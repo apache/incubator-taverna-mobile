@@ -47,10 +47,10 @@ Please subscribe to and contact the
 for any questions, suggestions and discussions about 
 Apache Taverna Mobile.
 
-Bugs and feature plannings are tracked in the `TAVERNA`
+Bugs and feature plannings are tracked in the Jira
 [Issue tracker](https://issues.apache.org/jira/browse/TAVERNA/component/12326901)
-under the component _GSOC Taverna Mobile_. Feel free to create
-an 
+under the `TAVERNA` component _GSOC Taverna Mobile. Feel free 
+to add an issue!
 
 To suggest changes to this source code, feel free to raise a 
 [GitHub pull request](https://github.com/apache/incubator-taverna-mobile/pulls).
