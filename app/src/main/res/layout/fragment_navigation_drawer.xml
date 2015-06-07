@@ -1,0 +1,43 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ccc">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sliding_header">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView4"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ic_user" />
+    </LinearLayout>
+
+    <ListView
+    android:id="@+id/navigation_drawer_listview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:choiceMode="singleChoice"
+    android:divider="@android:color/holo_blue_light"
+    android:dividerHeight="2dp"
+    android:background="#cccc"
+    tools:context="org.apache.taverna.mobile.fragments.NavigationDrawerFragment"
+     />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/completebrand"
+        android:id="@+id/textView8"
+        android:hint="@string/completebrand"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp" />
+</LinearLayout>

@@ -3,4 +3,7 @@
     <!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/values-w820dp/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">64dp</dimen>
+    <!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/values-w820dp/strings.xml -->
+    <eat-comment/>
+    <string name="completebrand">Powered By Apache Taverna</string>
 </resources>

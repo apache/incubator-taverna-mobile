@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/menuIcon"
+        android:src="@drawable/abc_btn_radio_to_on_mtrl_015"
+        android:layout_margin="5dp"
+        android:layout_gravity="top|left"
+        android:accessibilityLiveRegion="polite"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/menuItemText"
+        android:hint="@string/action_example"
+        android:layout_margin="5dp" />
+</LinearLayout><!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/layout/menu_item_layout.xml -->

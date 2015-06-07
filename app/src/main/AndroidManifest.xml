@@ -18,9 +18,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mobile.taverna.apache.com.org.apache.taverna.mobile" >
+    package="org.apache.taverna.mobile" >
 
     <application
         android:allowBackup="true"
@@ -28,13 +27,27 @@ limitations under the License.
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".activities.FlashScreenActivity"
+            android:label="@string/title_activity_flash_screen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.DashboardMainActivity"
+            android:label="@string/title_activity_dashboard_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"></action>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+
         </activity>
     </application>
 
