@@ -29,8 +29,11 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -58,6 +61,13 @@ public class DashboardMainActivity extends ActionBarActivity
      */
     private CharSequence mTitle;
 
+    static final int NUM_ITEMS = 2;
+
+    MyAdapter mAdapter;
+
+    ViewPager mPager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +81,13 @@ public class DashboardMainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-       //Handle search actions from a system sent intent
+        //manage tabs and swipe
+        mAdapter = new MyAdapter(getSupportFragmentManager());
+
+        mPager = (ViewPager)findViewById(R.id.pager);
+        mPager.setAdapter(mAdapter);
+
+        //Handle search actions from a system sent intent
         Intent searchIntent = getIntent();
         if(searchIntent != null && Intent.ACTION_SEARCH.equals(searchIntent.getAction())){
             //retrieve and process query then display results
@@ -111,10 +127,7 @@ public class DashboardMainActivity extends ActionBarActivity
                         .commit();
                 break;
             case 5:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, DashboardFragment.newInstance(position + 1))
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
+                this.finish();
                 break;
             default:
                 break;
@@ -162,7 +175,7 @@ public class DashboardMainActivity extends ActionBarActivity
             //assuming this activity is the searchable activity
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
             searchView.setSubmitButtonEnabled(true);
-            searchView.setIconifiedByDefault(false);
+//            searchView.setIconifiedByDefault(false);
 
             restoreActionBar();
             return true;
@@ -177,5 +190,38 @@ public class DashboardMainActivity extends ActionBarActivity
 
     @Override
     public void onWorkflowSelected(String id) {
+    }
+
+    public class MyAdapter extends FragmentPagerAdapter {
+        public MyAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_ITEMS;
+        }
+        @Override
+        public String getPageTitle(int position){
+            switch(position+1){
+                case 2:
+                    return (DashboardMainActivity.this).getResources().getString(R.string.title_favorite);
+
+                case 1:
+                    return (DashboardMainActivity.this).getResources().getString(R.string.title_explore);
+            }
+            return "";
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch(position+1){
+                case 1:
+                    return WorkflowItemFragment.newInstance("Workflows","Running ...");
+                case 2:
+                    return DashboardFragment.newInstance(position);
+            }
+            return WorkflowItemFragment.newInstance("","");
+        }
     }
 }

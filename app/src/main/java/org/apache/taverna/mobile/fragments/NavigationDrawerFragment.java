@@ -141,20 +141,8 @@ public class NavigationDrawerFragment extends Fragment {
         mlist.add(getString(R.string.title_exit));
 
         mDrawerListView.setAdapter(new SliderMenuAdapter(getActivity(), mlist));
-       /* mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_explore),
-                        getString(R.string.title_openworkflow),
-                        getString(R.string.title_usage),
-                        getString(R.string.title_about),
-                        getString(R.string.title_exit),
-
-                }));*/
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        //return mDrawerListView;
+
         return nview;
     }
 

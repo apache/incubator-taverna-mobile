@@ -34,6 +34,7 @@ limitations under the License.
     <string name="loginbutton">Login</string>
     <string name="title_activity_dashboard_main">Dashboard</string>
 
+    <string name="title_favorite">Favorites</string>
     <string name="title_explore">Workflows</string>
     <string name="title_usage">Usage</string>
     <string name="title_about">About </string>

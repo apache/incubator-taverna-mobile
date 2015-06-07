@@ -211,6 +211,7 @@
     <string name="title_activity_flash_screen">Taverna Mobile</string>
     <string name="title_exit">Quit</string>
     <string name="title_explore">Workflows</string>
+    <string name="title_favorite">Favorites</string>
     <string name="title_openworkflow">Open Workflow</string>
     <string name="title_usage">Usage</string>
     <!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
