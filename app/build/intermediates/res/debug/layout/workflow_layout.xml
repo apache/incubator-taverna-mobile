@@ -8,8 +8,7 @@
         android:theme="@style/Theme.AppCompat.Light"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/button_material_light"
-        >
+        android:background="@color/button_material_light">
 
         </android.support.v7.widget.RecyclerView>
 </LinearLayout><!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/layout/workflow_layout.xml -->

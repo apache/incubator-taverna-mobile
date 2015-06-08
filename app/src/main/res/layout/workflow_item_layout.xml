@@ -69,7 +69,9 @@
                 android:background="#ddd"
                 style="android:buttonBarButtonStyle"
                 android:text="@string/workflow_download"
-                android:drawableLeft="@android:drawable/ic_dialog_dialer" />
+                android:drawableLeft="@drawable/download"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp" />
             <Button
                 android:id="@+id/button_mark_workflow"
                 android:layout_width="wrap_content"
