@@ -59,11 +59,11 @@ public class SliderMenuAdapter extends BaseAdapter{
         TextView menuitem = (TextView) menuitemview.findViewById(R.id.menuItemText);
         switch(i +1){
             case 1:
-                menuicon.setImageResource(R.drawable.gear_icon);
+                menuicon.setImageResource(R.mipmap.ic_workflows);
                 menuitem.setText(dataItems.get(i));
                 break;
             case 2:
-                menuicon.setImageResource(android.R.drawable.ic_menu_agenda);
+                menuicon.setImageResource(R.mipmap.ic_openwk);
                 menuitem.setText(dataItems.get(i));
                 break;
             case 3:
@@ -71,11 +71,11 @@ public class SliderMenuAdapter extends BaseAdapter{
                 menuitem.setText(dataItems.get(i));
                 break;
             case 4:
-                menuicon.setImageResource(android.R.drawable.ic_dialog_info);
+                menuicon.setImageResource(R.mipmap.ic_about);
                 menuitem.setText(dataItems.get(i));
                 break;
             case 5:
-                menuicon.setImageResource(android.R.drawable.ic_lock_power_off);
+                menuicon.setImageResource(R.mipmap.ic_logout);
                 menuitem.setText(dataItems.get(i));
                 break;
         }

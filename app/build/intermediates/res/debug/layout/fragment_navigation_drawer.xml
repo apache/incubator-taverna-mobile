@@ -17,7 +17,9 @@
             android:layout_height="match_parent"
             android:id="@+id/imageView4"
             android:layout_gravity="center_horizontal"
-            android:src="@mipmap/ic_user" />
+            android:src="@mipmap/icuserprofiles"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitStart" />
     </LinearLayout>
 
     <ListView
@@ -39,5 +41,5 @@
         android:id="@+id/textView8"
         android:hint="@string/completebrand"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="80dp" />
+        android:layout_marginTop="30dp" />
 </LinearLayout><!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/layout/fragment_navigation_drawer.xml -->

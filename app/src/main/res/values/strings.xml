@@ -47,6 +47,6 @@ limitations under the License.
 
     <string name="action_example">Example action</string>
     <string name="completebrand">Powered By Apache Taverna</string>
-    <string name="search_hint"> Search titles and description</string>
+    <string name="search_hint"> Search workflows by name</string>
 
 </resources>

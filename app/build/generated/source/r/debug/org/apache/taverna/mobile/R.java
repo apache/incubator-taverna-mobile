@@ -1318,8 +1318,9 @@ containing a value of this type.
         public static final int drawer_shadow=0x7f020037;
         public static final int gear_icon=0x7f020038;
         public static final int ic_drawer=0x7f020039;
-        public static final int sliding_header=0x7f02003a;
-        public static final int tavernalogo=0x7f02003b;
+        public static final int ic_userprofile=0x7f02003a;
+        public static final int sliding_header=0x7f02003b;
+        public static final int tavernalogo=0x7f02003c;
     }
     public static final class id {
         public static final int action_bar=0x7f0b0031;
@@ -1343,7 +1344,7 @@ containing a value of this type.
         public static final int button=0x7f0b0049;
         public static final int checkbox=0x7f0b0029;
         public static final int collapseActionView=0x7f0b0017;
-        public static final int container=0x7f0b0040;
+        public static final int container=0x7f0b0042;
         public static final int decor_content_parent=0x7f0b002f;
         public static final int default_activity_button=0x7f0b0024;
         public static final int dialog=0x7f0b001b;
@@ -1378,8 +1379,8 @@ containing a value of this type.
         public static final int never=0x7f0b0019;
         public static final int none=0x7f0b000e;
         public static final int normal=0x7f0b000a;
-        public static final int pager=0x7f0b0041;
-        public static final int pager_title_strip=0x7f0b0042;
+        public static final int pager=0x7f0b0040;
+        public static final int pager_title_strip=0x7f0b0041;
         public static final int progress_circular=0x7f0b0005;
         public static final int progress_horizontal=0x7f0b0006;
         public static final int radio=0x7f0b002b;
@@ -1460,11 +1461,16 @@ containing a value of this type.
         public static final int global=0x7f0f0001;
     }
     public static final class mipmap {
-        public static final int ic_launcher=0x7f030000;
-        public static final int ic_poweredby=0x7f030001;
-        public static final int ic_quit=0x7f030002;
-        public static final int ic_usage=0x7f030003;
-        public static final int ic_user=0x7f030004;
+        public static final int ic_about=0x7f030000;
+        public static final int ic_launcher=0x7f030001;
+        public static final int ic_logout=0x7f030002;
+        public static final int ic_openwk=0x7f030003;
+        public static final int ic_poweredby=0x7f030004;
+        public static final int ic_quit=0x7f030005;
+        public static final int ic_usage=0x7f030006;
+        public static final int ic_user=0x7f030007;
+        public static final int ic_workflows=0x7f030008;
+        public static final int icuserprofiles=0x7f030009;
     }
     public static final class string {
         public static final int Logininfo=0x7f0d0000;

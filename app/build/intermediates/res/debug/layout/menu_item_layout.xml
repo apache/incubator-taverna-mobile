@@ -7,7 +7,7 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/menuIcon"
         android:src="@drawable/abc_btn_radio_to_on_mtrl_015"
         android:layout_margin="5dp"
