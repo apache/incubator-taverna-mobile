@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,9 @@ import android.widget.TextView;
 import org.apache.taverna.mobile.R;
 
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
+import org.apache.taverna.mobile.adapters.WorkflowAdapter;
 import org.apache.taverna.mobile.fragments.dummy.DummyContent;
+import org.apache.taverna.mobile.utils.Workflow;
 
 /**
  * A fragment representing a list of Items.
@@ -28,7 +32,7 @@ import org.apache.taverna.mobile.fragments.dummy.DummyContent;
  * Activities containing this fragment MUST implement the {@link org.apache.taverna.mobile.fragments.WorkflowItemFragment.OnWorkflowSelectedListener}
  * interface.
  */
-public class WorkflowItemFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class WorkflowItemFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,13 +48,15 @@ public class WorkflowItemFragment extends Fragment implements AbsListView.OnItem
     /**
      * The fragment's ListView/GridView.
      */
-    private AbsListView mListView;
+    private RecyclerView mListView;
 
     /**
      * The Adapter which will be used to populate the ListView/GridView with
      * Views.
      */
     private ListAdapter mAdapter;
+    private WorkflowAdapter workflowAdapter;
+
 
     // TODO: Rename and change types of parameters
     public static WorkflowItemFragment newInstance(String param1, String param2) {
@@ -79,8 +85,12 @@ public class WorkflowItemFragment extends Fragment implements AbsListView.OnItem
         }
 
         // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+        mAdapter =
+                new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+        workflowAdapter = new WorkflowAdapter(getActivity(), new Workflow[]{new Workflow(getActivity(), null),
+                new Workflow(getActivity(), null),
+                new Workflow(getActivity(), null)});
     }
 
     @Override
@@ -89,11 +99,10 @@ public class WorkflowItemFragment extends Fragment implements AbsListView.OnItem
         View view = inflater.inflate(R.layout.fragment_item, container, false);
 
         // Set the adapter
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
-
-        // Set OnItemClickListener so we can be notified on item clicks
-        mListView.setOnItemClickListener(this);
+        mListView = (RecyclerView) view.findViewById(android.R.id.list);
+        mListView.setHasFixedSize(true);
+        mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mListView.setAdapter(workflowAdapter);
 
         return view;
     }
@@ -131,7 +140,7 @@ public class WorkflowItemFragment extends Fragment implements AbsListView.OnItem
      * to supply the text it should use.
      */
     public void setEmptyText(CharSequence emptyText) {
-        View emptyView = mListView.getEmptyView();
+        View emptyView = mListView.getChildAt(2);
 
         if (emptyView instanceof TextView) {
             ((TextView) emptyView).setText(emptyText);

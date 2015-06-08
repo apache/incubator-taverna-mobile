@@ -94,7 +94,6 @@ public class DashboardMainActivity extends ActionBarActivity
             String query = searchIntent.getStringExtra(SearchManager.QUERY);
             Toast.makeText(this,"Query = "+query, Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override

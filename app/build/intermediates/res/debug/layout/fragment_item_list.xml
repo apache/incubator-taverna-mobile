@@ -4,11 +4,23 @@
     android:layout_height="match_parent"
     tools:context="org.apache.taverna.mobile.fragments.WorkflowItemFragment">
 
-    <ListView android:id="@android:id/list" android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <!--<ListView android:id="@android:id/list" android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+    <android.support.v7.widget.RecyclerView
+        xmlns:recycler_view="http://schemas.android.com/apk/res-auto"
+        android:id="@android:id/list"
+        android:theme="@style/Theme.AppCompat.Light"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/button_material_light"
+        >
 
-    <TextView android:id="@android:id/empty" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:gravity="center" />
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" />
 
 </FrameLayout>
 <!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/layout/fragment_item_list.xml -->

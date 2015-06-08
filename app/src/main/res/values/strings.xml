@@ -22,9 +22,10 @@ limitations under the License.
         <item >Usage</item>
         <item>Quit</item>
     </string-array>
-    <array name="dr_menus">
-        <item >Usage</item>
-        <item>Quit</item>
+    <array name="workflow_info">
+        <item >Date Created</item>
+        <item>Date Modified</item>
+        <item>Date Last Run</item>
     </array>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -38,7 +39,7 @@ limitations under the License.
     <string name="title_explore">Workflows</string>
     <string name="title_usage">Usage</string>
     <string name="title_about">About </string>
-    <string name="title_exit">Quit</string>
+    <string name="title_exit">Logout</string>
     <string name="title_openworkflow">Open Workflow</string>
     <string name="menu_search">Search</string>
 
@@ -48,5 +49,10 @@ limitations under the License.
     <string name="action_example">Example action</string>
     <string name="completebrand">Powered By Apache Taverna</string>
     <string name="search_hint"> Search workflows by name</string>
+
+    <string name="workflow_download">Download</string>
+    <string name="workflow_read">View</string>
+    <string name="workflow_mark">Favorite</string>
+    <string name="workflow_authorhint">Workflow Author</string>
 
 </resources>

@@ -35,7 +35,9 @@ limitations under the License.
                 android:background="#33b5e5"
                 android:textColor="#fff"
                 android:paddingTop="4dp"
-                android:paddingBottom="4dp" />
+                android:paddingBottom="4dp"
+                android:elevation="@dimen/abc_action_bar_default_height_material"
+                />
             <FrameLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"
