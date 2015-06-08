@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     tools:context="org.apache.taverna.mobile.fragments.WorkflowItemFragment">
 
-    <GridView android:id="@+id/gridlist"
+   <!-- <GridView android:id="@+id/gridlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2">
+        android:numColumns="2">-->
         <android.support.v7.widget.RecyclerView
             xmlns:recycler_view="http://schemas.android.com/apk/res-auto"
             android:id="@android:id/list"
@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:background="@color/button_material_light"
             ></android.support.v7.widget.RecyclerView>
-        </GridView>
+       <!-- </GridView>-->
 
     <TextView android:id="@android:id/empty"
         android:layout_width="match_parent"

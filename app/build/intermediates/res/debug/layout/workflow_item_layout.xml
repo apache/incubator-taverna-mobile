@@ -69,7 +69,7 @@
                 android:background="#ddd"
                 style="android:buttonBarButtonStyle"
                 android:text="@string/workflow_download"
-                android:drawableLeft="@drawable/down_arrow"
+                android:drawableLeft="@drawable/download"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp" />
             <Button
