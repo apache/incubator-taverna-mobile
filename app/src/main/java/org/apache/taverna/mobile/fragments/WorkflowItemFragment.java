@@ -3,24 +3,18 @@ package org.apache.taverna.mobile.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import org.apache.taverna.mobile.R;
-
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.adapters.WorkflowAdapter;
-import org.apache.taverna.mobile.fragments.dummy.DummyContent;
 import org.apache.taverna.mobile.utils.Workflow;
 
 /**
@@ -84,10 +78,6 @@ public class WorkflowItemFragment extends Fragment implements AdapterView.OnItem
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        // TODO: Change Adapter to display your content
-        mAdapter =
-                new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
         workflowAdapter = new WorkflowAdapter(getActivity(), new Workflow[]{new Workflow(getActivity(), null),
                 new Workflow(getActivity(), null),
                 new Workflow(getActivity(), null)});
@@ -131,7 +121,7 @@ public class WorkflowItemFragment extends Fragment implements AdapterView.OnItem
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onWorkflowSelected(DummyContent.ITEMS.get(position).id);
+            mListener.onWorkflowSelected("");
         }
     }
     /**

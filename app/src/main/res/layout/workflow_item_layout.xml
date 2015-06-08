@@ -56,31 +56,29 @@
                 android:layout_height="wrap_content"
                 android:textStyle="normal"
                 android:layout_weight="0.33"
-                android:background="#ccc"
                 style="android:buttonBarButtonStyle"
-                android:drawableLeft="@drawable/ic_viewworkflow"
                 android:text="@string/workflow_read"
-                />
+                android:background="#ddd"
+                android:drawableLeft="@android:drawable/ic_menu_view" />
             <Button
                 android:id="@+id/button_download_workflow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="normal"
                 android:layout_weight="0.33"
-                android:background="#ccc"
+                android:background="#ddd"
                 style="android:buttonBarButtonStyle"
                 android:text="@string/workflow_download"
-                android:drawableLeft="@drawable/ic_downloadworkflow"
-                />
+                android:drawableLeft="@android:drawable/ic_dialog_dialer" />
             <Button
                 android:id="@+id/button_mark_workflow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="normal"
                 android:layout_weight="0.33"
-                android:background="#ccc"
+                android:background="#ddd"
                 android:text="@string/workflow_mark"
-                android:drawableLeft="@drawable/ic_markworkflow_selected"
+                android:drawableLeft="@android:drawable/btn_star_big_off"
                 style="android:buttonBarButtonStyle"/>
             </LinearLayout>
     </LinearLayout>
