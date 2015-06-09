@@ -56,12 +56,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         return size;
     }
 
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        View workflow_root  = LayoutInflater.from(context).inflate(R.layout.workflow_item_layout, viewGroup,false);
-
-        return workflow_root;
-    }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final ImageView author_profile;
         public final TextView author_name;

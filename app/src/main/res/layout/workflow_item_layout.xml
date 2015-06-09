@@ -23,7 +23,7 @@ limitations under the License.
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        card_view:cardElevation="@dimen/abc_text_size_caption_material"
+        card_view:cardElevation="@dimen/abc_text_size_menu_material"
         card_view:cardBackgroundColor="@color/background_floating_material_light"
         card_view:cardCornerRadius="2dp"
         card_view:paddingEnd="2dp"
@@ -46,7 +46,8 @@ limitations under the License.
                 android:elevation="5dp"
                 android:src="@drawable/ic_userprofile"
                 android:background="@drawable/round_shape"/>
-            <LinearLayout
+
+        <LinearLayout
                 android:id="@+id/linearlayout_workflow_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +58,38 @@ limitations under the License.
                     android:layout_height="wrap_content"
                     android:text="@string/workflow_authorhint"/>
 
-            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/workflow_datecreated" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/workflow_dateupdated"
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/workflow_title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="See more"
+                android:id="@+id/show_more"
+                android:typeface="serif"
+                android:background="@color/material_deep_teal_200" />
+
+        </LinearLayout>
 
     </LinearLayout>
         <ImageView

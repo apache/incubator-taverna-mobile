@@ -36,13 +36,14 @@ limitations under the License.
                 android:textColor="#fff"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
-                android:elevation="@dimen/abc_action_bar_default_height_material"
+                android:elevation="@dimen/abc_text_size_menu_material"
                 />
             <FrameLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >
+
             </FrameLayout>
         </android.support.v4.view.ViewPager>
 

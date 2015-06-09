@@ -48,7 +48,6 @@ public class WorkflowItemFragment extends Fragment implements AdapterView.OnItem
      * The Adapter which will be used to populate the ListView/GridView with
      * Views.
      */
-    private ListAdapter mAdapter;
     private WorkflowAdapter workflowAdapter;
 
 

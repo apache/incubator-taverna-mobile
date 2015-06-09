@@ -28,7 +28,9 @@ package org.apache.taverna.mobile.activities;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -44,12 +46,14 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.fragments.DashboardFragment;
+import org.apache.taverna.mobile.fragments.FavoriteFragment;
 import org.apache.taverna.mobile.fragments.NavigationDrawerFragment;
 import org.apache.taverna.mobile.fragments.WorkflowItemFragment;
 
+import java.io.File;
+
 public class DashboardMainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, WorkflowItemFragment.OnWorkflowSelectedListener {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, WorkflowItemFragment.OnWorkflowSelectedListener, FavoriteFragment.FavoriteItemSelected {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -62,6 +66,8 @@ public class DashboardMainActivity extends ActionBarActivity
     private CharSequence mTitle;
 
     static final int NUM_ITEMS = 2;
+    private final int SELECT_WORKFLOW = 10;
+    public final String APP_DIRECTORY_NAME = "TavernaMobile";
 
     MyAdapter mAdapter;
 
@@ -94,6 +100,7 @@ public class DashboardMainActivity extends ActionBarActivity
             String query = searchIntent.getStringExtra(SearchManager.QUERY);
             Toast.makeText(this,"Query = "+query, Toast.LENGTH_SHORT).show();
         }
+        setUpWorkflowDirectory(this);
     }
 
     @Override
@@ -104,32 +111,51 @@ public class DashboardMainActivity extends ActionBarActivity
             case 1:
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, WorkflowItemFragment.newInstance("param1", "param2"))
-                        .setTransition(FragmentTransaction.TRANSIT_ENTER_MASK)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                         .commit();
+                try {
+                    mPager.setCurrentItem(0);
+                }catch (NullPointerException np){
+                    np.printStackTrace();
+                }
                 break;
-            case 2:
+            case 2: //open workflow
+                Intent workflowSelectIntent = new Intent(Intent.ACTION_GET_CONTENT)
+                        .setType("text/t2flow")
+                        .setData(Uri.parse(Environment.getExternalStorageDirectory()+File.separator+APP_DIRECTORY_NAME));
+
+                Intent loadWorkflowIntent = Intent.createChooser(workflowSelectIntent,
+                        "Choose Workflow (.t2flow)");
+                startActivityForResult(loadWorkflowIntent, SELECT_WORKFLOW);
+
+                break;
+            case 3: //show usage
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, DashboardFragment.newInstance(position + 1))
+                        .replace(R.id.container, FavoriteFragment.newInstance(position + 1))
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
                 break;
-            case 3:
+            case 4: //show about
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, DashboardFragment.newInstance(position + 1))
+                        .replace(R.id.container, FavoriteFragment.newInstance(position + 1))
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
                 break;
-            case 4:
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, DashboardFragment.newInstance(position + 1))
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
-                break;
-            case 5:
+            case 5: //logout user
                 this.finish();
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode , int resultCode, Intent data){
+        if(resultCode == RESULT_OK){
+            if(requestCode == SELECT_WORKFLOW){
+                String workflowPath = data.getData().getPath();
+                Toast.makeText(getBaseContext(), "Path: "+workflowPath, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -160,6 +186,18 @@ public class DashboardMainActivity extends ActionBarActivity
         actionBar.setTitle(mTitle);
     }
 
+    private void setUpWorkflowDirectory(Context context){
+        File workflowDirectory = new File(Environment.getExternalStorageDirectory()+File.separator+APP_DIRECTORY_NAME);
+        if(!workflowDirectory.exists()){
+            boolean state = workflowDirectory.mkdirs();
+            if(state){
+                Toast.makeText(context, "Storage Ready", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(context, "Storage Error. Directory not created", Toast.LENGTH_SHORT).show();
+            }
+//            workflowDirectory.list();
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
@@ -191,6 +229,11 @@ public class DashboardMainActivity extends ActionBarActivity
     public void onWorkflowSelected(String id) {
     }
 
+    @Override
+    public void onFavoriteItemSelected(int position) {
+        //trigger when a favorite item is selected.
+    }
+
     public class MyAdapter extends FragmentPagerAdapter {
         public MyAdapter(FragmentManager fm) {
             super(fm);
@@ -218,7 +261,7 @@ public class DashboardMainActivity extends ActionBarActivity
                 case 1:
                     return WorkflowItemFragment.newInstance("Workflows","Running ...");
                 case 2:
-                    return DashboardFragment.newInstance(position);
+                    return FavoriteFragment.newInstance(position);
             }
             return WorkflowItemFragment.newInstance("","");
         }

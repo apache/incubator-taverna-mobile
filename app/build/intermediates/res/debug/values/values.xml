@@ -212,12 +212,16 @@
     <string name="app_name">TavernaMobile</string>
     <string name="brand">Powered By</string>
     <string name="completebrand">Powered By Apache Taverna</string>
+    <string name="created">Workflow Created On:</string>
+    <string name="favorite_empty"> No Favorites Added Yet</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_world">Hello world!</string>
     <string name="loginbutton">Login</string>
     <string name="loginpassword">Password</string>
     <string name="loginusername">Email or Username</string>
+    <string name="marked">Marked On</string>
     <string name="menu_search">Search</string>
+    <string name="modified">Modified On:</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="search_hint"> Search workflows by name</string>
@@ -229,8 +233,11 @@
     <string name="title_favorite">Favorites</string>
     <string name="title_openworkflow">Open Workflow</string>
     <string name="title_usage">Usage</string>
+    <string name="wktitle">TITLE</string>
     <string name="workflow_authorhint">Workflow Author</string>
+    <string name="workflow_component">Workflow component</string>
     <string name="workflow_download">Download</string>
+    <string name="workflow_empty"> No <b>Workflows</b> Available. Check your Connection to the Internet</string>
     <string name="workflow_mark">Favorite</string>
     <string name="workflow_read">View</string>
     <!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values/values.xml -->
