@@ -1,0 +1,65 @@
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements. See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License. You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<resources>
+    <string name="app_name">TavernaMobile</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_flash_screen">Taverna Mobile</string>
+    <string name="brand">Powered By</string>
+    <string-array name="menus">
+        <item >Usage</item>
+        <item>Quit</item>
+    </string-array>
+    <array name="workflow_info">
+        <item >Date Created</item>
+        <item>Date Modified</item>
+        <item>Date Last Run</item>
+    </array>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Logininfo">Login to your Account</string>
+    <string name="loginusername">Email or Username</string>
+    <string name="loginpassword">Password</string>
+    <string name="loginbutton">Login</string>
+    <string name="title_activity_dashboard_main">Dashboard</string>
+
+    <string name="title_favorite">Favorites</string>
+    <string name="title_explore">Workflows</string>
+    <string name="title_usage">Usage</string>
+    <string name="title_about">About </string>
+    <string name="title_exit">Logout</string>
+    <string name="title_openworkflow">Open Workflow</string>
+    <string name="menu_search">Search</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+    <string name="completebrand">Powered By Apache Taverna</string>
+    <string name="search_hint"> Search workflows by name</string>
+
+    <string name="workflow_download">Download</string>
+    <string name="workflow_read">View</string>
+    <string name="workflow_mark">Favorite</string>
+    <string name="workflow_authorhint">Workflow Author</string>
+    <string name="workflow_component">Workflow component</string>
+    <string name="favorite_empty"> No Favorites Added Yet</string>
+    <string name="workflow_empty"> No <b>Workflows</b> Available. Check your Connection to the Internet</string>
+    <string name="wktitle">TITLE</string>
+    <string name="marked">Marked On</string>
+    <string name="created">Workflow Created On:</string>
+    <string name="modified">Modified On:</string>
+
+</resources>
