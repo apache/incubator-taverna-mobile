@@ -60,6 +60,14 @@ limitations under the License.
                 android:resource="@xml/searchable" />
         </activity>
         <activity
+            android:name="org.apache.taverna.mobile.activities.WorkflowDetailActivity"
+            android:label="@string/title_activity_workflow_detail"
+            android:parentActivityName="org.apache.taverna.mobile.activities.DashboardMainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.apache.taverna.mobile.activities.DashboardMainActivity" />
+        </activity>
+        <activity
             android:name="android.support.v7.widget.TestActivity"
             android:label="RecyclerViewTestActivity" />
     </application>

@@ -14,7 +14,7 @@ limitations under the License.
 -->
 <resources>
     <string name="app_name">TavernaMobile</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world"> Empty </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_flash_screen">Taverna Mobile</string>
     <string name="brand">Powered By</string>
@@ -28,7 +28,7 @@ limitations under the License.
         <item>Date Last Run</item>
     </array>
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment"> About Workflow </string>
     <string name="Logininfo">Login to your Account</string>
     <string name="loginusername">Email or Username</string>
     <string name="loginpassword">Password</string>
@@ -61,5 +61,13 @@ limitations under the License.
     <string name="marked">Marked On</string>
     <string name="created">Workflow Created On:</string>
     <string name="modified">Modified On:</string>
+    <string name="title_activity_workflow_detail">Workflow Detail</string>
+
+
+    <string name="detail_title_section1">Workflow </string>
+    <string name="detail_title_section2">Run History</string>
+    <string name="detail_title_section3">Licence | Policy</string>
+    <string name="detail_title_section4"> About </string>
+    <string name="play_workflow">Run</string>
 
 </resources>
