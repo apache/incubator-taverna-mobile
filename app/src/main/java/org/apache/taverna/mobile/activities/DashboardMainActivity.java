@@ -70,9 +70,7 @@ public class DashboardMainActivity extends ActionBarActivity
     public final String APP_DIRECTORY_NAME = "TavernaMobile";
 
     MyAdapter mAdapter;
-
     ViewPager mPager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,12 +224,16 @@ public class DashboardMainActivity extends ActionBarActivity
     }
 
     @Override
-    public void onWorkflowSelected(String id) {
+    public void onWorkflowSelected(int id) {
+        //send all details to the next Activity which should display the Workflow details in full
+        startActivity(new Intent(this, WorkflowDetailActivity.class));
+
     }
 
     @Override
     public void onFavoriteItemSelected(int position) {
         //trigger when a favorite item is selected.
+        startActivity(new Intent(this, WorkflowDetailActivity.class));
     }
 
     public class MyAdapter extends FragmentPagerAdapter {

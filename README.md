@@ -62,9 +62,14 @@ before accepting a larger contribution.
 
 # Building and install requirements
 
-_TODO_
-
-* ...
+* Android Studio at least version 1.1.0
+* Android Build tools version 21.1.2+
+* gradle version 1.1.0+
+* Support libraries for CardViews and recycler views. These are already configured in the gradle files
+Import the project as Android Studio Project into Android Studio after downloading from the github repository.
+Create and startup a virtual device or connecct your mobile device if ready.
+Once the devices are ready, build and run the project. Select the target devvice on which to install and launch the app.
+Once installed, you get a flash screen containing the logo and Name of the app and some powered by Text.
 
 
 # Usage

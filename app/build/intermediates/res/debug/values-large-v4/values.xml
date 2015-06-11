@@ -17,6 +17,7 @@
     <!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/values-large/strings.xml -->
     <eat-comment/>
     <string name="completebrand">Powered By Apache Taverna</string>
+    <string name="play_workflow">Run</string>
     <!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values-large-v4/values.xml -->
     <eat-comment/>
     <style name="Base.Theme.AppCompat.DialogWhenLarge" parent="Base.Theme.AppCompat.Dialog.FixedSize"/>

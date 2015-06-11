@@ -20,4 +20,5 @@ limitations under the License.
 -->
 <resources>
     <string name="completebrand">Powered By Apache Taverna</string>
+    <string name="play_workflow">Run</string>
 </resources>

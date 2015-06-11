@@ -44,7 +44,7 @@ limitations under the License.
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:elevation="5dp"
-                android:src="@drawable/ic_userprofile"
+                android:src="@mipmap/icuserprofiles"
                 android:background="@drawable/round_shape"/>
 
         <LinearLayout

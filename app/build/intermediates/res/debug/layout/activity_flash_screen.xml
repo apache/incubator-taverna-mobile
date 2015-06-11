@@ -53,7 +53,8 @@ limitations under the License.
         android:layout_alignEnd="@+id/textView"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView"
-        android:layout_above="@+id/imageView" />
+        android:layout_above="@+id/imageView"
+        android:scaleType="fitStart" />
 
     <TextView
         android:layout_width="wrap_content"
