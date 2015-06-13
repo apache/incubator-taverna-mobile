@@ -26,8 +26,9 @@ package org.apache.taverna.mobile.utils;
 import android.app.Activity;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.util.Base64;
+import android.util.Log;
 
-import org.apache.taverna.mobile.adapters.WorkflowAdapter;
 import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.json.JSONArray;
@@ -35,15 +36,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,16 +64,25 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
          userWorkflows = new ArrayList<Workflow>();
         //start a network request to fetch user's workflows
         try {
+            //for password protected urls use the user's credentials
+            Authenticator.setDefault(new TavernaPlayerAPI.Authenticator("taverna","taverna"));
+
             URL workflowurl = new URL(TavernaPlayerAPI.PLAYER_URL+"workflows");
             HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-            connection.setUseCaches(false);
-            connection.setRequestProperty("Accept","application/json");
-            connection.setRequestMethod("GET");
-            connection.connect(); //send request
+            String userpass = "icep603@gmail.com" + ":" + "creationfox";
+            String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(),Base64.DEFAULT);
+            //new String(Base64.encode(userpass.getBytes(),Base64.DEFAULT));
 
-//            DataInputStream dis = new DataInputStream(connection.getInputStream());
+            connection.setRequestProperty ("Authorization", basicAuth);
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestMethod("GET");
+           // connection.setDoInput(true);
+          //  connection.setDoOutput(true);
+            connection.connect(); //send request
+            Log.i("RESPONSE Code", ""+connection.getResponseCode());
+            Log.i("RESPONSE Messsage", ""+connection.getResponseMessage());
+            Log.i("Authorization ", ""+connection.getRequestProperty("Authorization"));
+
             InputStream dis = connection.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(dis));
             StringBuffer sb = new StringBuffer();
@@ -87,11 +95,12 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
             JSONArray jsonWorkflow = new JSONArray(sb.toString());
             for(int i=0; i<jsonWorkflow.length();i++){
                 JSONObject js = jsonWorkflow.getJSONObject(i);
-                String author = js.getString("author");
+                Log.i("JSON ", js.toString(2));
+                //String author = js.getString("author");
                 String title = js.getString("title");
                 String description = js.getString("description");
                 long id = js.getLong("id");
-                userWorkflows.add(new Workflow(ctx,title,author,description,id,""));
+                userWorkflows.add(new Workflow(ctx,title,"Larry",description,id,""));
             }
 
         } catch (MalformedURLException e) {
