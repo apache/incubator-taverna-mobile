@@ -61,7 +61,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link org.apache.taverna.mobile.fragments.WorkflowItemFragment.OnWorkflowSelectedListener}
  * interface.
  */
-public class WorkflowItemFragment extends Fragment implements AdapterView.OnItemClickListener,android.app.LoaderManager.LoaderCallbacks<List<Workflow>> {
+public class WorkflowItemFragment extends Fragment implements android.app.LoaderManager.LoaderCallbacks<List<Workflow>> {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -197,6 +197,7 @@ public class WorkflowItemFragment extends Fragment implements AdapterView.OnItem
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getTitle().equals("Refresh")){
+            getActivity().setProgressBarIndeterminateVisibility(true);
             getActivity().getLoaderManager().restartLoader(0, null, this);
             return true;
         }
@@ -209,14 +210,6 @@ public class WorkflowItemFragment extends Fragment implements AdapterView.OnItem
         mListener = null;
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            mListener.onWorkflowSelected(position);
-        }
-    }
     /**
      * The default content for this Fragment has a TextView that is shown when
      * the list is empty. If you would like to change the text, call this method

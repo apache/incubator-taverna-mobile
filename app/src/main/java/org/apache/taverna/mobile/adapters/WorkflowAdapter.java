@@ -31,6 +31,7 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,9 +94,10 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
 
                     String workflow_name = Uri.parse(wkflow_url).getLastPathSegment();
                     WorkflowDownloadManager dm = new WorkflowDownloadManager(c);
-                    dm.downloadWorkflow(new File(PreferenceManager
-                            .getDefaultSharedPreferences(c)
-                            .getString(DashboardMainActivity.APP_DIRECTORY_NAME, "/")+File.separator+workflow_name), wkflow_url);
+                    File destinationFile = new File(PreferenceManager.getDefaultSharedPreferences(c)
+                            .getString(DashboardMainActivity.APP_DIRECTORY_NAME, "/"));
+                    Log.i("Workflow Name ", destinationFile.getAbsolutePath());
+                    dm.downloadWorkflow(destinationFile, wkflow_url);
                 } catch(NullPointerException np){
                     np.printStackTrace();
                 }catch (IllegalArgumentException ill){
