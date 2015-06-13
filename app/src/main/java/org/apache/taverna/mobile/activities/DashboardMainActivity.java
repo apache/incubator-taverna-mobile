@@ -105,8 +105,8 @@ public class DashboardMainActivity extends ActionBarActivity
             Toast.makeText(this,"Query = "+query, Toast.LENGTH_SHORT).show();
         }
         setUpWorkflowDirectory(this);
-        if (savedInstanceState == null)
-            getSupportFragmentManager().beginTransaction().add(R.id.container, WorkflowItemFragment.newInstance("","")).commit();
+        /*if (savedInstanceState == null)
+            getSupportFragmentManager().beginTransaction().add(R.id.container, WorkflowItemFragment.newInstance("","")).commit();*/
     }
 
     @Override

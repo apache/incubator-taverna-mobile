@@ -23,6 +23,7 @@ package org.apache.taverna.mobile.utils;
  * specific language governing permissions and limitations
  * under the License.
  */
+import android.app.Activity;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 
@@ -117,6 +118,7 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
     @Override
     protected void onStartLoading() {
         //if there is data available, deliver it at once
+        ((Activity)ctx).setProgressBarIndeterminateVisibility(true);
         if(userWorkflows != null)
             deliverResult(userWorkflows);
         else{

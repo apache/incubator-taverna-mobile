@@ -37,6 +37,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
@@ -119,6 +120,7 @@ public class WorkflowItemFragment extends Fragment implements AdapterView.OnItem
         mlist.add(new Workflow(getActivity(), null));
         mlist.add(new Workflow(getActivity(), null)); */
         workflowAdapter = new WorkflowAdapter(getActivity(), mlist );
+        getActivity().setProgressBarIndeterminateVisibility(true);
     }
 
     @Override
@@ -131,7 +133,7 @@ public class WorkflowItemFragment extends Fragment implements AdapterView.OnItem
         mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
          if(workflowAdapter.getItemCount() == 0){
             setEmptyText("No Workflows available");
-            mListView.swapAdapter(null, false);
+            mListView.swapAdapter(workflowAdapter, false);
         }else {
             mListView.setAdapter(workflowAdapter);
              mListView.setAnimation(in);
@@ -237,13 +239,13 @@ public class WorkflowItemFragment extends Fragment implements AdapterView.OnItem
      */
     @Override
     public android.content.Loader<List<Workflow>> onCreateLoader(int id, Bundle args) {
-        getActivity().setProgressBarIndeterminateVisibility(true);
+        //getActivity().setProgressBarIndeterminateVisibility(true);
         return new WorkflowLoader(getActivity());
     }
 
     @Override
     public void onLoadFinished(android.content.Loader<List<Workflow>> loader, List<Workflow> workflows) {
-        getActivity().setProgressBarIndeterminateVisibility(false);
+       // getActivity().setProgressBarIndeterminateVisibility(false);
         loader.stopLoading();
         workflowAdapter = new WorkflowAdapter(getActivity(), workflows);
         if(workflows.size() > 0)
