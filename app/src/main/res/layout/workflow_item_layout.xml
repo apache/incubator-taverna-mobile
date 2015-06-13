@@ -45,13 +45,18 @@ limitations under the License.
                 android:layout_height="wrap_content"
                 android:elevation="5dp"
                 android:src="@mipmap/icuserprofiles"
-                android:background="@drawable/round_shape"/>
+                android:background="@drawable/round_shape"
+                android:contentDescription="@string/workflow_authorhint" />
 
         <LinearLayout
                 android:id="@+id/linearlayout_workflow_info"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+            android:showDividers="middle|beginning"
+            android:divider="@color/background_material_dark"
+            android:dividerPadding="2dp"
+            android:layout_marginLeft="2dp">
                 <TextView
                     android:id="@+id/workflow_author"
                     android:layout_width="match_parent"
@@ -62,42 +67,59 @@ limitations under the License.
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/workflow_datecreated" />
+                android:id="@+id/workflow_title"
+                android:hint="@string/wktitle" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/workflow_dateupdated"
-                android:layout_gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Large Text"
-                android:id="@+id/workflow_title" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="See more"
+                android:text="@string/abc_activity_chooser_view_see_all"
                 android:id="@+id/show_more"
                 android:typeface="serif"
                 android:background="@color/material_deep_teal_200" />
-
         </LinearLayout>
-
     </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:id="@+id/layoutinfo"
+            android:showDividers="middle|beginning"
+            android:dividerPadding="1dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/created"
+                android:id="@+id/workflow_datecreated"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/modified"
+                android:id="@+id/workflow_dateupdated"
+                android:layout_gravity="center_vertical"
+                android:gravity="center" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:minLines="2"
+                android:id="@+id/workflow_brief_description"
+                android:layout_gravity="center_vertical"
+                android:hint="@string/description" />
+        </LinearLayout>
         <ImageView
             android:id="@+id/workflow_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/tavernalogo"
-            android:background="@color/highlighted_text_material_light"/>
+            android:contentDescription="@string/workflow_component" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

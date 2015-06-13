@@ -1457,16 +1457,16 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0b002e;
         public static final int action_mode_bar_stub=0x7f0b002d;
         public static final int action_mode_close_button=0x7f0b0020;
-        public static final int action_search=0x7f0b0076;
-        public static final int action_settings=0x7f0b0077;
+        public static final int action_search=0x7f0b0078;
+        public static final int action_settings=0x7f0b0079;
         public static final int activity_chooser_view_content=0x7f0b0021;
         public static final int always=0x7f0b0016;
         public static final int author=0x7f0b0048;
         public static final int author_profile_image=0x7f0b004a;
         public static final int beginning=0x7f0b0013;
-        public static final int button_download_workflow=0x7f0b0073;
-        public static final int button_mark_workflow=0x7f0b0074;
-        public static final int button_view_workflow=0x7f0b0072;
+        public static final int button_download_workflow=0x7f0b0075;
+        public static final int button_mark_workflow=0x7f0b0076;
+        public static final int button_view_workflow=0x7f0b0074;
         public static final int checkbox=0x7f0b0029;
         public static final int collapseActionView=0x7f0b0017;
         public static final int container=0x7f0b0042;
@@ -1496,6 +1496,7 @@ containing a value of this type.
         public static final int imageView2=0x7f0b0045;
         public static final int imageView3=0x7f0b005d;
         public static final int imageView4=0x7f0b005e;
+        public static final int layoutinfo=0x7f0b006f;
         public static final int linearlayout_workflow_info=0x7f0b0049;
         public static final int listMode=0x7f0b0009;
         public static final int list_item=0x7f0b0025;
@@ -1516,7 +1517,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f0b0005;
         public static final int progress_horizontal=0x7f0b0006;
         public static final int radio=0x7f0b002b;
-        public static final int recycler_list=0x7f0b0075;
+        public static final int recycler_list=0x7f0b0077;
         public static final int run_wk=0x7f0b0065;
         public static final int scrollView=0x7f0b0063;
         public static final int search_badge=0x7f0b0035;
@@ -1533,7 +1534,7 @@ containing a value of this type.
         public static final int showCustom=0x7f0b000f;
         public static final int showHome=0x7f0b0010;
         public static final int showTitle=0x7f0b0011;
-        public static final int show_more=0x7f0b0070;
+        public static final int show_more=0x7f0b006e;
         public static final int split_action_bar=0x7f0b0007;
         public static final int submit_area=0x7f0b003c;
         public static final int tabMode=0x7f0b000b;
@@ -1556,10 +1557,11 @@ containing a value of this type.
         public static final int wkf_author=0x7f0b0062;
         public static final int wkll=0x7f0b006b;
         public static final int workflow_author=0x7f0b006c;
-        public static final int workflow_datecreated=0x7f0b006d;
-        public static final int workflow_dateupdated=0x7f0b006e;
-        public static final int workflow_image=0x7f0b0071;
-        public static final int workflow_title=0x7f0b006f;
+        public static final int workflow_brief_description=0x7f0b0072;
+        public static final int workflow_datecreated=0x7f0b0070;
+        public static final int workflow_dateupdated=0x7f0b0071;
+        public static final int workflow_image=0x7f0b0073;
+        public static final int workflow_title=0x7f0b006d;
         public static final int workflowpolicyTextView=0x7f0b0068;
         public static final int wrap_content=0x7f0b001d;
     }
@@ -1655,39 +1657,46 @@ containing a value of this type.
         public static final int brand=0x7f0d0014;
         public static final int completebrand=0x7f0d0015;
         public static final int created=0x7f0d0016;
-        public static final int detail_title_section1=0x7f0d0017;
-        public static final int detail_title_section2=0x7f0d0018;
-        public static final int detail_title_section3=0x7f0d0019;
-        public static final int detail_title_section4=0x7f0d001a;
-        public static final int favorite_empty=0x7f0d001b;
-        public static final int hello_blank_fragment=0x7f0d001c;
-        public static final int hello_world=0x7f0d001d;
-        public static final int loginbutton=0x7f0d001e;
-        public static final int loginpassword=0x7f0d001f;
-        public static final int loginusername=0x7f0d0020;
-        public static final int marked=0x7f0d0021;
-        public static final int menu_search=0x7f0d0022;
-        public static final int modified=0x7f0d0023;
-        public static final int navigation_drawer_close=0x7f0d0024;
-        public static final int navigation_drawer_open=0x7f0d0025;
-        public static final int play_workflow=0x7f0d0026;
-        public static final int search_hint=0x7f0d0027;
-        public static final int title_about=0x7f0d0028;
-        public static final int title_activity_dashboard_main=0x7f0d0029;
-        public static final int title_activity_flash_screen=0x7f0d002a;
-        public static final int title_activity_workflow_detail=0x7f0d002b;
-        public static final int title_exit=0x7f0d002c;
-        public static final int title_explore=0x7f0d002d;
-        public static final int title_favorite=0x7f0d002e;
-        public static final int title_openworkflow=0x7f0d002f;
-        public static final int title_usage=0x7f0d0030;
-        public static final int wktitle=0x7f0d0031;
-        public static final int workflow_authorhint=0x7f0d0032;
-        public static final int workflow_component=0x7f0d0033;
-        public static final int workflow_download=0x7f0d0034;
-        public static final int workflow_empty=0x7f0d0035;
-        public static final int workflow_mark=0x7f0d0036;
-        public static final int workflow_read=0x7f0d0037;
+        public static final int description=0x7f0d0017;
+        public static final int detail_title_section1=0x7f0d0018;
+        public static final int detail_title_section2=0x7f0d0019;
+        public static final int detail_title_section3=0x7f0d001a;
+        public static final int detail_title_section4=0x7f0d001b;
+        public static final int downloadcomplete=0x7f0d001c;
+        public static final int downloadduplicate=0x7f0d001d;
+        public static final int downloaderror=0x7f0d001e;
+        public static final int downloadfailed=0x7f0d001f;
+        public static final int downloadprogress=0x7f0d0020;
+        public static final int favorite_empty=0x7f0d0021;
+        public static final int hello_blank_fragment=0x7f0d0022;
+        public static final int hello_world=0x7f0d0023;
+        public static final int loginbutton=0x7f0d0024;
+        public static final int loginpassword=0x7f0d0025;
+        public static final int loginusername=0x7f0d0026;
+        public static final int marked=0x7f0d0027;
+        public static final int menu_search=0x7f0d0028;
+        public static final int modified=0x7f0d0029;
+        public static final int navigation_drawer_close=0x7f0d002a;
+        public static final int navigation_drawer_open=0x7f0d002b;
+        public static final int play_workflow=0x7f0d002c;
+        public static final int search_hint=0x7f0d002d;
+        public static final int seemore=0x7f0d002e;
+        public static final int title_about=0x7f0d002f;
+        public static final int title_activity_dashboard_main=0x7f0d0030;
+        public static final int title_activity_flash_screen=0x7f0d0031;
+        public static final int title_activity_workflow_detail=0x7f0d0032;
+        public static final int title_exit=0x7f0d0033;
+        public static final int title_explore=0x7f0d0034;
+        public static final int title_favorite=0x7f0d0035;
+        public static final int title_openworkflow=0x7f0d0036;
+        public static final int title_usage=0x7f0d0037;
+        public static final int wktitle=0x7f0d0038;
+        public static final int workflow_authorhint=0x7f0d0039;
+        public static final int workflow_component=0x7f0d003a;
+        public static final int workflow_download=0x7f0d003b;
+        public static final int workflow_empty=0x7f0d003c;
+        public static final int workflow_mark=0x7f0d003d;
+        public static final int workflow_read=0x7f0d003e;
     }
     public static final class style {
         public static final int Animation_AppCompat_DropDownUp=0x7f0e0000;
@@ -1955,33 +1964,33 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionBar_background mobile.taverna.apache.com.tavernamobile:background}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_backgroundSplit mobile.taverna.apache.com.tavernamobile:backgroundSplit}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_backgroundStacked mobile.taverna.apache.com.tavernamobile:backgroundStacked}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_contentInsetEnd mobile.taverna.apache.com.tavernamobile:contentInsetEnd}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_contentInsetLeft mobile.taverna.apache.com.tavernamobile:contentInsetLeft}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_contentInsetRight mobile.taverna.apache.com.tavernamobile:contentInsetRight}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_contentInsetStart mobile.taverna.apache.com.tavernamobile:contentInsetStart}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_customNavigationLayout mobile.taverna.apache.com.tavernamobile:customNavigationLayout}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_displayOptions mobile.taverna.apache.com.tavernamobile:displayOptions}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_divider mobile.taverna.apache.com.tavernamobile:divider}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_elevation mobile.taverna.apache.com.tavernamobile:elevation}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_height mobile.taverna.apache.com.tavernamobile:height}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_hideOnContentScroll mobile.taverna.apache.com.tavernamobile:hideOnContentScroll}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_homeAsUpIndicator mobile.taverna.apache.com.tavernamobile:homeAsUpIndicator}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_homeLayout mobile.taverna.apache.com.tavernamobile:homeLayout}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_icon mobile.taverna.apache.com.tavernamobile:icon}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_indeterminateProgressStyle mobile.taverna.apache.com.tavernamobile:indeterminateProgressStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_itemPadding mobile.taverna.apache.com.tavernamobile:itemPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_logo mobile.taverna.apache.com.tavernamobile:logo}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_navigationMode mobile.taverna.apache.com.tavernamobile:navigationMode}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_popupTheme mobile.taverna.apache.com.tavernamobile:popupTheme}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_progressBarPadding mobile.taverna.apache.com.tavernamobile:progressBarPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_progressBarStyle mobile.taverna.apache.com.tavernamobile:progressBarStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_subtitle mobile.taverna.apache.com.tavernamobile:subtitle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_subtitleTextStyle mobile.taverna.apache.com.tavernamobile:subtitleTextStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_title mobile.taverna.apache.com.tavernamobile:title}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionBar_titleTextStyle mobile.taverna.apache.com.tavernamobile:titleTextStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_background mobile.taverna.apache.org.tavernamobile:background}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_backgroundSplit mobile.taverna.apache.org.tavernamobile:backgroundSplit}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_backgroundStacked mobile.taverna.apache.org.tavernamobile:backgroundStacked}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_contentInsetEnd mobile.taverna.apache.org.tavernamobile:contentInsetEnd}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_contentInsetLeft mobile.taverna.apache.org.tavernamobile:contentInsetLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_contentInsetRight mobile.taverna.apache.org.tavernamobile:contentInsetRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_contentInsetStart mobile.taverna.apache.org.tavernamobile:contentInsetStart}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_customNavigationLayout mobile.taverna.apache.org.tavernamobile:customNavigationLayout}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_displayOptions mobile.taverna.apache.org.tavernamobile:displayOptions}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_divider mobile.taverna.apache.org.tavernamobile:divider}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_elevation mobile.taverna.apache.org.tavernamobile:elevation}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_height mobile.taverna.apache.org.tavernamobile:height}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_hideOnContentScroll mobile.taverna.apache.org.tavernamobile:hideOnContentScroll}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_homeAsUpIndicator mobile.taverna.apache.org.tavernamobile:homeAsUpIndicator}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_homeLayout mobile.taverna.apache.org.tavernamobile:homeLayout}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_icon mobile.taverna.apache.org.tavernamobile:icon}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_indeterminateProgressStyle mobile.taverna.apache.org.tavernamobile:indeterminateProgressStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_itemPadding mobile.taverna.apache.org.tavernamobile:itemPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_logo mobile.taverna.apache.org.tavernamobile:logo}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_navigationMode mobile.taverna.apache.org.tavernamobile:navigationMode}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_popupTheme mobile.taverna.apache.org.tavernamobile:popupTheme}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_progressBarPadding mobile.taverna.apache.org.tavernamobile:progressBarPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_progressBarStyle mobile.taverna.apache.org.tavernamobile:progressBarStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_subtitle mobile.taverna.apache.org.tavernamobile:subtitle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_subtitleTextStyle mobile.taverna.apache.org.tavernamobile:subtitleTextStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_title mobile.taverna.apache.org.tavernamobile:title}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionBar_titleTextStyle mobile.taverna.apache.org.tavernamobile:titleTextStyle}</code></td><td></td></tr>
            </table>
            @see #ActionBar_background
            @see #ActionBar_backgroundSplit
@@ -2021,17 +2030,17 @@ containing a value of this type.
             0x7f01001a, 0x7f01001b, 0x7f01007c
         };
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#background}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#background}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:background
+          @attr name mobile.taverna.apache.org.tavernamobile:background
         */
         public static final int ActionBar_background = 10;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#backgroundSplit}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#backgroundSplit}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2039,11 +2048,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:backgroundSplit
+          @attr name mobile.taverna.apache.org.tavernamobile:backgroundSplit
         */
         public static final int ActionBar_backgroundSplit = 12;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#backgroundStacked}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#backgroundStacked}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2051,11 +2060,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:backgroundStacked
+          @attr name mobile.taverna.apache.org.tavernamobile:backgroundStacked
         */
         public static final int ActionBar_backgroundStacked = 11;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentInsetEnd}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentInsetEnd}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2067,11 +2076,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentInsetEnd
+          @attr name mobile.taverna.apache.org.tavernamobile:contentInsetEnd
         */
         public static final int ActionBar_contentInsetEnd = 21;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentInsetLeft}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentInsetLeft}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2083,11 +2092,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentInsetLeft
+          @attr name mobile.taverna.apache.org.tavernamobile:contentInsetLeft
         */
         public static final int ActionBar_contentInsetLeft = 22;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentInsetRight}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentInsetRight}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2099,11 +2108,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentInsetRight
+          @attr name mobile.taverna.apache.org.tavernamobile:contentInsetRight
         */
         public static final int ActionBar_contentInsetRight = 23;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentInsetStart}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentInsetStart}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2115,21 +2124,21 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentInsetStart
+          @attr name mobile.taverna.apache.org.tavernamobile:contentInsetStart
         */
         public static final int ActionBar_contentInsetStart = 20;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#customNavigationLayout}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#customNavigationLayout}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:customNavigationLayout
+          @attr name mobile.taverna.apache.org.tavernamobile:customNavigationLayout
         */
         public static final int ActionBar_customNavigationLayout = 13;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#displayOptions}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#displayOptions}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2147,21 +2156,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>showCustom</code></td><td>0x10</td><td></td></tr>
 <tr><td><code>disableHome</code></td><td>0x20</td><td></td></tr>
 </table>
-          @attr name mobile.taverna.apache.com.tavernamobile:displayOptions
+          @attr name mobile.taverna.apache.org.tavernamobile:displayOptions
         */
         public static final int ActionBar_displayOptions = 3;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#divider}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#divider}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:divider
+          @attr name mobile.taverna.apache.org.tavernamobile:divider
         */
         public static final int ActionBar_divider = 9;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#elevation}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#elevation}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2173,11 +2182,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:elevation
+          @attr name mobile.taverna.apache.org.tavernamobile:elevation
         */
         public static final int ActionBar_elevation = 24;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#height}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#height}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2189,11 +2198,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:height
+          @attr name mobile.taverna.apache.org.tavernamobile:height
         */
         public static final int ActionBar_height = 0;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#hideOnContentScroll}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#hideOnContentScroll}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2203,51 +2212,51 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:hideOnContentScroll
+          @attr name mobile.taverna.apache.org.tavernamobile:hideOnContentScroll
         */
         public static final int ActionBar_hideOnContentScroll = 19;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#homeAsUpIndicator}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#homeAsUpIndicator}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:homeAsUpIndicator
+          @attr name mobile.taverna.apache.org.tavernamobile:homeAsUpIndicator
         */
         public static final int ActionBar_homeAsUpIndicator = 26;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#homeLayout}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#homeLayout}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:homeLayout
+          @attr name mobile.taverna.apache.org.tavernamobile:homeLayout
         */
         public static final int ActionBar_homeLayout = 14;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#icon}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#icon}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:icon
+          @attr name mobile.taverna.apache.org.tavernamobile:icon
         */
         public static final int ActionBar_icon = 7;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#indeterminateProgressStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#indeterminateProgressStyle}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:indeterminateProgressStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:indeterminateProgressStyle
         */
         public static final int ActionBar_indeterminateProgressStyle = 16;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#itemPadding}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#itemPadding}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2259,21 +2268,21 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:itemPadding
+          @attr name mobile.taverna.apache.org.tavernamobile:itemPadding
         */
         public static final int ActionBar_itemPadding = 18;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#logo}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#logo}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:logo
+          @attr name mobile.taverna.apache.org.tavernamobile:logo
         */
         public static final int ActionBar_logo = 8;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#navigationMode}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#navigationMode}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2287,21 +2296,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>listMode</code></td><td>1</td><td></td></tr>
 <tr><td><code>tabMode</code></td><td>2</td><td></td></tr>
 </table>
-          @attr name mobile.taverna.apache.com.tavernamobile:navigationMode
+          @attr name mobile.taverna.apache.org.tavernamobile:navigationMode
         */
         public static final int ActionBar_navigationMode = 2;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#popupTheme}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#popupTheme}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:popupTheme
+          @attr name mobile.taverna.apache.org.tavernamobile:popupTheme
         */
         public static final int ActionBar_popupTheme = 25;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#progressBarPadding}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#progressBarPadding}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2313,21 +2322,21 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:progressBarPadding
+          @attr name mobile.taverna.apache.org.tavernamobile:progressBarPadding
         */
         public static final int ActionBar_progressBarPadding = 17;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#progressBarStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#progressBarStyle}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:progressBarStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:progressBarStyle
         */
         public static final int ActionBar_progressBarStyle = 15;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#subtitle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#subtitle}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2337,21 +2346,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:subtitle
+          @attr name mobile.taverna.apache.org.tavernamobile:subtitle
         */
         public static final int ActionBar_subtitle = 4;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#subtitleTextStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#subtitleTextStyle}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:subtitleTextStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:subtitleTextStyle
         */
         public static final int ActionBar_subtitleTextStyle = 6;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#title}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#title}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
@@ -2361,17 +2370,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:title
+          @attr name mobile.taverna.apache.org.tavernamobile:title
         */
         public static final int ActionBar_title = 1;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#titleTextStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#titleTextStyle}
           attribute's value can be found in the {@link #ActionBar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:titleTextStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:titleTextStyle
         */
         public static final int ActionBar_titleTextStyle = 5;
         /** Attributes that can be used with a ActionBarLayout.
@@ -2423,12 +2432,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActionMode_background mobile.taverna.apache.com.tavernamobile:background}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionMode_backgroundSplit mobile.taverna.apache.com.tavernamobile:backgroundSplit}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionMode_closeItemLayout mobile.taverna.apache.com.tavernamobile:closeItemLayout}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionMode_height mobile.taverna.apache.com.tavernamobile:height}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionMode_subtitleTextStyle mobile.taverna.apache.com.tavernamobile:subtitleTextStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActionMode_titleTextStyle mobile.taverna.apache.com.tavernamobile:titleTextStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionMode_background mobile.taverna.apache.org.tavernamobile:background}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionMode_backgroundSplit mobile.taverna.apache.org.tavernamobile:backgroundSplit}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionMode_closeItemLayout mobile.taverna.apache.org.tavernamobile:closeItemLayout}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionMode_height mobile.taverna.apache.org.tavernamobile:height}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionMode_subtitleTextStyle mobile.taverna.apache.org.tavernamobile:subtitleTextStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActionMode_titleTextStyle mobile.taverna.apache.org.tavernamobile:titleTextStyle}</code></td><td></td></tr>
            </table>
            @see #ActionMode_background
            @see #ActionMode_backgroundSplit
@@ -2442,17 +2451,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x7f01000e, 0x7f01001c
         };
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#background}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#background}
           attribute's value can be found in the {@link #ActionMode} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:background
+          @attr name mobile.taverna.apache.org.tavernamobile:background
         */
         public static final int ActionMode_background = 3;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#backgroundSplit}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#backgroundSplit}
           attribute's value can be found in the {@link #ActionMode} array.
 
 
@@ -2460,21 +2469,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:backgroundSplit
+          @attr name mobile.taverna.apache.org.tavernamobile:backgroundSplit
         */
         public static final int ActionMode_backgroundSplit = 4;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#closeItemLayout}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#closeItemLayout}
           attribute's value can be found in the {@link #ActionMode} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:closeItemLayout
+          @attr name mobile.taverna.apache.org.tavernamobile:closeItemLayout
         */
         public static final int ActionMode_closeItemLayout = 5;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#height}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#height}
           attribute's value can be found in the {@link #ActionMode} array.
 
 
@@ -2486,27 +2495,27 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:height
+          @attr name mobile.taverna.apache.org.tavernamobile:height
         */
         public static final int ActionMode_height = 0;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#subtitleTextStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#subtitleTextStyle}
           attribute's value can be found in the {@link #ActionMode} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:subtitleTextStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:subtitleTextStyle
         */
         public static final int ActionMode_subtitleTextStyle = 2;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#titleTextStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#titleTextStyle}
           attribute's value can be found in the {@link #ActionMode} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:titleTextStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:titleTextStyle
         */
         public static final int ActionMode_titleTextStyle = 1;
         /** Attributes that can be used with a ActivityChooserView.
@@ -2515,8 +2524,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ActivityChooserView_expandActivityOverflowButtonDrawable mobile.taverna.apache.com.tavernamobile:expandActivityOverflowButtonDrawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #ActivityChooserView_initialActivityCount mobile.taverna.apache.com.tavernamobile:initialActivityCount}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActivityChooserView_expandActivityOverflowButtonDrawable mobile.taverna.apache.org.tavernamobile:expandActivityOverflowButtonDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #ActivityChooserView_initialActivityCount mobile.taverna.apache.org.tavernamobile:initialActivityCount}</code></td><td></td></tr>
            </table>
            @see #ActivityChooserView_expandActivityOverflowButtonDrawable
            @see #ActivityChooserView_initialActivityCount
@@ -2525,17 +2534,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x7f01001d, 0x7f01001e
         };
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#expandActivityOverflowButtonDrawable}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#expandActivityOverflowButtonDrawable}
           attribute's value can be found in the {@link #ActivityChooserView} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:expandActivityOverflowButtonDrawable
+          @attr name mobile.taverna.apache.org.tavernamobile:expandActivityOverflowButtonDrawable
         */
         public static final int ActivityChooserView_expandActivityOverflowButtonDrawable = 1;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#initialActivityCount}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#initialActivityCount}
           attribute's value can be found in the {@link #ActivityChooserView} array.
 
 
@@ -2545,7 +2554,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:initialActivityCount
+          @attr name mobile.taverna.apache.org.tavernamobile:initialActivityCount
         */
         public static final int ActivityChooserView_initialActivityCount = 0;
         /** Attributes that can be used with a CardView.
@@ -2554,17 +2563,17 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #CardView_cardBackgroundColor mobile.taverna.apache.com.tavernamobile:cardBackgroundColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_cardCornerRadius mobile.taverna.apache.com.tavernamobile:cardCornerRadius}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_cardElevation mobile.taverna.apache.com.tavernamobile:cardElevation}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_cardMaxElevation mobile.taverna.apache.com.tavernamobile:cardMaxElevation}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_cardPreventCornerOverlap mobile.taverna.apache.com.tavernamobile:cardPreventCornerOverlap}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_cardUseCompatPadding mobile.taverna.apache.com.tavernamobile:cardUseCompatPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_contentPadding mobile.taverna.apache.com.tavernamobile:contentPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_contentPaddingBottom mobile.taverna.apache.com.tavernamobile:contentPaddingBottom}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_contentPaddingLeft mobile.taverna.apache.com.tavernamobile:contentPaddingLeft}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_contentPaddingRight mobile.taverna.apache.com.tavernamobile:contentPaddingRight}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_contentPaddingTop mobile.taverna.apache.com.tavernamobile:contentPaddingTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardBackgroundColor mobile.taverna.apache.org.tavernamobile:cardBackgroundColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardCornerRadius mobile.taverna.apache.org.tavernamobile:cardCornerRadius}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardElevation mobile.taverna.apache.org.tavernamobile:cardElevation}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardMaxElevation mobile.taverna.apache.org.tavernamobile:cardMaxElevation}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardPreventCornerOverlap mobile.taverna.apache.org.tavernamobile:cardPreventCornerOverlap}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardUseCompatPadding mobile.taverna.apache.org.tavernamobile:cardUseCompatPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPadding mobile.taverna.apache.org.tavernamobile:contentPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingBottom mobile.taverna.apache.org.tavernamobile:contentPaddingBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingLeft mobile.taverna.apache.org.tavernamobile:contentPaddingLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingRight mobile.taverna.apache.org.tavernamobile:contentPaddingRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingTop mobile.taverna.apache.org.tavernamobile:contentPaddingTop}</code></td><td></td></tr>
            </table>
            @see #CardView_cardBackgroundColor
            @see #CardView_cardCornerRadius
@@ -2584,7 +2593,7 @@ containing a value of this type.
             0x7f010027, 0x7f010028, 0x7f010029
         };
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#cardBackgroundColor}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#cardBackgroundColor}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -2595,11 +2604,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:cardBackgroundColor
+          @attr name mobile.taverna.apache.org.tavernamobile:cardBackgroundColor
         */
         public static final int CardView_cardBackgroundColor = 0;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#cardCornerRadius}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#cardCornerRadius}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -2611,11 +2620,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:cardCornerRadius
+          @attr name mobile.taverna.apache.org.tavernamobile:cardCornerRadius
         */
         public static final int CardView_cardCornerRadius = 1;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#cardElevation}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#cardElevation}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -2627,11 +2636,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:cardElevation
+          @attr name mobile.taverna.apache.org.tavernamobile:cardElevation
         */
         public static final int CardView_cardElevation = 2;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#cardMaxElevation}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#cardMaxElevation}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -2643,11 +2652,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:cardMaxElevation
+          @attr name mobile.taverna.apache.org.tavernamobile:cardMaxElevation
         */
         public static final int CardView_cardMaxElevation = 3;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#cardPreventCornerOverlap}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#cardPreventCornerOverlap}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -2657,11 +2666,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:cardPreventCornerOverlap
+          @attr name mobile.taverna.apache.org.tavernamobile:cardPreventCornerOverlap
         */
         public static final int CardView_cardPreventCornerOverlap = 5;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#cardUseCompatPadding}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#cardUseCompatPadding}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -2671,11 +2680,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:cardUseCompatPadding
+          @attr name mobile.taverna.apache.org.tavernamobile:cardUseCompatPadding
         */
         public static final int CardView_cardUseCompatPadding = 4;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentPadding}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentPadding}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -2687,11 +2696,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentPadding
+          @attr name mobile.taverna.apache.org.tavernamobile:contentPadding
         */
         public static final int CardView_contentPadding = 6;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentPaddingBottom}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentPaddingBottom}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -2703,11 +2712,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentPaddingBottom
+          @attr name mobile.taverna.apache.org.tavernamobile:contentPaddingBottom
         */
         public static final int CardView_contentPaddingBottom = 10;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentPaddingLeft}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentPaddingLeft}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -2719,11 +2728,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentPaddingLeft
+          @attr name mobile.taverna.apache.org.tavernamobile:contentPaddingLeft
         */
         public static final int CardView_contentPaddingLeft = 7;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentPaddingRight}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentPaddingRight}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -2735,11 +2744,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentPaddingRight
+          @attr name mobile.taverna.apache.org.tavernamobile:contentPaddingRight
         */
         public static final int CardView_contentPaddingRight = 8;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentPaddingTop}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentPaddingTop}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -2751,7 +2760,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentPaddingTop
+          @attr name mobile.taverna.apache.org.tavernamobile:contentPaddingTop
         */
         public static final int CardView_contentPaddingTop = 9;
         /** Attributes that can be used with a CompatTextView.
@@ -2760,7 +2769,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #CompatTextView_textAllCaps mobile.taverna.apache.com.tavernamobile:textAllCaps}</code></td><td></td></tr>
+           <tr><td><code>{@link #CompatTextView_textAllCaps mobile.taverna.apache.org.tavernamobile:textAllCaps}</code></td><td></td></tr>
            </table>
            @see #CompatTextView_textAllCaps
          */
@@ -2768,14 +2777,14 @@ containing a value of this type.
             0x7f01002a
         };
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#textAllCaps}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#textAllCaps}
           attribute's value can be found in the {@link #CompatTextView} array.
 
 
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:textAllCaps
+          @attr name mobile.taverna.apache.org.tavernamobile:textAllCaps
         */
         public static final int CompatTextView_textAllCaps = 0;
         /** Attributes that can be used with a DrawerArrowToggle.
@@ -2784,14 +2793,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #DrawerArrowToggle_barSize mobile.taverna.apache.com.tavernamobile:barSize}</code></td><td></td></tr>
-           <tr><td><code>{@link #DrawerArrowToggle_color mobile.taverna.apache.com.tavernamobile:color}</code></td><td></td></tr>
-           <tr><td><code>{@link #DrawerArrowToggle_drawableSize mobile.taverna.apache.com.tavernamobile:drawableSize}</code></td><td></td></tr>
-           <tr><td><code>{@link #DrawerArrowToggle_gapBetweenBars mobile.taverna.apache.com.tavernamobile:gapBetweenBars}</code></td><td></td></tr>
-           <tr><td><code>{@link #DrawerArrowToggle_middleBarArrowSize mobile.taverna.apache.com.tavernamobile:middleBarArrowSize}</code></td><td></td></tr>
-           <tr><td><code>{@link #DrawerArrowToggle_spinBars mobile.taverna.apache.com.tavernamobile:spinBars}</code></td><td></td></tr>
-           <tr><td><code>{@link #DrawerArrowToggle_thickness mobile.taverna.apache.com.tavernamobile:thickness}</code></td><td></td></tr>
-           <tr><td><code>{@link #DrawerArrowToggle_topBottomBarArrowSize mobile.taverna.apache.com.tavernamobile:topBottomBarArrowSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #DrawerArrowToggle_barSize mobile.taverna.apache.org.tavernamobile:barSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #DrawerArrowToggle_color mobile.taverna.apache.org.tavernamobile:color}</code></td><td></td></tr>
+           <tr><td><code>{@link #DrawerArrowToggle_drawableSize mobile.taverna.apache.org.tavernamobile:drawableSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #DrawerArrowToggle_gapBetweenBars mobile.taverna.apache.org.tavernamobile:gapBetweenBars}</code></td><td></td></tr>
+           <tr><td><code>{@link #DrawerArrowToggle_middleBarArrowSize mobile.taverna.apache.org.tavernamobile:middleBarArrowSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #DrawerArrowToggle_spinBars mobile.taverna.apache.org.tavernamobile:spinBars}</code></td><td></td></tr>
+           <tr><td><code>{@link #DrawerArrowToggle_thickness mobile.taverna.apache.org.tavernamobile:thickness}</code></td><td></td></tr>
+           <tr><td><code>{@link #DrawerArrowToggle_topBottomBarArrowSize mobile.taverna.apache.org.tavernamobile:topBottomBarArrowSize}</code></td><td></td></tr>
            </table>
            @see #DrawerArrowToggle_barSize
            @see #DrawerArrowToggle_color
@@ -2807,7 +2816,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x7f01002f, 0x7f010030, 0x7f010031, 0x7f010032
         };
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#barSize}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#barSize}
           attribute's value can be found in the {@link #DrawerArrowToggle} array.
 
 
@@ -2819,11 +2828,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:barSize
+          @attr name mobile.taverna.apache.org.tavernamobile:barSize
         */
         public static final int DrawerArrowToggle_barSize = 6;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#color}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#color}
           attribute's value can be found in the {@link #DrawerArrowToggle} array.
 
 
@@ -2834,11 +2843,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:color
+          @attr name mobile.taverna.apache.org.tavernamobile:color
         */
         public static final int DrawerArrowToggle_color = 0;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#drawableSize}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#drawableSize}
           attribute's value can be found in the {@link #DrawerArrowToggle} array.
 
 
@@ -2850,11 +2859,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:drawableSize
+          @attr name mobile.taverna.apache.org.tavernamobile:drawableSize
         */
         public static final int DrawerArrowToggle_drawableSize = 2;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#gapBetweenBars}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#gapBetweenBars}
           attribute's value can be found in the {@link #DrawerArrowToggle} array.
 
 
@@ -2866,11 +2875,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:gapBetweenBars
+          @attr name mobile.taverna.apache.org.tavernamobile:gapBetweenBars
         */
         public static final int DrawerArrowToggle_gapBetweenBars = 3;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#middleBarArrowSize}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#middleBarArrowSize}
           attribute's value can be found in the {@link #DrawerArrowToggle} array.
 
 
@@ -2882,11 +2891,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:middleBarArrowSize
+          @attr name mobile.taverna.apache.org.tavernamobile:middleBarArrowSize
         */
         public static final int DrawerArrowToggle_middleBarArrowSize = 5;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#spinBars}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#spinBars}
           attribute's value can be found in the {@link #DrawerArrowToggle} array.
 
 
@@ -2896,11 +2905,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:spinBars
+          @attr name mobile.taverna.apache.org.tavernamobile:spinBars
         */
         public static final int DrawerArrowToggle_spinBars = 1;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#thickness}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#thickness}
           attribute's value can be found in the {@link #DrawerArrowToggle} array.
 
 
@@ -2912,11 +2921,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:thickness
+          @attr name mobile.taverna.apache.org.tavernamobile:thickness
         */
         public static final int DrawerArrowToggle_thickness = 7;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#topBottomBarArrowSize}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#topBottomBarArrowSize}
           attribute's value can be found in the {@link #DrawerArrowToggle} array.
 
 
@@ -2928,7 +2937,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:topBottomBarArrowSize
+          @attr name mobile.taverna.apache.org.tavernamobile:topBottomBarArrowSize
         */
         public static final int DrawerArrowToggle_topBottomBarArrowSize = 4;
         /** Attributes that can be used with a LinearLayoutCompat.
@@ -2942,10 +2951,10 @@ containing a value of this type.
            <tr><td><code>{@link #LinearLayoutCompat_android_gravity android:gravity}</code></td><td></td></tr>
            <tr><td><code>{@link #LinearLayoutCompat_android_orientation android:orientation}</code></td><td></td></tr>
            <tr><td><code>{@link #LinearLayoutCompat_android_weightSum android:weightSum}</code></td><td></td></tr>
-           <tr><td><code>{@link #LinearLayoutCompat_divider mobile.taverna.apache.com.tavernamobile:divider}</code></td><td></td></tr>
-           <tr><td><code>{@link #LinearLayoutCompat_dividerPadding mobile.taverna.apache.com.tavernamobile:dividerPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #LinearLayoutCompat_measureWithLargestChild mobile.taverna.apache.com.tavernamobile:measureWithLargestChild}</code></td><td></td></tr>
-           <tr><td><code>{@link #LinearLayoutCompat_showDividers mobile.taverna.apache.com.tavernamobile:showDividers}</code></td><td></td></tr>
+           <tr><td><code>{@link #LinearLayoutCompat_divider mobile.taverna.apache.org.tavernamobile:divider}</code></td><td></td></tr>
+           <tr><td><code>{@link #LinearLayoutCompat_dividerPadding mobile.taverna.apache.org.tavernamobile:dividerPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #LinearLayoutCompat_measureWithLargestChild mobile.taverna.apache.org.tavernamobile:measureWithLargestChild}</code></td><td></td></tr>
+           <tr><td><code>{@link #LinearLayoutCompat_showDividers mobile.taverna.apache.org.tavernamobile:showDividers}</code></td><td></td></tr>
            </table>
            @see #LinearLayoutCompat_android_baselineAligned
            @see #LinearLayoutCompat_android_baselineAlignedChildIndex
@@ -2993,17 +3002,17 @@ containing a value of this type.
         */
         public static final int LinearLayoutCompat_android_weightSum = 4;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#divider}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#divider}
           attribute's value can be found in the {@link #LinearLayoutCompat} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:divider
+          @attr name mobile.taverna.apache.org.tavernamobile:divider
         */
         public static final int LinearLayoutCompat_divider = 5;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#dividerPadding}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#dividerPadding}
           attribute's value can be found in the {@link #LinearLayoutCompat} array.
 
 
@@ -3015,11 +3024,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:dividerPadding
+          @attr name mobile.taverna.apache.org.tavernamobile:dividerPadding
         */
         public static final int LinearLayoutCompat_dividerPadding = 8;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#measureWithLargestChild}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#measureWithLargestChild}
           attribute's value can be found in the {@link #LinearLayoutCompat} array.
 
 
@@ -3029,11 +3038,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:measureWithLargestChild
+          @attr name mobile.taverna.apache.org.tavernamobile:measureWithLargestChild
         */
         public static final int LinearLayoutCompat_measureWithLargestChild = 6;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#showDividers}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#showDividers}
           attribute's value can be found in the {@link #LinearLayoutCompat} array.
 
 
@@ -3048,7 +3057,7 @@ containing a value of this type.
 <tr><td><code>middle</code></td><td>2</td><td></td></tr>
 <tr><td><code>end</code></td><td>4</td><td></td></tr>
 </table>
-          @attr name mobile.taverna.apache.com.tavernamobile:showDividers
+          @attr name mobile.taverna.apache.org.tavernamobile:showDividers
         */
         public static final int LinearLayoutCompat_showDividers = 7;
         /** Attributes that can be used with a LinearLayoutCompat_Layout.
@@ -3187,9 +3196,9 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #MenuItem_actionLayout mobile.taverna.apache.com.tavernamobile:actionLayout}</code></td><td></td></tr>
-           <tr><td><code>{@link #MenuItem_actionProviderClass mobile.taverna.apache.com.tavernamobile:actionProviderClass}</code></td><td></td></tr>
-           <tr><td><code>{@link #MenuItem_actionViewClass mobile.taverna.apache.com.tavernamobile:actionViewClass}</code></td><td></td></tr>
+           <tr><td><code>{@link #MenuItem_actionLayout mobile.taverna.apache.org.tavernamobile:actionLayout}</code></td><td></td></tr>
+           <tr><td><code>{@link #MenuItem_actionProviderClass mobile.taverna.apache.org.tavernamobile:actionProviderClass}</code></td><td></td></tr>
+           <tr><td><code>{@link #MenuItem_actionViewClass mobile.taverna.apache.org.tavernamobile:actionViewClass}</code></td><td></td></tr>
            <tr><td><code>{@link #MenuItem_android_alphabeticShortcut android:alphabeticShortcut}</code></td><td></td></tr>
            <tr><td><code>{@link #MenuItem_android_checkable android:checkable}</code></td><td></td></tr>
            <tr><td><code>{@link #MenuItem_android_checked android:checked}</code></td><td></td></tr>
@@ -3203,7 +3212,7 @@ containing a value of this type.
            <tr><td><code>{@link #MenuItem_android_title android:title}</code></td><td></td></tr>
            <tr><td><code>{@link #MenuItem_android_titleCondensed android:titleCondensed}</code></td><td></td></tr>
            <tr><td><code>{@link #MenuItem_android_visible android:visible}</code></td><td></td></tr>
-           <tr><td><code>{@link #MenuItem_showAsAction mobile.taverna.apache.com.tavernamobile:showAsAction}</code></td><td></td></tr>
+           <tr><td><code>{@link #MenuItem_showAsAction mobile.taverna.apache.org.tavernamobile:showAsAction}</code></td><td></td></tr>
            </table>
            @see #MenuItem_actionLayout
            @see #MenuItem_actionProviderClass
@@ -3231,17 +3240,17 @@ containing a value of this type.
             0x7f010039
         };
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionLayout}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionLayout}
           attribute's value can be found in the {@link #MenuItem} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionLayout
+          @attr name mobile.taverna.apache.org.tavernamobile:actionLayout
         */
         public static final int MenuItem_actionLayout = 14;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionProviderClass}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionProviderClass}
           attribute's value can be found in the {@link #MenuItem} array.
 
 
@@ -3251,11 +3260,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:actionProviderClass
+          @attr name mobile.taverna.apache.org.tavernamobile:actionProviderClass
         */
         public static final int MenuItem_actionProviderClass = 16;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionViewClass}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionViewClass}
           attribute's value can be found in the {@link #MenuItem} array.
 
 
@@ -3265,7 +3274,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:actionViewClass
+          @attr name mobile.taverna.apache.org.tavernamobile:actionViewClass
         */
         public static final int MenuItem_actionViewClass = 15;
         /**
@@ -3347,7 +3356,7 @@ containing a value of this type.
         */
         public static final int MenuItem_android_visible = 4;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#showAsAction}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#showAsAction}
           attribute's value can be found in the {@link #MenuItem} array.
 
 
@@ -3363,7 +3372,7 @@ containing a value of this type.
 <tr><td><code>withText</code></td><td>4</td><td></td></tr>
 <tr><td><code>collapseActionView</code></td><td>8</td><td></td></tr>
 </table>
-          @attr name mobile.taverna.apache.com.tavernamobile:showAsAction
+          @attr name mobile.taverna.apache.org.tavernamobile:showAsAction
         */
         public static final int MenuItem_showAsAction = 13;
         /** Attributes that can be used with a MenuView.
@@ -3379,7 +3388,7 @@ containing a value of this type.
            <tr><td><code>{@link #MenuView_android_itemTextAppearance android:itemTextAppearance}</code></td><td></td></tr>
            <tr><td><code>{@link #MenuView_android_verticalDivider android:verticalDivider}</code></td><td></td></tr>
            <tr><td><code>{@link #MenuView_android_windowAnimationStyle android:windowAnimationStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #MenuView_preserveIconSpacing mobile.taverna.apache.com.tavernamobile:preserveIconSpacing}</code></td><td></td></tr>
+           <tr><td><code>{@link #MenuView_preserveIconSpacing mobile.taverna.apache.org.tavernamobile:preserveIconSpacing}</code></td><td></td></tr>
            </table>
            @see #MenuView_android_headerBackground
            @see #MenuView_android_horizontalDivider
@@ -3437,7 +3446,7 @@ containing a value of this type.
         */
         public static final int MenuView_android_windowAnimationStyle = 0;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#preserveIconSpacing}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#preserveIconSpacing}
           attribute's value can be found in the {@link #MenuView} array.
 
 
@@ -3447,7 +3456,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:preserveIconSpacing
+          @attr name mobile.taverna.apache.org.tavernamobile:preserveIconSpacing
         */
         public static final int MenuView_preserveIconSpacing = 7;
         /** Attributes that can be used with a PopupWindow.
@@ -3457,7 +3466,7 @@ containing a value of this type.
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #PopupWindow_android_popupBackground android:popupBackground}</code></td><td></td></tr>
-           <tr><td><code>{@link #PopupWindow_overlapAnchor mobile.taverna.apache.com.tavernamobile:overlapAnchor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PopupWindow_overlapAnchor mobile.taverna.apache.org.tavernamobile:overlapAnchor}</code></td><td></td></tr>
            </table>
            @see #PopupWindow_android_popupBackground
            @see #PopupWindow_overlapAnchor
@@ -3472,7 +3481,7 @@ containing a value of this type.
         */
         public static final int PopupWindow_android_popupBackground = 0;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#overlapAnchor}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#overlapAnchor}
           attribute's value can be found in the {@link #PopupWindow} array.
 
 
@@ -3482,7 +3491,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:overlapAnchor
+          @attr name mobile.taverna.apache.org.tavernamobile:overlapAnchor
         */
         public static final int PopupWindow_overlapAnchor = 1;
         /** Attributes that can be used with a PopupWindowBackgroundState.
@@ -3491,7 +3500,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #PopupWindowBackgroundState_state_above_anchor mobile.taverna.apache.com.tavernamobile:state_above_anchor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PopupWindowBackgroundState_state_above_anchor mobile.taverna.apache.org.tavernamobile:state_above_anchor}</code></td><td></td></tr>
            </table>
            @see #PopupWindowBackgroundState_state_above_anchor
          */
@@ -3499,7 +3508,7 @@ containing a value of this type.
             0x7f01003c
         };
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#state_above_anchor}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#state_above_anchor}
           attribute's value can be found in the {@link #PopupWindowBackgroundState} array.
 
 
@@ -3509,7 +3518,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:state_above_anchor
+          @attr name mobile.taverna.apache.org.tavernamobile:state_above_anchor
         */
         public static final int PopupWindowBackgroundState_state_above_anchor = 0;
         /** Attributes that can be used with a SearchView.
@@ -3522,17 +3531,17 @@ containing a value of this type.
            <tr><td><code>{@link #SearchView_android_imeOptions android:imeOptions}</code></td><td></td></tr>
            <tr><td><code>{@link #SearchView_android_inputType android:inputType}</code></td><td></td></tr>
            <tr><td><code>{@link #SearchView_android_maxWidth android:maxWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_closeIcon mobile.taverna.apache.com.tavernamobile:closeIcon}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_commitIcon mobile.taverna.apache.com.tavernamobile:commitIcon}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_goIcon mobile.taverna.apache.com.tavernamobile:goIcon}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_iconifiedByDefault mobile.taverna.apache.com.tavernamobile:iconifiedByDefault}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_layout mobile.taverna.apache.com.tavernamobile:layout}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_queryBackground mobile.taverna.apache.com.tavernamobile:queryBackground}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_queryHint mobile.taverna.apache.com.tavernamobile:queryHint}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_searchIcon mobile.taverna.apache.com.tavernamobile:searchIcon}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_submitBackground mobile.taverna.apache.com.tavernamobile:submitBackground}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_suggestionRowLayout mobile.taverna.apache.com.tavernamobile:suggestionRowLayout}</code></td><td></td></tr>
-           <tr><td><code>{@link #SearchView_voiceIcon mobile.taverna.apache.com.tavernamobile:voiceIcon}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_closeIcon mobile.taverna.apache.org.tavernamobile:closeIcon}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_commitIcon mobile.taverna.apache.org.tavernamobile:commitIcon}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_goIcon mobile.taverna.apache.org.tavernamobile:goIcon}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_iconifiedByDefault mobile.taverna.apache.org.tavernamobile:iconifiedByDefault}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_layout mobile.taverna.apache.org.tavernamobile:layout}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_queryBackground mobile.taverna.apache.org.tavernamobile:queryBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_queryHint mobile.taverna.apache.org.tavernamobile:queryHint}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_searchIcon mobile.taverna.apache.org.tavernamobile:searchIcon}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_submitBackground mobile.taverna.apache.org.tavernamobile:submitBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_suggestionRowLayout mobile.taverna.apache.org.tavernamobile:suggestionRowLayout}</code></td><td></td></tr>
+           <tr><td><code>{@link #SearchView_voiceIcon mobile.taverna.apache.org.tavernamobile:voiceIcon}</code></td><td></td></tr>
            </table>
            @see #SearchView_android_focusable
            @see #SearchView_android_imeOptions
@@ -3581,37 +3590,37 @@ containing a value of this type.
         */
         public static final int SearchView_android_maxWidth = 1;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#closeIcon}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#closeIcon}
           attribute's value can be found in the {@link #SearchView} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:closeIcon
+          @attr name mobile.taverna.apache.org.tavernamobile:closeIcon
         */
         public static final int SearchView_closeIcon = 7;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#commitIcon}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#commitIcon}
           attribute's value can be found in the {@link #SearchView} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:commitIcon
+          @attr name mobile.taverna.apache.org.tavernamobile:commitIcon
         */
         public static final int SearchView_commitIcon = 11;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#goIcon}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#goIcon}
           attribute's value can be found in the {@link #SearchView} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:goIcon
+          @attr name mobile.taverna.apache.org.tavernamobile:goIcon
         */
         public static final int SearchView_goIcon = 8;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#iconifiedByDefault}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#iconifiedByDefault}
           attribute's value can be found in the {@link #SearchView} array.
 
 
@@ -3621,31 +3630,31 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:iconifiedByDefault
+          @attr name mobile.taverna.apache.org.tavernamobile:iconifiedByDefault
         */
         public static final int SearchView_iconifiedByDefault = 5;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#layout}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#layout}
           attribute's value can be found in the {@link #SearchView} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:layout
+          @attr name mobile.taverna.apache.org.tavernamobile:layout
         */
         public static final int SearchView_layout = 4;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#queryBackground}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#queryBackground}
           attribute's value can be found in the {@link #SearchView} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:queryBackground
+          @attr name mobile.taverna.apache.org.tavernamobile:queryBackground
         */
         public static final int SearchView_queryBackground = 13;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#queryHint}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#queryHint}
           attribute's value can be found in the {@link #SearchView} array.
 
 
@@ -3655,47 +3664,47 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:queryHint
+          @attr name mobile.taverna.apache.org.tavernamobile:queryHint
         */
         public static final int SearchView_queryHint = 6;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#searchIcon}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#searchIcon}
           attribute's value can be found in the {@link #SearchView} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:searchIcon
+          @attr name mobile.taverna.apache.org.tavernamobile:searchIcon
         */
         public static final int SearchView_searchIcon = 9;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#submitBackground}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#submitBackground}
           attribute's value can be found in the {@link #SearchView} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:submitBackground
+          @attr name mobile.taverna.apache.org.tavernamobile:submitBackground
         */
         public static final int SearchView_submitBackground = 14;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#suggestionRowLayout}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#suggestionRowLayout}
           attribute's value can be found in the {@link #SearchView} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:suggestionRowLayout
+          @attr name mobile.taverna.apache.org.tavernamobile:suggestionRowLayout
         */
         public static final int SearchView_suggestionRowLayout = 12;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#voiceIcon}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#voiceIcon}
           attribute's value can be found in the {@link #SearchView} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:voiceIcon
+          @attr name mobile.taverna.apache.org.tavernamobile:voiceIcon
         */
         public static final int SearchView_voiceIcon = 10;
         /** Attributes that can be used with a Spinner.
@@ -3711,10 +3720,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <tr><td><code>{@link #Spinner_android_dropDownWidth android:dropDownWidth}</code></td><td></td></tr>
            <tr><td><code>{@link #Spinner_android_gravity android:gravity}</code></td><td></td></tr>
            <tr><td><code>{@link #Spinner_android_popupBackground android:popupBackground}</code></td><td></td></tr>
-           <tr><td><code>{@link #Spinner_disableChildrenWhenDisabled mobile.taverna.apache.com.tavernamobile:disableChildrenWhenDisabled}</code></td><td></td></tr>
-           <tr><td><code>{@link #Spinner_popupPromptView mobile.taverna.apache.com.tavernamobile:popupPromptView}</code></td><td></td></tr>
-           <tr><td><code>{@link #Spinner_prompt mobile.taverna.apache.com.tavernamobile:prompt}</code></td><td></td></tr>
-           <tr><td><code>{@link #Spinner_spinnerMode mobile.taverna.apache.com.tavernamobile:spinnerMode}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_disableChildrenWhenDisabled mobile.taverna.apache.org.tavernamobile:disableChildrenWhenDisabled}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_popupPromptView mobile.taverna.apache.org.tavernamobile:popupPromptView}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_prompt mobile.taverna.apache.org.tavernamobile:prompt}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_spinnerMode mobile.taverna.apache.org.tavernamobile:spinnerMode}</code></td><td></td></tr>
            </table>
            @see #Spinner_android_background
            @see #Spinner_android_dropDownHorizontalOffset
@@ -3776,7 +3785,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         */
         public static final int Spinner_android_popupBackground = 3;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#disableChildrenWhenDisabled}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#disableChildrenWhenDisabled}
           attribute's value can be found in the {@link #Spinner} array.
 
 
@@ -3786,31 +3795,31 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:disableChildrenWhenDisabled
+          @attr name mobile.taverna.apache.org.tavernamobile:disableChildrenWhenDisabled
         */
         public static final int Spinner_disableChildrenWhenDisabled = 10;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#popupPromptView}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#popupPromptView}
           attribute's value can be found in the {@link #Spinner} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:popupPromptView
+          @attr name mobile.taverna.apache.org.tavernamobile:popupPromptView
         */
         public static final int Spinner_popupPromptView = 9;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#prompt}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#prompt}
           attribute's value can be found in the {@link #Spinner} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:prompt
+          @attr name mobile.taverna.apache.org.tavernamobile:prompt
         */
         public static final int Spinner_prompt = 7;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#spinnerMode}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#spinnerMode}
           attribute's value can be found in the {@link #Spinner} array.
 
 
@@ -3823,7 +3832,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>dialog</code></td><td>0</td><td></td></tr>
 <tr><td><code>dropdown</code></td><td>1</td><td></td></tr>
 </table>
-          @attr name mobile.taverna.apache.com.tavernamobile:spinnerMode
+          @attr name mobile.taverna.apache.org.tavernamobile:spinnerMode
         */
         public static final int Spinner_spinnerMode = 8;
         /** Attributes that can be used with a SwitchCompat.
@@ -3835,13 +3844,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <tr><td><code>{@link #SwitchCompat_android_textOff android:textOff}</code></td><td></td></tr>
            <tr><td><code>{@link #SwitchCompat_android_textOn android:textOn}</code></td><td></td></tr>
            <tr><td><code>{@link #SwitchCompat_android_thumb android:thumb}</code></td><td></td></tr>
-           <tr><td><code>{@link #SwitchCompat_showText mobile.taverna.apache.com.tavernamobile:showText}</code></td><td></td></tr>
-           <tr><td><code>{@link #SwitchCompat_splitTrack mobile.taverna.apache.com.tavernamobile:splitTrack}</code></td><td></td></tr>
-           <tr><td><code>{@link #SwitchCompat_switchMinWidth mobile.taverna.apache.com.tavernamobile:switchMinWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #SwitchCompat_switchPadding mobile.taverna.apache.com.tavernamobile:switchPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #SwitchCompat_switchTextAppearance mobile.taverna.apache.com.tavernamobile:switchTextAppearance}</code></td><td></td></tr>
-           <tr><td><code>{@link #SwitchCompat_thumbTextPadding mobile.taverna.apache.com.tavernamobile:thumbTextPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #SwitchCompat_track mobile.taverna.apache.com.tavernamobile:track}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchCompat_showText mobile.taverna.apache.org.tavernamobile:showText}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchCompat_splitTrack mobile.taverna.apache.org.tavernamobile:splitTrack}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchCompat_switchMinWidth mobile.taverna.apache.org.tavernamobile:switchMinWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchCompat_switchPadding mobile.taverna.apache.org.tavernamobile:switchPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchCompat_switchTextAppearance mobile.taverna.apache.org.tavernamobile:switchTextAppearance}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchCompat_thumbTextPadding mobile.taverna.apache.org.tavernamobile:thumbTextPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchCompat_track mobile.taverna.apache.org.tavernamobile:track}</code></td><td></td></tr>
            </table>
            @see #SwitchCompat_android_textOff
            @see #SwitchCompat_android_textOn
@@ -3878,7 +3887,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         */
         public static final int SwitchCompat_android_thumb = 2;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#showText}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#showText}
           attribute's value can be found in the {@link #SwitchCompat} array.
 
 
@@ -3888,11 +3897,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:showText
+          @attr name mobile.taverna.apache.org.tavernamobile:showText
         */
         public static final int SwitchCompat_showText = 9;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#splitTrack}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#splitTrack}
           attribute's value can be found in the {@link #SwitchCompat} array.
 
 
@@ -3902,11 +3911,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:splitTrack
+          @attr name mobile.taverna.apache.org.tavernamobile:splitTrack
         */
         public static final int SwitchCompat_splitTrack = 8;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#switchMinWidth}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#switchMinWidth}
           attribute's value can be found in the {@link #SwitchCompat} array.
 
 
@@ -3918,11 +3927,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:switchMinWidth
+          @attr name mobile.taverna.apache.org.tavernamobile:switchMinWidth
         */
         public static final int SwitchCompat_switchMinWidth = 6;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#switchPadding}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#switchPadding}
           attribute's value can be found in the {@link #SwitchCompat} array.
 
 
@@ -3934,21 +3943,21 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:switchPadding
+          @attr name mobile.taverna.apache.org.tavernamobile:switchPadding
         */
         public static final int SwitchCompat_switchPadding = 7;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#switchTextAppearance}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#switchTextAppearance}
           attribute's value can be found in the {@link #SwitchCompat} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:switchTextAppearance
+          @attr name mobile.taverna.apache.org.tavernamobile:switchTextAppearance
         */
         public static final int SwitchCompat_switchTextAppearance = 5;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#thumbTextPadding}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#thumbTextPadding}
           attribute's value can be found in the {@link #SwitchCompat} array.
 
 
@@ -3960,17 +3969,17 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:thumbTextPadding
+          @attr name mobile.taverna.apache.org.tavernamobile:thumbTextPadding
         */
         public static final int SwitchCompat_thumbTextPadding = 4;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#track}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#track}
           attribute's value can be found in the {@link #SwitchCompat} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:track
+          @attr name mobile.taverna.apache.org.tavernamobile:track
         */
         public static final int SwitchCompat_track = 3;
         /** Attributes that can be used with a SwitchCompatTextAppearance.
@@ -3981,7 +3990,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #SwitchCompatTextAppearance_android_textColor android:textColor}</code></td><td></td></tr>
            <tr><td><code>{@link #SwitchCompatTextAppearance_android_textSize android:textSize}</code></td><td></td></tr>
-           <tr><td><code>{@link #SwitchCompatTextAppearance_textAllCaps mobile.taverna.apache.com.tavernamobile:textAllCaps}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwitchCompatTextAppearance_textAllCaps mobile.taverna.apache.org.tavernamobile:textAllCaps}</code></td><td></td></tr>
            </table>
            @see #SwitchCompatTextAppearance_android_textColor
            @see #SwitchCompatTextAppearance_android_textSize
@@ -4003,14 +4012,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         */
         public static final int SwitchCompatTextAppearance_android_textSize = 0;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#textAllCaps}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#textAllCaps}
           attribute's value can be found in the {@link #SwitchCompatTextAppearance} array.
 
 
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:textAllCaps
+          @attr name mobile.taverna.apache.org.tavernamobile:textAllCaps
         */
         public static final int SwitchCompatTextAppearance_textAllCaps = 2;
         /** Attributes that can be used with a Theme.
@@ -4019,90 +4028,90 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #Theme_actionBarDivider mobile.taverna.apache.com.tavernamobile:actionBarDivider}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionBarItemBackground mobile.taverna.apache.com.tavernamobile:actionBarItemBackground}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionBarPopupTheme mobile.taverna.apache.com.tavernamobile:actionBarPopupTheme}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionBarSize mobile.taverna.apache.com.tavernamobile:actionBarSize}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionBarSplitStyle mobile.taverna.apache.com.tavernamobile:actionBarSplitStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionBarStyle mobile.taverna.apache.com.tavernamobile:actionBarStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionBarTabBarStyle mobile.taverna.apache.com.tavernamobile:actionBarTabBarStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionBarTabStyle mobile.taverna.apache.com.tavernamobile:actionBarTabStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionBarTabTextStyle mobile.taverna.apache.com.tavernamobile:actionBarTabTextStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionBarTheme mobile.taverna.apache.com.tavernamobile:actionBarTheme}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionBarWidgetTheme mobile.taverna.apache.com.tavernamobile:actionBarWidgetTheme}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionButtonStyle mobile.taverna.apache.com.tavernamobile:actionButtonStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionDropDownStyle mobile.taverna.apache.com.tavernamobile:actionDropDownStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionMenuTextAppearance mobile.taverna.apache.com.tavernamobile:actionMenuTextAppearance}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionMenuTextColor mobile.taverna.apache.com.tavernamobile:actionMenuTextColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModeBackground mobile.taverna.apache.com.tavernamobile:actionModeBackground}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModeCloseButtonStyle mobile.taverna.apache.com.tavernamobile:actionModeCloseButtonStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModeCloseDrawable mobile.taverna.apache.com.tavernamobile:actionModeCloseDrawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModeCopyDrawable mobile.taverna.apache.com.tavernamobile:actionModeCopyDrawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModeCutDrawable mobile.taverna.apache.com.tavernamobile:actionModeCutDrawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModeFindDrawable mobile.taverna.apache.com.tavernamobile:actionModeFindDrawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModePasteDrawable mobile.taverna.apache.com.tavernamobile:actionModePasteDrawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModePopupWindowStyle mobile.taverna.apache.com.tavernamobile:actionModePopupWindowStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModeSelectAllDrawable mobile.taverna.apache.com.tavernamobile:actionModeSelectAllDrawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModeShareDrawable mobile.taverna.apache.com.tavernamobile:actionModeShareDrawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModeSplitBackground mobile.taverna.apache.com.tavernamobile:actionModeSplitBackground}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModeStyle mobile.taverna.apache.com.tavernamobile:actionModeStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionModeWebSearchDrawable mobile.taverna.apache.com.tavernamobile:actionModeWebSearchDrawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionOverflowButtonStyle mobile.taverna.apache.com.tavernamobile:actionOverflowButtonStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_actionOverflowMenuStyle mobile.taverna.apache.com.tavernamobile:actionOverflowMenuStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_activityChooserViewStyle mobile.taverna.apache.com.tavernamobile:activityChooserViewStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionBarDivider mobile.taverna.apache.org.tavernamobile:actionBarDivider}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionBarItemBackground mobile.taverna.apache.org.tavernamobile:actionBarItemBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionBarPopupTheme mobile.taverna.apache.org.tavernamobile:actionBarPopupTheme}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionBarSize mobile.taverna.apache.org.tavernamobile:actionBarSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionBarSplitStyle mobile.taverna.apache.org.tavernamobile:actionBarSplitStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionBarStyle mobile.taverna.apache.org.tavernamobile:actionBarStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionBarTabBarStyle mobile.taverna.apache.org.tavernamobile:actionBarTabBarStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionBarTabStyle mobile.taverna.apache.org.tavernamobile:actionBarTabStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionBarTabTextStyle mobile.taverna.apache.org.tavernamobile:actionBarTabTextStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionBarTheme mobile.taverna.apache.org.tavernamobile:actionBarTheme}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionBarWidgetTheme mobile.taverna.apache.org.tavernamobile:actionBarWidgetTheme}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionButtonStyle mobile.taverna.apache.org.tavernamobile:actionButtonStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionDropDownStyle mobile.taverna.apache.org.tavernamobile:actionDropDownStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionMenuTextAppearance mobile.taverna.apache.org.tavernamobile:actionMenuTextAppearance}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionMenuTextColor mobile.taverna.apache.org.tavernamobile:actionMenuTextColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModeBackground mobile.taverna.apache.org.tavernamobile:actionModeBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModeCloseButtonStyle mobile.taverna.apache.org.tavernamobile:actionModeCloseButtonStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModeCloseDrawable mobile.taverna.apache.org.tavernamobile:actionModeCloseDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModeCopyDrawable mobile.taverna.apache.org.tavernamobile:actionModeCopyDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModeCutDrawable mobile.taverna.apache.org.tavernamobile:actionModeCutDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModeFindDrawable mobile.taverna.apache.org.tavernamobile:actionModeFindDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModePasteDrawable mobile.taverna.apache.org.tavernamobile:actionModePasteDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModePopupWindowStyle mobile.taverna.apache.org.tavernamobile:actionModePopupWindowStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModeSelectAllDrawable mobile.taverna.apache.org.tavernamobile:actionModeSelectAllDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModeShareDrawable mobile.taverna.apache.org.tavernamobile:actionModeShareDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModeSplitBackground mobile.taverna.apache.org.tavernamobile:actionModeSplitBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModeStyle mobile.taverna.apache.org.tavernamobile:actionModeStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionModeWebSearchDrawable mobile.taverna.apache.org.tavernamobile:actionModeWebSearchDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionOverflowButtonStyle mobile.taverna.apache.org.tavernamobile:actionOverflowButtonStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_actionOverflowMenuStyle mobile.taverna.apache.org.tavernamobile:actionOverflowMenuStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_activityChooserViewStyle mobile.taverna.apache.org.tavernamobile:activityChooserViewStyle}</code></td><td></td></tr>
            <tr><td><code>{@link #Theme_android_windowAnimationStyle android:windowAnimationStyle}</code></td><td></td></tr>
            <tr><td><code>{@link #Theme_android_windowIsFloating android:windowIsFloating}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_buttonBarButtonStyle mobile.taverna.apache.com.tavernamobile:buttonBarButtonStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_buttonBarStyle mobile.taverna.apache.com.tavernamobile:buttonBarStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_colorAccent mobile.taverna.apache.com.tavernamobile:colorAccent}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_colorButtonNormal mobile.taverna.apache.com.tavernamobile:colorButtonNormal}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_colorControlActivated mobile.taverna.apache.com.tavernamobile:colorControlActivated}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_colorControlHighlight mobile.taverna.apache.com.tavernamobile:colorControlHighlight}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_colorControlNormal mobile.taverna.apache.com.tavernamobile:colorControlNormal}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_colorPrimary mobile.taverna.apache.com.tavernamobile:colorPrimary}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_colorPrimaryDark mobile.taverna.apache.com.tavernamobile:colorPrimaryDark}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_colorSwitchThumbNormal mobile.taverna.apache.com.tavernamobile:colorSwitchThumbNormal}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_dividerHorizontal mobile.taverna.apache.com.tavernamobile:dividerHorizontal}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_dividerVertical mobile.taverna.apache.com.tavernamobile:dividerVertical}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_dropDownListViewStyle mobile.taverna.apache.com.tavernamobile:dropDownListViewStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_dropdownListPreferredItemHeight mobile.taverna.apache.com.tavernamobile:dropdownListPreferredItemHeight}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_editTextBackground mobile.taverna.apache.com.tavernamobile:editTextBackground}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_editTextColor mobile.taverna.apache.com.tavernamobile:editTextColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_homeAsUpIndicator mobile.taverna.apache.com.tavernamobile:homeAsUpIndicator}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_listChoiceBackgroundIndicator mobile.taverna.apache.com.tavernamobile:listChoiceBackgroundIndicator}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_listPopupWindowStyle mobile.taverna.apache.com.tavernamobile:listPopupWindowStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_listPreferredItemHeight mobile.taverna.apache.com.tavernamobile:listPreferredItemHeight}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_listPreferredItemHeightLarge mobile.taverna.apache.com.tavernamobile:listPreferredItemHeightLarge}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_listPreferredItemHeightSmall mobile.taverna.apache.com.tavernamobile:listPreferredItemHeightSmall}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_listPreferredItemPaddingLeft mobile.taverna.apache.com.tavernamobile:listPreferredItemPaddingLeft}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_listPreferredItemPaddingRight mobile.taverna.apache.com.tavernamobile:listPreferredItemPaddingRight}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_panelBackground mobile.taverna.apache.com.tavernamobile:panelBackground}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_panelMenuListTheme mobile.taverna.apache.com.tavernamobile:panelMenuListTheme}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_panelMenuListWidth mobile.taverna.apache.com.tavernamobile:panelMenuListWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_popupMenuStyle mobile.taverna.apache.com.tavernamobile:popupMenuStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_popupWindowStyle mobile.taverna.apache.com.tavernamobile:popupWindowStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_searchViewStyle mobile.taverna.apache.com.tavernamobile:searchViewStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_selectableItemBackground mobile.taverna.apache.com.tavernamobile:selectableItemBackground}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_selectableItemBackgroundBorderless mobile.taverna.apache.com.tavernamobile:selectableItemBackgroundBorderless}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_spinnerDropDownItemStyle mobile.taverna.apache.com.tavernamobile:spinnerDropDownItemStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_spinnerStyle mobile.taverna.apache.com.tavernamobile:spinnerStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_switchStyle mobile.taverna.apache.com.tavernamobile:switchStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_textAppearanceLargePopupMenu mobile.taverna.apache.com.tavernamobile:textAppearanceLargePopupMenu}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_textAppearanceListItem mobile.taverna.apache.com.tavernamobile:textAppearanceListItem}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_textAppearanceListItemSmall mobile.taverna.apache.com.tavernamobile:textAppearanceListItemSmall}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_textAppearanceSearchResultSubtitle mobile.taverna.apache.com.tavernamobile:textAppearanceSearchResultSubtitle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_textAppearanceSearchResultTitle mobile.taverna.apache.com.tavernamobile:textAppearanceSearchResultTitle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_textAppearanceSmallPopupMenu mobile.taverna.apache.com.tavernamobile:textAppearanceSmallPopupMenu}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_textColorSearchUrl mobile.taverna.apache.com.tavernamobile:textColorSearchUrl}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_toolbarNavigationButtonStyle mobile.taverna.apache.com.tavernamobile:toolbarNavigationButtonStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_toolbarStyle mobile.taverna.apache.com.tavernamobile:toolbarStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_windowActionBar mobile.taverna.apache.com.tavernamobile:windowActionBar}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_windowActionBarOverlay mobile.taverna.apache.com.tavernamobile:windowActionBarOverlay}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_windowActionModeOverlay mobile.taverna.apache.com.tavernamobile:windowActionModeOverlay}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_windowFixedHeightMajor mobile.taverna.apache.com.tavernamobile:windowFixedHeightMajor}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_windowFixedHeightMinor mobile.taverna.apache.com.tavernamobile:windowFixedHeightMinor}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_windowFixedWidthMajor mobile.taverna.apache.com.tavernamobile:windowFixedWidthMajor}</code></td><td></td></tr>
-           <tr><td><code>{@link #Theme_windowFixedWidthMinor mobile.taverna.apache.com.tavernamobile:windowFixedWidthMinor}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_buttonBarButtonStyle mobile.taverna.apache.org.tavernamobile:buttonBarButtonStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_buttonBarStyle mobile.taverna.apache.org.tavernamobile:buttonBarStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_colorAccent mobile.taverna.apache.org.tavernamobile:colorAccent}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_colorButtonNormal mobile.taverna.apache.org.tavernamobile:colorButtonNormal}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_colorControlActivated mobile.taverna.apache.org.tavernamobile:colorControlActivated}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_colorControlHighlight mobile.taverna.apache.org.tavernamobile:colorControlHighlight}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_colorControlNormal mobile.taverna.apache.org.tavernamobile:colorControlNormal}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_colorPrimary mobile.taverna.apache.org.tavernamobile:colorPrimary}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_colorPrimaryDark mobile.taverna.apache.org.tavernamobile:colorPrimaryDark}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_colorSwitchThumbNormal mobile.taverna.apache.org.tavernamobile:colorSwitchThumbNormal}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_dividerHorizontal mobile.taverna.apache.org.tavernamobile:dividerHorizontal}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_dividerVertical mobile.taverna.apache.org.tavernamobile:dividerVertical}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_dropDownListViewStyle mobile.taverna.apache.org.tavernamobile:dropDownListViewStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_dropdownListPreferredItemHeight mobile.taverna.apache.org.tavernamobile:dropdownListPreferredItemHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_editTextBackground mobile.taverna.apache.org.tavernamobile:editTextBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_editTextColor mobile.taverna.apache.org.tavernamobile:editTextColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_homeAsUpIndicator mobile.taverna.apache.org.tavernamobile:homeAsUpIndicator}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_listChoiceBackgroundIndicator mobile.taverna.apache.org.tavernamobile:listChoiceBackgroundIndicator}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_listPopupWindowStyle mobile.taverna.apache.org.tavernamobile:listPopupWindowStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_listPreferredItemHeight mobile.taverna.apache.org.tavernamobile:listPreferredItemHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_listPreferredItemHeightLarge mobile.taverna.apache.org.tavernamobile:listPreferredItemHeightLarge}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_listPreferredItemHeightSmall mobile.taverna.apache.org.tavernamobile:listPreferredItemHeightSmall}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_listPreferredItemPaddingLeft mobile.taverna.apache.org.tavernamobile:listPreferredItemPaddingLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_listPreferredItemPaddingRight mobile.taverna.apache.org.tavernamobile:listPreferredItemPaddingRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_panelBackground mobile.taverna.apache.org.tavernamobile:panelBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_panelMenuListTheme mobile.taverna.apache.org.tavernamobile:panelMenuListTheme}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_panelMenuListWidth mobile.taverna.apache.org.tavernamobile:panelMenuListWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_popupMenuStyle mobile.taverna.apache.org.tavernamobile:popupMenuStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_popupWindowStyle mobile.taverna.apache.org.tavernamobile:popupWindowStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_searchViewStyle mobile.taverna.apache.org.tavernamobile:searchViewStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_selectableItemBackground mobile.taverna.apache.org.tavernamobile:selectableItemBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_selectableItemBackgroundBorderless mobile.taverna.apache.org.tavernamobile:selectableItemBackgroundBorderless}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_spinnerDropDownItemStyle mobile.taverna.apache.org.tavernamobile:spinnerDropDownItemStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_spinnerStyle mobile.taverna.apache.org.tavernamobile:spinnerStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_switchStyle mobile.taverna.apache.org.tavernamobile:switchStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_textAppearanceLargePopupMenu mobile.taverna.apache.org.tavernamobile:textAppearanceLargePopupMenu}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_textAppearanceListItem mobile.taverna.apache.org.tavernamobile:textAppearanceListItem}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_textAppearanceListItemSmall mobile.taverna.apache.org.tavernamobile:textAppearanceListItemSmall}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_textAppearanceSearchResultSubtitle mobile.taverna.apache.org.tavernamobile:textAppearanceSearchResultSubtitle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_textAppearanceSearchResultTitle mobile.taverna.apache.org.tavernamobile:textAppearanceSearchResultTitle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_textAppearanceSmallPopupMenu mobile.taverna.apache.org.tavernamobile:textAppearanceSmallPopupMenu}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_textColorSearchUrl mobile.taverna.apache.org.tavernamobile:textColorSearchUrl}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_toolbarNavigationButtonStyle mobile.taverna.apache.org.tavernamobile:toolbarNavigationButtonStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_toolbarStyle mobile.taverna.apache.org.tavernamobile:toolbarStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_windowActionBar mobile.taverna.apache.org.tavernamobile:windowActionBar}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_windowActionBarOverlay mobile.taverna.apache.org.tavernamobile:windowActionBarOverlay}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_windowActionModeOverlay mobile.taverna.apache.org.tavernamobile:windowActionModeOverlay}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_windowFixedHeightMajor mobile.taverna.apache.org.tavernamobile:windowFixedHeightMajor}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_windowFixedHeightMinor mobile.taverna.apache.org.tavernamobile:windowFixedHeightMinor}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_windowFixedWidthMajor mobile.taverna.apache.org.tavernamobile:windowFixedWidthMajor}</code></td><td></td></tr>
+           <tr><td><code>{@link #Theme_windowFixedWidthMinor mobile.taverna.apache.org.tavernamobile:windowFixedWidthMinor}</code></td><td></td></tr>
            </table>
            @see #Theme_actionBarDivider
            @see #Theme_actionBarItemBackground
@@ -4213,37 +4222,37 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x7f0100a1, 0x7f0100a2, 0x7f0100a3, 0x7f0100a4
         };
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionBarDivider}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionBarDivider}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionBarDivider
+          @attr name mobile.taverna.apache.org.tavernamobile:actionBarDivider
         */
         public static final int Theme_actionBarDivider = 20;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionBarItemBackground}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionBarItemBackground}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionBarItemBackground
+          @attr name mobile.taverna.apache.org.tavernamobile:actionBarItemBackground
         */
         public static final int Theme_actionBarItemBackground = 21;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionBarPopupTheme}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionBarPopupTheme}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionBarPopupTheme
+          @attr name mobile.taverna.apache.org.tavernamobile:actionBarPopupTheme
         */
         public static final int Theme_actionBarPopupTheme = 14;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionBarSize}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionBarSize}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4263,111 +4272,111 @@ containing a value of this type.
 <tr><th>Constant</th><th>Value</th><th>Description</th></tr>
 <tr><td><code>wrap_content</code></td><td>0</td><td></td></tr>
 </table>
-          @attr name mobile.taverna.apache.com.tavernamobile:actionBarSize
+          @attr name mobile.taverna.apache.org.tavernamobile:actionBarSize
         */
         public static final int Theme_actionBarSize = 19;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionBarSplitStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionBarSplitStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionBarSplitStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:actionBarSplitStyle
         */
         public static final int Theme_actionBarSplitStyle = 16;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionBarStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionBarStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionBarStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:actionBarStyle
         */
         public static final int Theme_actionBarStyle = 15;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionBarTabBarStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionBarTabBarStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionBarTabBarStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:actionBarTabBarStyle
         */
         public static final int Theme_actionBarTabBarStyle = 10;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionBarTabStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionBarTabStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionBarTabStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:actionBarTabStyle
         */
         public static final int Theme_actionBarTabStyle = 9;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionBarTabTextStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionBarTabTextStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionBarTabTextStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:actionBarTabTextStyle
         */
         public static final int Theme_actionBarTabTextStyle = 11;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionBarTheme}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionBarTheme}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionBarTheme
+          @attr name mobile.taverna.apache.org.tavernamobile:actionBarTheme
         */
         public static final int Theme_actionBarTheme = 17;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionBarWidgetTheme}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionBarWidgetTheme}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionBarWidgetTheme
+          @attr name mobile.taverna.apache.org.tavernamobile:actionBarWidgetTheme
         */
         public static final int Theme_actionBarWidgetTheme = 18;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionButtonStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionButtonStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionButtonStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:actionButtonStyle
         */
         public static final int Theme_actionButtonStyle = 44;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionDropDownStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionDropDownStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionDropDownStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:actionDropDownStyle
         */
         public static final int Theme_actionDropDownStyle = 39;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionMenuTextAppearance}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionMenuTextAppearance}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionMenuTextAppearance
+          @attr name mobile.taverna.apache.org.tavernamobile:actionMenuTextAppearance
         */
         public static final int Theme_actionMenuTextAppearance = 22;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionMenuTextColor}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionMenuTextColor}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4375,167 +4384,167 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionMenuTextColor
+          @attr name mobile.taverna.apache.org.tavernamobile:actionMenuTextColor
         */
         public static final int Theme_actionMenuTextColor = 23;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModeBackground}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModeBackground}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModeBackground
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModeBackground
         */
         public static final int Theme_actionModeBackground = 26;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModeCloseButtonStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModeCloseButtonStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModeCloseButtonStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModeCloseButtonStyle
         */
         public static final int Theme_actionModeCloseButtonStyle = 25;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModeCloseDrawable}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModeCloseDrawable}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModeCloseDrawable
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModeCloseDrawable
         */
         public static final int Theme_actionModeCloseDrawable = 28;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModeCopyDrawable}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModeCopyDrawable}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModeCopyDrawable
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModeCopyDrawable
         */
         public static final int Theme_actionModeCopyDrawable = 30;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModeCutDrawable}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModeCutDrawable}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModeCutDrawable
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModeCutDrawable
         */
         public static final int Theme_actionModeCutDrawable = 29;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModeFindDrawable}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModeFindDrawable}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModeFindDrawable
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModeFindDrawable
         */
         public static final int Theme_actionModeFindDrawable = 34;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModePasteDrawable}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModePasteDrawable}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModePasteDrawable
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModePasteDrawable
         */
         public static final int Theme_actionModePasteDrawable = 31;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModePopupWindowStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModePopupWindowStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModePopupWindowStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModePopupWindowStyle
         */
         public static final int Theme_actionModePopupWindowStyle = 36;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModeSelectAllDrawable}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModeSelectAllDrawable}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModeSelectAllDrawable
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModeSelectAllDrawable
         */
         public static final int Theme_actionModeSelectAllDrawable = 32;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModeShareDrawable}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModeShareDrawable}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModeShareDrawable
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModeShareDrawable
         */
         public static final int Theme_actionModeShareDrawable = 33;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModeSplitBackground}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModeSplitBackground}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModeSplitBackground
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModeSplitBackground
         */
         public static final int Theme_actionModeSplitBackground = 27;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModeStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModeStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModeStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModeStyle
         */
         public static final int Theme_actionModeStyle = 24;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionModeWebSearchDrawable}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionModeWebSearchDrawable}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionModeWebSearchDrawable
+          @attr name mobile.taverna.apache.org.tavernamobile:actionModeWebSearchDrawable
         */
         public static final int Theme_actionModeWebSearchDrawable = 35;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionOverflowButtonStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionOverflowButtonStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionOverflowButtonStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:actionOverflowButtonStyle
         */
         public static final int Theme_actionOverflowButtonStyle = 12;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#actionOverflowMenuStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#actionOverflowMenuStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:actionOverflowMenuStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:actionOverflowMenuStyle
         */
         public static final int Theme_actionOverflowMenuStyle = 13;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#activityChooserViewStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#activityChooserViewStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:activityChooserViewStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:activityChooserViewStyle
         */
         public static final int Theme_activityChooserViewStyle = 51;
         /**
@@ -4551,27 +4560,27 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         */
         public static final int Theme_android_windowIsFloating = 0;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#buttonBarButtonStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#buttonBarButtonStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:buttonBarButtonStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:buttonBarButtonStyle
         */
         public static final int Theme_buttonBarButtonStyle = 46;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#buttonBarStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#buttonBarStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:buttonBarStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:buttonBarStyle
         */
         public static final int Theme_buttonBarStyle = 45;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#colorAccent}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#colorAccent}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4582,11 +4591,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:colorAccent
+          @attr name mobile.taverna.apache.org.tavernamobile:colorAccent
         */
         public static final int Theme_colorAccent = 78;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#colorButtonNormal}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#colorButtonNormal}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4597,11 +4606,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:colorButtonNormal
+          @attr name mobile.taverna.apache.org.tavernamobile:colorButtonNormal
         */
         public static final int Theme_colorButtonNormal = 82;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#colorControlActivated}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#colorControlActivated}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4612,11 +4621,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:colorControlActivated
+          @attr name mobile.taverna.apache.org.tavernamobile:colorControlActivated
         */
         public static final int Theme_colorControlActivated = 80;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#colorControlHighlight}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#colorControlHighlight}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4627,11 +4636,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:colorControlHighlight
+          @attr name mobile.taverna.apache.org.tavernamobile:colorControlHighlight
         */
         public static final int Theme_colorControlHighlight = 81;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#colorControlNormal}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#colorControlNormal}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4642,11 +4651,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:colorControlNormal
+          @attr name mobile.taverna.apache.org.tavernamobile:colorControlNormal
         */
         public static final int Theme_colorControlNormal = 79;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#colorPrimary}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#colorPrimary}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4657,11 +4666,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:colorPrimary
+          @attr name mobile.taverna.apache.org.tavernamobile:colorPrimary
         */
         public static final int Theme_colorPrimary = 76;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#colorPrimaryDark}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#colorPrimaryDark}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4672,11 +4681,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:colorPrimaryDark
+          @attr name mobile.taverna.apache.org.tavernamobile:colorPrimaryDark
         */
         public static final int Theme_colorPrimaryDark = 77;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#colorSwitchThumbNormal}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#colorSwitchThumbNormal}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4687,41 +4696,41 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:colorSwitchThumbNormal
+          @attr name mobile.taverna.apache.org.tavernamobile:colorSwitchThumbNormal
         */
         public static final int Theme_colorSwitchThumbNormal = 83;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#dividerHorizontal}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#dividerHorizontal}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:dividerHorizontal
+          @attr name mobile.taverna.apache.org.tavernamobile:dividerHorizontal
         */
         public static final int Theme_dividerHorizontal = 50;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#dividerVertical}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#dividerVertical}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:dividerVertical
+          @attr name mobile.taverna.apache.org.tavernamobile:dividerVertical
         */
         public static final int Theme_dividerVertical = 49;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#dropDownListViewStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#dropDownListViewStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:dropDownListViewStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:dropDownListViewStyle
         */
         public static final int Theme_dropDownListViewStyle = 68;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#dropdownListPreferredItemHeight}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#dropdownListPreferredItemHeight}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4733,21 +4742,21 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:dropdownListPreferredItemHeight
+          @attr name mobile.taverna.apache.org.tavernamobile:dropdownListPreferredItemHeight
         */
         public static final int Theme_dropdownListPreferredItemHeight = 40;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#editTextBackground}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#editTextBackground}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:editTextBackground
+          @attr name mobile.taverna.apache.org.tavernamobile:editTextBackground
         */
         public static final int Theme_editTextBackground = 57;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#editTextColor}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#editTextColor}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4755,41 +4764,41 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:editTextColor
+          @attr name mobile.taverna.apache.org.tavernamobile:editTextColor
         */
         public static final int Theme_editTextColor = 56;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#homeAsUpIndicator}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#homeAsUpIndicator}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:homeAsUpIndicator
+          @attr name mobile.taverna.apache.org.tavernamobile:homeAsUpIndicator
         */
         public static final int Theme_homeAsUpIndicator = 43;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#listChoiceBackgroundIndicator}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#listChoiceBackgroundIndicator}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:listChoiceBackgroundIndicator
+          @attr name mobile.taverna.apache.org.tavernamobile:listChoiceBackgroundIndicator
         */
         public static final int Theme_listChoiceBackgroundIndicator = 75;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#listPopupWindowStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#listPopupWindowStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:listPopupWindowStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:listPopupWindowStyle
         */
         public static final int Theme_listPopupWindowStyle = 69;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#listPreferredItemHeight}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#listPreferredItemHeight}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4801,11 +4810,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:listPreferredItemHeight
+          @attr name mobile.taverna.apache.org.tavernamobile:listPreferredItemHeight
         */
         public static final int Theme_listPreferredItemHeight = 63;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#listPreferredItemHeightLarge}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#listPreferredItemHeightLarge}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4817,11 +4826,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:listPreferredItemHeightLarge
+          @attr name mobile.taverna.apache.org.tavernamobile:listPreferredItemHeightLarge
         */
         public static final int Theme_listPreferredItemHeightLarge = 65;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#listPreferredItemHeightSmall}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#listPreferredItemHeightSmall}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4833,11 +4842,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:listPreferredItemHeightSmall
+          @attr name mobile.taverna.apache.org.tavernamobile:listPreferredItemHeightSmall
         */
         public static final int Theme_listPreferredItemHeightSmall = 64;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#listPreferredItemPaddingLeft}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#listPreferredItemPaddingLeft}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4849,11 +4858,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:listPreferredItemPaddingLeft
+          @attr name mobile.taverna.apache.org.tavernamobile:listPreferredItemPaddingLeft
         */
         public static final int Theme_listPreferredItemPaddingLeft = 66;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#listPreferredItemPaddingRight}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#listPreferredItemPaddingRight}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4865,31 +4874,31 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:listPreferredItemPaddingRight
+          @attr name mobile.taverna.apache.org.tavernamobile:listPreferredItemPaddingRight
         */
         public static final int Theme_listPreferredItemPaddingRight = 67;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#panelBackground}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#panelBackground}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:panelBackground
+          @attr name mobile.taverna.apache.org.tavernamobile:panelBackground
         */
         public static final int Theme_panelBackground = 72;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#panelMenuListTheme}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#panelMenuListTheme}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:panelMenuListTheme
+          @attr name mobile.taverna.apache.org.tavernamobile:panelMenuListTheme
         */
         public static final int Theme_panelMenuListTheme = 74;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#panelMenuListWidth}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#panelMenuListWidth}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -4901,151 +4910,151 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:panelMenuListWidth
+          @attr name mobile.taverna.apache.org.tavernamobile:panelMenuListWidth
         */
         public static final int Theme_panelMenuListWidth = 73;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#popupMenuStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#popupMenuStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:popupMenuStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:popupMenuStyle
         */
         public static final int Theme_popupMenuStyle = 54;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#popupWindowStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#popupWindowStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:popupWindowStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:popupWindowStyle
         */
         public static final int Theme_popupWindowStyle = 55;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#searchViewStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#searchViewStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:searchViewStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:searchViewStyle
         */
         public static final int Theme_searchViewStyle = 62;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#selectableItemBackground}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#selectableItemBackground}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:selectableItemBackground
+          @attr name mobile.taverna.apache.org.tavernamobile:selectableItemBackground
         */
         public static final int Theme_selectableItemBackground = 47;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#selectableItemBackgroundBorderless}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#selectableItemBackgroundBorderless}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:selectableItemBackgroundBorderless
+          @attr name mobile.taverna.apache.org.tavernamobile:selectableItemBackgroundBorderless
         */
         public static final int Theme_selectableItemBackgroundBorderless = 48;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#spinnerDropDownItemStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#spinnerDropDownItemStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:spinnerDropDownItemStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:spinnerDropDownItemStyle
         */
         public static final int Theme_spinnerDropDownItemStyle = 42;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#spinnerStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#spinnerStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:spinnerStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:spinnerStyle
         */
         public static final int Theme_spinnerStyle = 41;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#switchStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#switchStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:switchStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:switchStyle
         */
         public static final int Theme_switchStyle = 58;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#textAppearanceLargePopupMenu}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#textAppearanceLargePopupMenu}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:textAppearanceLargePopupMenu
+          @attr name mobile.taverna.apache.org.tavernamobile:textAppearanceLargePopupMenu
         */
         public static final int Theme_textAppearanceLargePopupMenu = 37;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#textAppearanceListItem}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#textAppearanceListItem}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:textAppearanceListItem
+          @attr name mobile.taverna.apache.org.tavernamobile:textAppearanceListItem
         */
         public static final int Theme_textAppearanceListItem = 70;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#textAppearanceListItemSmall}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#textAppearanceListItemSmall}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:textAppearanceListItemSmall
+          @attr name mobile.taverna.apache.org.tavernamobile:textAppearanceListItemSmall
         */
         public static final int Theme_textAppearanceListItemSmall = 71;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#textAppearanceSearchResultSubtitle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#textAppearanceSearchResultSubtitle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:textAppearanceSearchResultSubtitle
+          @attr name mobile.taverna.apache.org.tavernamobile:textAppearanceSearchResultSubtitle
         */
         public static final int Theme_textAppearanceSearchResultSubtitle = 60;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#textAppearanceSearchResultTitle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#textAppearanceSearchResultTitle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:textAppearanceSearchResultTitle
+          @attr name mobile.taverna.apache.org.tavernamobile:textAppearanceSearchResultTitle
         */
         public static final int Theme_textAppearanceSearchResultTitle = 59;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#textAppearanceSmallPopupMenu}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#textAppearanceSmallPopupMenu}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:textAppearanceSmallPopupMenu
+          @attr name mobile.taverna.apache.org.tavernamobile:textAppearanceSmallPopupMenu
         */
         public static final int Theme_textAppearanceSmallPopupMenu = 38;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#textColorSearchUrl}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#textColorSearchUrl}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -5053,31 +5062,31 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:textColorSearchUrl
+          @attr name mobile.taverna.apache.org.tavernamobile:textColorSearchUrl
         */
         public static final int Theme_textColorSearchUrl = 61;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#toolbarNavigationButtonStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#toolbarNavigationButtonStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:toolbarNavigationButtonStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:toolbarNavigationButtonStyle
         */
         public static final int Theme_toolbarNavigationButtonStyle = 53;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#toolbarStyle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#toolbarStyle}
           attribute's value can be found in the {@link #Theme} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:toolbarStyle
+          @attr name mobile.taverna.apache.org.tavernamobile:toolbarStyle
         */
         public static final int Theme_toolbarStyle = 52;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#windowActionBar}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#windowActionBar}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -5087,11 +5096,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:windowActionBar
+          @attr name mobile.taverna.apache.org.tavernamobile:windowActionBar
         */
         public static final int Theme_windowActionBar = 2;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#windowActionBarOverlay}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#windowActionBarOverlay}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -5101,11 +5110,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:windowActionBarOverlay
+          @attr name mobile.taverna.apache.org.tavernamobile:windowActionBarOverlay
         */
         public static final int Theme_windowActionBarOverlay = 3;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#windowActionModeOverlay}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#windowActionModeOverlay}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -5115,11 +5124,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:windowActionModeOverlay
+          @attr name mobile.taverna.apache.org.tavernamobile:windowActionModeOverlay
         */
         public static final int Theme_windowActionModeOverlay = 4;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#windowFixedHeightMajor}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#windowFixedHeightMajor}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -5134,11 +5143,11 @@ some parent container.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:windowFixedHeightMajor
+          @attr name mobile.taverna.apache.org.tavernamobile:windowFixedHeightMajor
         */
         public static final int Theme_windowFixedHeightMajor = 8;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#windowFixedHeightMinor}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#windowFixedHeightMinor}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -5153,11 +5162,11 @@ some parent container.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:windowFixedHeightMinor
+          @attr name mobile.taverna.apache.org.tavernamobile:windowFixedHeightMinor
         */
         public static final int Theme_windowFixedHeightMinor = 6;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#windowFixedWidthMajor}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#windowFixedWidthMajor}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -5172,11 +5181,11 @@ some parent container.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:windowFixedWidthMajor
+          @attr name mobile.taverna.apache.org.tavernamobile:windowFixedWidthMajor
         */
         public static final int Theme_windowFixedWidthMajor = 5;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#windowFixedWidthMinor}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#windowFixedWidthMinor}
           attribute's value can be found in the {@link #Theme} array.
 
 
@@ -5191,7 +5200,7 @@ some parent container.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:windowFixedWidthMinor
+          @attr name mobile.taverna.apache.org.tavernamobile:windowFixedWidthMinor
         */
         public static final int Theme_windowFixedWidthMinor = 7;
         /** Attributes that can be used with a Toolbar.
@@ -5202,26 +5211,26 @@ containing a value of this type.
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #Toolbar_android_gravity android:gravity}</code></td><td></td></tr>
            <tr><td><code>{@link #Toolbar_android_minHeight android:minHeight}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_collapseContentDescription mobile.taverna.apache.com.tavernamobile:collapseContentDescription}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_collapseIcon mobile.taverna.apache.com.tavernamobile:collapseIcon}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_contentInsetEnd mobile.taverna.apache.com.tavernamobile:contentInsetEnd}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_contentInsetLeft mobile.taverna.apache.com.tavernamobile:contentInsetLeft}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_contentInsetRight mobile.taverna.apache.com.tavernamobile:contentInsetRight}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_contentInsetStart mobile.taverna.apache.com.tavernamobile:contentInsetStart}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_maxButtonHeight mobile.taverna.apache.com.tavernamobile:maxButtonHeight}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_navigationContentDescription mobile.taverna.apache.com.tavernamobile:navigationContentDescription}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_navigationIcon mobile.taverna.apache.com.tavernamobile:navigationIcon}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_popupTheme mobile.taverna.apache.com.tavernamobile:popupTheme}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_subtitle mobile.taverna.apache.com.tavernamobile:subtitle}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_subtitleTextAppearance mobile.taverna.apache.com.tavernamobile:subtitleTextAppearance}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_theme mobile.taverna.apache.com.tavernamobile:theme}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_title mobile.taverna.apache.com.tavernamobile:title}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_titleMarginBottom mobile.taverna.apache.com.tavernamobile:titleMarginBottom}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_titleMarginEnd mobile.taverna.apache.com.tavernamobile:titleMarginEnd}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_titleMarginStart mobile.taverna.apache.com.tavernamobile:titleMarginStart}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_titleMarginTop mobile.taverna.apache.com.tavernamobile:titleMarginTop}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_titleMargins mobile.taverna.apache.com.tavernamobile:titleMargins}</code></td><td></td></tr>
-           <tr><td><code>{@link #Toolbar_titleTextAppearance mobile.taverna.apache.com.tavernamobile:titleTextAppearance}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_collapseContentDescription mobile.taverna.apache.org.tavernamobile:collapseContentDescription}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_collapseIcon mobile.taverna.apache.org.tavernamobile:collapseIcon}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_contentInsetEnd mobile.taverna.apache.org.tavernamobile:contentInsetEnd}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_contentInsetLeft mobile.taverna.apache.org.tavernamobile:contentInsetLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_contentInsetRight mobile.taverna.apache.org.tavernamobile:contentInsetRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_contentInsetStart mobile.taverna.apache.org.tavernamobile:contentInsetStart}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_maxButtonHeight mobile.taverna.apache.org.tavernamobile:maxButtonHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_navigationContentDescription mobile.taverna.apache.org.tavernamobile:navigationContentDescription}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_navigationIcon mobile.taverna.apache.org.tavernamobile:navigationIcon}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_popupTheme mobile.taverna.apache.org.tavernamobile:popupTheme}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_subtitle mobile.taverna.apache.org.tavernamobile:subtitle}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_subtitleTextAppearance mobile.taverna.apache.org.tavernamobile:subtitleTextAppearance}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_theme mobile.taverna.apache.org.tavernamobile:theme}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_title mobile.taverna.apache.org.tavernamobile:title}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_titleMarginBottom mobile.taverna.apache.org.tavernamobile:titleMarginBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_titleMarginEnd mobile.taverna.apache.org.tavernamobile:titleMarginEnd}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_titleMarginStart mobile.taverna.apache.org.tavernamobile:titleMarginStart}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_titleMarginTop mobile.taverna.apache.org.tavernamobile:titleMarginTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_titleMargins mobile.taverna.apache.org.tavernamobile:titleMargins}</code></td><td></td></tr>
+           <tr><td><code>{@link #Toolbar_titleTextAppearance mobile.taverna.apache.org.tavernamobile:titleTextAppearance}</code></td><td></td></tr>
            </table>
            @see #Toolbar_android_gravity
            @see #Toolbar_android_minHeight
@@ -5267,7 +5276,7 @@ containing a value of this type.
         */
         public static final int Toolbar_android_minHeight = 1;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#collapseContentDescription}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#collapseContentDescription}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5277,21 +5286,21 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:collapseContentDescription
+          @attr name mobile.taverna.apache.org.tavernamobile:collapseContentDescription
         */
         public static final int Toolbar_collapseContentDescription = 19;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#collapseIcon}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#collapseIcon}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:collapseIcon
+          @attr name mobile.taverna.apache.org.tavernamobile:collapseIcon
         */
         public static final int Toolbar_collapseIcon = 18;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentInsetEnd}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentInsetEnd}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5303,11 +5312,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentInsetEnd
+          @attr name mobile.taverna.apache.org.tavernamobile:contentInsetEnd
         */
         public static final int Toolbar_contentInsetEnd = 5;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentInsetLeft}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentInsetLeft}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5319,11 +5328,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentInsetLeft
+          @attr name mobile.taverna.apache.org.tavernamobile:contentInsetLeft
         */
         public static final int Toolbar_contentInsetLeft = 6;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentInsetRight}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentInsetRight}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5335,11 +5344,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentInsetRight
+          @attr name mobile.taverna.apache.org.tavernamobile:contentInsetRight
         */
         public static final int Toolbar_contentInsetRight = 7;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#contentInsetStart}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#contentInsetStart}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5351,11 +5360,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:contentInsetStart
+          @attr name mobile.taverna.apache.org.tavernamobile:contentInsetStart
         */
         public static final int Toolbar_contentInsetStart = 4;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#maxButtonHeight}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#maxButtonHeight}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5367,11 +5376,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:maxButtonHeight
+          @attr name mobile.taverna.apache.org.tavernamobile:maxButtonHeight
         */
         public static final int Toolbar_maxButtonHeight = 16;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#navigationContentDescription}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#navigationContentDescription}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5381,31 +5390,31 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:navigationContentDescription
+          @attr name mobile.taverna.apache.org.tavernamobile:navigationContentDescription
         */
         public static final int Toolbar_navigationContentDescription = 21;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#navigationIcon}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#navigationIcon}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:navigationIcon
+          @attr name mobile.taverna.apache.org.tavernamobile:navigationIcon
         */
         public static final int Toolbar_navigationIcon = 20;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#popupTheme}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#popupTheme}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:popupTheme
+          @attr name mobile.taverna.apache.org.tavernamobile:popupTheme
         */
         public static final int Toolbar_popupTheme = 8;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#subtitle}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#subtitle}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5415,31 +5424,31 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:subtitle
+          @attr name mobile.taverna.apache.org.tavernamobile:subtitle
         */
         public static final int Toolbar_subtitle = 3;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#subtitleTextAppearance}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#subtitleTextAppearance}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:subtitleTextAppearance
+          @attr name mobile.taverna.apache.org.tavernamobile:subtitleTextAppearance
         */
         public static final int Toolbar_subtitleTextAppearance = 10;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#theme}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#theme}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:theme
+          @attr name mobile.taverna.apache.org.tavernamobile:theme
         */
         public static final int Toolbar_theme = 17;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#title}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#title}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5449,11 +5458,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:title
+          @attr name mobile.taverna.apache.org.tavernamobile:title
         */
         public static final int Toolbar_title = 2;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#titleMarginBottom}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#titleMarginBottom}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5465,11 +5474,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:titleMarginBottom
+          @attr name mobile.taverna.apache.org.tavernamobile:titleMarginBottom
         */
         public static final int Toolbar_titleMarginBottom = 15;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#titleMarginEnd}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#titleMarginEnd}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5481,11 +5490,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:titleMarginEnd
+          @attr name mobile.taverna.apache.org.tavernamobile:titleMarginEnd
         */
         public static final int Toolbar_titleMarginEnd = 13;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#titleMarginStart}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#titleMarginStart}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5497,11 +5506,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:titleMarginStart
+          @attr name mobile.taverna.apache.org.tavernamobile:titleMarginStart
         */
         public static final int Toolbar_titleMarginStart = 12;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#titleMarginTop}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#titleMarginTop}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5513,11 +5522,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:titleMarginTop
+          @attr name mobile.taverna.apache.org.tavernamobile:titleMarginTop
         */
         public static final int Toolbar_titleMarginTop = 14;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#titleMargins}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#titleMargins}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
@@ -5529,17 +5538,17 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:titleMargins
+          @attr name mobile.taverna.apache.org.tavernamobile:titleMargins
         */
         public static final int Toolbar_titleMargins = 11;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#titleTextAppearance}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#titleTextAppearance}
           attribute's value can be found in the {@link #Toolbar} array.
 
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name mobile.taverna.apache.com.tavernamobile:titleTextAppearance
+          @attr name mobile.taverna.apache.org.tavernamobile:titleTextAppearance
         */
         public static final int Toolbar_titleTextAppearance = 9;
         /** Attributes that can be used with a View.
@@ -5549,8 +5558,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #View_android_focusable android:focusable}</code></td><td></td></tr>
-           <tr><td><code>{@link #View_paddingEnd mobile.taverna.apache.com.tavernamobile:paddingEnd}</code></td><td></td></tr>
-           <tr><td><code>{@link #View_paddingStart mobile.taverna.apache.com.tavernamobile:paddingStart}</code></td><td></td></tr>
+           <tr><td><code>{@link #View_paddingEnd mobile.taverna.apache.org.tavernamobile:paddingEnd}</code></td><td></td></tr>
+           <tr><td><code>{@link #View_paddingStart mobile.taverna.apache.org.tavernamobile:paddingStart}</code></td><td></td></tr>
            </table>
            @see #View_android_focusable
            @see #View_paddingEnd
@@ -5566,7 +5575,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         */
         public static final int View_android_focusable = 0;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#paddingEnd}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#paddingEnd}
           attribute's value can be found in the {@link #View} array.
 
 
@@ -5578,11 +5587,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:paddingEnd
+          @attr name mobile.taverna.apache.org.tavernamobile:paddingEnd
         */
         public static final int View_paddingEnd = 2;
         /**
-          <p>This symbol is the offset where the {@link mobile.taverna.apache.com.tavernamobile.R.attr#paddingStart}
+          <p>This symbol is the offset where the {@link mobile.taverna.apache.org.tavernamobile.R.attr#paddingStart}
           attribute's value can be found in the {@link #View} array.
 
 
@@ -5594,7 +5603,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name mobile.taverna.apache.com.tavernamobile:paddingStart
+          @attr name mobile.taverna.apache.org.tavernamobile:paddingStart
         */
         public static final int View_paddingStart = 1;
         /** Attributes that can be used with a ViewStubCompat.

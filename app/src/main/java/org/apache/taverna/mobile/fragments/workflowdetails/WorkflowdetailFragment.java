@@ -24,23 +24,37 @@ package org.apache.taverna.mobile.fragments.workflowdetails;
  * under the License.
  */
 
+import android.app.DownloadManager;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.activities.DashboardMainActivity;
+import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
+
+import java.io.File;
+import java.util.prefs.PreferenceChangeEvent;
 
 /**
  * Created by Larry Akah on 6/9/15.
  */
-public class WorkflowdetailFragment extends Fragment {
+public class WorkflowdetailFragment extends Fragment implements View.OnClickListener{
     /**
      * The fragment argument representing the section number for this
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private DownloadManager downloadManager;
+    private boolean isDownloading = false;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -61,6 +75,34 @@ public class WorkflowdetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_workflow_detail, container, false);
+        Button download = (Button) rootView.findViewById(R.id.download_wk);
+        download.setOnClickListener(this);
+        downloadManager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
+
         return rootView;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.run_wk:
+                //TODO implement functionality to issue a run request to the Taverna PLAYER to run the current workflow
+                break;
+            case R.id.download_wk:
+                // start the android Download manager to start downloading a remote workflow file
+                WorkflowDownloadManager dmgr = new WorkflowDownloadManager(getActivity(), downloadManager);
+                try {
+                    dmgr.downloadWorkflow(new File(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(
+                                    DashboardMainActivity.APP_DIRECTORY_NAME, "/")),
+                            "http://www.iceteck.com/volley.jar");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+            case R.id.mark_wk:
+                //TODO mark a workflow as important and launch task to store the entry into the local database
+                break;
+        }
     }
 }

@@ -90,6 +90,20 @@ ADDED from AndroidManifest.xml:60:13
 		ADDED from AndroidManifest.xml:62:17
 	android:name
 		ADDED from AndroidManifest.xml:61:17
+receiver#org.apache.taverna.mobile.broadcastreceivers.WorkflowDownloadReceiver
+ADDED from AndroidManifest.xml:65:9
+	android:enabled
+		ADDED from AndroidManifest.xml:67:13
+	android:exported
+		ADDED from AndroidManifest.xml:68:13
+	android:name
+		ADDED from AndroidManifest.xml:66:13
+intent-filter#android.intent.action.DOWNLOAD_COMPLETE
+ADDED from AndroidManifest.xml:69:13
+action#android.intent.action.DOWNLOAD_COMPLETE
+ADDED from AndroidManifest.xml:70:17
+	android:name
+		ADDED from AndroidManifest.xml:70:25
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:22.0.0:20:5

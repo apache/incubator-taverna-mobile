@@ -19,7 +19,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mobile.taverna.apache.com.tavernamobile"
+    package="mobile.taverna.apache.org.tavernamobile"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -67,6 +67,16 @@ limitations under the License.
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.apache.taverna.mobile.activities.DashboardMainActivity" />
         </activity>
+
+        <receiver
+            android:name="org.apache.taverna.mobile.broadcastreceivers.WorkflowDownloadReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name="android.support.v7.widget.TestActivity"
             android:label="RecyclerViewTestActivity" />

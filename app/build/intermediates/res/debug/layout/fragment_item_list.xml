@@ -31,7 +31,8 @@ limitations under the License.
 
     </android.support.v7.widget.RecyclerView>
 
-    <TextView android:id="@android:id/empty"
+    <TextView
+        android:id="@android:id/empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

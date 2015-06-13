@@ -27,27 +27,36 @@ package org.apache.taverna.mobile.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.activities.WorkflowDetailActivity;
-import org.apache.taverna.mobile.utils.Workflow;
+import org.apache.taverna.mobile.tavernamobile.Workflow;
+import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * Created by root on 6/8/15.
  */
 public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHolder> implements View.OnClickListener{
     private Context context;
-    private Workflow[] workflow;
+    private List<Workflow> workflow;
     private WorkflowAdapter.ViewHolder mViewHolder;
-    public WorkflowAdapter(Context c, Workflow[] wk) {
+
+    public WorkflowAdapter(Context c, List<Workflow> wk) {
         context = c;
         workflow = wk;
     }
@@ -65,15 +74,53 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
      * @param i position of data in the dataset to use.
      */
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        viewHolder.author_name.setText(workflow[i].getWorkflow_author());
+    public void onBindViewHolder(final ViewHolder viewHolder, int i) {
+        final int j = i; //position of workflow item that has workflow data
+        final Context c = this.context;
+        viewHolder.author_name.setText(workflow.get(i).getWorkflow_author());
+        viewHolder.wk_title.setText(workflow.get(i).getWorkflow_title());
+        viewHolder.wk_modified.append(workflow.get(i).getWorkflow_datemodified());
+        viewHolder.wk_created.append(workflow.get(i).getWorkflow_datecreated());
+        viewHolder.wk_description.setText( workflow.get(i).getWorkflow_description());
         //viewHolder.author_profile.setImageBitmap(workflow[i].getWorkflow_author_bitmap());
+        Intent it = new Intent();
         viewHolder.btn_view_workflow.setOnClickListener(this);
+        viewHolder.btn_download_workflow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String wkflow_url = workflow.get(j).getWorkflow_remote_url();
+                try {
+
+                    String workflow_name = Uri.parse(wkflow_url).getLastPathSegment();
+                    WorkflowDownloadManager dm = new WorkflowDownloadManager(c);
+                    dm.downloadWorkflow(new File(PreferenceManager
+                            .getDefaultSharedPreferences(c)
+                            .getString(DashboardMainActivity.APP_DIRECTORY_NAME, "/")+File.separator+workflow_name), wkflow_url);
+                } catch(NullPointerException np){
+                    np.printStackTrace();
+                }catch (IllegalArgumentException ill){
+                    ill.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        viewHolder.btn_mark_workflow.setOnClickListener(this);
+        viewHolder.wk_showmore.setText(Html.fromHtml(context.getResources().getString(R.string.seemore)));
+        viewHolder.wk_showmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (viewHolder.infolayout.getVisibility() == View.GONE)
+                    viewHolder.infolayout.setVisibility(View.VISIBLE);
+                else
+                    viewHolder.infolayout.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
     public long getItemId(int i) {
-        return workflow[i].getid();
+        return workflow.get(i).getId();
     }
 
     @Override
@@ -85,6 +132,10 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         return size;
     }
 
+    public Workflow getItem(int position){
+        return workflow.get(position);
+    }
+
     @Override
     public void onClick(View view) {
         switch(view.getId()){
@@ -92,18 +143,35 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 context.startActivity(new Intent(context, WorkflowDetailActivity.class));
                 ((Activity) context).overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.fade_out);
                 break;
+            case R.id.button_mark_workflow:
+                break;
+
         }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final ImageView author_profile;
-        public final TextView author_name;
+        public final TextView author_name, wk_title,wk_showmore,wk_created,wk_modified,wk_description;
         public final Button btn_view_workflow;
+        public final Button btn_download_workflow;
+        public final Button btn_mark_workflow;
+        public final LinearLayout infolayout;
 
         public ViewHolder(View v) {
             super(v);
+            infolayout = (LinearLayout) v.findViewById(R.id.layoutinfo);
+            //cache text fields
             author_profile = (ImageView) v.findViewById(R.id.author_profile_image);
             author_name = (TextView) v.findViewById(R.id.workflow_author);
+            wk_title = (TextView) v.findViewById(R.id.workflow_title);
+            wk_showmore = (TextView) v.findViewById(R.id.show_more);
+            wk_created = (TextView) v.findViewById(R.id.workflow_datecreated);
+            wk_modified = (TextView) v.findViewById(R.id.workflow_dateupdated);
+            wk_description = (TextView) v.findViewById(R.id.workflow_brief_description);
+
+            //cache buttons
+            btn_download_workflow = (Button) v.findViewById(R.id.button_download_workflow);
+            btn_mark_workflow = (Button) v.findViewById(R.id.button_mark_workflow);
             btn_view_workflow = (Button) v.findViewById(R.id.button_view_workflow);
         }
     }
