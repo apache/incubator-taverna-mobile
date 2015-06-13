@@ -99,8 +99,9 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
                 //String author = js.getString("author");
                 String title = js.getString("title");
                 String description = js.getString("description");
+                String url = js.getString("url");
                 long id = js.getLong("id");
-                userWorkflows.add(new Workflow(ctx,title,"Larry",description,id,""));
+                userWorkflows.add(new Workflow(ctx,title,"Larry",description,id,url));
             }
 
         } catch (MalformedURLException e) {

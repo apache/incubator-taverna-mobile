@@ -29,7 +29,7 @@ public class Workflow {
 
     public static enum workflow_input_type{ TYPE_INT, TYPE_STRING, TYPE_OBJECT};
 
-    public Workflow(Context ctx, String title, String author, String description, long id, String status){
+    public Workflow(Context ctx, String title, String author, String description, long id, String url){
         this.context = ctx;
         this.workflow_author = author;
         this.workflow_author_bitmap = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.ic_userprofile);
@@ -37,7 +37,7 @@ public class Workflow {
         this.workflow_title =title;
         this.workflow_input=1;
         this.id = id;
-        this.workflow_remote_url = "http://org.man.uc.taverna/workflows";
+        this.workflow_remote_url = url;
         this.workflow_runs = new ArrayList<Runs>();
         this.setWorkflow_datecreated(SimpleDateFormat.getDateTimeInstance().format(new Date()));
         this.setWorkflow_datemodified(SimpleDateFormat.getDateTimeInstance().format(new Date()));

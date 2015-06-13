@@ -125,11 +125,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        int size = 0;
-        for(Workflow w: workflow){
-            size++;
-        }
-        return size;
+        return workflow.size();
     }
 
     public Workflow getItem(int position){
