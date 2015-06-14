@@ -41,6 +41,7 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.apache.taverna.mobile.R;
@@ -68,6 +69,7 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Animation in;
+    private ProgressBar wpb; //progressbar used to indicate the state of the workflow loaders
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -120,17 +122,17 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         mlist.add(new Workflow(getActivity(), null));
         mlist.add(new Workflow(getActivity(), null)); */
         workflowAdapter = new WorkflowAdapter(getActivity(), mlist );
-        getActivity().setProgressBarIndeterminateVisibility(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item, container, false);
-
+        wpb = (ProgressBar) view.findViewById(R.id.workflow_pb);
         // Set the adapter
         mListView = (RecyclerView) view.findViewById(android.R.id.list);
         mListView.setHasFixedSize(true);
         mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        getActivity().getLoaderManager().initLoader(0,null,this);
          if(workflowAdapter.getItemCount() == 0){
             setEmptyText("No Workflows available");
             mListView.swapAdapter(workflowAdapter, false);
@@ -147,7 +149,6 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         try {
             mListener = (OnWorkflowSelectedListener) activity;
             ((DashboardMainActivity) activity).onSectionAttached(1);
-            getActivity().getLoaderManager().initLoader(0,null,this);
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -197,7 +198,7 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getTitle().equals("Refresh")){
-            getActivity().setProgressBarIndeterminateVisibility(true);
+
             getActivity().getLoaderManager().restartLoader(0, null, this);
             return true;
         }
@@ -232,19 +233,22 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
      */
     @Override
     public android.content.Loader<List<Workflow>> onCreateLoader(int id, Bundle args) {
-        //getActivity().setProgressBarIndeterminateVisibility(true);
+      //  if (null != wpb)
+            wpb.setVisibility(View.VISIBLE);
         return new WorkflowLoader(getActivity());
     }
 
     @Override
     public void onLoadFinished(android.content.Loader<List<Workflow>> loader, List<Workflow> workflows) {
        // getActivity().setProgressBarIndeterminateVisibility(false);
+      //  if (null != wpb)
+        wpb.setVisibility(View.GONE);
         loader.stopLoading();
         workflowAdapter = new WorkflowAdapter(getActivity(), workflows);
         if(workflows.size() > 0)
             mListView.swapAdapter(workflowAdapter, true);
         else {
-//            mListView.setVisibility(View.GONE);
+            mListView.setVisibility(View.GONE);
 //            setEmptyText("No views available");
         }
     }

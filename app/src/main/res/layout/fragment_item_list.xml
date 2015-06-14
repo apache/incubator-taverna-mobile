@@ -14,9 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.apache.taverna.mobile.fragments.WorkflowItemFragment">
+    <ProgressBar
+        android:id="@+id/workflow_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
 
     <!--<ListView android:id="@android:id/list" android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent" />-->
@@ -25,7 +32,7 @@ limitations under the License.
         android:id="@android:id/list"
         android:theme="@style/Theme.AppCompat.Light"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/button_material_light"
         >
 
@@ -34,7 +41,7 @@ limitations under the License.
     <TextView
         android:id="@android:id/empty"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:visibility="gone"
         android:text="@string/workflow_empty"/>

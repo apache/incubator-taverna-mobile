@@ -69,7 +69,7 @@ limitations under the License.
     <string name="detail_title_section2">Run History</string>
     <string name="detail_title_section3">Licence | Policy</string>
     <string name="detail_title_section4"> About </string>
-    <string name="play_workflow">Run</string>
+    <string name="play_workflow">Create Run</string>
     
     <string name="downloadfailed">Download Failed. Please try again</string>
     <string name="downloadprogress">Workflow download in progress</string>

@@ -36,6 +36,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
@@ -94,7 +95,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 try {
                     dmgr.downloadWorkflow(new File(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(
                                     DashboardMainActivity.APP_DIRECTORY_NAME, "/")),
-                            "http://www.iceteck.com/volley.jar");
+                            "");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -103,6 +104,21 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             case R.id.mark_wk:
                 //TODO mark a workflow as important and launch task to store the entry into the local database
                 break;
+        }
+    }
+
+    /**
+     * Called when the fragment is visible to the user and actively running.
+     * This is generally
+     * tied to {@link android.app.Activity#onResume() Activity.onResume} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity().getIntent() != null) {
+            long id = getActivity().getIntent().getLongExtra("workflowid", 0);
+            Toast.makeText(getActivity(), "Workflow id ="+id, Toast.LENGTH_LONG).show();
         }
     }
 }

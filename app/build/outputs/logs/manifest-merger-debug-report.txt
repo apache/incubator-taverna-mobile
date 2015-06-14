@@ -100,10 +100,12 @@ ADDED from AndroidManifest.xml:65:9
 		ADDED from AndroidManifest.xml:66:13
 intent-filter#android.intent.action.DOWNLOAD_COMPLETE
 ADDED from AndroidManifest.xml:69:13
+	android:priority
+		ADDED from AndroidManifest.xml:70:17
 action#android.intent.action.DOWNLOAD_COMPLETE
-ADDED from AndroidManifest.xml:70:17
+ADDED from AndroidManifest.xml:71:17
 	android:name
-		ADDED from AndroidManifest.xml:70:25
+		ADDED from AndroidManifest.xml:71:25
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:22.0.0:20:5

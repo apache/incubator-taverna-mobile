@@ -89,7 +89,7 @@ limitations under the License.
             android:showDividers="middle|beginning"
             android:dividerPadding="1dp">
 
-            <TextView
+           <!-- <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -104,7 +104,7 @@ limitations under the License.
                 android:text="@string/modified"
                 android:id="@+id/workflow_dateupdated"
                 android:layout_gravity="center_vertical"
-                android:gravity="center" />
+                android:gravity="center" />-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

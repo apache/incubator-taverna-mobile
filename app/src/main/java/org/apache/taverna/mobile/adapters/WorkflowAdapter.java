@@ -28,6 +28,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -78,14 +79,27 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder viewHolder, int i) {
         final int j = i; //position of workflow item that has workflow data
         final Context c = this.context;
+        String description  = workflow.get(i).getWorkflow_description();
+        if(description.length() > 80) description = description.substring(0, 79);
         viewHolder.author_name.setText(workflow.get(i).getWorkflow_author());
         viewHolder.wk_title.setText(workflow.get(i).getWorkflow_title());
-        viewHolder.wk_modified.append(workflow.get(i).getWorkflow_datemodified());
-        viewHolder.wk_created.append(workflow.get(i).getWorkflow_datecreated());
-        viewHolder.wk_description.setText( workflow.get(i).getWorkflow_description());
+       // viewHolder.wk_modified.append(workflow.get(i).getWorkflow_datemodified());
+       // viewHolder.wk_created.append(workflow.get(i).getWorkflow_datecreated());
+        viewHolder.wk_description.setText( description+" ... ");
         //viewHolder.author_profile.setImageBitmap(workflow[i].getWorkflow_author_bitmap());
-        Intent it = new Intent();
-        viewHolder.btn_view_workflow.setOnClickListener(this);
+        final Intent it = new Intent();
+        it.setClass(context, WorkflowDetailActivity.class);
+        it.putExtra("workflowid", workflow.get(i).getId());
+        viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent detailsIntent = new Intent(context, WorkflowDetailActivity.class);
+
+                //detailsIntent.putExtras(null);
+                context.startActivity(it);
+                ((Activity) context).overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.fade_out);
+            }
+        });
         viewHolder.btn_download_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,20 +150,14 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
-            case R.id.button_view_workflow:
-                context.startActivity(new Intent(context, WorkflowDetailActivity.class));
-                ((Activity) context).overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.fade_out);
-                break;
-            case R.id.button_mark_workflow:
-                break;
-
+        int i = view.getId();
+        if (i == R.id.button_mark_workflow) {
         }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final ImageView author_profile;
-        public final TextView author_name, wk_title,wk_showmore,wk_created,wk_modified,wk_description;
+        public final TextView author_name, wk_title,wk_showmore,wk_description;
         public final Button btn_view_workflow;
         public final Button btn_download_workflow;
         public final Button btn_mark_workflow;
@@ -163,8 +171,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
             author_name = (TextView) v.findViewById(R.id.workflow_author);
             wk_title = (TextView) v.findViewById(R.id.workflow_title);
             wk_showmore = (TextView) v.findViewById(R.id.show_more);
-            wk_created = (TextView) v.findViewById(R.id.workflow_datecreated);
-            wk_modified = (TextView) v.findViewById(R.id.workflow_dateupdated);
+           // wk_created = (TextView) v.findViewById(R.id.workflow_datecreated);
+           // wk_modified = (TextView) v.findViewById(R.id.workflow_dateupdated);
             wk_description = (TextView) v.findViewById(R.id.workflow_brief_description);
 
             //cache buttons

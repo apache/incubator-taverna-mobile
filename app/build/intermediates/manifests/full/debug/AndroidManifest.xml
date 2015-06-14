@@ -72,7 +72,7 @@ limitations under the License.
             android:name="org.apache.taverna.mobile.broadcastreceivers.WorkflowDownloadReceiver"
             android:enabled="true"
             android:exported="false" >
-            <intent-filter>
+            <intent-filter android:priority="999" >
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>

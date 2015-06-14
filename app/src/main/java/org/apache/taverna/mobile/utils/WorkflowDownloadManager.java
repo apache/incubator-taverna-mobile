@@ -65,7 +65,7 @@ public class WorkflowDownloadManager {
         DownloadManager.Query query = new DownloadManager.Query();
         query.setFilterByStatus(DownloadManager.STATUS_PAUSED|
                 DownloadManager.STATUS_PENDING|
-                DownloadManager.STATUS_RUNNING|
+                DownloadManager.STATUS_RUNNING|DownloadManager.STATUS_FAILED|
                 DownloadManager.STATUS_SUCCESSFUL);
         Cursor cur = this.downloadManager.query(query);
         int col = cur.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME);
@@ -73,7 +73,7 @@ public class WorkflowDownloadManager {
         for(cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
             this.isDownloading = this.isDownloading || (destination.getName() == cur.getString(col));
         }
-        cur.close();
+       // cur.close();
         if (!this.isDownloading) {
             Uri source = Uri.parse(sourceurl);
             //extract the file name from the source url and append it to the workflow storage directory to be used to download the file into.
@@ -88,14 +88,22 @@ public class WorkflowDownloadManager {
             request.allowScanningByMediaScanner();
 
             long id = downloadManager.enqueue(request);
-            if(id == DownloadManager.STATUS_RUNNING ){
-                //send notification to user about running download
-                sendNotification(this.context.getResources().getString(R.string.downloadprogress));
-            }else{
-                sendNotification(this.context.getResources().getString(R.string.downloaderror));
+            int status = cur.getInt(cur.getColumnIndex(DownloadManager.COLUMN_STATUS));
+            switch (status) {
+                case DownloadManager.STATUS_SUCCESSFUL:
+                    sendNotification(this.context.getResources().getString(R.string.downloadcomplete));
+                    break;
+                case DownloadManager.STATUS_FAILED:
+                    sendNotification(this.context.getResources().getString(R.string.downloaderror));
+                    break;
+                case DownloadManager.STATUS_RUNNING:
+                    sendNotification(this.context.getResources().getString(R.string.downloadprogress));
+                    break;
+                case DownloadManager.ERROR_FILE_ALREADY_EXISTS:
+                    sendNotification(this.context.getResources().getString(R.string.downloadduplicate));
+                    break;
             }
-        }else{
-            sendNotification(this.context.getResources().getString(R.string.downloadduplicate));
+            cur.close();
         }
     }
 

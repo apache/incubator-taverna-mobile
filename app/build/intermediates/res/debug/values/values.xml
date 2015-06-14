@@ -234,7 +234,7 @@
     <string name="modified">Modified On:</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="play_workflow">Run</string>
+    <string name="play_workflow">Create Run</string>
     <string name="search_hint"> Search workflows by name</string>
     <string name="seemore"> See more &amp;raquo</string>
     <string name="title_about">About </string>

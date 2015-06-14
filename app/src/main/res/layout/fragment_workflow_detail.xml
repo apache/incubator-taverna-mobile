@@ -57,7 +57,7 @@ limitations under the License.
             android:background="#ddd"
             style="android:buttonBarButtonStyle"
             android:text="@string/play_workflow"
-            android:drawableLeft="@android:drawable/ic_media_play"
+            android:drawableLeft="@android:drawable/ic_menu_edit"
             android:id="@+id/run_wk" />
         <Button
             android:layout_width="wrap_content"

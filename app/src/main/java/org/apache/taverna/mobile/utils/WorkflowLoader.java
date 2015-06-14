@@ -26,6 +26,7 @@ package org.apache.taverna.mobile.utils;
 import android.app.Activity;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.Log;
 
@@ -67,7 +68,7 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
             //for password protected urls use the user's credentials
             Authenticator.setDefault(new TavernaPlayerAPI.Authenticator("taverna","taverna"));
 
-            URL workflowurl = new URL(TavernaPlayerAPI.PLAYER_URL+"workflows");
+            URL workflowurl = new URL(TavernaPlayerAPI.PLAYER_WORKFLOW_URL);
             HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
             String userpass = "icep603@gmail.com" + ":" + "creationfox";
             String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(),Base64.DEFAULT);
@@ -101,7 +102,7 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
                 String description = js.getString("description");
                 String url = js.getString("url");
                 long id = js.getLong("id");
-                userWorkflows.add(new Workflow(ctx,title,"Larry",description,id,url));
+                userWorkflows.add(new Workflow(ctx,title," ",description,id,url));
             }
 
         } catch (MalformedURLException e) {
@@ -147,4 +148,5 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
     protected void onStopLoading() {
         cancelLoad();
     }
+
 }
