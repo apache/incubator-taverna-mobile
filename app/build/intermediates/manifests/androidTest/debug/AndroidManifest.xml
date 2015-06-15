@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mobile.taverna.apache.com.tavernamobile.test">
+    package="mobile.taverna.apache.org.tavernamobile.test">
 
     <uses-sdk android:minSdkVersion="13" android:targetSdkVersion="21" />
 
@@ -9,8 +9,8 @@
     </application>
 
     <instrumentation android:name="android.test.InstrumentationTestRunner"
-                     android:targetPackage="mobile.taverna.apache.com.tavernamobile"
+                     android:targetPackage="mobile.taverna.apache.org.tavernamobile"
                      android:handleProfiling="false"
                      android:functionalTest="false"
-                     android:label="Tests for mobile.taverna.apache.com.tavernamobile"/>
+                     android:label="Tests for mobile.taverna.apache.org.tavernamobile"/>
 </manifest>

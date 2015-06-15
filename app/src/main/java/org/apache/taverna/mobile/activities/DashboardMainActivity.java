@@ -28,9 +28,11 @@ package org.apache.taverna.mobile.activities;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -43,6 +45,7 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
@@ -67,15 +70,17 @@ public class DashboardMainActivity extends ActionBarActivity
 
     static final int NUM_ITEMS = 2;
     private final int SELECT_WORKFLOW = 10;
-    public final String APP_DIRECTORY_NAME = "TavernaMobile";
+    public static final String APP_DIRECTORY_NAME = "TavernaMobile";
 
     MyAdapter mAdapter;
     ViewPager mPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_main);
+        setUpWorkflowDirectory(this);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -98,7 +103,6 @@ public class DashboardMainActivity extends ActionBarActivity
             String query = searchIntent.getStringExtra(SearchManager.QUERY);
             Toast.makeText(this,"Query = "+query, Toast.LENGTH_SHORT).show();
         }
-        setUpWorkflowDirectory(this);
     }
 
     @Override
@@ -119,8 +123,10 @@ public class DashboardMainActivity extends ActionBarActivity
                 break;
             case 2: //open workflow
                 Intent workflowSelectIntent = new Intent(Intent.ACTION_GET_CONTENT)
-                        .setType("text/t2flow")
-                        .setData(Uri.parse(Environment.getExternalStorageDirectory()+File.separator+APP_DIRECTORY_NAME));
+                        .setDataAndTypeAndNormalize(Uri.parse(String.format("%s%s%s",
+                                        Environment.getExternalStorageDirectory(),
+                                        File.separator, APP_DIRECTORY_NAME)),
+                                "application/vnd.taverna.t2flow+xml");
 
                 Intent loadWorkflowIntent = Intent.createChooser(workflowSelectIntent,
                         "Choose Workflow (.t2flow)");
@@ -185,15 +191,37 @@ public class DashboardMainActivity extends ActionBarActivity
     }
 
     private void setUpWorkflowDirectory(Context context){
-        File workflowDirectory = new File(Environment.getExternalStorageDirectory()+File.separator+APP_DIRECTORY_NAME);
-        if(!workflowDirectory.exists()){
-            boolean state = workflowDirectory.mkdirs();
-            if(state){
-                Toast.makeText(context, "Storage Ready", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(context, "Storage Error. Directory not created", Toast.LENGTH_SHORT).show();
-            }
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            File workflowDirectory = new File(Environment.getExternalStorageDirectory()+File.separator+APP_DIRECTORY_NAME);
+            if (!workflowDirectory.exists()) {
+                boolean state = workflowDirectory.mkdirs();
+                if (state) {
+                    Toast.makeText(context, "Storage Ready", Toast.LENGTH_SHORT).show();
+                    sp.edit().putString(APP_DIRECTORY_NAME, workflowDirectory.getAbsolutePath()).commit();
+                    Toast.makeText(context, "Home dir: "+workflowDirectory.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                } else { //directory can't be created either because of restricted access or lack of an external storage media.
+                    //we assume the lack of secondary storage so we have to switch to internal storage
+                    //   File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.))
+            //        Toast.makeText(context, "Storage Error. Directory not created", Toast.LENGTH_SHORT).show();
+                }
 //            workflowDirectory.list();
+            }else {
+          //      Toast.makeText(context, "Directory exists. Home dir: "+workflowDirectory.getAbsolutePath(), Toast.LENGTH_LONG).show();
+                sp.edit().putString(APP_DIRECTORY_NAME, workflowDirectory.getAbsolutePath()).commit();
+            /*else {
+                File mainDir = new File(Environment.getExternalStorageDirectory() + File.separator + APP_DIRECTORY_NAME);
+                if (mainDir.mkdirs())
+                    sp.edit().putString(APP_DIRECTORY_NAME, mainDir.getAbsolutePath()).commit();
+                else
+                    Toast.makeText(context, "Workflow home not created. Permission issues", Toast.LENGTH_SHORT).show();
+            }*/
+            }
+        }else{//use internal memory to save the data
+            File home = context.getDir("Workflows", Context.MODE_PRIVATE);
+            sp.edit().putString(APP_DIRECTORY_NAME, home.getAbsolutePath()).commit();
+       //     Toast.makeText(context, "Home dir: "+home.getAbsolutePath(), Toast.LENGTH_LONG).show();
         }
     }
     @Override

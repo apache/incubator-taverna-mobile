@@ -24,24 +24,39 @@ package org.apache.taverna.mobile.fragments.workflowdetails;
  * under the License.
  */
 
+import android.app.LoaderManager;
+import android.app.ProgressDialog;
+import android.content.Loader;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.adapters.RunAdapter;
+import org.apache.taverna.mobile.tavernamobile.Runs;
+import org.apache.taverna.mobile.tavernamobile.Workflow;
+import org.apache.taverna.mobile.utils.DetailsLoader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link WorkflowRunHistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WorkflowRunHistoryFragment extends Fragment {
+public class WorkflowRunHistoryFragment extends Fragment implements LoaderManager.LoaderCallbacks<Workflow>{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private ProgressDialog progressDialog;
+    private RecyclerView mRecyclerView;
+    private RunAdapter runAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -72,6 +87,19 @@ public class WorkflowRunHistoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        List<Runs> runsList = new ArrayList<Runs>();
+/*        runsList.add(new Runs("Test Run1 ",
+                SimpleDateFormat.getDateTimeInstance().format(new Date()).toString()
+                ,SimpleDateFormat.getDateTimeInstance().format(new Date()).toString(),"failed"));
+        runsList.add(new Runs("Test Run2 ",
+                SimpleDateFormat.getDateTimeInstance().format(new Date()).toString()
+                ,SimpleDateFormat.getDateTimeInstance().format(new Date()).toString(),"finished"));
+       */
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
+        progressDialog.setCancelable(true);
+
+        runAdapter = new RunAdapter(getActivity(),runsList );
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -82,10 +110,50 @@ public class WorkflowRunHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_workflow_run_history, container, false);
+        View rootView =inflater.inflate(R.layout.fragment_workflow_run_history, container, false);
+        mRecyclerView = (RecyclerView) rootView.findViewById(android.R.id.list);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        getActivity().getLoaderManager().initLoader(1,null,this);
+        return rootView;
     }
+
+    /**
+     * Called when the fragment is visible to the user and actively running.
+     * This is generally
+     * tied to {@link android.app.Activity#onResume() Activity.onResume} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        mRecyclerView.setAdapter(runAdapter);
+        mRecyclerView.setScrollingTouchSlop(RecyclerView.TOUCH_SLOP_PAGING);
+
+    }
+
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public Loader<Workflow> onCreateLoader(int i, Bundle bundle) {
+        progressDialog.show();
+        return new DetailsLoader(getActivity(),
+                DetailsLoader.LOAD_TYPE.TYPE_RUN_HISTORY,
+                1);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Workflow> workflowLoader, Workflow workflow) {
+        runAdapter.setRunList(workflow.getWorkflow_runs());
+        mRecyclerView.swapAdapter(runAdapter, false);
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Workflow> workflowLoader) {
+        workflowLoader.reset();
     }
 }

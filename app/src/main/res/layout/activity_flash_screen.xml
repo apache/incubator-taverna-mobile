@@ -66,4 +66,15 @@ limitations under the License.
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="35dp" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_above="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="true"
+        android:indeterminateBehavior="repeat"
+        android:indeterminateOnly="true"
+        android:indeterminateTintMode="src_over" />
 </RelativeLayout>
