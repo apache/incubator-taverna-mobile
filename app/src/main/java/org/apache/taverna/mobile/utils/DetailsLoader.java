@@ -119,8 +119,9 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                         Log.i("JSON ", js.toString(2));
                         String created_at = js.getString("created_at");
                         String updated_at = js.getString("updated_at");
+                        JSONObject user = js.getJSONObject("user");
                     workflow = new Workflow(this.context, js.getString("title"),
-                            "",
+                            user.getString("name"),
                             js.getString("description"),
                             js.getInt("id"),
                             js.getString("url"));

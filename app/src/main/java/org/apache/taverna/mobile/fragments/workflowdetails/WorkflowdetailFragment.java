@@ -162,7 +162,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     @Override
     public void onLoadFinished(Loader<Workflow> workflowLoader, Workflow workflow) {
         TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
-            author.setText(workflow.getWorkflow_author());
+            author.append("->"+workflow.getWorkflow_author());
         TextView title = (TextView) rootView.findViewById(R.id.wtitle);
             title.setText(workflow.getWorkflow_title());
         TextView desc = (TextView) rootView.findViewById(R.id.wdescription);

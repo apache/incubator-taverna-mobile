@@ -79,17 +79,19 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder viewHolder, int i) {
         final int j = i; //position of workflow item that has workflow data
         final Context c = this.context;
+        String author = workflow.get(i).getWorkflow_author();
         String title = workflow.get(i).getWorkflow_title();
         String description  = workflow.get(i).getWorkflow_description();
         String desc_full = description;
         if(description.length() > 80) description = description.substring(0, 79);
-        viewHolder.author_name.setText(workflow.get(i).getWorkflow_author());
+        viewHolder.author_name.setText(author);
         viewHolder.wk_title.setText(title);
         viewHolder.wk_description.setText( description+" ... ");
         final String wkflow_url = workflow.get(j).getWorkflow_remote_url();
         final Intent it = new Intent();
         it.setClass(context, WorkflowDetailActivity.class);
         it.putExtra("workflowid", workflow.get(i).getId());
+        it.putExtra("author", workflow.get(i).getWorkflow_author());
         it.putExtra("title",title);
         it.putExtra("description",desc_full);
         it.putExtra("url", wkflow_url);

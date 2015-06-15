@@ -65,9 +65,8 @@ limitations under the License.
         <receiver
             android:name=".broadcastreceivers.WorkflowDownloadReceiver"
             android:enabled="true"
-            android:exported="false" >
-            <intent-filter
-                android:priority="999">
+            android:exported="true" >
+            <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
             </intent-filter>
         </receiver>
