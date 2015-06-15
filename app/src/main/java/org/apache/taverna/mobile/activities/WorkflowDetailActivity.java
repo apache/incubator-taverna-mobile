@@ -111,7 +111,7 @@ public class WorkflowDetailActivity extends ActionBarActivity {
                 case 1:
                 return WorkflowdetailFragment.newInstance(position + 1);
                 case 2:
-                   return WorkflowRunHistoryFragment.newInstance("","");
+                   return WorkflowRunHistoryFragment.newInstance("workflow",WorkflowdetailFragment.WORKFLO_ID);
                 case 3:
                     return WorkflowLicenceFragment.newInstance("","");
                 case 4:

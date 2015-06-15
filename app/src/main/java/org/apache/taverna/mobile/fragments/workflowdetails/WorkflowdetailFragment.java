@@ -69,6 +69,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     private DownloadManager downloadManager;
     View rootView;
     private ProgressDialog progressDialog;
+    public static long WORKFLO_ID;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -93,6 +94,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
         progressDialog.setCancelable(true);
+        WORKFLO_ID = getActivity().getIntent().getLongExtra("workflowid", 0);
 
         Button download = (Button) rootView.findViewById(R.id.download_wk);
         download.setOnClickListener(this);
