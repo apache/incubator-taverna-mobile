@@ -43,6 +43,7 @@ import android.widget.TextView;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.activities.WorkflowDetailActivity;
+import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowdetailFragment;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
 
@@ -92,6 +93,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         it.putExtra("title",title);
         it.putExtra("description",desc_full);
         it.putExtra("url", wkflow_url);
+        WorkflowdetailFragment.WORKFLO_ID = workflow.get(i).getId();
 
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
