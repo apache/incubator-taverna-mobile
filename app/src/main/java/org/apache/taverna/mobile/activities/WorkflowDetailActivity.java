@@ -63,7 +63,6 @@ public class WorkflowDetailActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workflow_detail);
         // Create the adapter that will return a fragment for each of the three

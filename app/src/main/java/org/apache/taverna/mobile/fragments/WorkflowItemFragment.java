@@ -25,10 +25,10 @@ package org.apache.taverna.mobile.fragments;
  */
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -37,11 +37,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.apache.taverna.mobile.R;
@@ -62,14 +59,14 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link org.apache.taverna.mobile.fragments.WorkflowItemFragment.OnWorkflowSelectedListener}
  * interface.
  */
-public class WorkflowItemFragment extends Fragment implements android.app.LoaderManager.LoaderCallbacks<List<Workflow>> {
+public class WorkflowItemFragment extends Fragment implements android.app.LoaderManager.LoaderCallbacks<List<Workflow>>, SwipeRefreshLayout.OnRefreshListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Animation in;
-    private ProgressBar wpb; //progressbar used to indicate the state of the workflow loaders
+    private ProgressDialog mProgressDialog; //progressbar used to indicate the state of the workflow loaders
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -81,6 +78,7 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
      * The fragment's ListView/GridView.
      */
     private RecyclerView mListView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     /**
      * The Adapter which will be used to populate the ListView/GridView with
@@ -129,7 +127,8 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item, container, false);
-        wpb = (ProgressBar) view.findViewById(R.id.workflow_pb);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
         // Set the adapter
         mListView = (RecyclerView) view.findViewById(android.R.id.list);
         mListView.setHasFixedSize(true);
@@ -235,30 +234,29 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
      */
     @Override
     public android.content.Loader<List<Workflow>> onCreateLoader(int id, Bundle args) {
-        if (null != wpb)
-            wpb.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
         return new WorkflowLoader(getActivity());
     }
 
     @Override
     public void onLoadFinished(android.content.Loader<List<Workflow>> loader, List<Workflow> workflows) {
-       // getActivity().setProgressBarIndeterminateVisibility(false);
-        if (null != wpb)
-        wpb.setVisibility(View.GONE);
+        swipeRefreshLayout.setRefreshing(false);
         loader.stopLoading();
         workflowAdapter = new WorkflowAdapter(getActivity(), workflows);
         if(workflows.size() > 0)
             mListView.swapAdapter(workflowAdapter, true);
-        else {
-           // mListView.setVisibility(View.GONE);
-//            setEmptyText("No views available");
-        }
+
     }
 
     @Override
     public void onLoaderReset(android.content.Loader<List<Workflow>> listLoader) {
         listLoader.reset();
         mListView.swapAdapter(null, false);
+    }
+
+    @Override
+    public void onRefresh() {
+        getActivity().getLoaderManager().initLoader(0,null,this);
     }
 
     /**
