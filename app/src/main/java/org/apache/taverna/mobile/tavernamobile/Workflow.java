@@ -1,4 +1,28 @@
 package org.apache.taverna.mobile.tavernamobile;
+/**
+ * Apache Taverna Mobile
+ * Copyright 2015 The Apache Software Foundation
+
+ * This product includes software developed at
+ * The Apache Software Foundation (http://www.apache.org/).
+
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements. See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership. The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,9 +30,7 @@ import android.graphics.BitmapFactory;
 
 import org.apache.taverna.mobile.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,7 +40,7 @@ public class Workflow {
     private Context context;
     private String workflow_author;
     private String workflow_title;
-    private String workflow_description;
+    private String workflow_description, about, policy;
     private String workflow_datecreated, workflow_datemodified;
     private Bitmap workflow_author_bitmap;
     private WorkflowComponent workflowComponent;
@@ -28,6 +50,11 @@ public class Workflow {
     private long id;
 
     public static enum workflow_input_type{ TYPE_INT, TYPE_STRING, TYPE_OBJECT};
+
+    public Workflow(Context context) {
+        this.context = context;
+        this.workflow_runs = new ArrayList<Runs>();
+    }
 
     public Workflow(Context ctx, String title, String author, String description, long id, String url){
         this.context = ctx;
@@ -39,8 +66,6 @@ public class Workflow {
         this.id = id;
         this.workflow_remote_url = url;
         this.workflow_runs = new ArrayList<Runs>();
-        this.setWorkflow_datecreated(SimpleDateFormat.getDateTimeInstance().format(new Date()));
-        this.setWorkflow_datemodified(SimpleDateFormat.getDateTimeInstance().format(new Date()));
     }
 
     public long getId() {
@@ -63,6 +88,22 @@ public class Workflow {
         this.workflow_remote_url = workflow_remote_url;
     }
 
+    public String getPolicy() {
+        return policy;
+    }
+
+    public void setPolicy(String policy) {
+        this.policy = policy;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
     public void setWorkflow_datecreated(String workflow_datecreated) {
         this.workflow_datecreated = workflow_datecreated;
     }
@@ -81,6 +122,10 @@ public class Workflow {
 
     public void setWorkflow_runs(List<Runs> workflow_runs) {
         this.workflow_runs = workflow_runs;
+    }
+
+    public void addWorkflowRun(Runs runs){ //adds a run to this workflow
+        this.workflow_runs.add(runs);
     }
 
     public int getWorkflow_input() {

@@ -212,7 +212,7 @@
     <string name="app_name">TavernaMobile</string>
     <string name="brand">Powered By</string>
     <string name="completebrand">Powered By Apache Taverna</string>
-    <string name="created">Workflow Created On:</string>
+    <string name="created">Created :</string>
     <string name="description">Workflow Description</string>
     <string name="detail_title_section1">Workflow </string>
     <string name="detail_title_section2">Run History</string>
@@ -226,12 +226,13 @@
     <string name="favorite_empty"> No Favorites Added Yet</string>
     <string name="hello_blank_fragment"> About Workflow </string>
     <string name="hello_world"> Empty </string>
+    <string name="loading">Loading details</string>
     <string name="loginbutton">Login</string>
     <string name="loginpassword">Password</string>
     <string name="loginusername">Email or Username</string>
     <string name="marked">Marked On</string>
     <string name="menu_search">Search</string>
-    <string name="modified">Modified On:</string>
+    <string name="modified">Modified :</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="play_workflow">Create Run</string>

@@ -24,23 +24,35 @@ package org.apache.taverna.mobile.fragments.workflowdetails;
  * under the License.
  */
 
+import android.app.Activity;
 import android.app.DownloadManager;
+import android.app.LoaderManager;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
+import org.apache.taverna.mobile.tavernamobile.Workflow;
+import org.apache.taverna.mobile.utils.DetailsLoader;
 import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.prefs.PreferenceChangeEvent;
@@ -48,14 +60,15 @@ import java.util.prefs.PreferenceChangeEvent;
 /**
  * Created by Larry Akah on 6/9/15.
  */
-public class WorkflowdetailFragment extends Fragment implements View.OnClickListener{
+public class WorkflowdetailFragment extends Fragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<Workflow>{
     /**
      * The fragment argument representing the section number for this
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
     private DownloadManager downloadManager;
-    private boolean isDownloading = false;
+    View rootView;
+    private ProgressDialog progressDialog;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -75,12 +88,27 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_workflow_detail, container, false);
+
+        rootView = inflater.inflate(R.layout.fragment_workflow_detail, container, false);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
+        progressDialog.setCancelable(true);
+
         Button download = (Button) rootView.findViewById(R.id.download_wk);
         download.setOnClickListener(this);
         downloadManager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
-
         return rootView;
+    }
+
+    /**
+     * Called when a fragment is first attached to its activity.
+     * {@link #onCreate(android.os.Bundle)} will be called after this.
+     *
+     * @param activity
+     */
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
     }
 
     @Override
@@ -116,9 +144,39 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     @Override
     public void onResume() {
         super.onResume();
-        if (getActivity().getIntent() != null) {
-            long id = getActivity().getIntent().getLongExtra("workflowid", 0);
-            Toast.makeText(getActivity(), "Workflow id ="+id, Toast.LENGTH_LONG).show();
-        }
+        getActivity().getLoaderManager().initLoader(0, null, this);
+
+    }
+
+    @Override
+    public Loader<Workflow> onCreateLoader(int i, Bundle bundle) {
+       // progressDialog = ProgressDialog.show(getActivity(),"",getActivity().getResources().getString(R.string.loading));
+        progressDialog.show();
+        return new DetailsLoader(getActivity(),
+                DetailsLoader.LOAD_TYPE.TYPE_WORKFLOW_DETAIL,
+                getActivity().getIntent().getLongExtra("workflowid", 0));
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Workflow> workflowLoader, Workflow workflow) {
+        TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
+            author.setText(workflow.getWorkflow_author());
+        TextView title = (TextView) rootView.findViewById(R.id.wtitle);
+            title.setText(workflow.getWorkflow_title());
+        TextView desc = (TextView) rootView.findViewById(R.id.wdescription);
+            desc.setText(workflow.getWorkflow_description());
+        TextView createdat = (TextView) rootView.findViewById(R.id.wcreatedat);
+            createdat.append(workflow.getWorkflow_datecreated());
+        TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
+            updated.append(workflow.getWorkflow_datemodified());
+    //    ImageView preview = (ImageView) rootView.findViewById(R.id.wkf_image);
+          //  preview.setImageURI(Uri.parse(workflow.getWorkflow_remote_url()));
+      //  progressDialog.cancel();
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Workflow> workflowLoader) {
+        workflowLoader.reset();
     }
 }

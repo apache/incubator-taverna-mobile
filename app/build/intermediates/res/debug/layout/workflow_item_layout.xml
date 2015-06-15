@@ -131,7 +131,7 @@ limitations under the License.
                 android:layout_weight="0.33"
                 style="android:buttonBarButtonStyle"
                 android:text="@string/workflow_read"
-                android:background="#ddd"
+                android:background="#33b5e5"
                 android:drawableLeft="@android:drawable/ic_menu_view" />
             <Button
                 android:id="@+id/button_download_workflow"
@@ -139,7 +139,7 @@ limitations under the License.
                 android:layout_height="wrap_content"
                 android:textStyle="normal"
                 android:layout_weight="0.33"
-                android:background="#ddd"
+                android:background="#33b5e5"
                 style="android:buttonBarButtonStyle"
                 android:text="@string/workflow_download"
                 android:drawableLeft="@drawable/download"
@@ -151,7 +151,7 @@ limitations under the License.
                 android:layout_height="wrap_content"
                 android:textStyle="normal"
                 android:layout_weight="0.33"
-                android:background="#ddd"
+                android:background="#33b5e5"
                 android:text="@string/workflow_mark"
                 android:drawableLeft="@android:drawable/btn_star_big_off"
                 style="android:buttonBarButtonStyle"/>

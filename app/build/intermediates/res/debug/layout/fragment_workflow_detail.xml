@@ -21,27 +21,70 @@ limitations under the License.
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="org.apache.taverna.mobile.activities.WorkflowDetailActivity$PlaceholderFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <TextView android:id="@+id/wkf_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/detail_title_section1"
         android:typeface="serif"
         android:textStyle="italic"
-        android:text="@string/workflow_authorhint"
         android:textSize="20sp" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/scrollView"
-        android:layout_weight="1" />
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/wtitle"
+                android:layout_marginTop="5dp"
+                android:hint="@string/detail_title_section1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/wcreatedat"
+                android:layout_marginTop="5dp"
+                android:text="@string/created" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/wupdatedat"
+                android:layout_marginTop="5dp"
+                android:text="@string/modified" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/wdescription"
+                android:layout_marginTop="5dp"
+                android:minLines="3" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/wkf_image"
+                android:src="@mipmap/ic_viewworkflow"
+                android:backgroundTint="@color/accent_material_light"
+                android:backgroundTintMode="src_atop" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -54,7 +97,7 @@ limitations under the License.
             android:layout_height="wrap_content"
             android:textStyle="normal"
             android:layout_weight="0.33"
-            android:background="#ddd"
+            android:background="#33b5e5"
             style="android:buttonBarButtonStyle"
             android:text="@string/play_workflow"
             android:drawableLeft="@android:drawable/ic_menu_edit"
@@ -64,7 +107,7 @@ limitations under the License.
             android:layout_height="wrap_content"
             android:textStyle="normal"
             android:layout_weight="0.33"
-            android:background="#ddd"
+            android:background="#33b5e5"
             style="android:buttonBarButtonStyle"
             android:text="@string/workflow_download"
             android:drawableLeft="@drawable/download"
@@ -76,7 +119,7 @@ limitations under the License.
             android:layout_height="wrap_content"
             android:textStyle="normal"
             android:layout_weight="0.33"
-            android:background="#ddd"
+            android:background="#33b5e5"
             style="android:buttonBarButtonStyle"
             android:text="@string/workflow_mark"
             android:drawableLeft="@android:drawable/btn_star_big_off"

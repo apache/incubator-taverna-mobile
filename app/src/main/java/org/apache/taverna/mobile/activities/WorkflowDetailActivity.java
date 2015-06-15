@@ -34,6 +34,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowAboutFragment;
@@ -62,6 +63,7 @@ public class WorkflowDetailActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workflow_detail);
         // Create the adapter that will return a fragment for each of the three
@@ -71,7 +73,6 @@ public class WorkflowDetailActivity extends ActionBarActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
     }
 
     @Override
@@ -140,6 +141,8 @@ public class WorkflowDetailActivity extends ActionBarActivity {
             }
             return "";
         }
+
+
     }
 
 }

@@ -28,7 +28,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -79,17 +78,21 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder viewHolder, int i) {
         final int j = i; //position of workflow item that has workflow data
         final Context c = this.context;
+        String title = workflow.get(i).getWorkflow_title();
         String description  = workflow.get(i).getWorkflow_description();
+        String desc_full = description;
         if(description.length() > 80) description = description.substring(0, 79);
         viewHolder.author_name.setText(workflow.get(i).getWorkflow_author());
-        viewHolder.wk_title.setText(workflow.get(i).getWorkflow_title());
-       // viewHolder.wk_modified.append(workflow.get(i).getWorkflow_datemodified());
-       // viewHolder.wk_created.append(workflow.get(i).getWorkflow_datecreated());
+        viewHolder.wk_title.setText(title);
         viewHolder.wk_description.setText( description+" ... ");
-        //viewHolder.author_profile.setImageBitmap(workflow[i].getWorkflow_author_bitmap());
+        final String wkflow_url = workflow.get(j).getWorkflow_remote_url();
         final Intent it = new Intent();
         it.setClass(context, WorkflowDetailActivity.class);
         it.putExtra("workflowid", workflow.get(i).getId());
+        it.putExtra("title",title);
+        it.putExtra("description",desc_full);
+        it.putExtra("url", wkflow_url);
+
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,7 +106,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         viewHolder.btn_download_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String wkflow_url = workflow.get(j).getWorkflow_remote_url();
+
                 try {
 
                     String workflow_name = Uri.parse(wkflow_url).getLastPathSegment();

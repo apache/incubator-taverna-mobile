@@ -59,8 +59,8 @@ limitations under the License.
     <string name="workflow_empty"> No <b>Workflows</b> Available. Check your Connection to the Internet</string>
     <string name="wktitle">TITLE</string>
     <string name="marked">Marked On</string>
-    <string name="created">Workflow Created On:</string>
-    <string name="modified">Modified On:</string>
+    <string name="created">Created :</string>
+    <string name="modified">Modified :</string>
     <string name="description">Workflow Description</string>
     <string name="title_activity_workflow_detail">Workflow Detail</string>
 
@@ -77,5 +77,6 @@ limitations under the License.
     <string name="downloadduplicate">Already Downloading</string>
     <string name="downloadcomplete">  download complete</string>
     <string name="seemore"> See more &amp;raquo</string>
+    <string name="loading">Loading details</string>
 
 </resources>

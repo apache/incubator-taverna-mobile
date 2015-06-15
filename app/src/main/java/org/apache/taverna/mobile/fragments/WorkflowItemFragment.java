@@ -117,6 +117,8 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         }
         in = AnimationUtils.loadAnimation(getActivity(),android.R.anim.slide_in_left);
        List<Workflow> mlist = new ArrayList<Workflow>();
+    /*    mlist.add(new Workflow(getActivity(),"Testing title","Larry","Ok testing",0,"http://127.0.0.1"));
+        mlist.add(new Workflow(getActivity(),"Testing title","Larry","Ok testing",0,"http://127.0.0.1"));
    /*
         mlist.add(new Workflow(getActivity(), null));
         mlist.add(new Workflow(getActivity(), null));
@@ -233,7 +235,7 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
      */
     @Override
     public android.content.Loader<List<Workflow>> onCreateLoader(int id, Bundle args) {
-      //  if (null != wpb)
+        if (null != wpb)
             wpb.setVisibility(View.VISIBLE);
         return new WorkflowLoader(getActivity());
     }
@@ -241,14 +243,14 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
     @Override
     public void onLoadFinished(android.content.Loader<List<Workflow>> loader, List<Workflow> workflows) {
        // getActivity().setProgressBarIndeterminateVisibility(false);
-      //  if (null != wpb)
+        if (null != wpb)
         wpb.setVisibility(View.GONE);
         loader.stopLoading();
         workflowAdapter = new WorkflowAdapter(getActivity(), workflows);
         if(workflows.size() > 0)
             mListView.swapAdapter(workflowAdapter, true);
         else {
-            mListView.setVisibility(View.GONE);
+           // mListView.setVisibility(View.GONE);
 //            setEmptyText("No views available");
         }
     }
