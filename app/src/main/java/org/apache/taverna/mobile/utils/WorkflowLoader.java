@@ -68,7 +68,7 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
             //for password protected urls use the user's credentials
             Authenticator.setDefault(new TavernaPlayerAPI.Authenticator("taverna","taverna"));
 
-            URL workflowurl = new URL(TavernaPlayerAPI.PLAYER_WORKFLOW_URL);
+            URL workflowurl = new URL(new TavernaPlayerAPI(ctx).PLAYER_WORKFLOW_URL);
             HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
             String userpass = "icep603@gmail.com" + ":" + "creationfox";
             String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(),Base64.DEFAULT);
