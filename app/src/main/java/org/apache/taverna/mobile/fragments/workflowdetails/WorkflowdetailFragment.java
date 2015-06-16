@@ -246,7 +246,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             StringBuffer sb = new StringBuffer();
             try {
 
-                URL workflowurl = new URL(TavernaPlayerAPI.PLAYER_RUN_FRAMEWORK_URL+params[0]);
+                URL workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_FRAMEWORK_URL+params[0]);
                 HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
                 String userpass = "icep603@gmail.com" + ":" + "creationfox";
                 String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
@@ -359,6 +359,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            progressDialog.setMessage("Creating new run for the workflow");
+            progressDialog.show();
         }
 
         @Override
@@ -366,7 +368,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             StringBuffer sb = new StringBuffer();
             try {
 
-                URL workflowurl = new URL(TavernaPlayerAPI.PLAYER_RUN_URL);
+                URL workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_URL);
                 HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
                 String userpass = "icep603@gmail.com" + ":" + "creationfox";
                 String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
@@ -409,6 +411,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         @Override
         protected void onPostExecute(String s) {
             Log.i("RUN OutPut", s);
+            progressDialog.dismiss();
         }
     }
 }

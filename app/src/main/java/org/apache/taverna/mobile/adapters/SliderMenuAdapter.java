@@ -68,22 +68,12 @@ public class SliderMenuAdapter extends BaseAdapter{
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         View menuitemview = LayoutInflater.from(context).inflate(R.layout.menu_item_layout, viewGroup, false);
-       /* if(view != null ) {
-            ViewHolder vh = (ViewHolder) view.getTag();
-            if (vh == null) {
-                ViewHolder v = new ViewHolder(menuitemview);
-                view.setTag(v);
-                return getView(i,view,viewGroup);
-            } else {
-                vh.menuitem.setText(dataItems.get(i));
-                vh.menuicon.setImageResource(R.drawable.gear_icon);
-            }
-        }*/
+
         ImageView menuicon = (ImageView) menuitemview.findViewById(R.id.menuIcon);
         TextView menuitem = (TextView) menuitemview.findViewById(R.id.menuItemText);
         switch(i +1){
             case 1:
-                menuicon.setImageResource(R.mipmap.ic_workflows);
+                menuicon.setImageResource(R.mipmap.ic_dashboard_home);
                 menuitem.setText(dataItems.get(i));
                 break;
             case 2:
@@ -99,6 +89,10 @@ public class SliderMenuAdapter extends BaseAdapter{
                 menuitem.setText(dataItems.get(i));
                 break;
             case 5:
+                menuicon.setImageResource(R.mipmap.ic_workflows);
+                menuitem.setText(dataItems.get(i));
+                break;
+            case 6:
                 menuicon.setImageResource(R.mipmap.ic_logout);
                 menuitem.setText(dataItems.get(i));
                 break;

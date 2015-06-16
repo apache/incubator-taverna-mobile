@@ -75,19 +75,19 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
 
             switch (this.lt){
                 case TYPE_WORKFLOW_DETAIL:
-                    workflowurl = new URL(TavernaPlayerAPI.PLAYER_WORKFLOW_URL+this.wid);
+                    workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_WORKFLOW_URL+this.wid);
                     break;
                 case TYPE_RUN_HISTORY:
-                    workflowurl = new URL(TavernaPlayerAPI.PLAYER_RUN_URL);
+                    workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_URL);
                     break;
                 case TYPE_POLICY:
-                    workflowurl = new URL(TavernaPlayerAPI.SERVER_BASE_URL);
+                    workflowurl = new URL(new TavernaPlayerAPI(this.context).SERVER_BASE_URL);
                     break;
                 case TYPE_ABOUT_WORKFLOW:
-                    workflowurl = new URL(TavernaPlayerAPI.PLAYER_WORKFLOW_URL);
+                    workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_WORKFLOW_URL);
                     break;
                 default:
-                    workflowurl = new URL(TavernaPlayerAPI.PLAYER_WORKFLOW_URL);
+                    workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_WORKFLOW_URL);
                     break;
             }
             HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();

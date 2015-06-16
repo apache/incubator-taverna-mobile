@@ -84,5 +84,4 @@ public class WorkflowAboutFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_workflow_about, container, false);
     }
 
-
 }

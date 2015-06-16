@@ -110,7 +110,7 @@ public class DashboardMainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch(position+1){
-            case 1:
+            case 1://return home
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, WorkflowItemFragment.newInstance("param1", "param2"))
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
@@ -145,7 +145,11 @@ public class DashboardMainActivity extends ActionBarActivity
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
                 break;
-            case 5: //logout user
+            case 5://open settings/preference activity
+                startActivity(new Intent(this, SettingsActivity.class));
+                overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                break;
+            case 6: //logout user
                 this.finish();
                 break;
             default:
@@ -178,6 +182,9 @@ public class DashboardMainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_about);
                 break;
             case 5:
+                mTitle = getString(R.string.title_activity_settings);
+                break;
+            case 6:
                 mTitle = getString(R.string.title_exit);
                 break;
         }
