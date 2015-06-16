@@ -36,7 +36,7 @@ limitations under the License.
         android:id="@android:id/list"
         android:theme="@style/Theme.AppCompat.Light"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/button_material_light"
         >
 

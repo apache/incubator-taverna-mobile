@@ -56,7 +56,7 @@ import org.apache.taverna.mobile.fragments.WorkflowItemFragment;
 import java.io.File;
 
 public class DashboardMainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, WorkflowItemFragment.OnWorkflowSelectedListener, FavoriteFragment.FavoriteItemSelected {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, FavoriteFragment.FavoriteItemSelected {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -249,13 +249,6 @@ public class DashboardMainActivity extends ActionBarActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onWorkflowSelected(int id) {
-        //send all details to the next Activity which should display the Workflow details in full
-        startActivity(new Intent(this, WorkflowDetailActivity.class));
-
     }
 
     @Override

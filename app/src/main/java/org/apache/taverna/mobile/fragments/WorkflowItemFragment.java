@@ -56,8 +56,6 @@ import java.util.List;
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
  * <p/>
- * Activities containing this fragment MUST implement the {@link org.apache.taverna.mobile.fragments.WorkflowItemFragment.OnWorkflowSelectedListener}
- * interface.
  */
 public class WorkflowItemFragment extends Fragment implements android.app.LoaderManager.LoaderCallbacks<List<Workflow>>, SwipeRefreshLayout.OnRefreshListener {
 
@@ -71,8 +69,6 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    private OnWorkflowSelectedListener mListener;
 
     /**
      * The fragment's ListView/GridView.
@@ -133,12 +129,11 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         mListView = (RecyclerView) view.findViewById(android.R.id.list);
         mListView.setHasFixedSize(true);
         mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        getActivity().getLoaderManager().initLoader(0,null,this);
          if(workflowAdapter.getItemCount() == 0){
             setEmptyText("No Workflows available");
-            mListView.swapAdapter(workflowAdapter, false);
+            mListView.swapAdapter(workflowAdapter, true);
         }else {
-            mListView.setAdapter(workflowAdapter);
+            mListView.swapAdapter(workflowAdapter,true);
              mListView.setAnimation(in);
         }
         return view;
@@ -148,13 +143,26 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnWorkflowSelectedListener) activity;
+
             ((DashboardMainActivity) activity).onSectionAttached(1);
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
+
+    /**
+     * Called when the fragment is visible to the user and actively running.
+     * This is generally
+     * tied to {@link android.app.Activity#onResume() Activity.onResume} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getLoaderManager().initLoader(0,null,this);
+    }
+
     /**
      * Initialize the contents of the Activity's standard options menu.  You
      * should place your menu items in to <var>menu</var>.  For this method
@@ -209,7 +217,6 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     /**
@@ -241,37 +248,20 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
     @Override
     public void onLoadFinished(android.content.Loader<List<Workflow>> loader, List<Workflow> workflows) {
         swipeRefreshLayout.setRefreshing(false);
-        loader.stopLoading();
         workflowAdapter = new WorkflowAdapter(getActivity(), workflows);
-        if(workflows.size() > 0)
-            mListView.swapAdapter(workflowAdapter, true);
+        mListView.swapAdapter(workflowAdapter, true);
 
     }
 
     @Override
     public void onLoaderReset(android.content.Loader<List<Workflow>> listLoader) {
-        listLoader.reset();
-        mListView.swapAdapter(null, false);
+        //listLoader.reset();
+//        mListView.swapAdapter(null, true);
     }
 
     @Override
     public void onRefresh() {
-        getActivity().getLoaderManager().initLoader(0,null,this);
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnWorkflowSelectedListener {
-        // TODO: Update argument type and name
-        public void onWorkflowSelected(int workflowPosition);
+        getActivity().getLoaderManager().restartLoader(0, null, this);
     }
 
 }

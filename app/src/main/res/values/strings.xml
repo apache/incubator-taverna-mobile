@@ -79,5 +79,6 @@ limitations under the License.
     <string name="seemore"> See more &amp;raquo</string>
     <string name="loading">Loading details</string>
     <string name="loadworkflows">Loading Workflows</string>
+    <string name="fetchrun">Fetching run components </string>
 
 </resources>
