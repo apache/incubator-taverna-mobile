@@ -48,6 +48,7 @@ import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,6 +62,11 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     public WorkflowAdapter(Context c, List<Workflow> wk) {
         context = c;
         workflow = wk;
+    }
+
+    public WorkflowAdapter(Context c){
+        context = c;
+        workflow = new ArrayList<Workflow>();
     }
 
     @Override
@@ -153,6 +159,10 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
 
     public Workflow getItem(int position){
         return workflow.get(position);
+    }
+
+    public void addWorkflow(Workflow wk){
+        workflow.add(wk);
     }
 
     @Override

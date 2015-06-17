@@ -25,7 +25,6 @@ package org.apache.taverna.mobile.activities;
 * under the License.
 */
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -41,11 +40,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
@@ -77,7 +74,6 @@ public class DashboardMainActivity extends ActionBarActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_main);
         setUpWorkflowDirectory(this);
@@ -96,13 +92,13 @@ public class DashboardMainActivity extends ActionBarActivity
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
 
-        //Handle search actions from a system sent intent
+      /*  //Handle search actions from a system sent intent
         Intent searchIntent = getIntent();
         if(searchIntent != null && Intent.ACTION_SEARCH.equals(searchIntent.getAction())){
             //retrieve and process query then display results
             String query = searchIntent.getStringExtra(SearchManager.QUERY);
             Toast.makeText(this,"Query = "+query, Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     @Override
@@ -239,13 +235,13 @@ public class DashboardMainActivity extends ActionBarActivity
             // decide what to show in the action bar.
             MenuInflater mi = getMenuInflater();
                 mi.inflate(R.menu.dashboard_main, menu);
-            //get the searchview and set the searchable configuration
+          /*  //get the searchview and set the searchable configuration
             SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
             SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
             //assuming this activity is the searchable activity
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
             searchView.setSubmitButtonEnabled(true);
-//            searchView.setIconifiedByDefault(false);
+//            searchView.setIconifiedByDefault(false);*/
 
             restoreActionBar();
             return true;

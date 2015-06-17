@@ -26,11 +26,15 @@ package org.apache.taverna.mobile.fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,6 +44,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
@@ -113,10 +118,7 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
        List<Workflow> mlist = new ArrayList<Workflow>();
     /*    mlist.add(new Workflow(getActivity(),"Testing title","Larry","Ok testing",0,"http://127.0.0.1"));
         mlist.add(new Workflow(getActivity(),"Testing title","Larry","Ok testing",0,"http://127.0.0.1"));
-   /*
-        mlist.add(new Workflow(getActivity(), null));
-        mlist.add(new Workflow(getActivity(), null));
-        mlist.add(new Workflow(getActivity(), null)); */
+*/
         workflowAdapter = new WorkflowAdapter(getActivity(), mlist );
     }
 
@@ -160,7 +162,15 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().getLoaderManager().initLoader(0,null,this);
+        //Handle search actions from a system sent intent
+        Intent searchIntent = getActivity().getIntent();
+        if(searchIntent != null && Intent.ACTION_SEARCH.equals(searchIntent.getAction())){
+            //retrieve and process query then display results
+            String query = searchIntent.getStringExtra(SearchManager.QUERY);
+            //Toast.makeText(getActivity(), "Query = " + query, Toast.LENGTH_SHORT).show();
+            performSearch(workflowAdapter,query);
+        }else
+            getActivity().getLoaderManager().initLoader(0,null,this);
     }
 
     /**
@@ -181,7 +191,13 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         super.onCreateOptionsMenu(menu, inflater);
         //menu.clear();
         if(menu.size() == 1) {
-            // inflater.inflate(R.menu.dashboard_main,menu);
+            //get the searchview and set the searchable configuration
+            SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+            SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+            //assuming this activity is the searchable activity
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+            searchView.setSubmitButtonEnabled(true);
+//            searchView.setIconifiedByDefault(false);
             MenuItem mit = menu.add("Refresh");
             mit.setIcon(android.R.drawable.stat_notify_sync);
             mit.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -230,6 +246,18 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         if (emptyView instanceof TextView) {
             ((TextView) emptyView).setText(emptyText);
         }
+    }
+
+    private void performSearch(WorkflowAdapter adapter, String search){
+        WorkflowAdapter ladapter = new WorkflowAdapter(getActivity());
+
+        for(int i=0; i<adapter.getItemCount(); i++) {
+            Workflow workflow = adapter.getItem(i);
+            if(search.contains(workflow.getWorkflow_author()) || search.contains(workflow.getWorkflow_title())){
+                ladapter.addWorkflow(workflow);
+            }
+        }
+        mListView.swapAdapter(ladapter, true);
     }
 
     /**

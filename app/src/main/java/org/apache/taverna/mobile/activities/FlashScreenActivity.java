@@ -25,8 +25,10 @@ package org.apache.taverna.mobile.activities;
 * under the License.
 */
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -56,12 +58,25 @@ public class FlashScreenActivity extends ActionBarActivity {
     @Override
     public void onResume(){
         super.onResume();
+        final Context context = this;
+        //setup initial app settings
+        if(!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("pref_set", false)){
+            PreferenceManager.getDefaultSharedPreferences(context).edit().putString("pref_server_url", "http://heater.cs.man.ac.uk:8090/taverna-2.5.4/").commit();
+            PreferenceManager.getDefaultSharedPreferences(context).edit().putString("pref_player_url", "http://heater.cs.man.ac.uk:3000/").commit();
+        }else{
+            PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("pref_set", true).commit();
+        }
         Handler mhandler = new Handler();
         mhandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(FlashScreenActivity.this, LoginActivity.class));
-                (FlashScreenActivity.this).finish();
+                if(!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("pref_logged_in", false)) {
+                    startActivity(new Intent(FlashScreenActivity.this, LoginActivity.class));
+                    (FlashScreenActivity.this).finish();
+                }else{
+                    startActivity(new Intent(FlashScreenActivity.this, DashboardMainActivity.class));
+                    (FlashScreenActivity.this).finish();
+                }
             }
         }, 2500);
 

@@ -27,23 +27,28 @@ public class TavernaPlayerAPI {
         PLAYER_RUN_FRAMEWORK_URL = PLAYER_RUN_URL+"new?workflow_id=";
     }
 
-    public static String getPLAYER_BASE_URL() {
+    public static String getPLAYER_BASE_URL(Context context) {
+        new TavernaPlayerAPI(context);
         return PLAYER_BASE_URL;
     }
 
-    public static String getSERVER_BASE_URL() {
+    public static String getSERVER_BASE_URL(Context ctx) {
+        new TavernaPlayerAPI(ctx);
         return SERVER_BASE_URL;
     }
 
-    public static String getPLAYER_WORKFLOW_URL() {
+    public static String getPLAYER_WORKFLOW_URL(Context ctx) {
+        new TavernaPlayerAPI(ctx);
         return PLAYER_WORKFLOW_URL;
     }
 
-    public static String getPLAYER_RUN_URL() {
+    public static String getPLAYER_RUN_URL(Context ctx) {
+        new TavernaPlayerAPI(ctx);
         return PLAYER_RUN_URL;
     }
 
-    public static String getPLAYER_RUN_FRAMEWORK_URL() {
+    public static String getPLAYER_RUN_FRAMEWORK_URL(Context ctx) {
+        new TavernaPlayerAPI(ctx);
         return PLAYER_RUN_FRAMEWORK_URL;
     }
 
