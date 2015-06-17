@@ -53,7 +53,7 @@ import org.apache.taverna.mobile.fragments.WorkflowItemFragment;
 import java.io.File;
 
 public class DashboardMainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, FavoriteFragment.FavoriteItemSelected {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -252,12 +252,6 @@ public class DashboardMainActivity extends ActionBarActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onFavoriteItemSelected(int position) {
-        //trigger when a favorite item is selected.
-        startActivity(new Intent(this, WorkflowDetailActivity.class));
     }
 
     public class MyAdapter extends FragmentPagerAdapter {
