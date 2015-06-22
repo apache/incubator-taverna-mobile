@@ -25,24 +25,26 @@ package org.apache.taverna.mobile.fragments;
  */
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
@@ -59,28 +61,25 @@ import java.util.List;
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
  * <p/>
- * Activities containing this fragment MUST implement the {@link org.apache.taverna.mobile.fragments.WorkflowItemFragment.OnWorkflowSelectedListener}
- * interface.
  */
-public class WorkflowItemFragment extends Fragment implements android.app.LoaderManager.LoaderCallbacks<List<Workflow>> {
+public class WorkflowItemFragment extends Fragment implements android.app.LoaderManager.LoaderCallbacks<List<Workflow>>, SwipeRefreshLayout.OnRefreshListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Animation in;
-    private ProgressBar wpb; //progressbar used to indicate the state of the workflow loaders
+    private ProgressDialog mProgressDialog; //progressbar used to indicate the state of the workflow loaders
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private OnWorkflowSelectedListener mListener;
-
     /**
      * The fragment's ListView/GridView.
      */
     private RecyclerView mListView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     /**
      * The Adapter which will be used to populate the ListView/GridView with
@@ -119,27 +118,24 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
        List<Workflow> mlist = new ArrayList<Workflow>();
     /*    mlist.add(new Workflow(getActivity(),"Testing title","Larry","Ok testing",0,"http://127.0.0.1"));
         mlist.add(new Workflow(getActivity(),"Testing title","Larry","Ok testing",0,"http://127.0.0.1"));
-   /*
-        mlist.add(new Workflow(getActivity(), null));
-        mlist.add(new Workflow(getActivity(), null));
-        mlist.add(new Workflow(getActivity(), null)); */
+*/
         workflowAdapter = new WorkflowAdapter(getActivity(), mlist );
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item, container, false);
-        wpb = (ProgressBar) view.findViewById(R.id.workflow_pb);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+        swipeRefreshLayout.setOnRefreshListener(this);
         // Set the adapter
         mListView = (RecyclerView) view.findViewById(android.R.id.list);
         mListView.setHasFixedSize(true);
         mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        getActivity().getLoaderManager().initLoader(0,null,this);
          if(workflowAdapter.getItemCount() == 0){
             setEmptyText("No Workflows available");
-            mListView.swapAdapter(workflowAdapter, false);
+            mListView.swapAdapter(workflowAdapter, true);
         }else {
-            mListView.setAdapter(workflowAdapter);
+            mListView.swapAdapter(workflowAdapter,true);
              mListView.setAnimation(in);
         }
         return view;
@@ -149,13 +145,34 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnWorkflowSelectedListener) activity;
+
             ((DashboardMainActivity) activity).onSectionAttached(1);
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
+
+    /**
+     * Called when the fragment is visible to the user and actively running.
+     * This is generally
+     * tied to {@link android.app.Activity#onResume() Activity.onResume} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Handle search actions from a system sent intent
+        Intent searchIntent = getActivity().getIntent();
+        if(searchIntent != null && Intent.ACTION_SEARCH.equals(searchIntent.getAction())){
+            //retrieve and process query then display results
+            String query = searchIntent.getStringExtra(SearchManager.QUERY);
+            //Toast.makeText(getActivity(), "Query = " + query, Toast.LENGTH_SHORT).show();
+            performSearch(workflowAdapter,query);
+        }else
+            getActivity().getLoaderManager().initLoader(0,null,this);
+    }
+
     /**
      * Initialize the contents of the Activity's standard options menu.  You
      * should place your menu items in to <var>menu</var>.  For this method
@@ -174,7 +191,13 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         super.onCreateOptionsMenu(menu, inflater);
         //menu.clear();
         if(menu.size() == 1) {
-            // inflater.inflate(R.menu.dashboard_main,menu);
+            //get the searchview and set the searchable configuration
+            SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+            SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+            //assuming this activity is the searchable activity
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+            searchView.setSubmitButtonEnabled(true);
+//            searchView.setIconifiedByDefault(false);
             MenuItem mit = menu.add("Refresh");
             mit.setIcon(android.R.drawable.stat_notify_sync);
             mit.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
@@ -210,7 +233,6 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     /**
@@ -226,6 +248,18 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         }
     }
 
+    private void performSearch(WorkflowAdapter adapter, String search){
+        WorkflowAdapter ladapter = new WorkflowAdapter(getActivity());
+
+        for(int i=0; i<adapter.getItemCount(); i++) {
+            Workflow workflow = adapter.getItem(i);
+            if(search.contains(workflow.getWorkflow_author()) || search.contains(workflow.getWorkflow_title())){
+                ladapter.addWorkflow(workflow);
+            }
+        }
+        mListView.swapAdapter(ladapter, true);
+    }
+
     /**
      * Instantiate and return a new Loader for the given ID.
      *
@@ -235,45 +269,27 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
      */
     @Override
     public android.content.Loader<List<Workflow>> onCreateLoader(int id, Bundle args) {
-        if (null != wpb)
-            wpb.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setRefreshing(true);
         return new WorkflowLoader(getActivity());
     }
 
     @Override
     public void onLoadFinished(android.content.Loader<List<Workflow>> loader, List<Workflow> workflows) {
-       // getActivity().setProgressBarIndeterminateVisibility(false);
-        if (null != wpb)
-        wpb.setVisibility(View.GONE);
-        loader.stopLoading();
+        swipeRefreshLayout.setRefreshing(false);
         workflowAdapter = new WorkflowAdapter(getActivity(), workflows);
-        if(workflows.size() > 0)
-            mListView.swapAdapter(workflowAdapter, true);
-        else {
-           // mListView.setVisibility(View.GONE);
-//            setEmptyText("No views available");
-        }
+        mListView.swapAdapter(workflowAdapter, true);
+
     }
 
     @Override
     public void onLoaderReset(android.content.Loader<List<Workflow>> listLoader) {
-        listLoader.reset();
-        mListView.swapAdapter(null, false);
+        //listLoader.reset();
+//        mListView.swapAdapter(null, true);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnWorkflowSelectedListener {
-        // TODO: Update argument type and name
-        public void onWorkflowSelected(int workflowPosition);
+    @Override
+    public void onRefresh() {
+        getActivity().getLoaderManager().restartLoader(0, null, this);
     }
 
 }

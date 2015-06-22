@@ -65,12 +65,20 @@ limitations under the License.
         <receiver
             android:name=".broadcastreceivers.WorkflowDownloadReceiver"
             android:enabled="true"
-            android:exported="false" >
-            <intent-filter
-                android:priority="999">
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="org.apache.taverna.mobile.activities.DashboardMainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.apache.taverna.mobile.activities.DashboardMainActivity" />
+        </activity>
     </application>
 
 </manifest>

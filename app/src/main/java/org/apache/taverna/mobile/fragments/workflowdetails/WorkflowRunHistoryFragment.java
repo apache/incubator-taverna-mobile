@@ -60,7 +60,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
 
     // TODO: Rename and change types of parameters
     private String mParam1;
-    private String mParam2;
+    private static long workflowID;
 
     /**
      * Use this factory method to create a new instance of
@@ -71,11 +71,11 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
      * @return A new instance of fragment WorkflowRunHistoryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WorkflowRunHistoryFragment newInstance(String param1, String param2) {
+    public static WorkflowRunHistoryFragment newInstance(String param1, long param2) {
         WorkflowRunHistoryFragment fragment = new WorkflowRunHistoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putLong(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -102,7 +102,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
         runAdapter = new RunAdapter(getActivity(),runsList );
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            workflowID = getArguments().getLong(ARG_PARAM2);
         }
     }
 
@@ -114,7 +114,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
         mRecyclerView = (RecyclerView) rootView.findViewById(android.R.id.list);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        getActivity().getLoaderManager().initLoader(1,null,this);
+        getActivity().getLoaderManager().initLoader(1,savedInstanceState,this);
         return rootView;
     }
 
@@ -142,7 +142,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
         progressDialog.show();
         return new DetailsLoader(getActivity(),
                 DetailsLoader.LOAD_TYPE.TYPE_RUN_HISTORY,
-                1);
+                workflowID);
     }
 
     @Override

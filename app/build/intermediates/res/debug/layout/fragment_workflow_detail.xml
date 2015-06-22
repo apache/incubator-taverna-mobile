@@ -30,7 +30,8 @@ limitations under the License.
         android:layout_height="wrap_content"
         android:typeface="serif"
         android:textStyle="italic"
-        android:textSize="20sp" />
+        android:textSize="22sp"
+        android:text="@string/workflow_authorhint" />
 
     <ScrollView
         android:layout_width="match_parent"

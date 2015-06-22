@@ -85,10 +85,12 @@ public class WorkflowDownloadManager {
             request.setDestinationUri(destinationurl);
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED |
                     DownloadManager.Request.VISIBILITY_VISIBLE);
-            request.allowScanningByMediaScanner();
 
-            long id = downloadManager.enqueue(request);
-            int status = cur.getInt(cur.getColumnIndex(DownloadManager.COLUMN_STATUS));
+            long id = this.downloadManager.enqueue(request);
+
+            if(id != 0)
+                sendNotification(this.context.getResources().getString(R.string.downloadprogress));
+         /*   int status = cur.getInt(cur.getColumnIndex(DownloadManager.COLUMN_STATUS));
             switch (status) {
                 case DownloadManager.STATUS_SUCCESSFUL:
                     sendNotification(this.context.getResources().getString(R.string.downloadcomplete));
@@ -102,7 +104,7 @@ public class WorkflowDownloadManager {
                 case DownloadManager.ERROR_FILE_ALREADY_EXISTS:
                     sendNotification(this.context.getResources().getString(R.string.downloadduplicate));
                     break;
-            }
+            }*/
             cur.close();
         }
     }

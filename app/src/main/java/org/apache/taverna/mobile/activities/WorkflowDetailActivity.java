@@ -63,7 +63,6 @@ public class WorkflowDetailActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workflow_detail);
         // Create the adapter that will return a fragment for each of the three
@@ -111,7 +110,7 @@ public class WorkflowDetailActivity extends ActionBarActivity {
                 case 1:
                 return WorkflowdetailFragment.newInstance(position + 1);
                 case 2:
-                   return WorkflowRunHistoryFragment.newInstance("","");
+                   return WorkflowRunHistoryFragment.newInstance("workflow",WorkflowdetailFragment.WORKFLO_ID);
                 case 3:
                     return WorkflowLicenceFragment.newInstance("","");
                 case 4:

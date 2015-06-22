@@ -68,7 +68,7 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
             //for password protected urls use the user's credentials
             Authenticator.setDefault(new TavernaPlayerAPI.Authenticator("taverna","taverna"));
 
-            URL workflowurl = new URL(TavernaPlayerAPI.PLAYER_WORKFLOW_URL);
+            URL workflowurl = new URL(new TavernaPlayerAPI(ctx).PLAYER_WORKFLOW_URL);
             HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
             String userpass = "icep603@gmail.com" + ":" + "creationfox";
             String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(),Base64.DEFAULT);
@@ -97,19 +97,15 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
             for(int i=0; i<jsonWorkflow.length();i++){
                 JSONObject js = jsonWorkflow.getJSONObject(i);
                 Log.i("JSON ", js.toString(2));
-                //String author = js.getString("author");
+                JSONObject authorJson = js.getJSONObject("user");
                 String title = js.getString("title");
                 String description = js.getString("description");
                 String url = js.getString("url");
                 long id = js.getLong("id");
-                userWorkflows.add(new Workflow(ctx,title," ",description,id,url));
+                userWorkflows.add(new Workflow(ctx,title,">"+authorJson.getString("name"),description,id,url));
             }
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
 

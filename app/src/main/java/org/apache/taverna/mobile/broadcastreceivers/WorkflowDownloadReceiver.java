@@ -47,11 +47,11 @@ public class WorkflowDownloadReceiver extends BroadcastReceiver {
         query.setFilterById(receivedID);
         Cursor cur = mgr.query(query);
         int index = cur.getColumnIndex(DownloadManager.COLUMN_STATUS);
-        String workflow = cur.getString(cur.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+//        String workflow = cur.getString(cur.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
 
         if(cur.moveToFirst()) {
             if(cur.getInt(index) == DownloadManager.STATUS_SUCCESSFUL){
-                wdm.sendNotification(workflow+context.getResources().getString(R.string.downloadcomplete));
+                wdm.sendNotification(context.getResources().getString(R.string.downloadcomplete));
             }else{
                 wdm.sendNotification(context.getResources().getString(R.string.downloadfailed));
             }

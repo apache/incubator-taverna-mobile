@@ -61,9 +61,9 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
         String[] mdata = dataSet.get(i);
         fViewHolder.author.setText(mdata[0]);
         fViewHolder.title.setText(mdata[1]);
-        fViewHolder.dateMarked.setText(mdata[2]);
-        fViewHolder.dateAdd.setText(mdata[3]);
-        fViewHolder.dateModified.setText(mdata[4]);
+        //fViewHolder.dateMarked.setText(mdata[2]);
+        //fViewHolder.dateAdd.setText(mdata[3]);
+        //fViewHolder.dateModified.setText(mdata[4]);
     }
 
     @Override

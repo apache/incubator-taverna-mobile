@@ -53,7 +53,7 @@ limitations under the License.
     <string name="workflow_download">Download</string>
     <string name="workflow_read">View</string>
     <string name="workflow_mark">Favorite</string>
-    <string name="workflow_authorhint">Workflow Author</string>
+    <string name="workflow_authorhint">Workflow Author  </string>
     <string name="workflow_component">Workflow component</string>
     <string name="favorite_empty"> No Favorites Added Yet</string>
     <string name="workflow_empty"> No <b>Workflows</b> Available. Check your Connection to the Internet</string>
@@ -78,5 +78,11 @@ limitations under the License.
     <string name="downloadcomplete">  download complete</string>
     <string name="seemore"> See more &amp;raquo</string>
     <string name="loading">Loading details</string>
+    <string name="loadworkflows">Loading Workflows</string>
+    <string name="fetchrun">Fetching run components </string>
+    <string name="keeplogin">Remain Logged-in</string>
+    
+    <string name="emailerr">Email must not be empty</string>
+    <string name="passworderr">Password must not be empty</string>
 
 </resources>

@@ -138,6 +138,7 @@ public class NavigationDrawerFragment extends Fragment {
         mlist.add(getString(R.string.title_openworkflow));
         mlist.add(getString(R.string.title_usage));
         mlist.add(getString(R.string.title_about));
+        mlist.add(getString(R.string.title_activity_settings));
         mlist.add(getString(R.string.title_exit));
 
         mDrawerListView.setAdapter(new SliderMenuAdapter(getActivity(), mlist));

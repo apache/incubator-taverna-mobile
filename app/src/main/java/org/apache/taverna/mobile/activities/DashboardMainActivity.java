@@ -25,7 +25,6 @@ package org.apache.taverna.mobile.activities;
 * under the License.
 */
 
-import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -41,11 +40,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
@@ -56,7 +53,7 @@ import org.apache.taverna.mobile.fragments.WorkflowItemFragment;
 import java.io.File;
 
 public class DashboardMainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, WorkflowItemFragment.OnWorkflowSelectedListener, FavoriteFragment.FavoriteItemSelected {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -77,7 +74,6 @@ public class DashboardMainActivity extends ActionBarActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_main);
         setUpWorkflowDirectory(this);
@@ -96,13 +92,13 @@ public class DashboardMainActivity extends ActionBarActivity
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
 
-        //Handle search actions from a system sent intent
+      /*  //Handle search actions from a system sent intent
         Intent searchIntent = getIntent();
         if(searchIntent != null && Intent.ACTION_SEARCH.equals(searchIntent.getAction())){
             //retrieve and process query then display results
             String query = searchIntent.getStringExtra(SearchManager.QUERY);
             Toast.makeText(this,"Query = "+query, Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     @Override
@@ -110,7 +106,7 @@ public class DashboardMainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         switch(position+1){
-            case 1:
+            case 1://return home
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, WorkflowItemFragment.newInstance("param1", "param2"))
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
@@ -145,7 +141,11 @@ public class DashboardMainActivity extends ActionBarActivity
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
                 break;
-            case 5: //logout user
+            case 5://open settings/preference activity
+                startActivity(new Intent(this, SettingsActivity.class));
+                overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+                break;
+            case 6: //logout user
                 this.finish();
                 break;
             default:
@@ -178,6 +178,9 @@ public class DashboardMainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_about);
                 break;
             case 5:
+                mTitle = getString(R.string.title_activity_settings);
+                break;
+            case 6:
                 mTitle = getString(R.string.title_exit);
                 break;
         }
@@ -232,13 +235,13 @@ public class DashboardMainActivity extends ActionBarActivity
             // decide what to show in the action bar.
             MenuInflater mi = getMenuInflater();
                 mi.inflate(R.menu.dashboard_main, menu);
-            //get the searchview and set the searchable configuration
+          /*  //get the searchview and set the searchable configuration
             SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
             SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
             //assuming this activity is the searchable activity
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
             searchView.setSubmitButtonEnabled(true);
-//            searchView.setIconifiedByDefault(false);
+//            searchView.setIconifiedByDefault(false);*/
 
             restoreActionBar();
             return true;
@@ -249,19 +252,6 @@ public class DashboardMainActivity extends ActionBarActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onWorkflowSelected(int id) {
-        //send all details to the next Activity which should display the Workflow details in full
-        startActivity(new Intent(this, WorkflowDetailActivity.class));
-
-    }
-
-    @Override
-    public void onFavoriteItemSelected(int position) {
-        //trigger when a favorite item is selected.
-        startActivity(new Intent(this, WorkflowDetailActivity.class));
     }
 
     public class MyAdapter extends FragmentPagerAdapter {

@@ -25,18 +25,41 @@ package org.apache.taverna.mobile.activities;
 * under the License.
 */
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
+import org.apache.taverna.mobile.tavernamobile.Workflow;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.Authenticator;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 
 public class LoginActivity extends ActionBarActivity {
@@ -69,6 +92,10 @@ public class LoginActivity extends ActionBarActivity {
     public static class LoginFragment extends Fragment implements View.OnClickListener{
 
         private View rootView;
+        private Button loginButton;
+        private EditText email, password;
+        private boolean logginRemain;
+        private CheckBox loginCheck;
 
         public LoginFragment() {
         }
@@ -77,19 +104,104 @@ public class LoginActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             rootView = inflater.inflate(R.layout.fragment_login, container, false);
-            Button loginButton = (Button) rootView.findViewById(R.id.loginbutton);
+            email = (EditText) rootView.findViewById(R.id.editTextUsername);
+            password = (EditText) rootView.findViewById(R.id.edittextPassword);
+            loginCheck = (CheckBox) rootView.findViewById(R.id.rememberCheckbox);
+            loginButton = (Button) rootView.findViewById(R.id.loginbutton);
             loginButton.setOnClickListener(this);
             return rootView;
         }
 
         @Override
         public void onClick(View view) {
-            switch (view.getId()){
-                case R.id.loginbutton:
-                    startActivity(new Intent(getActivity(), DashboardMainActivity.class));
-                    break;
+            int i = view.getId();
+            if (i == R.id.loginbutton) {
+                logginRemain = loginCheck.isChecked();
+                if (logginRemain) {
+                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putBoolean("pref_logged_in",true).apply();
+                } else {
+                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putBoolean("pref_logged_in",false).apply();
+                }
+                if (email.getText().toString().isEmpty()) {
+                    email.setError(getString(R.string.emailerr));
+                } else if (password.getText().toString().isEmpty()) {
+                    password.setError(getString(R.string.passworderr));
+                } else {
+                    //send login request
+                    new LoginTask(getActivity()).execute(email.getText().toString(), password.getText().toString());
+                }
+                //startActivity(new Intent(getActivity(), DashboardMainActivity.class));
 
             }
         }
+        private class LoginTask extends AsyncTask<String, Void, String>{
+            private Context context;
+            private ProgressDialog pd;
+
+            private LoginTask(Context context) {
+                this.context = context;
+                pd = new ProgressDialog(this.context);
+                pd.setMessage("Logging in");
+            }
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                pd.show();
+            }
+
+            @Override
+            protected String doInBackground(String... strings) {
+                //http://sandbox.myexperiment.org/users
+                try {
+                    //for password protected urls use the user's credentials:new TavernaPlayerAPI(this.context).PLAYER_BASE_URL
+                    Authenticator.setDefault(new TavernaPlayerAPI.Authenticator("taverna", "taverna"));
+
+                    URL workflowurl = new URL(TavernaPlayerAPI.getSERVER_BASE_URL(this.context));
+                    HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
+                    String userpass = strings[0] + ":" + strings[1];
+                    String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
+                    //new String(Base64.encode(userpass.getBytes(),Base64.DEFAULT));
+
+                    connection.setRequestProperty ("Authorization", basicAuth);
+                    //       connection.setRequestProperty("Accept", "application/json");
+                    connection.setRequestMethod("GET");
+                    // connection.setDoInput(true);
+                    //  connection.setDoOutput(true);
+                    connection.connect(); //send request
+                    int responseCode = connection.getResponseCode();
+                    Log.i("RESPONSE Code", "" + responseCode);
+                    Log.i("RESPONSE Messsage", ""+connection.getResponseMessage());
+                    Log.i("Authorization ", ""+connection.getRequestProperty("Authorization"));
+
+                    InputStream dis = connection.getInputStream();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+                    StringBuffer sb = new StringBuffer();
+                    String jsonData = "";
+                    while((jsonData = br.readLine()) != null){
+                        sb.append(jsonData);
+                    }
+                    dis.close();
+                    br.close();
+                    return ""+responseCode;
+                } catch ( IOException e) {
+                    e.printStackTrace();
+                }
+                return "0";
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                Log.i("RESULTS", ""+s);
+                pd.dismiss();
+                if(TextUtils.isDigitsOnly(s) && Integer.parseInt(s) == 200) {
+                    this.context.startActivity(new Intent(this.context, DashboardMainActivity.class));
+                    getActivity().finish();
+                }else{
+                    Toast.makeText(this.context, "Invalid username or password",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
+
 }

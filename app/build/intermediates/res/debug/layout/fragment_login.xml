@@ -110,6 +110,12 @@ limitations under the License.
             android:drawableStart="@android:drawable/ic_secure"
             android:drawableLeft="@android:drawable/ic_secure"/>
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/keeplogin"
+            android:id="@+id/rememberCheckbox" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
