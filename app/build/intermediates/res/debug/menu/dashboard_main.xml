@@ -25,7 +25,7 @@ limitations under the License.
     <item android:id="@+id/action_search"
         android:title="@string/menu_search"
         android:icon="@android:drawable/ic_menu_search"
-        app:showAsAction="always|withText"
+        app:showAsAction="collapseActionView|always"
         app:actionViewClass="android.support.v7.widget.SearchView"/>
 </menu>
 <!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/menu/dashboard_main.xml -->

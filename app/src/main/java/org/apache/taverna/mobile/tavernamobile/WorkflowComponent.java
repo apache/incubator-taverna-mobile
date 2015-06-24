@@ -24,7 +24,8 @@ package org.apache.taverna.mobile.tavernamobile;
  * under the License.
  */
 /**
- * Created by root on 6/8/15.
+ * Created by Larry Akah on 6/8/15.
+ * the component elements that make up a workflow's dataflow (e.g. Taverna has sources, sinks, processors, links and coordinations)
  */
 public class WorkflowComponent {
 

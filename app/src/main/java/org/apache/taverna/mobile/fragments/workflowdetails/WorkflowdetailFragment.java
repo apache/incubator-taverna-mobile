@@ -170,7 +170,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().getLoaderManager().initLoader(0, null, this);
+        getActivity().getLoaderManager().initLoader(1, null, this);
 
     }
 
@@ -208,8 +208,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     }
 
     //create and return a new TextView
-    public TextView createTextView(Context mcontetx, String placeholder){
-        TextView tv = new TextView(mcontetx);
+    public TextView createTextView(Context mcontext, String placeholder){
+        TextView tv = new TextView(mcontext);
         tv.setText(placeholder);
         tv.setMinLines(2);
 

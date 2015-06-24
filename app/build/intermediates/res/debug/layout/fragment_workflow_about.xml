@@ -22,13 +22,11 @@ limitations under the License.
     android:layout_height="match_parent"
     tools:context="org.apache.taverna.mobile.fragments.workflowdetails.WorkflowAboutFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment"
         android:elevation="5sp"
         android:layout_margin="2dp"
-        android:background="@color/accent_material_dark"
         android:backgroundTintMode="screen"
         android:ellipsize="start"
         android:id="@+id/aboutworkflowTextView"
