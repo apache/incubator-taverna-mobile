@@ -23,29 +23,20 @@ package org.apache.taverna.mobile.utils;
  * specific language governing permissions and limitations
  * under the License.
  */
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
 import android.util.Log;
 
-import com.thebuzzmedia.sjxp.XMLParser;
-import com.thebuzzmedia.sjxp.rule.DefaultRule;
 import com.thebuzzmedia.sjxp.rule.IRule;
 
-import org.apache.taverna.mobile.adapters.WorkflowAdapter;
-import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParser;
+import org.apache.taverna.mobile.utils.xmlparsers.WorkflowParser;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -61,7 +52,6 @@ public class WorkflowLoader extends AsyncTask<Object, Object, Object>{ //Workflo
     private Context ctx;
     private List<Workflow> userWorkflows;
     public static List<Workflow> loadedWorkflows;
-    private RecyclerView recyclerView;
     private SwipeRefreshLayout refreshLayout;
 
   /*  public WorkflowLoader(Context context) {
@@ -71,9 +61,8 @@ public class WorkflowLoader extends AsyncTask<Object, Object, Object>{ //Workflo
         userWorkflows = new ArrayList<Workflow>();
     }*/
 
-    public WorkflowLoader(Context context, RecyclerView rc, SwipeRefreshLayout sw) {
+    public WorkflowLoader(Context context, SwipeRefreshLayout sw) {
         this.ctx = context;
-        this.recyclerView = rc;
         this.refreshLayout = sw;
         this.userWorkflows = new ArrayList<Workflow>();
         loadedWorkflows = new ArrayList<Workflow>();
@@ -134,7 +123,7 @@ public class WorkflowLoader extends AsyncTask<Object, Object, Object>{ //Workflo
         }*/
         IRule wkflowRule = new MyExperimentXmlParser.WorkflowRule(IRule.Type.ATTRIBUTE, "/workflows/workflow", "resource", "uri","id", "version");
         IRule workflowNameRule = new MyExperimentXmlParser.WorkflowRule(IRule.Type.CHARACTER, "/workflows/workflow");
-        WorkflowParser xmlParser = new WorkflowParser(new IRule[]{wkflowRule, workflowNameRule}, recyclerView, this.ctx);
+        WorkflowParser xmlParser = new WorkflowParser(new IRule[]{wkflowRule, workflowNameRule});
         try {
             URL workflowurl = new URL("http://www.myexperiment.org/workflows.xml");
             HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
@@ -146,7 +135,6 @@ public class WorkflowLoader extends AsyncTask<Object, Object, Object>{ //Workflo
 
             InputStream dis = connection.getInputStream();
             xmlParser.parse(dis, this.userWorkflows);
-            Thread.sleep(4000);//4sec delay so that parsing completes
 
         }catch (MalformedURLException e) {
             e.printStackTrace();
@@ -154,10 +142,7 @@ public class WorkflowLoader extends AsyncTask<Object, Object, Object>{ //Workflo
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
-       // return WorkflowLoader.loadedWorkflows;
         return this.userWorkflows;
     }
 
@@ -200,83 +185,5 @@ public class WorkflowLoader extends AsyncTask<Object, Object, Object>{ //Workflo
     protected void onPostExecute(Object o) {
         refreshLayout.setRefreshing(false);
         System.out.println("Workflow Count: "+this.userWorkflows.size());
-      //  recyclerView.setAdapter(new WorkflowAdapter(this.ctx, (List<Workflow>) o));
-    }
-
-    class WorkflowRule extends DefaultRule {
-        Workflow workflow;
-
-        /**
-         * Create a new rule with the given values.
-         *
-         * @param type           The type of the rule.
-         * @param locationPath   The location path of the element to target in the XML.
-         * @param attributeNames An optional list of attribute names to parse values for if the
-         *                       type of this rule is {@link com.thebuzzmedia.sjxp.rule.IRule.Type#ATTRIBUTE}.
-         * @throws IllegalArgumentException if <code>type</code> is <code>null</code>, if
-         *                                            <code>locationPath</code> is <code>null</code> or empty, if
-         *                                            <code>type</code> is {@link com.thebuzzmedia.sjxp.rule.IRule.Type#ATTRIBUTE} and
-         *                                            <code>attributeNames</code> is <code>null</code> or empty or
-         *                                            if <code>type</code> is {@link com.thebuzzmedia.sjxp.rule.IRule.Type#CHARACTER} and
-         *                                            <code>attributeNames</code> <strong>is not</strong>
-         *                                            <code>null</code> or empty.
-         */
-        public WorkflowRule(Type type, String locationPath, String... attributeNames) throws IllegalArgumentException {
-            super(type, locationPath, attributeNames);
-            workflow = new Workflow();
-        }
-        //instantiated to parse xml data for a given workflow
-        public WorkflowRule(Type type, String path, int id, String attributenames){
-            super(type,path,attributenames);
-        }
-
-        /**
-         * Default no-op implementation. Please override with your own logic.
-         *
-         * @param parser
-         * @param index
-         * @param value
-         * @param userObject
-         * @see com.thebuzzmedia.sjxp.rule.IRule#handleParsedAttribute(com.thebuzzmedia.sjxp.XMLParser, int, String, Object)
-         */
-        @Override
-        public void handleParsedAttribute(XMLParser parser, int index, String value, Object userObject) {
-            switch(index){
-                case 0:
-                    System.out.println("Workflow Resource: "+value);
-                    workflow.setWorkflow_web_url(value);
-                    workflow.setWorkflow_description("To view workflow on the web, click "+value);
-                    break;
-                case 1:
-                    System.out.println("Workflow uri: "+value); //uri for detailed workflow
-                    workflow.setWorkflow_remote_url(value);
-                    break;
-                case 2:
-                    System.out.println("Workflow id: "+value);
-                    workflow.setId(Integer.parseInt(value));
-                    break;
-                case 3:
-                    System.out.println("Workflow version: "+value);
-                    workflow.setWorkflow_versions(value);
-                    break;
-            }
-        }
-
-        /**
-         * Default no-op implementation. Please override with your own logic.
-         *
-         * @param parser
-         * @param text
-         * @param workflowListObject
-         * @see com.thebuzzmedia.sjxp.rule.IRule#handleParsedCharacters(com.thebuzzmedia.sjxp.XMLParser, String, Object)
-         */
-        @Override
-        public void handleParsedCharacters(XMLParser parser, String text, Object workflowListObject) {
-            //add the title to the workflow and add it to the workflow list
-            workflow.setWorkflow_title(text);
-            workflow.setWorkflow_author("");
-            workflow = new Workflow();
-            ((List<Workflow>)workflowListObject).add(workflow);
-        }
     }
 }

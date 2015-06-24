@@ -76,6 +76,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     public WorkflowAdapter(Context c){
         context = c;
         workflow = new ArrayList<Workflow>();
+        favDB = new Workflow_DB(context, WORKFLOW_FAVORITE_KEY);
     }
 
     @Override
@@ -115,10 +116,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         final Intent it = new Intent();
         it.setClass(context, WorkflowDetailActivity.class);
         it.putExtra("workflowid", workflow.get(i).getId());
-        /*it.putExtra("author", workflow.get(i).getWorkflow_author());
-        it.putExtra("title",title);
-        it.putExtra("description",desc_full);
-        it.putExtra("url", wkflow_url);*/
         WorkflowdetailFragment.WORKFLO_ID = workflow.get(i).getId();
 
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +128,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 ((Activity) context).overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.fade_out);
             }
         });
-        viewHolder.btn_download_workflow.setOnClickListener(new View.OnClickListener() {
+        /*viewHolder.btn_download_workflow.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -151,14 +148,15 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                     e.printStackTrace();
                 }
             }
-        });
+        });*/
         viewHolder.btn_mark_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean saved =  favDB.save();
-                if(saved)
-                    Toast.makeText(context,"Workflow marked as favorite",Toast.LENGTH_SHORT).show();
-                else
+                if(saved) {
+                    Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
+                    viewHolder.btn_mark_workflow.setCompoundDrawables(context.getResources().getDrawable(android.R.drawable.btn_star_big_on),null,null,null);
+                }else
                     Toast.makeText(context,"Error!, please try again",Toast.LENGTH_SHORT).show();
             }
         });

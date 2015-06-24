@@ -28,7 +28,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -36,7 +35,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,13 +44,11 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.adapters.WorkflowAdapter;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
-import org.apache.taverna.mobile.utils.WorkflowDataCallback;
 import org.apache.taverna.mobile.utils.WorkflowLoader;
 
 import java.util.ArrayList;
@@ -65,8 +61,7 @@ import java.util.List;
  * with a GridView.
  * <p/>
  */
-public class WorkflowItemFragment extends Fragment implements android.app.LoaderManager.LoaderCallbacks<List<Workflow>>,
-        SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
+public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -166,12 +161,6 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         rootView = null;
     }
 
-    /**
-     * Called when the fragment is visible to the user and actively running.
-     * This is generally
-     * tied to {@link android.app.Activity#onResume() Activity.onResume} of the containing
-     * Activity's lifecycle.
-     */
     @Override
     public void onResume() {
         super.onResume();
@@ -183,23 +172,10 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
             //Toast.makeText(getActivity(), "Query = " + query, Toast.LENGTH_SHORT).show();
             performSearch(workflowAdapter,query);
         }else*/
-        new WorkflowLoader(getActivity(),mListView,swipeRefreshLayout).execute();
+        new WorkflowLoader(getActivity(), swipeRefreshLayout).execute();
         //    getActivity().getLoaderManager().initLoader(0,null,this).forceLoad();
     }
 
-    /**
-     * Initialize the contents of the Activity's standard options menu.  You
-     * should place your menu items in to <var>menu</var>.  For this method
-     * to be called, you must have first called {@link #setHasOptionsMenu}.  See
-     * {@link android.app.Activity#onCreateOptionsMenu(android.view.Menu) Activity.onCreateOptionsMenu}
-     * for more information.
-     *
-     * @param menu     The options menu in which you place your items.
-     * @param inflater
-     * @see #setHasOptionsMenu
-     * @see #onPrepareOptionsMenu
-     * @see #onOptionsItemSelected
-     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -220,27 +196,10 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         }
     }
 
-    /**
-     * This hook is called whenever an item in your options menu is selected.
-     * The default implementation simply returns false to have the normal
-     * processing happen (calling the item's Runnable or sending a message to
-     * its Handler as appropriate).  You can use this method for any items
-     * for which you would like to do processing without those other
-     * facilities.
-     * <p/>
-     * <p>Derived classes should call through to the base class for it to
-     * perform the default menu handling.
-     *
-     * @param item The menu item that was selected.
-     * @return boolean Return false to allow normal menu processing to
-     * proceed, true to consume it here.
-     * @see #onCreateOptionsMenu
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getTitle().equals("Refresh")){
-            new WorkflowLoader(getActivity(), mListView, swipeRefreshLayout).execute();
-//            getActivity().getLoaderManager().restartLoader(0, null, this).forceLoad();
+            new WorkflowLoader(getActivity(),swipeRefreshLayout).execute();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -251,11 +210,6 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         super.onDetach();
     }
 
-    /**
-     * The default content for this Fragment has a TextView that is shown when
-     * the list is empty. If you would like to change the text, call this method
-     * to supply the text it should use.
-     */
     public void setEmptyText(CharSequence emptyText) {
         View emptyView = mListView.getChildAt(2);
 
@@ -271,42 +225,17 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         Log.i("Count", ""+wk.getItemCount());
         for(int i=0; i< wk.getItemCount(); i++) {
             Workflow workflow = wk.getItem(i);
-            if(search.toLowerCase().contains(workflow.getWorkflow_author().toLowerCase())
-                    || search.contains(workflow.getWorkflow_title().toLowerCase())){
+            if( search.contains(workflow.getWorkflow_title().toLowerCase())){
                 ladapter.addWorkflow(workflow);
             }
         }
-        mListView.swapAdapter(ladapter, true);
-       /// Toast.makeText(getActivity(), "Query = " + search, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public android.content.Loader<List<Workflow>> onCreateLoader(int id, Bundle args) {
-        swipeRefreshLayout.setRefreshing(true);
-        return null;
-        //return new WorkflowLoader(getActivity());
-    }
-
-    @Override
-    public void onLoadFinished(android.content.Loader<List<Workflow>> loader, List<Workflow> workflows) {
-        swipeRefreshLayout.setRefreshing(false);
-        Toast.makeText(getActivity(), "loader finished", Toast.LENGTH_SHORT).show();
-        workflowAdapter= new WorkflowAdapter(getActivity(), workflows);
-        WorkflowItemFragment.searchAdpater = workflowAdapter;
-        //mListView.swapAdapter(workflowAdapter, true);
-    }
-
-    @Override
-    public void onLoaderReset(android.content.Loader<List<Workflow>> listLoader) {
-        listLoader.reset();
-//        mListView.swapAdapter(null, true);
+        mListView.setAdapter(ladapter);
+//        mListView.swapAdapter(ladapter, true);
     }
 
     @Override
     public void onRefresh() {
-
-        new WorkflowLoader(getActivity(), mListView, swipeRefreshLayout).execute();
-        //getActivity().getLoaderManager().restartLoader(0, null, this).forceLoad();
+        new WorkflowLoader(getActivity(),swipeRefreshLayout).execute();
     }
 
     @Override
@@ -325,9 +254,9 @@ public class WorkflowItemFragment extends Fragment implements android.app.Loader
         ((Activity)cx).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                WorkflowItemFragment.mListView.setAdapter(new WorkflowAdapter(cx, data));
+                WorkflowItemFragment.searchAdpater = new WorkflowAdapter(cx,data);
+                WorkflowItemFragment.mListView.setAdapter(WorkflowItemFragment.searchAdpater);
             }
         });
-
     }
 }

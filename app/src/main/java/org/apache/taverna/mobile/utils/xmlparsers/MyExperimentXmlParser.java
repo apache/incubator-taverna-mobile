@@ -1,4 +1,4 @@
-package org.apache.taverna.mobile.utils;
+package org.apache.taverna.mobile.utils.xmlparsers;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
@@ -24,12 +24,11 @@ package org.apache.taverna.mobile.utils;
  * under the License.
  */
 
-import android.text.util.Linkify;
-
 import com.thebuzzmedia.sjxp.XMLParser;
 import com.thebuzzmedia.sjxp.rule.DefaultRule;
 
 import org.apache.taverna.mobile.tavernamobile.Workflow;
+import org.apache.taverna.mobile.utils.WorkflowLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,21 +94,7 @@ public class MyExperimentXmlParser {
         static String uri,version,desc;
         static String url=uri=version=desc="";
         static long id = 0;
-        /**
-         * Create a new rule with the given values.
-         *
-         * @param type           The type of the rule.
-         * @param locationPath   The location path of the element to target in the XML.
-         * @param attributeNames An optional list of attribute names to parse values for if the
-         *                       type of this rule is {@link com.thebuzzmedia.sjxp.rule.IRule.Type#ATTRIBUTE}.
-         * @throws IllegalArgumentException if <code>type</code> is <code>null</code>, if
-         *                                            <code>locationPath</code> is <code>null</code> or empty, if
-         *                                            <code>type</code> is {@link com.thebuzzmedia.sjxp.rule.IRule.Type#ATTRIBUTE} and
-         *                                            <code>attributeNames</code> is <code>null</code> or empty or
-         *                                            if <code>type</code> is {@link com.thebuzzmedia.sjxp.rule.IRule.Type#CHARACTER} and
-         *                                            <code>attributeNames</code> <strong>is not</strong>
-         *                                            <code>null</code> or empty.
-         */
+
         public WorkflowRule(Type type, String locationPath, String... attributeNames) throws IllegalArgumentException {
             super(type, locationPath, attributeNames);
             this.workflow = new Workflow();
@@ -127,31 +112,25 @@ public class MyExperimentXmlParser {
                 case 0:
                     System.out.println("Workflow Resource: "+value); url = value;
                     desc = "To view workflow on the web, click "+value;
-//                    this.workflow.setWorkflow_web_url(value);
-//                    this.workflow.setWorkflow_description("To view workflow on the web, click "+value);
                     break;
                 case 1:
-                    System.out.println("Workflow uri: "+value); //uri for detailed workflow
+                    System.out.println("Workflow uri: "+value);
                     uri = value;
-//                    this.workflow.setWorkflow_remote_url(value);
                     break;
                 case 2:
                     System.out.println("Workflow id: "+value);
                     id = Integer.parseInt(value);
-//                    this.workflow.setId(Integer.parseInt(value));
                     break;
                 case 3:
                     System.out.println("Workflow version: "+value);
                     version = value;
-               //     this.workflow.setWorkflow_versions(value);
                     break;
             }
-
         }
 
         @Override
         public void handleParsedCharacters(XMLParser parser, String text, Object workflowListObject) {
-            //add the title to the workflow and add it to the workflow list
+            //add the  workflow to the workflow list
             this.workflow = new Workflow("", desc, id, url);
             this.workflow.setWorkflow_title(text);
             this.workflow.setWorkflow_author("");
@@ -160,7 +139,6 @@ public class MyExperimentXmlParser {
             System.out.println("static Workflow Count: " + WorkflowLoader.loadedWorkflows.size());
             ((List<Workflow>)workflowListObject).add(this.workflow);
             this.workflow = null;
-
         }
 
     }
