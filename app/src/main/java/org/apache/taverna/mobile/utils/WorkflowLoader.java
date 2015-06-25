@@ -23,26 +23,23 @@ package org.apache.taverna.mobile.utils;
  * specific language governing permissions and limitations
  * under the License.
  */
-import android.app.Activity;
-import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Base64;
 import android.util.Log;
 
-import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
-import org.apache.taverna.mobile.tavernamobile.Workflow;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.thebuzzmedia.sjxp.rule.IRule;
 
-import java.io.BufferedReader;
+import org.apache.taverna.mobile.tavernamobile.Workflow;
+import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParser;
+import org.apache.taverna.mobile.utils.xmlparsers.WorkflowParser;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,28 +47,44 @@ import java.util.List;
 /**
  * Created by Larry Akah on 6/13/15.
  */
-public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
+public class WorkflowLoader extends AsyncTask<Object, Object, Object>{ //WorkflowLoaderMain {
 
     private Context ctx;
     private List<Workflow> userWorkflows;
+    public static List<Workflow> loadedWorkflows;
+    private SwipeRefreshLayout refreshLayout;
 
-    public WorkflowLoader(Context context) {
+  /*  public WorkflowLoader(Context context) {
         super(context);
         ctx = context;
+        loadedWorkflows = new ArrayList<Workflow>();
+        userWorkflows = new ArrayList<Workflow>();
+    }*/
+
+    public WorkflowLoader(Context context, SwipeRefreshLayout sw) {
+        this.ctx = context;
+        this.refreshLayout = sw;
+        this.userWorkflows = new ArrayList<Workflow>();
+        loadedWorkflows = new ArrayList<Workflow>();
     }
 
     @Override
-    public List<Workflow> loadInBackground() {
-         userWorkflows = new ArrayList<Workflow>();
+    protected void onPreExecute() {
+        super.onPreExecute();
+        refreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public List<Workflow> doInBackground(Object[] objects) {
         //start a network request to fetch user's workflows
-        try {
+        /*try {
             //for password protected urls use the user's credentials
-            Authenticator.setDefault(new TavernaPlayerAPI.Authenticator("taverna","taverna"));
+            //Authenticator.setDefault(new TavernaPlayerAPI.Authenticator("taverna","taverna"));
 
             URL workflowurl = new URL(new TavernaPlayerAPI(ctx).PLAYER_WORKFLOW_URL);
             HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
             String userpass = "icep603@gmail.com" + ":" + "creationfox";
-            String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(),Base64.DEFAULT);
+            String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
             //new String(Base64.encode(userpass.getBytes(),Base64.DEFAULT));
 
             connection.setRequestProperty ("Authorization", basicAuth);
@@ -104,14 +117,36 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
                 long id = js.getLong("id");
                 userWorkflows.add(new Workflow(ctx,title,">"+authorJson.getString("name"),description,id,url));
             }
-
+            return userWorkflows;
         } catch (JSONException | IOException e) {
             e.printStackTrace();
-        }
+        }*/
+        IRule wkflowRule = new MyExperimentXmlParser.WorkflowRule(IRule.Type.ATTRIBUTE, "/workflows/workflow", "resource", "uri","id", "version");
+        IRule workflowNameRule = new MyExperimentXmlParser.WorkflowRule(IRule.Type.CHARACTER, "/workflows/workflow");
+        WorkflowParser xmlParser = new WorkflowParser(new IRule[]{wkflowRule, workflowNameRule});
+        try {
+            URL workflowurl = new URL("http://www.myexperiment.org/workflows.xml");
+            HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
+            connection.setRequestMethod("GET");
+            connection.connect(); //send request
 
-        return userWorkflows;
+            Log.i("RESPONSE Code", ""+connection.getResponseCode());
+            Log.i("RESPONSE Messsage", ""+connection.getResponseMessage());
+
+            InputStream dis = connection.getInputStream();
+            xmlParser.parse(dis, this.userWorkflows);
+
+        }catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return this.userWorkflows;
     }
 
+/*
     @Override
     public void onCanceled(List<Workflow> data) {
         super.onCanceled(data);
@@ -125,7 +160,6 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
     @Override
     protected void onStartLoading() {
         //if there is data available, deliver it at once
-        ((Activity)ctx).setProgressBarIndeterminateVisibility(true);
         if(userWorkflows != null)
             deliverResult(userWorkflows);
         else{
@@ -137,6 +171,7 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
     public void deliverResult(List<Workflow> data) {
         if(isStarted()){
             super.deliverResult(data);
+
         }
     }
 
@@ -144,5 +179,11 @@ public class WorkflowLoader extends AsyncTaskLoader<List<Workflow>> {
     protected void onStopLoading() {
         cancelLoad();
     }
+*/
 
+    @Override
+    protected void onPostExecute(Object o) {
+        refreshLayout.setRefreshing(false);
+        System.out.println("Workflow Count: "+this.userWorkflows.size());
+    }
 }

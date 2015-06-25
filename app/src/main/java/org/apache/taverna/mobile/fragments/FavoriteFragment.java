@@ -25,31 +25,32 @@ package org.apache.taverna.mobile.fragments;
 * under the License.
 */
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.adapters.FavoriteWorkflowAdapter;
+import org.apache.taverna.mobile.adapters.WorkflowAdapter;
+import org.apache.taverna.mobile.utils.Workflow_DB;
+import org.json.JSONException;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Larry Akah on 6/6/15.
  */
-public class FavoriteFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateContextMenuListener, RecyclerView.OnClickListener{
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -57,7 +58,8 @@ public class FavoriteFragment extends Fragment implements AdapterView.OnItemClic
     private static final String ARG_SECTION_NUMBER = "SECTION_NUMBER";
     private FavoriteWorkflowAdapter favoriteAdapter;
     private RecyclerView wFavoriteListView;
-    private FavoriteItemSelected favItemListener;
+   // private FavoriteItemSelected favItemListener;
+    public Workflow_DB myWorkflowDb;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -77,27 +79,17 @@ public class FavoriteFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
-        //TODO : Collect data through  API (ICEBASE)
-        //create a sample list of data. future data come s from an API on local storage
-        List<String[]> sampledata = new ArrayList<String[]>();
-               sampledata.add(new String[]{"Larry", "Prokaryotic symbiosis",
-                       new SimpleDateFormat().format(new Date()),
-                       new SimpleDateFormat().format(new Date()),
-                       new SimpleDateFormat().format(new Date()),
-                       new SimpleDateFormat().format(new Date())});
-        sampledata.add(new String[]{"Meeze Ball", "Fluid Traffic analysis",
-                new SimpleDateFormat().format(new Date()),
-                new SimpleDateFormat().format(new Date()),
-                new SimpleDateFormat().format(new Date()),
-                new SimpleDateFormat().format(new Date())});
-        sampledata.add(new String[]{"Halway Law", "Photosynthetic tissue disengagement",
-                new SimpleDateFormat().format(new Date()),
-                new SimpleDateFormat().format(new Date()),
-                new SimpleDateFormat().format(new Date()),
-                new SimpleDateFormat().format(new Date())});
-
-        favoriteAdapter = new FavoriteWorkflowAdapter(getActivity(), sampledata);
+        myWorkflowDb = new Workflow_DB(getActivity(), WorkflowAdapter.WORKFLOW_FAVORITE_KEY);
+//TODO Add support for loading all the favorites and adding to the required list
+      //  try {
+         //   List<ArrayList<Object>> mydata = myWorkflowDb.get();
+         //   ArrayList<Object> m = mydata.get(0);
+            List<String[]> sampledata = new ArrayList<String[]>();
+            sampledata.add(new String[]{"test fav","test data", "test"});//new String[]{(String) m.get(1), (String) m.get(2)});
+            favoriteAdapter = new FavoriteWorkflowAdapter(getActivity(), sampledata);
+   //     } catch (JSONException e) {
+   //         e.printStackTrace();
+       // }
     }
 
     @Override
@@ -112,16 +104,81 @@ public class FavoriteFragment extends Fragment implements AdapterView.OnItemClic
         return rootView;
     }
 
+    /**
+     * Called when a context menu for the {@code view} is about to be shown.
+     * Unlike {@link #onCreateOptionsMenu}, this will be called every
+     * time the context menu is about to be shown and should be populated for
+     * the view (or item inside the view for {@link android.widget.AdapterView} subclasses,
+     * this can be found in the {@code menuInfo})).
+     * <p/>
+     * Use {@link #onContextItemSelected(android.view.MenuItem)} to know when an
+     * item has been selected.
+     * <p/>
+     * The default implementation calls up to
+     * {@link android.app.Activity#onCreateContextMenu Activity.onCreateContextMenu}, though
+     * you can not call this implementation if you don't want that behavior.
+     * <p/>
+     * It is not safe to hold onto the context menu after this method returns.
+     * {@inheritDoc}
+     *
+     * @param menu
+     * @param v
+     * @param menuInfo
+     */
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            favItemListener = (FavoriteItemSelected) activity;
-            ((DashboardMainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }catch (ClassCastException ex){
-            ex.printStackTrace();
-        }
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add("Select");
+        menu.add("Comment ...");
+        menu.add("Delete");
+        menu.setHeaderIcon(R.mipmap.ic_launcher);
+    }
+
+    /**
+     * This hook is called whenever an item in a context menu is selected. The
+     * default implementation simply returns false to have the normal processing
+     * happen (calling the item's Runnable or sending a message to its Handler
+     * as appropriate). You can use this method for any items for which you
+     * would like to do processing without those other facilities.
+     * <p/>
+     * Use {@link android.view.MenuItem#getMenuInfo()} to get extra information set by the
+     * View that added this menu item.
+     * <p/>
+     * Derived classes should call through to the base class for it to perform
+     * the default menu handling.
+     *
+     * @param item The context menu item that was selected.
+     * @return boolean Return false to allow normal context menu processing to
+     * proceed, true to consume it here.
+     */
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        String title = (String) item.getTitle();
+        if(title.equals("Select")){
+            Toast.makeText(getActivity(),"Selected", Toast.LENGTH_SHORT).show();
+            return true;
+        }else if (title.equals("Comment ...")){
+            Toast.makeText(getActivity(),"Commenting", Toast.LENGTH_SHORT).show();
+            return true;
+        }else if (title.equals("Delete")){
+            Toast.makeText(getActivity(),"Deleted", Toast.LENGTH_SHORT).show();
+            return true;
+        }else
+            return super.onContextItemSelected(item);
+    }
+
+    /**
+     * Called when the fragment is visible to the user and actively running.
+     * This is generally
+     * tied to {@link android.app.Activity#onResume() Activity.onResume} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+//        wFavoriteListView.setKeepScreenOn();
+        wFavoriteListView.setOnClickListener(this);
+        registerForContextMenu(wFavoriteListView);
     }
 
     /**
@@ -131,12 +188,6 @@ public class FavoriteFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onDetach() {
         super.onDetach();
-        favItemListener = null;
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        favItemListener.onFavoriteItemSelected(i);
     }
 
     /**
@@ -149,8 +200,8 @@ public class FavoriteFragment extends Fragment implements AdapterView.OnItemClic
         }
     }
 
-    public interface FavoriteItemSelected{
-        //implemented by activity when sending click events to this fragments views
-        public void onFavoriteItemSelected(int position);
+    @Override
+    public void onClick(View view) {
+        Toast.makeText(getActivity(),"Clicked", Toast.LENGTH_SHORT).show();
     }
 }

@@ -50,7 +50,8 @@ limitations under the License.
         </activity>
         <activity
             android:name="org.apache.taverna.mobile.activities.DashboardMainActivity"
-            android:label="@string/title_activity_dashboard_main" >
+            android:label="@string/title_activity_dashboard_main"
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

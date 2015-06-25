@@ -31,6 +31,7 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.util.Linkify;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,13 +58,13 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by root on 6/8/15.
+ * Created by Larry Akah on 6/8/15.
  */
-public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHolder> implements View.OnClickListener{
+public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHolder>{
     private Context context;
-    private List<Workflow> workflow;
+    private List<Workflow> workflow; //workflow data to bind to the UI
     private WorkflowAdapter.ViewHolder mViewHolder;
-    public static final String WORKFLOW_FAVORITE_KEY = "WORKFLOW_FAVORITES";
+    public static final String WORKFLOW_FAVORITE_KEY = "WORKFLOW_FAVORITES"; //workflow key used to save workflows when marked as favorites
     public Workflow_DB favDB;
 
     public WorkflowAdapter(Context c, List<Workflow> wk) {
@@ -75,6 +76,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     public WorkflowAdapter(Context c){
         context = c;
         workflow = new ArrayList<Workflow>();
+        favDB = new Workflow_DB(context, WORKFLOW_FAVORITE_KEY);
     }
 
     @Override
@@ -105,18 +107,15 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         //save current workflow as favorite
             mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full); mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
 
-        if(description.length() > 80) description = description.substring(0, 79);
+//        if(description.length() > 80) description = description.substring(0, 79);
         viewHolder.author_name.setText(author);
         viewHolder.wk_title.setText(title);
         viewHolder.wk_description.setText( description+" ... ");
+        Linkify.addLinks(viewHolder.wk_description, Linkify.WEB_URLS);
         final String wkflow_url = workflow.get(j).getWorkflow_remote_url();
         final Intent it = new Intent();
         it.setClass(context, WorkflowDetailActivity.class);
         it.putExtra("workflowid", workflow.get(i).getId());
-        it.putExtra("author", workflow.get(i).getWorkflow_author());
-        it.putExtra("title",title);
-        it.putExtra("description",desc_full);
-        it.putExtra("url", wkflow_url);
         WorkflowdetailFragment.WORKFLO_ID = workflow.get(i).getId();
 
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +128,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 ((Activity) context).overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.fade_out);
             }
         });
-        viewHolder.btn_download_workflow.setOnClickListener(new View.OnClickListener() {
+        /*viewHolder.btn_download_workflow.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -149,14 +148,15 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                     e.printStackTrace();
                 }
             }
-        });
+        });*/
         viewHolder.btn_mark_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean saved =  favDB.save();
-                if(saved)
-                    Toast.makeText(context,"Workflow marked as favorite",Toast.LENGTH_SHORT).show();
-                else
+                if(saved) {
+                    Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
+                    viewHolder.btn_mark_workflow.setCompoundDrawables(context.getResources().getDrawable(android.R.drawable.btn_star_big_on),null,null,null);
+                }else
                     Toast.makeText(context,"Error!, please try again",Toast.LENGTH_SHORT).show();
             }
         });
@@ -177,6 +177,9 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         }
     }
 
+    public void setData(List<Workflow> workflowList){
+        this.workflow = workflowList;
+    }
     @Override
     public long getItemId(int i) {
         return workflow.get(i).getId();
@@ -193,13 +196,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
 
     public void addWorkflow(Workflow wk){
         workflow.add(wk);
-    }
-
-    @Override
-    public void onClick(View view) {
-        int i = view.getId();
-        if (i == R.id.button_mark_workflow) {
-        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

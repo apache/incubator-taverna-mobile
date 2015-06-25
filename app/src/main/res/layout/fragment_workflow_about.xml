@@ -27,7 +27,6 @@ limitations under the License.
         android:text="@string/hello_blank_fragment"
         android:elevation="5sp"
         android:layout_margin="2dp"
-        android:background="@color/accent_material_dark"
         android:backgroundTintMode="screen"
         android:ellipsize="start"
         android:id="@+id/aboutworkflowTextView"

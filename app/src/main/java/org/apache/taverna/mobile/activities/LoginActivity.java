@@ -25,6 +25,7 @@ package org.apache.taverna.mobile.activities;
 * under the License.
 */
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -48,7 +49,9 @@ import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
+import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
+import org.apache.taverna.mobile.utils.HttpUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -134,6 +137,7 @@ public class LoginActivity extends ActionBarActivity {
 
             }
         }
+
         private class LoginTask extends AsyncTask<String, Void, String>{
             private Context context;
             private ProgressDialog pd;
@@ -147,59 +151,62 @@ public class LoginActivity extends ActionBarActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                pd.setCancelable(false);
                 pd.show();
             }
 
             @Override
             protected String doInBackground(String... strings) {
                 //http://sandbox.myexperiment.org/users
-                try {
-                    //for password protected urls use the user's credentials:new TavernaPlayerAPI(this.context).PLAYER_BASE_URL
-                    Authenticator.setDefault(new TavernaPlayerAPI.Authenticator("taverna", "taverna"));
 
-                    URL workflowurl = new URL(TavernaPlayerAPI.getSERVER_BASE_URL(this.context));
-                    HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
-                    String userpass = strings[0] + ":" + strings[1];
-                    String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
-                    //new String(Base64.encode(userpass.getBytes(),Base64.DEFAULT));
+                String whoAmI = "http://www.myexperiment.org/whoami.xml";
+                Object response = null;
+                String responseMessage = null;
+                User loggedUser;
 
-                    connection.setRequestProperty ("Authorization", basicAuth);
-                    //       connection.setRequestProperty("Accept", "application/json");
-                    connection.setRequestMethod("GET");
-                    // connection.setDoInput(true);
-                    //  connection.setDoOutput(true);
-                    connection.connect(); //send request
-                    int responseCode = connection.getResponseCode();
-                    Log.i("RESPONSE Code", "" + responseCode);
-                    Log.i("RESPONSE Messsage", ""+connection.getResponseMessage());
-                    Log.i("Authorization ", ""+connection.getRequestProperty("Authorization"));
+                response = new HttpUtil().doGetRequestResponse(whoAmI, User.class,strings[0], strings[1]);
+                if(response instanceof User){
+                    //user is successfully authenticated
+                    loggedUser = (User) response;
+                    //TODO save login state at this level,
 
-                    InputStream dis = connection.getInputStream();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(dis));
-                    StringBuffer sb = new StringBuffer();
-                    String jsonData = "";
-                    while((jsonData = br.readLine()) != null){
-                        sb.append(jsonData);
+                    //TODO set any cookies necessary
+
+                    //TODO save remember user login at this level
+
+                }else{
+                    if (response instanceof String){
+                        responseMessage = (String) response;
+                        if (responseMessage.equals("Unauthorized request")) {
+                            responseMessage = "Invalid username or password";
+                        }
                     }
-                    dis.close();
-                    br.close();
-                    return ""+responseCode;
-                } catch ( IOException e) {
-                    e.printStackTrace();
                 }
-                return "0";
+                return responseMessage;
             }
 
             @Override
-            protected void onPostExecute(String s) {
-                Log.i("RESULTS", ""+s);
+            protected void onPostExecute(String response) {
+                Log.i("RESULTS", ""+response);
                 pd.dismiss();
-                if(TextUtils.isDigitsOnly(s) && Integer.parseInt(s) == 200) {
-                    this.context.startActivity(new Intent(this.context, DashboardMainActivity.class));
-                    getActivity().finish();
+                String responseMessage = response;
+                if(responseMessage != null) {
+                    if (responseMessage.equals("Unauthorized request")) {
+                        responseMessage = "Invalid username or password";
+                        Toast.makeText(this.context, responseMessage, Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(this.context, responseMessage, Toast.LENGTH_SHORT).show();
+                    }
                 }else{
-                    Toast.makeText(this.context, "Invalid username or password",Toast.LENGTH_SHORT).show();
+                    //TODO: save user profile at this stage
+
+                    this.context.startActivity(new Intent(this.context, DashboardMainActivity.class));
+                    getActivity().overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
+                    getActivity().finish();
                 }
+                this.context.startActivity(new Intent(this.context, DashboardMainActivity.class));
+                getActivity().overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
+                getActivity().finish();
             }
         }
     }
