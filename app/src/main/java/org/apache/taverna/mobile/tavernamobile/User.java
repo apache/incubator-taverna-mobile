@@ -56,6 +56,7 @@ public class User {
     protected String country;
     @Element(required = false)
     protected String website;
+    protected String details_uri;
 
     protected List<Workflow> user_workflows; //a list of workflows owned by this user
 
@@ -69,6 +70,14 @@ public class User {
 
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
+    }
+
+    public String getDetails_uri() {
+        return this.details_uri;
+    }
+
+    public void setDetails_uri(String details_uri) {
+        this.details_uri = details_uri;
     }
 
     public String getName() {

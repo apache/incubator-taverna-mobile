@@ -23,7 +23,8 @@ limitations under the License.
     android:layout_height="match_parent"
     tools:context="org.apache.taverna.mobile.activities.WorkflowDetailActivity$PlaceholderFragment"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:background="@color/button_material_light">
 
     <TextView android:id="@+id/wkf_author"
         android:layout_width="match_parent"
@@ -74,7 +75,8 @@ limitations under the License.
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/wdescription"
                 android:layout_marginTop="5dp"
-                android:minLines="3" />
+                android:minLines="3"
+                android:hint="@string/description" />
 
             <ImageView
                 android:layout_width="match_parent"

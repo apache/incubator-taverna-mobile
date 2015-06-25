@@ -33,6 +33,9 @@ limitations under the License.
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/button_material_light"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="insideOverlay"
+            android:fadeScrollbars="true"
             ></android.support.v7.widget.RecyclerView>
        <!-- </GridView>-->
 </android.support.v4.widget.SwipeRefreshLayout>

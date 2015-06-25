@@ -26,7 +26,6 @@ package org.apache.taverna.mobile.utils;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.thebuzzmedia.sjxp.rule.IRule;
@@ -184,6 +183,6 @@ public class WorkflowLoader extends AsyncTask<Object, Object, Object>{ //Workflo
     @Override
     protected void onPostExecute(Object o) {
         refreshLayout.setRefreshing(false);
-        System.out.println("Workflow Count: "+this.userWorkflows.size());
+//        System.out.println("Workflow Count: "+this.userWorkflows.size());
     }
 }

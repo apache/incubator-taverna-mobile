@@ -101,6 +101,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         final String author = workflow.get(i).getWorkflow_author();
         final String title = workflow.get(i).getWorkflow_title();
         String description  = workflow.get(i).getWorkflow_description();
+        String uri = workflow.get(i).getWorkflow_details_url();
         final String desc_full = description;
         ArrayList<Object> mfav = new ArrayList<Object>();
 
@@ -115,7 +116,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         final String wkflow_url = workflow.get(j).getWorkflow_remote_url();
         final Intent it = new Intent();
         it.setClass(context, WorkflowDetailActivity.class);
-        it.putExtra("workflowid", workflow.get(i).getId());
+//        it.putExtra("workflowid", workflow.get(i).getId());
+        it.putExtra("uri",uri);
         WorkflowdetailFragment.WORKFLO_ID = workflow.get(i).getId();
 
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {

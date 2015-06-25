@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Larry Akah on 6/24/15.
  */
 
-public class WorkflowParser extends XMLParser implements WorkflowDataCallback {
+public class WorkflowParser extends XMLParser {
 
     public WorkflowParser(IRule[] rules) throws IllegalArgumentException, XMLParserException {
         super(rules);
@@ -24,12 +24,5 @@ public class WorkflowParser extends XMLParser implements WorkflowDataCallback {
     @Override
     protected void doEndDocument(Object userObject) {
         WorkflowItemFragment.updateWorkflowUI((List<Workflow>) userObject);
-    }
-
-    @Override
-    public void onWorkflowDataReady(List<Workflow> data) {
-        for(Workflow w:data){
-            System.out.println(w.getId());
-        }
     }
 }
