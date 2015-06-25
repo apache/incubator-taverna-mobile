@@ -114,7 +114,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
         mRecyclerView = (RecyclerView) rootView.findViewById(android.R.id.list);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        getActivity().getLoaderManager().initLoader(1,savedInstanceState,this);
+  //      getActivity().getLoaderManager().initLoader(1,savedInstanceState,this);
         return rootView;
     }
 
@@ -142,7 +142,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
         progressDialog.show();
         return new DetailsLoader(getActivity(),
                 DetailsLoader.LOAD_TYPE.TYPE_RUN_HISTORY,
-                workflowID);
+                ""+workflowID);
     }
 
     @Override

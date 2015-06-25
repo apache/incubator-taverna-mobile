@@ -70,6 +70,7 @@ limitations under the License.
     <string name="detail_title_section3">Licence | Policy</string>
     <string name="detail_title_section4"> About </string>
     <string name="play_workflow">Create Run</string>
+    <string name="err_workflow_conn">Unable to fetch latest workflows. Please check your network connectivity</string>
     
     <string name="downloadfailed">Download Failed. Please try again</string>
     <string name="downloadprogress">Workflow download in progress</string>

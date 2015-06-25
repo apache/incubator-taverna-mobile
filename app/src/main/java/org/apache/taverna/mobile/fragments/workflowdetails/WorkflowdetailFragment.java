@@ -34,6 +34,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -85,12 +87,13 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
     private DownloadManager downloadManager;
-    View rootView;
-    private ProgressDialog progressDialog;
+    static View rootView;
+    private static ProgressDialog progressDialog;
     public AlertDialog runDialog;
     public AlertDialog.Builder alertDialogBuilder;
-    private String download_url;
+    private static String download_url;
     public static long WORKFLO_ID;
+    public static Context cont;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -114,7 +117,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         rootView = inflater.inflate(R.layout.fragment_workflow_detail, container, false);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
-        progressDialog.setCancelable(true);
+        progressDialog.setCancelable(false);
         WORKFLO_ID = workflowid;
 
         Button createRun = (Button) rootView.findViewById(R.id.run_wk);
@@ -134,6 +137,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        cont = getActivity();
     }
 
     @Override
@@ -170,22 +174,21 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().getLoaderManager().initLoader(1, null, this);
+        getActivity().getLoaderManager().initLoader(1, null, this).forceLoad();
 
     }
 
     @Override
     public Loader<Workflow> onCreateLoader(int i, Bundle bundle) {
-       // progressDialog = ProgressDialog.show(getActivity(),"",getActivity().getResources().getString(R.string.loading));
-        progressDialog.show();
+
         return new DetailsLoader(getActivity(),
                 DetailsLoader.LOAD_TYPE.TYPE_WORKFLOW_DETAIL,
-                getActivity().getIntent().getLongExtra("workflowid", 0));
+                getActivity().getIntent().getStringExtra("uri"));
     }
 
     @Override
     public void onLoadFinished(Loader<Workflow> workflowLoader, Workflow workflow) {
-        TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
+       /* TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
             author.append("->" + workflow.getWorkflow_author());
         TextView title = (TextView) rootView.findViewById(R.id.wtitle);
             title.setText(workflow.getWorkflow_title());
@@ -199,7 +202,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
           //  preview.setImageURI(Uri.parse(workflow.getWorkflow_remote_url()));
         download_url =workflow.getWorkflow_remote_url();
       //  progressDialog.cancel();
-        progressDialog.dismiss();
+     */  // progressDialog.dismiss();
     }
 
     @Override
@@ -207,6 +210,29 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         workflowLoader.reset();
     }
 
+    public static void setWorkflowDetails(final Workflow wk){
+        ((Activity)cont).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //update UI with code here
+                TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
+                author.append("->" + wk.getWorkflow_author());
+                TextView title = (TextView) rootView.findViewById(R.id.wtitle);
+                title.setText(wk.getWorkflow_title());
+                TextView desc = (TextView) rootView.findViewById(R.id.wdescription);
+                desc.setText(wk.getWorkflow_description());
+                TextView createdat = (TextView) rootView.findViewById(R.id.wcreatedat);
+                createdat.setText("Created : " + wk.getWorkflow_datecreated());
+                TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
+                updated.setText(wk.getWorkflow_datemodified() + wk.getWorkflow_remote_url());
+                    ImageView preview = (ImageView) rootView.findViewById(R.id.wkf_image);
+                  preview.setImageURI(Uri.parse("http://www.myexperiment.org/workflows/5/versions/2/previews/full"));
+                download_url =wk.getWorkflow_remote_url();
+
+              //  progressDialog.dismiss();
+            }
+        });
+    }
     //create and return a new TextView
     public TextView createTextView(Context mcontext, String placeholder){
         TextView tv = new TextView(mcontext);

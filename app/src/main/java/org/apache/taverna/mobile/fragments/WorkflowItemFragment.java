@@ -44,6 +44,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
@@ -217,10 +218,10 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             ((TextView) emptyView).setText(emptyText);
         }
     }
-
+//handle a request to query for given workflows
     private void performSearch(String search){
         WorkflowAdapter ladapter = new WorkflowAdapter(getActivity());
-        WorkflowAdapter wk = WorkflowItemFragment.searchAdpater;//workflowAdapter;
+        WorkflowAdapter wk = (WorkflowAdapter) mListView.getAdapter();//workflowAdapter;
 
         if(null != wk)
         for(int i=0; i< wk.getItemCount(); i++) {
@@ -229,8 +230,12 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                 ladapter.addWorkflow(workflow);
             }
         }
-        mListView.setAdapter(ladapter);
-//        mListView.swapAdapter(ladapter, true);
+        else{
+            Toast.makeText(getActivity(),"No workflows found matching criteria", Toast.LENGTH_SHORT).show();
+        }
+        mListView.swapAdapter(ladapter, true);
+        if(ladapter.getItemCount()==0)
+            Toast.makeText(getActivity(),"No workflows found matching criteria", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -238,6 +243,11 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         new WorkflowLoader(getActivity(),swipeRefreshLayout).execute();
     }
 
+    /**
+     * Search action triggered, handle the search request. Filter the workflows by name/title and swap current adapter with the new adapter
+     * @param query Search string criteria
+     * @return whether or not user handled request 'manually'
+     */
     @Override
     public boolean onQueryTextSubmit(String query) {
         performSearch(query);
@@ -256,6 +266,9 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             public void run() {
                 WorkflowItemFragment.searchAdpater = new WorkflowAdapter(cx,data);
                 WorkflowItemFragment.mListView.setAdapter(WorkflowItemFragment.searchAdpater);
+                if(data.size() == 0){
+                    Toast.makeText(cx, cx.getResources().getString(R.string.err_workflow_conn), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
