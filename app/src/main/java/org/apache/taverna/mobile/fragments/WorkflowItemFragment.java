@@ -222,7 +222,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         WorkflowAdapter ladapter = new WorkflowAdapter(getActivity());
         WorkflowAdapter wk = WorkflowItemFragment.searchAdpater;//workflowAdapter;
 
-        Log.i("Count", ""+wk.getItemCount());
+        if(null != wk)
         for(int i=0; i< wk.getItemCount(); i++) {
             Workflow workflow = wk.getItem(i);
             if( search.contains(workflow.getWorkflow_title().toLowerCase())){
