@@ -256,7 +256,8 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
 
     @Override
     public boolean onQueryTextChange(String s) {
-        return false;
+        performSearch(s);
+        return true;
     }
 
     public static void updateWorkflowUI(final List<Workflow> data) {
@@ -269,6 +270,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                 if(data.size() == 0){
                     Toast.makeText(cx, cx.getResources().getString(R.string.err_workflow_conn), Toast.LENGTH_LONG).show();
                 }
+                System.out.println("workflows: "+data.size());
             }
         });
     }
