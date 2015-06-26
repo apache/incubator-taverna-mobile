@@ -221,17 +221,17 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
 //handle a request to query for given workflows
     private void performSearch(String search){
         WorkflowAdapter ladapter = new WorkflowAdapter(getActivity());
-        WorkflowAdapter wk = (WorkflowAdapter) mListView.getAdapter();//workflowAdapter;
+        WorkflowAdapter wk = searchAdpater;//workflowAdapter;
 
         if(null != wk)
         for(int i=0; i< wk.getItemCount(); i++) {
             Workflow workflow = wk.getItem(i);
-            if( search.contains(workflow.getWorkflow_title().toLowerCase())){
+            if( workflow.getWorkflow_title().toLowerCase().contains(search.toLowerCase())){
                 ladapter.addWorkflow(workflow);
             }
         }
         else{
-            Toast.makeText(getActivity(),"No workflows found matching criteria", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"No workflows available", Toast.LENGTH_SHORT).show();
         }
         mListView.swapAdapter(ladapter, true);
         if(ladapter.getItemCount()==0)

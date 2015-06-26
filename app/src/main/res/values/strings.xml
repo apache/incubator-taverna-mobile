@@ -77,7 +77,7 @@ limitations under the License.
     <string name="downloaderror">Unable to start Download. Check your internet connectivity</string>
     <string name="downloadduplicate">Already Downloading</string>
     <string name="downloadcomplete">  download complete</string>
-    <string name="seemore"> See more &amp;raquo</string>
+    <string name="seemore"> More Info &amp;raquo</string>
     <string name="loading">Loading details</string>
     <string name="loadworkflows">Loading Workflows</string>
     <string name="fetchrun">Fetching run components </string>

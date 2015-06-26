@@ -122,10 +122,12 @@ limitations under the License.
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/tavernalogo"
-            android:contentDescription="@string/workflow_component" />
+            android:contentDescription="@string/workflow_component"
+            android:visibility="gone" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
             <Button
                 android:id="@+id/button_view_workflow"
                 android:layout_width="wrap_content"
