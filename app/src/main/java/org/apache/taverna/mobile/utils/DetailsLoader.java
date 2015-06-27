@@ -31,10 +31,9 @@ import android.util.Log;
 
 import com.thebuzzmedia.sjxp.rule.IRule;
 
-import org.apache.taverna.mobile.tavernamobile.Runs;
 import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
-import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParser;
+import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParserRules;
 import org.apache.taverna.mobile.utils.xmlparsers.WorkflowDetailParser;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,8 +47,6 @@ import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import static org.apache.taverna.mobile.utils.DetailsLoader.LOAD_TYPE.*;
 
 /**
  * Loads workflow details from the myexperiment API and presents them on the UI .The class is generic and can be used to load the
@@ -69,7 +66,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
         this.context = context;
         this.lt = load_type;
         this.uri = detailsRUI;
-        workflow = new Workflow();
+        this.workflow = new Workflow();
     }
 
     @Override
@@ -110,44 +107,44 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
             connection.connect(); //send request
             Log.i("RESPONSE Code", "" + connection.getResponseCode());
             Log.i("RESPONSE Messsage", ""+connection.getResponseMessage());
-            Log.i("Authorization ", ""+connection.getRequestProperty("Authorization"));
 
             InputStream dis = connection.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(dis));
-            StringBuffer sb = new StringBuffer();
-            String jsonData = "";
-            while((jsonData = br.readLine()) != null){
-                sb.append(jsonData);
-            }
 
             switch(this.lt) {
                 case TYPE_WORKFLOW_DETAIL: {
                     //make rules and apply the parser
-                    IRule workfl = new MyExperimentXmlParser.WorkflowDetailRule(IRule.Type.ATTRIBUTE,
+                    IRule workfl = new MyExperimentXmlParserRules.WorkflowDetailRule(IRule.Type.ATTRIBUTE,
                             "/workflow", "uri","resource", "id","version");
-                    IRule title = new MyExperimentXmlParser.TitleRule(IRule.Type.CHARACTER,"/workflow/title");
-                    IRule description = new MyExperimentXmlParser.DescriptionRule(IRule.Type.CHARACTER, "/workflow/description");
-                    IRule type = new MyExperimentXmlParser.TypeRule(IRule.Type.CHARACTER, "/workflow/type");
-                    IRule attrType = new MyExperimentXmlParser.TypeRule(IRule.Type.ATTRIBUTE, "/workflow/type", "resource", "uri","id");
-                    IRule uploader = new MyExperimentXmlParser.UploaderRule(IRule.Type.CHARACTER, "/workflow/uploader");
-                    IRule attrUploader = new MyExperimentXmlParser.UploaderRule(IRule.Type.ATTRIBUTE, "/workflow/uploader",  "resource", "uri","id");
-                    IRule date = new MyExperimentXmlParser.DateRule(IRule.Type.CHARACTER, "/workflow/created-at");
-                    IRule preview = new MyExperimentXmlParser.PreviewRule(IRule.Type.CHARACTER, "/workflow/preview");
-                    IRule licetype = new MyExperimentXmlParser.LicenceTypeRule(IRule.Type.CHARACTER, "/workflow/licence-type");
-                    IRule attrlicetype = new MyExperimentXmlParser.LicenceTypeRule(IRule.Type.ATTRIBUTE,"/workflow/licence-type", "resource", "uri","id");
-                    IRule contenturi = new MyExperimentXmlParser.ContentUriRule(IRule.Type.CHARACTER, "/workflow/content-uri");
-                    IRule contentType = new MyExperimentXmlParser.ContentTypeRule(IRule.Type.CHARACTER, "/workflow/content-type");
-                    IRule tags = new MyExperimentXmlParser.TagsRule(IRule.Type.CHARACTER, "/workflow/tags/tag");
-                    IRule attrTags = new MyExperimentXmlParser.TagsRule(IRule.Type.ATTRIBUTE, "/workflow/tags/tag", "resource", "uri","id");
+                    IRule title = new MyExperimentXmlParserRules.TitleRule(IRule.Type.CHARACTER,"/workflow/title");
+                    IRule description = new MyExperimentXmlParserRules.DescriptionRule(IRule.Type.CHARACTER, "/workflow/description");
+                    IRule type = new MyExperimentXmlParserRules.TypeRule(IRule.Type.CHARACTER, "/workflow/type");
+                    IRule attrType = new MyExperimentXmlParserRules.TypeRule(IRule.Type.ATTRIBUTE, "/workflow/type", "resource", "uri","id");
+                    IRule uploader = new MyExperimentXmlParserRules.UploaderRule(IRule.Type.CHARACTER, "/workflow/uploader");
+                    IRule attrUploader = new MyExperimentXmlParserRules.UploaderRule(IRule.Type.ATTRIBUTE, "/workflow/uploader",  "resource", "uri","id");
+                    IRule date = new MyExperimentXmlParserRules.DateRule(IRule.Type.CHARACTER, "/workflow/created-at");
+                    IRule preview = new MyExperimentXmlParserRules.PreviewRule(IRule.Type.CHARACTER, "/workflow/preview");
+                    IRule licetype = new MyExperimentXmlParserRules.LicenceTypeRule(IRule.Type.CHARACTER, "/workflow/licence-type");
+                    IRule attrlicetype = new MyExperimentXmlParserRules.LicenceTypeRule(IRule.Type.ATTRIBUTE,"/workflow/licence-type", "resource", "uri","id");
+                    IRule contenturi = new MyExperimentXmlParserRules.ContentUriRule(IRule.Type.CHARACTER, "/workflow/content-uri");
+                    IRule contentType = new MyExperimentXmlParserRules.ContentTypeRule(IRule.Type.CHARACTER, "/workflow/content-type");
+                    IRule tags = new MyExperimentXmlParserRules.TagsRule(IRule.Type.CHARACTER, "/workflow/tags/tag");
+                    IRule attrTags = new MyExperimentXmlParserRules.TagsRule(IRule.Type.ATTRIBUTE, "/workflow/tags/tag", "resource", "uri","id");
 
                     WorkflowDetailParser parser = new WorkflowDetailParser(new IRule[]{workfl,title,description,type,
                             attrlicetype,attrType, uploader,attrUploader,date,preview,licetype,contenturi,contentType,tags,attrTags});
-                    parser.parse(dis, workflow);
+                 //   System.out.println(sb.toString());
+                    parser.parse(dis, this.workflow);
                 }
                 dis.close();
-                br.close();
+                //br.close();
                     return workflow;
                 case TYPE_RUN_HISTORY:{
+                    BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+                    StringBuffer sb = new StringBuffer();
+                    String jsonData = "";
+                    while((jsonData = br.readLine()) != null){
+                        sb.append(jsonData);
+                    }
                     workflow = new Workflow(this.context);
                     JSONArray jsonArray = new JSONArray(sb.toString());
                     Log.i("JSON ", jsonArray.toString(2));
@@ -181,6 +178,12 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                 }
                     return workflow;
                 default:
+                    BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+                    StringBuffer sb = new StringBuffer();
+                    String jsonData = "";
+                    while((jsonData = br.readLine()) != null){
+                        sb.append(jsonData);
+                    }
                     dis.close();
                     br.close();
                     return workflow;

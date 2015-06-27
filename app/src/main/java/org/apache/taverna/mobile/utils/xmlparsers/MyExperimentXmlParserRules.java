@@ -42,28 +42,29 @@ import java.util.List;
 /**
  * Created by Larry Akah on 6/23/15.
  */
-public class MyExperimentXmlParser {
+public class MyExperimentXmlParserRules {
 
     public static Workflow mWorkflow = new Workflow();
 
-    public MyExperimentXmlParser(){
+    public MyExperimentXmlParserRules(){
     }
 
     public Workflow getWorkflowHere(){
         return mWorkflow;
     }
     //parse a single workflow from myexperiment
-    public static class WorkflowDetailRule extends DefaultRule{
+    public final static class WorkflowDetailRule extends DefaultRule{
 
         public WorkflowDetailRule(Type type, String locationPath, String... attributeNames) throws IllegalArgumentException {
             super(type, locationPath, attributeNames);
+            System.out.println("Parser rules created. Ready to parse");
         }
 
         @Override
         public void handleParsedAttribute(XMLParser parser, int index, String value, Object userObject) {
             switch(index){
                 case 0: //uri
-                mWorkflow.setWorkflow_details_url(value);
+                    mWorkflow.setWorkflow_details_url(value);
                     ((Workflow)userObject).setWorkflow_details_url(value);
                     break;
                 case 1: //resource
@@ -246,7 +247,7 @@ public class MyExperimentXmlParser {
         @Override
         public void handleParsedAttribute(XMLParser parser, int index, String value, Object userObject) {
             super.handleParsedAttribute(parser, index, value, userObject);
-            System.out.println(value);
+            System.out.println("Tag attribute value"+value);
         }
 
         @Override

@@ -82,7 +82,7 @@ limitations under the License.
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/wkf_image"
-                android:src="@mipmap/ic_viewworkflow"
+                android:src="@mipmap/ic_loading"
                 android:backgroundTint="@color/accent_material_light"
                 android:backgroundTintMode="src_atop" />
 

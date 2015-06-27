@@ -85,5 +85,8 @@ limitations under the License.
     
     <string name="emailerr">Email must not be empty</string>
     <string name="passworderr">Password must not be empty</string>
+    <string name="about">Mobile Application for managing Taverna workflows on the fly.<br/>
+                         View, run and download workflows at a convenience on your android mobile<br/>
+                        device. \n\n <br/><b>Developed at Apache Taverna and Powered by MyExperiment</b><br/></string>
 
 </resources>

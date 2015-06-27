@@ -46,5 +46,7 @@ public class WorkflowDetailParser extends XMLParser {
     @Override
     protected void doEndDocument(Object userObject) {
         WorkflowdetailFragment.setWorkflowDetails((Workflow) userObject);
+       // WorkflowdetailFragment.setWorkflowDetails(MyExperimentXmlParserRules.mWorkflow);
+        System.out.println("Finished Parsing document. Results"+(Workflow) userObject);
     }
 }

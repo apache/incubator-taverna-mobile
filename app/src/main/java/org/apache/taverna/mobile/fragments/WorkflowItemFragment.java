@@ -34,6 +34,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -223,19 +224,21 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         WorkflowAdapter ladapter = new WorkflowAdapter(getActivity());
         WorkflowAdapter wk = searchAdpater;//workflowAdapter;
 
-        if(null != wk)
-        for(int i=0; i< wk.getItemCount(); i++) {
-            Workflow workflow = wk.getItem(i);
-            if( workflow.getWorkflow_title().toLowerCase().contains(search.toLowerCase())){
-                ladapter.addWorkflow(workflow);
+        if(!TextUtils.isEmpty(search)) {
+            if (null != wk)
+                for (int i = 0; i < wk.getItemCount(); i++) {
+                    Workflow workflow = wk.getItem(i);
+                    if (workflow.getWorkflow_title().toLowerCase().contains(search.toLowerCase())) {
+                        ladapter.addWorkflow(workflow);
+                    }
+                }
+            else {
+                Toast.makeText(getActivity(), "No workflows available", Toast.LENGTH_SHORT).show();
             }
+            mListView.swapAdapter(ladapter, true);
+            if (ladapter.getItemCount() == 0)
+                Toast.makeText(getActivity(), "No workflows found matching criteria", Toast.LENGTH_SHORT).show();
         }
-        else{
-            Toast.makeText(getActivity(),"No workflows available", Toast.LENGTH_SHORT).show();
-        }
-        mListView.swapAdapter(ladapter, true);
-        if(ladapter.getItemCount()==0)
-            Toast.makeText(getActivity(),"No workflows found matching criteria", Toast.LENGTH_SHORT).show();
     }
 
     @Override

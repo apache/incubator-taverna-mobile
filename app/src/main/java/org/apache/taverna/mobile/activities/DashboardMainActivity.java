@@ -25,6 +25,7 @@ package org.apache.taverna.mobile.activities;
 * under the License.
 */
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,6 +33,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -43,6 +45,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
@@ -68,7 +73,7 @@ public class DashboardMainActivity extends ActionBarActivity
     static final int NUM_ITEMS = 2;
     private final int SELECT_WORKFLOW = 10;
     public static final String APP_DIRECTORY_NAME = "TavernaMobile";
-
+    private  Dialog aboutDialog;
     MyAdapter mAdapter;
     ViewPager mPager;
 
@@ -77,6 +82,7 @@ public class DashboardMainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_main);
         setUpWorkflowDirectory(this);
+        aboutDialog = new Dialog(this);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -136,10 +142,13 @@ public class DashboardMainActivity extends ActionBarActivity
                         .commit();
                 break;
             case 4: //show about
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, FavoriteFragment.newInstance(position + 1))
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
+                TextView about = new TextView(getApplicationContext());
+                about.setTextSize(25);
+                about.setText(getResources().getString(R.string.about));
+
+                aboutDialog.setTitle("About Taverna Mobile");
+                aboutDialog.setContentView(about);
+                aboutDialog.show();
                 break;
             case 5://open settings/preference activity
                 startActivity(new Intent(this, SettingsActivity.class));

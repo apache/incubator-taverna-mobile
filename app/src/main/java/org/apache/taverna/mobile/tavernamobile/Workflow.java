@@ -299,6 +299,11 @@ public class Workflow {
     public void setWorkflow_credits(List<String> workflow_credits) {
         this.workflow_credits = workflow_credits;
     }
+
+    @Override
+    public String toString() {
+        return this.workflow_title;
+    }
 }
 /* Use the sample code if it becomes necessary to pass this objects amongst activities
 / simple class that just has one member property as an example

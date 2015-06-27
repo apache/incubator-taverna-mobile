@@ -59,6 +59,7 @@ import android.widget.Toast;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
+import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.DetailsLoader;
 import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
@@ -180,7 +181,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
     @Override
     public Loader<Workflow> onCreateLoader(int i, Bundle bundle) {
-
+        progressDialog.show();
         return new DetailsLoader(getActivity(),
                 DetailsLoader.LOAD_TYPE.TYPE_WORKFLOW_DETAIL,
                 getActivity().getIntent().getStringExtra("uri"));
@@ -202,7 +203,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
           //  preview.setImageURI(Uri.parse(workflow.getWorkflow_remote_url()));
         download_url =workflow.getWorkflow_remote_url();
       //  progressDialog.cancel();
-     */  // progressDialog.dismiss();
+     */ //progressDialog.dismiss();
     }
 
     @Override
@@ -216,7 +217,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             public void run() {
                 //update UI with code here
                 TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
-                author.append("->" + wk.getWorkflow_author());
+                User uploader = wk.getUploader();
+                author.setText("Uploader ->" + uploader != null?uploader.getName():"Unknown");
                 TextView title = (TextView) rootView.findViewById(R.id.wtitle);
                 title.setText(wk.getWorkflow_title());
                 TextView desc = (TextView) rootView.findViewById(R.id.wdescription);
@@ -224,14 +226,46 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 TextView createdat = (TextView) rootView.findViewById(R.id.wcreatedat);
                 createdat.setText("Created : " + wk.getWorkflow_datecreated());
                 TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
-                updated.setText(wk.getWorkflow_datemodified() + wk.getWorkflow_remote_url());
+                updated.setText("Workflow Description");
                     ImageView preview = (ImageView) rootView.findViewById(R.id.wkf_image);
-                  preview.setImageURI(Uri.parse("http://www.myexperiment.org/workflows/5/versions/2/previews/full"));
+                  //preview.setImageURI(Uri.parse(wk.getWorkflow_preview()));
+                new LoadImageThread(preview, wk.getWorkflow_preview()).execute();
                 download_url =wk.getWorkflow_remote_url();
 
-              //  progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         });
+    }
+    private static class LoadImageThread extends AsyncTask<String, Void, Bitmap>{
+          ImageView imageView;
+          String src ;
+        public LoadImageThread(ImageView image, String source) {
+            imageView = image;
+            src = source;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            Bitmap myBitmap = null;
+            try {
+                URL url = new URL(src);
+                HttpURLConnection connection = null;
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                 myBitmap = BitmapFactory.decodeStream(input);
+//                imageView.setImageBitmap(myBitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return myBitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
+        }
     }
     //create and return a new TextView
     public TextView createTextView(Context mcontext, String placeholder){

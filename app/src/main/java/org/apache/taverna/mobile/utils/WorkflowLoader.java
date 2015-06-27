@@ -31,7 +31,7 @@ import android.util.Log;
 import com.thebuzzmedia.sjxp.rule.IRule;
 
 import org.apache.taverna.mobile.tavernamobile.Workflow;
-import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParser;
+import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParserRules;
 import org.apache.taverna.mobile.utils.xmlparsers.WorkflowParser;
 
 import java.io.IOException;
@@ -120,8 +120,8 @@ public class WorkflowLoader extends AsyncTask<Object, Object, Object>{ //Workflo
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }*/
-        IRule wkflowRule = new MyExperimentXmlParser.WorkflowRule(IRule.Type.ATTRIBUTE, "/workflows/workflow", "resource", "uri","id", "version");
-        IRule workflowNameRule = new MyExperimentXmlParser.WorkflowRule(IRule.Type.CHARACTER, "/workflows/workflow");
+        IRule wkflowRule = new MyExperimentXmlParserRules.WorkflowRule(IRule.Type.ATTRIBUTE, "/workflows/workflow", "resource", "uri","id", "version");
+        IRule workflowNameRule = new MyExperimentXmlParserRules.WorkflowRule(IRule.Type.CHARACTER, "/workflows/workflow");
         WorkflowParser xmlParser = new WorkflowParser(new IRule[]{wkflowRule, workflowNameRule});
         try {
             URL workflowurl = new URL("http://www.myexperiment.org/workflows.xml");
