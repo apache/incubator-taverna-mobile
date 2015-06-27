@@ -116,7 +116,8 @@ limitations under the License.
             android:drawableLeft="@drawable/download"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:id="@+id/download_wk" />
+            android:id="@+id/download_wk"
+            android:paddingLeft="5dp" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
