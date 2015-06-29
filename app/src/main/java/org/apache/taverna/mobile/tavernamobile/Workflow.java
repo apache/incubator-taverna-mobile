@@ -38,6 +38,7 @@ import java.util.List;
  */
 public class Workflow {
     private Context context;
+    private User uploader;
     private String workflow_author;
     private String workflow_title;
     private String workflow_description, about, policy;
@@ -46,6 +47,7 @@ public class Workflow {
     private WorkflowComponent workflowComponent;
     private String workflow_remote_url; //provides a link to download the workflow. Equivalent to content-uri in the xml form
     private String workflow_web_url; //a string containing the workflow resource that can be loaded in  browser
+    private String workflow_details_url;//used to refer to the details of the workflow
     private List<Runs> workflow_runs;
     private int workflow_input;
     private long id;
@@ -108,6 +110,22 @@ public class Workflow {
 
     public void setWorkflow_remote_url(String workflow_remote_url) {
         this.workflow_remote_url = workflow_remote_url;
+    }
+
+    public String getWorkflow_details_url() {
+        return this.workflow_details_url;
+    }
+
+    public User getUploader() {
+        return this.uploader;
+    }
+
+    public void setUploader(User uploader) {
+        this.uploader = uploader;
+    }
+
+    public void setWorkflow_details_url(String workflow_details_url) {
+        this.workflow_details_url = workflow_details_url;
     }
 
     public String getPolicy() {
@@ -280,6 +298,11 @@ public class Workflow {
 
     public void setWorkflow_credits(List<String> workflow_credits) {
         this.workflow_credits = workflow_credits;
+    }
+
+    @Override
+    public String toString() {
+        return this.workflow_title;
     }
 }
 /* Use the sample code if it becomes necessary to pass this objects amongst activities

@@ -70,13 +70,14 @@ limitations under the License.
     <string name="detail_title_section3">Licence | Policy</string>
     <string name="detail_title_section4"> About </string>
     <string name="play_workflow">Create Run</string>
+    <string name="err_workflow_conn">Unable to fetch latest workflows. Please check your network connectivity</string>
     
     <string name="downloadfailed">Download Failed. Please try again</string>
     <string name="downloadprogress">Workflow download in progress</string>
     <string name="downloaderror">Unable to start Download. Check your internet connectivity</string>
     <string name="downloadduplicate">Already Downloading</string>
     <string name="downloadcomplete">  download complete</string>
-    <string name="seemore"> See more &amp;raquo</string>
+    <string name="seemore"> More Info &amp;raquo</string>
     <string name="loading">Loading details</string>
     <string name="loadworkflows">Loading Workflows</string>
     <string name="fetchrun">Fetching run components </string>
@@ -84,5 +85,8 @@ limitations under the License.
     
     <string name="emailerr">Email must not be empty</string>
     <string name="passworderr">Password must not be empty</string>
+    <string name="about">Mobile Application for managing Taverna workflows on the fly.<br/>
+                         View, run and download workflows at a convenience on your android mobile<br/>
+                        device. \n\n <br/><b>Developed at Apache Taverna and Powered by MyExperiment</b><br/></string>
 
 </resources>
