@@ -46,15 +46,20 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ZoomControls;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
@@ -95,6 +100,10 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     private static String download_url;
     public static long WORKFLO_ID;
     public static Context cont;
+    private static boolean LOAD_STATE = false;
+    private ZoomControls zoomControls;
+    static Animation zoomin;
+    static Animation zoomout;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -120,6 +129,11 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         progressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
         progressDialog.setCancelable(false);
         WORKFLO_ID = workflowid;
+        zoomin = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomin);
+        zoomout = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomout);
+        zoomControls = (ZoomControls) rootView.findViewById(R.id.zoomControls);
+        zoomControls.setOnZoomInClickListener(this);
+        zoomControls.setOnZoomOutClickListener(this);
 
         Button createRun = (Button) rootView.findViewById(R.id.run_wk);
         createRun.setOnClickListener(this);
@@ -163,6 +177,10 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             case R.id.mark_wk:
                 //TODO mark a workflow as important and launch task to store the entry into the local database
                 break;
+            case R.id.zoomControls:
+                zoomin.startNow();
+                Toast.makeText(getActivity(), "Zooming", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 
@@ -175,8 +193,14 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().getLoaderManager().initLoader(1, null, this).forceLoad();
+        if(!LOAD_STATE)
+            getActivity().getLoaderManager().initLoader(1, null, this).forceLoad();
+    }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        LOAD_STATE = true;
     }
 
     @Override
@@ -212,26 +236,71 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     }
 
     public static void setWorkflowDetails(final Workflow wk){
+
         ((Activity)cont).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //update UI with code here
+                //load necessary widgets
                 TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
+                TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
+                TextView type = (TextView) rootView.findViewById(R.id.wtype);
+                TextView title = (TextView) rootView.findViewById(R.id.wtitle);
+                TextView desc = (TextView) rootView.findViewById(R.id.wdescription);
+                TextView createdat = (TextView) rootView.findViewById(R.id.wcreatedat);
+                final ImageView preview = (ImageView) rootView.findViewById(R.id.wkf_image);
+
+                //set widget data
                 User uploader = wk.getUploader();
                 author.setText("Uploader ->" + uploader != null?uploader.getName():"Unknown");
-                TextView title = (TextView) rootView.findViewById(R.id.wtitle);
                 title.setText(wk.getWorkflow_title());
-                TextView desc = (TextView) rootView.findViewById(R.id.wdescription);
                 desc.setText(wk.getWorkflow_description());
-                TextView createdat = (TextView) rootView.findViewById(R.id.wcreatedat);
                 createdat.setText("Created : " + wk.getWorkflow_datecreated());
-                TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
                 updated.setText("Workflow Description");
-                    ImageView preview = (ImageView) rootView.findViewById(R.id.wkf_image);
+                type.setText("Type-> "+wk.getWorkflow_Type());
+
                   //preview.setImageURI(Uri.parse(wk.getWorkflow_preview()));
                 new LoadImageThread(preview, wk.getWorkflow_preview()).execute();
                 download_url =wk.getWorkflow_remote_url();
+                zoomin.setAnimationListener(new Animation.AnimationListener() {
 
+                    @Override
+                    public void onAnimationStart(Animation arg0) {
+                        // TODO Auto-generated method stub
+                        preview.startAnimation(zoomout);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation arg0) {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation arg0) {
+                        preview.startAnimation(zoomout);
+
+                    }
+                });
+                zoomout.setAnimationListener(new Animation.AnimationListener() {
+
+                    @Override
+                    public void onAnimationStart(Animation arg0) {
+                        // TODO Auto-generated method stub
+                        preview.startAnimation(zoomin);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation arg0) {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation arg0) {
+                        preview.startAnimation(zoomin);
+
+                    }
+                });
                 progressDialog.dismiss();
             }
         });
@@ -267,6 +336,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             imageView.setImageBitmap(bitmap);
         }
     }
+
     //create and return a new TextView
     public TextView createTextView(Context mcontext, String placeholder){
         TextView tv = new TextView(mcontext);

@@ -28,6 +28,9 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -44,15 +47,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.adapters.WorkflowAdapter;
+import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
+import org.apache.taverna.mobile.utils.AvatarLoader;
 import org.apache.taverna.mobile.utils.WorkflowLoader;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,8 +97,9 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
      */
     private WorkflowAdapter workflowAdapter;
     private static WorkflowAdapter searchAdpater;
-    private View rootView;
+    private static View rootView;
     public static Context cx;
+    private static boolean STATE_ON = false;
 
     public static WorkflowItemFragment newInstance(String param1, String param2) {
         WorkflowItemFragment fragment = new WorkflowItemFragment();
@@ -166,16 +177,15 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     @Override
     public void onResume() {
         super.onResume();
-      /*  //Handle search actions from a system sent intent
-        Intent searchIntent = getActivity().getIntent();
-        if(searchIntent != null && Intent.ACTION_SEARCH.equals(searchIntent.getAction())){
-            //retrieve and process query then display results
-            String query = searchIntent.getStringExtra(SearchManager.QUERY);
-            //Toast.makeText(getActivity(), "Query = " + query, Toast.LENGTH_SHORT).show();
-            performSearch(workflowAdapter,query);
-        }else*/
+        if(!STATE_ON)
         new WorkflowLoader(getActivity(), swipeRefreshLayout).execute();
-        //    getActivity().getLoaderManager().initLoader(0,null,this).forceLoad();
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        STATE_ON = true;
     }
 
     @Override
@@ -276,5 +286,64 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                 System.out.println("workflows: "+data.size());
             }
         });
+    }
+    public static void startLoadingAvatar(final User author) {
+
+        ((Activity)cx).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this) {
+                    new AvatarLoader().execute(author.getDetails_uri());
+                    System.out.println(author.getDetails_uri());
+                }
+            }
+        });
+    }
+
+    public static void updateAvatar(final User author) {
+
+        ((Activity)cx).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this) {
+                    ((TextView)rootView.findViewById(R.id.workflow_author)).setText(author.getName());
+                    new LoadAuthorAvatar((ImageView) rootView.findViewById(R.id.author_profile_image)).execute(author.getAvatar_url());
+                }
+            }
+        });
+    }
+    /**
+     * Load the Author Avatar from a background Task
+     */
+    private static class LoadAuthorAvatar extends AsyncTask<String, Void, Bitmap> {
+        ImageView img;
+
+        public LoadAuthorAvatar(ImageView imageView) {
+            img = imageView;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            Bitmap myBitmap = null;
+            try {
+                URL url = new URL(strings[0]);
+                HttpURLConnection connection = null;
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                myBitmap = BitmapFactory.decodeStream(input);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return myBitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            img.setImageBitmap(bitmap);
+///            img.setBackground();
+            notify();
+        }
     }
 }

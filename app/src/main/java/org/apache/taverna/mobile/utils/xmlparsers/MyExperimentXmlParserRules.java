@@ -24,8 +24,6 @@ package org.apache.taverna.mobile.utils.xmlparsers;
  * under the License.
  */
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.text.Html;
 
 import com.thebuzzmedia.sjxp.XMLParser;
@@ -34,7 +32,6 @@ import com.thebuzzmedia.sjxp.rule.DefaultRule;
 import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.WorkflowLoader;
-import org.simpleframework.xml.Default;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,13 +146,22 @@ public class MyExperimentXmlParserRules {
             switch(index){
                 case 0:
                     muser.setWebsite(value);
+                    if( (userObject instanceof User)){
+                        ((User)userObject).setWebsite(value);
+                    }
                     break;
                 case 1:
                     muser.setDetails_uri(value);
+                    if( (userObject instanceof User)){
+                        ((User)userObject).setDetails_uri(value);
+                    }
                     break;
                 case 2:
                     muser.setId(value);
                     break;
+            }
+            if( (userObject instanceof User)){
+                System.out.println("USER Details => "+muser.getDetails_uri());
             }
         }
 
@@ -164,6 +170,35 @@ public class MyExperimentXmlParserRules {
            muser.setName(text);
            mWorkflow.setUploader(muser);
             ((Workflow)userObject).setUploader(muser);
+        }
+    }
+//rule used to parse author from main page
+    public static class AuthorRule extends DefaultRule{
+
+        public AuthorRule(Type type, String locationPath, String... attributeNames) throws IllegalArgumentException {
+            super(type, locationPath, attributeNames);
+
+        }
+
+        @Override
+        public void handleParsedAttribute(XMLParser parser, int index, String value, Object userObject) {
+            switch(index){
+                case 0:
+                    ((User) userObject).setAvatar_url(value);
+                    break;
+                case 1:
+                    ((User) userObject).setDetails_uri(value);
+                    break;
+                case 2:
+                    ((User) userObject).setId(value);
+                    break;
+            }
+        }
+
+        @Override
+        public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
+            ((User) userObject).setName(text);
+            //((Workflow)userObject).setUploader(muser);
         }
     }
 //rule for the date the workflow was created/uploaded

@@ -68,6 +68,13 @@ limitations under the License.
                 android:id="@+id/wupdatedat"
                 android:layout_marginTop="5dp"
                 android:text="@string/modified" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/wtype"
+                android:layout_marginTop="5dp"
+                android:text="Type" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -85,6 +92,13 @@ limitations under the License.
                 android:src="@mipmap/ic_loading"
                 android:backgroundTint="@color/accent_material_light"
                 android:backgroundTintMode="src_atop" />
+
+            <ZoomControls
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/zoomControls"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal" />
 
         </LinearLayout>
     </ScrollView>
