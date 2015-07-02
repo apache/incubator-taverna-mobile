@@ -75,6 +75,14 @@ public class TavernaPlayerAPI {
         return PLAYER_RUN_FRAMEWORK_URL;
     }
 
+    public static String getPlayerUserName(Context c){
+        return PreferenceManager.getDefaultSharedPreferences(c).getString("pref_user","default");
+    }
+
+    public static String getPlayerUserPassword(Context c){
+        return PreferenceManager.getDefaultSharedPreferences(c).getString("pref_password","default");
+    }
+
     public static class Authenticator extends java.net.Authenticator{
         private String username, password;
 

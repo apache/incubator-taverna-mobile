@@ -30,6 +30,13 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -59,6 +66,7 @@ import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.AvatarLoader;
 import org.apache.taverna.mobile.utils.WorkflowLoader;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -333,6 +341,8 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                 connection.connect();
                 InputStream input = connection.getInputStream();
                 myBitmap = BitmapFactory.decodeStream(input);
+                input.close();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -343,7 +353,39 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         protected void onPostExecute(Bitmap bitmap) {
             img.setImageBitmap(bitmap);
 ///            img.setBackground();
-            notify();
+//            notify();
+        }
+        private Bitmap ProcessingBitmap(Bitmap bmp){
+            Bitmap bm1 = null;
+            Bitmap newBitmap = null;
+
+                bm1 = bmp;
+                int w = bm1.getWidth();
+                int h = bm1.getHeight();
+
+                Bitmap.Config config = bm1.getConfig();
+                if(config == null){
+                    config = Bitmap.Config.ARGB_8888;
+                }
+
+                newBitmap = Bitmap.createBitmap(w, h, config);
+                Canvas newCanvas = new Canvas(newBitmap);
+                newCanvas.drawColor(Color.WHITE);
+
+                Paint paint = new Paint();
+                paint.setColor(Color.TRANSPARENT);
+                Rect frame = new Rect(
+                        (int)(w*0.05),
+                        (int)(w*0.05),
+                        (int)(w*0.95),
+                        (int)(h*0.95));
+                RectF frameF = new RectF(frame);
+                newCanvas.drawRoundRect(frameF, (float)(w*0.5), (float)(h*0.05), paint);
+
+                paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SCREEN));
+                newCanvas.drawBitmap(bm1, 0, 0, paint);
+
+            return newBitmap;
         }
     }
 }

@@ -76,6 +76,7 @@ import org.w3c.dom.Text;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -160,7 +161,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         switch(view.getId()){
             case R.id.run_wk:
                 //TODO implement functionality to issue a run request to the Taverna PLAYER to run the current workflow
-                new WorkflowRunTask(getActivity()).execute(""+WORKFLO_ID);
+                //new WorkflowRunTask(getActivity()).execute(""+WORKFLO_ID);
+                new WorkflowProcessTask(getActivity()).execute(download_url);
                 break;
             case R.id.download_wk:
                 // start the android Download manager to start downloading a remote workflow file
@@ -305,6 +307,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             }
         });
     }
+
     private static class LoadImageThread extends AsyncTask<String, Void, Bitmap>{
           ImageView imageView;
           String src ;
@@ -355,7 +358,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         edt.setId(i);
         return edt;
     }
-//fetch and compute the framework on which the run inputs are to be built and entered
+    //fetch and compute the framework on which the run inputs are to be built and entered
     private class WorkflowRunTask extends AsyncTask<String, Void, String>{
 
         private Context context;
@@ -477,7 +480,100 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             runDialog.show();
         }
     }
-    //Send request for the execution of a run on the server through the player
+
+    /**
+     *    Send request for the execution of a run on a Taverna server through the Taverna player using the Player API
+     *    This process passes through several steps,\n
+     *    1- Downloading and caching a local version of the workflow whose run we need \n
+     *    2- uploading the workflow through the portal to register it so a run can be generated from it. The request requires some authentication
+     *    3- Retrieving the results and extracting data required to create a run (the workflow_id) as provided by the results
+     *    4- Posting a run request to the player so that a new run can be created and started
+     *    5- retrieving a run framework so that users can know what types of input is expected for a successful run
+     *    6- retrieving and displaying run results
+     */
+    private class WorkflowProcessTask extends AsyncTask<String, Void, String>{
+
+        private Context context;
+
+        private WorkflowProcessTask(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog.setMessage("Uploading Workflow ... ");
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            StringBuffer sb = new StringBuffer();
+            try {
+                //prepare connection requests
+                URL workflowurl = new URL(params[0]); //the resource xml file representing the workflow to be uploaded to the player
+                URL posturl = new URL(new TavernaPlayerAPI(this.context).PLAYER_BASE_URL+"workflows.json");
+                HttpURLConnection connection = (HttpURLConnection) posturl.openConnection();
+                HttpURLConnection wconn = (HttpURLConnection) workflowurl.openConnection();
+                    wconn.setRequestMethod("GET");
+                    wconn.setDoOutput(true);
+                    wconn.setRequestProperty("Accept", "application/xml");
+                    //wconn.setConnectTimeout(60000);
+                wconn.connect();
+
+                String user = "icep603@gmail.com" + ":" + "creationfox";
+                String basicAuth = "Basic " + Base64.encodeToString(user.getBytes(), Base64.DEFAULT);
+                //read the file from remote resource and encode the stream with a base64 algorithm
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(wconn.getInputStream()));
+                String str = "";
+                while ((str = bufferedReader.readLine()) != null)
+                    sb.append(str); //in this string builder we have read the .t2flow or xml workflow from remote resource. Now we need to post that to the player.
+                bufferedReader.close();
+
+                //prepare post json data
+                JSONObject postJson = new JSONObject();
+                JSONObject datajson = new JSONObject();
+                datajson.put("document", "data:application/octet-stream;base64,"+Base64.encodeToString(sb.toString().getBytes(), Base64.DEFAULT)+"");
+                postJson.put("workflow",datajson.toString());
+                //clear sb so that we can use it again to fetch results from this post request
+                sb.delete(0,sb.length()-1);
+                System.out.println(postJson.toString(2));
+                connection.setRequestProperty("Authorization", basicAuth);
+           //     connection.setRequestProperty("Accept", "application/json");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestMethod("POST");
+                connection.connect(); //send request
+
+                DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
+                dos.writeBytes(postJson.toString());//write post data which is a formatted json data representing body of workflow
+                //dos.writeUTF("");
+                dos.flush();
+                dos.close();
+
+                InputStream dis = connection.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+                while ((str = br.readLine())!= null)
+                    sb.append(str);
+                System.out.println("Post Response Code: "+connection.getResponseCode());
+                System.out.println("Post response message: "+connection.getResponseMessage());
+            }catch (IOException e){
+                e.printStackTrace();
+                sb.append("Error reading remote workflow. Please try again later");
+            } catch (JSONException e) {
+                e.printStackTrace();
+                sb.append("Invalid data format: JSON DATA");
+            }
+            return sb.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            System.out.println(s);
+            progressDialog.dismiss();
+        }
+    }
+    /**
+     * creates a new workflow run from the
+     */
     private class RunTask extends AsyncTask<String, Void, String>{
 
         private Context context;
@@ -542,6 +638,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         protected void onPostExecute(String s) {
             Log.i("RUN OutPut", s);
             progressDialog.dismiss();
+            //TODO startup the runActivity to display the run results
         }
     }
 }
