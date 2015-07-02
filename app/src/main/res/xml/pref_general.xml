@@ -30,12 +30,12 @@
         android:maxLines="1" />
     <PreferenceCategory
         android:icon="@drawable/gear_icon"
-        android:summary="@string/playerconfig_summary"
         android:title="@string/playerconfig">
         <EditTextPreference
             android:key="pref_user"
             android:title="@string/playeruser"
-            android:summary="@string/pref_server_des"
+            android:icon="@mipmap/icuserprofiles"
+            android:summary="@string/playerconfig_summary"
             android:defaultValue="default"
             android:selectAllOnFocus="true"
             android:inputType="textEmailAddress|textPersonName"
@@ -44,7 +44,8 @@
         <EditTextPreference
             android:key="pref_password"
             android:title="@string/playerpass"
-            android:summary="@string/pref_server_des"
+            android:icon="@android:drawable/ic_secure"
+            android:summary="Taverna Player Password"
             android:defaultValue="default"
             android:selectAllOnFocus="true"
             android:inputType="textPassword"
@@ -58,7 +59,8 @@
         <EditTextPreference
             android:key="myexperimentuser"
             android:title="@string/playeruser"
-            android:summary="@string/pref_server_des"
+            android:icon="@mipmap/icuserprofiles"
+            android:summary="@string/myexperimentsummary"
             android:defaultValue="default"
             android:selectAllOnFocus="true"
             android:inputType="textEmailAddress|textPersonName"
@@ -67,7 +69,8 @@
         <EditTextPreference
             android:key="myexperimentpass"
             android:title="@string/playerpass"
-            android:summary="@string/pref_server_des"
+            android:icon="@android:drawable/ic_secure"
+            android:summary="Myexperiment password"
             android:defaultValue="default"
             android:selectAllOnFocus="true"
             android:inputType="textPassword"
