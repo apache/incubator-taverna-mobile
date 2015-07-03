@@ -519,12 +519,10 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                     sb.append(str); //in this string builder we have read the .t2flow or xml workflow from remote resource. Now we need to post that to the player.
                 bufferedReader.close();
 
-                //prepare post json data
-                JSONObject postJson = new JSONObject();
-                JSONObject datajson = new JSONObject();
-                String data = "{\"document\":\"data:application/octet-stream;base64,"+Base64.encodeToString(sb.toString().getBytes(), Base64.DEFAULT)+"\"}";
-                datajson.put("document", "data:application/octet-stream;base64,"+Base64.encodeToString(sb.toString().getBytes(), Base64.DEFAULT)+"");
-                String post = "{\"workflow:\""+data+"}";
+//                String data = "{\"document\":\"data:application/octet-stream;base64,"+Base64.encodeToString(sb.toString().getBytes(), Base64.DEFAULT)+"\"}";
+                String data = "{document:data:application/octet-stream;base64,"+Base64.encodeToString(sb.toString().getBytes(), Base64.DEFAULT)+"}";
+              //  datajson.put("document", "data:application/octet-stream;base64,"+Base64.encodeToString(sb.toString().getBytes(), Base64.DEFAULT)+"");
+                String post = "{workflow:"+data+"}";
   //              postJson.put("workflow",datajson.toString());
                 //clear sb so that we can use it again to fetch results from this post request
                 sb.delete(0,sb.length()-1);
@@ -551,9 +549,6 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             }catch (IOException e){
                 e.printStackTrace();
                 sb.append("Error reading remote workflow. Please try again later");
-            } catch (JSONException e) {
-                e.printStackTrace();
-                sb.append("Invalid data format: JSON DATA");
             }
             return sb.toString();
         }
