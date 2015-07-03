@@ -121,7 +121,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         //save current workflow as favorite
             mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full); mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
             mfav.add(uri);
-//        if(description.length() > 80) description = description.substring(0, 79);
+        if(description.length() > 80) description = description.substring(0, 79);
         viewHolder.author_name.setText(author);
         viewHolder.wk_title.setText(title);
         viewHolder.wk_description.setText( description+" ... ");

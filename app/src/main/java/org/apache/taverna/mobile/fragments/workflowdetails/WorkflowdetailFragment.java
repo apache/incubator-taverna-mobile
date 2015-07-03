@@ -507,7 +507,6 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                     wconn.setRequestMethod("GET");
                     wconn.setDoOutput(true);
                     wconn.setRequestProperty("Accept", "application/xml");
-                    //wconn.setConnectTimeout(60000);
                     wconn.connect();
 
                 String user = "icep603@gmail.com" + ":" + "creationfox";
@@ -516,29 +515,26 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(wconn.getInputStream()));
                 String str = "";
                 while ((str = bufferedReader.readLine()) != null)
-                    sb.append(str); //in this string builder we have read the .t2flow or xml workflow from remote resource. Now we need to post that to the player.
+                    sb.append(str); //in this string builder we have read the workflow( as .t2flow or .xml) workflow from remote resource. Now we need to post that to the player.
                 bufferedReader.close();
+                wconn.disconnect();
 
                 String data = "{\"document\":\"data:application/octet-stream;base64,"+Base64.encodeToString(sb.toString().getBytes(), Base64.DEFAULT)+"\"}";
-//                String data = "{document:data:application/octet-stream;base64,"+Base64.encodeToString(sb.toString().getBytes(), Base64.DEFAULT)+"}";
-              //  datajson.put("document", "data:application/octet-stream;base64,"+Base64.encodeToString(sb.toString().getBytes(), Base64.DEFAULT)+"");
                 String post = "{\"workflow\":"+data+"}";
-  //              postJson.put("workflow",datajson.toString());
                 //clear sb so that we can use it again to fetch results from this post request
                 sb.delete(0,sb.length()-1);
                 System.out.println("BODY=>"+post);
-//                System.out.println(postJson.toString(2));
                 connection.setRequestProperty("Authorization", basicAuth);
-                connection.setRequestProperty("Accept", "application/json");
+                connection.setRequestProperty("Accept", "*/*");
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setRequestMethod("POST");
                 connection.connect(); //send request
 
-                DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
+             /*   DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
                 dos.writeBytes(post);//write post data which is a formatted json data representing body of workflow
-                //dos.writeUTF("");
+
                 dos.flush();
-                dos.close();
+                dos.close();*/
 /*
                 InputStream dis = connection.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(dis));
@@ -546,6 +542,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                     sb.append(str);*/
                 System.out.println("Post Response Code: "+connection.getResponseCode());
                 System.out.println("Post response message: "+connection.getResponseMessage());
+                connection.disconnect();
             }catch (IOException e){
                 e.printStackTrace();
                 sb.append("Error reading remote workflow. Please try again later");
