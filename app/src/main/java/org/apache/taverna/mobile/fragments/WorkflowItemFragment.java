@@ -314,8 +314,12 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             @Override
             public void run() {
                 synchronized (this) {
-                    ((TextView)rootView.findViewById(R.id.workflow_author)).setText(author.getName());
-                    new LoadAuthorAvatar((ImageView) rootView.findViewById(R.id.author_profile_image)).execute(author.getAvatar_url());
+                    try {
+                        ((TextView) rootView.findViewById(R.id.workflow_author)).setText(author.getName());
+                        new LoadAuthorAvatar((ImageView) rootView.findViewById(R.id.author_profile_image)).execute(author.getAvatar_url());
+                    }catch(NullPointerException np){
+
+                    }
                 }
             }
         });

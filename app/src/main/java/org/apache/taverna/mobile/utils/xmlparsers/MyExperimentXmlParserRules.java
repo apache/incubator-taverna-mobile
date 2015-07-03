@@ -54,7 +54,6 @@ public class MyExperimentXmlParserRules {
 
         public WorkflowDetailRule(Type type, String locationPath, String... attributeNames) throws IllegalArgumentException {
             super(type, locationPath, attributeNames);
-            System.out.println("Parser rules created. Ready to parse");
         }
 
         @Override
@@ -159,9 +158,6 @@ public class MyExperimentXmlParserRules {
                 case 2:
                     muser.setId(value);
                     break;
-            }
-            if( (userObject instanceof User)){
-                System.out.println("USER Details => "+muser.getDetails_uri());
             }
         }
 
@@ -282,14 +278,13 @@ public class MyExperimentXmlParserRules {
         @Override
         public void handleParsedAttribute(XMLParser parser, int index, String value, Object userObject) {
             super.handleParsedAttribute(parser, index, value, userObject);
-            System.out.println("Tag attribute value"+value);
         }
 
         @Override
         public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
             mWorkflow.setWorkflow_tags(new ArrayList<String>(){});
             ((Workflow)userObject).setWorkflow_tags(new ArrayList<String>(){});
-            System.out.println(text);
+
         }
     }
 
@@ -318,19 +313,15 @@ public class MyExperimentXmlParserRules {
 
             switch(index){
                 case 0:
-                    System.out.println("Workflow Resource: "+value); url = value;
                     desc = "To view workflow on the web, click "+value;
                     break;
                 case 1:
-                    System.out.println("Workflow uri: "+value);
                     uri = value;
                     break;
                 case 2:
-                    System.out.println("Workflow id: "+value);
                     id = Integer.parseInt(value);
                     break;
                 case 3:
-                    System.out.println("Workflow version: "+value);
                     version = value;
                     break;
             }
@@ -345,11 +336,9 @@ public class MyExperimentXmlParserRules {
             this.workflow.setWorkflow_author("");
             wlist.add(this.workflow);
             WorkflowLoader.loadedWorkflows.add(this.workflow);
-            System.out.println("static Workflow Count: " + WorkflowLoader.loadedWorkflows.size());
             ((List<Workflow>)workflowListObject).add(this.workflow);
             this.workflow = null;
         }
-
     }
 
 }

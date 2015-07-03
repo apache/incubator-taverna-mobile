@@ -23,11 +23,10 @@ package org.apache.taverna.mobile.utils;
  * specific language governing permissions and limitations
  * under the License.
  */
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import java.util.ArrayList;
 
 /**
  * This class contains all utility functions used by our database for basic functionality not directly related to the core

@@ -81,15 +81,14 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
         super.onCreate(savedInstanceState);
         myWorkflowDb = new Workflow_DB(getActivity(), WorkflowAdapter.WORKFLOW_FAVORITE_KEY);
 //TODO Add support for loading all the favorites and adding to the required list
-      //  try {
-         //   List<ArrayList<Object>> mydata = myWorkflowDb.get();
+        try {
+            List<ArrayList<Object>> mfavorites = myWorkflowDb.get();
          //   ArrayList<Object> m = mydata.get(0);
-            List<String[]> sampledata = new ArrayList<String[]>();
-            sampledata.add(new String[]{"test fav","test data", "test"});//new String[]{(String) m.get(1), (String) m.get(2)});
-            favoriteAdapter = new FavoriteWorkflowAdapter(getActivity(), sampledata);
-   //     } catch (JSONException e) {
-   //         e.printStackTrace();
-       // }
+        //retrieval order: workflowid, workflowauthor, workflowtitle, workflowmarkeddate
+            favoriteAdapter = new FavoriteWorkflowAdapter(getActivity(), mfavorites);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

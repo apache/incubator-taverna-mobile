@@ -31,24 +31,16 @@ import android.app.LoaderManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.Loader;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -71,18 +63,15 @@ import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.prefs.PreferenceChangeEvent;
 
 /**
  * Created by Larry Akah on 6/9/15.
@@ -511,14 +500,15 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             try {
                 //prepare connection requests
                 URL workflowurl = new URL(params[0]); //the resource xml file representing the workflow to be uploaded to the player
-                URL posturl = new URL(new TavernaPlayerAPI(this.context).PLAYER_BASE_URL+"workflows.json");
+                String playerurl = new TavernaPlayerAPI(this.context).PLAYER_BASE_URL+"workflows.json";
+                URL posturl = new URL(playerurl);
                 HttpURLConnection connection = (HttpURLConnection) posturl.openConnection();
                 HttpURLConnection wconn = (HttpURLConnection) workflowurl.openConnection();
                     wconn.setRequestMethod("GET");
                     wconn.setDoOutput(true);
                     wconn.setRequestProperty("Accept", "application/xml");
                     //wconn.setConnectTimeout(60000);
-                wconn.connect();
+                    wconn.connect();
 
                 String user = "icep603@gmail.com" + ":" + "creationfox";
                 String basicAuth = "Basic " + Base64.encodeToString(user.getBytes(), Base64.DEFAULT);
@@ -532,27 +522,30 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 //prepare post json data
                 JSONObject postJson = new JSONObject();
                 JSONObject datajson = new JSONObject();
+                String data = "{\"document\":\"data:application/octet-stream;base64,"+Base64.encodeToString(sb.toString().getBytes(), Base64.DEFAULT)+"\"}";
                 datajson.put("document", "data:application/octet-stream;base64,"+Base64.encodeToString(sb.toString().getBytes(), Base64.DEFAULT)+"");
-                postJson.put("workflow",datajson.toString());
+                String post = "{\"workflow:\""+data+"}";
+  //              postJson.put("workflow",datajson.toString());
                 //clear sb so that we can use it again to fetch results from this post request
                 sb.delete(0,sb.length()-1);
-                System.out.println(postJson.toString(2));
+                System.out.println("BODY=>"+post);
+//                System.out.println(postJson.toString(2));
                 connection.setRequestProperty("Authorization", basicAuth);
-           //     connection.setRequestProperty("Accept", "application/json");
+        //        connection.setRequestProperty("Accept", "application/json");
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setRequestMethod("POST");
                 connection.connect(); //send request
 
                 DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
-                dos.writeBytes(postJson.toString());//write post data which is a formatted json data representing body of workflow
+                dos.writeBytes(post);//write post data which is a formatted json data representing body of workflow
                 //dos.writeUTF("");
                 dos.flush();
                 dos.close();
-
+/*
                 InputStream dis = connection.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(dis));
                 while ((str = br.readLine())!= null)
-                    sb.append(str);
+                    sb.append(str);*/
                 System.out.println("Post Response Code: "+connection.getResponseCode());
                 System.out.println("Post response message: "+connection.getResponseMessage());
             }catch (IOException e){
