@@ -122,8 +122,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
             mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full); mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
             mfav.add(uri);
         if(description.length() > 80) description = description.substring(0, 79);
-        viewHolder.author_name.setText(author);
-        viewHolder.wk_title.setText(title);
+        viewHolder.author_name.setHint(author);
+        viewHolder.wk_title.setHint(title);
         viewHolder.wk_description.setText( description+" ... ");
         Linkify.addLinks(viewHolder.wk_description, Linkify.WEB_URLS);
         final String wkflow_url = workflow.get(j).getWorkflow_remote_url();

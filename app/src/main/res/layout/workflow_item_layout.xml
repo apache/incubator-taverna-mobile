@@ -39,14 +39,18 @@ limitations under the License.
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+        <FrameLayout android:id="@+id/mframe"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
             <ImageView
                 android:id="@+id/author_profile_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:elevation="5dp"
                 android:src="@mipmap/icuserprofiles"
-                android:background="@drawable/round_shape"
-                android:contentDescription="@string/workflow_authorhint" />
+
+                android:contentDescription="@string/workflow_authorhint"
+                android:scaleType="fitEnd" />
 
         <LinearLayout
                 android:id="@+id/linearlayout_workflow_info"
@@ -56,15 +60,17 @@ limitations under the License.
             android:showDividers="middle|beginning"
             android:divider="@color/background_material_dark"
             android:dividerPadding="2dp"
-            android:layout_marginLeft="2dp">
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="50dp"
+            android:background="@android:color/transparent">
                 <TextView
                     android:id="@+id/workflow_author"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/workflow_authorhint"
                     android:capitalize="characters"
                     android:textColor="#000"
-                    android:textSize="22dp" />
+                    android:textSize="22dp"
+                    android:hint="@string/workflow_authorhint" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -82,6 +88,8 @@ limitations under the License.
                 android:typeface="serif"
                 android:background="@color/material_deep_teal_200" />
         </LinearLayout>
+        </FrameLayout>
+
     </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

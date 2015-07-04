@@ -519,22 +519,30 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 bufferedReader.close();
                 wconn.disconnect();
 
-                String data = "{\"document\":\"data:application/octet-stream;base64,"+Base64.encodeToString(sb.toString().getBytes(), Base64.DEFAULT)+"\"}";
+                       // Base64.encodeToString(sb.toString().getBytes("UTF-8"), Base64.DEFAULT)
+                String data = "{\"document\":\"data:application/octet-stream;base64," +
+                        "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHM6c2N1ZmwgeG1sbnM6cz0iaHR0cDovL29yZy5lbWJsLmViaS5lc2NpZW5jZS94c2N1ZmwvMC4xYWxwaGEiIHZlcnNpb249IjAuMiIgbG9nPSIwIj4KICA8czp3b3JrZmxvd2Rlc2NyaXB0aW9uIGxzaWQ9InVybjpsc2lkOnd3dy5teWdyaWQub3JnLnVrOm9wZXJhdGlvbjpLNlpDRzZJV05TMCIgYXV0aG9yPSIiIHRpdGxlPSIiIC8+CiAgPHM6cHJvY2Vzc29yIG5hbWU9IlN0cmluZ19Db25zdGFudCIgYm9yaW5nPSJ0cnVlIj4KICAgIDxzOnN0cmluZ2NvbnN0YW50Pmh0dHA6Ly93d3cuY3MubWFuLmFjLnVrL35nb2RlcmlzYS9QaG90by5qcGc8L3M6c3RyaW5nY29uc3RhbnQ+CiAgPC9zOnByb2Nlc3Nvcj4KICA8czpwcm9jZXNzb3IgbmFtZT0iR2V0X2ltYWdlX2Zyb21fVVJMIj4KICAgIDxzOmxvY2FsPm9yZy5lbWJsLmViaS5lc2NpZW5jZS5zY3VmbHdvcmtlcnMuamF2YS5XZWJJbWFnZUZldGNoZXI8L3M6bG9jYWw+CiAgPC9zOnByb2Nlc3Nvcj4KICA8czpsaW5rIHNvdXJjZT0iU3RyaW5nX0NvbnN0YW50OnZhbHVlIiBzaW5rPSJHZXRfaW1hZ2VfZnJvbV9VUkw6dXJsIiAvPgogIDxzOmxpbmsgc291cmNlPSJHZXRfaW1hZ2VfZnJvbV9VUkw6aW1hZ2UiIHNpbms9InZpeiIgLz4KICA8czpzaW5rIG5hbWU9InZpeiIgLz4KPC9zOnNjdWZsPgoKCg=="+"\"}";
                 String post = "{\"workflow\":"+data+"}";
                 //clear sb so that we can use it again to fetch results from this post request
                 sb.delete(0,sb.length()-1);
                 System.out.println("BODY=>"+post);
+                connection.setRequestMethod("POST");
                 connection.setRequestProperty("Authorization", basicAuth);
                 connection.setRequestProperty("Accept", "*/*");
+               // connection.setRequestProperty("Content-Length", "10165");
                 connection.setRequestProperty("Content-Type", "application/json");
-                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Language", "en-US");
+                connection.setRequestProperty("Accept-Charset", "UTF-8");
+                connection.setUseCaches (false);
+                connection.setDoOutput(true);
+             //   connection.setDoInput(true);
                 connection.connect(); //send request
 
-             /*   DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
+                DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
                 dos.writeBytes(post);//write post data which is a formatted json data representing body of workflow
 
                 dos.flush();
-                dos.close();*/
+                dos.close();
 /*
                 InputStream dis = connection.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(dis));
