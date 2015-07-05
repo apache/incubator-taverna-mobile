@@ -114,13 +114,9 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         final String author = workflow.get(i).getWorkflow_author();
         final String title = workflow.get(i).getWorkflow_title();
         String description  = workflow.get(i).getWorkflow_description();
-        String uri = workflow.get(i).getWorkflow_details_url();
+        final String uri = workflow.get(i).getWorkflow_details_url();
         final String desc_full = description;
-        final ArrayList<Object> mfav = new ArrayList<Object>();
 
-        //save current workflow as favorite
-            mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full); mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
-            mfav.add(uri);
         if(description.length() > 80) description = description.substring(0, 79);
         viewHolder.author_name.setHint(author);
         viewHolder.wk_title.setHint(title);
@@ -144,7 +140,16 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         viewHolder.btn_mark_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ArrayList<Object> mfav = new ArrayList<Object>();
+                //save current workflow as favorite
+                mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full); mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
+                mfav.add(uri);
                 mfav.add(viewHolder.author_name.getText());
+                try {
+                    favDB.put(mfav);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 boolean saved =  favDB.save();
                 if(saved) {
                     Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
@@ -165,11 +170,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                     viewHolder.infolayout.setVisibility(View.GONE);
             }
         });
-        try {
-            favDB.put(mfav);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
         synchronized (this){
             new DetailLinkLoader().execute(uri);
         }
