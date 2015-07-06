@@ -77,7 +77,10 @@ limitations under the License.
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/workflow_title"
-                android:hint="@string/wktitle" />
+                android:hint="@string/wktitle"
+                android:textColor="#33b5e5"
+                android:textColorHighlight="#33b5ee"
+                android:textColorHint="#33b5e5" />
 
             <TextView
                 android:layout_width="match_parent"
