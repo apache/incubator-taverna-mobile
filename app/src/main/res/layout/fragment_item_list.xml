@@ -18,12 +18,6 @@ limitations under the License.
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.apache.taverna.mobile.fragments.WorkflowItemFragment">
-    <ProgressBar
-        android:id="@+id/workflow_pb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:visibility="gone"/>
 
     <!--<ListView android:id="@android:id/list" android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent" />-->
@@ -40,17 +34,17 @@ limitations under the License.
         android:background="@color/button_material_light"
         android:scrollbars="vertical"
         android:scrollbarStyle="insideOverlay"
-        android:fadeScrollbars="true"
-        >
+        android:fadeScrollbars="true">
 
     </android.support.v7.widget.RecyclerView>
 </android.support.v4.widget.SwipeRefreshLayout>
     <TextView
         android:id="@android:id/empty"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone"
+        android:background="@drawable/ic_viewworkflow"
         android:text="@string/workflow_empty"/>
 
 </FrameLayout>

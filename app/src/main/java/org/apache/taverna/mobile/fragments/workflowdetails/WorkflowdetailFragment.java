@@ -204,6 +204,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         LOAD_STATE = true;
     }
 
+
     @Override
     public Loader<Workflow> onCreateLoader(int i, Bundle bundle) {
         progressDialog.show();
@@ -214,21 +215,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onLoadFinished(Loader<Workflow> workflowLoader, Workflow workflow) {
-       /* TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
-            author.append("->" + workflow.getWorkflow_author());
-        TextView title = (TextView) rootView.findViewById(R.id.wtitle);
-            title.setText(workflow.getWorkflow_title());
-        TextView desc = (TextView) rootView.findViewById(R.id.wdescription);
-            desc.setText(workflow.getWorkflow_description());
-        TextView createdat = (TextView) rootView.findViewById(R.id.wcreatedat);
-            createdat.append(workflow.getWorkflow_datecreated());
-        TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
-            updated.append(workflow.getWorkflow_datemodified());
-    //    ImageView preview = (ImageView) rootView.findViewById(R.id.wkf_image);
-          //  preview.setImageURI(Uri.parse(workflow.getWorkflow_remote_url()));
-        download_url =workflow.getWorkflow_remote_url();
-      //  progressDialog.cancel();
-     */ //progressDialog.dismiss();
+
     }
 
     @Override
@@ -354,7 +341,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         EditText edt;
         edt = new EditText(ctx);
         edt.setHint("Enter Value");
-        edt.setMinLines(2);
+        edt.setMinLines(1);
         edt.setId(i);
         return edt;
     }
@@ -458,7 +445,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                             json.put("inputs_attributes", attr_array);
                             Log.i("RUN FRAMEWORK", json.toString(2));
                             //start a run task to execute the run.
-                         //   new RunTask(ctx).execute(json.toString());
+                            new RunTask(ctx).execute(json.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -628,7 +615,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
                 DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
                 dos.writeBytes(params[0]);//write post data which is a formatted json data representing inputs to a run
-                //dos.writeUTF("");
+
                 dos.flush();
                 dos.close();
 
@@ -638,11 +625,12 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 String jsonData = "";
                 while ((jsonData = br.readLine()) != null) {
                     sb.append(jsonData);
+                    //
                 }
                 dis.close();
                 br.close();
-                Log.i("RESPONSE Code", "" + connection.getResponseCode());
-                Log.i("RESPONSE Messsage", "" + connection.getResponseMessage());
+                Log.i("Run RESPONSE Code", "" + connection.getResponseCode());
+                Log.i("Run RESPONSE Messsage", "" + connection.getResponseMessage());
 
                 return sb.toString();
 

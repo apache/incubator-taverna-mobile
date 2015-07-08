@@ -108,6 +108,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     private static View rootView;
     public static Context cx;
     private static boolean STATE_ON = false;
+    private static TextView noDataText;
 
     public static WorkflowItemFragment newInstance(String param1, String param2) {
         WorkflowItemFragment fragment = new WorkflowItemFragment();
@@ -145,6 +146,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_item, container, false);
+        noDataText = (TextView) rootView.findViewById(android.R.id.empty);
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.refresh);
         swipeRefreshLayout.setOnRefreshListener(this);
         // Set the adapter
@@ -152,6 +154,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         mListView.setHasFixedSize(true);
         mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mListView.setAnimation(in);
+        mListView.setAdapter(new WorkflowAdapter(getActivity()));
         return rootView;
     }
 
@@ -187,6 +190,15 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         super.onResume();
         if(!STATE_ON)
         new WorkflowLoader(getActivity(), swipeRefreshLayout).execute();
+
+        if(mListView.getAdapter().getItemCount() == 0){
+            mListView.setVisibility(View.GONE);
+            noDataText.setVisibility(View.VISIBLE);
+            Toast.makeText(cx, cx.getResources().getString(R.string.err_workflow_conn), Toast.LENGTH_LONG).show();
+        }else{
+            mListView.setVisibility(View.VISIBLE);
+            noDataText.setVisibility(View.GONE);
+        }
 
     }
 
@@ -288,10 +300,14 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             public void run() {
                 WorkflowItemFragment.searchAdpater = new WorkflowAdapter(cx,data);
                 WorkflowItemFragment.mListView.setAdapter(WorkflowItemFragment.searchAdpater);
-                if(data.size() == 0){
+                if(WorkflowItemFragment.searchAdpater.getItemCount() == 0){
+                    mListView.setVisibility(View.GONE);
+                    noDataText.setVisibility(View.VISIBLE);
                     Toast.makeText(cx, cx.getResources().getString(R.string.err_workflow_conn), Toast.LENGTH_LONG).show();
+                }else{
+                    mListView.setVisibility(View.VISIBLE);
+                    noDataText.setVisibility(View.GONE);
                 }
-                System.out.println("workflows: "+data.size());
             }
         });
     }
@@ -302,7 +318,6 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             public void run() {
                 synchronized (this) {
                     new AvatarLoader().execute(author.getDetails_uri());
-                    System.out.println(author.getDetails_uri());
                 }
             }
         });

@@ -31,6 +31,7 @@ import android.util.Log;
 
 import com.thebuzzmedia.sjxp.rule.IRule;
 
+import org.apache.taverna.mobile.tavernamobile.Runs;
 import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParserRules;
@@ -156,15 +157,13 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                         String started = jsonObject.getString("start_time");
                         String ended = jsonObject.getString("finish_time");
                         String state = jsonObject.getString("state");
-/*
-                        if(workflow_id == this.wid) {
+                        if(workflow_id == Integer.parseInt(this.uri)) {
                             Runs mrun = new Runs(name,started,ended,state);
                             mrun.setRun_id(id);
                             mrun.setRun_workflow_id(workflow_id);
 
                             workflow.addWorkflowRun(mrun);
                         }
-                        */
                     }
 
                 }
