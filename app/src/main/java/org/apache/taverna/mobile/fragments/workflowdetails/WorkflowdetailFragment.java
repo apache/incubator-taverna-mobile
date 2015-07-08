@@ -49,6 +49,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomControls;
@@ -72,11 +73,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.CharsetEncoder;
 
 /**
  * Created by Larry Akah on 6/9/15.
  */
-public class WorkflowdetailFragment extends Fragment implements View.OnClickListener, LoaderManager.LoaderCallbacks<Workflow>{
+public class WorkflowdetailFragment extends Fragment implements View.OnClickListener,LoaderManager.LoaderCallbacks<Workflow>{
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -106,6 +108,9 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         fragment.setArguments(args);
         return fragment;
     }
+    public static WorkflowdetailFragment getInstance(){
+        return WorkflowdetailFragment.getInstance();
+    }
 
     public WorkflowdetailFragment() {
     }
@@ -122,8 +127,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         zoomin = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomin);
         zoomout = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomout);
         zoomControls = (ZoomControls) rootView.findViewById(R.id.zoomControls);
-        zoomControls.setOnZoomInClickListener(this);
-        zoomControls.setOnZoomOutClickListener(this);
+        zoomControls.setOnClickListener(this);
+       // zoomControls.setOnZoomOutClickListener(this);
 
         Button createRun = (Button) rootView.findViewById(R.id.run_wk);
         createRun.setOnClickListener(this);
@@ -149,9 +154,10 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.run_wk:
-                //TODO implement functionality to issue a run request to the Taverna PLAYER to run the current workflow
-                //new WorkflowRunTask(getActivity()).execute(""+WORKFLO_ID);
-                new WorkflowProcessTask(getActivity()).execute(download_url);
+                if (((TextView)rootView.findViewById(R.id.wtype)).getText().toString().contains("Taverna 2"))
+                    new WorkflowProcessTask(getActivity()).execute(download_url);
+                else
+                    Toast.makeText(getActivity(), "Sorry! only Type 2 workflows can be run as of now.", Toast.LENGTH_LONG).show();
                 break;
             case R.id.download_wk:
                 // start the android Download manager to start downloading a remote workflow file
@@ -169,8 +175,12 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 //TODO mark a workflow as important and launch task to store the entry into the local database
                 break;
             case R.id.zoomControls:
+                zoomin.reset();
                 zoomin.startNow();
                 Toast.makeText(getActivity(), "Zooming", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.wkf_image:
+                view.setAnimation(zoomin);
                 break;
         }
     }
@@ -227,18 +237,18 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     }
 
     public static void setWorkflowDetails(final Workflow wk){
+        final TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
+        final TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
+        final TextView type = (TextView) rootView.findViewById(R.id.wtype);
+        final TextView title = (TextView) rootView.findViewById(R.id.wtitle);
+        final TextView desc = (TextView) rootView.findViewById(R.id.wdescription);
+        final TextView createdat = (TextView) rootView.findViewById(R.id.wcreatedat);
+        final ImageView preview = (ImageView) rootView.findViewById(R.id.wkf_image);
 
         ((Activity)cont).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 //load necessary widgets
-                TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
-                TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
-                TextView type = (TextView) rootView.findViewById(R.id.wtype);
-                TextView title = (TextView) rootView.findViewById(R.id.wtitle);
-                TextView desc = (TextView) rootView.findViewById(R.id.wdescription);
-                TextView createdat = (TextView) rootView.findViewById(R.id.wcreatedat);
-                final ImageView preview = (ImageView) rootView.findViewById(R.id.wkf_image);
 
                 //set widget data
                 User uploader = wk.getUploader();
@@ -295,6 +305,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 progressDialog.dismiss();
             }
         });
+      //  preview.setOnClickListener(WorkflowdetailFragment.getInstance());
     }
 
     private static class LoadImageThread extends AsyncTask<String, Void, Bitmap>{
@@ -405,7 +416,9 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             //show the skeleton to the user in a dialog box
             final Context ctx = this.context;
             final LinearLayout ll = new LinearLayout(ctx);
+            ScrollView sv = new ScrollView(ctx);
             ll.setOrientation(LinearLayout.VERTICAL);
+            sv.addView(ll);
 
             try {
                 final JSONObject json = new JSONObject(result); //main server response json
@@ -420,10 +433,10 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 }
 
                 alertDialogBuilder = new AlertDialog.Builder(ctx);
-                alertDialogBuilder.setView(ll);
+                alertDialogBuilder.setView(sv);
  //               alertDialogBuilder.setMessage(result);
                 alertDialogBuilder.setIcon(ctx.getResources().getDrawable(R.mipmap.ic_launcher));
-                alertDialogBuilder.setTitle("New Run");
+                alertDialogBuilder.setTitle("New Workflow Run");
                 alertDialogBuilder.setPositiveButton("Execute", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -444,7 +457,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                         try {
                             json.put("inputs_attributes", attr_array);
                             Log.i("RUN FRAMEWORK", json.toString(2));
-                            new RunTask(ctx).execute(json.toString());
+                            //start a run task to execute the run.
+                         //   new RunTask(ctx).execute(json.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -518,10 +532,9 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                     sb.append(str); //in this string builder we have read the workflow( as .t2flow or .xml) workflow from remote resource. Now we need to post that to the player.
                 bufferedReader.close();
                 wconn.disconnect();
-//PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHM6c2N1ZmwgeG1sbnM6cz0iaHR0cDovL29yZy5lbWJsLmViaS5lc2NpZW5jZS94c2N1ZmwvMC4xYWxwaGEiIHZlcnNpb249IjAuMiIgbG9nPSIwIj4KICA8czp3b3JrZmxvd2Rlc2NyaXB0aW9uIGxzaWQ9InVybjpsc2lkOnd3dy5teWdyaWQub3JnLnVrOm9wZXJhdGlvbjpLNlpDRzZJV05TMCIgYXV0aG9yPSIiIHRpdGxlPSIiIC8+CiAgPHM6cHJvY2Vzc29yIG5hbWU9IlN0cmluZ19Db25zdGFudCIgYm9yaW5nPSJ0cnVlIj4KICAgIDxzOnN0cmluZ2NvbnN0YW50Pmh0dHA6Ly93d3cuY3MubWFuLmFjLnVrL35nb2RlcmlzYS9QaG90by5qcGc8L3M6c3RyaW5nY29uc3RhbnQ+CiAgPC9zOnByb2Nlc3Nvcj4KICA8czpwcm9jZXNzb3IgbmFtZT0iR2V0X2ltYWdlX2Zyb21fVVJMIj4KICAgIDxzOmxvY2FsPm9yZy5lbWJsLmViaS5lc2NpZW5jZS5zY3VmbHdvcmtlcnMuamF2YS5XZWJJbWFnZUZldGNoZXI8L3M6bG9jYWw+CiAgPC9zOnByb2Nlc3Nvcj4KICA8czpsaW5rIHNvdXJjZT0iU3RyaW5nX0NvbnN0YW50OnZhbHVlIiBzaW5rPSJHZXRfaW1hZ2VfZnJvbV9VUkw6dXJsIiAvPgogIDxzOmxpbmsgc291cmNlPSJHZXRfaW1hZ2VfZnJvbV9VUkw6aW1hZ2UiIHNpbms9InZpeiIgLz4KICA8czpzaW5rIG5hbWU9InZpeiIgLz4KPC9zOnNjdWZsPgoKCg==
-                       // Base64.encodeToString(sb.toString().getBytes("UTF-8"), Base64.DEFAULT)
+
                 String data = "{\"document\":\"data:application/octet-stream;base64," +
-                        Base64.encodeToString(sb.toString().getBytes("UTF-8"), Base64.URL_SAFE|Base64.NO_WRAP)+"\"}";
+                        Base64.encodeToString(sb.toString().getBytes("UTF-8"), Base64.URL_SAFE|Base64.NO_WRAP).replace('-','+')+"\"}";
                 String post = "{\"workflow\":"+data+"}";
                 //clear sb so that we can use it again to fetch results from this post request
                 sb.delete(0,sb.length()-1);
@@ -529,25 +542,23 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Authorization", basicAuth);
                 connection.setRequestProperty("Accept", "*/*");
-               // connection.setRequestProperty("Content-Length", "10165");
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setRequestProperty("Content-Encoding", "UTF-8");
-                connection.setRequestProperty("Accept-Charset", "UTF-8");
                 connection.setUseCaches (false);
                 connection.setDoOutput(true);
-             //   connection.setDoInput(true);
                 connection.connect(); //send request
 
                 DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
+
                 dos.writeBytes(post);//write post data which is a formatted json data representing body of workflow
 
                 dos.flush();
                 dos.close();
-/*
+
                 InputStream dis = connection.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(dis));
                 while ((str = br.readLine())!= null)
-                    sb.append(str);*/
+                    sb.append(str);
                 System.out.println("Post Response Code: "+connection.getResponseCode());
                 System.out.println("Post response message: "+connection.getResponseMessage());
                 connection.disconnect();
@@ -555,17 +566,32 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 e.printStackTrace();
                 sb.append("Error reading remote workflow. Please try again later");
             }
+
             return sb.toString();
         }
 
+        /**
+         * Receives a result from the player as a json describing the workflow that has just been uploaded along with key components that
+         * can be used to generate a run from thw workflow. A run is started that would fetch and build a sample UI for a workflow run to be executed
+         * @param s the json result that describes the uploaded workflow
+         */
         @Override
         protected void onPostExecute(String s) {
-            System.out.println(s);
             progressDialog.dismiss();
+            System.out.println(s);
+            s = s.substring(1, s.length());
+            try {
+                JSONObject workflowJson = new JSONObject(s);
+                new WorkflowRunTask(getActivity()).execute(workflowJson.getString("id"));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     }
     /**
-     * creates a new workflow run from the
+     * creates a new workflow run from the workflow on the player
      */
     private class RunTask extends AsyncTask<String, Void, String>{
 
@@ -617,7 +643,6 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 br.close();
                 Log.i("RESPONSE Code", "" + connection.getResponseCode());
                 Log.i("RESPONSE Messsage", "" + connection.getResponseMessage());
-                Log.i("Authorization ", "" + connection.getRequestProperty("Authorization"));
 
                 return sb.toString();
 
