@@ -194,7 +194,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             if (mListView.getAdapter().getItemCount() == 0) {
                 mListView.setVisibility(View.GONE);
                 noDataText.setVisibility(View.VISIBLE);
-                Toast.makeText(cx, cx.getResources().getString(R.string.err_workflow_conn), Toast.LENGTH_LONG).show();
+
             } else {
                 mListView.setVisibility(View.VISIBLE);
                 noDataText.setVisibility(View.GONE);
@@ -303,7 +303,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                 if(WorkflowItemFragment.searchAdpater.getItemCount() == 0){
                     mListView.setVisibility(View.GONE);
                     noDataText.setVisibility(View.VISIBLE);
-                    Toast.makeText(cx, cx.getResources().getString(R.string.err_workflow_conn), Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(cx, cx.getResources().getString(R.string.err_workflow_conn), Toast.LENGTH_LONG).show();
                 }else{
                     mListView.setVisibility(View.VISIBLE);
                     noDataText.setVisibility(View.GONE);
