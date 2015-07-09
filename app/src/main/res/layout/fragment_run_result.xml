@@ -93,6 +93,7 @@
         android:text="inputs from run"
         android:id="@+id/runinputsTextView"
         android:minLines="5"
+        android:scrollbars="vertical"
         android:layout_marginTop="10dp"
         android:layout_weight="1.5"
         android:layout_marginBottom="10dp" />

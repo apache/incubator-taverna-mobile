@@ -3,6 +3,7 @@ package org.apache.taverna.mobile.fragments.workflowdetails;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -110,6 +111,7 @@ public class RunFragment extends Fragment implements View.OnClickListener{
                 runStartTime.setHint(runStarted);
                 runEndTime.setHint(runEnded);
                 runInputsText.setText(runInputs);
+                runInputsText.setMovementMethod(new ScrollingMovementMethod());
 
                 downloadOutput.setOnClickListener(this);
                 downloadLogs.setOnClickListener(this);
