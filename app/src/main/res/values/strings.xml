@@ -94,5 +94,8 @@ limitations under the License.
     <string name="playerpass">Password</string>
     <string name="myexperimenttitle">Configure MyExperiment Account</string>
     <string name="myexperimentsummary">Username used to login to MyExperiment</string>
+    <string name="title_activity_run_result">Workflow Run Result</string>
+    <string name="runstarted">Run Started</string>
+    <string name="run_finishtime">Run finish Time</string>
 
 </resources>

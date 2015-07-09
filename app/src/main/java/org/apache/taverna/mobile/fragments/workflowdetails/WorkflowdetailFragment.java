@@ -31,6 +31,7 @@ import android.app.LoaderManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.Loader;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -56,6 +57,7 @@ import android.widget.ZoomControls;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
+import org.apache.taverna.mobile.activities.RunResult;
 import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
 import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
@@ -194,7 +196,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     @Override
     public void onResume() {
         super.onResume();
-        if(!LOAD_STATE)
+     //   if(!LOAD_STATE)
             getActivity().getLoaderManager().initLoader(1, null, this).forceLoad();
     }
 
@@ -203,7 +205,6 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         super.onSaveInstanceState(outState);
         LOAD_STATE = true;
     }
-
 
     @Override
     public Loader<Workflow> onCreateLoader(int i, Bundle bundle) {
@@ -645,6 +646,10 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             Log.i("RUN OutPut", s);
             progressDialog.dismiss();
             //TODO startup the runActivity to display the run results
+            Intent runIntent = new Intent();
+            runIntent.setClass(this.context, RunResult.class);
+            runIntent.putExtra("runresult", s);
+            startActivity(runIntent);
         }
     }
 }

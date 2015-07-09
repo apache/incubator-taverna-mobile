@@ -262,9 +262,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                         ladapter.addWorkflow(workflow);
                     }
                 }
-            else {
-                Toast.makeText(getActivity(), "No workflows available", Toast.LENGTH_SHORT).show();
-            }
+
             mListView.swapAdapter(ladapter, true);
             if (ladapter.getItemCount() == 0)
                 Toast.makeText(getActivity(), "No workflows found matching criteria", Toast.LENGTH_SHORT).show();
