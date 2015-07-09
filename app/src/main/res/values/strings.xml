@@ -56,7 +56,7 @@ limitations under the License.
     <string name="workflow_authorhint">Workflow Author  </string>
     <string name="workflow_component">Workflow component</string>
     <string name="favorite_empty"> No Favorites Added Yet</string>
-    <string name="workflow_empty"> No <b>Workflows</b> Available. Check your Connection to the Internet</string>
+    <string name="workflow_empty"> No <b>Workflows</b> Available. Check your Connection to the Internet or Pull down to refresh</string>
     <string name="wktitle">TITLE</string>
     <string name="marked">Marked On</string>
     <string name="created">Created :</string>
