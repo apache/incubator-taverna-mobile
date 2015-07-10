@@ -170,14 +170,15 @@ public class RunFragment extends Fragment implements View.OnClickListener{
                 try {
                     runStartTime.setHint(runInfo.getString("start_time"));
                     runEndTime.setHint(runInfo.getString("finish_time"));
+                    runStateTextView.setText(runInfo.getString("status_message"));
 
-                if(runInfo.getString("state").contains("Pending"))
+                if(runInfo.getString("status_message").contains("Pending"))
                     status.setImageResource(android.R.drawable.presence_busy);
-                else if (runInfo.getString("state").contains("Running"))
+                else if (runInfo.getString("status_message").contains("Running"))
                     status.setImageResource(android.R.drawable.presence_away);
-                else if (runInfo.getString("state").contains("Finished"))
+                else if (runInfo.getString("status_message").contains("Finished"))
                     status.setImageResource(android.R.drawable.presence_online);
-                else if (runInfo.getString("state").contains("Failed"))
+                else if (runInfo.getString("status_message").contains("Failed"))
                     status.setImageResource(android.R.drawable.presence_offline);
                 else
                     status.setImageResource(android.R.drawable.presence_invisible);
@@ -206,12 +207,8 @@ public class RunFragment extends Fragment implements View.OnClickListener{
 
                 URL workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_URL+this.runid);
                 HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
-                String userpass = "icep603@gmail.com" + ":" + "creationfox";
-                String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
 
-      //          connection.setRequestProperty("Authorization", basicAuth);
                 connection.setRequestProperty("Accept", "application/json");
-    //            connection.setRequestProperty("Content-Type", "application/json");
                 connection.setRequestMethod("GET");
                 connection.connect(); //send request
 
@@ -228,6 +225,7 @@ public class RunFragment extends Fragment implements View.OnClickListener{
                 connection.disconnect();
 
                 JSONObject runInfo = new JSONObject(sb.toString());
+             //   System.out.println(runInfo.toString(2));
                 updateRun(runInfo);
 
             }catch (IOException ex){
