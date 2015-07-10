@@ -98,6 +98,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     private ZoomControls zoomControls;
     static Animation zoomin;
     static Animation zoomout;
+    public boolean isZoomIn;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -130,12 +131,19 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         zoomout = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomout);
         zoomControls = (ZoomControls) rootView.findViewById(R.id.zoomControls);
         zoomControls.setOnClickListener(this);
-       // zoomControls.setOnZoomOutClickListener(this);
+        isZoomIn = false;
 
         Button createRun = (Button) rootView.findViewById(R.id.run_wk);
         createRun.setOnClickListener(this);
         Button download = (Button) rootView.findViewById(R.id.download_wk);
         download.setOnClickListener(this);
+        (rootView.findViewById(R.id.wkf_image)).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                view.setAnimation(zoomin);
+                return true;
+            }
+        });
         downloadManager = (DownloadManager) getActivity().getSystemService(Context.DOWNLOAD_SERVICE);
         return rootView;
     }
@@ -180,9 +188,6 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 zoomin.reset();
                 zoomin.startNow();
                 Toast.makeText(getActivity(), "Zooming", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.wkf_image:
-                view.setAnimation(zoomin);
                 break;
         }
     }
@@ -610,8 +615,6 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 connection.setRequestProperty("Accept", "application/json");
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setRequestMethod("POST");
-                // connection.setDoInput(true);
-                //  connection.setDoOutput(true);
                 connection.connect(); //send request
 
                 DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
