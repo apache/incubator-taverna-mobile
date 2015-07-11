@@ -99,13 +99,6 @@ public class DashboardMainActivity extends ActionBarActivity
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
 
-      /*  //Handle search actions from a system sent intent
-        Intent searchIntent = getIntent();
-        if(searchIntent != null && Intent.ACTION_SEARCH.equals(searchIntent.getAction())){
-            //retrieve and process query then display results
-            String query = searchIntent.getStringExtra(SearchManager.QUERY);
-            Toast.makeText(this,"Query = "+query, Toast.LENGTH_SHORT).show();
-        }*/
     }
 
     @Override

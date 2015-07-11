@@ -359,6 +359,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     private class WorkflowRunTask extends AsyncTask<String, Void, String>{
 
         private Context context;
+        TavernaPlayerAPI tavernaPlayerAPI = new TavernaPlayerAPI();
 
         private WorkflowRunTask(Context context) {
             this.context = context;
@@ -378,7 +379,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
                 URL workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_FRAMEWORK_URL+params[0]);
                 HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
-                String userpass = "icep603@gmail.com" + ":" + "creationfox";
+                String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" + tavernaPlayerAPI.getPlayerUserPassword(this.context);
                 String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
 
                 connection.setRequestProperty("Authorization", basicAuth);

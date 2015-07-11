@@ -39,10 +39,11 @@ public class TavernaPlayerAPI {
     public static String PLAYER_RUN_URL = PLAYER_BASE_URL+"runs/";
     public static String PLAYER_RUN_FRAMEWORK_URL = PLAYER_RUN_URL+"new?workflow_id="; //returns a json 'framework' used for creating runs for the given workflow
 
-
     public TavernaPlayerAPI(Context context) {
         String server = PreferenceManager.getDefaultSharedPreferences(context).getString("pref_server_url","/");
         String player = PreferenceManager.getDefaultSharedPreferences(context).getString("pref_player_url","/");
+        String user = PreferenceManager.getDefaultSharedPreferences(context).getString("pref_player_url","/");
+        String password = PreferenceManager.getDefaultSharedPreferences(context).getString("pref_player_url","/");
         PLAYER_BASE_URL = player;
         SERVER_BASE_URL = server;
         PLAYER_WORKFLOW_URL = PLAYER_BASE_URL+"workflows/";
@@ -50,36 +51,35 @@ public class TavernaPlayerAPI {
         PLAYER_RUN_FRAMEWORK_URL = PLAYER_RUN_URL+"new?workflow_id=";
     }
 
-    public static String getPLAYER_BASE_URL(Context context) {
-        new TavernaPlayerAPI(context);
+    public TavernaPlayerAPI(){
+
+    }
+
+    public static String getPLAYER_BASE_URL() {
         return PLAYER_BASE_URL;
     }
 
-    public static String getSERVER_BASE_URL(Context ctx) {
-        new TavernaPlayerAPI(ctx);
+    public static String getSERVER_BASE_URL() {
         return SERVER_BASE_URL;
     }
 
-    public static String getPLAYER_WORKFLOW_URL(Context ctx) {
-        new TavernaPlayerAPI(ctx);
+    public static String getPLAYER_WORKFLOW_URL() {
         return PLAYER_WORKFLOW_URL;
     }
 
     public static String getPLAYER_RUN_URL(Context ctx) {
-        new TavernaPlayerAPI(ctx);
         return PLAYER_RUN_URL;
     }
 
     public static String getPLAYER_RUN_FRAMEWORK_URL(Context ctx) {
-        new TavernaPlayerAPI(ctx);
         return PLAYER_RUN_FRAMEWORK_URL;
     }
 
-    public static String getPlayerUserName(Context c){
+    public String getPlayerUserName(Context c){
         return PreferenceManager.getDefaultSharedPreferences(c).getString("pref_user","default");
     }
 
-    public static String getPlayerUserPassword(Context c){
+    public String getPlayerUserPassword(Context c){
         return PreferenceManager.getDefaultSharedPreferences(c).getString("pref_password","default");
     }
 

@@ -39,6 +39,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
 
     private Context context;
     private ProgressDialog progressDialog;
+    TavernaPlayerAPI tavernaPlayerAPI = new TavernaPlayerAPI();
 
     public WorkflowOpen(Context context) {
         this.context = context;
@@ -61,13 +62,14 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
         StringBuffer sb = new StringBuffer();
         String str = "";
         try {
+
              //prepare connection requests
             File objectFile = new File(params[0]); //the resource xml file representing the workflow to be uploaded to the player
             String playerurl = new TavernaPlayerAPI(this.context).PLAYER_BASE_URL+"workflows.json";
             URL posturl = new URL(playerurl);
             HttpURLConnection connection = (HttpURLConnection) posturl.openConnection();
 
-            String user = "icep603@gmail.com" + ":" + "creationfox";
+            String user = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" + tavernaPlayerAPI.getPlayerUserPassword(this.context);
             String basicAuth = "Basic " + Base64.encodeToString(user.getBytes(), Base64.DEFAULT);
             //read the file from remote resource and encode the stream with a base64 algorithm
 
@@ -184,7 +186,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
 
                 URL workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_FRAMEWORK_URL+params[0]);
                 HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
-                String userpass = "icep603@gmail.com" + ":" + "creationfox";
+                String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" + tavernaPlayerAPI.getPlayerUserPassword(this.context);
                 String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
 
                 connection.setRequestProperty("Authorization", basicAuth);
@@ -192,7 +194,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
                 connection.setRequestMethod("GET");
                 connection.connect(); //send request
                 Log.i("RESPONSE Code", "" + connection.getResponseCode());
-                Log.i("RESPONSE Messsage", "" + connection.getResponseMessage());
+                Log.i("RESPONSE Message", "" + connection.getResponseMessage());
                 Log.i("Authorization ", "" + connection.getRequestProperty("Authorization"));
 
                 InputStream dis = connection.getInputStream();

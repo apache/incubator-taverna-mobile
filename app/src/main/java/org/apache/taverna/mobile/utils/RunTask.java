@@ -42,10 +42,10 @@ public class RunTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         StringBuffer sb = new StringBuffer();
         try {
-
+            TavernaPlayerAPI tavernaPlayerAPI = new TavernaPlayerAPI();
             URL workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_URL);
             HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
-            String userpass = "icep603@gmail.com" + ":" + "creationfox";
+            String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" + tavernaPlayerAPI.getPlayerUserPassword(this.context);
             String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
 
             connection.setRequestProperty("Authorization", basicAuth);
@@ -84,7 +84,7 @@ public class RunTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         Log.i("RUN OutPut", s);
-//            progressDialog.dismiss();
+            progressDialog.dismiss();
         Intent runIntent = new Intent();
         runIntent.setClass(this.context, RunResult.class);
         runIntent.putExtra("runresult", s);
