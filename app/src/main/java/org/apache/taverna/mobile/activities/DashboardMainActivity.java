@@ -54,6 +54,7 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.fragments.FavoriteFragment;
 import org.apache.taverna.mobile.fragments.NavigationDrawerFragment;
 import org.apache.taverna.mobile.fragments.WorkflowItemFragment;
+import org.apache.taverna.mobile.utils.WorkflowOpen;
 
 import java.io.File;
 
@@ -168,6 +169,7 @@ public class DashboardMainActivity extends ActionBarActivity
             if(requestCode == SELECT_WORKFLOW){
                 String workflowPath = data.getData().getPath();
                 Toast.makeText(getBaseContext(), "Path: "+workflowPath, Toast.LENGTH_LONG).show();
+                new WorkflowOpen(this).execute(workflowPath);
             }
         }
     }

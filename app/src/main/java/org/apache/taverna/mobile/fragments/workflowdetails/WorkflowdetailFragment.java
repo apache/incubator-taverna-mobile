@@ -62,6 +62,7 @@ import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
 import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.DetailsLoader;
+import org.apache.taverna.mobile.utils.RunTask;
 import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -99,6 +100,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     static Animation zoomin;
     static Animation zoomout;
     public boolean isZoomIn;
+    public static String workflow_uri ;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -201,8 +203,10 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     @Override
     public void onResume() {
         super.onResume();
-     //   if(!LOAD_STATE)
-            getActivity().getLoaderManager().initLoader(1, null, this).forceLoad();
+        if(!LOAD_STATE)
+        workflow_uri = getActivity().getIntent().getStringExtra("uri");
+
+        getActivity().getLoaderManager().initLoader(1, null, this).forceLoad();
     }
 
     @Override
@@ -216,7 +220,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         progressDialog.show();
         return new DetailsLoader(getActivity(),
                 DetailsLoader.LOAD_TYPE.TYPE_WORKFLOW_DETAIL,
-                getActivity().getIntent().getStringExtra("uri"));
+                workflow_uri);
     }
 
     @Override
@@ -454,6 +458,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                             new RunTask(ctx).execute(json.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
+                        }catch (Exception ex){
+                            ex.printStackTrace();
                         }
 
                     }
@@ -583,76 +589,5 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
         }
     }
-    /**
-     * creates a new workflow run from the workflow on the player
-     */
-    private class RunTask extends AsyncTask<String, Void, String>{
 
-        private Context context;
-
-        private RunTask(Context ctx) {
-            this.context = ctx;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog.setMessage("Creating new run for the workflow");
-            progressDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            StringBuffer sb = new StringBuffer();
-            try {
-
-                URL workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_URL);
-                HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
-                String userpass = "icep603@gmail.com" + ":" + "creationfox";
-                String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
-
-                connection.setRequestProperty("Authorization", basicAuth);
-                connection.setRequestProperty("Accept", "application/json");
-                connection.setRequestProperty("Content-Type", "application/json");
-                connection.setRequestMethod("POST");
-                connection.connect(); //send request
-
-                DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
-                dos.writeBytes(params[0]);//write post data which is a formatted json data representing inputs to a run
-
-                dos.flush();
-                dos.close();
-
-                InputStream dis = connection.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(dis));
-
-                String jsonData = "";
-                while ((jsonData = br.readLine()) != null) {
-                    sb.append(jsonData);
-                    //
-                }
-                dis.close();
-                br.close();
-                Log.i("Run RESPONSE Code", "" + connection.getResponseCode());
-                Log.i("Run RESPONSE Messsage", "" + connection.getResponseMessage());
-
-                return sb.toString();
-
-            }catch (IOException ex){
-                ex.printStackTrace();
-            }
-            return sb.toString();
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            Log.i("RUN OutPut", s);
-            progressDialog.dismiss();
-            //TODO startup the runActivity to display the run results
-            Intent runIntent = new Intent();
-            runIntent.setClass(this.context, RunResult.class);
-            runIntent.putExtra("runresult", s);
-            startActivity(runIntent);
-        }
-    }
 }

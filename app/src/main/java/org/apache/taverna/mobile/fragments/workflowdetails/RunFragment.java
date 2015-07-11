@@ -96,6 +96,12 @@ public class RunFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().finish();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         String runresult = getActivity().getIntent().getStringExtra("runresult");
@@ -147,12 +153,14 @@ public class RunFragment extends Fragment implements View.OnClickListener{
             reloadRunResult();
             return true;
         }
+        if(id == android.R.id.home){
+           getActivity().finish();
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
     private void reloadRunResult(){
-        //TODO reload the run results when refreshed
         Timer t = new Timer();
         t.scheduleAtFixedRate(new RunTimerTask(getActivity(), run_id), 0, 5000);
     }
@@ -163,7 +171,7 @@ public class RunFragment extends Fragment implements View.OnClickListener{
     }
 
     public void updateRun(final JSONObject runInfo){
-
+        if(null != runInfo)
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
