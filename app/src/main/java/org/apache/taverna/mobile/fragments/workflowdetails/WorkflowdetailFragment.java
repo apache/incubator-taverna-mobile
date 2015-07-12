@@ -106,7 +106,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     public static long WORKFLO_ID;
     public static Context cont;
     private static boolean LOAD_STATE = false;
-    private ZoomControls zoomControls;
+    private static boolean DROPUPLOAD = false;
     static Animation zoomin;
     static Animation zoomout;
     public boolean isZoomIn;
@@ -205,8 +205,13 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 //TODO mark a workflow as important and launch task to store the entry into the local database
                 break;
             case R.id.saveToDropboxButton:
-                mDBApi.getSession().startOAuth2Authentication(getActivity());
-
+                String authToken = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("dropboxauth", "");
+                if (authToken.isEmpty())
+                    mDBApi.getSession().startOAuth2Authentication(getActivity());
+                else {
+                    mDBApi.getSession().setOAuth2AccessToken(authToken);
+                    new WorkflowDriveUpload().execute(download_url);
+                }
                 break;
             case R.id.saveToGoogleDriveButton:
                 break;
@@ -227,11 +232,12 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
         getActivity().getLoaderManager().initLoader(1, null, this).forceLoad();
 
-        if (mDBApi.getSession().authenticationSuccessful()) {
+        if (mDBApi.getSession().authenticationSuccessful() && !DROPUPLOAD) {
             try {
                 // Required to complete auth, sets the access token on the session
                 mDBApi.getSession().finishAuthentication();
                 String accessToken = mDBApi.getSession().getOAuth2AccessToken();
+                PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putString("dropboxauth", accessToken).commit();
                 new WorkflowDriveUpload().execute(download_url);
             } catch (IllegalStateException e) {
                 Log.i("DbAuthLog", "Error authenticating", e);
@@ -655,7 +661,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                          });
 
                 Log.i("DbExampleLog", "The uploaded file's rev is: " + response.rev);
-                metaDataEntry = mDBApi.metadata("/"+Uri.parse(files[0]).getLastPathSegment(), 1, null, false, null);
+              //  metaDataEntry = mDBApi.metadata("/"+Uri.parse(files[0]).getLastPathSegment(), 1, null, false, null);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (DropboxException e) {
@@ -671,8 +677,10 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
         @Override
         protected void onPostExecute(String s) {
-            if(null != s)
-                Toast.makeText(getActivity(), "File Saved to dropbox: "+s, Toast.LENGTH_LONG).show();
+            if(null != s) {
+                Toast.makeText(getActivity(), "File Saved to dropbox. Reference: " + s, Toast.LENGTH_LONG).show();
+                DROPUPLOAD = true;
+            }
             else{
                 Toast.makeText(getActivity(), "Failed to save to dropbox "+s, Toast.LENGTH_LONG).show();
             }
