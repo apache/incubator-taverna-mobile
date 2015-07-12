@@ -60,9 +60,10 @@ limitations under the License.
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
-        android:layout_centerHorizontal="true"
         android:indeterminate="true"
         android:indeterminateBehavior="repeat"
         android:indeterminateOnly="true"
-        android:indeterminateTintMode="src_over" />
+        android:indeterminateTintMode="src_over"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
