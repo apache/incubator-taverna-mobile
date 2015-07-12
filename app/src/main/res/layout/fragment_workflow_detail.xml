@@ -93,12 +93,30 @@ limitations under the License.
                 android:backgroundTint="@color/accent_material_light"
                 android:backgroundTintMode="src_atop" />
 
-            <ZoomControls
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/zoomControls"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal" />
+                android:layout_gravity="center"
+                android:gravity="right">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/saveToDropboxButton"
+                    android:src="@drawable/dropbox_icon"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/button_material_light" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/saveToGoogleDriveButton"
+                    android:src="@drawable/google_drive_icon"
+                    android:layout_gravity="right"
+                    android:background="@color/button_material_light" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

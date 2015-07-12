@@ -35,6 +35,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -55,6 +56,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ZoomControls;
 
+import com.dropbox.client2.DropboxAPI;
+import com.dropbox.client2.ProgressListener;
+import com.dropbox.client2.android.AndroidAuthSession;
+import com.dropbox.client2.exception.DropboxException;
+import com.dropbox.client2.session.AppKeyPair;
+
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.activities.RunResult;
@@ -71,10 +78,13 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.CharsetEncoder;
 
@@ -101,6 +111,10 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     static Animation zoomout;
     public boolean isZoomIn;
     public static String workflow_uri ;
+    final static private String BOX_APP_KEY = "doicbvkfyzligh2";
+    final static private String BOX_APP_SECRET = "3uuuw36mm7jkflc";
+
+    private DropboxAPI<AndroidAuthSession> mDBApi;
 
     /**
      * Returns a new instance of this fragment for the given section
@@ -121,8 +135,11 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+
+        AppKeyPair appKeys = new AppKeyPair(BOX_APP_KEY, BOX_APP_SECRET);
+        AndroidAuthSession session = new AndroidAuthSession(appKeys);
+        mDBApi = new DropboxAPI<AndroidAuthSession>(session);
         long workflowid = getActivity().getIntent().getLongExtra("workflowid", 0);
         rootView = inflater.inflate(R.layout.fragment_workflow_detail, container, false);
         progressDialog = new ProgressDialog(getActivity());
@@ -131,14 +148,15 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         WORKFLO_ID = workflowid;
         zoomin = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomin);
         zoomout = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomout);
-        zoomControls = (ZoomControls) rootView.findViewById(R.id.zoomControls);
-        zoomControls.setOnClickListener(this);
+
         isZoomIn = false;
 
         Button createRun = (Button) rootView.findViewById(R.id.run_wk);
         createRun.setOnClickListener(this);
         Button download = (Button) rootView.findViewById(R.id.download_wk);
         download.setOnClickListener(this);
+        rootView.findViewById(R.id.saveToDropboxButton).setOnClickListener(this);
+        rootView.findViewById(R.id.saveToGoogleDriveButton).setOnClickListener(this);
         (rootView.findViewById(R.id.wkf_image)).setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -186,10 +204,11 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             case R.id.mark_wk:
                 //TODO mark a workflow as important and launch task to store the entry into the local database
                 break;
-            case R.id.zoomControls:
-                zoomin.reset();
-                zoomin.startNow();
-                Toast.makeText(getActivity(), "Zooming", Toast.LENGTH_SHORT).show();
+            case R.id.saveToDropboxButton:
+                mDBApi.getSession().startOAuth2Authentication(getActivity());
+
+                break;
+            case R.id.saveToGoogleDriveButton:
                 break;
         }
     }
@@ -207,6 +226,17 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         workflow_uri = getActivity().getIntent().getStringExtra("uri");
 
         getActivity().getLoaderManager().initLoader(1, null, this).forceLoad();
+
+        if (mDBApi.getSession().authenticationSuccessful()) {
+            try {
+                // Required to complete auth, sets the access token on the session
+                mDBApi.getSession().finishAuthentication();
+                String accessToken = mDBApi.getSession().getOAuth2AccessToken();
+                new WorkflowDriveUpload().execute(download_url);
+            } catch (IllegalStateException e) {
+                Log.i("DbAuthLog", "Error authenticating", e);
+            }
+        }
     }
 
     @Override
@@ -588,6 +618,64 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 e.printStackTrace();
             }
 
+        }
+    }
+
+    /**
+     * Upload workflow from myexperiment to DropBox
+     */
+    private class WorkflowDriveUpload extends  AsyncTask<String, Void, String>{
+        @Override
+        protected void onPreExecute() {
+            Toast.makeText(getActivity(), "Saving workflow to dropBox", Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        protected String doInBackground(String... files) {
+           // File file = new File(files[0]);
+            HttpURLConnection mconn ;
+         //   FileInputStream inputStream = null;
+            DropboxAPI.Entry response = null;
+            DropboxAPI.Entry metaDataEntry = null;
+            try {
+                mconn = (HttpURLConnection) new URL(files[0]).openConnection();
+                mconn.setRequestMethod("GET");
+                mconn.connect();
+
+              //  inputStream = new FileInputStream(file);
+
+                 response = mDBApi.putFile("/"+ Uri.parse(files[0]).getLastPathSegment(), mconn.getInputStream(),
+                        mconn.getContentLength(), null, new ProgressListener() {
+                             @Override
+                             public void onProgress(long l, long l2) {
+                                 if (l==l2){
+                                     Toast.makeText(getActivity(), "Upload complete", Toast.LENGTH_LONG).show();
+                                 }
+                             }
+                         });
+
+                Log.i("DbExampleLog", "The uploaded file's rev is: " + response.rev);
+                metaDataEntry = mDBApi.metadata("/"+Uri.parse(files[0]).getLastPathSegment(), 1, null, false, null);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (DropboxException e) {
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return response.rev;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if(null != s)
+                Toast.makeText(getActivity(), "File Saved to dropbox: "+s, Toast.LENGTH_LONG).show();
+            else{
+                Toast.makeText(getActivity(), "Failed to save to dropbox "+s, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
