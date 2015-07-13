@@ -17,8 +17,8 @@
 # Apache Taverna Mobile
 
 Apache Taverna Mobile is planned as an Android app
-for controlling an [Apache Taverna Server](http://taverna.incubator.apache.org/documentation/server/) 
-for remotely running 
+for controlling an [Apache Taverna Server](http://taverna.incubator.apache.org/documentation/server/)
+for remotely running
 [Apache Taverna](http://taverna.incubator.apache.org/) workflows.
 
 This module is **work in progress** as part of Google Summer of Code 2015.
@@ -42,20 +42,20 @@ details about embedded third-party libraries and source code.
 
 # Contribute
 
-Please subscribe to and contact the 
+Please subscribe to and contact the
 [dev@taverna](http://taverna.incubator.apache.org/community/lists#dev mailing list)
-for any questions, suggestions and discussions about 
+for any questions, suggestions and discussions about
 Apache Taverna Mobile.
 
 Bugs and feature plannings are tracked in the Jira
 [Issue tracker](https://issues.apache.org/jira/browse/TAVERNA/component/12326901)
-under the `TAVERNA` component _GSOC Taverna Mobile. Feel free 
+under the `TAVERNA` component _GSOC Taverna Mobile._ Feel free
 to add an issue!
 
-To suggest changes to this source code, feel free to raise a 
+To suggest changes to this source code, feel free to raise a
 [GitHub pull request](https://github.com/apache/incubator-taverna-mobile/pulls).
 Any contributions received are assumed to be covered by the [Apache License
-2.0](https://www.apache.org/licenses/LICENSE-2.0). We might ask you 
+2.0](https://www.apache.org/licenses/LICENSE-2.0). We might ask you
 to sign a [Contributor License Agreement](https://www.apache.org/licenses/#clas)
 before accepting a larger contribution.
 
@@ -83,4 +83,3 @@ _TODO_
 _TODO_
 
 * ...
-
