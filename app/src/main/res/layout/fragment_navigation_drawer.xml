@@ -58,7 +58,7 @@ limitations under the License.
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/completebrand"
         android:id="@+id/textView8"
-        android:hint="@string/completebrand"
+        android:hint="@string/brand"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp" />
 </LinearLayout>

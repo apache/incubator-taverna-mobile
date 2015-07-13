@@ -54,6 +54,7 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.fragments.FavoriteFragment;
 import org.apache.taverna.mobile.fragments.NavigationDrawerFragment;
 import org.apache.taverna.mobile.fragments.WorkflowItemFragment;
+import org.apache.taverna.mobile.utils.WorkflowOpen;
 
 import java.io.File;
 
@@ -98,13 +99,6 @@ public class DashboardMainActivity extends ActionBarActivity
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
 
-      /*  //Handle search actions from a system sent intent
-        Intent searchIntent = getIntent();
-        if(searchIntent != null && Intent.ACTION_SEARCH.equals(searchIntent.getAction())){
-            //retrieve and process query then display results
-            String query = searchIntent.getStringExtra(SearchManager.QUERY);
-            Toast.makeText(this,"Query = "+query, Toast.LENGTH_SHORT).show();
-        }*/
     }
 
     @Override
@@ -168,6 +162,7 @@ public class DashboardMainActivity extends ActionBarActivity
             if(requestCode == SELECT_WORKFLOW){
                 String workflowPath = data.getData().getPath();
                 Toast.makeText(getBaseContext(), "Path: "+workflowPath, Toast.LENGTH_LONG).show();
+                new WorkflowOpen(this).execute(workflowPath);
             }
         }
     }

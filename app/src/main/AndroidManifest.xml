@@ -45,7 +45,7 @@ limitations under the License.
         <activity
             android:name=".activities.DashboardMainActivity"
             android:label="@string/title_activity_dashboard_main"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -75,10 +75,30 @@ limitations under the License.
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName="org.apache.taverna.mobile.activities.DashboardMainActivity" >
+            android:parentActivityName=".activities.DashboardMainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.apache.taverna.mobile.activities.DashboardMainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.RunResult"
+            android:label="@string/title_activity_run_result"
+            android:parentActivityName=".activities.WorkflowDetailActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.apache.taverna.mobile.activities.WorkflowDetailActivity" />
+        </activity>
+        <activity
+            android:name="com.dropbox.client2.android.AuthActivity"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|keyboard">
+            <intent-filter>
+                <!-- Change this to be db- followed by your app key -->
+                <data android:scheme="db-doicbvkfyzligh2" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

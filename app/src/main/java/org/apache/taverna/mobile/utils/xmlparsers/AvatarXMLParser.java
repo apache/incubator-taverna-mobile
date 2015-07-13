@@ -1,14 +1,4 @@
 package org.apache.taverna.mobile.utils.xmlparsers;
-
-import com.thebuzzmedia.sjxp.XMLParser;
-import com.thebuzzmedia.sjxp.XMLParserException;
-import com.thebuzzmedia.sjxp.rule.IRule;
-
-import org.apache.taverna.mobile.fragments.WorkflowItemFragment;
-import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowdetailFragment;
-import org.apache.taverna.mobile.tavernamobile.User;
-import org.apache.taverna.mobile.tavernamobile.Workflow;
-
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
@@ -33,23 +23,24 @@ import org.apache.taverna.mobile.tavernamobile.Workflow;
  * specific language governing permissions and limitations
  * under the License.
  */
+import com.thebuzzmedia.sjxp.XMLParser;
+import com.thebuzzmedia.sjxp.XMLParserException;
+import com.thebuzzmedia.sjxp.rule.IRule;
+
+import org.apache.taverna.mobile.fragments.WorkflowItemFragment;
+import org.apache.taverna.mobile.tavernamobile.User;
 
 /**
- * Parse details from the xml output of myexperiment API
- * Created by Larry Akah on 6/24/15.
+ * Created by Larry Akah on 6/29/15.
  */
-public class WorkflowDetailParser extends XMLParser {
+public class AvatarXMLParser extends XMLParser {
 
-    public WorkflowDetailParser(IRule[] rules) throws IllegalArgumentException, XMLParserException {
+    public AvatarXMLParser(IRule[] rules) throws IllegalArgumentException, XMLParserException {
         super(rules);
     }
 
-    //deliver results when parsing has completed and all the information required has been retrieved
     @Override
     protected void doEndDocument(Object userObject) {
-        if(userObject instanceof User){
-          WorkflowItemFragment.startLoadingAvatar((User) userObject);
-        }else
-        WorkflowdetailFragment.setWorkflowDetails((Workflow) userObject);
+        WorkflowItemFragment.updateAvatar((User) userObject);
     }
 }

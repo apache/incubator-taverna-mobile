@@ -34,9 +34,6 @@ import java.util.List;
  */
 public class User {
 
-    public User() {
-        super();
-    }
     private static final long serialVersionUID = 3467195671046297377L;
     @Element(required = false)
     protected String id;
@@ -57,7 +54,12 @@ public class User {
     @Element(required = false)
     protected String website;
     protected String details_uri;
+    private String avatar_url;
 
+    public User(){
+        super();
+//        this.setAvatar_url("http://www.myexperiment.org/users/6/pictures/614");
+    }
     protected List<Workflow> user_workflows; //a list of workflows owned by this user
 
     public void setId(String id) {
@@ -78,6 +80,14 @@ public class User {
 
     public void setDetails_uri(String details_uri) {
         this.details_uri = details_uri;
+    }
+
+    public String getAvatar_url() {
+        return this.avatar_url;
+    }
+
+    public void setAvatar_url(String avatar_url) {
+        this.avatar_url = avatar_url;
     }
 
     public String getName() {
@@ -134,5 +144,10 @@ public class User {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    @Override
+    public String toString(){
+        return "This is the user object";
     }
 }

@@ -68,6 +68,13 @@ limitations under the License.
                 android:id="@+id/wupdatedat"
                 android:layout_marginTop="5dp"
                 android:text="@string/modified" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/wtype"
+                android:layout_marginTop="5dp"
+                android:text="Type" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -85,6 +92,31 @@ limitations under the License.
                 android:src="@mipmap/ic_loading"
                 android:backgroundTint="@color/accent_material_light"
                 android:backgroundTintMode="src_atop" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:gravity="bottom|right">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/saveToDropboxButton"
+                    android:src="@drawable/dropbox_icon"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="20dp"
+                    android:background="@color/button_material_light" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/saveToGoogleDriveButton"
+                    android:src="@drawable/google_drive_icon"
+                    android:layout_gravity="right"
+                    android:background="@color/button_material_light" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
@@ -113,11 +145,12 @@ limitations under the License.
             android:background="#33b5e5"
             style="android:buttonBarButtonStyle"
             android:text="@string/workflow_download"
-            android:drawableLeft="@drawable/download"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
             android:id="@+id/download_wk"
-            android:paddingLeft="5dp" />
+            android:paddingLeft="5dp"
+            android:elegantTextHeight="true"
+            android:drawableLeft="@drawable/ic_download_web" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

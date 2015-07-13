@@ -6,7 +6,6 @@ import com.thebuzzmedia.sjxp.rule.IRule;
 
 import org.apache.taverna.mobile.fragments.WorkflowItemFragment;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
-import org.apache.taverna.mobile.utils.WorkflowDataCallback;
 
 import java.util.List;
 

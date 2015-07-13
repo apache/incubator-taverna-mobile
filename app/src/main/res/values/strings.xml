@@ -17,7 +17,7 @@ limitations under the License.
     <string name="hello_world"> Empty </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_flash_screen">Taverna Mobile</string>
-    <string name="brand">Powered By</string>
+    <string name="brand">Powered By MyExperiment</string>
     <string-array name="menus">
         <item >Usage</item>
         <item>Quit</item>
@@ -56,7 +56,7 @@ limitations under the License.
     <string name="workflow_authorhint">Workflow Author  </string>
     <string name="workflow_component">Workflow component</string>
     <string name="favorite_empty"> No Favorites Added Yet</string>
-    <string name="workflow_empty"> No <b>Workflows</b> Available. Check your Connection to the Internet</string>
+    <string name="workflow_empty"> No <b>Workflows</b> Available. Check your Connection to the Internet or Pull down to refresh</string>
     <string name="wktitle">TITLE</string>
     <string name="marked">Marked On</string>
     <string name="created">Created :</string>
@@ -88,5 +88,14 @@ limitations under the License.
     <string name="about">Mobile Application for managing Taverna workflows on the fly.<br/>
                          View, run and download workflows at a convenience on your android mobile<br/>
                         device. \n\n <br/><b>Developed at Apache Taverna and Powered by MyExperiment</b><br/></string>
+    <string name="playerconfig">Configure Player Account</string>
+    <string name="playerconfig_summary">Username used to login to Taverna player portal</string>
+    <string name="playeruser">Username/email</string>
+    <string name="playerpass">Password</string>
+    <string name="myexperimenttitle">Configure MyExperiment Account</string>
+    <string name="myexperimentsummary">Username used to login to MyExperiment</string>
+    <string name="title_activity_run_result">Workflow Run Result</string>
+    <string name="runstarted">Run Started</string>
+    <string name="run_finishtime">Run finish Time</string>
 
 </resources>

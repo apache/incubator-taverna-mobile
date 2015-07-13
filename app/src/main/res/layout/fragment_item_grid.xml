@@ -22,7 +22,8 @@ limitations under the License.
    <!-- <GridView android:id="@+id/gridlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2">-->   <android.support.v4.widget.SwipeRefreshLayout
+        android:numColumns="2">-->
+    <android.support.v4.widget.SwipeRefreshLayout
     android:id="@+id/refresh"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
@@ -42,6 +43,9 @@ limitations under the License.
     <TextView android:id="@android:id/empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center" />
+        android:visibility="gone"
+        android:background="@drawable/ic_viewworkflow"
+        android:gravity="center"
+        android:text="@string/workflow_empty"/>
 
 </FrameLayout>

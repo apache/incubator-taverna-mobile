@@ -20,19 +20,6 @@ limitations under the License.
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="org.apache.taverna.mobile.activities.FlashScreenActivity">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@mipmap/ic_poweredby"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:scaleType="fitCenter"
-        android:contentDescription="@string/brand"
-        android:layout_alignLeft="@+id/imageView2"
-        android:layout_alignStart="@+id/imageView2" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,8 +40,8 @@ limitations under the License.
         android:layout_alignEnd="@+id/textView"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView"
-        android:layout_above="@+id/imageView"
-        android:scaleType="fitStart" />
+        android:scaleType="fitStart"
+        android:layout_above="@+id/textView2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,19 +49,21 @@ limitations under the License.
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/brand"
         android:id="@+id/textView2"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="35dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center" />
 
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar"
-        android:layout_above="@+id/imageView"
-        android:layout_centerHorizontal="true"
         android:indeterminate="true"
         android:indeterminateBehavior="repeat"
         android:indeterminateOnly="true"
-        android:indeterminateTintMode="src_over" />
+        android:indeterminateTintMode="src_over"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

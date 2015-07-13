@@ -28,6 +28,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -42,16 +43,28 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.thebuzzmedia.sjxp.rule.IRule;
+
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.activities.WorkflowDetailActivity;
+import org.apache.taverna.mobile.fragments.FavoriteFragment;
 import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowdetailFragment;
+import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
 import org.apache.taverna.mobile.utils.Workflow_DB;
+import org.apache.taverna.mobile.utils.xmlparsers.AvatarXMLParser;
+import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParserRules;
+import org.apache.taverna.mobile.utils.xmlparsers.WorkflowDetailParser;
 import org.json.JSONException;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -101,16 +114,12 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         final String author = workflow.get(i).getWorkflow_author();
         final String title = workflow.get(i).getWorkflow_title();
         String description  = workflow.get(i).getWorkflow_description();
-        String uri = workflow.get(i).getWorkflow_details_url();
+        final String uri = workflow.get(i).getWorkflow_details_url();
         final String desc_full = description;
-        ArrayList<Object> mfav = new ArrayList<Object>();
 
-        //save current workflow as favorite
-            mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full); mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
-
-//        if(description.length() > 80) description = description.substring(0, 79);
-        viewHolder.author_name.setText(author);
-        viewHolder.wk_title.setText(title);
+        if(description.length() > 80) description = description.substring(0, 79);
+        viewHolder.author_name.setHint(author);
+        viewHolder.wk_title.setHint(title);
         viewHolder.wk_description.setText( description+" ... ");
         Linkify.addLinks(viewHolder.wk_description, Linkify.WEB_URLS);
         final String wkflow_url = workflow.get(j).getWorkflow_remote_url();
@@ -123,41 +132,30 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent detailsIntent = new Intent(context, WorkflowDetailActivity.class);
-
-                //detailsIntent.putExtras(null);
                 context.startActivity(it);
                 ((Activity) context).overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.fade_out);
             }
         });
-        /*viewHolder.btn_download_workflow.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View view) {
-                try {
-
-                    //String workflow_name = Uri.parse(wkflow_url).getLastPathSegment();
-                    WorkflowDownloadManager dm = new WorkflowDownloadManager(c);
-                    File destinationFile = new File(PreferenceManager.getDefaultSharedPreferences(c)
-                            .getString(DashboardMainActivity.APP_DIRECTORY_NAME, "/"));
-                    Log.i("Workflow Name ", destinationFile.getAbsolutePath());
-                    dm.downloadWorkflow(destinationFile, wkflow_url);
-                } catch(NullPointerException np){
-                    np.printStackTrace();
-                }catch (IllegalArgumentException ill){
-                    ill.printStackTrace();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });*/
         viewHolder.btn_mark_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ArrayList<Object> mfav = new ArrayList<Object>();
+                //save current workflow as favorite
+                mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full); mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
+                mfav.add(uri);
+                mfav.add(viewHolder.author_name.getText());
+                try {
+                    favDB.put(mfav);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 boolean saved =  favDB.save();
                 if(saved) {
                     Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
                     viewHolder.btn_mark_workflow.setCompoundDrawables(context.getResources().getDrawable(android.R.drawable.btn_star_big_on),null,null,null);
+                    //refresh fragment since data has changed
+                    FavoriteFragment.newInstance(0);
                 }else
                     Toast.makeText(context,"Error!, please try again",Toast.LENGTH_SHORT).show();
             }
@@ -172,10 +170,9 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                     viewHolder.infolayout.setVisibility(View.GONE);
             }
         });
-        try {
-            favDB.put(mfav);
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+        synchronized (this){
+            new DetailLinkLoader().execute(uri);
         }
     }
 
@@ -224,6 +221,39 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
             btn_download_workflow = (Button) v.findViewById(R.id.button_download_workflow);
             btn_mark_workflow = (Button) v.findViewById(R.id.button_mark_workflow);
             btn_view_workflow = (Button) v.findViewById(R.id.button_view_workflow);
+        }
+    }
+
+    /**
+     * Loads partially details of a given workflow to retrieve author information
+     */
+    private class DetailLinkLoader extends AsyncTask<String, Void, Void>{
+
+        @Override
+        protected Void doInBackground(String ... strings) {
+            URL url = null;
+            HttpURLConnection connection = null;
+            try {
+                url = new URL(strings[0]); //fetch workflow detail
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                IRule avatarRule = new MyExperimentXmlParserRules.UploaderRule(IRule.Type.ATTRIBUTE,"/workflow/uploader", "resource","uri","id");
+                WorkflowDetailParser detailMinParser = new WorkflowDetailParser(new IRule[]{avatarRule});
+                detailMinParser.parse(input, new User());
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.cancel(true);
         }
     }
 }

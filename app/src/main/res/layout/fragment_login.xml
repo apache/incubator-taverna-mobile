@@ -139,13 +139,9 @@ limitations under the License.
                 android:text="@string/brand"
                 android:id="@+id/textView7"
                 android:paddingTop="20dp"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:gravity="center|center_horizontal" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView3"
-                android:src="@mipmap/ic_poweredby" />
         </LinearLayout>
 
     </LinearLayout>

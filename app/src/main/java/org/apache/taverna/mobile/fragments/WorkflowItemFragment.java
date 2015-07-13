@@ -28,6 +28,16 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -44,15 +54,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.adapters.WorkflowAdapter;
+import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
+import org.apache.taverna.mobile.utils.AvatarLoader;
 import org.apache.taverna.mobile.utils.WorkflowLoader;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,8 +105,10 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
      */
     private WorkflowAdapter workflowAdapter;
     private static WorkflowAdapter searchAdpater;
-    private View rootView;
+    private static View rootView;
     public static Context cx;
+    private static boolean STATE_ON = false;
+    private static TextView noDataText;
 
     public static WorkflowItemFragment newInstance(String param1, String param2) {
         WorkflowItemFragment fragment = new WorkflowItemFragment();
@@ -126,6 +146,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_item, container, false);
+        noDataText = (TextView) rootView.findViewById(android.R.id.empty);
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.refresh);
         swipeRefreshLayout.setOnRefreshListener(this);
         // Set the adapter
@@ -133,6 +154,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         mListView.setHasFixedSize(true);
         mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mListView.setAnimation(in);
+        mListView.setAdapter(new WorkflowAdapter(getActivity()));
         return rootView;
     }
 
@@ -166,16 +188,24 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     @Override
     public void onResume() {
         super.onResume();
-      /*  //Handle search actions from a system sent intent
-        Intent searchIntent = getActivity().getIntent();
-        if(searchIntent != null && Intent.ACTION_SEARCH.equals(searchIntent.getAction())){
-            //retrieve and process query then display results
-            String query = searchIntent.getStringExtra(SearchManager.QUERY);
-            //Toast.makeText(getActivity(), "Query = " + query, Toast.LENGTH_SHORT).show();
-            performSearch(workflowAdapter,query);
-        }else*/
-        new WorkflowLoader(getActivity(), swipeRefreshLayout).execute();
-        //    getActivity().getLoaderManager().initLoader(0,null,this).forceLoad();
+        if(!STATE_ON) {
+            new WorkflowLoader(getActivity(), swipeRefreshLayout).execute();
+
+            if (mListView.getAdapter().getItemCount() == 0) {
+                mListView.setVisibility(View.GONE);
+                noDataText.setVisibility(View.VISIBLE);
+
+            } else {
+                mListView.setVisibility(View.VISIBLE);
+                noDataText.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        STATE_ON = true;
     }
 
     @Override
@@ -232,9 +262,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                         ladapter.addWorkflow(workflow);
                     }
                 }
-            else {
-                Toast.makeText(getActivity(), "No workflows available", Toast.LENGTH_SHORT).show();
-            }
+
             mListView.swapAdapter(ladapter, true);
             if (ladapter.getItemCount() == 0)
                 Toast.makeText(getActivity(), "No workflows found matching criteria", Toast.LENGTH_SHORT).show();
@@ -270,11 +298,111 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             public void run() {
                 WorkflowItemFragment.searchAdpater = new WorkflowAdapter(cx,data);
                 WorkflowItemFragment.mListView.setAdapter(WorkflowItemFragment.searchAdpater);
-                if(data.size() == 0){
-                    Toast.makeText(cx, cx.getResources().getString(R.string.err_workflow_conn), Toast.LENGTH_LONG).show();
+                if(WorkflowItemFragment.searchAdpater.getItemCount() == 0){
+                    mListView.setVisibility(View.GONE);
+                    noDataText.setVisibility(View.VISIBLE);
+                  //  Toast.makeText(cx, cx.getResources().getString(R.string.err_workflow_conn), Toast.LENGTH_LONG).show();
+                }else{
+                    mListView.setVisibility(View.VISIBLE);
+                    noDataText.setVisibility(View.GONE);
                 }
-                System.out.println("workflows: "+data.size());
             }
         });
+    }
+    public static void startLoadingAvatar(final User author) {
+
+        ((Activity)cx).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this) {
+                    new AvatarLoader().execute(author.getDetails_uri());
+                }
+            }
+        });
+    }
+
+    public static void updateAvatar(final User author) {
+
+        ((Activity)cx).runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this) {
+                    try {
+                        ((TextView) rootView.findViewById(R.id.workflow_author)).setText(author.getName());
+                        new LoadAuthorAvatar((ImageView) rootView.findViewById(R.id.author_profile_image)).execute(author.getAvatar_url());
+                    }catch(NullPointerException np){
+
+                    }
+                }
+            }
+        });
+    }
+    /**
+     * Load the Author Avatar from a background Task
+     */
+    private static class LoadAuthorAvatar extends AsyncTask<String, Void, Bitmap> {
+        ImageView img;
+
+        public LoadAuthorAvatar(ImageView imageView) {
+            img = imageView;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            Bitmap myBitmap = null;
+            try {
+                URL url = new URL(strings[0]);
+                HttpURLConnection connection = null;
+                connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                myBitmap = BitmapFactory.decodeStream(input);
+                input.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return myBitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            img.setImageBitmap(bitmap);
+///            img.setBackground();
+//            notify();
+        }
+        private Bitmap ProcessingBitmap(Bitmap bmp){
+            Bitmap bm1 = null;
+            Bitmap newBitmap = null;
+
+                bm1 = bmp;
+                int w = bm1.getWidth();
+                int h = bm1.getHeight();
+
+                Bitmap.Config config = bm1.getConfig();
+                if(config == null){
+                    config = Bitmap.Config.ARGB_8888;
+                }
+
+                newBitmap = Bitmap.createBitmap(w, h, config);
+                Canvas newCanvas = new Canvas(newBitmap);
+                newCanvas.drawColor(Color.WHITE);
+
+                Paint paint = new Paint();
+                paint.setColor(Color.TRANSPARENT);
+                Rect frame = new Rect(
+                        (int)(w*0.05),
+                        (int)(w*0.05),
+                        (int)(w*0.95),
+                        (int)(h*0.95));
+                RectF frameF = new RectF(frame);
+                newCanvas.drawRoundRect(frameF, (float)(w*0.5), (float)(h*0.05), paint);
+
+                paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SCREEN));
+                newCanvas.drawBitmap(bm1, 0, 0, paint);
+
+            return newBitmap;
+        }
     }
 }
