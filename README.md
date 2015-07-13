@@ -27,7 +27,7 @@ This module is **work in progress** as part of Google Summer of Code 2015.
 
 ## License
 
-(c) 2015 Apache Software Foundation
+(c) 2014-2015 Apache Software Foundation
 
 This product includes software developed at The [Apache Software
 Foundation](http://www.apache.org/).
