@@ -66,7 +66,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
         super(context);
         this.context = context;
         this.lt = load_type;
-        this.uri = dataParam;
+        uri = dataParam;
         this.workflow = new Workflow();
     }
 
@@ -84,7 +84,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
 
             switch (this.lt){
                 case TYPE_WORKFLOW_DETAIL:
-                    workflowurl = new URL(this.uri);
+                    workflowurl = new URL(uri);
                     connection = (HttpURLConnection) workflowurl.openConnection();
                     connection.setRequestProperty("Accept", "application/json");
                     connection.setRequestMethod("GET");
@@ -171,7 +171,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                         StringBuffer nm = new StringBuffer(), ur = new StringBuffer();
                         for(String n: name.toLowerCase().split(" "))
                             nm.append(n);
-                        for (String p: this.uri.toLowerCase().split(" "))
+                        for (String p: uri.toLowerCase().split(" "))
                             ur.append(p);
 
                         if(nm.toString().equals(ur.toString())) {
