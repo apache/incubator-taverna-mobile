@@ -3,6 +3,7 @@ package org.apache.taverna.mobile.fragments.workflowdetails;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
@@ -16,15 +17,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
+import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,6 +37,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static org.apache.taverna.mobile.activities.DashboardMainActivity.APP_DIRECTORY_NAME;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,6 +54,8 @@ public class RunFragment extends Fragment implements View.OnClickListener{
     private  TextView runStateTextView, runStartTime,runEndTime, runInputsText;
     private  Button downloadOutput,downloadLogs;
     private int run_id;
+    private String run_output_url = "";
+    private String run_logs_url = "";
 
     /**
      * Use this factory method to create a new instance of
@@ -167,7 +176,30 @@ public class RunFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-
+        switch(view.getId()){
+            case R.id.buttonWorkflowDownloadOutput:
+                try {
+                    new WorkflowDownloadManager(getActivity()).downloadWorkflow(
+                            new File(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(
+                                    APP_DIRECTORY_NAME+"/Runoutput/outputs","/Runouput/outputs/")),
+                            new TavernaPlayerAPI(getActivity()).PLAYER_RUN_URL+run_output_url.substring(0,5));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "Error downloading run output",Toast.LENGTH_LONG).show();
+                }
+                break;
+            case R.id.downloadRunLogs:
+                try {
+                    new WorkflowDownloadManager(getActivity()).downloadWorkflow(
+                            new File(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(
+                            APP_DIRECTORY_NAME+"/Runoutput/logs/","/Runoutput/logs")),
+                            new TavernaPlayerAPI(getActivity()).PLAYER_RUN_URL+run_logs_url.substring(0,5));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "Error downloading run logs",Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
     }
 
     public void updateRun(final JSONObject runInfo){
@@ -190,6 +222,9 @@ public class RunFragment extends Fragment implements View.OnClickListener{
                     status.setImageResource(android.R.drawable.presence_offline);
                 else
                     status.setImageResource(android.R.drawable.presence_invisible);
+
+                run_output_url = runInfo.getString("outputs_zip");
+                run_logs_url = runInfo.getString("log");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
