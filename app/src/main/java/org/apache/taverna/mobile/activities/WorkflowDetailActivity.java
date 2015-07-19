@@ -121,7 +121,7 @@ public class WorkflowDetailActivity extends ActionBarActivity {
         @Override
         public int getCount() {
             // Show 4 total pages.
-            return 4;
+            return 3;
         }
 
         @Override
