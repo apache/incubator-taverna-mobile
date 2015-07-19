@@ -139,7 +139,6 @@ public class WorkflowDetailActivity extends ActionBarActivity {
             }
             return "";
         }
-
     }
 
 }
