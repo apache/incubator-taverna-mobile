@@ -62,29 +62,51 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
     private Workflow workflow;
     private Context context;
 
-    public DetailsLoader(Context context, LOAD_TYPE load_type, String detailsRUI) {
+    public DetailsLoader(Context context, LOAD_TYPE load_type, String dataParam) {
         super(context);
         this.context = context;
         this.lt = load_type;
-        this.uri = detailsRUI;
+        this.uri = dataParam;
         this.workflow = new Workflow();
     }
 
     @Override
     public Workflow loadInBackground() {
+        HttpURLConnection connection = null;
+        InputStream dis = null;
         //start a network request to fetch user's workflow details
         try {
             Log.i("LOADER STARTED", "loading data");
             //for password protected urls use the user's credentials
             Authenticator.setDefault(new TavernaPlayerAPI.Authenticator("taverna", "taverna"));
+            TavernaPlayerAPI tavernaPlayerAPI = new TavernaPlayerAPI();
             URL workflowurl;
 
             switch (this.lt){
                 case TYPE_WORKFLOW_DETAIL:
                     workflowurl = new URL(this.uri);
+                    connection = (HttpURLConnection) workflowurl.openConnection();
+                    connection.setRequestProperty("Accept", "application/json");
+                    connection.setRequestMethod("GET");
+                    connection.connect(); //send request
+
+                    Log.i("RESPONSE CODE", "" + connection.getResponseCode());
+                    Log.i("RESPONSE Messsage", ""+connection.getResponseMessage());
+                    dis = connection.getInputStream();
                     break;
                 case TYPE_RUN_HISTORY:
                     workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_URL);
+                    connection = (HttpURLConnection) workflowurl.openConnection();
+                    String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" + tavernaPlayerAPI.getPlayerUserPassword(this.context);
+                    String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
+
+                    connection.setRequestProperty ("Authorization", basicAuth);
+                    connection.setRequestProperty("Accept", "application/json");
+                    connection.setRequestMethod("GET");
+                    connection.connect(); //send request
+                    Log.i("RESPONSE CODE", "" + connection.getResponseCode());
+                    Log.i("RESPONSE Messsage. Run", ""+connection.getResponseMessage());
+                    dis = connection.getInputStream();
                     break;
                 case TYPE_POLICY:
                     workflowurl = new URL(new TavernaPlayerAPI(this.context).SERVER_BASE_URL);
@@ -96,20 +118,6 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                     workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_WORKFLOW_URL);
                     break;
             }
-            HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
-            String userpass = "icep603@gmail.com" + ":" + "creationfox";
-            String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
-
-         //   connection.setRequestProperty ("Authorization", basicAuth);
-           // connection.setRequestProperty("Accept", "application/json");
-            connection.setRequestMethod("GET");
-            // connection.setDoInput(true);
-            //  connection.setDoOutput(true);
-            connection.connect(); //send request
-            Log.i("RESPONSE Code", "" + connection.getResponseCode());
-            Log.i("RESPONSE Messsage", ""+connection.getResponseMessage());
-
-            InputStream dis = connection.getInputStream();
 
             switch(this.lt) {
                 case TYPE_WORKFLOW_DETAIL: {
@@ -140,6 +148,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                 //br.close();
                     return workflow;
                 case TYPE_RUN_HISTORY:{
+                    System.out.println("Downloading run history");
                     BufferedReader br = new BufferedReader(new InputStreamReader(dis));
                     StringBuffer sb = new StringBuffer();
                     String jsonData = "";
@@ -148,7 +157,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                     }
                     workflow = new Workflow(this.context);
                     JSONArray jsonArray = new JSONArray(sb.toString());
-                    Log.i("JSON ", jsonArray.toString(2));
+                    Log.i("RUN JSON ", jsonArray.toString(2));
                     for(int j=0; j< jsonArray.length();j++){
                         JSONObject jsonObject = jsonArray.getJSONObject(j);
                         long id = jsonObject.getLong("id");
@@ -157,7 +166,13 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                         String started = jsonObject.getString("start_time");
                         String ended = jsonObject.getString("finish_time");
                         String state = jsonObject.getString("state");
-                        if(workflow_id == Integer.parseInt(this.uri)) {
+                        StringBuffer nm = new StringBuffer(), ur = new StringBuffer();
+                        for(String n: name.toLowerCase().split(" "))
+                            nm.append(n);
+                        for (String p: this.uri.toLowerCase().split(" "))
+                            ur.append(p);
+
+                        if(nm.toString().equals(ur.toString())) {
                             Runs mrun = new Runs(name,started,ended,state);
                             mrun.setRun_id(id);
                             mrun.setRun_workflow_id(workflow_id);
@@ -165,7 +180,6 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                             workflow.addWorkflowRun(mrun);
                         }
                     }
-
                 }
                     return workflow;
                 case TYPE_POLICY:{
@@ -216,7 +230,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
 
     @Override
     protected void onStopLoading() {
-        Log.i("Loading State","loading stopped");
+        Log.i("Loading detailComponent","loading stopped");
     }
 
     @Override

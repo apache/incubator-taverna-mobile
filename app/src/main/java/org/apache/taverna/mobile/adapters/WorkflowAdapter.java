@@ -127,7 +127,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         it.setClass(context, WorkflowDetailActivity.class);
 //        it.putExtra("workflowid", workflow.get(i).getId());
         it.putExtra("uri",uri);
-        WorkflowdetailFragment.WORKFLO_ID = workflow.get(i).getId();
+        it.putExtra("wtitle", title); //pass this workflow's title to the detail activity so the corresponding run can be fetched
+        WorkflowdetailFragment.WORKFLO_ID = title;//workflow.get(i).getId();
 
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
             @Override

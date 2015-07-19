@@ -130,8 +130,8 @@ public class RunAdapter extends RecyclerView.Adapter<RunAdapter.RunHolder> {
      */
     @Override
     public int getItemCount() {
-        return 0;
-///        return runList.size();
+        //return 0;
+        return runList.size();
     }
 
     public static class RunHolder extends RecyclerView.ViewHolder {

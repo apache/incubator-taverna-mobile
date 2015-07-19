@@ -103,7 +103,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     public AlertDialog runDialog;
     public AlertDialog.Builder alertDialogBuilder;
     private static String download_url;
-    public static long WORKFLO_ID;
+    public static String WORKFLO_ID = "";
     public static Context cont;
     private static boolean LOAD_STATE = false;
     private static boolean DROPUPLOAD = false;
@@ -127,6 +127,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         fragment.setArguments(args);
         return fragment;
     }
+
     public static WorkflowdetailFragment getInstance(){
         return WorkflowdetailFragment.getInstance();
     }
@@ -140,12 +141,12 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         AppKeyPair appKeys = new AppKeyPair(BOX_APP_KEY, BOX_APP_SECRET);
         AndroidAuthSession session = new AndroidAuthSession(appKeys);
         mDBApi = new DropboxAPI<AndroidAuthSession>(session);
-        long workflowid = getActivity().getIntent().getLongExtra("workflowid", 0);
+    //    long workflowid = getActivity().getIntent().getLongExtra("workflowid", 0);
         rootView = inflater.inflate(R.layout.fragment_workflow_detail, container, false);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
         progressDialog.setCancelable(false);
-        WORKFLO_ID = workflowid;
+     //   WORKFLO_ID = workflowid;
         zoomin = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomin);
         zoomout = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomout);
 
@@ -277,7 +278,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         final TextView desc = (TextView) rootView.findViewById(R.id.wdescription);
         final TextView createdat = (TextView) rootView.findViewById(R.id.wcreatedat);
         final ImageView preview = (ImageView) rootView.findViewById(R.id.wkf_image);
-
+        WORKFLO_ID = wk.getWorkflow_title();
         ((Activity)cont).runOnUiThread(new Runnable() {
             @Override
             public void run() {

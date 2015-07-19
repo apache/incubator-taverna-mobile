@@ -50,32 +50,27 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class WorkflowRunHistoryFragment extends Fragment implements LoaderManager.LoaderCallbacks<Workflow>{
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private ProgressDialog progressDialog;
     private RecyclerView mRecyclerView;
     private RunAdapter runAdapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private static long workflowID;
+    private static String workflowID; //represents a run name that matches the given workflow
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment WorkflowRunHistoryFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static WorkflowRunHistoryFragment newInstance(String param1, long param2) {
+    public static WorkflowRunHistoryFragment newInstance(String param2) {
         WorkflowRunHistoryFragment fragment = new WorkflowRunHistoryFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putLong(ARG_PARAM2, param2);
+        workflowID = param2;
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -100,10 +95,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
         progressDialog.setCancelable(true);
 
         runAdapter = new RunAdapter(getActivity(),runsList );
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            workflowID = getArguments().getLong(ARG_PARAM2);
-        }
+       // System.out.println("WorkflowTitle->Run->"+workflowID);
     }
 
     @Override
@@ -114,7 +106,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
         mRecyclerView = (RecyclerView) rootView.findViewById(android.R.id.list);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-  //      getActivity().getLoaderManager().initLoader(1,savedInstanceState,this);
+        getActivity().getLoaderManager().initLoader(0,savedInstanceState,this).forceLoad();
         return rootView;
     }
 
@@ -129,7 +121,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
         super.onResume();
         mRecyclerView.setAdapter(runAdapter);
         mRecyclerView.setScrollingTouchSlop(RecyclerView.TOUCH_SLOP_PAGING);
-
+        //getActivity().getLoaderManager().initLoader(1,null,this);
     }
 
     @Override
@@ -139,17 +131,17 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
 
     @Override
     public Loader<Workflow> onCreateLoader(int i, Bundle bundle) {
-        progressDialog.show();
+        //progressDialog.show();
         return new DetailsLoader(getActivity(),
                 DetailsLoader.LOAD_TYPE.TYPE_RUN_HISTORY,
-                ""+workflowID);
+                workflowID);
     }
 
     @Override
     public void onLoadFinished(Loader<Workflow> workflowLoader, Workflow workflow) {
         runAdapter.setRunList(workflow.getWorkflow_runs());
-        mRecyclerView.swapAdapter(runAdapter, false);
-        progressDialog.dismiss();
+        mRecyclerView.setAdapter(runAdapter);
+       // progressDialog.dismiss();
     }
 
     @Override

@@ -242,13 +242,6 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         super.onDetach();
     }
 
-    public void setEmptyText(CharSequence emptyText) {
-        View emptyView = mListView.getChildAt(2);
-
-        if (emptyView instanceof TextView) {
-            ((TextView) emptyView).setText(emptyText);
-        }
-    }
 //handle a request to query for given workflows
     private void performSearch(String search){
         WorkflowAdapter ladapter = new WorkflowAdapter(getActivity());
