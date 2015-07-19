@@ -57,6 +57,7 @@ limitations under the License.
     <string name="workflow_component">Workflow component</string>
     <string name="favorite_empty"> No Favorites Added Yet</string>
     <string name="workflow_empty"> No <b>Workflows</b> Available. Check your Connection to the Internet or Pull down to refresh</string>
+    <string name="workflow_run_empty"> <b>Workflows History</b> empty. No runs have been created for this workflow</string>
     <string name="wktitle">TITLE</string>
     <string name="marked">Marked On</string>
     <string name="created">Created :</string>

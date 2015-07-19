@@ -34,6 +34,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.adapters.RunAdapter;
@@ -55,6 +56,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
     private static final String ARG_PARAM2 = "param2";
     private ProgressDialog progressDialog;
     private RecyclerView mRecyclerView;
+    private TextView emptyRunHistoryTextView;
     private RunAdapter runAdapter;
 
     private static String workflowID; //represents a run name that matches the given workflow
@@ -103,6 +105,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView =inflater.inflate(R.layout.fragment_workflow_run_history, container, false);
+        emptyRunHistoryTextView = (TextView) rootView.findViewById(android.R.id.empty);
         mRecyclerView = (RecyclerView) rootView.findViewById(android.R.id.list);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -141,6 +144,13 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
     public void onLoadFinished(Loader<Workflow> workflowLoader, Workflow workflow) {
         runAdapter.setRunList(workflow.getWorkflow_runs());
         mRecyclerView.setAdapter(runAdapter);
+        if(runAdapter.getRunList().size() ==0){
+            mRecyclerView.setVisibility(View.GONE);
+            emptyRunHistoryTextView.setVisibility(View.VISIBLE);
+        }else{
+            mRecyclerView.setVisibility(View.VISIBLE);
+            emptyRunHistoryTextView.setVisibility(View.GONE);
+        }
        // progressDialog.dismiss();
     }
 
