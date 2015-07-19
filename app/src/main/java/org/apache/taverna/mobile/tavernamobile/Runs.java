@@ -11,6 +11,7 @@ public class Runs {
     private String run_started_date;
     private String run_ended_date;
     private String state;
+    private String run_author;
     public static enum RUN_STATE { FAILED,FINISHED,RUNNING};
 
 
@@ -64,6 +65,14 @@ public class Runs {
 
     public void setRun_started_date(String run_started_date) {
         this.run_started_date = run_started_date;
+    }
+
+    public String getRun_author() {
+        return run_author;
+    }
+
+    public void setRun_author(String run_author) {
+        this.run_author = run_author;
     }
 
     public String getRun_ended_date() {

@@ -97,7 +97,7 @@ public class RunAdapter extends RecyclerView.Adapter<RunAdapter.RunHolder> {
         holder.runtitle.setText(lRun.getRun_name());
         holder.runstarted.setText(lRun.getRun_started_date());
         holder.runfinished.setText(lRun.getRun_ended_date());
-
+        holder.runAuthor.setText("Author->"+lRun.getRun_author());
         switch(lRun.getState()){
             case RUNNING:
                 holder.runStatus.setImageResource(android.R.drawable.presence_busy);
@@ -135,12 +135,13 @@ public class RunAdapter extends RecyclerView.Adapter<RunAdapter.RunHolder> {
     }
 
     public static class RunHolder extends RecyclerView.ViewHolder {
-        public final TextView runtitle, runstarted, runfinished,textState;
+        public final TextView runtitle, runstarted, runfinished,textState,runAuthor;
         public final ImageButton runStatus;
 
         public RunHolder(View itemView) {
             super(itemView);
             runtitle = (TextView) itemView.findViewById(R.id.runtitle);
+            runAuthor = (TextView) itemView.findViewById(R.id.run_authorTextview);
             runstarted = (TextView) itemView.findViewById(R.id.runstarted);
             runfinished = (TextView) itemView.findViewById(R.id.runfinished);
             runStatus = (ImageButton) itemView.findViewById(R.id.imageButtonState);

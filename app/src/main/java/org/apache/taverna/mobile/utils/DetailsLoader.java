@@ -166,6 +166,8 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                         String started = jsonObject.getString("start_time");
                         String ended = jsonObject.getString("finish_time");
                         String state = jsonObject.getString("state");
+                        JSONObject userobj = jsonObject.getJSONObject("user");
+                        String username = userobj.getString("name");
                         StringBuffer nm = new StringBuffer(), ur = new StringBuffer();
                         for(String n: name.toLowerCase().split(" "))
                             nm.append(n);
@@ -176,6 +178,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                             Runs mrun = new Runs(name,started,ended,state);
                             mrun.setRun_id(id);
                             mrun.setRun_workflow_id(workflow_id);
+                            mrun.setRun_author(username);
 
                             workflow.addWorkflowRun(mrun);
                         }
