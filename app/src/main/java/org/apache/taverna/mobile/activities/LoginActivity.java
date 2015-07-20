@@ -172,13 +172,26 @@ public class LoginActivity extends ActionBarActivity {
                     String authentication = userName + ":" + password;
                     con.setRequestMethod("GET");
                     con.setRequestProperty("Authorization", "Basic " + Base64.encodeToString(authentication.getBytes(), Base64.DEFAULT));
+                    con.setInstanceFollowRedirects(true);
 
                     con.connect();
                     response = String.valueOf(con.getResponseCode());
                     //response values are:
                     //401 for an unauthorized or invalid credential and 200 for a valid and authorized user
+                    System.out.println("url = "+con.getURL());
+                    System.out.println("content-type = "+con.getContentType());
+                    System.out.println("content encoding "+con.getContentEncoding());
+                    System.out.println("date"+con.getDate());
                     System.out.println("" + response);
                     System.out.println(""+con.getResponseMessage());
+                    BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    StringBuilder sb = new StringBuilder();
+                    String s = "";
+                    while((s = br.readLine())!= null ){
+                        sb.append(s);
+                    }
+                    System.out.println("data: "+sb.toString());
+
                     con.disconnect();
                     return response;
 
@@ -193,7 +206,6 @@ public class LoginActivity extends ActionBarActivity {
 
             @Override
             protected void onPostExecute(String response) {
-                Log.i("STATUS CODE", ""+response);
                 pd.dismiss();
                 if(response != null) {
                     switch(Integer.parseInt(response)){
