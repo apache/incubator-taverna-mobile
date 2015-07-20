@@ -62,6 +62,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Authenticator;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 
@@ -130,10 +131,9 @@ public class LoginActivity extends ActionBarActivity {
                 } else if (password.getText().toString().isEmpty()) {
                     password.setError(getString(R.string.passworderr));
                 } else {
-                    //send login request
+                    // login request
                     new LoginTask(getActivity()).execute(email.getText().toString(), password.getText().toString());
                 }
-                //startActivity(new Intent(getActivity(), DashboardMainActivity.class));
 
             }
         }
@@ -156,57 +156,59 @@ public class LoginActivity extends ActionBarActivity {
             }
 
             @Override
-            protected String doInBackground(String... strings) {
+            protected String doInBackground(String... params) {
                 //http://sandbox.myexperiment.org/users
 
                 String whoAmI = "http://www.myexperiment.org/whoami.xml";
-                Object response = null;
-                String responseMessage = null;
-                User loggedUser;
 
-                response = new HttpUtil().doGetRequestResponse(whoAmI, User.class,strings[0], strings[1]);
-                if(response instanceof User){
-                    //user is successfully authenticated
-                    loggedUser = (User) response;
-                    //TODO save login state at this level,
+                String response = null;
+                HttpURLConnection con = null;
+                try {
+                    URL url = new URL(whoAmI);
+                    con = (HttpURLConnection) url.openConnection();
+                    String userName = params[0];
+                    String password = params[1];
 
-                    //TODO set any cookies necessary
+                    String authentication = userName + ":" + password;
+                    con.setRequestMethod("GET");
+                    con.setRequestProperty("Authorization", "Basic " + Base64.encodeToString(authentication.getBytes(), Base64.DEFAULT));
 
-                    //TODO save remember user login at this level
+                    con.connect();
+                    response = String.valueOf(con.getResponseCode());
+                    //response values are:
+                    //401 for an unauthorized or invalid credential and 200 for a valid and authorized user
+                    System.out.println("" + response);
+                    System.out.println(""+con.getResponseMessage());
+                    con.disconnect();
+                    return response;
 
-                }else{
-                    if (response instanceof String){
-                        responseMessage = (String) response;
-                        if (responseMessage.equals("Unauthorized request")) {
-                            responseMessage = "Invalid username or password";
-                        }
-                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                return responseMessage;
+
+                return response;
             }
 
             @Override
             protected void onPostExecute(String response) {
-                Log.i("RESULTS", ""+response);
+                Log.i("STATUS CODE", ""+response);
                 pd.dismiss();
-                String responseMessage = response;
-                if(responseMessage != null) {
-                    if (responseMessage.equals("Unauthorized request")) {
-                        responseMessage = "Invalid username or password";
-                        Toast.makeText(this.context, responseMessage, Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(this.context, responseMessage, Toast.LENGTH_SHORT).show();
+                if(response != null) {
+                    switch(Integer.parseInt(response)){
+                        case 401:
+                            Toast.makeText(getActivity(), getActivity().getString(R.string.auth_err), Toast.LENGTH_LONG).show();
+                            break;
+                        case 200:
+                            this.context.startActivity(new Intent(this.context, DashboardMainActivity.class));
+                            getActivity().overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
+                            getActivity().finish();
+                            break;
                     }
                 }else{
-                    //TODO: save user profile at this stage
-
-                    this.context.startActivity(new Intent(this.context, DashboardMainActivity.class));
-                    getActivity().overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
-                    getActivity().finish();
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.servererr), Toast.LENGTH_LONG).show();
                 }
-                this.context.startActivity(new Intent(this.context, DashboardMainActivity.class));
-                getActivity().overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
-                getActivity().finish();
             }
         }
     }
