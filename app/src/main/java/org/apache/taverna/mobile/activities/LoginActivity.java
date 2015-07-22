@@ -141,6 +141,8 @@ public class LoginActivity extends ActionBarActivity {
         private class LoginTask extends AsyncTask<String, Void, String>{
             private Context context;
             private ProgressDialog pd;
+            String cookie;
+            String userurl;
 
             private LoginTask(Context context) {
                 this.context = context;
@@ -168,31 +170,49 @@ public class LoginActivity extends ActionBarActivity {
                     con = (HttpURLConnection) url.openConnection();
                     String userName = params[0];
                     String password = params[1];
+                    boolean redirect = false;
 
                     String authentication = userName + ":" + password;
                     con.setRequestMethod("GET");
                     con.setRequestProperty("Authorization", "Basic " + Base64.encodeToString(authentication.getBytes(), Base64.DEFAULT));
                     con.setInstanceFollowRedirects(true);
-
+                    HttpURLConnection.setFollowRedirects(true);
                     con.connect();
-                    response = String.valueOf(con.getResponseCode());
-                    //response values are:
-                    //401 for an unauthorized or invalid credential and 200 for a valid and authorized user
-                    System.out.println("url = "+con.getURL());
-                    System.out.println("content-type = "+con.getContentType());
-                    System.out.println("content encoding "+con.getContentEncoding());
-                    System.out.println("date"+con.getDate());
-                    System.out.println("" + response);
-                    System.out.println(""+con.getResponseMessage());
+                    int status = con.getResponseCode();
+                    response = String.valueOf(status);
+                    if(status != HttpURLConnection.HTTP_OK){
+                        if (status == HttpURLConnection.HTTP_MOVED_PERM ||
+                                status == HttpURLConnection.HTTP_MOVED_TEMP ||
+                                status == HttpURLConnection.HTTP_SEE_OTHER || status == 307){
+                            redirect = true;
+                        }
+
+                    }
+                    System.out.println("Status code: "+status);
+                    if(redirect) {
+                        // get redirect url from "location" header field
+                        String newUrl = con.getHeaderField("Location");
+                        this.userurl = newUrl;
+                        // get the cookie needed, for login
+                        String cookies = con.getHeaderField("Set-Cookie");
+                        this.cookie = cookies;
+                        // open the new connection again
+                        con = (HttpURLConnection) new URL(newUrl).openConnection();
+                        con.setRequestProperty("Cookie", cookies);
+                        System.out.println("Redirect to URL : " + newUrl);
+                        con.connect();
+                    }
                     BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
                     StringBuilder sb = new StringBuilder();
                     String s = "";
                     while((s = br.readLine())!= null ){
                         sb.append(s);
                     }
+                    br.close();
                     System.out.println("data: "+sb.toString());
 
                     con.disconnect();
+
                     return response;
 
                 } catch (MalformedURLException e) {
@@ -213,6 +233,7 @@ public class LoginActivity extends ActionBarActivity {
                             Toast.makeText(getActivity(), getActivity().getString(R.string.auth_err), Toast.LENGTH_LONG).show();
                             break;
                         case 200:
+                        case 307:
                             this.context.startActivity(new Intent(this.context, DashboardMainActivity.class));
                             getActivity().overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
                             getActivity().finish();
