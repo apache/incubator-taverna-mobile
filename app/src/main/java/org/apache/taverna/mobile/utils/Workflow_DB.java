@@ -81,7 +81,6 @@ public class Workflow_DB {
 			jarray.put(item);
 		}
 		dataobj.put(item_id, jarray);
-		Log.d(LIBTAG, ""+dataobj.toString(2));
 		return this;
 	}
 	
@@ -95,7 +94,7 @@ public class Workflow_DB {
 				msharedpreference = PreferenceManager.getDefaultSharedPreferences(context);
 				//read key and get existing data
 				List<ArrayList<Object>> results = new ArrayList<ArrayList<Object>>();
-				JSONObject mainJson = new JSONObject(msharedpreference.getString(ENTITY_KEY, ENTITY_KEY+":{}"));
+				JSONObject mainJson = new JSONObject(msharedpreference.getString(ENTITY_KEY, "{"+ENTITY_KEY+":{}}"));
 				
 				Log.i(ENTITY_KEY, mainJson.toString(2));
 				
@@ -213,6 +212,41 @@ public class Workflow_DB {
 		else
 			return false;
 	}
+
+    /**
+     *
+     * @return the number of entities inserted
+     */
+    public int insert(ArrayList<Object> item){
+        long start = System.currentTimeMillis();
+        msharedpreference = PreferenceManager.getDefaultSharedPreferences(context);
+        try {
+            JSONObject jsonObject = new JSONObject(msharedpreference.getString(ENTITY_KEY, "{"+ENTITY_KEY+":{}}")); //main json db
+            System.out.println(jsonObject.toString(1));
+
+            JSONArray jsonArray;
+            if(jsonObject.has("ids"))
+                jsonArray = jsonObject.optJSONArray("ids");
+            else
+                jsonArray = new JSONArray();
+
+            String newItemId = generateRandomId(); //generate an entity id to be used for the new entity
+            jsonArray.put(jsonArray.length(),newItemId); //add new entity id
+            JSONArray newEntity = new JSONArray();
+            for(Object entity: item){
+                newEntity.put(entity);
+            }
+            jsonObject.put("ids", jsonArray);
+            jsonObject.put(newItemId, newEntity);
+            msharedpreference.edit().putString(ENTITY_KEY, jsonObject.toString()).commit();
+            long end = System.currentTimeMillis();
+            System.out.println("Insert benchmark length = "+(end - start));
+            return 1;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 	
 	/**
 	 * save the ids of all entity entries

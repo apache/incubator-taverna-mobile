@@ -151,8 +151,10 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                boolean saved =  favDB.save();
-                if(saved) {
+                //boolean saved =  favDB.save();
+                int saved =
+                favDB.insert(mfav);
+                if(saved >0) {
                     Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
                     viewHolder.btn_mark_workflow.setCompoundDrawables(context.getResources().getDrawable(android.R.drawable.btn_star_big_on),null,null,null);
                     //refresh fragment since data has changed
