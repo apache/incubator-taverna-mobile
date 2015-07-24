@@ -90,8 +90,8 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                     connection.setRequestMethod("GET");
                     connection.connect(); //send request
 
-                    Log.i("RESPONSE CODE", "" + connection.getResponseCode());
-                    Log.i("RESPONSE Messsage", ""+connection.getResponseMessage());
+                    Log.i("Workflow Response Code", "" + connection.getResponseCode());
+                    Log.i("Workflow Response msg", ""+connection.getResponseMessage());
                     dis = connection.getInputStream();
                     break;
                 case TYPE_RUN_HISTORY:
@@ -110,9 +110,6 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                     break;
                 case TYPE_POLICY:
                     workflowurl = new URL(new TavernaPlayerAPI(this.context).SERVER_BASE_URL);
-                    break;
-                case TYPE_ABOUT_WORKFLOW:
-                    workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_WORKFLOW_URL);
                     break;
                 default:
                     workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_WORKFLOW_URL);
@@ -186,10 +183,6 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                 }
                     return workflow;
                 case TYPE_POLICY:{
-
-                }
-                    return workflow;
-                case TYPE_ABOUT_WORKFLOW:{
 
                 }
                     return workflow;

@@ -124,9 +124,10 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         Linkify.addLinks(viewHolder.wk_description, Linkify.WEB_URLS);
         final String wkflow_url = workflow.get(j).getWorkflow_remote_url();
         final Intent it = new Intent();
+        System.out.println("Workflow_uri:"+uri);
         it.setClass(context, WorkflowDetailActivity.class);
-//        it.putExtra("workflowid", workflow.get(i).getId());
-        it.putExtra("uri",uri);
+//        it.putExtra("workflowid", workflow.get(i).getId()); //workflow_url
+        it.putExtra("uri",uri);//uri
         it.putExtra("wtitle", title); //pass this workflow's title to the detail activity so the corresponding run can be fetched
         WorkflowdetailFragment.WORKFLO_ID = title;//workflow.get(i).getId();
 

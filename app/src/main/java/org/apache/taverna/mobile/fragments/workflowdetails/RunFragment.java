@@ -1,6 +1,7 @@
 package org.apache.taverna.mobile.fragments.workflowdetails;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -105,12 +106,6 @@ public class RunFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        getActivity().finish();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         String runresult = getActivity().getIntent().getStringExtra("runresult");
@@ -164,6 +159,7 @@ public class RunFragment extends Fragment implements View.OnClickListener{
         }
         if(id == android.R.id.home){
            getActivity().finish();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -171,7 +167,8 @@ public class RunFragment extends Fragment implements View.OnClickListener{
 
     private void reloadRunResult(){
         Timer t = new Timer();
-        t.scheduleAtFixedRate(new RunTimerTask(getActivity(), run_id), 0, 5000);
+       // t.scheduleAtFixedRate(new RunTimerTask(getActivity(), run_id), 0, 5000);
+        t.schedule(new RunTimerTask(getActivity(),run_id),1);
     }
 
     @Override
@@ -179,10 +176,15 @@ public class RunFragment extends Fragment implements View.OnClickListener{
         switch(view.getId()){
             case R.id.buttonWorkflowDownloadOutput:
                 try {
-                    new WorkflowDownloadManager(getActivity()).downloadWorkflow(
-                            new File(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(
-                                    APP_DIRECTORY_NAME+"/Runoutput/outputs","/Runouput/outputs/")),
-                            new TavernaPlayerAPI(getActivity()).PLAYER_RUN_URL+run_output_url.substring(0,5));
+                    System.out.println("output url: "+run_output_url);
+                    if(run_output_url.isEmpty()){
+                        Toast.makeText(getActivity(), "No run logs available", Toast.LENGTH_LONG).show();
+                    }else {
+                        new WorkflowDownloadManager(getActivity()).downloadWorkflow(
+                                new File(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(
+                                        APP_DIRECTORY_NAME + "/Runoutput/outputs", "/TavernaMobile/Runouput/outputs/")),
+                                new TavernaPlayerAPI(getActivity()).PLAYER_RUN_URL + run_output_url.substring(0, 5));
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getActivity(), "Error downloading run output",Toast.LENGTH_LONG).show();
@@ -190,10 +192,15 @@ public class RunFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.downloadRunLogs:
                 try {
-                    new WorkflowDownloadManager(getActivity()).downloadWorkflow(
-                            new File(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(
-                            APP_DIRECTORY_NAME+"/Runoutput/logs/","/Runoutput/logs")),
-                            new TavernaPlayerAPI(getActivity()).PLAYER_RUN_URL+run_logs_url.substring(0,5));
+                    System.out.println("run logs: "+run_logs_url);
+                    if(run_logs_url.isEmpty()){
+                        Toast.makeText(getActivity(), "No run logs available", Toast.LENGTH_LONG).show();
+                    }else {
+                        new WorkflowDownloadManager(getActivity()).downloadWorkflow(
+                                new File(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(
+                                        APP_DIRECTORY_NAME + "/Runoutput/logs/", "/TavernaMobile/Runoutput/logs")),
+                                new TavernaPlayerAPI(getActivity()).PLAYER_RUN_URL + run_logs_url.substring(0, 5));
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(getActivity(), "Error downloading run logs",Toast.LENGTH_LONG).show();
@@ -202,9 +209,9 @@ public class RunFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public void updateRun(final JSONObject runInfo){
+    public void updateRun(Context context, final JSONObject runInfo){
         if(null != runInfo)
-        getActivity().runOnUiThread(new Runnable() {
+            ((Activity)context).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -223,8 +230,8 @@ public class RunFragment extends Fragment implements View.OnClickListener{
                 else
                     status.setImageResource(android.R.drawable.presence_invisible);
 
-                run_output_url = runInfo.getString("outputs_zip");
-                run_logs_url = runInfo.getString("log");
+                run_output_url = runInfo.has("outputs_zip")? runInfo.getString("outputs_zip"):"";
+                run_logs_url = runInfo.has("log")?runInfo.getString("log"):"";
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -268,8 +275,8 @@ public class RunFragment extends Fragment implements View.OnClickListener{
                 connection.disconnect();
 
                 JSONObject runInfo = new JSONObject(sb.toString());
-             //   System.out.println(runInfo.toString(2));
-                updateRun(runInfo);
+                System.out.println(runInfo.toString(2));
+                updateRun(this.context, runInfo);
 
             }catch (IOException ex){
                 ex.printStackTrace();
