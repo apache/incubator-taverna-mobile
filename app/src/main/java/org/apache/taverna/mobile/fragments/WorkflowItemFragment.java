@@ -40,6 +40,7 @@ import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.LruCache;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -109,6 +110,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     public static Context cx;
     private static boolean STATE_ON = false;
     private static TextView noDataText;
+    private static LruCache<String, Bitmap> avatarCache;
 
     public static WorkflowItemFragment newInstance(String param1, String param2) {
         WorkflowItemFragment fragment = new WorkflowItemFragment();
@@ -155,6 +157,17 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mListView.setAnimation(in);
         mListView.setAdapter(new WorkflowAdapter(getActivity()));
+        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+        // Use 1/8th of the available memory for this memory cache. up to 4MB for high screen densities and 1.2Mb for low sds
+        final int cacheSize = maxMemory / 8;
+        avatarCache = new LruCache<String, Bitmap>(cacheSize) {
+            @Override
+            protected int sizeOf(String key, Bitmap bitmap) {
+            // The cache size will be measured in kilobytes
+                return bitmap.getByteCount() / 1024;
+            }
+        };
+
         return rootView;
     }
 
@@ -302,18 +315,30 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             }
         });
     }
+
     public static void startLoadingAvatar(final User author) {
 
         ((Activity)cx).runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 synchronized (this) {
-                    new AvatarLoader().execute(author.getDetails_uri());
+                    //check whether avatar is already in the cache before trying to download it from remote resource
+                    //((ImageView) rootView.findViewById(R.id.author_profile_image))
+                    if(avatarCache.get(author.getRow_id()) == null)
+                        new AvatarLoader().execute(author.getDetails_uri(), author.getRow_id());
+                    else{
+                        ((ImageView) rootView.findViewById(R.id.author_profile_image)).setImageBitmap(avatarCache.get(author.getRow_id()));
+                    }
+                    System.out.println("Author cached ID "+author.getRow_id());
                 }
             }
         });
     }
 
+    /**
+     * Called when avatar xml has finished parsing. fetches the avatar remotely and updates the item in the list view
+     * @param author the author avatar to load
+     */
     public static void updateAvatar(final User author) {
 
         ((Activity)cx).runOnUiThread(new Runnable() {
@@ -322,7 +347,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                 synchronized (this) {
                     try {
                         ((TextView) rootView.findViewById(R.id.workflow_author)).setText(author.getName());
-                        new LoadAuthorAvatar((ImageView) rootView.findViewById(R.id.author_profile_image)).execute(author.getAvatar_url());
+                        new LoadAuthorAvatar((ImageView) rootView.findViewById(R.id.author_profile_image),author.getRow_id()).execute(author.getAvatar_url());
                     }catch(NullPointerException np){
 
                     }
@@ -335,9 +360,11 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
      */
     private static class LoadAuthorAvatar extends AsyncTask<String, Void, Bitmap> {
         ImageView img;
+        String row_id_as_key;
 
-        public LoadAuthorAvatar(ImageView imageView) {
+        public LoadAuthorAvatar(ImageView imageView, String rowid) {
             img = imageView;
+            row_id_as_key = rowid;
         }
 
         @Override
@@ -362,10 +389,10 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             img.setImageBitmap(bitmap);
-///            img.setBackground();
-//            notify();
+            //cache this image for faster loading next time
+            avatarCache.put(row_id_as_key, bitmap);
         }
-        private Bitmap ProcessingBitmap(Bitmap bmp){
+        private Bitmap processingBitmap(Bitmap bmp){
             Bitmap bm1 = null;
             Bitmap newBitmap = null;
 

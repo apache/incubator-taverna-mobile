@@ -55,11 +55,18 @@ public class User {
     protected String website;
     protected String details_uri;
     private String avatar_url;
+    private String row_id; //identifies the row  to which this user is being loaded in, in the workflow listview
 
-    public User(){
+    public User(String rid){
         super();
+        row_id = rid;
 //        this.setAvatar_url("http://www.myexperiment.org/users/6/pictures/614");
     }
+
+    public String getRow_id() {
+        return this.row_id;
+    }
+
     protected List<Workflow> user_workflows; //a list of workflows owned by this user
 
     public void setId(String id) {

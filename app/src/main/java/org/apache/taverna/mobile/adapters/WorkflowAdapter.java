@@ -176,7 +176,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         });
 
         synchronized (this){
-            new DetailLinkLoader().execute(uri);
+            new DetailLinkLoader().execute(uri, String.valueOf(i));
         }
     }
 
@@ -245,7 +245,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 InputStream input = connection.getInputStream();
                 IRule avatarRule = new MyExperimentXmlParserRules.UploaderRule(IRule.Type.ATTRIBUTE,"/workflow/uploader", "resource","uri","id");
                 WorkflowDetailParser detailMinParser = new WorkflowDetailParser(new IRule[]{avatarRule});
-                detailMinParser.parse(input, new User());
+                detailMinParser.parse(input, new User(strings[1]));
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();

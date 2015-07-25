@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,15 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
 import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,7 +44,6 @@ import static org.apache.taverna.mobile.activities.DashboardMainActivity.APP_DIR
 public class RunFragment extends Fragment implements View.OnClickListener{
 
     private View rootView;
-    private static int RUNID;
     private TextView runIdTextView,runNameTextView;
     private ImageButton status;
     private  TextView runStateTextView, runStartTime,runEndTime, runInputsText;
@@ -68,7 +62,6 @@ public class RunFragment extends Fragment implements View.OnClickListener{
         RunFragment fragment = new RunFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
-        RUNID = 0 ;
         return fragment;
     }
 
@@ -141,7 +134,7 @@ public class RunFragment extends Fragment implements View.OnClickListener{
 
                 downloadOutput.setOnClickListener(this);
                 downloadLogs.setOnClickListener(this);
-
+            reloadRunResult();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -158,10 +151,9 @@ public class RunFragment extends Fragment implements View.OnClickListener{
             return true;
         }
         if(id == android.R.id.home){
-           getActivity().finish();
+           //getActivity().finish();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -275,7 +267,6 @@ public class RunFragment extends Fragment implements View.OnClickListener{
                 connection.disconnect();
 
                 JSONObject runInfo = new JSONObject(sb.toString());
-                System.out.println(runInfo.toString(2));
                 updateRun(this.context, runInfo);
 
             }catch (IOException ex){
