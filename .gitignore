@@ -4,3 +4,8 @@
 /.idea/libraries
 .DS_Store
 /build
+/.idea/
+/app/build
+/app/app.iml
+/simple-xml-2.7.1
+
