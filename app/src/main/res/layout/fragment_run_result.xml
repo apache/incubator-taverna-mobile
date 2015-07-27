@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/abc_btn_radio_to_on_mtrl_000"
+            android:background="@drawable/round_shape"
             android:id="@+id/textview_runid"
             android:layout_gravity="left"
             android:layout_weight="1"

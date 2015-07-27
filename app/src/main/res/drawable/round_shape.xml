@@ -16,8 +16,8 @@
     android:bottom="1dp" />
   
   <size
-      android:width="80dp"
-      android:height="80dp"
+      android:width="10dp"
+      android:height="10dp"
       />
   <solid android:color="#fff"></solid>
   
