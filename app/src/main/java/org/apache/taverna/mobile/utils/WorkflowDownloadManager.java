@@ -90,21 +90,6 @@ public class WorkflowDownloadManager {
 
             if(id != 0)
                 sendNotification(this.context.getResources().getString(R.string.downloadprogress));
-         /*   int status = cur.getInt(cur.getColumnIndex(DownloadManager.COLUMN_STATUS));
-            switch (status) {
-                case DownloadManager.STATUS_SUCCESSFUL:
-                    sendNotification(this.context.getResources().getString(R.string.downloadcomplete));
-                    break;
-                case DownloadManager.STATUS_FAILED:
-                    sendNotification(this.context.getResources().getString(R.string.downloaderror));
-                    break;
-                case DownloadManager.STATUS_RUNNING:
-                    sendNotification(this.context.getResources().getString(R.string.downloadprogress));
-                    break;
-                case DownloadManager.ERROR_FILE_ALREADY_EXISTS:
-                    sendNotification(this.context.getResources().getString(R.string.downloadduplicate));
-                    break;
-            }*/
             cur.close();
         }
     }

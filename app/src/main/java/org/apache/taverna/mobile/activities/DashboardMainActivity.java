@@ -45,6 +45,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -125,7 +126,7 @@ public class DashboardMainActivity extends ActionBarActivity
                                 "application/vnd.taverna.t2flow+xml");
 
                 Intent loadWorkflowIntent = Intent.createChooser(workflowSelectIntent,
-                        "Choose Workflow (.t2flow)");
+                        "Choose Workflow (t2flow or xml)");
                 startActivityForResult(loadWorkflowIntent, SELECT_WORKFLOW);
 
                 break;
@@ -161,10 +162,31 @@ public class DashboardMainActivity extends ActionBarActivity
         if(resultCode == RESULT_OK){
             if(requestCode == SELECT_WORKFLOW){
                 String workflowPath = data.getData().getPath();
-                Toast.makeText(getBaseContext(), "Path: "+workflowPath, Toast.LENGTH_LONG).show();
-                new WorkflowOpen(this).execute(workflowPath);
+             //   Toast.makeText(getBaseContext(), "Path: "+workflowPath, Toast.LENGTH_LONG).show();
+                String type = getMimeType(data.getData().getPath());
+                if (type == "text/xml" || type == "application/vnd.taverna.t2flow+xml"){
+
+                    new WorkflowOpen(this).execute(workflowPath);
+                }else {
+                    Toast.makeText(getBaseContext(), "Invalid worklow. Please try again", Toast.LENGTH_LONG).show();
+
+                }
             }
         }
+    }
+
+    /**
+     * Return the mimetype of the file selected to be run as a workflow
+     * @param url the path to the seleted file
+     * @return the mimetype of the file selected
+     */
+    private String getMimeType(String url) {
+        String type = null;
+        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
+        if (extension != null) {
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+        }
+        return type;
     }
 
     public void onSectionAttached(int number) {
@@ -231,6 +253,7 @@ public class DashboardMainActivity extends ActionBarActivity
        //     Toast.makeText(context, "Home dir: "+home.getAbsolutePath(), Toast.LENGTH_LONG).show();
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {

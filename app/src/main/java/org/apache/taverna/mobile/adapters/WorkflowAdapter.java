@@ -124,10 +124,12 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         Linkify.addLinks(viewHolder.wk_description, Linkify.WEB_URLS);
         final String wkflow_url = workflow.get(j).getWorkflow_remote_url();
         final Intent it = new Intent();
+        System.out.println("Workflow_uri:"+uri);
         it.setClass(context, WorkflowDetailActivity.class);
-//        it.putExtra("workflowid", workflow.get(i).getId());
-        it.putExtra("uri",uri);
-        WorkflowdetailFragment.WORKFLO_ID = workflow.get(i).getId();
+//        it.putExtra("workflowid", workflow.get(i).getId()); //workflow_url
+        it.putExtra("uri",uri);//uri
+        it.putExtra("wtitle", title); //pass this workflow's title to the detail activity so the corresponding run can be fetched
+        WorkflowdetailFragment.WORKFLO_ID = title;//workflow.get(i).getId();
 
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,8 +152,10 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                boolean saved =  favDB.save();
-                if(saved) {
+                //boolean saved =  favDB.save();
+                int saved =
+                favDB.insert(mfav);
+                if(saved >0) {
                     Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
                     viewHolder.btn_mark_workflow.setCompoundDrawables(context.getResources().getDrawable(android.R.drawable.btn_star_big_on),null,null,null);
                     //refresh fragment since data has changed
@@ -172,7 +176,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         });
 
         synchronized (this){
-            new DetailLinkLoader().execute(uri);
+            new DetailLinkLoader().execute(uri, String.valueOf(i));
         }
     }
 
@@ -241,7 +245,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 InputStream input = connection.getInputStream();
                 IRule avatarRule = new MyExperimentXmlParserRules.UploaderRule(IRule.Type.ATTRIBUTE,"/workflow/uploader", "resource","uri","id");
                 WorkflowDetailParser detailMinParser = new WorkflowDetailParser(new IRule[]{avatarRule});
-                detailMinParser.parse(input, new User());
+                detailMinParser.parse(input, new User(strings[1]));
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();

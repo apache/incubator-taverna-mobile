@@ -57,6 +57,7 @@ limitations under the License.
     <string name="workflow_component">Workflow component</string>
     <string name="favorite_empty"> No Favorites Added Yet</string>
     <string name="workflow_empty"> No <b>Workflows</b> Available. Check your Connection to the Internet or Pull down to refresh</string>
+    <string name="workflow_run_empty"> <b>Workflows History</b> empty. No runs have been created for this workflow</string>
     <string name="wktitle">TITLE</string>
     <string name="marked">Marked On</string>
     <string name="created">Created :</string>
@@ -83,7 +84,7 @@ limitations under the License.
     <string name="fetchrun">Fetching run components </string>
     <string name="keeplogin">Remain Logged-in</string>
     
-    <string name="emailerr">Email must not be empty</string>
+    <string name="emailerr">Username must not be empty</string>
     <string name="passworderr">Password must not be empty</string>
     <string name="about">Mobile Application for managing Taverna workflows on the fly.<br/>
                          View, run and download workflows at a convenience on your android mobile<br/>
@@ -92,6 +93,8 @@ limitations under the License.
     <string name="playerconfig_summary">Username used to login to Taverna player portal</string>
     <string name="playeruser">Username/email</string>
     <string name="playerpass">Password</string>
+    <string name="servererr">Server error. Please try again later</string>
+    <string name="auth_err">Invalid login credentials</string>
     <string name="myexperimenttitle">Configure MyExperiment Account</string>
     <string name="myexperimentsummary">Username used to login to MyExperiment</string>
     <string name="title_activity_run_result">Workflow Run Result</string>

@@ -39,6 +39,6 @@ limitations under the License.
         android:layout_height="wrap_content"
         android:gravity="center"
         android:visibility="gone"
-        android:text="@string/workflow_empty"/>
+        android:text="@string/workflow_run_empty"/>
 
 </FrameLayout>

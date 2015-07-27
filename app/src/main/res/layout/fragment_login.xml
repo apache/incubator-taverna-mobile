@@ -140,7 +140,8 @@ limitations under the License.
                 android:id="@+id/textView7"
                 android:paddingTop="20dp"
                 android:textSize="20dp"
-                android:gravity="center|center_horizontal" />
+                android:gravity="center|center_horizontal"
+                android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
 

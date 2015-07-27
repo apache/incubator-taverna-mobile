@@ -38,6 +38,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
+ * initiates a process to fetch and parse uploader information so as to retrieve the id, name and avatar link
  * Created by Larry AKah on 6/29/15.
  */
 public class AvatarLoader extends AsyncTask<String, Void, Void> {
@@ -56,7 +57,7 @@ public class AvatarLoader extends AsyncTask<String, Void, Void> {
             IRule avatarName = new MyExperimentXmlParserRules.AuthorRule(IRule.Type.CHARACTER,"/user/name");
             AvatarXMLParser avatarXMLParser = new AvatarXMLParser(new IRule[]{avatarRule, avatarName});
 
-            avatarXMLParser.parse(input, new User());
+            avatarXMLParser.parse(input, new User(strings[1]));
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

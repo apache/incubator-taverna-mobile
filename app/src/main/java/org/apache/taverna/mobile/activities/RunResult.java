@@ -30,6 +30,8 @@ public class RunResult extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+       this.finish();
+
         return super.onOptionsItemSelected(item);
     }
 
