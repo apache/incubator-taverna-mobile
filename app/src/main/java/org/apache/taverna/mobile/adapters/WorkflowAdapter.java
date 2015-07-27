@@ -75,20 +75,20 @@ import java.util.List;
  */
 public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHolder>{
     private Context context;
-    private List<Workflow> workflow; //workflow data to bind to the UI
+    private List<Workflow> workflowList; //workflow data to bind to the UI
     private WorkflowAdapter.ViewHolder mViewHolder;
     public static final String WORKFLOW_FAVORITE_KEY = "WORKFLOW_FAVORITES"; //workflow key used to save workflows when marked as favorites
     public Workflow_DB favDB;
 
     public WorkflowAdapter(Context c, List<Workflow> wk) {
         context = c;
-        workflow = wk;
+        workflowList = wk;
         favDB = new Workflow_DB(context, WORKFLOW_FAVORITE_KEY);
     }
 
     public WorkflowAdapter(Context c){
         context = c;
-        workflow = new ArrayList<Workflow>();
+        workflowList = new ArrayList<Workflow>();
         favDB = new Workflow_DB(context, WORKFLOW_FAVORITE_KEY);
     }
 
@@ -108,21 +108,20 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder viewHolder, int i) {
 
         final int j = i; //position of workflow item that has workflow data
-        final Context c = this.context;
 
-        final long wid = workflow.get(i).getId();
-        final String author = workflow.get(i).getWorkflow_author();
-        final String title = workflow.get(i).getWorkflow_title();
-        String description  = workflow.get(i).getWorkflow_description();
-        final String uri = workflow.get(i).getWorkflow_details_url();
+        final long wid = workflowList.get(i).getId();
+        final String author = workflowList.get(i).getWorkflow_author();
+        final String title = workflowList.get(i).getWorkflow_title();
+        String description  = workflowList.get(i).getWorkflow_description();
+        final String uri = workflowList.get(i).getWorkflow_details_url();
         final String desc_full = description;
 
-        if(description.length() > 80) description = description.substring(0, 79);
+        if(description.length() > 80) description = description.substring(0, 79)+" ...";
         viewHolder.author_name.setHint(author);
         viewHolder.wk_title.setHint(title);
-        viewHolder.wk_description.setText( description+" ... ");
+        viewHolder.wk_description.setText(description);
         Linkify.addLinks(viewHolder.wk_description, Linkify.WEB_URLS);
-        final String wkflow_url = workflow.get(j).getWorkflow_remote_url();
+
         final Intent it = new Intent();
         System.out.println("Workflow_uri:"+uri);
         it.setClass(context, WorkflowDetailActivity.class);
@@ -147,12 +146,13 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full); mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
                 mfav.add(uri);
                 mfav.add(viewHolder.author_name.getText());
+                /*
                 try {
                     favDB.put(mfav);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //boolean saved =  favDB.save();
+                */
                 int saved =
                 favDB.insert(mfav);
                 if(saved >0) {
@@ -160,6 +160,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                     viewHolder.btn_mark_workflow.setCompoundDrawables(context.getResources().getDrawable(android.R.drawable.btn_star_big_on),null,null,null);
                     //refresh fragment since data has changed
                     FavoriteFragment.newInstance(0);
+                }else if(saved == -1){
+                    Toast.makeText(context,"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();
                 }else
                     Toast.makeText(context,"Error!, please try again",Toast.LENGTH_SHORT).show();
             }
@@ -181,24 +183,24 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     }
 
     public void setData(List<Workflow> workflowList){
-        this.workflow = workflowList;
+        this.workflowList = workflowList;
     }
     @Override
     public long getItemId(int i) {
-        return workflow.get(i).getId();
+        return workflowList.get(i).getId();
     }
 
     @Override
     public int getItemCount() {
-        return workflow.size();
+        return workflowList.size();
     }
 
     public Workflow getItem(int position){
-        return workflow.get(position);
+        return workflowList.get(position);
     }
 
     public void addWorkflow(Workflow wk){
-        workflow.add(wk);
+        workflowList.add(wk);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
