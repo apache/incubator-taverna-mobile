@@ -138,7 +138,7 @@ public class DashboardMainActivity extends ActionBarActivity
                 break;
             case 4: //show about
                 TextView about = new TextView(getApplicationContext());
-                about.setTextSize(25);
+                about.setTextSize(21);
                 about.setText(getResources().getString(R.string.about));
 
                 aboutDialog.setTitle("About Taverna Mobile");

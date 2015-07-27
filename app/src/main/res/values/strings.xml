@@ -86,8 +86,9 @@ limitations under the License.
     <string name="emailerr">Username must not be empty</string>
     <string name="passworderr">Password must not be empty</string>
     <string name="about">Mobile Application for managing Taverna workflows on the fly.<br/>
-                         View, run and download workflows at a convenience on your android mobile<br/>
-                        device. \n\n <br/><b>Developed at Apache Taverna and Powered by MyExperiment</b><br/></string>
+                         View, run and download workflows at your convenience on your android mobile
+                        device. \n\n <br/>Developed during Google Summer of Code 2015
+        under Apache Taverna. \n Powered by MyExperiment<br/></string>
     <string name="playerconfig">Configure Player Account</string>
     <string name="playerconfig_summary">Username used to login to Taverna player portal</string>
     <string name="playeruser">Username/email</string>
