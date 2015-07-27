@@ -29,6 +29,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -139,6 +140,8 @@ public class DashboardMainActivity extends ActionBarActivity
             case 4: //show about
                 TextView about = new TextView(getApplicationContext());
                 about.setTextSize(21);
+                about.setTextColor(Color.BLACK);
+                about.setPadding(3,3,3,3);
                 about.setText(getResources().getString(R.string.about));
 
                 aboutDialog.setTitle("About Taverna Mobile");
