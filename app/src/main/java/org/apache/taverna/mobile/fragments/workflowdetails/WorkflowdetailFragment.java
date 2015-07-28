@@ -65,12 +65,14 @@ import com.dropbox.client2.session.AppKeyPair;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.activities.RunResult;
+import org.apache.taverna.mobile.adapters.WorkflowAdapter;
 import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
 import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.DetailsLoader;
 import org.apache.taverna.mobile.utils.RunTask;
 import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
+import org.apache.taverna.mobile.utils.Workflow_DB;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -87,6 +89,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.CharsetEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Larry Akah on 6/9/15.
@@ -113,6 +118,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     public static String workflow_uri ;
     final static private String BOX_APP_KEY = "doicbvkfyzligh2";
     final static private String BOX_APP_SECRET = "3uuuw36mm7jkflc";
+    static Workflow currentWorkflow =  null;
 
     private DropboxAPI<AndroidAuthSession> mDBApi;
 
@@ -156,6 +162,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         createRun.setOnClickListener(this);
         Button download = (Button) rootView.findViewById(R.id.download_wk);
         download.setOnClickListener(this);
+        rootView.findViewById(R.id.mark_wk).setOnClickListener(this);
         rootView.findViewById(R.id.saveToDropboxButton).setOnClickListener(this);
         rootView.findViewById(R.id.saveToGoogleDriveButton).setOnClickListener(this);
         (rootView.findViewById(R.id.wkf_image)).setOnLongClickListener(new View.OnLongClickListener() {
@@ -204,6 +211,24 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.mark_wk:
                 //TODO mark a workflow as important and launch task to store the entry into the local database
+                ArrayList<Object> mfav = new ArrayList<Object>();
+                //save current workflow as favorite
+                mfav.add(currentWorkflow.getId());
+                mfav.add(currentWorkflow.getWorkflow_author());
+                mfav.add(currentWorkflow.getWorkflow_title());
+                mfav.add(currentWorkflow.getWorkflow_description());
+                mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
+                mfav.add(currentWorkflow.getWorkflow_details_url());
+                mfav.add(((TextView) rootView.findViewById(R.id.wkf_author)).getText());
+                int result = new Workflow_DB(getActivity(), WorkflowAdapter.WORKFLOW_FAVORITE_KEY).insert(mfav);
+                if(result >0) {
+                    Toast.makeText(getActivity(), "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
+                    ((Button) view).setCompoundDrawables(getActivity().getResources().getDrawable(android.R.drawable.btn_star_big_on),null,null,null);
+
+                }else if(result == -1){
+                    Toast.makeText(getActivity(),"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();
+                }else
+                    Toast.makeText(getActivity(),"Error!, please try again",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.saveToDropboxButton:
                 String authToken = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("dropboxauth", "");
@@ -271,6 +296,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     }
 
     public static void setWorkflowDetails(final Workflow wk){
+        currentWorkflow = wk;
         final TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
         final TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
         final TextView type = (TextView) rootView.findViewById(R.id.wtype);
