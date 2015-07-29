@@ -212,6 +212,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                 noDataText.setVisibility(View.GONE);
             }
         }
+        ((RecyclerView)(getActivity()).findViewById(R.id.favoriteList)).getAdapter().notifyDataSetChanged();
     }
 
     @Override
