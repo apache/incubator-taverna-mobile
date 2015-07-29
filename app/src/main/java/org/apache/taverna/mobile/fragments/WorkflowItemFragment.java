@@ -104,7 +104,6 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
      * The Adapter which will be used to populate the ListView/GridView with
      * Views.
      */
-    private WorkflowAdapter workflowAdapter;
     private static WorkflowAdapter searchAdpater;
     private static View rootView;
     public static Context cx;
@@ -142,7 +141,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
    //    mlist.add(new Workflow(getActivity(),"Testing title","Larry","Ok testing",0,"http://127.0.0.1"));
    /*     mlist.add(new Workflow(getActivity(),"Testing title","Larry","Ok testing",0,"http://127.0.0.1"));
 */
-        workflowAdapter = new WorkflowAdapter(getActivity(), mlist );
+
     }
 
     @Override

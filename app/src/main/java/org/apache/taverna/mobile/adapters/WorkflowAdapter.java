@@ -27,13 +27,10 @@ package org.apache.taverna.mobile.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.util.Linkify;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,20 +43,14 @@ import android.widget.Toast;
 import com.thebuzzmedia.sjxp.rule.IRule;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.activities.WorkflowDetailActivity;
-import org.apache.taverna.mobile.fragments.FavoriteFragment;
 import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowdetailFragment;
 import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
-import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
 import org.apache.taverna.mobile.utils.Workflow_DB;
-import org.apache.taverna.mobile.utils.xmlparsers.AvatarXMLParser;
 import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParserRules;
 import org.apache.taverna.mobile.utils.xmlparsers.WorkflowDetailParser;
-import org.json.JSONException;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -143,27 +134,23 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
             public void onClick(View view) {
                 ArrayList<Object> mfav = new ArrayList<Object>();
                 //save current workflow as favorite
-                mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full); mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
+                mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full);
+                mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
                 mfav.add(uri);
                 mfav.add(viewHolder.author_name.getText());
-                /*
-                try {
-                    favDB.put(mfav);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                */
-                int saved =
-                favDB.insert(mfav);
+                int saved = favDB.insert(mfav);
+
                 if(saved >0) {
                     Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
                     viewHolder.btn_mark_workflow.setCompoundDrawables(context.getResources().getDrawable(android.R.drawable.btn_star_big_on),null,null,null);
                     //refresh fragment since data has changed
-                    FavoriteFragment.newInstance(0);
+//                    FavoriteFragment.newInstance(0).favoriteAdapter.notifyDataSetChanged();
+                    ((RecyclerView)((Activity) context).findViewById(R.id.favoriteList)).getAdapter().notifyDataSetChanged();
                 }else if(saved == -1){
                     Toast.makeText(context,"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();
                 }else
                     Toast.makeText(context,"Error!, please try again",Toast.LENGTH_SHORT).show();
+
             }
         });
         viewHolder.wk_showmore.setText(Html.fromHtml(context.getResources().getString(R.string.seemore)));

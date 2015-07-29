@@ -56,6 +56,39 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
         FViewHolder vh = new FViewHolder(itemview);
         return vh;
     }
+    /**
+     * Register a new observer to listen for data changes.
+     * <p/>
+     * <p>The adapter may publish a variety of events describing specific changes.
+     * Not all adapters may support all change types and some may fall back to a generic
+     * {@link android.support.v7.widget.RecyclerView.AdapterDataObserver#onChanged()
+     * "something changed"} event if more specific data is not available.</p>
+     * <p/>
+     * <p>Components registering observers with an adapter are responsible for
+     * {@link #unregisterAdapterDataObserver(android.support.v7.widget.RecyclerView.AdapterDataObserver)
+     * unregistering} those observers when finished.</p>
+     *
+     * @param observer Observer to register
+     * @see #unregisterAdapterDataObserver(android.support.v7.widget.RecyclerView.AdapterDataObserver)
+     */
+    @Override
+    public void registerAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+        super.registerAdapterDataObserver(observer);
+        //observer.onChanged();
+    }
+    /**
+     * Unregister an observer currently listening for data changes.
+     * <p/>
+     * <p>The unregistered observer will no longer receive events about changes
+     * to the adapter.</p>
+     *
+     * @param observer Observer to unregister
+     * @see #registerAdapterDataObserver(android.support.v7.widget.RecyclerView.AdapterDataObserver)
+     */
+    @Override
+    public void unregisterAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+        super.unregisterAdapterDataObserver(observer);
+    }
 
     @Override
     public void onBindViewHolder(FViewHolder fViewHolder, int i) {
