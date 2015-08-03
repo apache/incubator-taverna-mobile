@@ -27,6 +27,7 @@ package org.apache.taverna.mobile.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -142,9 +143,11 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
 
                 if(saved >0) {
                     Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
+                    Drawable drawable = context.getResources().getDrawable(android.R.drawable.btn_star_big_on);
+                    drawable.setBounds(0,0,50,50);
+                    viewHolder.btn_mark_workflow.setCompoundDrawables(drawable,null,null,null);
                     viewHolder.btn_mark_workflow.setCompoundDrawables(context.getResources().getDrawable(android.R.drawable.btn_star_big_on),null,null,null);
                     //refresh fragment since data has changed
-//                    FavoriteFragment.newInstance(0).favoriteAdapter.notifyDataSetChanged();
                     ((RecyclerView)((Activity) context).findViewById(R.id.favoriteList)).getAdapter().notifyDataSetChanged();
                 }else if(saved == -1){
                     Toast.makeText(context,"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();
