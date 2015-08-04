@@ -29,7 +29,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -109,7 +108,7 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
         fViewHolder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, String.format("%s %s", "Removed " , String.valueOf(data.get(0))),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, String.format("%s", "Removed "),Toast.LENGTH_SHORT).show();
                 try {
                     favDB.delete(String.valueOf(data.get(0)));
                     notifyDataSetChanged();

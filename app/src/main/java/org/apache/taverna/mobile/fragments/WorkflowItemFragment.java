@@ -137,7 +137,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         in = AnimationUtils.loadAnimation(getActivity(),android.R.anim.slide_in_left);
-       List<Workflow> mlist = new ArrayList<Workflow>();
+   //    List<Workflow> mlist = new ArrayList<Workflow>();
    //    mlist.add(new Workflow(getActivity(),"Testing title","Larry","Ok testing",0,"http://127.0.0.1"));
    /*     mlist.add(new Workflow(getActivity(),"Testing title","Larry","Ok testing",0,"http://127.0.0.1"));
 */
@@ -322,14 +322,14 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             @Override
             public void run() {
                 synchronized (this) {
+                    ((TextView) rootView.findViewById(R.id.workflow_author)).setText(author.getName());
                     //check whether avatar is already in the cache before trying to download it from remote resource
-                    //((ImageView) rootView.findViewById(R.id.author_profile_image))
-                    if(avatarCache.get(author.getRow_id()) == null)
+                    if(avatarCache.get(author.getDetails_uri()) == null)
                         new AvatarLoader().execute(author.getDetails_uri(), author.getRow_id());
                     else{
-                        ((ImageView) rootView.findViewById(R.id.author_profile_image)).setImageBitmap(avatarCache.get(author.getRow_id()));
+                        ((ImageView) rootView.findViewById(R.id.author_profile_image)).setImageBitmap(avatarCache.get(author.getDetails_uri()));
                     }
-                    System.out.println("Author cached ID "+author.getRow_id());
+                    System.out.println("Author cached ID "+author.getDetails_uri());
                 }
             }
         });
@@ -344,15 +344,8 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         ((Activity)cx).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                synchronized (this) {
-                    try {
-                        ((TextView) rootView.findViewById(R.id.workflow_author)).setText(author.getName());
-                        new LoadAuthorAvatar((ImageView) rootView.findViewById(R.id.author_profile_image),author.getRow_id()).execute(author.getAvatar_url());
-                    }catch(NullPointerException np){
-
-                    }
+                     new LoadAuthorAvatar((ImageView) rootView.findViewById(R.id.author_profile_image),author.getDetails_uri()).execute(author.getAvatar_url());
                 }
-            }
         });
     }
     /**
@@ -391,38 +384,6 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             img.setImageBitmap(bitmap);
             //cache this image for faster loading next time
             avatarCache.put(row_id_as_key, bitmap);
-        }
-        private Bitmap processingBitmap(Bitmap bmp){
-            Bitmap bm1 = null;
-            Bitmap newBitmap = null;
-
-                bm1 = bmp;
-                int w = bm1.getWidth();
-                int h = bm1.getHeight();
-
-                Bitmap.Config config = bm1.getConfig();
-                if(config == null){
-                    config = Bitmap.Config.ARGB_8888;
-                }
-
-                newBitmap = Bitmap.createBitmap(w, h, config);
-                Canvas newCanvas = new Canvas(newBitmap);
-                newCanvas.drawColor(Color.WHITE);
-
-                Paint paint = new Paint();
-                paint.setColor(Color.TRANSPARENT);
-                Rect frame = new Rect(
-                        (int)(w*0.05),
-                        (int)(w*0.05),
-                        (int)(w*0.95),
-                        (int)(h*0.95));
-                RectF frameF = new RectF(frame);
-                newCanvas.drawRoundRect(frameF, (float)(w*0.5), (float)(h*0.05), paint);
-
-                paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SCREEN));
-                newCanvas.drawBitmap(bm1, 0, 0, paint);
-
-            return newBitmap;
         }
     }
 }
