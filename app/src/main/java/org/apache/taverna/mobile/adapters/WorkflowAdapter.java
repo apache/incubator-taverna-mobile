@@ -125,7 +125,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         WorkflowdetailFragment.WORKFLO_ID = title;//workflow.get(i).getId();
 
             //determine whether to mark button as favorited or not
-           String favs = PreferenceManager.getDefaultSharedPreferences(context).getString(FAVORITE_LIST_DB, "");
+           final String favs = PreferenceManager.getDefaultSharedPreferences(context).getString(FAVORITE_LIST_DB, "");
             String[] ids = favs.split(",");
             if(ids.length > 0) {
                 for (String id : ids)
@@ -156,16 +156,18 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 int saved = favDB.insert(mfav);
 
                 if(saved >0) {
-                    Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
                     viewHolder.btn_mark_workflow.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
 
-                    PreferenceManager.getDefaultSharedPreferences(context).edit().putString(FAVORITE_LIST_DB, wid+",").apply();
+                    PreferenceManager.getDefaultSharedPreferences(context).edit().putString(FAVORITE_LIST_DB, favs+wid+",").apply();
                     //refresh fragment since data has changed
-                   try {
-                       ((RecyclerView) ((Activity) context).findViewById(R.id.favoriteList)).getAdapter().notifyDataSetChanged();
-                   }catch(NullPointerException np){
-                        np.printStackTrace();
-                   }
+                    FavoriteWorkflowAdapter favoriteWorkflowAdapter = (FavoriteWorkflowAdapter) ((RecyclerView) ((Activity) context).findViewById(R.id.favoriteList)).getAdapter();
+                   //try {
+                    if(null != favoriteWorkflowAdapter)
+                       favoriteWorkflowAdapter.notifyDataSetChanged();
+                   //}catch(NullPointerException np){
+                   //     np.printStackTrace();
+                  // }
+                    Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
                 }else if(saved == -1){
                     Toast.makeText(context,"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();
                 }else

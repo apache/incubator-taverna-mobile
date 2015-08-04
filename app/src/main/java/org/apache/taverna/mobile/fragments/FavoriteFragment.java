@@ -91,6 +91,7 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
 
         };
        setUpFavoriteData();
+
     }
 
     @Override
@@ -101,7 +102,6 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
         wFavoriteListView.setHasFixedSize(true);
         wFavoriteListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         wFavoriteListView.setAdapter(favoriteAdapter);
-
         return rootView;
     }
 
@@ -196,6 +196,7 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
     @Override
     public void onResume() {
         super.onResume();
+       // setUpListView();
         //wFavoriteListView.setOnCreateContextMenuListener(this);
         //registerForContextMenu(wFavoriteListView);
 
