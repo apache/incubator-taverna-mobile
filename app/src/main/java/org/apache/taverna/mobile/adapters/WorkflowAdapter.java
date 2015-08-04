@@ -27,8 +27,8 @@ package org.apache.taverna.mobile.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.util.Linkify;
@@ -51,6 +51,7 @@ import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.Workflow_DB;
 import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParserRules;
 import org.apache.taverna.mobile.utils.xmlparsers.WorkflowDetailParser;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,8 +71,9 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     private List<Workflow> workflowList; //workflow data to bind to the UI
     private WorkflowAdapter.ViewHolder mViewHolder;
     public static final String WORKFLOW_FAVORITE_KEY = "WORKFLOW_FAVORITES"; //workflow key used to save workflows when marked as favorites
-    public Workflow_DB favDB;
-
+    public static final String FAVORITE_LIST_DB = "FAVORITE_LIST";
+    public Workflow_DB favDB; //favorited keeps items that have been favorited in order to identify them during
+                                        // display in the list.
     public WorkflowAdapter(Context c, List<Workflow> wk) {
         context = c;
         workflowList = wk;
@@ -122,6 +124,18 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         it.putExtra("wtitle", title); //pass this workflow's title to the detail activity so the corresponding run can be fetched
         WorkflowdetailFragment.WORKFLO_ID = title;//workflow.get(i).getId();
 
+            //determine whether to mark button as favorited or not
+           String favs = PreferenceManager.getDefaultSharedPreferences(context).getString(FAVORITE_LIST_DB, "");
+            String[] ids = favs.split(",");
+            if(ids.length > 0) {
+                for (String id : ids)
+                    if (id.equalsIgnoreCase("" + wid)){
+                        viewHolder.btn_mark_workflow.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
+                        break;
+                    }
+            }
+
+
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,8 +158,14 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 if(saved >0) {
                     Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
                     viewHolder.btn_mark_workflow.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
+
+                    PreferenceManager.getDefaultSharedPreferences(context).edit().putString(FAVORITE_LIST_DB, wid+",").apply();
                     //refresh fragment since data has changed
-                    ((RecyclerView)((Activity) context).findViewById(R.id.favoriteList)).getAdapter().notifyDataSetChanged();
+                   try {
+                       ((RecyclerView) ((Activity) context).findViewById(R.id.favoriteList)).getAdapter().notifyDataSetChanged();
+                   }catch(NullPointerException np){
+                        np.printStackTrace();
+                   }
                 }else if(saved == -1){
                     Toast.makeText(context,"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();
                 }else
