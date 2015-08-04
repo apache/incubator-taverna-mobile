@@ -150,7 +150,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 ArrayList<Object> mfav = new ArrayList<Object>();
                 //save current workflow as favorite
                 mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full);
-                mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
+                mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()));
                 mfav.add(uri);
                 mfav.add(viewHolder.author_name.getText());
                 int saved = favDB.insert(mfav);

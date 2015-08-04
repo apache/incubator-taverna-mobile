@@ -33,16 +33,31 @@ limitations under the License.
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/author"
-            android:hint="@string/workflow_authorhint"
-            android:textSize="25sp"
-            android:elevation="5dp" />
 
-            <LinearLayout
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/author"
+                android:textSize="25sp"
+                android:elevation="5dp"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/favoriteButtonDelete"
+                android:src="@drawable/ic_delete_favorite"
+                android:background="#eee"
+                android:layout_gravity="right" />
+        </LinearLayout>
+
+        <LinearLayout
                 android:id="@+id/linearlayout_workflow_info"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
