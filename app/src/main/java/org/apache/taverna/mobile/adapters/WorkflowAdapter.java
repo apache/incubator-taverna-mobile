@@ -86,6 +86,52 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         favDB = new Workflow_DB(context, WORKFLOW_FAVORITE_KEY);
     }
 
+    public void addItems(List<Workflow> workflow, int position) throws ClassCastException{
+        //add item to the list
+//      workflowList.add(position,workflow);
+        workflowList.addAll(workflow);
+        notifyItemRangeInserted(position + 24, 25);
+    }
+
+    public void removeItem(Workflow workflow){
+        workflowList.remove(workflow);
+        //notifyItemRemoved();
+    }
+
+    /**
+     * Register a new observer to listen for data changes.
+     * <p/>
+     * <p>The adapter may publish a variety of events describing specific changes.
+     * Not all adapters may support all change types and some may fall back to a generic
+     * {@link android.support.v7.widget.RecyclerView.AdapterDataObserver#onChanged()
+     * "something changed"} event if more specific data is not available.</p>
+     * <p/>
+     * <p>Components registering observers with an adapter are responsible for
+     * {@link #unregisterAdapterDataObserver(android.support.v7.widget.RecyclerView.AdapterDataObserver)
+     * unregistering} those observers when finished.</p>
+     *
+     * @param observer Observer to register
+     * @see #unregisterAdapterDataObserver(android.support.v7.widget.RecyclerView.AdapterDataObserver)
+     */
+    @Override
+    public void registerAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+        super.registerAdapterDataObserver(observer);
+    }
+
+    /**
+     * Unregister an observer currently listening for data changes.
+     * <p/>
+     * <p>The unregistered observer will no longer receive events about changes
+     * to the adapter.</p>
+     *
+     * @param observer Observer to unregister
+     * @see #registerAdapterDataObserver(android.support.v7.widget.RecyclerView.AdapterDataObserver)
+     */
+    @Override
+    public void unregisterAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+        super.unregisterAdapterDataObserver(observer);
+    }
+
     @Override
     public WorkflowAdapter.ViewHolder onCreateViewHolder(ViewGroup parentViewGroup, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.workflow_item_layout,parentViewGroup,false);

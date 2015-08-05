@@ -335,7 +335,7 @@ public class MyExperimentXmlParserRules {
             this.workflow.setWorkflow_title(text);
             this.workflow.setWorkflow_author("");
             wlist.add(this.workflow);
-            WorkflowLoader.loadedWorkflows.add(this.workflow);
+            //WorkflowLoader.loadedWorkflows.add(this.workflow);
             ((List<Workflow>)workflowListObject).add(this.workflow);
             this.workflow = null;
         }

@@ -88,7 +88,6 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
                 setUpFavoriteData();
                 setUpListView();
             }
-
         };
        setUpFavoriteData();
 
