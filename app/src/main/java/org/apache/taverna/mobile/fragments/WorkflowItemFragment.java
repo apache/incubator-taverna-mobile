@@ -108,7 +108,6 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     private InfiniteScrollListener scrollListener;
     private RecyclerView.AdapterDataObserver workflowObserver;
     //variables controlling the different kinds of data loading
-    public static boolean isLoadInitialData =true;
     public static boolean isLoadMoreData = false;
     public static boolean isRefreshData = false;
 
@@ -293,7 +292,6 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     @Override
     public void onRefresh() {
         isRefreshData = true;
-        isLoadInitialData = false;
         isLoadMoreData = false;
         new WorkflowLoader(getActivity(),swipeRefreshLayout).execute(""+currentPage);
     }
@@ -323,7 +321,6 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                 WorkflowItemFragment.workflowAdapter = new WorkflowAdapter(cx,data);
                 if(isLoadMoreData) {
                     isLoadMoreData = false;
-                    isLoadInitialData = false;
                     isRefreshData = false;
                     workflowAdapter.addItems(data, previousTotal);
                 }else
