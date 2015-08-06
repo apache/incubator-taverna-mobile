@@ -87,8 +87,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     }
 
     public void addItems(List<Workflow> workflow, int position) throws ClassCastException{
-        //add item to the list
-//      workflowList.add(position,workflow);
+        //add items to the current list of list
+       //workflowList.add(position,workflow);
         workflowList.addAll(workflow);
         notifyItemRangeInserted(position + 24, 25);
     }
