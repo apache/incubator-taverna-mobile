@@ -322,7 +322,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                 if(isLoadMoreData) {
                     isLoadMoreData = false;
                     isRefreshData = false;
-                    workflowAdapter.addItems(data, previousTotal);
+                    ((WorkflowAdapter)mListView.getAdapter()).addItems(data, previousTotal);
                 }else
                     mListView.swapAdapter(workflowAdapter, false);
 
@@ -442,7 +442,8 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                 //list has reached end, load more.
                 Toast.makeText(getActivity(), "Loading more", Toast.LENGTH_SHORT).show();
                 isLoadMoreData = true;
-                new WorkflowLoader(getActivity(),swipeRefreshLayout).execute(""+currentPage++);
+                currentPage++;
+                new WorkflowLoader(getActivity(),swipeRefreshLayout).execute(""+currentPage);
                 System.out.println(currentPage);
                 loading = true;
             }
