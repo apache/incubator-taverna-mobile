@@ -257,7 +257,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getTitle().equals("Refresh")){
-            new WorkflowLoader(getActivity(),swipeRefreshLayout).execute(""+currentPage);
+            new WorkflowLoader(getActivity(),swipeRefreshLayout).execute("1");
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -293,6 +293,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     public void onRefresh() {
         isRefreshData = true;
         isLoadMoreData = false;
+
         new WorkflowLoader(getActivity(),swipeRefreshLayout).execute(""+currentPage);
     }
 

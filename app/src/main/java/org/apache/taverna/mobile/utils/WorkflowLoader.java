@@ -87,6 +87,8 @@ public class WorkflowLoader extends AsyncTask<String, Object, Object>{ //Workflo
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
         return this.userWorkflows;
     }
