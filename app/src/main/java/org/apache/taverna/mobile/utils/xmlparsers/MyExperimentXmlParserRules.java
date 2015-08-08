@@ -157,6 +157,9 @@ public class MyExperimentXmlParserRules {
                     break;
                 case 2:
                     muser.setId(value);
+                    if( (userObject instanceof User)){
+                        ((User)userObject).setId(value);
+                    }
                     break;
             }
         }
@@ -165,15 +168,19 @@ public class MyExperimentXmlParserRules {
         public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
            muser.setName(text);
            mWorkflow.setUploader(muser);
-            ((Workflow)userObject).setUploader(muser);
+
+            if( (userObject instanceof User)){
+                ((User)userObject).setName(text);
+            }else{
+                ((Workflow)userObject).setUploader(muser);
+            }
         }
     }
-//rule used to parse author from main page
+    //rule used to parse author from main page
     public static class AuthorRule extends DefaultRule{
 
         public AuthorRule(Type type, String locationPath, String... attributeNames) throws IllegalArgumentException {
             super(type, locationPath, attributeNames);
-
         }
 
         @Override
@@ -195,9 +202,10 @@ public class MyExperimentXmlParserRules {
         public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
             ((User) userObject).setName(text);
             //((Workflow)userObject).setUploader(muser);
+            //System.out.println("Author Name: "+text);
         }
     }
-//rule for the date the workflow was created/uploaded
+    //rule for the date the workflow was created/uploaded
     public static class DateRule extends DefaultRule{
 
         public DateRule(Type type, String locationPath, String... attributeNames) throws IllegalArgumentException {
@@ -242,7 +250,7 @@ public class MyExperimentXmlParserRules {
             ((Workflow)userObject).setWorkflow_licence_type("Licence By "+text);
         }
     }
-//set download link for the workflow
+    //set download link for the workflow
     public static class ContentUriRule extends DefaultRule{
 
         public ContentUriRule(Type type, String locationPath, String... attributeNames) throws IllegalArgumentException {

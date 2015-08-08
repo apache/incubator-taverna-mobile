@@ -151,6 +151,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
 
         final long wid = workflowList.get(i).getId();
         final String author = workflowList.get(i).getWorkflow_author();
+//        final String author = workflowList.get(i).getUploader().getName();
         final String title = workflowList.get(i).getWorkflow_title();
         String description  = workflowList.get(i).getWorkflow_description();
         final String uri = workflowList.get(i).getWorkflow_details_url();
@@ -306,7 +307,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 connection.connect();
                 InputStream input = connection.getInputStream();
                 IRule avatarRule = new MyExperimentXmlParserRules.UploaderRule(IRule.Type.ATTRIBUTE,"/workflow/uploader", "resource","uri","id");
-                WorkflowDetailParser detailMinParser = new WorkflowDetailParser(new IRule[]{avatarRule});
+                IRule uploaderRule = new MyExperimentXmlParserRules.UploaderRule(IRule.Type.CHARACTER,"/workflow/uploader");
+                WorkflowDetailParser detailMinParser = new WorkflowDetailParser(new IRule[]{avatarRule,uploaderRule});
                 detailMinParser.parse(input, new User(strings[1], this.mViewHolder));
 
             } catch (MalformedURLException e) {

@@ -47,7 +47,7 @@ import java.net.HttpURLConnection;
 public class HttpUtil {
 
     public <T> Object doPostAuthenticate(){
-        User muser = new User("");
+        User muser = new User("",null);
 
         return muser;
     }

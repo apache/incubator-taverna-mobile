@@ -354,7 +354,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                         author.getUserViewHolder().author_profile.setImageBitmap(avatarCache.get(author.getDetails_uri()));
 //                        ((ImageView) rootView.findViewById(R.id.author_profile_image)).setImageBitmap(avatarCache.get(author.getDetails_uri()));
                     }
-                    System.out.println("Author cached ID "+author.getDetails_uri());
+                    System.out.println("Author cached ID "+author.getDetails_uri()+"\n Name: "+author.getName());
                 }
             }
         });

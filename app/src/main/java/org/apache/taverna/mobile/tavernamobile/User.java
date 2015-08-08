@@ -70,6 +70,10 @@ public class User {
         return userViewHolder;
     }
 
+    public void setUserViewHolder(WorkflowAdapter.ViewHolder userViewHolder) {
+        this.userViewHolder = userViewHolder;
+    }
+
     public String getRow_id() {
         return this.row_id;
     }
