@@ -345,12 +345,14 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             @Override
             public void run() {
                 synchronized (this) {
-                    ((TextView) rootView.findViewById(R.id.workflow_author)).setText(author.getName());
+                    author.getUserViewHolder().author_name.setText(author.getName());
+                    //((TextView) rootView.findViewById(R.id.workflow_author)).setText(author.getName());
                     //check whether avatar is already in the cache before trying to download it from remote resource
                     if(avatarCache.get(author.getDetails_uri()) == null)
-                        new AvatarLoader().execute(author.getDetails_uri(), author.getRow_id());
+                        new AvatarLoader(author.getUserViewHolder()).execute(author.getDetails_uri(), author.getRow_id());
                     else{
-                        ((ImageView) rootView.findViewById(R.id.author_profile_image)).setImageBitmap(avatarCache.get(author.getDetails_uri()));
+                        author.getUserViewHolder().author_profile.setImageBitmap(avatarCache.get(author.getDetails_uri()));
+//                        ((ImageView) rootView.findViewById(R.id.author_profile_image)).setImageBitmap(avatarCache.get(author.getDetails_uri()));
                     }
                     System.out.println("Author cached ID "+author.getDetails_uri());
                 }
@@ -367,8 +369,9 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         ((Activity)cx).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                     new LoadAuthorAvatar((ImageView) rootView.findViewById(R.id.author_profile_image),author.getDetails_uri()).execute(author.getAvatar_url());
-                }
+               //      new LoadAuthorAvatar((ImageView) rootView.findViewById(R.id.author_profile_image),author.getDetails_uri()).execute(author.getAvatar_url());
+                new LoadAuthorAvatar( author.getUserViewHolder().author_profile,author.getDetails_uri()).execute(author.getAvatar_url());
+            }
         });
     }
     /**

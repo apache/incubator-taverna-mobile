@@ -233,7 +233,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         });
 
         synchronized (this){
-            new DetailLinkLoader().execute(uri, String.valueOf(i));
+            new DetailLinkLoader(viewHolder).execute(uri, String.valueOf(i));
         }
     }
 
@@ -289,6 +289,11 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
      * Loads partially details of a given workflow to retrieve author information
      */
     private class DetailLinkLoader extends AsyncTask<String, Void, Void>{
+        ViewHolder mViewHolder;
+
+        public DetailLinkLoader(ViewHolder vh){
+            this.mViewHolder = vh;
+        }
 
         @Override
         protected Void doInBackground(String ... strings) {
@@ -302,7 +307,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 InputStream input = connection.getInputStream();
                 IRule avatarRule = new MyExperimentXmlParserRules.UploaderRule(IRule.Type.ATTRIBUTE,"/workflow/uploader", "resource","uri","id");
                 WorkflowDetailParser detailMinParser = new WorkflowDetailParser(new IRule[]{avatarRule});
-                detailMinParser.parse(input, new User(strings[1]));
+                detailMinParser.parse(input, new User(strings[1], this.mViewHolder));
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -314,7 +319,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.cancel(true);
+
         }
     }
 }

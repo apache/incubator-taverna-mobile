@@ -25,6 +25,8 @@ package org.apache.taverna.mobile.tavernamobile;
  */
 
 import android.graphics.Bitmap;
+
+import org.apache.taverna.mobile.adapters.WorkflowAdapter;
 import org.simpleframework.xml.Element;
 
 import java.util.List;
@@ -56,11 +58,16 @@ public class User {
     protected String details_uri;
     private String avatar_url;
     private String row_id; //identifies the row  to which this user is being loaded in, in the workflow listview
+    private WorkflowAdapter.ViewHolder userViewHolder;
 
-    public User(String rid){
+    public User(String rid, WorkflowAdapter.ViewHolder vh){
         super();
         row_id = rid;
-//        this.setAvatar_url("http://www.myexperiment.org/users/6/pictures/614");
+        this.userViewHolder = vh;
+    }
+
+    public WorkflowAdapter.ViewHolder getUserViewHolder() {
+        return userViewHolder;
     }
 
     public String getRow_id() {

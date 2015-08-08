@@ -137,7 +137,7 @@ public class MyExperimentXmlParserRules {
         User muser;
         public UploaderRule(Type type, String locationPath, String... attributeNames) throws IllegalArgumentException {
             super(type, locationPath, attributeNames);
-            muser = new User("");
+            muser = new User("", null);
         }
 
         @Override
