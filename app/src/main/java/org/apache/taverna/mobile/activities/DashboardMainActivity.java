@@ -132,10 +132,9 @@ public class DashboardMainActivity extends ActionBarActivity
 
                 break;
             case 3: //show usage
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, FavoriteFragment.newInstance(position + 1))
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
+                aboutDialog.setTitle("USage");
+                aboutDialog.setContentView(R.layout.usage_layout);
+                aboutDialog.show();
                 break;
             case 4: //show about
                 TextView about = new TextView(getApplicationContext());
