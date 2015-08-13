@@ -45,6 +45,7 @@ import org.apache.taverna.mobile.utils.Workflow_DB;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -115,6 +116,8 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
             favoriteAdapter.registerAdapterDataObserver(dataObserver);
         } catch (JSONException e) {
             e.printStackTrace();
+            favoriteAdapter = new FavoriteWorkflowAdapter(getActivity(),  Collections.<ArrayList<Object>>emptyList());
+            favoriteAdapter.registerAdapterDataObserver(dataObserver);
         }
     }
 
