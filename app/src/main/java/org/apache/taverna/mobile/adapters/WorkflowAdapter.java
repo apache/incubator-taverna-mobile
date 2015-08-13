@@ -147,8 +147,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int i) {
 
-        final int j = i; //position of workflow item that has workflow data
-
         final long wid = workflowList.get(i).getId();
         final String author = workflowList.get(i).getWorkflow_author();
 //        final String author = workflowList.get(i).getUploader().getName();
@@ -169,6 +167,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
 //        it.putExtra("workflowid", workflow.get(i).getId()); //workflow_url
         it.putExtra("uri",uri);//uri
         it.putExtra("wtitle", title); //pass this workflow's title to the detail activity so the corresponding run can be fetched
+        it.putExtra("wid", wid);
         WorkflowdetailFragment.WORKFLO_ID = title;//workflow.get(i).getId();
 
             //determine whether to mark button as favorited or not
@@ -181,7 +180,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                         break;
                     }
             }
-
 
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
             @Override

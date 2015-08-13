@@ -25,6 +25,8 @@ package org.apache.taverna.mobile.adapters;
  */
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -110,6 +112,7 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
             public void onClick(View view) {
                 Toast.makeText(context, String.format("%s", "Removed "),Toast.LENGTH_SHORT).show();
                 try {
+                    //removeMarkedWorkflow(String.valueOf(data.get(0)));
                     favDB.delete(String.valueOf(data.get(0)));
                     notifyDataSetChanged();
                 } catch (JSONException e) {
@@ -118,6 +121,18 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
 
             }
         });
+    }
+    //remove a workflow from the marked state
+    private void removeMarkedWorkflow(String strToRemove){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        char[] charsequence = sharedPreferences.getString(WorkflowAdapter.FAVORITE_LIST_DB, "").toCharArray();
+        for(int i=0; i<charsequence.length; i++){
+            if(charsequence[i] == strToRemove.charAt(0)){
+                charsequence[i] = '0';
+                break;
+            }
+        }
+        sharedPreferences.edit().putString(WorkflowAdapter.FAVORITE_LIST_DB, charsequence.toString()).apply();
     }
 
     @Override

@@ -33,6 +33,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -110,6 +111,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     private static String download_url;
     public static String WORKFLO_ID = "";
     public static Context cont;
+    SharedPreferences sharedPreferences;
     private static boolean LOAD_STATE = false;
     private static boolean DROPUPLOAD = false;
     static Animation zoomin;
@@ -119,6 +121,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     final static private String BOX_APP_KEY = "doicbvkfyzligh2";
     final static private String BOX_APP_SECRET = "3uuuw36mm7jkflc";
     static Workflow currentWorkflow =  null;
+    private long wid;
 
     private DropboxAPI<AndroidAuthSession> mDBApi;
 
@@ -157,12 +160,23 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         zoomout = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomout);
 
         isZoomIn = false;
-
+         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        wid = getActivity().getIntent().getLongExtra("wid", 0);
         Button createRun = (Button) rootView.findViewById(R.id.run_wk);
         createRun.setOnClickListener(this);
         Button download = (Button) rootView.findViewById(R.id.download_wk);
         download.setOnClickListener(this);
-        rootView.findViewById(R.id.mark_wk).setOnClickListener(this);
+        Button mark_workflow = (Button) rootView.findViewById(R.id.mark_wk);
+        mark_workflow.setOnClickListener(this);
+        final String favs = sharedPreferences.getString(WorkflowAdapter.FAVORITE_LIST_DB, "");
+        String[] ids = favs.split(",");
+        if(ids.length > 0) {
+            for (String id : ids)
+                if (id.equalsIgnoreCase("" +wid )){
+                    mark_workflow.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
+                    break;
+                }
+        }
         rootView.findViewById(R.id.saveToDropboxButton).setOnClickListener(this);
         rootView.findViewById(R.id.saveToGoogleDriveButton).setOnClickListener(this);
         (rootView.findViewById(R.id.wkf_image)).setOnLongClickListener(new View.OnLongClickListener() {
@@ -210,8 +224,9 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
                 break;
             case R.id.mark_wk:
-                //TODO mark a workflow as important and launch task to store the entry into the local database
+
                 ArrayList<Object> mfav = new ArrayList<Object>();
+                String favs = sharedPreferences.getString(WorkflowAdapter.FAVORITE_LIST_DB, "");
                 //save current workflow as favorite
                 mfav.add(currentWorkflow.getId());
                 mfav.add(currentWorkflow.getWorkflow_author());
@@ -222,8 +237,9 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 mfav.add(((TextView) rootView.findViewById(R.id.wkf_author)).getText());
                 int result = new Workflow_DB(getActivity(), WorkflowAdapter.WORKFLOW_FAVORITE_KEY).insert(mfav);
                 if(result >0) {
+                    sharedPreferences.edit().putString(WorkflowAdapter.FAVORITE_LIST_DB, favs+wid+",").apply();
                     Toast.makeText(getActivity(), "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
-                    ((Button) view).setCompoundDrawables(getActivity().getResources().getDrawable(android.R.drawable.btn_star_big_on),null,null,null);
+                     view.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
 
                 }else if(result == -1){
                     Toast.makeText(getActivity(),"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();

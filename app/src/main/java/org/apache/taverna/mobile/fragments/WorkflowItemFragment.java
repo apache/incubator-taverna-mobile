@@ -294,7 +294,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         isRefreshData = true;
         isLoadMoreData = false;
 
-        new WorkflowLoader(getActivity(),swipeRefreshLayout).execute(""+currentPage);
+        new WorkflowLoader(getActivity(),swipeRefreshLayout).execute(""+1);
     }
 
     /**
