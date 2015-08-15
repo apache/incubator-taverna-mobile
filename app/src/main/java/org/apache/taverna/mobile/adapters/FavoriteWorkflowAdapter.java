@@ -24,6 +24,7 @@ package org.apache.taverna.mobile.adapters;
  * under the License.
  */
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -31,6 +32,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -121,6 +123,19 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
 
             }
         });
+        fViewHolder.btn_view_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog d = new Dialog(context);
+                TextView textView = new TextView(context);
+                String text = "Author -> "+ (String) data.get(6) + "\nTitle: "+data.get(2)+"\nDescription: "+data.get(3);
+                textView.setText(text);
+                textView.setTextSize(22);
+                d.setTitle(""+data.get(2));
+                d.setContentView(textView);
+                d.show();
+            }
+        });
     }
     //remove a workflow from the marked state
     private void removeMarkedWorkflow(String strToRemove){
@@ -147,8 +162,9 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
     public class FViewHolder extends RecyclerView.ViewHolder {
 
         public final ImageView favorite_thumb;
-        public final TextView author, title, dateMarked;// dateAdd, dateModified;
+        public final TextView author, title, dateMarked;// dateAdd;
         public final ImageButton btn_delete;
+        public final Button btn_view_fav;
         public FViewHolder(View itemView) {
             super(itemView);
             favorite_thumb = (ImageView) itemView.findViewById(R.id.author_profile_image);
@@ -156,7 +172,7 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
             title = (TextView) itemView.findViewById(R.id.favorite_title);
             dateMarked = (TextView) itemView.findViewById(R.id.date_set);
            btn_delete = (ImageButton) itemView.findViewById(R.id.favoriteButtonDelete);
-          //  dateModified = (TextView) itemView.findViewById(R.id.date_modified);
+            btn_view_fav = (Button) itemView.findViewById(R.id.buttonOpenFavorite);
         }
     }
 }
