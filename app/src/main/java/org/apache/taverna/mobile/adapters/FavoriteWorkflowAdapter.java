@@ -27,6 +27,7 @@ package org.apache.taverna.mobile.adapters;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -128,9 +129,10 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
             public void onClick(View view) {
                 Dialog d = new Dialog(context);
                 TextView textView = new TextView(context);
-                String text = "Author -> "+ (String) data.get(6) + "\nTitle: "+data.get(2)+"\nDescription: "+data.get(3);
+                String text = "Author -> "+ (String) data.get(6) + "\nTitle: "+data.get(2)+"\nDescription\n"+data.get(3);
                 textView.setText(text);
                 textView.setTextSize(22);
+                textView.setTextColor(Color.BLACK);
                 d.setTitle(""+data.get(2));
                 d.setContentView(textView);
                 d.show();
