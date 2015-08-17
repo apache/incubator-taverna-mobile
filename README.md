@@ -73,8 +73,30 @@ Once installed, you get a flash screen containing the logo and Name of the app a
 
 
 # Usage
+Launch and Login
+Launch the application to get started. For first time use when the application is started, you will be prompted with a login screen. This login accepts MyExperiment accounts. You will need to first create one such account in order to login. You can decide whether to remain logged-in or be logged-out when your session expires. You can also configure the login persistence from the settings option in the menu after you login.
+A successful login would lead you to a dashboard or home screen of the application.
+Users need to go to the settings page and configure their Taverna Player accounts and mount points to indicate which server should be used to run their workflows. This setting could change per organisation.
 
-_TODO_
+Dashboard or Home
+The dashboard has two swipeable tabs. These tabs represent screens that hosts workflow streams.
+once logged-in a stream of workflows should appear on the first screen(Wrofklows). The second tab holds workflows that have been favorited or saved for offline reference.
+On the first tab, you could pull down to referesh initial workflows. To load more workflows, just scroll to the end of the current stream. more workflows would be loaded and added to the current ones as the user reaches the end of the current stream.
+The search bar icon allows you to search and find workfows by author or by name. the results are provided in real-time in the first tab (First page).
+To mark a workflow as favorite, you can just tap the favorite button for the given workflow.
+
+Workflow Detail
+To view details and actually run a workflow, click the view button for the given workflow. Details are fetched from myxperiment and presented on the current page. The details page has three main swipeable tabs. The second tab shows a list  of the runs performed on this workflow and the last tab is for some policy information. On the first page of the details, users can initiate a workflow run, download a workflow or mark them as favorite with the appropriate button.
+
+Application Menus
+The navigation drawer can be pulled out from the home page by swiping the extreme left of screen across the screen. This menu contains the following items:
+ - Workflows: enters the workflow screen from any other screen.
+ - Open workflow: prompts users to pick a workflow to run from an external storage location or Dropbox.
+ - Usage: presents usrs with usage dialog with usage information.
+ - About: presents an about dialog for the application.
+ - Settings: Provides a settings page for users to configure preference paramters an options like player portal location and credentials.
+ - Logout: Logs a user out of the application and closes the app.
+
 
 * ...
 
