@@ -72,7 +72,7 @@ Once the devices are ready, build and run the project. Select the target devvice
 Once installed, you get a flash screen containing the logo and Name of the app and some powered by Text.
 
 
-# Usage
+# Usage | Quick start
 Launch and Login  
 Launch the application to get started. For first time use when the application is started, you will be prompted with a login screen. This login accepts MyExperiment accounts. You will need to first create one such account in order to login. You can decide whether to remain logged-in or be logged-out when your session expires. You can also configure the login persistence from the settings option in the menu after you login.
 A successful login would lead you to a dashboard or home screen of the application.
@@ -102,7 +102,11 @@ The navigation drawer can be pulled out from the home page by swiping the extrem
 
 # Documentation
 
-_TODO_
+This documentation provides links to wikis of the javadocs as well as to wiki information about key functionalities and implementations with screenshots attached.
+It has been mainly adapted for developers, however, users can get neccessary information from the quick start section of this readme
 
-* ...
+The Javadocs for the entire application can be found at ....
+
+Project wikis are found at ...
+
 
