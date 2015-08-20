@@ -102,11 +102,9 @@ The navigation drawer can be pulled out from the home page by swiping the extrem
 
 # Documentation
 
-This documentation provides links to wikis of the javadocs as well as to wiki information about key functionalities and implementations with screenshots attached.
+This section provides links to documentation about key functionalities and implementations with screenshots attached.
 It has been mainly adapted for developers, however, users can get neccessary information from the quick start section of this readme
 
-The Javadocs for the entire application can be found at ....
-
-Project wikis are found at ...
+Essential project documentation can be found [HERE] (https://docs.google.com/document/d/1G3AmW-zgsOxNg81uOWOUVISfaimp9Ku5k1ntIFm8hvo/edit?usp=sharing)
 
 
