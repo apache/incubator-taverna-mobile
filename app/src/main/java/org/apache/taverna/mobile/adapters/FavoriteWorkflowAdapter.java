@@ -113,16 +113,18 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
         fViewHolder.author.setText((CharSequence) data.get(6));
         fViewHolder.title.setText((CharSequence) data.get(2));
         fViewHolder.dateMarked.setText((CharSequence) data.get(4));
-        fViewHolder.btn_delete.setOnClickListener(new View.OnClickListener() {
+        fViewHolder.btn_delete.setOnClickListener(new ButtonFloat.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, String.format("%s", "Removed "),Toast.LENGTH_SHORT).show();
                 try {
+                    Toast.makeText(context, String.format("%s", "Removed "),Toast.LENGTH_SHORT).show();
                     //removeMarkedWorkflow(String.valueOf(data.get(0)));
                     favDB.delete(String.valueOf(data.get(0)));
                     notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }catch(Exception ex){
+                    ex.printStackTrace();
                 }
 
             }
