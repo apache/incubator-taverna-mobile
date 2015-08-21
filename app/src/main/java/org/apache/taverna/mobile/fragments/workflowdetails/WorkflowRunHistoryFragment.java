@@ -144,13 +144,17 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
     public void onLoadFinished(Loader<Workflow> workflowLoader, Workflow workflow) {
         runAdapter.setRunList(workflow.getWorkflow_runs());
         mRecyclerView.setAdapter(runAdapter);
-        if(runAdapter.getRunList().size() ==0){
+    try {
+        if (runAdapter.getRunList().size() == 0) {
             mRecyclerView.setVisibility(View.GONE);
             emptyRunHistoryTextView.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             mRecyclerView.setVisibility(View.VISIBLE);
             emptyRunHistoryTextView.setVisibility(View.GONE);
         }
+    }catch(NullPointerException np){
+        np.printStackTrace();
+    }
        // progressDialog.dismiss();
     }
 

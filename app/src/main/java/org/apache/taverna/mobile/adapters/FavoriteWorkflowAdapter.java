@@ -39,6 +39,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gc.materialdesign.views.ButtonFlat;
+import com.gc.materialdesign.views.ButtonFloat;
+
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.utils.Workflow_DB;
 import org.json.JSONException;
@@ -165,7 +168,7 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
 
         public final ImageView favorite_thumb;
         public final TextView author, title, dateMarked;// dateAdd;
-        public final ImageButton btn_delete;
+        public final ButtonFloat btn_delete;
         public final Button btn_view_fav;
         public FViewHolder(View itemView) {
             super(itemView);
@@ -173,7 +176,7 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
             author = (TextView) itemView.findViewById(R.id.author);
             title = (TextView) itemView.findViewById(R.id.favorite_title);
             dateMarked = (TextView) itemView.findViewById(R.id.date_set);
-           btn_delete = (ImageButton) itemView.findViewById(R.id.favoriteButtonDelete);
+           btn_delete = (ButtonFloat) itemView.findViewById(R.id.favoriteButtonDelete);
             btn_view_fav = (Button) itemView.findViewById(R.id.buttonOpenFavorite);
         }
     }
