@@ -594,6 +594,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 //prepare connection requests
                 URL workflowurl = new URL(params[0]); //the resource xml file representing the workflow to be uploaded to the player
                 String playerurl = new TavernaPlayerAPI(this.context).PLAYER_BASE_URL+"workflows.json";
+                TavernaPlayerAPI tavernaPlayerAPI = new TavernaPlayerAPI();
+
                 URL posturl = new URL(playerurl);
                 HttpURLConnection connection = (HttpURLConnection) posturl.openConnection();
                 HttpURLConnection wconn = (HttpURLConnection) workflowurl.openConnection();
@@ -602,7 +604,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                     wconn.setRequestProperty("Accept", "application/xml");
                     wconn.connect();
 
-                String user = "icep603@gmail.com" + ":" + "creationfox";
+                String user = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" + tavernaPlayerAPI.getPlayerUserPassword(this.context);
                 String basicAuth = "Basic " + Base64.encodeToString(user.getBytes(), Base64.DEFAULT);
                 //read the file from remote resource and encode the stream with a base64 algorithm
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(wconn.getInputStream()));
