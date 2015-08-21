@@ -640,8 +640,6 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 BufferedReader br = new BufferedReader(new InputStreamReader(dis));
                 while ((str = br.readLine())!= null)
                     sb.append(str);
-                System.out.println("Post Response Code: "+connection.getResponseCode());
-                System.out.println("Post response message: "+connection.getResponseMessage());
                 connection.disconnect();
             }catch (IOException e){
                 e.printStackTrace();
@@ -659,7 +657,6 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         @Override
         protected void onPostExecute(String s) {
             progressDialog.dismiss();
-            System.out.println(s);
             s = s.substring(1, s.length());
             try {
                 JSONObject workflowJson = new JSONObject(s);
