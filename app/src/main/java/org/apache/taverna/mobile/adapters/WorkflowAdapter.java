@@ -27,13 +27,11 @@ package org.apache.taverna.mobile.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.util.Linkify;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,20 +44,15 @@ import android.widget.Toast;
 import com.thebuzzmedia.sjxp.rule.IRule;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.activities.WorkflowDetailActivity;
-import org.apache.taverna.mobile.fragments.FavoriteFragment;
 import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowdetailFragment;
 import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
-import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
 import org.apache.taverna.mobile.utils.Workflow_DB;
-import org.apache.taverna.mobile.utils.xmlparsers.AvatarXMLParser;
 import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParserRules;
 import org.apache.taverna.mobile.utils.xmlparsers.WorkflowDetailParser;
 import org.json.JSONException;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -75,21 +68,68 @@ import java.util.List;
  */
 public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHolder>{
     private Context context;
-    private List<Workflow> workflow; //workflow data to bind to the UI
+    private List<Workflow> workflowList; //workflow data to bind to the UI
     private WorkflowAdapter.ViewHolder mViewHolder;
     public static final String WORKFLOW_FAVORITE_KEY = "WORKFLOW_FAVORITES"; //workflow key used to save workflows when marked as favorites
-    public Workflow_DB favDB;
-
+    public static final String FAVORITE_LIST_DB = "FAVORITE_LIST";
+    public Workflow_DB favDB; //favorited keeps items that have been favorited in order to identify them during
+                                        // display in the list.
     public WorkflowAdapter(Context c, List<Workflow> wk) {
         context = c;
-        workflow = wk;
+        workflowList = wk;
         favDB = new Workflow_DB(context, WORKFLOW_FAVORITE_KEY);
     }
 
     public WorkflowAdapter(Context c){
         context = c;
-        workflow = new ArrayList<Workflow>();
+        workflowList = new ArrayList<Workflow>();
         favDB = new Workflow_DB(context, WORKFLOW_FAVORITE_KEY);
+    }
+
+    public void addItems(List<Workflow> workflow, int position) throws ClassCastException{
+        //add items to the current list of list
+       //workflowList.add(position,workflow);
+        workflowList.addAll(workflow);
+        notifyItemRangeInserted(position + 24, 25);
+    }
+
+    public void removeItem(Workflow workflow){
+        workflowList.remove(workflow);
+        //notifyItemRemoved();
+    }
+
+    /**
+     * Register a new observer to listen for data changes.
+     * <p/>
+     * <p>The adapter may publish a variety of events describing specific changes.
+     * Not all adapters may support all change types and some may fall back to a generic
+     * {@link android.support.v7.widget.RecyclerView.AdapterDataObserver#onChanged()
+     * "something changed"} event if more specific data is not available.</p>
+     * <p/>
+     * <p>Components registering observers with an adapter are responsible for
+     * {@link #unregisterAdapterDataObserver(android.support.v7.widget.RecyclerView.AdapterDataObserver)
+     * unregistering} those observers when finished.</p>
+     *
+     * @param observer Observer to register
+     * @see #unregisterAdapterDataObserver(android.support.v7.widget.RecyclerView.AdapterDataObserver)
+     */
+    @Override
+    public void registerAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+        super.registerAdapterDataObserver(observer);
+    }
+
+    /**
+     * Unregister an observer currently listening for data changes.
+     * <p/>
+     * <p>The unregistered observer will no longer receive events about changes
+     * to the adapter.</p>
+     *
+     * @param observer Observer to unregister
+     * @see #registerAdapterDataObserver(android.support.v7.widget.RecyclerView.AdapterDataObserver)
+     */
+    @Override
+    public void unregisterAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
+        super.unregisterAdapterDataObserver(observer);
     }
 
     @Override
@@ -107,29 +147,39 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int i) {
 
-        final int j = i; //position of workflow item that has workflow data
-        final Context c = this.context;
-
-        final long wid = workflow.get(i).getId();
-        final String author = workflow.get(i).getWorkflow_author();
-        final String title = workflow.get(i).getWorkflow_title();
-        String description  = workflow.get(i).getWorkflow_description();
-        final String uri = workflow.get(i).getWorkflow_details_url();
+        final long wid = workflowList.get(i).getId();
+        final String author = workflowList.get(i).getWorkflow_author();
+//        final String author = workflowList.get(i).getUploader().getName();
+        final String title = workflowList.get(i).getWorkflow_title();
+        String description  = workflowList.get(i).getWorkflow_description();
+        final String uri = workflowList.get(i).getWorkflow_details_url();
         final String desc_full = description;
 
-        if(description.length() > 80) description = description.substring(0, 79);
+        if(description.length() > 80) description = description.substring(0, 79)+" ...";
         viewHolder.author_name.setHint(author);
         viewHolder.wk_title.setHint(title);
-        viewHolder.wk_description.setText( description+" ... ");
+        viewHolder.wk_description.setText(description);
         Linkify.addLinks(viewHolder.wk_description, Linkify.WEB_URLS);
-        final String wkflow_url = workflow.get(j).getWorkflow_remote_url();
+
         final Intent it = new Intent();
         System.out.println("Workflow_uri:"+uri);
         it.setClass(context, WorkflowDetailActivity.class);
 //        it.putExtra("workflowid", workflow.get(i).getId()); //workflow_url
         it.putExtra("uri",uri);//uri
         it.putExtra("wtitle", title); //pass this workflow's title to the detail activity so the corresponding run can be fetched
+        it.putExtra("wid", wid);
         WorkflowdetailFragment.WORKFLO_ID = title;//workflow.get(i).getId();
+
+            //determine whether to mark button as favorited or not
+           final String favs = PreferenceManager.getDefaultSharedPreferences(context).getString(FAVORITE_LIST_DB, "");
+            String[] ids = favs.split(",");
+            if(ids.length > 0) {
+                for (String id : ids)
+                    if (id.equalsIgnoreCase("" + wid)){
+                        viewHolder.btn_mark_workflow.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
+                        break;
+                    }
+            }
 
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,24 +194,30 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
             public void onClick(View view) {
                 ArrayList<Object> mfav = new ArrayList<Object>();
                 //save current workflow as favorite
-                mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full); mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
+                mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full);
+                mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()));
                 mfav.add(uri);
                 mfav.add(viewHolder.author_name.getText());
-                try {
-                    favDB.put(mfav);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                //boolean saved =  favDB.save();
-                int saved =
-                favDB.insert(mfav);
+                int saved = favDB.insert(mfav);
+
                 if(saved >0) {
-                    Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
-                    viewHolder.btn_mark_workflow.setCompoundDrawables(context.getResources().getDrawable(android.R.drawable.btn_star_big_on),null,null,null);
+                    viewHolder.btn_mark_workflow.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
+
+                    PreferenceManager.getDefaultSharedPreferences(context).edit().putString(FAVORITE_LIST_DB, favs+wid+",").apply();
                     //refresh fragment since data has changed
-                    FavoriteFragment.newInstance(0);
+                    FavoriteWorkflowAdapter favoriteWorkflowAdapter = (FavoriteWorkflowAdapter) ((RecyclerView) ((Activity) context).findViewById(R.id.favoriteList)).getAdapter();
+                   //try {
+                    if(null != favoriteWorkflowAdapter)
+                       favoriteWorkflowAdapter.notifyDataSetChanged();
+                   //}catch(NullPointerException np){
+                   //     np.printStackTrace();
+                  // }
+                    Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
+                }else if(saved == -1){
+                    Toast.makeText(context,"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();
                 }else
                     Toast.makeText(context,"Error!, please try again",Toast.LENGTH_SHORT).show();
+
             }
         });
         viewHolder.wk_showmore.setText(Html.fromHtml(context.getResources().getString(R.string.seemore)));
@@ -176,29 +232,29 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         });
 
         synchronized (this){
-            new DetailLinkLoader().execute(uri, String.valueOf(i));
+            new DetailLinkLoader(viewHolder).execute(uri, String.valueOf(i));
         }
     }
 
     public void setData(List<Workflow> workflowList){
-        this.workflow = workflowList;
+        this.workflowList = workflowList;
     }
     @Override
     public long getItemId(int i) {
-        return workflow.get(i).getId();
+        return workflowList.get(i).getId();
     }
 
     @Override
     public int getItemCount() {
-        return workflow.size();
+        return workflowList.size();
     }
 
     public Workflow getItem(int position){
-        return workflow.get(position);
+        return workflowList.get(position);
     }
 
     public void addWorkflow(Workflow wk){
-        workflow.add(wk);
+        workflowList.add(wk);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -232,6 +288,11 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
      * Loads partially details of a given workflow to retrieve author information
      */
     private class DetailLinkLoader extends AsyncTask<String, Void, Void>{
+        ViewHolder mViewHolder;
+
+        public DetailLinkLoader(ViewHolder vh){
+            this.mViewHolder = vh;
+        }
 
         @Override
         protected Void doInBackground(String ... strings) {
@@ -244,8 +305,9 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 connection.connect();
                 InputStream input = connection.getInputStream();
                 IRule avatarRule = new MyExperimentXmlParserRules.UploaderRule(IRule.Type.ATTRIBUTE,"/workflow/uploader", "resource","uri","id");
-                WorkflowDetailParser detailMinParser = new WorkflowDetailParser(new IRule[]{avatarRule});
-                detailMinParser.parse(input, new User(strings[1]));
+                IRule uploaderRule = new MyExperimentXmlParserRules.UploaderRule(IRule.Type.CHARACTER,"/workflow/uploader");
+                WorkflowDetailParser detailMinParser = new WorkflowDetailParser(new IRule[]{avatarRule,uploaderRule});
+                detailMinParser.parse(input, new User(strings[1], this.mViewHolder));
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -257,7 +319,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            super.cancel(true);
+
         }
     }
 }

@@ -20,4 +20,6 @@ limitations under the License.
 -->
 <resources>
     <string name="completebrand">Powered By Apache Taverna</string>
+    <string name="usage_login_accounts">When the app is started you are initially prompted with an accounts page to login. Use Your myExperiment account to login. You will need to configure a Taverna player account in the settings when you have successfully logged-in to the app. you can also choose to remain logged-in or not from the login page.</string>
+    <string name="usage_dashboard">Usage | Dashboard</string>
 </resources>

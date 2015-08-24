@@ -21,4 +21,13 @@ limitations under the License.
 <resources>
     <string name="completebrand">Powered By Apache Taverna</string>
     <string name="play_workflow">Run</string>
+    <string name="usage_login_accounts">When the app is started you are initially prompted with an accounts page to login. Use Your myExperiment account to login. You will need to configure a Taverna player account in the settings when you have successfully logged-in to the app. you can also choose to remain logged-in or not from the login page.</string>
+    <string name="usage_dashboard">Usage | Dashboard</string>
+    <string name="usage_dashboard_Text">Once logged-in to the app, a stream of workflows appears as a stream from which you could view, mark workflows for offline viewing. There are two tabs on the dashboard, the second tab presents a list of marked workflows. there is a menu button the pulls out a navigation drawer menu from the left corner of the dashboard. You can also swipe finger from the extreme left of the screen to pull out the menu. Scrolling to the bottom of the workflow screen will load more workflows. You can pull down to refresh workflows for the initial workflow list. the search bar is used to fetch amongst currently loaded workflows.</string>
+    <string name="usage_menus">Usage | Menus</string>
+
+    <string name="usage_menu_Text">The navigation drawer brings up a menu. The workflow menu item allows one to quickly return to the workflow streams page from any screen. The \'Open Workflow\' item allows users to pick a valid workflow from external storage and run it against a Taverna Server through a Taverna Player. Settings allow user to configure player accounts and portal urls. Logout allows users to log-out of the app</string>
+    <string name="usage_detail">Usage | Workfow Detail</string>
+    <string name="usage_detail_text">The details screen allows users to run particular worklows and provides detailed information about the workflows. Workflows can also be downloaded from here. Workflows can also be marked from this screen which would save much more data for offline use than on the dashboard screen. This screen also provides a set of runs for the workflow from other users</string>
+
 </resources>

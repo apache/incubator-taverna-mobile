@@ -2,25 +2,25 @@
 <items version="2" >
 
     <item
-        jar="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-ab39a2263976cb0fd278360818acc6d173a8d8e0.jar" />
-    </item>
-    <item
-        jar="/root/Desktop/android-studio/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-2f3cb2807dead79ef0327bdd9269035b879fdd27.jar" />
-    </item>
-    <item
         jar="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
         <dex dex="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/pre-dexed/debug/classes-be9904e841d6b70d2ec429ffa7d3732bb544b8ab.jar" />
+    </item>
+    <item
+        jar="/root/Desktop/AndroidLab/TavernaMobile2/app/libs/dropbox-android-sdk-1.6.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="986e7a58e925c6f91b88ae8d3224a0550b65acc7">
+        <dex dex="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/pre-dexed/debug/dropbox-android-sdk-1.6.3-49f85fff2c0dd0aeb7ee59e23d24ce3535e37e81.jar" />
+    </item>
+    <item
+        jar="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-ab39a2263976cb0fd278360818acc6d173a8d8e0.jar" />
     </item>
     <item
         jar="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/classes.jar"
@@ -44,6 +44,13 @@
         <dex dex="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/pre-dexed/debug/simple-xml-2.7.1-0337a02c2c7a819ce7d4f1cb9e7af39ace3fc996.jar" />
     </item>
     <item
+        jar="/root/Desktop/android-studio/sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-2f3cb2807dead79ef0327bdd9269035b879fdd27.jar" />
+    </item>
+    <item
         jar="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -56,6 +63,13 @@
         revision="21.1.2"
         sha1="11842de6a309c447b3a3d60d73ad637a87c58994">
         <dex dex="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/pre-dexed/debug/classes-2dbcae8b037134953fc4e3eb3645a66e2931661a.jar" />
+    </item>
+    <item
+        jar="/root/Desktop/AndroidLab/TavernaMobile2/app/libs/json_simple-1.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5e303a03d04e6788dddfa3655272580ae0fc13bb">
+        <dex dex="/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/pre-dexed/debug/json_simple-1.1-c6f2833f7d87dc082af9be3e409fbd98def079fd.jar" />
     </item>
 
 </items>

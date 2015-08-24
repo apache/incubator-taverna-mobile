@@ -30,23 +30,16 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
-import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.LruCache;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -67,12 +60,10 @@ import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.AvatarLoader;
 import org.apache.taverna.mobile.utils.WorkflowLoader;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -82,7 +73,7 @@ import java.util.List;
  * with a GridView.
  * <p/>
  */
-public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener {
+public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,SearchView.OnQueryTextListener {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -100,17 +91,25 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     private static RecyclerView mListView;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    /**
-     * The Adapter which will be used to populate the ListView/GridView with
-     * Views.
-     */
-    private WorkflowAdapter workflowAdapter;
-    private static WorkflowAdapter searchAdpater;
     private static View rootView;
     public static Context cx;
     private static boolean STATE_ON = false;
     private static TextView noDataText;
     private static LruCache<String, Bitmap> avatarCache;
+    private LinearLayoutManager mLinearLayoutManager;
+    private static WorkflowAdapter workflowAdapter;
+
+    //variables for controlling the infinite scroll mechanism
+    private static int previousTotal = 0;
+    private int visibleThreshold = 3;
+    private int firstVisibleItem, visibleItemCount, totalItemCount;
+    private int currentPage = 1;
+    private boolean loading  = true;
+    private InfiniteScrollListener scrollListener;
+    private RecyclerView.AdapterDataObserver workflowObserver;
+    //variables controlling the different kinds of data loading
+    public static boolean isLoadMoreData = false;
+    public static boolean isRefreshData = false;
 
     public static WorkflowItemFragment newInstance(String param1, String param2) {
         WorkflowItemFragment fragment = new WorkflowItemFragment();
@@ -133,16 +132,25 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         cx = getActivity();
+        mLinearLayoutManager = new LinearLayoutManager(cx);
+        scrollListener = new InfiniteScrollListener();
+        workflowObserver= new RecyclerView.AdapterDataObserver() {
+
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                mListView.swapAdapter(workflowAdapter,false);
+                Toast.makeText(getActivity(), "adding more workflows to listview", Toast.LENGTH_SHORT).show();
+            }
+        };
+        workflowAdapter = new WorkflowAdapter(getActivity());
+        workflowAdapter.registerAdapterDataObserver(workflowObserver);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         in = AnimationUtils.loadAnimation(getActivity(),android.R.anim.slide_in_left);
-       List<Workflow> mlist = new ArrayList<Workflow>();
-   //    mlist.add(new Workflow(getActivity(),"Testing title","Larry","Ok testing",0,"http://127.0.0.1"));
-   /*     mlist.add(new Workflow(getActivity(),"Testing title","Larry","Ok testing",0,"http://127.0.0.1"));
-*/
-        workflowAdapter = new WorkflowAdapter(getActivity(), mlist );
     }
 
     @Override
@@ -151,18 +159,22 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         noDataText = (TextView) rootView.findViewById(android.R.id.empty);
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.refresh);
         swipeRefreshLayout.setOnRefreshListener(this);
+
         // Set the adapter
         mListView = (RecyclerView) rootView.findViewById(android.R.id.list);
         mListView.setHasFixedSize(true);
-        mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mListView.setLayoutManager(mLinearLayoutManager);
         mListView.setAnimation(in);
-        mListView.setAdapter(new WorkflowAdapter(getActivity()));
+        mListView.setAdapter(workflowAdapter);
+        mListView.setOnScrollListener(scrollListener);
+        mListView.setItemAnimator(new DefaultItemAnimator());
+
         final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
         // Use 1/8th of the available memory for this memory cache. up to 4MB for high screen densities and 1.2Mb for low sds
         final int cacheSize = maxMemory / 8;
-        avatarCache = new LruCache<String, Bitmap>(cacheSize) {
+        avatarCache = new LruCache<String, Bitmap>(cacheSize){
             @Override
-            protected int sizeOf(String key, Bitmap bitmap) {
+            protected int sizeOf(String key, Bitmap bitmap){
             // The cache size will be measured in kilobytes
                 return bitmap.getByteCount() / 1024;
             }
@@ -202,7 +214,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     public void onResume() {
         super.onResume();
         if(!STATE_ON) {
-            new WorkflowLoader(getActivity(), swipeRefreshLayout).execute();
+            new WorkflowLoader(getActivity(), swipeRefreshLayout).execute(""+currentPage);
 
             if (mListView.getAdapter().getItemCount() == 0) {
                 mListView.setVisibility(View.GONE);
@@ -213,6 +225,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                 noDataText.setVisibility(View.GONE);
             }
         }
+//        ((RecyclerView)(getActivity()).findViewById(R.id.favoriteList)).getAdapter().notifyDataSetChanged();
     }
 
     @Override
@@ -244,21 +257,22 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getTitle().equals("Refresh")){
-            new WorkflowLoader(getActivity(),swipeRefreshLayout).execute();
+            new WorkflowLoader(getActivity(),swipeRefreshLayout).execute("1");
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onDetach() {
+    public void onDestroy() {
         super.onDetach();
+      //  workflowAdapter.unregisterAdapterDataObserver(workflowObserver);
     }
 
-//handle a request to query for given workflows
+    //handle a request to query for given workflows
     private void performSearch(String search){
         WorkflowAdapter ladapter = new WorkflowAdapter(getActivity());
-        WorkflowAdapter wk = searchAdpater;//workflowAdapter;
+        WorkflowAdapter wk = workflowAdapter;
 
         if(!TextUtils.isEmpty(search)) {
             if (null != wk)
@@ -277,7 +291,10 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
 
     @Override
     public void onRefresh() {
-        new WorkflowLoader(getActivity(),swipeRefreshLayout).execute();
+        isRefreshData = true;
+        isLoadMoreData = false;
+
+        new WorkflowLoader(getActivity(),swipeRefreshLayout).execute(""+1);
     }
 
     /**
@@ -302,9 +319,15 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         ((Activity)cx).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                WorkflowItemFragment.searchAdpater = new WorkflowAdapter(cx,data);
-                WorkflowItemFragment.mListView.setAdapter(WorkflowItemFragment.searchAdpater);
-                if(WorkflowItemFragment.searchAdpater.getItemCount() == 0){
+                WorkflowItemFragment.workflowAdapter = new WorkflowAdapter(cx,data);
+                if(isLoadMoreData) {
+                    isLoadMoreData = false;
+                    isRefreshData = false;
+                    ((WorkflowAdapter)mListView.getAdapter()).addItems(data, previousTotal);
+                }else
+                    mListView.swapAdapter(workflowAdapter, false);
+
+                if(WorkflowItemFragment.workflowAdapter.getItemCount() == 0){
                     mListView.setVisibility(View.GONE);
                     noDataText.setVisibility(View.VISIBLE);
                   //  Toast.makeText(cx, cx.getResources().getString(R.string.err_workflow_conn), Toast.LENGTH_LONG).show();
@@ -322,14 +345,16 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             @Override
             public void run() {
                 synchronized (this) {
+                    author.getUserViewHolder().author_name.setText(author.getName());
+                    //((TextView) rootView.findViewById(R.id.workflow_author)).setText(author.getName());
                     //check whether avatar is already in the cache before trying to download it from remote resource
-                    //((ImageView) rootView.findViewById(R.id.author_profile_image))
-                    if(avatarCache.get(author.getRow_id()) == null)
-                        new AvatarLoader().execute(author.getDetails_uri(), author.getRow_id());
+                    if(avatarCache.get(author.getDetails_uri()) == null)
+                        new AvatarLoader(author.getUserViewHolder()).execute(author.getDetails_uri(), author.getRow_id());
                     else{
-                        ((ImageView) rootView.findViewById(R.id.author_profile_image)).setImageBitmap(avatarCache.get(author.getRow_id()));
+                        author.getUserViewHolder().author_profile.setImageBitmap(avatarCache.get(author.getDetails_uri()));
+//                        ((ImageView) rootView.findViewById(R.id.author_profile_image)).setImageBitmap(avatarCache.get(author.getDetails_uri()));
                     }
-                    System.out.println("Author cached ID "+author.getRow_id());
+                    System.out.println("Author cached ID "+author.getDetails_uri()+"\n Name: "+author.getName());
                 }
             }
         });
@@ -344,14 +369,8 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         ((Activity)cx).runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                synchronized (this) {
-                    try {
-                        ((TextView) rootView.findViewById(R.id.workflow_author)).setText(author.getName());
-                        new LoadAuthorAvatar((ImageView) rootView.findViewById(R.id.author_profile_image),author.getRow_id()).execute(author.getAvatar_url());
-                    }catch(NullPointerException np){
-
-                    }
-                }
+               //      new LoadAuthorAvatar((ImageView) rootView.findViewById(R.id.author_profile_image),author.getDetails_uri()).execute(author.getAvatar_url());
+                new LoadAuthorAvatar( author.getUserViewHolder().author_profile,author.getDetails_uri()).execute(author.getAvatar_url());
             }
         });
     }
@@ -390,39 +409,49 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         protected void onPostExecute(Bitmap bitmap) {
             img.setImageBitmap(bitmap);
             //cache this image for faster loading next time
-            avatarCache.put(row_id_as_key, bitmap);
+            try {
+                avatarCache.put(row_id_as_key, bitmap);
+
+            }catch(NullPointerException np){
+
+            }
         }
-        private Bitmap processingBitmap(Bitmap bmp){
-            Bitmap bm1 = null;
-            Bitmap newBitmap = null;
+    }
 
-                bm1 = bmp;
-                int w = bm1.getWidth();
-                int h = bm1.getHeight();
-
-                Bitmap.Config config = bm1.getConfig();
-                if(config == null){
-                    config = Bitmap.Config.ARGB_8888;
+    private class InfiniteScrollListener extends RecyclerView.OnScrollListener{
+        /**
+         * Callback method to be invoked when the RecyclerView has been scrolled. This will be
+         * called after the scroll has completed.
+         * <p/>
+         * This callback will also be called if visible item range changes after a layout
+         * calculation. In that case, dx and dy will be 0.
+         *
+         * @param recyclerView The RecyclerView which scrolled.
+         * @param dx           The amount of horizontal scroll.
+         * @param dy           The amount of vertical scroll.
+         */
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            visibleItemCount = mListView.getChildCount();
+            totalItemCount = mLinearLayoutManager.getItemCount();
+            firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+            if(loading){
+                if(totalItemCount > previousTotal){
+                    loading = false;
+                    previousTotal = totalItemCount;
                 }
-
-                newBitmap = Bitmap.createBitmap(w, h, config);
-                Canvas newCanvas = new Canvas(newBitmap);
-                newCanvas.drawColor(Color.WHITE);
-
-                Paint paint = new Paint();
-                paint.setColor(Color.TRANSPARENT);
-                Rect frame = new Rect(
-                        (int)(w*0.05),
-                        (int)(w*0.05),
-                        (int)(w*0.95),
-                        (int)(h*0.95));
-                RectF frameF = new RectF(frame);
-                newCanvas.drawRoundRect(frameF, (float)(w*0.5), (float)(h*0.05), paint);
-
-                paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SCREEN));
-                newCanvas.drawBitmap(bm1, 0, 0, paint);
-
-            return newBitmap;
+            }
+            if(!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem+visibleThreshold)){
+                //list has reached end, load more.
+                Toast.makeText(getActivity(), "Loading more", Toast.LENGTH_SHORT).show();
+                isLoadMoreData = true;
+                currentPage++;
+                new WorkflowLoader(getActivity(),swipeRefreshLayout).execute(""+currentPage);
+                System.out.println(currentPage);
+                loading = true;
+            }
         }
+
     }
 }

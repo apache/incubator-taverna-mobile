@@ -230,7 +230,14 @@ public class Workflow_DB {
             else
                 jsonArray = new JSONArray();
 
-            String newItemId = generateRandomId(); //generate an entity id to be used for the new entity
+            String newItemId = item.get(0).toString(); //use the workflow id as an entity key for the new entity
+
+            //verify if this workflow item has already been marked as favorite
+            for(int k=0; k<jsonArray.length(); k++){
+                if (jsonArray.get(k).toString().equalsIgnoreCase(newItemId))
+                    return -1;
+            }
+
             jsonArray.put(jsonArray.length(),newItemId); //add new entity id
             JSONArray newEntity = new JSONArray();
             for(Object entity: item){

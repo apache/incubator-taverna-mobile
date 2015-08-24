@@ -29,6 +29,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -131,14 +132,15 @@ public class DashboardMainActivity extends ActionBarActivity
 
                 break;
             case 3: //show usage
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, FavoriteFragment.newInstance(position + 1))
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
+                aboutDialog.setTitle("USage");
+                aboutDialog.setContentView(R.layout.usage_layout);
+                aboutDialog.show();
                 break;
             case 4: //show about
                 TextView about = new TextView(getApplicationContext());
-                about.setTextSize(25);
+                about.setTextSize(21);
+                about.setTextColor(Color.BLACK);
+                about.setPadding(3,3,3,3);
                 about.setText(getResources().getString(R.string.about));
 
                 aboutDialog.setTitle("About Taverna Mobile");

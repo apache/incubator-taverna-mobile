@@ -27,6 +27,7 @@ import android.os.AsyncTask;
 
 import com.thebuzzmedia.sjxp.rule.IRule;
 
+import org.apache.taverna.mobile.adapters.WorkflowAdapter;
 import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.utils.xmlparsers.AvatarXMLParser;
 import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParserRules;
@@ -42,6 +43,11 @@ import java.net.URL;
  * Created by Larry AKah on 6/29/15.
  */
 public class AvatarLoader extends AsyncTask<String, Void, Void> {
+    WorkflowAdapter.ViewHolder vh;
+    public AvatarLoader(WorkflowAdapter.ViewHolder userViewHolder) {
+        this.vh = userViewHolder;
+    }
+
     @Override
     protected Void doInBackground(String... strings) {
         URL url = null;
@@ -57,7 +63,7 @@ public class AvatarLoader extends AsyncTask<String, Void, Void> {
             IRule avatarName = new MyExperimentXmlParserRules.AuthorRule(IRule.Type.CHARACTER,"/user/name");
             AvatarXMLParser avatarXMLParser = new AvatarXMLParser(new IRule[]{avatarRule, avatarName});
 
-            avatarXMLParser.parse(input, new User(strings[1]));
+            avatarXMLParser.parse(input, new User(strings[1], this.vh));
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

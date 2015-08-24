@@ -45,20 +45,21 @@ import org.apache.taverna.mobile.utils.Workflow_DB;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by Larry Akah on 6/6/15.
  */
-public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateContextMenuListener, RecyclerView.OnClickListener{
+public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateContextMenuListener{
     /**
      * The fragment argument representing the section number for this
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "SECTION_NUMBER";
-    private FavoriteWorkflowAdapter favoriteAdapter;
+    public FavoriteWorkflowAdapter favoriteAdapter;
     private RecyclerView wFavoriteListView;
-   // private FavoriteItemSelected favItemListener;
+    private RecyclerView.AdapterDataObserver dataObserver;
     public Workflow_DB myWorkflowDb;
 
     /**
@@ -70,6 +71,7 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -79,30 +81,52 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        myWorkflowDb = new Workflow_DB(getActivity(), WorkflowAdapter.WORKFLOW_FAVORITE_KEY);
-//TODO Add support for loading all the favorites and adding to the required list
-        try {
-            List<ArrayList<Object>> mfavorites = myWorkflowDb.get();
-         //   ArrayList<Object> m = mydata.get(0);
-        //retrieval order: workflowid, workflowauthor, workflowtitle, workflowmarkeddate
-            favoriteAdapter = new FavoriteWorkflowAdapter(getActivity(), mfavorites);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        dataObserver = new RecyclerView.AdapterDataObserver(){
+            @Override
+            public void onChanged() {
+                super.onChanged();
+               // Toast.makeText(getActivity(), "data changed", Toast.LENGTH_SHORT).show();
+                setUpFavoriteData();
+                setUpListView();
+            }
+        };
+       setUpFavoriteData();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_dashboard_main, container, false);
-        wFavoriteListView = (RecyclerView)rootView.findViewById(android.R.id.list);
+        wFavoriteListView = (RecyclerView)rootView.findViewById(R.id.favoriteList);
         wFavoriteListView.setHasFixedSize(true);
         wFavoriteListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         wFavoriteListView.setAdapter(favoriteAdapter);
-
         return rootView;
     }
 
+    /**
+     * Prepare the data to be used in the list as favorite items
+     */
+    private void setUpFavoriteData(){
+        myWorkflowDb = new Workflow_DB(getActivity(), WorkflowAdapter.WORKFLOW_FAVORITE_KEY);
+        try {
+            List<ArrayList<Object>> mfavorites = myWorkflowDb.get();
+            favoriteAdapter = new FavoriteWorkflowAdapter(getActivity(), mfavorites);
+            favoriteAdapter.registerAdapterDataObserver(dataObserver);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            favoriteAdapter = new FavoriteWorkflowAdapter(getActivity(),  Collections.<ArrayList<Object>>emptyList());
+            favoriteAdapter.registerAdapterDataObserver(dataObserver);
+        }
+    }
+
+    /**
+     * Populate the listview using the adapter
+     */
+    private void setUpListView(){
+        wFavoriteListView.setAdapter(favoriteAdapter);
+    }
     /**
      * Called when a context menu for the {@code view} is about to be shown.
      * Unlike {@link #onCreateOptionsMenu}, this will be called every
@@ -126,11 +150,12 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
      */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        menu.add("Select");
-        menu.add("Comment ...");
-        menu.add("Delete");
+       // super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add("View");
+        menu.add("Remove");
         menu.setHeaderIcon(R.mipmap.ic_launcher);
+        menu.setHeaderTitle("Favorite");
+
     }
 
     /**
@@ -153,14 +178,12 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         String title = (String) item.getTitle();
-        if(title.equals("Select")){
-            Toast.makeText(getActivity(),"Selected", Toast.LENGTH_SHORT).show();
+        if(title.equals("View")){
+            Toast.makeText(getActivity(),"View", Toast.LENGTH_SHORT).show();
             return true;
-        }else if (title.equals("Comment ...")){
-            Toast.makeText(getActivity(),"Commenting", Toast.LENGTH_SHORT).show();
-            return true;
-        }else if (title.equals("Delete")){
-            Toast.makeText(getActivity(),"Deleted", Toast.LENGTH_SHORT).show();
+        }
+        else if (title.equals("Remove")){
+            Toast.makeText(getActivity(),"Removing", Toast.LENGTH_SHORT).show();
             return true;
         }else
             return super.onContextItemSelected(item);
@@ -175,18 +198,21 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
     @Override
     public void onResume() {
         super.onResume();
-//        wFavoriteListView.setKeepScreenOn();
-        wFavoriteListView.setOnClickListener(this);
-        registerForContextMenu(wFavoriteListView);
+       // setUpListView();
+        //wFavoriteListView.setOnCreateContextMenuListener(this);
+        //registerForContextMenu(wFavoriteListView);
+
     }
 
     /**
-     * Called when the fragment is no longer attached to its activity.  This
-     * is called after {@link #onDestroy()}.
+     * Called when the fragment is no longer in use.  This is called
+     * after {@link #onStop()} and before {@link #onDetach()}.
      */
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void onDestroy() {
+        super.onDestroy();
+        favoriteAdapter.unregisterAdapterDataObserver(dataObserver);
+        unregisterForContextMenu(wFavoriteListView);
     }
 
     /**
@@ -199,8 +225,4 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        Toast.makeText(getActivity(),"Clicked", Toast.LENGTH_SHORT).show();
-    }
 }

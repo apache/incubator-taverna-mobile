@@ -33,6 +33,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -65,12 +66,14 @@ import com.dropbox.client2.session.AppKeyPair;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.activities.RunResult;
+import org.apache.taverna.mobile.adapters.WorkflowAdapter;
 import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
 import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.DetailsLoader;
 import org.apache.taverna.mobile.utils.RunTask;
 import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
+import org.apache.taverna.mobile.utils.Workflow_DB;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -87,6 +90,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.CharsetEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Larry Akah on 6/9/15.
@@ -105,6 +111,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     private static String download_url;
     public static String WORKFLO_ID = "";
     public static Context cont;
+    SharedPreferences sharedPreferences;
     private static boolean LOAD_STATE = false;
     private static boolean DROPUPLOAD = false;
     static Animation zoomin;
@@ -113,6 +120,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     public static String workflow_uri ;
     final static private String BOX_APP_KEY = "doicbvkfyzligh2";
     final static private String BOX_APP_SECRET = "3uuuw36mm7jkflc";
+    static Workflow currentWorkflow =  null;
+    private long wid;
 
     private DropboxAPI<AndroidAuthSession> mDBApi;
 
@@ -151,11 +160,23 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         zoomout = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomout);
 
         isZoomIn = false;
-
+         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        wid = getActivity().getIntent().getLongExtra("wid", 0);
         Button createRun = (Button) rootView.findViewById(R.id.run_wk);
         createRun.setOnClickListener(this);
         Button download = (Button) rootView.findViewById(R.id.download_wk);
         download.setOnClickListener(this);
+        Button mark_workflow = (Button) rootView.findViewById(R.id.mark_wk);
+        mark_workflow.setOnClickListener(this);
+        final String favs = sharedPreferences.getString(WorkflowAdapter.FAVORITE_LIST_DB, "");
+        String[] ids = favs.split(",");
+        if(ids.length > 0) {
+            for (String id : ids)
+                if (id.equalsIgnoreCase("" +wid )){
+                    mark_workflow.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
+                    break;
+                }
+        }
         rootView.findViewById(R.id.saveToDropboxButton).setOnClickListener(this);
         rootView.findViewById(R.id.saveToGoogleDriveButton).setOnClickListener(this);
         (rootView.findViewById(R.id.wkf_image)).setOnLongClickListener(new View.OnLongClickListener() {
@@ -203,7 +224,27 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
                 break;
             case R.id.mark_wk:
-                //TODO mark a workflow as important and launch task to store the entry into the local database
+
+                ArrayList<Object> mfav = new ArrayList<Object>();
+                String favs = sharedPreferences.getString(WorkflowAdapter.FAVORITE_LIST_DB, "");
+                //save current workflow as favorite
+                mfav.add(currentWorkflow.getId());
+                mfav.add(currentWorkflow.getWorkflow_author());
+                mfav.add(currentWorkflow.getWorkflow_title());
+                mfav.add(currentWorkflow.getWorkflow_description());
+                mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
+                mfav.add(currentWorkflow.getWorkflow_details_url());
+                mfav.add(((TextView) rootView.findViewById(R.id.wkf_author)).getText());
+                int result = new Workflow_DB(getActivity(), WorkflowAdapter.WORKFLOW_FAVORITE_KEY).insert(mfav);
+                if(result >0) {
+                    sharedPreferences.edit().putString(WorkflowAdapter.FAVORITE_LIST_DB, favs+wid+",").apply();
+                    Toast.makeText(getActivity(), "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
+                     view.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
+
+                }else if(result == -1){
+                    Toast.makeText(getActivity(),"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();
+                }else
+                    Toast.makeText(getActivity(),"Error!, please try again",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.saveToDropboxButton:
                 String authToken = PreferenceManager.getDefaultSharedPreferences(getActivity()).getString("dropboxauth", "");
@@ -271,6 +312,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     }
 
     public static void setWorkflowDetails(final Workflow wk){
+        currentWorkflow = wk;
         final TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
         final TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
         final TextView type = (TextView) rootView.findViewById(R.id.wtype);
@@ -552,6 +594,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 //prepare connection requests
                 URL workflowurl = new URL(params[0]); //the resource xml file representing the workflow to be uploaded to the player
                 String playerurl = new TavernaPlayerAPI(this.context).PLAYER_BASE_URL+"workflows.json";
+                TavernaPlayerAPI tavernaPlayerAPI = new TavernaPlayerAPI();
+
                 URL posturl = new URL(playerurl);
                 HttpURLConnection connection = (HttpURLConnection) posturl.openConnection();
                 HttpURLConnection wconn = (HttpURLConnection) workflowurl.openConnection();
@@ -560,7 +604,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                     wconn.setRequestProperty("Accept", "application/xml");
                     wconn.connect();
 
-                String user = "icep603@gmail.com" + ":" + "creationfox";
+                String user = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" + tavernaPlayerAPI.getPlayerUserPassword(this.context);
                 String basicAuth = "Basic " + Base64.encodeToString(user.getBytes(), Base64.DEFAULT);
                 //read the file from remote resource and encode the stream with a base64 algorithm
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(wconn.getInputStream()));
@@ -596,8 +640,6 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 BufferedReader br = new BufferedReader(new InputStreamReader(dis));
                 while ((str = br.readLine())!= null)
                     sb.append(str);
-                System.out.println("Post Response Code: "+connection.getResponseCode());
-                System.out.println("Post response message: "+connection.getResponseMessage());
                 connection.disconnect();
             }catch (IOException e){
                 e.printStackTrace();
@@ -615,7 +657,6 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         @Override
         protected void onPostExecute(String s) {
             progressDialog.dismiss();
-            System.out.println(s);
             s = s.substring(1, s.length());
             try {
                 JSONObject workflowJson = new JSONObject(s);
