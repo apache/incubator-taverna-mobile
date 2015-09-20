@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/number_indicator_spinner_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+<!-- From: file:/Users/Navas/Desktop/Git/MaterialDesignLibrary/MaterialDesign/res/layout/number_indicator_spinner.xml --><!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.github.navasmdc/MaterialDesign/1.5/res/layout/number_indicator_spinner.xml -->

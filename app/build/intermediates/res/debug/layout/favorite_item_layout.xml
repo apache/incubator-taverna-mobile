@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Apache Taverna Mobile
+Copyright 2015 The Apache Software Foundation
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements. See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License. You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card_view:cardElevation="@dimen/abc_text_size_menu_material"
+    card_view:cardBackgroundColor="@color/background_floating_material_light"
+    card_view:cardCornerRadius="2dp"
+    card_view:paddingEnd="2dp"
+    card_view:paddingStart="2dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/author"
+                android:textSize="25sp"
+                android:elevation="5dp"
+                android:layout_weight="1" />
+
+<!--            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/favoriteButonDelete"
+                android:src="@android:drawable/ic_menu_delete"
+                android:background="#eee"
+                android:layout_gravity="right"
+                android:visibility="gone" />-->
+<!-- @drawable/ic_delete_favorite -->
+            <com.gc.materialdesign.views.ButtonFloat
+                android:id="@+id/favoriteButtonDelete"
+                android:layout_gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="#33b5ee"
+                materialdesign:animate="false"
+                materialdesign:iconDrawable="@android:drawable/ic_menu_delete" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/linearlayout_workflow_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wktitle"
+                        android:id="@+id/textView9"
+                        android:layout_marginTop="5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:id="@+id/favorite_title"
+                        android:hint="@string/title_favorite" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/marked"
+                        android:id="@+id/textView10"
+                        android:layout_gravity="center_horizontal" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:hint="Date workflow was marked"
+                        android:id="@+id/date_set"
+                        android:typeface="serif"
+                        android:textColor="@color/material_deep_teal_200"
+                        android:textSize="15dp"
+                        android:focusableInTouchMode="false"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/workflow_read"
+                        android:id="@+id/buttonOpenFavorite"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="10dp"
+                        android:background="#33b5e5"
+                        android:elevation="5dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
+<!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/layout/favorite_item_layout.xml -->

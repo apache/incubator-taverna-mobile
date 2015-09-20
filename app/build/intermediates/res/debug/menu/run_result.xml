@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="org.apache.taverna.mobile.fragments.workflowdetails.RunFragment">
+
+    <item android:id="@+id/action_refresh"
+        android:title="Refresh"
+        app:showAsAction="always|withText"
+        android:icon="@android:drawable/stat_notify_sync"/>
+</menu>
+<!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/menu/run_result.xml -->

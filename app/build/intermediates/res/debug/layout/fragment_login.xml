@@ -1,0 +1,150 @@
+<!--
+Apache Taverna Mobile
+Copyright 2015 The Apache Software Foundation
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements. See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License. You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".LoginActivity$PlaceholderFragment">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_launcher"
+        android:elevation="5dp"
+        android:contentDescription="@string/brand" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:typeface="normal"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="20dp"
+        android:background="#fff"
+        android:id="@+id/loginlayout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="@string/Logininfo"
+            android:id="@+id/textView4"
+            android:textStyle="normal|bold|italic"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="#E1E1E1"
+            android:textAlignment="center"
+            android:typeface="normal"
+            android:elevation="10dp"
+            android:ellipsize="middle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/loginusername"
+            android:id="@+id/textView5"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextUsername"
+            android:drawableStart="@android:drawable/sym_action_email"
+            android:drawableLeft="@android:drawable/sym_action_email"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/loginpassword"
+            android:id="@+id/textView6"
+            android:layout_marginTop="10dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/edittextPassword"
+            android:drawableStart="@android:drawable/ic_secure"
+            android:drawableLeft="@android:drawable/ic_secure"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/keeplogin"
+            android:id="@+id/rememberCheckbox" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loginbutton"
+            android:id="@+id/loginbutton"
+            android:layout_gravity="center_horizontal"
+            android:background="#1F9FEA"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@android:drawable/ic_menu_set_as"
+            android:elevation="5dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/brand"
+                android:id="@+id/textView7"
+                android:paddingTop="20dp"
+                android:textSize="20dp"
+                android:gravity="center|center_horizontal"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
+</ScrollView><!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/layout/fragment_login.xml -->

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values-large-v4/values.xml -->
+    <eat-comment/>
+    <bool name="abc_action_bar_embed_tabs_pre_jb">true</bool>
+    <bool name="abc_config_allowActionMenuItemTextWithIcon">true</bool>
+    <dimen name="abc_config_prefDialogWidth">440dp</dimen>
+    <dimen name="abc_search_view_text_min_width">192dip</dimen>
+    <item name="dialog_fixed_height_major" type="dimen">60%</item>
+    <item name="dialog_fixed_height_minor" type="dimen">90%</item>
+    <item name="dialog_fixed_width_major" type="dimen">60%</item>
+    <item name="dialog_fixed_width_minor" type="dimen">90%</item>
+    <integer name="abc_max_action_buttons">4</integer>
+    <!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/values-large/refs.xml -->
+    <eat-comment/>
+    <item name="fragment_item" type="layout">@layout/fragment_item_grid</item>
+    <!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/values-large/strings.xml -->
+    <eat-comment/>
+    <string name="completebrand">Powered By Apache Taverna</string>
+    <string name="play_workflow">Run</string>
+    <string name="usage_dashboard">Usage | Dashboard</string>
+    <string name="usage_dashboard_Text">Once logged-in to the app, a stream of workflows appears as a stream from which you could view, mark workflows for offline viewing. There are two tabs on the dashboard, the second tab presents a list of marked workflows. there is a menu button the pulls out a navigation drawer menu from the left corner of the dashboard. You can also swipe finger from the extreme left of the screen to pull out the menu. Scrolling to the bottom of the workflow screen will load more workflows. You can pull down to refresh workflows for the initial workflow list. the search bar is used to fetch amongst currently loaded workflows.</string>
+    <string name="usage_detail">Usage | Workfow Detail</string>
+    <string name="usage_detail_text">The details screen allows users to run particular worklows and provides detailed information about the workflows. Workflows can also be downloaded from here. Workflows can also be marked from this screen which would save much more data for offline use than on the dashboard screen. This screen also provides a set of runs for the workflow from other users</string>
+    <string name="usage_login_accounts">When the app is started you are initially prompted with an accounts page to login. Use Your myExperiment account to login. You will need to configure a Taverna player account in the settings when you have successfully logged-in to the app. you can also choose to remain logged-in or not from the login page.</string>
+    <string name="usage_menu_Text">The navigation drawer brings up a menu. The workflow menu item allows one to quickly return to the workflow streams page from any screen. The \'Open Workflow\' item allows users to pick a valid workflow from external storage and run it against a Taverna Server through a Taverna Player. Settings allow user to configure player accounts and portal urls. Logout allows users to log-out of the app</string>
+    <string name="usage_menus">Usage | Menus</string>
+    <!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/values-large-v4/values.xml -->
+    <eat-comment/>
+    <style name="Base.Theme.AppCompat.DialogWhenLarge" parent="Base.Theme.AppCompat.Dialog.FixedSize"/>
+    <style name="Base.Theme.AppCompat.Light.DialogWhenLarge" parent="Base.Theme.AppCompat.Light.Dialog.FixedSize"/>
+</resources>

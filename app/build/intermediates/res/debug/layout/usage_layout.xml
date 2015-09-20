@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/usage_intro"
+        android:id="@+id/textView16"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25dp"
+        android:textColor="#33b5e5" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/usage_login_accounts"
+        android:id="@+id/textView17"
+        android:textSize="20dp"
+        android:textColor="#111" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/usage_dashboard"
+        android:id="@+id/textView18"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25dp"
+        android:textColor="#33b5e5" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/usage_dashboard_Text"
+        android:id="@+id/textView19"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#111"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/usage_detail"
+        android:id="@+id/textView22"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#33b5e5"
+        android:textSize="25dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/usage_detail_text"
+        android:id="@+id/textView23"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/usage_menus"
+        android:id="@+id/textView20"
+        android:layout_gravity="center_horizontal"
+        android:textSize="25dp"
+        android:textColor="#33b5e5" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/usage_menu_Text"
+        android:id="@+id/textView21"
+        android:textSize="20dp" />
+</LinearLayout>
+</ScrollView><!-- From: file:/root/Desktop/AndroidLab/TavernaMobile2/app/src/main/res/layout/usage_layout.xml -->
