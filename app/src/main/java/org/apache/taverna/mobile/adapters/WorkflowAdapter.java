@@ -71,13 +71,16 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     private List<Workflow> workflowList; //workflow data to bind to the UI
     private WorkflowAdapter.ViewHolder mViewHolder;
     public static final String WORKFLOW_FAVORITE_KEY = "WORKFLOW_FAVORITES"; //workflow key used to save workflows when marked as favorites
+    public static final String WORKFLOW_FAVORITE = "favorited";//workflow key to favorited items tags
     public static final String FAVORITE_LIST_DB = "FAVORITE_LIST";
-    public Workflow_DB favDB; //favorited keeps items that have been favorited in order to identify them during
-                                        // display in the list.
+    public Workflow_DB favDB; //database to hold favorited workflows
+    public Workflow_DB favoritedDb; //keep tags about favorited workflows
+
     public WorkflowAdapter(Context c, List<Workflow> wk) {
         context = c;
         workflowList = wk;
         favDB = new Workflow_DB(context, WORKFLOW_FAVORITE_KEY);
+        favoritedDb = new Workflow_DB(context, WORKFLOW_FAVORITE);
     }
 
     public WorkflowAdapter(Context c){
@@ -171,7 +174,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         WorkflowdetailFragment.WORKFLO_ID = title;//workflow.get(i).getId();
 
             //determine whether to mark button as favorited or not
-           final String favs = PreferenceManager.getDefaultSharedPreferences(context).getString(FAVORITE_LIST_DB, "");
+        /*
+        final String favs = PreferenceManager.getDefaultSharedPreferences(context).getString(FAVORITE_LIST_DB, "");
             String[] ids = favs.split(",");
             if(ids.length > 0) {
                 for (String id : ids)
@@ -179,7 +183,14 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                         viewHolder.btn_mark_workflow.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
                         break;
                     }
+            } */
+        try {
+            if (favoritedDb.get(String.valueOf(wid)).size() > 0) {
+                viewHolder.btn_mark_workflow.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
             }
+        }catch (JSONException | NullPointerException ex){
+            ex.printStackTrace();
+        }
 
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -202,8 +213,10 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
 
                 if(saved >0) {
                     viewHolder.btn_mark_workflow.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
-
-                    PreferenceManager.getDefaultSharedPreferences(context).edit().putString(FAVORITE_LIST_DB, favs+wid+",").apply();
+                    ArrayList<Object> flist = new ArrayList<Object>();
+                    flist.add(wid);
+                    favoritedDb.insert(flist);
+                 //   PreferenceManager.getDefaultSharedPreferences(context).edit().putString(FAVORITE_LIST_DB, favs+wid+",").apply();
                     //refresh fragment since data has changed
                     FavoriteWorkflowAdapter favoriteWorkflowAdapter = (FavoriteWorkflowAdapter) ((RecyclerView) ((Activity) context).findViewById(R.id.favoriteList)).getAdapter();
                    //try {

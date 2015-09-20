@@ -218,7 +218,6 @@ public class Workflow_DB {
      * @return the number of entities inserted
      */
     public int insert(ArrayList<Object> item){
-        long start = System.currentTimeMillis();
         msharedpreference = PreferenceManager.getDefaultSharedPreferences(context);
         try {
             JSONObject jsonObject = new JSONObject(msharedpreference.getString(ENTITY_KEY, "{"+ENTITY_KEY+":{}}")); //main json db
@@ -246,8 +245,7 @@ public class Workflow_DB {
             jsonObject.put("ids", jsonArray);
             jsonObject.put(newItemId, newEntity);
             msharedpreference.edit().putString(ENTITY_KEY, jsonObject.toString()).commit();
-            long end = System.currentTimeMillis();
-            System.out.println("Insert benchmark length = "+(end - start));
+
             return 1;
         } catch (JSONException e) {
             e.printStackTrace();
