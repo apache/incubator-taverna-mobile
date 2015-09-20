@@ -166,27 +166,28 @@ public class Workflow_DB {
 				msharedpreference = PreferenceManager.getDefaultSharedPreferences(context);
 				//read key and get existing data
 				ArrayList<Object> results = new ArrayList<Object>();
-				JSONObject mainJson = new JSONObject(msharedpreference.getString(ENTITY_KEY, ENTITY_KEY+":{}"));
+				JSONObject mainJson = new JSONObject(msharedpreference.getString(ENTITY_KEY, "\""+ENTITY_KEY+"\":{}"));
 				
 				Log.i(ENTITY_KEY, mainJson.toString(2));
 				
 				JSONArray keysJson = mainJson.getJSONArray("ids"); //retrieve a json array of ids for every entity entry
-				Log.i(ENTITY_KEY, keysJson.toString(2));
-				
+				Log.i("KEY "+ENTITY_KEY, keysJson.toString(2));
+
+
 				if(null != keysJson)
-					for(int i=0; i<keysJson.length(); i++){
+					if(keysJson.get(0).toString().equalsIgnoreCase(id)){
 						//for each key, get the associated data
 						try {
-							JSONArray resultArray = mainJson.getJSONArray(keysJson.getString(i));
+							JSONArray resultArray = mainJson.getJSONArray(keysJson.getString(0));
 							if(null != resultArray)
 								for(int j=0; j<resultArray.length(); j++){
 									results.add(resultArray.getString(j));
 								}
 						} catch (Exception e) {
 							e.printStackTrace();
-							continue;
 						}
 					}
+
 				return results;
 	}
 	
