@@ -71,7 +71,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     private List<Workflow> workflowList; //workflow data to bind to the UI
     private WorkflowAdapter.ViewHolder mViewHolder;
     public static final String WORKFLOW_FAVORITE_KEY = "WORKFLOW_FAVORITES"; //workflow key used to save workflows when marked as favorites
-    public static final String WORKFLOW_FAVORITE = "favorited";//workflow key to favorited items tags
+    //public static final String WORKFLOW_FAVORITE = "favorited";//workflow key to favorited items tags
     public static final String FAVORITE_LIST_DB = "FAVORITE_LIST";
     public Workflow_DB favDB; //database to hold favorited workflows
     public Workflow_DB favoritedDb; //keep tags about favorited workflows
@@ -80,7 +80,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         context = c;
         workflowList = wk;
         favDB = new Workflow_DB(context, WORKFLOW_FAVORITE_KEY);
-        favoritedDb = new Workflow_DB(context, WORKFLOW_FAVORITE);
+        favoritedDb = new Workflow_DB(context, WORKFLOW_FAVORITE_KEY);
     }
 
     public WorkflowAdapter(Context c){
