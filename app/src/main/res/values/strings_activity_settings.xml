@@ -15,7 +15,7 @@
     <string name="pref_player_des">Configure a different player URL for the app to use. End with the mount point(/)</string>
 
     <!-- Server Portal url info -->
-    <string name="pref_server_default"> http://heater.cs.man.ac.uk:8090/taverna-2.5.4/</string>   <!-- default value -->
+    <string name="pref_server_default"> http://heater.cs.man.ac.uk:8090/</string>   <!-- default value -->
     <string name="pref_server_title">Configure Taverna Server </string>
     <string name="pref_server_des">Configure a different Taverna Server for the app</string>
 
