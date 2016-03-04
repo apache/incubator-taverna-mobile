@@ -106,3 +106,32 @@ This section provides links to documentation about key functionalities and imple
 It has been mainly adapted for developers, however, users can get neccessary information from the quick start section of this readme
 
 Essential project documentation can be found [HERE] (https://docs.google.com/document/d/1G3AmW-zgsOxNg81uOWOUVISfaimp9Ku5k1ntIFm8hvo/edit?usp=sharing)
+
+# Using your own Taverna Server
+
+The defaults for this applications uses a development instance of Taverna Server at University of Manchester, which might not be available.
+
+You can start our own [Taverna Server](https://hub.docker.com/r/taverna/taverna-server/) with Docker:
+
+    docker run -p 8090:8080 --name taverna -d taverna/taverna-server:2.5.4
+
+And a [Taverna Player](https://hub.docker.com/r/fbacall/taverna-player-portal/):
+
+    docker run --name taverna-portal --link taverna-server:taverna -p 3000:3000 -d fbacall/taverna-player-portal
+
+Then edit [app/src/main/res/values/strings\_activity\_settings.xml](app/src/main/res/values/strings_activity_settings.xml) to set:
+
+
+```xml
+    <string name="pref_player_default"> http://example.com:3000/</string>   <!-- default value -->
+    <string name="pref_server_default"> http://example.com:8090/</string>   <!-- default value -->
+```
+
+.. where you= replace `example.com` with the hostname or IP address of your server running Docker. 
+Note that if you are using Docker on OS X or Windows, then a Virtual Machine will run the Docker
+containers under a different IP address. Use `docker-machine ip` to check. You may have to
+adjust your firewalls to allow port `3000` and `8090` from the Taverna Mobile app. If you are 
+testing from a mobile/tablet, you may have to use WiFi to get access to the
+Taverna Server on the local network.
+
+
