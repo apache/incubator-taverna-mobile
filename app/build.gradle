@@ -31,8 +31,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.0'
     compile 'com.android.support:support-v4:21.0.0'
     compile files('libs/dropbox-android-sdk-1.6.3.jar')
-    //compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
-   // compile 'com.github.rey5137:material:1.2.2'
     compile 'com.nineoldandroids:library:2.4.+'
     compile 'com.android.support:design:22.2.0'
 }

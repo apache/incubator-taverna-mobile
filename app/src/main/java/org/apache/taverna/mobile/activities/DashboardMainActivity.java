@@ -62,6 +62,7 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.fragments.FavoriteFragment;
 import org.apache.taverna.mobile.fragments.NavigationDrawerFragment;
 import org.apache.taverna.mobile.fragments.WorkflowItemFragment;
+import org.apache.taverna.mobile.fragments.Workflow_viewpager;
 import org.apache.taverna.mobile.utils.WorkflowOpen;
 
 import java.io.File;
@@ -73,13 +74,9 @@ public class DashboardMainActivity extends AppCompatActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-
-    static final int NUM_ITEMS = 2;
     private final int SELECT_WORKFLOW = 10;
     public static final String APP_DIRECTORY_NAME = "TavernaMobile";
     private  Dialog aboutDialog;
-    MyAdapter mAdapter;
-    ViewPager mPager;
 	private DrawerLayout mDrawerLayout;
 
     @Override
@@ -87,29 +84,28 @@ public class DashboardMainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_main);
 
-	    //Setting Support Toolbar
-	    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-	    setSupportActionBar(toolbar);
-
 	    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 	    if (navigationView != null) {
 		    setupDrawerContent(navigationView);
 	    }
 
-	    final ActionBar ab = getSupportActionBar();
-	    ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-	    ab.setDisplayHomeAsUpEnabled(true);
 
 	    mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         setUpWorkflowDirectory(this);
         aboutDialog = new Dialog(this);
 
-        //manage tabs and swipe
-        mAdapter = new MyAdapter(getSupportFragmentManager());
+	    /**
+	     * Setting the Fragment in FrameLayout
+	     */
+	    if (savedInstanceState == null) {
+		    Fragment view = new Workflow_viewpager();
 
-        mPager = (ViewPager)findViewById(R.id.pager);
-        mPager.setAdapter(mAdapter);
+		    getSupportFragmentManager()
+				    .beginTransaction().replace(R.id.frame_container, view)
+				    .commit();
+
+	    }
 
     }
 
@@ -121,25 +117,23 @@ public class DashboardMainActivity extends AppCompatActivity
 	private void setupDrawerContent(final NavigationView navigationView) {
 		navigationView.setNavigationItemSelectedListener(
 				new NavigationView.OnNavigationItemSelectedListener() {
-					@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+
 					@Override
 					public boolean onNavigationItemSelected(MenuItem menuItem) {
 
 
 						FragmentManager fragmentManager = getSupportFragmentManager();
+						Fragment fragment;
 
 						switch (menuItem.getItemId()) {
 							case R.id.nav_dashboard:
 
+								fragment = new Workflow_viewpager();
 								fragmentManager.beginTransaction()
-										.replace(R.id.container, WorkflowItemFragment.newInstance("param1", "param2"))
+										.replace(R.id.frame_container, fragment)
 										.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
 										.commit();
-								try {
-									mPager.setCurrentItem(0);
-								}catch (NullPointerException np){
-									np.printStackTrace();
-								}
+
 								menuItem.setChecked(true);
 								mDrawerLayout.closeDrawers();
 								return true;
@@ -244,28 +238,7 @@ public class DashboardMainActivity extends AppCompatActivity
         return type;
     }
 
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_activity_dashboard_main);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_openworkflow);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_usage);
-                break;
-            case 4:
-                mTitle = getString(R.string.title_about);
-                break;
-            case 5:
-                mTitle = getString(R.string.title_activity_settings);
-                break;
-            case 6:
-                mTitle = getString(R.string.title_exit);
-                break;
-        }
-    }
+
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -342,36 +315,4 @@ public class DashboardMainActivity extends AppCompatActivity
 	    return super.onOptionsItemSelected(item);
     }
 
-    public class MyAdapter extends FragmentPagerAdapter {
-        public MyAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public int getCount() {
-            return NUM_ITEMS;
-        }
-        @Override
-        public String getPageTitle(int position){
-            switch(position+1){
-                case 2:
-                    return (DashboardMainActivity.this).getResources().getString(R.string.title_favorite);
-
-                case 1:
-                    return (DashboardMainActivity.this).getResources().getString(R.string.title_explore);
-            }
-            return "";
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            switch(position+1){
-                case 1:
-                    return WorkflowItemFragment.newInstance("Workflows","Running ...");
-                case 2:
-                    return FavoriteFragment.newInstance(position);
-            }
-            return WorkflowItemFragment.newInstance("","");
-        }
-    }
 }
