@@ -16,36 +16,31 @@
   -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_dashboard"
-            android:icon="@drawable/ic_dashboard_home_web"
-            android:title="Workflows" />
-        <item
-            android:id="@+id/nav_openworkflow"
-            android:icon="@drawable/ic_openwk_web"
-            android:title="Open Workflow" />
-        <item
-            android:id="@+id/nav_usage"
-            android:icon="@drawable/ic_usage_web"
-            android:title="Usage" />
-    </group>
-
-    <item android:title="Sub items">
-        <menu>
-            <item
-	            android:id="@+id/nav_about"
-                android:icon="@drawable/ic_about_web"
-                android:title="Sub item 1" />
-	        <item
-		        android:id="@+id/nav_settings"
-		        android:icon="@drawable/ic_setting_workflows_web"
-		        android:title="Sub item 1" />
-	        <item
-		        android:id="@+id/nav_logout"
-		        android:icon="@drawable/ic_logout_web"
-		        android:title="Sub item 1" />
-        </menu>
-    </item>
+	<group android:checkableBehavior="single">
+		<item
+			android:id="@+id/nav_dashboard"
+			android:icon="@drawable/ic_dashboard_home_web"
+			android:title="Workflows"/>
+		<item
+			android:id="@+id/nav_openworkflow"
+			android:icon="@drawable/ic_openwk_web"
+			android:title="Open Workflow"/>
+		<item
+			android:id="@+id/nav_usage"
+			android:icon="@drawable/ic_usage_web"
+			android:title="Usage"/>
+		<item
+			android:id="@+id/nav_about"
+			android:icon="@drawable/ic_about_web"
+			android:title="About"/>
+		<item
+			android:id="@+id/nav_settings"
+			android:icon="@drawable/ic_setting_workflows_web"
+			android:title="Settings"/>
+		<item
+			android:id="@+id/nav_logout"
+			android:icon="@drawable/ic_logout_web"
+			android:title="Logout"/>
+	</group>
 
 </menu>

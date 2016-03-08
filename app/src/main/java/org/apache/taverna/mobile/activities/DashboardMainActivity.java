@@ -25,24 +25,30 @@ package org.apache.taverna.mobile.activities;
 * under the License.
 */
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -60,14 +66,8 @@ import org.apache.taverna.mobile.utils.WorkflowOpen;
 
 import java.io.File;
 
-public class DashboardMainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks{
-
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
-
+public class DashboardMainActivity extends AppCompatActivity
+{
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -80,22 +80,31 @@ public class DashboardMainActivity extends ActionBarActivity
     private  Dialog aboutDialog;
     MyAdapter mAdapter;
     ViewPager mPager;
+	private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_main);
+
+	    //Setting Support Toolbar
+	    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+	    setSupportActionBar(toolbar);
+
+	    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+	    if (navigationView != null) {
+		    setupDrawerContent(navigationView);
+	    }
+
+	    final ActionBar ab = getSupportActionBar();
+	    ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+	    ab.setDisplayHomeAsUpEnabled(true);
+
+	    mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         setUpWorkflowDirectory(this);
         aboutDialog = new Dialog(this);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
-
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
         //manage tabs and swipe
         mAdapter = new MyAdapter(getSupportFragmentManager());
 
@@ -104,61 +113,104 @@ public class DashboardMainActivity extends ActionBarActivity
 
     }
 
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        switch(position+1){
-            case 1://return home
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, WorkflowItemFragment.newInstance("param1", "param2"))
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                        .commit();
-                try {
-                    mPager.setCurrentItem(0);
-                }catch (NullPointerException np){
-                    np.printStackTrace();
-                }
-                break;
-            case 2: //open workflow
-                Intent workflowSelectIntent = new Intent(Intent.ACTION_GET_CONTENT)
-                        .setDataAndTypeAndNormalize(Uri.parse(String.format("%s%s%s",
-                                        Environment.getExternalStorageDirectory(),
-                                        File.separator, APP_DIRECTORY_NAME)),
-                                "application/vnd.taverna.t2flow+xml");
 
-                Intent loadWorkflowIntent = Intent.createChooser(workflowSelectIntent,
-                        "Choose Workflow (t2flow or xml)");
-                startActivityForResult(loadWorkflowIntent, SELECT_WORKFLOW);
+	/**
+	 *
+	 * @param navigationView Design Support NavigationView  OnClick Listener Event
+	 */
+	private void setupDrawerContent(final NavigationView navigationView) {
+		navigationView.setNavigationItemSelectedListener(
+				new NavigationView.OnNavigationItemSelectedListener() {
+					@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+					@Override
+					public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-                break;
-            case 3: //show usage
-                aboutDialog.setTitle("USage");
-                aboutDialog.setContentView(R.layout.usage_layout);
-                aboutDialog.show();
-                break;
-            case 4: //show about
-                TextView about = new TextView(getApplicationContext());
-                about.setTextSize(21);
-                about.setTextColor(Color.BLACK);
-                about.setPadding(3,3,3,3);
-                about.setText(getResources().getString(R.string.about));
 
-                aboutDialog.setTitle("About Taverna Mobile");
-                aboutDialog.setContentView(about);
-                aboutDialog.show();
-                break;
-            case 5://open settings/preference activity
-                startActivity(new Intent(this, SettingsActivity.class));
-                overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-                break;
-            case 6: //logout user
-                this.finish();
-                break;
-            default:
-                break;
-        }
-    }
+						FragmentManager fragmentManager = getSupportFragmentManager();
+
+						switch (menuItem.getItemId()) {
+							case R.id.nav_dashboard:
+
+								fragmentManager.beginTransaction()
+										.replace(R.id.container, WorkflowItemFragment.newInstance("param1", "param2"))
+										.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+										.commit();
+								try {
+									mPager.setCurrentItem(0);
+								}catch (NullPointerException np){
+									np.printStackTrace();
+								}
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+
+							case R.id.nav_openworkflow:
+
+								Intent workflowSelectIntent =
+										new Intent(Intent.ACTION_GET_CONTENT)
+										.setDataAndTypeAndNormalize(Uri.parse(String.format("%s%s%s",
+														Environment.getExternalStorageDirectory(),
+														File.separator, APP_DIRECTORY_NAME)),
+												"application/vnd.taverna.t2flow+xml");
+
+								Intent loadWorkflowIntent = Intent.createChooser(workflowSelectIntent,
+										"Choose Workflow (t2flow or xml)");
+								startActivityForResult(loadWorkflowIntent, SELECT_WORKFLOW);
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+							case R.id.nav_usage:
+
+								aboutDialog.setTitle("USage");
+								aboutDialog.setContentView(R.layout.usage_layout);
+								aboutDialog.show();
+
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+
+							case R.id.nav_about:
+
+
+								TextView about = new TextView(getApplicationContext());
+								about.setTextSize(21);
+								about.setTextColor(Color.BLACK);
+								about.setPadding(3,3,3,3);
+								about.setText(getResources().getString(R.string.about));
+
+								aboutDialog.setTitle("About Taverna Mobile");
+								aboutDialog.setContentView(about);
+								aboutDialog.show();
+
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+
+							case R.id.nav_settings:
+
+								startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+								overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+
+							case R.id.nav_logout:
+
+								finish();
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+
+						}
+						return true;
+					}
+				});
+	}
+
+
+
+
 
     @Override
     public void onActivityResult(int requestCode , int resultCode, Intent data){
@@ -259,7 +311,8 @@ public class DashboardMainActivity extends ActionBarActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
+        {
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
@@ -281,7 +334,12 @@ public class DashboardMainActivity extends ActionBarActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+	    switch (item.getItemId()) {
+		    case android.R.id.home:
+			    mDrawerLayout.openDrawer(GravityCompat.START);
+			    return true;
+	    }
+	    return super.onOptionsItemSelected(item);
     }
 
     public class MyAdapter extends FragmentPagerAdapter {
