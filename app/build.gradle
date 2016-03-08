@@ -25,13 +25,14 @@ repositories {
     jcenter()
 }
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.android.support:cardview-v7:22.0.0'
-    compile 'com.android.support:recyclerview-v7:22.0.0'
-    compile 'com.android.support:support-v4:22.0.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:21.0.0'
+    compile 'com.android.support:cardview-v7:21.0.0'
+    compile 'com.android.support:recyclerview-v7:21.0.0'
+    compile 'com.android.support:support-v4:21.0.0'
     compile files('libs/dropbox-android-sdk-1.6.3.jar')
-    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
+    //compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
+   // compile 'com.github.rey5137:material:1.2.2'
     compile 'com.nineoldandroids:library:2.4.+'
-
+    compile 'com.android.support:design:22.2.0'
 }

@@ -14,7 +14,7 @@ limitations under the License.
 -->
 <resources>
 
-	<style name="Theme.DesignDemo" parent="Base.Theme.Taverna">
+	<style name="Theme.Taverna" parent="Base.Theme.Taverna">
 	</style>
 
 	<style name="Base.Theme.Taverna" parent="Theme.AppCompat.Light.NoActionBar">

@@ -19,15 +19,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_dashboard"
-            android:icon="@drawable/ic_dashboard_home-web"
+            android:icon="@drawable/ic_dashboard_home_web"
             android:title="Workflows" />
         <item
             android:id="@+id/nav_openworkflow"
-            android:icon="@drawable/ic_openwk-web"
+            android:icon="@drawable/ic_openwk_web"
             android:title="Open Workflow" />
         <item
             android:id="@+id/nav_usage"
-            android:icon="@drawable/ic_usage-web"
+            android:icon="@drawable/ic_usage_web"
             android:title="Usage" />
     </group>
 
@@ -35,15 +35,15 @@
         <menu>
             <item
 	            android:id="@+id/nav_about"
-                android:icon="@drawable/ic_about-web"
+                android:icon="@drawable/ic_about_web"
                 android:title="Sub item 1" />
 	        <item
 		        android:id="@+id/nav_settings"
-		        android:icon="@drawable/ic_setting_workflows-web"
+		        android:icon="@drawable/ic_setting_workflows_web"
 		        android:title="Sub item 1" />
 	        <item
 		        android:id="@+id/nav_logout"
-		        android:icon="@drawable/ic_logout-web"
+		        android:icon="@drawable/ic_logout_web"
 		        android:title="Sub item 1" />
         </menu>
     </item>

@@ -123,7 +123,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
     public void onResume() {
         super.onResume();
         mRecyclerView.setAdapter(runAdapter);
-        mRecyclerView.setScrollingTouchSlop(RecyclerView.TOUCH_SLOP_PAGING);
+       // mRecyclerView.setScrollingTouchSlop(RecyclerView.TOUCH_SLOP_PAGING);
         //getActivity().getLoaderManager().initLoader(1,null,this);
     }
 
