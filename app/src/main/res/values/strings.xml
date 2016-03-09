@@ -42,9 +42,6 @@ limitations under the License.
     <string name="title_openworkflow">Open Workflow</string>
     <string name="menu_search">Search</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_example">Example action</string>
     <string name="completebrand">Powered By Apache Taverna</string>
     <string name="search_hint"> Search workflows by name</string>
