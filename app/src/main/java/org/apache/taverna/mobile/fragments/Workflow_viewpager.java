@@ -62,6 +62,7 @@ public class Workflow_viewpager extends Fragment{
 		adapter.addFragment(new FavoriteFragment(), getResources().getString(R.string.title_favorite));
 
 		viewPager.setAdapter(adapter);
+		viewPager.setOffscreenPageLimit(2);
 		tabLayout = (TabLayout) workflow_pager.findViewById(R.id.mtablayout);
 		tabLayout.setupWithViewPager(viewPager);
 
@@ -109,5 +110,4 @@ public class Workflow_viewpager extends Fragment{
 			return mFragmentTitles.get(position);
 		}
 	}
-
 }

@@ -19,7 +19,8 @@
 
     <style name="Theme.Taverna" parent="Base.Theme.Taverna">
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+
     </style>
 
 </resources>

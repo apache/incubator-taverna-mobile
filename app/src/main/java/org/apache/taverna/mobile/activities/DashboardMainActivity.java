@@ -25,43 +25,29 @@ package org.apache.taverna.mobile.activities;
 * under the License.
 */
 
-import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.MimeTypeMap;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.fragments.FavoriteFragment;
-import org.apache.taverna.mobile.fragments.NavigationDrawerFragment;
-import org.apache.taverna.mobile.fragments.WorkflowItemFragment;
 import org.apache.taverna.mobile.fragments.Workflow_viewpager;
 import org.apache.taverna.mobile.utils.WorkflowOpen;
 
@@ -73,7 +59,7 @@ public class DashboardMainActivity extends AppCompatActivity
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
-    private CharSequence mTitle;
+    private CharSequence mTitle = "Dashboard";
     private final int SELECT_WORKFLOW = 10;
     public static final String APP_DIRECTORY_NAME = "TavernaMobile";
     private  Dialog aboutDialog;
@@ -99,11 +85,16 @@ public class DashboardMainActivity extends AppCompatActivity
 	     * Setting the Fragment in FrameLayout
 	     */
 	    if (savedInstanceState == null) {
-		    Fragment view = new Workflow_viewpager();
 
-		    getSupportFragmentManager()
-				    .beginTransaction().replace(R.id.frame_container, view)
+		    FragmentManager fragmentManager = getSupportFragmentManager();
+		    Fragment fragment;
+
+		    fragment = new Workflow_viewpager();
+		    fragmentManager.beginTransaction()
+				    .replace(R.id.frame_container, fragment)
+				    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
 				    .commit();
+
 
 	    }
 
@@ -116,16 +107,19 @@ public class DashboardMainActivity extends AppCompatActivity
 	 */
 	private void setupDrawerContent(final NavigationView navigationView) {
 		navigationView.setNavigationItemSelectedListener(
-				new NavigationView.OnNavigationItemSelectedListener() {
+				new NavigationView.OnNavigationItemSelectedListener()
+				{
 
 					@Override
-					public boolean onNavigationItemSelected(MenuItem menuItem) {
+					public boolean onNavigationItemSelected(MenuItem menuItem)
+					{
 
 
 						FragmentManager fragmentManager = getSupportFragmentManager();
 						Fragment fragment;
 
-						switch (menuItem.getItemId()) {
+						switch (menuItem.getItemId())
+						{
 							case R.id.nav_dashboard:
 
 								fragment = new Workflow_viewpager();
@@ -142,10 +136,10 @@ public class DashboardMainActivity extends AppCompatActivity
 
 								Intent workflowSelectIntent =
 										new Intent(Intent.ACTION_GET_CONTENT)
-										.setDataAndTypeAndNormalize(Uri.parse(String.format("%s%s%s",
-														Environment.getExternalStorageDirectory(),
-														File.separator, APP_DIRECTORY_NAME)),
-												"application/vnd.taverna.t2flow+xml");
+												.setDataAndTypeAndNormalize(Uri.parse(String.format("%s%s%s",
+																Environment.getExternalStorageDirectory(),
+																File.separator, APP_DIRECTORY_NAME)),
+														"application/vnd.taverna.t2flow+xml");
 
 								Intent loadWorkflowIntent = Intent.createChooser(workflowSelectIntent,
 										"Choose Workflow (t2flow or xml)");
@@ -169,7 +163,7 @@ public class DashboardMainActivity extends AppCompatActivity
 								TextView about = new TextView(getApplicationContext());
 								about.setTextSize(21);
 								about.setTextColor(Color.BLACK);
-								about.setPadding(3,3,3,3);
+								about.setPadding(3, 3, 3, 3);
 								about.setText(getResources().getString(R.string.about));
 
 								aboutDialog.setTitle("About Taverna Mobile");
@@ -183,7 +177,7 @@ public class DashboardMainActivity extends AppCompatActivity
 							case R.id.nav_settings:
 
 								startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-								overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+								overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
 								menuItem.setChecked(true);
 								mDrawerLayout.closeDrawers();
@@ -282,30 +276,16 @@ public class DashboardMainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START))
-        {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            MenuInflater mi = getMenuInflater();
-                mi.inflate(R.menu.dashboard_main, menu);
-          /*  //get the searchview and set the searchable configuration
-            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-            SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-            //assuming this activity is the searchable activity
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-            searchView.setSubmitButtonEnabled(true);
-//            searchView.setIconifiedByDefault(false);*/
 
-            restoreActionBar();
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.dashboard_main, menu);
+		restoreActionBar();
+		return true;
+	}
 
-    @Override
+
+	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
 	    switch (item.getItemId()) {
 		    case android.R.id.home:
