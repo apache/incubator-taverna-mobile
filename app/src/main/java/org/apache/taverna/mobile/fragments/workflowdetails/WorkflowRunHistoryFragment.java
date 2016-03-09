@@ -58,6 +58,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
     private RecyclerView mRecyclerView;
     private TextView emptyRunHistoryTextView;
     private RunAdapter runAdapter;
+	List<Runs> runsList;
 
     private static String workflowID; //represents a run name that matches the given workflow
 
@@ -84,7 +85,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        List<Runs> runsList = new ArrayList<Runs>();
+	    runsList = new ArrayList<Runs>();
 /*        runsList.add(new Runs("Test Run1 ",
                 SimpleDateFormat.getDateTimeInstance().format(new Date()).toString()
                 ,SimpleDateFormat.getDateTimeInstance().format(new Date()).toString(),"failed"));
@@ -109,6 +110,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
         mRecyclerView = (RecyclerView) rootView.findViewById(android.R.id.list);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+	    mRecyclerView.setAdapter(runAdapter);
         getActivity().getLoaderManager().initLoader(0,savedInstanceState,this).forceLoad();
         return rootView;
     }
@@ -122,7 +124,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
     @Override
     public void onResume() {
         super.onResume();
-        mRecyclerView.setAdapter(runAdapter);
+
        // mRecyclerView.setScrollingTouchSlop(RecyclerView.TOUCH_SLOP_PAGING);
         //getActivity().getLoaderManager().initLoader(1,null,this);
     }
@@ -142,19 +144,23 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
 
     @Override
     public void onLoadFinished(Loader<Workflow> workflowLoader, Workflow workflow) {
-        runAdapter.setRunList(workflow.getWorkflow_runs());
-        mRecyclerView.setAdapter(runAdapter);
+
     try {
-        if (runAdapter.getRunList().size() == 0) {
-            mRecyclerView.setVisibility(View.GONE);
-            emptyRunHistoryTextView.setVisibility(View.VISIBLE);
+        if (workflow.getWorkflow_runs() !=null | workflow.getWorkflow_runs().size() !=0) {
+
+	        runAdapter.setRunList(workflow.getWorkflow_runs());
+	        mRecyclerView.setAdapter(runAdapter);
+	        mRecyclerView.setVisibility(View.VISIBLE);
+	        emptyRunHistoryTextView.setVisibility(View.GONE);
+
         } else {
-            mRecyclerView.setVisibility(View.VISIBLE);
-            emptyRunHistoryTextView.setVisibility(View.GONE);
+	        mRecyclerView.setVisibility(View.GONE);
+	        emptyRunHistoryTextView.setVisibility(View.VISIBLE);
         }
     }catch(NullPointerException np){
         np.printStackTrace();
     }
+
        // progressDialog.dismiss();
     }
 
