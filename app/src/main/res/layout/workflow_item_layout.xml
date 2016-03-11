@@ -67,7 +67,7 @@ limitations under the License.
 				android:layout_below="@+id/workflow_author"
 				android:layout_marginTop="5dp"
 				android:layout_toRightOf="@+id/author_profile_image"
-				android:textSize="16dp"
+				android:textSize="18dp"
 				android:hint="@string/wktitle" />
 
 		</RelativeLayout>
