@@ -19,16 +19,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-
-    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    card_view:cardElevation="@dimen/abc_text_size_menu_material"
-    card_view:cardBackgroundColor="@color/background_floating_material_light"
-    card_view:cardCornerRadius="2dp"
-    card_view:paddingEnd="2dp"
-    card_view:paddingStart="2dp">
+                                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    card_view:cardElevation="@dimen/abc_text_size_menu_material"
+                                    card_view:cardBackgroundColor="@color/background_floating_material_light"
+                                    card_view:cardCornerRadius="2dp"
+                                    card_view:paddingEnd="2dp"
+                                    card_view:paddingStart="2dp">
 
     <LinearLayout
         android:orientation="vertical"
@@ -50,24 +50,24 @@ limitations under the License.
                 android:elevation="5dp"
                 android:layout_weight="1" />
 
-<!--            <ImageButton
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/favoriteButonDelete"
                 android:src="@android:drawable/ic_menu_delete"
                 android:background="#eee"
                 android:layout_gravity="right"
-                android:visibility="gone" />-->
+                android:visibility="gone" />
 <!-- @drawable/ic_delete_favorite -->
-            <com.gc.materialdesign.views.ButtonFloat
-                android:id="@+id/favoriteButtonDelete"
-                android:layout_gravity="right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:background="#33b5ee"
-                materialdesign:animate="false"
-                materialdesign:iconDrawable="@android:drawable/ic_menu_delete" />
+
+	        <android.support.design.widget.FloatingActionButton
+		        android:id="@+id/favoriteButtonDelete"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        app:layout_anchorGravity="bottom|right|end"
+		        android:layout_margin="5dp"
+		        android:background="#33b5ee"
+		        android:src="@android:drawable/ic_menu_delete" />
         </LinearLayout>
 
         <LinearLayout

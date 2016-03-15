@@ -127,6 +127,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     public WorkflowItemFragment() {
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,7 +189,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
         super.onAttach(activity);
         try {
 
-            ((DashboardMainActivity) activity).onSectionAttached(1);
+           // ((DashboardMainActivity) activity).onSectionAttached(1);
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");

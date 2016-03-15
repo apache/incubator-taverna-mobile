@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,9 +39,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.gc.materialdesign.views.ButtonFlat;
-import com.gc.materialdesign.views.ButtonFloat;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.utils.Workflow_DB;
@@ -113,7 +111,7 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
         fViewHolder.author.setText((CharSequence) data.get(6));
         fViewHolder.title.setText((CharSequence) data.get(2));
         fViewHolder.dateMarked.setText((CharSequence) data.get(4));
-        fViewHolder.btn_delete.setOnClickListener(new ButtonFloat.OnClickListener() {
+        fViewHolder.btn_delete.setOnClickListener(new FloatingActionButton.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -170,7 +168,7 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
 
         public final ImageView favorite_thumb;
         public final TextView author, title, dateMarked;// dateAdd;
-        public final ButtonFloat btn_delete;
+        public final FloatingActionButton btn_delete;
         public final Button btn_view_fav;
         public FViewHolder(View itemView) {
             super(itemView);
@@ -178,7 +176,7 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
             author = (TextView) itemView.findViewById(R.id.author);
             title = (TextView) itemView.findViewById(R.id.favorite_title);
             dateMarked = (TextView) itemView.findViewById(R.id.date_set);
-           btn_delete = (ButtonFloat) itemView.findViewById(R.id.favoriteButtonDelete);
+           btn_delete = (FloatingActionButton) itemView.findViewById(R.id.favoriteButtonDelete);
             btn_view_fav = (Button) itemView.findViewById(R.id.buttonOpenFavorite);
         }
     }
