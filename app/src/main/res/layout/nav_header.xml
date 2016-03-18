@@ -30,26 +30,6 @@ limitations under the License.
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@drawable/sliding_header">
-
-		<ImageView
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:id="@+id/imageView4"
-			android:layout_gravity="center_horizontal"
-			android:src="@mipmap/icuserprofiles"
-			android:contentDescription="@string/app_name"
-			android:scaleType="fitStart" />
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceMedium"
-			android:text="@string/completebrand"
-			android:id="@+id/textView8"
-			android:hint="@string/brand"
-			android:layout_margin="10dp"
-			android:textColor="@android:color/black"
-			android:layout_marginTop="30dp" />
 	</LinearLayout>
 
 </LinearLayout>
