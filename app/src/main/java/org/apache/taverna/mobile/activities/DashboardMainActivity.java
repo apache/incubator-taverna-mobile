@@ -44,7 +44,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.apache.taverna.mobile.R;
@@ -149,7 +152,7 @@ public class DashboardMainActivity extends AppCompatActivity
 								return true;
 							case R.id.nav_usage:
 
-								aboutDialog.setTitle("USage");
+								aboutDialog.setTitle("Usage");
 								aboutDialog.setContentView(R.layout.usage_layout);
 								aboutDialog.show();
 
@@ -159,12 +162,7 @@ public class DashboardMainActivity extends AppCompatActivity
 
 							case R.id.nav_about:
 
-
-								TextView about = new TextView(getApplicationContext());
-								about.setTextSize(21);
-								about.setTextColor(Color.BLACK);
-								about.setPadding(3, 3, 3, 3);
-								about.setText(getResources().getString(R.string.about));
+                                TableLayout about =  (TableLayout) getLayoutInflater().inflate(R.layout.about, null);
 
 								aboutDialog.setTitle("About Taverna Mobile");
 								aboutDialog.setContentView(about);

@@ -9,7 +9,7 @@ android {
     }
     defaultConfig {
         applicationId "mobile.taverna.apache.org.tavernamobile"
-        minSdkVersion 13
+        minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -23,6 +23,7 @@ android {
 }
 repositories {
     jcenter()
+    mavenCentral()
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
