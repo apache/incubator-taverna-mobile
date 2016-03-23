@@ -70,6 +70,7 @@ limitations under the License.
             android:textColor="@android:color/black"
             style="@android:style/TextAppearance.DeviceDefault.Large"
             android:text="@string/about3"
+            android:autoLink="web"
             android:textStyle="normal" />
     </TableRow>
 </TableLayout>
