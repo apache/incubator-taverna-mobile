@@ -152,6 +152,7 @@ public class DashboardMainActivity extends AppCompatActivity
 								return true;
 							case R.id.nav_usage:
 
+                                aboutDialog.setCanceledOnTouchOutside(true);
 								aboutDialog.setTitle("Usage");
 								aboutDialog.setContentView(R.layout.usage_layout);
 								aboutDialog.show();
@@ -164,6 +165,7 @@ public class DashboardMainActivity extends AppCompatActivity
 
                                 TableLayout about =  (TableLayout) getLayoutInflater().inflate(R.layout.about, null);
 
+                                aboutDialog.setCanceledOnTouchOutside(true);
 								aboutDialog.setTitle("About Taverna Mobile");
 								aboutDialog.setContentView(about);
 								aboutDialog.show();
