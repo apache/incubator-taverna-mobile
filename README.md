@@ -120,7 +120,7 @@ The defaults for this applications uses a development instance of Taverna Server
 You can start our own [Taverna Server](https://hub.docker.com/r/taverna/taverna-server/) with 
 [Docker](https://www.docker.com/):
 
-    docker run -p 8090:8080 --name taverna -d taverna/taverna-server:2.5.4
+    docker run -p 8090:8080 --name taverna-server -d taverna/taverna-server:2.5.4
 
 And a [Taverna Player](https://hub.docker.com/r/fbacall/taverna-player-portal/):
 
