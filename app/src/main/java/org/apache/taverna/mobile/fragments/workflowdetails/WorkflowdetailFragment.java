@@ -34,6 +34,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -340,7 +341,10 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 } else {
                     //desc.setVisibility(View.INVISIBLE); //Not sure I trust this! Needs investigating.
                 }
-                createdat.setText("Created : " + wk.getWorkflow_datecreated());
+                //Use android resources to insert text into placeholder
+                Resources resources = cont.getResources();
+                String createdAtText = String.format(resources.getString(R.string.created), wk.getWorkflow_datecreated());
+                createdat.setText(createdAtText);
                 //updated.setText("Workflow Description");
                 type.setText("Type: "+wk.getWorkflow_Type());
 

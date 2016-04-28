@@ -56,7 +56,7 @@ limitations under the License.
     <string name="workflow_run_empty"> <b>Workflows History</b> empty. No runs have been created for this workflow</string>
     <string name="wktitle">TITLE</string>
     <string name="marked">Marked On</string>
-    <string name="created">Created :</string>
+    <string name="created">Created: %1$s</string>
     <string name="modified">Modified :</string>
     <string name="description">Workflow Description</string>
     <string name="title_activity_workflow_detail">Workflow Detail</string>
