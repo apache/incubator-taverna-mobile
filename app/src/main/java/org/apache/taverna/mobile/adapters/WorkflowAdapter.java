@@ -214,9 +214,9 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                   // }
                     Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
                 }else if(saved == -1){
-                    Toast.makeText(context,"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Sorry! This workflow has already been marked as a favourite",Toast.LENGTH_SHORT).show();
                 }else
-                    Toast.makeText(context,"Error!, please try again",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Error! Please try again",Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -276,7 +276,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
            // wk_created = (TextView) v.findViewById(R.id.workflow_datecreated);
            // wk_modified = (TextView) v.findViewById(R.id.workflow_dateupdated);
             wk_description = (TextView) v.findViewById(R.id.workflow_brief_description);
-
             //cache buttons
             btn_download_workflow = (Button) v.findViewById(R.id.button_download_workflow);
             btn_mark_workflow = (Button) v.findViewById(R.id.button_mark_workflow);

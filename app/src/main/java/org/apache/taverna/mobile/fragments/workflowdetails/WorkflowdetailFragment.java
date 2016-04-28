@@ -196,9 +196,14 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
      *
      * @param activity
      */
+    //@Override
+    //public void onAttach(Activity activity) {
+    //    super.onAttach(activity);
+    //    cont = getActivity();
+    //}
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
         cont = getActivity();
     }
 
@@ -209,7 +214,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 if (((TextView)rootView.findViewById(R.id.wtype)).getText().toString().contains("Taverna 2"))
                     new WorkflowProcessTask(getActivity()).execute(download_url);
                 else
-                    Toast.makeText(getActivity(), "Sorry! only Type 2 workflows can be run as of now.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Sorry! Only Taverna 2 workflows can be run.", Toast.LENGTH_LONG).show();
                 break;
             case R.id.download_wk:
                 // start the android Download manager to start downloading a remote workflow file
@@ -242,7 +247,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                      view.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
 
                 }else if(result == -1){
-                    Toast.makeText(getActivity(),"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Sorry! This workflow has already been marked as a favourite",Toast.LENGTH_SHORT).show();
                 }else
                     Toast.makeText(getActivity(),"Error!, please try again",Toast.LENGTH_SHORT).show();
                 break;
@@ -314,7 +319,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     public static void setWorkflowDetails(final Workflow wk){
         currentWorkflow = wk;
         final TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
-        final TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
+        //final TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
         final TextView type = (TextView) rootView.findViewById(R.id.wtype);
         final TextView title = (TextView) rootView.findViewById(R.id.wtitle);
         final TextView desc = (TextView) rootView.findViewById(R.id.wdescription);
@@ -328,12 +333,16 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
                 //set widget data
                 User uploader = wk.getUploader();
-                author.setText("Uploader ->" + uploader != null?uploader.getName():"Unknown");
+                author.setText("Uploader:" + uploader != null?uploader.getName():"Unknown");
                 title.setText(wk.getWorkflow_title());
-                desc.setText(wk.getWorkflow_description());
+                if (wk.getWorkflow_description() != null) {
+                    desc.setText(wk.getWorkflow_description());
+                } else {
+                    //desc.setVisibility(View.INVISIBLE); //Not sure I trust this! Needs investigating.
+                }
                 createdat.setText("Created : " + wk.getWorkflow_datecreated());
-                updated.setText("Workflow Description");
-                type.setText("Type-> "+wk.getWorkflow_Type());
+                //updated.setText("Workflow Description");
+                type.setText("Type: "+wk.getWorkflow_Type());
 
                   //preview.setImageURI(Uri.parse(wk.getWorkflow_preview()));
                 new LoadImageThread(preview, wk.getWorkflow_preview()).execute();

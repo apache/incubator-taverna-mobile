@@ -61,20 +61,21 @@ limitations under the License.
                 android:layout_marginTop="5dp"
                 android:text="@string/created" />
 
-            <TextView
+           <!-- <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/wupdatedat"
                 android:layout_marginTop="5dp"
-                android:text="@string/modified" />
+                android:text="@string/modified" />-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/wtype"
                 android:layout_marginTop="5dp"
-                android:text="Type" />
+                android:text="Type:"
+                android:singleLine="true" />
 
             <TextView
                 android:layout_width="match_parent"
