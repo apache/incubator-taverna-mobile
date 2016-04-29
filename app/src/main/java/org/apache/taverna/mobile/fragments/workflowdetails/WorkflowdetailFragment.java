@@ -333,20 +333,22 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 //load necessary widgets
 
                 //set widget data
+                //Use android resources to insert text into placeholder
+                Resources resources = cont.getResources();
                 User uploader = wk.getUploader();
-                author.setText("Uploader:" + uploader != null?uploader.getName():"Unknown");
+                String uploaderText = String.format(resources.getString(R.string.workflow_author), uploader != null ? uploader.getName():"Unknown");
+                author.setText(uploaderText);
                 title.setText(wk.getWorkflow_title());
                 if (wk.getWorkflow_description() != null) {
                     desc.setText(wk.getWorkflow_description());
                 } else {
                     //desc.setVisibility(View.INVISIBLE); //Not sure I trust this! Needs investigating.
                 }
-                //Use android resources to insert text into placeholder
-                Resources resources = cont.getResources();
                 String createdAtText = String.format(resources.getString(R.string.created), wk.getWorkflow_datecreated());
                 createdat.setText(createdAtText);
                 //updated.setText("Workflow Description");
-                type.setText("Type: "+wk.getWorkflow_Type());
+                String typeText = String.format(resources.getString(R.string.workflow_type_text), wk.getWorkflow_Type());
+                type.setText(typeText);
 
                   //preview.setImageURI(Uri.parse(wk.getWorkflow_preview()));
                 new LoadImageThread(preview, wk.getWorkflow_preview()).execute();
