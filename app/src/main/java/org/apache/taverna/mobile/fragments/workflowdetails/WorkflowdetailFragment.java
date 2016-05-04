@@ -319,7 +319,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
     public static void setWorkflowDetails(final Workflow wk){
         currentWorkflow = wk;
-        final TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
+        final TextView author = (TextView) rootView.findViewById(R.id.wkf_author_text);
         //final TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
         final TextView type = (TextView) rootView.findViewById(R.id.wtype);
         final TextView title = (TextView) rootView.findViewById(R.id.wtitle);
@@ -336,8 +336,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 //Use android resources to insert text into placeholder
                 Resources resources = cont.getResources();
                 User uploader = wk.getUploader();
-                String uploaderText = String.format(resources.getString(R.string.workflow_author), uploader != null ? uploader.getName():"Unknown");
-                author.setText(uploaderText);
+                //String uploaderText = String.format(resources.getString(R.string.workflow_author), uploader != null ? uploader.getName():"Unknown");
+                author.setText((uploader != null) ? uploader.getName() : "Unknown");
                 title.setText(wk.getWorkflow_title());
                 if (wk.getWorkflow_description() != null) {
                     desc.setText(wk.getWorkflow_description());

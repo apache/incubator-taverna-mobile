@@ -57,7 +57,7 @@ limitations under the License.
     <string name="wktitle">TITLE</string>
     <string name="marked">Marked On</string>
     <string name="workflow_type_text">Type: %1$s</string>
-    <string name="workflow_author">Uploaded by: %1$s</string>
+    <string name="workflow_author">Uploaded by:</string>
     <string name="created">Created: %1$s</string>
     <string name="modified">Modified :</string>
     <string name="description">Workflow Description</string>
