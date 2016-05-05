@@ -34,4 +34,10 @@ dependencies {
     compile 'com.android.support:support-v4:23.3.0'
     compile files('libs/dropbox-android-sdk-1.6.3.jar')
     compile 'com.android.support:design:23.3.0'
+
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'io.reactivex:rxandroid:1.2.0'
+// Because RxAndroid releases are few and far between, it is recommended you also
+// explicitly depend on RxJava's latest version for bug fixes and new features.
+    compile 'io.reactivex:rxjava:1.1.4'
 }
