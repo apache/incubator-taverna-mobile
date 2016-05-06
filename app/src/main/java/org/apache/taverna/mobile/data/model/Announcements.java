@@ -1,8 +1,8 @@
 package org.apache.taverna.mobile.data.model;
 import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
+import org.simpleframework.xml.Text;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class Announcements {
         @Attribute(name="id", required = false)
         String id;
 
-        @Element(name="announcement",required = false)
+        @Text
         String content;
 
         public String getContent() {
