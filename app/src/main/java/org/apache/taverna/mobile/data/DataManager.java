@@ -17,7 +17,7 @@ public class DataManager {
      *
      * @return List of all Announcement
      */
-    public Observable<Announcements> getAllAnnouncement(){
-        return mBaseApiManager.getTavernaApi().getAllAnnouncements();
+    public Observable<Announcements> getAllAnnouncement(int pageNumber){
+        return mBaseApiManager.getTavernaApi().getAllAnnouncements(pageNumber);
     }
 }
