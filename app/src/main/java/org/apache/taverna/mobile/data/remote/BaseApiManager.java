@@ -10,7 +10,7 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 public class BaseApiManager {
 
 
-    String ENDPOINT = "Enter Base Url";
+    String ENDPOINT = "http://www.myexperiment.org/";
 
     public TavernaService mTavernaService;
 
@@ -32,7 +32,7 @@ public class BaseApiManager {
         return  retrofit.create(clazz);
     }
 
-    public TavernaService getmMovieApi(){
+    public TavernaService getTavernaApi(){
         return mTavernaService;
     }
 }
