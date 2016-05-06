@@ -53,4 +53,9 @@ dependencies {
 // explicitly depend on RxJava's latest version for bug fixes and new features.
     compile 'io.reactivex:rxjava:1.1.4'
 
+    compile('org.simpleframework:simple-xml:2.7.+'){
+        exclude module: 'stax'
+        exclude module: 'stax-api'
+        exclude module: 'xpp3'
+    }
 }
