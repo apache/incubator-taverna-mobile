@@ -107,4 +107,5 @@ limitations under the License.
     <string name="usage_detail_text">The details screen allows users to run particular worklows and provides detailed information about the workflows. Workflows can also be downloaded from here. Workflows can also be marked from this screen which would save much more data for offline use than on the dashboard screen. This screen also provides a set of runs for the workflow from other users</string>
     <string name="runid_text">Workflow Run ID:</string>
 
+    <string name="announcement">Announcementss</string>
 </resources>

@@ -31,7 +31,7 @@
 			android:title="Usage"/>
 		<item
 			android:id="@+id/nav_announcement"
-			android:icon="@drawable/ic_logout_web"
+			android:icon="@drawable/ic_announcement_black_24dp"
 			android:title="Announcement"/>
 		<item
 			android:id="@+id/nav_about"

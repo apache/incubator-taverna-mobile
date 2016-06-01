@@ -83,6 +83,8 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
             ab.setHomeAsUpIndicator(R.drawable.ic_menu);
             ab.setDisplayHomeAsUpEnabled(true);
         }
+
+
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListner(getActivity(), this));
