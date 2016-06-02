@@ -56,7 +56,7 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                     }
                 });
     }
-    public void loadAnnouncementDetails(int id){
+    public void loadAnnouncementDetails(String id){
         getMvpView().showProgressbar(true);
         mSubscriptions = mDataManager.getAnnouncementDetail(id)
                 .observeOn(AndroidSchedulers.mainThread())

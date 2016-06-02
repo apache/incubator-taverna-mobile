@@ -26,7 +26,7 @@ public class DataManager {
      *
      * @return Detail of Announcement
      */
-    public Observable<Announcement> getAnnouncementDetail(int id){
+    public Observable<Announcement> getAnnouncementDetail(String id){
         return mBaseApiManager.getTavernaApi().getAnnouncement(id);
     }
 }

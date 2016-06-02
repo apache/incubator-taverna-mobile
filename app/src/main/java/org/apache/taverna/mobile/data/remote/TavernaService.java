@@ -17,5 +17,5 @@ public interface TavernaService {
     Observable<Announcements> getAllAnnouncements(@Query("page") int pageNumber);
 
     @GET("/announcement.xml")
-    Observable<Announcement> getAnnouncement(@Query("id") int id);
+    Observable<Announcement> getAnnouncement(@Query("id") String id);
 }
