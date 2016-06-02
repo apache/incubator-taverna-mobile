@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,10 +17,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Announcement;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
 import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
@@ -46,10 +50,10 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     private AnnouncementAdapter mAnnouncementAdapter;
     private String category;
     private int mPageNumber = 1;
-
+    private Announcement mAnnouncementDetail;
     @Override
     public void onItemClick(View childView, int position) {
-
+        mMainPresenter.loadAnnouncementDetails(mAnnouncements.getAnnouncement().get(position).getId());
     }
 
     @Override
@@ -172,6 +176,25 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
             mProgressBar.setVisibility(View.VISIBLE);
         }else
             mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showAnnouncementDetail(Announcement announcement) {
+        mAnnouncementDetail =announcement;
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.detail_annoucement_dialog_layout, null);
+        dialogBuilder.setView(dialogView);
+        TextView title =(TextView) dialogView.findViewById(R.id.tvDialogTitle);
+        TextView date =(TextView) dialogView.findViewById(R.id.tvDialogDate);
+        TextView author=(TextView) dialogView.findViewById(R.id.tvDialogAuthor);
+        WebView text=(WebView) dialogView.findViewById(R.id.wvDialogText);
+        text.loadDataWithBaseURL("", mAnnouncementDetail.getText(), "text/html", "utf-8", "");
+        date.setText(mAnnouncementDetail.getDate());
+        title.setText(mAnnouncementDetail.getTitle());
+        author.setText(mAnnouncementDetail.getAuthor().getContent());
+        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
     }
 
     @Override
