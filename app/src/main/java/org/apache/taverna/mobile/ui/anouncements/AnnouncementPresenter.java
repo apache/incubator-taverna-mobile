@@ -3,6 +3,7 @@ package org.apache.taverna.mobile.ui.anouncements;
 import android.util.Log;
 
 import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Announcement;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 import rx.Observer;
@@ -55,6 +56,28 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                     }
                 });
     }
+    public void loadAnnouncementDetails(int id){
+        getMvpView().showProgressbar(true);
+        mSubscriptions = mDataManager.getAnnouncementDetail(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Announcement>() {
+                    @Override
+                    public void onCompleted() {
+                        getMvpView().showProgressbar(false);
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(LOG_TAG,e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(Announcement announcement) {
+                        getMvpView().showAnnouncementDetail(announcement);
+
+                    }
+                });
+    }
 
 }
