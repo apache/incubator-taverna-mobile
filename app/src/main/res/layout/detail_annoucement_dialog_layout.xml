@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:paddingTop="24dp">
+
+    <TextView
+        android:id="@+id/tvDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:text="Title"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <WebView
+        android:id="@+id/wvDialogText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+
+        android:id="@+id/RelativeLayout01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp"
+        android:paddingTop="4dp">
+
+        <TextView
+            android:id="@+id/tvDialogDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Date"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvDialogAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="Author"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/bDialogOK"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tvDialogDate"
+            android:layout_margin="8dp"
+            android:background="@android:color/white"
+            android:text="OK"
+            android:textColor="@color/colorPrimary" />
+    </RelativeLayout>
+
+</LinearLayout>
