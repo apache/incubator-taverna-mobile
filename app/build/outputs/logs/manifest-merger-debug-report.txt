@@ -1,173 +1,173 @@
 -- Merging decision tree log ---
 manifest
-ADDED from AndroidManifest.xml:21:1
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:21:1-105:12
 	package
-		ADDED from AndroidManifest.xml:22:5
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:22:5-40
+		INJECTED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml
+		INJECTED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml
+		INJECTED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from AndroidManifest.xml:21:11
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:21:11-69
 	android:versionCode
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml
+		INJECTED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.INTERNET
-ADDED from AndroidManifest.xml:24:5
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:24:5-67
 	android:name
-		ADDED from AndroidManifest.xml:24:22
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:24:22-64
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from AndroidManifest.xml:25:5
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:25:5-81
 	android:name
-		ADDED from AndroidManifest.xml:25:22
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:25:22-78
 application
-ADDED from AndroidManifest.xml:27:5
-MERGED from com.android.support:appcompat-v7:22.0.0:22:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.android.support:cardview-v7:22.0.0:22:5
-MERGED from com.android.support:recyclerview-v7:22.0.0:22:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.github.navasmdc:MaterialDesign:1.5:11:5
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:27:5-103:19
+MERGED from [com.android.support:appcompat-v7:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:cardview-v7:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:recyclerview-v7:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-v4:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/AndroidManifest.xml:22:5-20
+MERGED from [com.github.navasmdc:MaterialDesign:1.5] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.github.navasmdc/MaterialDesign/1.5/AndroidManifest.xml:11:5-47
 	android:label
-		ADDED from AndroidManifest.xml:30:9
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:30:9-41
 	android:allowBackup
-		ADDED from AndroidManifest.xml:28:9
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:28:9-35
 	android:icon
-		ADDED from AndroidManifest.xml:29:9
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:29:9-43
 	android:theme
-		ADDED from AndroidManifest.xml:31:9
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:31:9-40
 activity#org.apache.taverna.mobile.activities.LoginActivity
-ADDED from AndroidManifest.xml:32:9
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:32:9-35:20
 	android:label
-		ADDED from AndroidManifest.xml:34:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:34:13-45
 	android:name
-		ADDED from AndroidManifest.xml:33:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:33:13-53
 activity#org.apache.taverna.mobile.activities.FlashScreenActivity
-ADDED from AndroidManifest.xml:36:9
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:36:9-44:20
 	android:label
-		ADDED from AndroidManifest.xml:38:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:38:13-64
 	android:name
-		ADDED from AndroidManifest.xml:37:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:37:13-59
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:39:13
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:39:13-43:29
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:40:17
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:40:17-69
 	android:name
-		ADDED from AndroidManifest.xml:40:25
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:40:25-66
 category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:42:17
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:42:17-77
 	android:name
-		ADDED from AndroidManifest.xml:42:27
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:42:27-74
 activity#org.apache.taverna.mobile.activities.DashboardMainActivity
-ADDED from AndroidManifest.xml:45:9
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:45:9-56:20
 	android:label
-		ADDED from AndroidManifest.xml:47:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:47:13-66
 	android:launchMode
-		ADDED from AndroidManifest.xml:48:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:48:13-43
 	android:name
-		ADDED from AndroidManifest.xml:46:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:46:13-61
 intent-filter#android.intent.action.SEARCH
-ADDED from AndroidManifest.xml:49:13
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:49:13-51:29
 action#android.intent.action.SEARCH
-ADDED from AndroidManifest.xml:50:17
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:50:17-71
 	android:name
-		ADDED from AndroidManifest.xml:50:25
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:50:25-68
 meta-data#android.app.searchable
-ADDED from AndroidManifest.xml:53:13
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:53:13-55:54
 	android:resource
-		ADDED from AndroidManifest.xml:55:17
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:55:17-51
 	android:name
-		ADDED from AndroidManifest.xml:54:17
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:54:17-54
 activity#org.apache.taverna.mobile.activities.WorkflowDetailActivity
-ADDED from AndroidManifest.xml:57:9
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:57:9-64:20
 	android:label
-		ADDED from AndroidManifest.xml:59:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:59:13-67
 	android:parentActivityName
-		ADDED from AndroidManifest.xml:60:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:60:13-75
 	android:name
-		ADDED from AndroidManifest.xml:58:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:58:13-62
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from AndroidManifest.xml:61:13
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:61:13-63:94
 	android:value
-		ADDED from AndroidManifest.xml:63:17
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:63:17-91
 	android:name
-		ADDED from AndroidManifest.xml:62:17
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:62:17-63
 receiver#org.apache.taverna.mobile.broadcastreceivers.WorkflowDownloadReceiver
-ADDED from AndroidManifest.xml:66:9
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:66:9-73:20
 	android:enabled
-		ADDED from AndroidManifest.xml:68:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:68:13-35
 	android:exported
-		ADDED from AndroidManifest.xml:69:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:69:13-36
 	android:name
-		ADDED from AndroidManifest.xml:67:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:67:13-72
 intent-filter#android.intent.action.DOWNLOAD_COMPLETE
-ADDED from AndroidManifest.xml:70:13
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:70:13-72:29
 action#android.intent.action.DOWNLOAD_COMPLETE
-ADDED from AndroidManifest.xml:71:17
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:71:17-82
 	android:name
-		ADDED from AndroidManifest.xml:71:25
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:71:25-79
 activity#org.apache.taverna.mobile.activities.SettingsActivity
-ADDED from AndroidManifest.xml:75:9
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:75:9-82:20
 	android:label
-		ADDED from AndroidManifest.xml:77:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:77:13-60
 	android:parentActivityName
-		ADDED from AndroidManifest.xml:78:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:78:13-75
 	android:name
-		ADDED from AndroidManifest.xml:76:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:76:13-56
 activity#org.apache.taverna.mobile.activities.RunResult
-ADDED from AndroidManifest.xml:83:9
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:83:9-90:20
 	android:label
-		ADDED from AndroidManifest.xml:85:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:85:13-62
 	android:parentActivityName
-		ADDED from AndroidManifest.xml:86:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:86:13-76
 	android:name
-		ADDED from AndroidManifest.xml:84:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:84:13-49
 activity#com.dropbox.client2.android.AuthActivity
-ADDED from AndroidManifest.xml:91:9
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:91:9-102:20
 	android:launchMode
-		ADDED from AndroidManifest.xml:93:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:93:13-44
 	android:configChanges
-		ADDED from AndroidManifest.xml:94:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:94:13-57
 	android:name
-		ADDED from AndroidManifest.xml:92:13
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:92:13-68
 intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:95:13
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:95:13-101:29
 data
-ADDED from AndroidManifest.xml:97:17
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:97:17-61
 	android:scheme
-		ADDED from AndroidManifest.xml:97:23
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:97:23-58
 action#android.intent.action.VIEW
-ADDED from AndroidManifest.xml:98:17
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:98:17-69
 	android:name
-		ADDED from AndroidManifest.xml:98:25
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:98:25-66
 category#android.intent.category.BROWSABLE
-ADDED from AndroidManifest.xml:99:17
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:99:17-77
 	android:name
-		ADDED from AndroidManifest.xml:99:27
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:99:27-75
 category#android.intent.category.DEFAULT
-ADDED from AndroidManifest.xml:100:17
+ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:100:17-76
 	android:name
-		ADDED from AndroidManifest.xml:100:27
+		ADDED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml:100:27-73
 uses-sdk
-INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
-MERGED from com.android.support:appcompat-v7:22.0.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.android.support:cardview-v7:22.0.0:20:5
-MERGED from com.android.support:recyclerview-v7:22.0.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.github.navasmdc:MaterialDesign:1.5:7:5
+INJECTED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:cardview-v7:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/22.0.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:recyclerview-v7:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/AndroidManifest.xml:20:5-43
+MERGED from [com.github.navasmdc:MaterialDesign:1.5] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.github.navasmdc/MaterialDesign/1.5/AndroidManifest.xml:7:5-9:41
 	android:targetSdkVersion
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml
+		INJECTED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		INJECTED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml
+		INJECTED from /root/Desktop/AndroidLab/TavernaMobile2/app/src/main/AndroidManifest.xml
 activity#android.support.v7.widget.TestActivity
-ADDED from com.android.support:recyclerview-v7:22.0.0:23:9
+ADDED from [com.android.support:recyclerview-v7:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:23:9-25:56
 	android:label
-		ADDED from com.android.support:recyclerview-v7:22.0.0:25:13
+		ADDED from [com.android.support:recyclerview-v7:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:25:13-53
 	android:name
-		ADDED from com.android.support:recyclerview-v7:22.0.0:24:13
+		ADDED from [com.android.support:recyclerview-v7:22.0.0] /root/Desktop/AndroidLab/TavernaMobile2/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/22.0.0/AndroidManifest.xml:24:13-66
