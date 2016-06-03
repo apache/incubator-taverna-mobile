@@ -3,7 +3,7 @@ package org.apache.taverna.mobile.ui.anouncements;
 import android.util.Log;
 
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Announcement;
+import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 import rx.Observer;
@@ -11,6 +11,9 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+/**
+ * Created by Sagar
+ */
 public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
 
     public final String LOG_TAG = getClass().getSimpleName();
@@ -61,7 +64,7 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
         mSubscriptions = mDataManager.getAnnouncementDetail(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Announcement>() {
+                .subscribe(new Observer<DetailAnnouncement>() {
                     @Override
                     public void onCompleted() {
                         getMvpView().showProgressbar(false);
@@ -73,8 +76,8 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                     }
 
                     @Override
-                    public void onNext(Announcement announcement) {
-                        getMvpView().showAnnouncementDetail(announcement);
+                    public void onNext(DetailAnnouncement detailAnnouncement) {
+                        getMvpView().showAnnouncementDetail(detailAnnouncement);
 
                     }
                 });

@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Announcement;
+import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
 import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
@@ -33,27 +33,38 @@ import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Created by Sagar
+ */
 public class AnnouncementFragment extends Fragment implements RecyclerItemClickListner.OnItemClickListener, AnnouncementMvpView {
 
-    public  final String LOG_TAG = getClass().getSimpleName();
+    public final String LOG_TAG = getClass().getSimpleName();
 
-    @BindView(R.id.rv_movies) RecyclerView mRecyclerView;
+    @BindView(R.id.rv_movies)
+    RecyclerView mRecyclerView;
+
     @BindView(R.id.swipe_refresh)
     ScrollChildSwipeRefreshLayout mSwipeRefresh;
+
     @BindView(R.id.progress_circular)
     ProgressBar mProgressBar;
 
 
     private Announcements mAnnouncements;
+
     private DataManager dataManager;
-    private AnnouncementPresenter mMainPresenter;
+
+    private AnnouncementPresenter mAnnouncementPresenter;
+
     private AnnouncementAdapter mAnnouncementAdapter;
-    private String category;
+
     private int mPageNumber = 1;
-    private Announcement mAnnouncementDetail;
+
+    private DetailAnnouncement mAnnouncementDetail;
+
     @Override
     public void onItemClick(View childView, int position) {
-        mMainPresenter.loadAnnouncementDetails(mAnnouncements.getAnnouncement().get(position).getId());
+        mAnnouncementPresenter.loadAnnouncementDetails(mAnnouncements.getAnnouncement().get(position).getId());
     }
 
     @Override
@@ -62,14 +73,13 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     }
 
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mAnnouncements = new Announcements();
         dataManager = new DataManager();
-        mMainPresenter = new AnnouncementPresenter(dataManager);
+        mAnnouncementPresenter = new AnnouncementPresenter(dataManager);
     }
 
 
@@ -77,13 +87,13 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_announcement, container, false);
         ButterKnife.bind(this, rootView);
-        mMainPresenter.attachView(this);
+        mAnnouncementPresenter.attachView(this);
 
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         final ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if(ab!=null) {
+        if (ab != null) {
             ab.setHomeAsUpIndicator(R.drawable.ic_menu);
             ab.setDisplayHomeAsUpEnabled(true);
         }
@@ -105,11 +115,10 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
                 if (networkInfo != null && networkInfo.isConnected()) {
                     if (mSwipeRefresh.isRefreshing()) {
                         mPageNumber = 1;
-                        mMainPresenter.loadAllAnnouncement(mPageNumber);
+                        mAnnouncementPresenter.loadAllAnnouncement(mPageNumber);
                         Log.i(LOG_TAG, "Swipe Refresh");
                     }
-                }
-                else {
+                } else {
                     Log.i(LOG_TAG, "NO Internet Connection");
                     if (mSwipeRefresh.isRefreshing()) {
                         mSwipeRefresh.setRefreshing(false);
@@ -120,23 +129,20 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         });
 
 
-        mMainPresenter.loadAllAnnouncement(mPageNumber);
+        mAnnouncementPresenter.loadAllAnnouncement(mPageNumber);
 
         mRecyclerView.setOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int current_page) {
                 ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                if (networkInfo != null && networkInfo.isConnected())
-                {
+                if (networkInfo != null && networkInfo.isConnected()) {
                     mAnnouncements.getAnnouncement().add(null);
                     mAnnouncementAdapter.notifyItemInserted(mAnnouncements.getAnnouncement().size());
                     mPageNumber = ++mPageNumber;
-                    mMainPresenter.loadAllAnnouncement(mPageNumber);
+                    mAnnouncementPresenter.loadAllAnnouncement(mPageNumber);
                     Log.i(LOG_TAG, "Loading more");
-                }
-                else
-                {
+                } else {
                     Log.i(LOG_TAG, "Internet not available. Not loading more posts.");
                 }
             }
@@ -147,19 +153,18 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mMainPresenter.detachView();
+        mAnnouncementPresenter.detachView();
     }
-
 
 
     @Override
     public void showAllAnouncement(Announcements announcements) {
-        if(mPageNumber == 1){
+        if (mPageNumber == 1) {
             mAnnouncements = announcements;
             mAnnouncementAdapter = new AnnouncementAdapter(mAnnouncements.getAnnouncement());
             mRecyclerView.setAdapter(mAnnouncementAdapter);
-        }else {
-            mAnnouncements.getAnnouncement().remove(mAnnouncements.getAnnouncement().size()-1);
+        } else {
+            mAnnouncements.getAnnouncement().remove(mAnnouncements.getAnnouncement().size() - 1);
             mAnnouncements.getAnnouncement().addAll(announcements.getAnnouncement());
         }
 
@@ -172,23 +177,23 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
 
     @Override
     public void showProgressbar(boolean status) {
-        if (status){
+        if (status) {
             mProgressBar.setVisibility(View.VISIBLE);
-        }else
+        } else
             mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
-    public void showAnnouncementDetail(Announcement announcement) {
-        mAnnouncementDetail =announcement;
+    public void showAnnouncementDetail(DetailAnnouncement detailAnnouncement) {
+        mAnnouncementDetail = detailAnnouncement;
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.detail_annoucement_dialog_layout, null);
         dialogBuilder.setView(dialogView);
-        TextView title =(TextView) dialogView.findViewById(R.id.tvDialogTitle);
-        TextView date =(TextView) dialogView.findViewById(R.id.tvDialogDate);
-        TextView author=(TextView) dialogView.findViewById(R.id.tvDialogAuthor);
-        WebView text=(WebView) dialogView.findViewById(R.id.wvDialogText);
+        TextView title = ButterKnife.findById(dialogView, R.id.tvDialogTitle);
+        TextView date = ButterKnife.findById(dialogView, R.id.tvDialogDate);
+        TextView author = ButterKnife.findById(dialogView, R.id.tvDialogAuthor);
+        WebView text = ButterKnife.findById(dialogView, R.id.wvDialogText);
         text.loadDataWithBaseURL("", mAnnouncementDetail.getText(), "text/html", "utf-8", "");
         date.setText(mAnnouncementDetail.getDate());
         title.setText(mAnnouncementDetail.getTitle());

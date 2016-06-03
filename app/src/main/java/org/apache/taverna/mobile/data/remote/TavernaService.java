@@ -1,6 +1,6 @@
 package org.apache.taverna.mobile.data.remote;
 
-import org.apache.taverna.mobile.data.model.Announcement;
+import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.Announcements;
 
 import retrofit2.http.GET;
@@ -17,5 +17,5 @@ public interface TavernaService {
     Observable<Announcements> getAllAnnouncements(@Query("page") int pageNumber);
 
     @GET("/announcement.xml")
-    Observable<Announcement> getAnnouncement(@Query("id") String id);
+    Observable<DetailAnnouncement> getAnnouncement(@Query("id") String id);
 }

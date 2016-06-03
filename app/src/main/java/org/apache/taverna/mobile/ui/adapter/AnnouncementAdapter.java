@@ -9,26 +9,28 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.model.Announcements;
-
+import org.apache.taverna.mobile.data.model.Announcement;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Created by Sagar
+ */
 public class AnnouncementAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Announcements.Announcement> mAnnouncementList;
+    private List<Announcement> mAnnouncementList;
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
 
 
-    public AnnouncementAdapter( List<Announcements.Announcement> announcementList) {
+    public AnnouncementAdapter( List<Announcement> announcementList) {
         mAnnouncementList = announcementList;
     }
 
-    public void setAnnouncementList(List<Announcements.Announcement> announcementList) {
+    public void setAnnouncementList(List<Announcement> announcementList) {
         mAnnouncementList = announcementList;
     }
 
