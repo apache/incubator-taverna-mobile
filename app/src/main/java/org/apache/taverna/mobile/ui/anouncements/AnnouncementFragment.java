@@ -1,9 +1,7 @@
 package org.apache.taverna.mobile.ui.anouncements;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -23,11 +21,12 @@ import android.widget.TextView;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.Announcements;
+import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
 import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
 import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
 import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 
 import butterknife.BindView;
@@ -62,6 +61,8 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
 
     private DetailAnnouncement mAnnouncementDetail;
 
+    private ConnectionInfo mConnectionInfo;
+
     @Override
     public void onItemClick(View childView, int position) {
         mAnnouncementPresenter.loadAnnouncementDetails(mAnnouncements.getAnnouncement().get(position).getId());
@@ -80,6 +81,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         mAnnouncements = new Announcements();
         dataManager = new DataManager();
         mAnnouncementPresenter = new AnnouncementPresenter(dataManager);
+        mConnectionInfo =new ConnectionInfo(getContext());
     }
 
 
@@ -109,10 +111,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ConnectivityManager connMgr = (ConnectivityManager) getActivity()
-                        .getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                if (networkInfo != null && networkInfo.isConnected()) {
+                if (mConnectionInfo.isConnectingToInternet()) {
                     if (mSwipeRefresh.isRefreshing()) {
                         mPageNumber = 1;
                         mAnnouncementPresenter.loadAllAnnouncement(mPageNumber);
@@ -120,6 +119,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
                     }
                 } else {
                     Log.i(LOG_TAG, "NO Internet Connection");
+                    showErrorSnackBar();
                     if (mSwipeRefresh.isRefreshing()) {
                         mSwipeRefresh.setRefreshing(false);
                     }
@@ -134,9 +134,8 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         mRecyclerView.setOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int current_page) {
-                ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-                if (networkInfo != null && networkInfo.isConnected()) {
+
+                if (mConnectionInfo.isConnectingToInternet()) {
                     mAnnouncements.getAnnouncement().add(null);
                     mAnnouncementAdapter.notifyItemInserted(mAnnouncements.getAnnouncement().size());
                     mPageNumber = ++mPageNumber;
@@ -144,6 +143,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
                     Log.i(LOG_TAG, "Loading more");
                 } else {
                     Log.i(LOG_TAG, "Internet not available. Not loading more posts.");
+                    showErrorSnackBar();
                 }
             }
         });
@@ -205,5 +205,17 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    public void showErrorSnackBar(){
+        final Snackbar snackbar = Snackbar.make(mRecyclerView, "No Internet Connection", Snackbar.LENGTH_LONG);
+        snackbar.setAction("OK", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                snackbar.dismiss();
+            }
+        });
+
+        snackbar.show();
     }
 }

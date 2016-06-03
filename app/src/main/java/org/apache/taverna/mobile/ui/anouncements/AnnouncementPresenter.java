@@ -50,6 +50,8 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                     @Override
                     public void onError(Throwable e) {
                         Log.d(LOG_TAG,e.getMessage());
+                        getMvpView().showProgressbar(false);
+                        getMvpView().showErrorSnackBar();
                     }
 
                     @Override
@@ -73,6 +75,8 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                     @Override
                     public void onError(Throwable e) {
                         Log.d(LOG_TAG,e.getMessage());
+                        getMvpView().showProgressbar(false);
+                        getMvpView().showErrorSnackBar();
                     }
 
                     @Override
