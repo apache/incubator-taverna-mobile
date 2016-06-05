@@ -1,5 +1,6 @@
 package org.apache.taverna.mobile.ui.anouncements;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -48,6 +50,9 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     @BindView(R.id.progress_circular)
     ProgressBar mProgressBar;
 
+    private  AlertDialog alertDialog;
+
+    private ProgressDialog dialog;
 
     private Announcements mAnnouncements;
 
@@ -65,6 +70,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
 
     @Override
     public void onItemClick(View childView, int position) {
+        showWaitProgress(true);
         mAnnouncementPresenter.loadAnnouncementDetails(mAnnouncements.getAnnouncement().get(position).getId());
     }
 
@@ -128,7 +134,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
             }
         });
 
-
+        showProgressbar(true);
         mAnnouncementPresenter.loadAllAnnouncement(mPageNumber);
 
         mRecyclerView.setOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
@@ -194,11 +200,18 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         TextView date = ButterKnife.findById(dialogView, R.id.tvDialogDate);
         TextView author = ButterKnife.findById(dialogView, R.id.tvDialogAuthor);
         WebView text = ButterKnife.findById(dialogView, R.id.wvDialogText);
+        Button buttonOk=ButterKnife.findById(dialogView, R.id.bDialogOK);
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
         text.loadDataWithBaseURL("", mAnnouncementDetail.getText(), "text/html", "utf-8", "");
         date.setText(mAnnouncementDetail.getDate());
         title.setText(mAnnouncementDetail.getTitle());
         author.setText(mAnnouncementDetail.getAuthor().getContent());
-        AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog = dialogBuilder.create();
         alertDialog.show();
     }
 
@@ -217,5 +230,14 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         });
 
         snackbar.show();
+    }
+
+    @Override
+    public void showWaitProgress(boolean b) {
+        if(b){
+           dialog  = ProgressDialog.show(getContext(), "Loading", "Please wait...", true);
+        }else{
+            dialog.dismiss();
+        }
     }
 }

@@ -37,7 +37,7 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
     }
 
     public void loadAllAnnouncement(int pageNumber){
-        getMvpView().showProgressbar(true);
+
         mSubscriptions = mDataManager.getAllAnnouncement(pageNumber)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -49,7 +49,7 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(LOG_TAG,e.getMessage());
+//                        Log.d(LOG_TAG,e.getMessage());
                         getMvpView().showProgressbar(false);
                         getMvpView().showErrorSnackBar();
                     }
@@ -62,20 +62,20 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                 });
     }
     public void loadAnnouncementDetails(String id){
-        getMvpView().showProgressbar(true);
+
         mSubscriptions = mDataManager.getAnnouncementDetail(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<DetailAnnouncement>() {
                     @Override
                     public void onCompleted() {
-                        getMvpView().showProgressbar(false);
+                        getMvpView().showWaitProgress(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.d(LOG_TAG,e.getMessage());
-                        getMvpView().showProgressbar(false);
+                        getMvpView().showWaitProgress(false);
                         getMvpView().showErrorSnackBar();
                     }
 

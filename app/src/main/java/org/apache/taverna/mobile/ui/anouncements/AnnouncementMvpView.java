@@ -12,5 +12,6 @@ public interface AnnouncementMvpView extends MvpView {
     void showAllAnouncement(Announcements announcements);
     void showProgressbar(boolean b);
     void showErrorSnackBar();
+    void showWaitProgress(boolean b);
     void showAnnouncementDetail(DetailAnnouncement detailAnnouncement);
 }
