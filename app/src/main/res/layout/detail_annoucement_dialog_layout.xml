@@ -16,18 +16,24 @@
         android:text="Title"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
-
+    <TextView
+        android:id="@+id/tvDialogAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Author"
+        android:textSize="15sp" />
     <WebView
         android:id="@+id/wvDialogText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
 
     <RelativeLayout
 
         android:id="@+id/RelativeLayout01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="24dp"
+        android:paddingBottom="8dp"
         android:paddingTop="4dp">
 
         <TextView
@@ -39,15 +45,6 @@
             android:text="Date"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/tvDialogAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:text="Author"
-            android:textSize="15sp" />
-
         <Button
             android:id="@+id/bDialogOK"
             android:layout_width="wrap_content"
@@ -56,7 +53,7 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/tvDialogDate"
             android:layout_margin="8dp"
-            android:background="@android:color/white"
+            android:background="@drawable/dialog_button"
             android:text="OK"
             android:textColor="@color/colorPrimary" />
     </RelativeLayout>
