@@ -29,7 +29,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -44,14 +43,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.RelativeLayout;
 import android.widget.TableLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.fragments.Workflow_viewpager;
+import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.utils.WorkflowOpen;
 
 import java.io.File;
@@ -126,6 +124,17 @@ public class DashboardMainActivity extends AppCompatActivity
 							case R.id.nav_dashboard:
 
 								fragment = new Workflow_viewpager();
+								fragmentManager.beginTransaction()
+										.replace(R.id.frame_container, fragment)
+										.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+										.commit();
+
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+							case R.id.nav_announcement:
+
+								fragment = new AnnouncementFragment();
 								fragmentManager.beginTransaction()
 										.replace(R.id.frame_container, fragment)
 										.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
