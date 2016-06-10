@@ -1,14 +1,14 @@
 package org.apache.taverna.mobile.utils;
 
+import org.apache.taverna.mobile.activities.RunResult;
+import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
-
-import org.apache.taverna.mobile.activities.RunResult;
-import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -34,8 +34,8 @@ public class RunTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-            progressDialog.setMessage("Creating new run for the workflow");
-            progressDialog.show();
+        progressDialog.setMessage("Creating new run for the workflow");
+        progressDialog.show();
     }
 
     @Override
@@ -45,8 +45,10 @@ public class RunTask extends AsyncTask<String, Void, String> {
             TavernaPlayerAPI tavernaPlayerAPI = new TavernaPlayerAPI();
             URL workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_URL);
             HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
-            String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" + tavernaPlayerAPI.getPlayerUserPassword(this.context);
-            String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64.DEFAULT);
+            String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" +
+                    tavernaPlayerAPI.getPlayerUserPassword(this.context);
+            String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64
+                    .DEFAULT);
 
             connection.setRequestProperty("Authorization", basicAuth);
             connection.setRequestProperty("Accept", "application/json");
@@ -57,7 +59,8 @@ public class RunTask extends AsyncTask<String, Void, String> {
             connection.connect(); //send request
 
             DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
-            dos.writeBytes(params[0]);//write post data which is a formatted json data representing inputs to a run
+            dos.writeBytes(params[0]); //write post data which is a formatted json data
+            // representing inputs to a run
 
             dos.flush();
             dos.close();
@@ -75,7 +78,7 @@ public class RunTask extends AsyncTask<String, Void, String> {
 
             return sb.toString();
 
-        }catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
         return sb.toString();
@@ -84,7 +87,7 @@ public class RunTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         Log.i("RUN OutPut", s);
-            progressDialog.dismiss();
+        progressDialog.dismiss();
         Intent runIntent = new Intent();
         runIntent.setClass(this.context, RunResult.class);
         runIntent.putExtra("runresult", s);

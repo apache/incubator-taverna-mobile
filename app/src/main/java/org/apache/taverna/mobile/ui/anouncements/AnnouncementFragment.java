@@ -18,6 +18,16 @@
  */
 package org.apache.taverna.mobile.ui.anouncements;
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Announcements;
+import org.apache.taverna.mobile.data.model.DetailAnnouncement;
+import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
+import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -39,21 +49,12 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Announcements;
-import org.apache.taverna.mobile.data.model.DetailAnnouncement;
-import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
-import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class AnnouncementFragment extends Fragment implements RecyclerItemClickListner.OnItemClickListener, AnnouncementMvpView {
+public class AnnouncementFragment extends Fragment implements RecyclerItemClickListner
+        .OnItemClickListener, AnnouncementMvpView {
 
     public final String LOG_TAG = getClass().getSimpleName();
 
@@ -66,7 +67,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     @BindView(R.id.progress_circular)
     ProgressBar mProgressBar;
 
-    private  AlertDialog alertDialog;
+    private AlertDialog alertDialog;
 
     private ProgressDialog dialog;
 
@@ -87,7 +88,8 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     @Override
     public void onItemClick(View childView, int position) {
         showWaitProgress(true);
-        mAnnouncementPresenter.loadAnnouncementDetails(mAnnouncements.getAnnouncement().get(position).getId());
+        mAnnouncementPresenter.loadAnnouncementDetails(mAnnouncements.getAnnouncement().get
+                (position).getId());
     }
 
     @Override
@@ -103,12 +105,13 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         mAnnouncements = new Announcements();
         dataManager = new DataManager();
         mAnnouncementPresenter = new AnnouncementPresenter(dataManager);
-        mConnectionInfo =new ConnectionInfo(getContext());
+        mConnectionInfo = new ConnectionInfo(getContext());
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_announcement, container, false);
         ButterKnife.bind(this, rootView);
         mAnnouncementPresenter.attachView(this);
@@ -129,7 +132,8 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        mSwipeRefresh.setColorSchemeResources(R.color.colorAccent, R.color.colorAccent, R.color.colorPrimary);
+        mSwipeRefresh.setColorSchemeResources(R.color.colorAccent, R.color.colorAccent, R.color
+                .colorPrimary);
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -159,7 +163,8 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
 
                 if (mConnectionInfo.isConnectingToInternet()) {
                     mAnnouncements.getAnnouncement().add(null);
-                    mAnnouncementAdapter.notifyItemInserted(mAnnouncements.getAnnouncement().size());
+                    mAnnouncementAdapter.notifyItemInserted(mAnnouncements.getAnnouncement().size
+                            ());
                     mPageNumber = ++mPageNumber;
                     mAnnouncementPresenter.loadAllAnnouncement(mPageNumber);
                     Log.i(LOG_TAG, "Loading more");
@@ -216,7 +221,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         TextView date = ButterKnife.findById(dialogView, R.id.tvDialogDate);
         TextView author = ButterKnife.findById(dialogView, R.id.tvDialogAuthor);
         WebView text = ButterKnife.findById(dialogView, R.id.wvDialogText);
-        Button buttonOk=ButterKnife.findById(dialogView, R.id.bDialogOK);
+        Button buttonOk = ButterKnife.findById(dialogView, R.id.bDialogOK);
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -236,8 +241,9 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         super.onResume();
     }
 
-    public void showErrorSnackBar(){
-        final Snackbar snackbar = Snackbar.make(mRecyclerView, "No Internet Connection", Snackbar.LENGTH_LONG);
+    public void showErrorSnackBar() {
+        final Snackbar snackbar = Snackbar.make(mRecyclerView, "No Internet Connection", Snackbar
+                .LENGTH_LONG);
         snackbar.setAction("OK", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -250,9 +256,9 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
 
     @Override
     public void showWaitProgress(boolean b) {
-        if(b){
-           dialog  = ProgressDialog.show(getContext(), "Loading", "Please wait...", true);
-        }else{
+        if (b) {
+            dialog = ProgressDialog.show(getContext(), "Loading", "Please wait...", true);
+        } else {
             dialog.dismiss();
         }
     }

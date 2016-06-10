@@ -1,7 +1,7 @@
 package org.apache.taverna.mobile.data;
 
-import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.Announcements;
+import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.remote.BaseApiManager;
 
 import rx.Observable;
@@ -13,22 +13,20 @@ public class DataManager {
 
     public BaseApiManager mBaseApiManager = new BaseApiManager();
 
-    public DataManager(){
+    public DataManager() {
     }
 
     /**
-     *
      * @return List of all Announcement
      */
-    public Observable<Announcements> getAllAnnouncement(int pageNumber){
+    public Observable<Announcements> getAllAnnouncement(int pageNumber) {
         return mBaseApiManager.getTavernaApi().getAllAnnouncements(pageNumber);
     }
 
     /**
-     *
      * @return Detail of Announcement
      */
-    public Observable<DetailAnnouncement> getAnnouncementDetail(String id){
+    public Observable<DetailAnnouncement> getAnnouncementDetail(String id) {
         return mBaseApiManager.getTavernaApi().getAnnouncement(id);
     }
 }

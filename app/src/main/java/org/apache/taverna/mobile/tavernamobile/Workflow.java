@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.tavernamobile;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -24,11 +24,11 @@ package org.apache.taverna.mobile.tavernamobile;
  * under the License.
  */
 
+import org.apache.taverna.mobile.R;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
-import org.apache.taverna.mobile.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,48 +45,56 @@ public class Workflow {
     private String workflow_datecreated, workflow_datemodified;
     private Bitmap workflow_author_bitmap;
     private WorkflowComponent workflowComponent;
-    private String workflow_remote_url; //provides a link to download the workflow. Equivalent to content-uri in the xml form
-    private String workflow_web_url; //a string containing the workflow resource that can be loaded in  browser
-    private String workflow_details_url;//used to refer to the details of the workflow
+    private String workflow_remote_url; //provides a link to download the workflow. Equivalent to
+    // content-uri in the xml form
+    private String workflow_web_url; //a string containing the workflow resource that can be
+    // loaded in  browser
+    private String workflow_details_url; //used to refer to the details of the workflow
     private List<Runs> workflow_runs;
     private int workflow_input;
     private long id;
-    private String workflow_uploader;//indicate the user who uploaded the workflow
+    private String workflow_uploader; //indicate the user who uploaded the workflow
     private String workflow_Type; //describes whether it is a type 1 or 2 workflow
     private String workflow_preview; //a url to a preview image of the workflow
-    private String workflow_thumb_big; //a url to a full scale image of the workflow. I Will usually an SVG because the it is available for most of the workflows
+    private String workflow_thumb_big; //a url to a full scale image of the workflow. I Will
+    // usually an SVG because the it is available for most of the workflows
     private String workflow_licence_type; //describes a type of licensing for the workflow
-    private String workflow_content_type;//specifies a content type for the workflow;
-    private List<String> workflow_tags;//provides a list of string tags that could be used to index the workflow for searches
-    private String workflow_versions;//a list of version for the workflow uploaded over time
-    private List<String> workflow_credits;//key contributors to the workflow
-
-    public static enum workflow_input_type{ TYPE_INT, TYPE_STRING, TYPE_OBJECT};
+    private String workflow_content_type; //specifies a content type for the workflow;
+    private List<String> workflow_tags; //provides a list of string tags that could be used to
+    // index the workflow for searches
+    private String workflow_versions; //a list of version for the workflow uploaded over time
+    private List<String> workflow_credits; //key contributors to the workflow
 
     public Workflow() {
     }
+
+    ;
 
     public Workflow(Context context) {
         this.context = context;
         this.workflow_runs = new ArrayList<Runs>();
     }
-    public Workflow(String author, String description, long id, String url){
+
+    public Workflow(String author, String description, long id, String url) {
         this.workflow_author = author;
-        this.workflow_author_bitmap = null;//BitmapFactory.decodeResource(getResources(), R.drawable.ic_userprofile);
-        this.workflow_description =description;
-        this.workflow_input=1;
+        this.workflow_author_bitmap = null; //BitmapFactory.decodeResource(getResources(), R
+        // .drawable.ic_userprofile);
+        this.workflow_description = description;
+        this.workflow_input = 1;
         this.id = id;
         this.workflow_remote_url = url;
         this.workflow_runs = new ArrayList<Runs>();
     }
 
-    public Workflow(Context ctx, String title, String author, String description, long id, String url){
+    public Workflow(Context ctx, String title, String author, String description, long id, String
+            url) {
         this.context = ctx;
         this.workflow_author = author;
-        this.workflow_author_bitmap = BitmapFactory.decodeResource(this.context.getResources(), R.drawable.ic_userprofile);
-        this.workflow_description =description;
-        this.workflow_title =title;
-        this.workflow_input=1;
+        this.workflow_author_bitmap = BitmapFactory.decodeResource(this.context.getResources(), R
+                .drawable.ic_userprofile);
+        this.workflow_description = description;
+        this.workflow_title = title;
+        this.workflow_input = 1;
         this.id = id;
         this.workflow_remote_url = url;
         this.workflow_runs = new ArrayList<Runs>();
@@ -104,6 +112,10 @@ public class Workflow {
         return this.workflow_datecreated;
     }
 
+    public void setWorkflow_datecreated(String workflow_datecreated) {
+        this.workflow_datecreated = workflow_datecreated;
+    }
+
     public String getWorkflow_remote_url() {
         return this.workflow_remote_url;
     }
@@ -116,16 +128,16 @@ public class Workflow {
         return this.workflow_details_url;
     }
 
+    public void setWorkflow_details_url(String workflow_details_url) {
+        this.workflow_details_url = workflow_details_url;
+    }
+
     public User getUploader() {
         return this.uploader;
     }
 
     public void setUploader(User uploader) {
         this.uploader = uploader;
-    }
-
-    public void setWorkflow_details_url(String workflow_details_url) {
-        this.workflow_details_url = workflow_details_url;
     }
 
     public String getPolicy() {
@@ -144,10 +156,6 @@ public class Workflow {
         this.about = about;
     }
 
-    public void setWorkflow_datecreated(String workflow_datecreated) {
-        this.workflow_datecreated = workflow_datecreated;
-    }
-
     public String getWorkflow_datemodified() {
         return this.workflow_datemodified;
     }
@@ -164,7 +172,7 @@ public class Workflow {
         this.workflow_runs = workflow_runs;
     }
 
-    public void addWorkflowRun(Runs runs){ //adds a run to this workflow
+    public void addWorkflowRun(Runs runs) { //adds a run to this workflow
         this.workflow_runs.add(runs);
     }
 
@@ -176,44 +184,44 @@ public class Workflow {
         this.workflow_input = workflow_input;
     }
 
-    public workflow_input_type getInputType(){
-        return workflow_input_type.TYPE_INT;
+    public WorkflowInputType getInputType() {
+        return WorkflowInputType.TYPE_INT;
     }
 
     public String getWorkflow_author() {
         return this.workflow_author;
     }
 
-    public String getWorkflow_description() {
-        return this.workflow_description;
-    }
-
-    public String getWorkflow_title() {
-        return this.workflow_title;
-    }
-
-    public Bitmap getWorkflow_author_bitmap() {
-        return this.workflow_author_bitmap;
-    }
-
-    public WorkflowComponent getWorkflowComponent() {
-        return this.workflowComponent;
-    }
-
     public void setWorkflow_author(String workflow_author) {
         this.workflow_author = workflow_author;
     }
 
-    public void setWorkflow_title(String workflow_title) {
-        this.workflow_title = workflow_title;
+    public String getWorkflow_description() {
+        return this.workflow_description;
     }
 
     public void setWorkflow_description(String workflow_description) {
         this.workflow_description = workflow_description;
     }
 
+    public String getWorkflow_title() {
+        return this.workflow_title;
+    }
+
+    public void setWorkflow_title(String workflow_title) {
+        this.workflow_title = workflow_title;
+    }
+
+    public Bitmap getWorkflow_author_bitmap() {
+        return this.workflow_author_bitmap;
+    }
+
     public void setWorkflow_author_bitmap(Bitmap workflow_author_bitmap) {
         this.workflow_author_bitmap = workflow_author_bitmap;
+    }
+
+    public WorkflowComponent getWorkflowComponent() {
+        return this.workflowComponent;
     }
 
     public void setWorkflowComponent(WorkflowComponent workflowComponent) {
@@ -304,6 +312,8 @@ public class Workflow {
     public String toString() {
         return this.workflow_title;
     }
+
+    public static enum WorkflowInputType { TYPE_INT, TYPE_STRING, TYPE_OBJECT }
 }
 /* Use the sample code if it becomes necessary to pass this objects amongst activities
 / simple class that just has one member property as an example
@@ -324,7 +334,8 @@ public class Workflow implements Parcelable {
         out.writeInt(mData);
     }
 
-// this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+// this is used to regenerate your object. All Parcelables must have a CREATOR that implements
+these two methods
 public static final Parcelable.Creator<Workflow> CREATOR = new Parcelable.Creator<Workflow>() {
     public Workflow createFromParcel(Parcel in) {
         return new Workflow(in);

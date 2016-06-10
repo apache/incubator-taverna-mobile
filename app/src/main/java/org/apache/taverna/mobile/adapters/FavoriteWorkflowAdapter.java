@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.adapters;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -24,6 +24,10 @@ package org.apache.taverna.mobile.adapters;
  * under the License.
  */
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.utils.WorkflowDB;
+import org.json.JSONException;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -35,14 +39,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.utils.Workflow_DB;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,24 +49,27 @@ import java.util.List;
 /**
  * Created by Larry Akah on 6/9/15.
  */
-public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkflowAdapter.FViewHolder> {
+public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkflowAdapter
+        .FViewHolder> {
 
+    public WorkflowDB favDB;
     private Context context;
     private List<ArrayList<Object>> dataSet;
-    public Workflow_DB favDB;
 
     public FavoriteWorkflowAdapter(Context c, List<ArrayList<Object>> data) {
         context = c;
         dataSet = data;
-        favDB = new Workflow_DB(context, WorkflowAdapter.WORKFLOW_FAVORITE_KEY);
+        favDB = new WorkflowDB(context, WorkflowAdapter.WORKFLOW_FAVORITE_KEY);
     }
 
     @Override
     public FViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View itemview = LayoutInflater.from(context).inflate(R.layout.favorite_item_layout, viewGroup, false);
+        View itemview = LayoutInflater.from(context).inflate(R.layout.favorite_item_layout,
+                viewGroup, false);
         FViewHolder vh = new FViewHolder(itemview);
         return vh;
     }
+
     /**
      * Register a new observer to listen for data changes.
      * <p/>
@@ -77,17 +79,20 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
      * "something changed"} event if more specific data is not available.</p>
      * <p/>
      * <p>Components registering observers with an adapter are responsible for
-     * {@link #unregisterAdapterDataObserver(android.support.v7.widget.RecyclerView.AdapterDataObserver)
+     * {@link #unregisterAdapterDataObserver(android.support.v7.widget.RecyclerView
+     * .AdapterDataObserver)
      * unregistering} those observers when finished.</p>
      *
      * @param observer Observer to register
-     * @see #unregisterAdapterDataObserver(android.support.v7.widget.RecyclerView.AdapterDataObserver)
+     * @see #unregisterAdapterDataObserver(android.support.v7.widget.RecyclerView
+     * .AdapterDataObserver)
      */
     @Override
     public void registerAdapterDataObserver(RecyclerView.AdapterDataObserver observer) {
         super.registerAdapterDataObserver(observer);
         //observer.onChanged();
     }
+
     /**
      * Unregister an observer currently listening for data changes.
      * <p/>
@@ -115,13 +120,14 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
             @Override
             public void onClick(View view) {
                 try {
-                    Toast.makeText(context, String.format("%s", "Removed "),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, String.format("%s", "Removed "), Toast.LENGTH_SHORT)
+                            .show();
                     //removeMarkedWorkflow(String.valueOf(data.get(0)));
                     favDB.delete(String.valueOf(data.get(0)));
                     notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
 
@@ -132,27 +138,32 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
             public void onClick(View view) {
                 Dialog d = new Dialog(context);
                 TextView textView = new TextView(context);
-                String text = "Author -> "+ (String) data.get(6) + "\nTitle: "+data.get(2)+"\nDescription\n"+data.get(3);
+                String text = "Author -> " + (String) data.get(6) + "\nTitle: " + data.get(2) +
+                        "\nDescription\n" + data.get(3);
                 textView.setText(text);
                 textView.setTextSize(22);
                 textView.setTextColor(Color.BLACK);
-                d.setTitle(""+data.get(2));
+                d.setTitle("" + data.get(2));
                 d.setContentView(textView);
                 d.show();
             }
         });
     }
+
     //remove a workflow from the marked state
-    private void removeMarkedWorkflow(String strToRemove){
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        char[] charsequence = sharedPreferences.getString(WorkflowAdapter.FAVORITE_LIST_DB, "").toCharArray();
-        for(int i=0; i<charsequence.length; i++){
-            if(charsequence[i] == strToRemove.charAt(0)){
+    private void removeMarkedWorkflow(String strToRemove) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences
+                (context);
+        char[] charsequence = sharedPreferences.getString(WorkflowAdapter.FAVORITE_LIST_DB, "")
+                .toCharArray();
+        for (int i = 0; i < charsequence.length; i++) {
+            if (charsequence[i] == strToRemove.charAt(0)) {
                 charsequence[i] = '0';
                 break;
             }
         }
-        sharedPreferences.edit().putString(WorkflowAdapter.FAVORITE_LIST_DB, charsequence.toString()).apply();
+        sharedPreferences.edit().putString(WorkflowAdapter.FAVORITE_LIST_DB, charsequence
+                .toString()).apply();
     }
 
     @Override
@@ -160,23 +171,24 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
         return dataSet.size();
     }
 
-    public ArrayList<Object> getDataItemAt(int position){
-        return dataSet.size() == 0? null: dataSet.get(position);
+    public ArrayList<Object> getDataItemAt(int position) {
+        return dataSet.size() == 0 ? null : dataSet.get(position);
     }
 
     public class FViewHolder extends RecyclerView.ViewHolder {
 
         public final ImageView favorite_thumb;
-        public final TextView author, title, dateMarked;// dateAdd;
+        public final TextView author, title, dateMarked; // dateAdd;
         public final FloatingActionButton btn_delete;
         public final Button btn_view_fav;
+
         public FViewHolder(View itemView) {
             super(itemView);
             favorite_thumb = (ImageView) itemView.findViewById(R.id.author_profile_image);
             author = (TextView) itemView.findViewById(R.id.author);
             title = (TextView) itemView.findViewById(R.id.favorite_title);
             dateMarked = (TextView) itemView.findViewById(R.id.date_set);
-           btn_delete = (FloatingActionButton) itemView.findViewById(R.id.favoriteButtonDelete);
+            btn_delete = (FloatingActionButton) itemView.findViewById(R.id.favoriteButtonDelete);
             btn_view_fav = (Button) itemView.findViewById(R.id.buttonOpenFavorite);
         }
     }

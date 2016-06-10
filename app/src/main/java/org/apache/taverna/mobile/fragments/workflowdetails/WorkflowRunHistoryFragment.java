@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.fragments.workflowdetails;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -24,6 +24,12 @@ package org.apache.taverna.mobile.fragments.workflowdetails;
  * under the License.
  */
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.adapters.RunAdapter;
+import org.apache.taverna.mobile.tavernamobile.Runs;
+import org.apache.taverna.mobile.tavernamobile.Workflow;
+import org.apache.taverna.mobile.utils.DetailsLoader;
+
 import android.app.LoaderManager;
 import android.app.ProgressDialog;
 import android.content.Loader;
@@ -36,12 +42,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.adapters.RunAdapter;
-import org.apache.taverna.mobile.tavernamobile.Runs;
-import org.apache.taverna.mobile.tavernamobile.Workflow;
-import org.apache.taverna.mobile.utils.DetailsLoader;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,17 +50,21 @@ import java.util.List;
  * Use the {@link WorkflowRunHistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WorkflowRunHistoryFragment extends Fragment implements LoaderManager.LoaderCallbacks<Workflow>{
+public class WorkflowRunHistoryFragment extends Fragment implements LoaderManager
+        .LoaderCallbacks<Workflow> {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM2 = "param2";
+    private static String workflowID; //represents a run name that matches the given workflow
+    List<Runs> runsList;
     private ProgressDialog progressDialog;
     private RecyclerView mRecyclerView;
     private TextView emptyRunHistoryTextView;
     private RunAdapter runAdapter;
-	List<Runs> runsList;
 
-    private static String workflowID; //represents a run name that matches the given workflow
+    public WorkflowRunHistoryFragment() {
+        // Required empty public constructor
+    }
 
     /**
      * Use this factory method to create a new instance of
@@ -78,14 +82,10 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
         return fragment;
     }
 
-    public WorkflowRunHistoryFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-	    runsList = new ArrayList<Runs>();
+        runsList = new ArrayList<Runs>();
 /*        runsList.add(new Runs("Test Run1 ",
                 SimpleDateFormat.getDateTimeInstance().format(new Date()).toString()
                 ,SimpleDateFormat.getDateTimeInstance().format(new Date()).toString(),"failed"));
@@ -97,21 +97,21 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
         progressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
         progressDialog.setCancelable(true);
 
-        runAdapter = new RunAdapter(getActivity(),runsList );
-       // System.out.println("WorkflowTitle->Run->"+workflowID);
+        runAdapter = new RunAdapter(getActivity(), runsList);
+        // System.out.println("WorkflowTitle->Run->"+workflowID);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =inflater.inflate(R.layout.fragment_workflow_run_history, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_workflow_run_history, container, false);
         emptyRunHistoryTextView = (TextView) rootView.findViewById(android.R.id.empty);
         mRecyclerView = (RecyclerView) rootView.findViewById(android.R.id.list);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-	    mRecyclerView.setAdapter(runAdapter);
-        getActivity().getLoaderManager().initLoader(0,savedInstanceState,this).forceLoad();
+        mRecyclerView.setAdapter(runAdapter);
+        getActivity().getLoaderManager().initLoader(0, savedInstanceState, this).forceLoad();
         return rootView;
     }
 
@@ -125,7 +125,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
     public void onResume() {
         super.onResume();
 
-       // mRecyclerView.setScrollingTouchSlop(RecyclerView.TOUCH_SLOP_PAGING);
+        // mRecyclerView.setScrollingTouchSlop(RecyclerView.TOUCH_SLOP_PAGING);
         //getActivity().getLoaderManager().initLoader(1,null,this);
     }
 
@@ -138,30 +138,30 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
     public Loader<Workflow> onCreateLoader(int i, Bundle bundle) {
         //progressDialog.show();
         return new DetailsLoader(getActivity(),
-                DetailsLoader.LOAD_TYPE.TYPE_RUN_HISTORY,
+                DetailsLoader.LoadType.TYPE_RUN_HISTORY,
                 workflowID);
     }
 
     @Override
     public void onLoadFinished(Loader<Workflow> workflowLoader, Workflow workflow) {
 
-    try {
-        if (workflow.getWorkflow_runs() !=null | workflow.getWorkflow_runs().size() !=0) {
+        try {
+            if (workflow.getWorkflow_runs() != null | workflow.getWorkflow_runs().size() != 0) {
 
-	        runAdapter.setRunList(workflow.getWorkflow_runs());
-	        mRecyclerView.setAdapter(runAdapter);
-	        mRecyclerView.setVisibility(View.VISIBLE);
-	        emptyRunHistoryTextView.setVisibility(View.GONE);
+                runAdapter.setRunList(workflow.getWorkflow_runs());
+                mRecyclerView.setAdapter(runAdapter);
+                mRecyclerView.setVisibility(View.VISIBLE);
+                emptyRunHistoryTextView.setVisibility(View.GONE);
 
-        } else {
-	        mRecyclerView.setVisibility(View.GONE);
-	        emptyRunHistoryTextView.setVisibility(View.VISIBLE);
+            } else {
+                mRecyclerView.setVisibility(View.GONE);
+                emptyRunHistoryTextView.setVisibility(View.VISIBLE);
+            }
+        } catch (NullPointerException np) {
+            np.printStackTrace();
         }
-    }catch(NullPointerException np){
-        np.printStackTrace();
-    }
 
-       // progressDialog.dismiss();
+        // progressDialog.dismiss();
     }
 
     @Override

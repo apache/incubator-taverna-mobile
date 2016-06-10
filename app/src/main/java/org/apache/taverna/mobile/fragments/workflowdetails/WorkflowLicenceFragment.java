@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.fragments.workflowdetails;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -24,13 +24,13 @@ package org.apache.taverna.mobile.fragments.workflowdetails;
  * under the License.
  */
 
+import org.apache.taverna.mobile.R;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import org.apache.taverna.mobile.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +46,10 @@ public class WorkflowLicenceFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    public WorkflowLicenceFragment() {
+        // Required empty public constructor
+    }
 
     /**
      * Use this factory method to create a new instance of
@@ -63,10 +67,6 @@ public class WorkflowLicenceFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public WorkflowLicenceFragment() {
-        // Required empty public constructor
     }
 
     @Override

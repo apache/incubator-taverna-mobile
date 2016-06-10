@@ -1,29 +1,47 @@
 package org.apache.taverna.mobile.data.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Text;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by Sagar
  */
 public class Announcement implements Parcelable {
 
+    public static final Parcelable.Creator<Announcement> CREATOR = new Parcelable
+            .Creator<Announcement>() {
+        @Override
+        public Announcement createFromParcel(Parcel source) {
+            return new Announcement(source);
+        }
+
+        @Override
+        public Announcement[] newArray(int size) {
+            return new Announcement[size];
+        }
+    };
     @Attribute(name = "resource", required = false)
     String resource;
-
-
     @Attribute(name = "uri", required = false)
     String uri;
-
-
     @Attribute(name = "id", required = false)
     String id;
-
     @Text
     String content;
+
+    public Announcement() {
+    }
+
+
+    protected Announcement(Parcel in) {
+        this.resource = in.readString();
+        this.uri = in.readString();
+        this.id = in.readString();
+        this.content = in.readString();
+    }
 
     public String getContent() {
         return content;
@@ -33,7 +51,6 @@ public class Announcement implements Parcelable {
         this.content = content;
     }
 
-
     public String getResource() {
         return this.resource;
     }
@@ -41,7 +58,6 @@ public class Announcement implements Parcelable {
     public void setResource(String _value) {
         this.resource = _value;
     }
-
 
     public String getUri() {
         return this.uri;
@@ -51,7 +67,6 @@ public class Announcement implements Parcelable {
         this.uri = _value;
     }
 
-
     public String getId() {
         return this.id;
     }
@@ -59,7 +74,6 @@ public class Announcement implements Parcelable {
     public void setId(String _value) {
         this.id = _value;
     }
-
 
     @Override
     public int describeContents() {
@@ -73,26 +87,4 @@ public class Announcement implements Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.content);
     }
-
-    public Announcement() {
-    }
-
-    protected Announcement(Parcel in) {
-        this.resource = in.readString();
-        this.uri = in.readString();
-        this.id = in.readString();
-        this.content = in.readString();
-    }
-
-    public static final Parcelable.Creator<Announcement> CREATOR = new Parcelable.Creator<Announcement>() {
-        @Override
-        public Announcement createFromParcel(Parcel source) {
-            return new Announcement(source);
-        }
-
-        @Override
-        public Announcement[] newArray(int size) {
-            return new Announcement[size];
-        }
-    };
 }

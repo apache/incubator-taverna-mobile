@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.adapters;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -23,6 +23,10 @@ package org.apache.taverna.mobile.adapters;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.tavernamobile.Runs;
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,9 +34,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.tavernamobile.Runs;
 
 import java.util.List;
 
@@ -50,7 +51,9 @@ public class RunAdapter extends RecyclerView.Adapter<RunAdapter.RunHolder> {
     }
 
     /**
-     * Called when RecyclerView needs a new {@link android.support.v7.widget.RecyclerView.ViewHolder} of the given type to represent
+     * Called when RecyclerView needs a new
+     * {@link android.support.v7.widget.RecyclerView.ViewHolder}
+     * of the given type to represent
      * an item.
      * <p/>
      * This new ViewHolder should be constructed with a new View that can represent the items
@@ -70,13 +73,15 @@ public class RunAdapter extends RecyclerView.Adapter<RunAdapter.RunHolder> {
      */
     @Override
     public RunHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.workflow_run_item,parent, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.workflow_run_item, parent, false);
         return new RunHolder(v);
     }
 
     /**
      * Called by RecyclerView to display the data at the specified position. This method
-     * should update the contents of the {@link android.support.v7.widget.RecyclerView.ViewHolder#itemView} to reflect the item at
+     * should update the contents of the
+     * {@link android.support.v7.widget.RecyclerView.ViewHolder#itemView}
+     * to reflect the item at
      * the given position.
      * <p/>
      * Note that unlike {@link android.widget.ListView}, RecyclerView will not call this
@@ -84,7 +89,9 @@ public class RunAdapter extends RecyclerView.Adapter<RunAdapter.RunHolder> {
      * is invalidated or the new position cannot be determined. For this reason, you should only
      * use the <code>position</code> parameter while acquiring the related data item inside this
      * method and should not keep a copy of it. If you need the position of an item later on
-     * (e.g. in a click listener), use {@link android.support.v7.widget.RecyclerView.ViewHolder#getAdapterPosition()} which will have
+     * (e.g. in a click listener), use
+     * {@link android.support.v7.widget.RecyclerView.ViewHolder#getAdapterPosition()}
+     * which will have
      * the updated adapter position.
      *
      * @param holder   The ViewHolder which should be updated to represent the contents of the
@@ -97,8 +104,8 @@ public class RunAdapter extends RecyclerView.Adapter<RunAdapter.RunHolder> {
         holder.runtitle.setText(lRun.getRun_name());
         holder.runstarted.setText(lRun.getRun_started_date());
         holder.runfinished.setText(lRun.getRun_ended_date());
-        holder.runAuthor.setText("Author->"+lRun.getRun_author());
-        switch(lRun.getState()){
+        holder.runAuthor.setText("Author->" + lRun.getRun_author());
+        switch (lRun.getState()) {
             case RUNNING:
                 holder.runStatus.setImageResource(android.R.drawable.presence_busy);
                 holder.textState.setText("Running");
@@ -115,7 +122,7 @@ public class RunAdapter extends RecyclerView.Adapter<RunAdapter.RunHolder> {
 
     }
 
-    public List<Runs> getRunList(){
+    public List<Runs> getRunList() {
         return this.runList;
     }
 
@@ -135,7 +142,7 @@ public class RunAdapter extends RecyclerView.Adapter<RunAdapter.RunHolder> {
     }
 
     public static class RunHolder extends RecyclerView.ViewHolder {
-        public final TextView runtitle, runstarted, runfinished,textState,runAuthor;
+        public final TextView runtitle, runstarted, runfinished, textState, runAuthor;
         public final ImageButton runStatus;
 
         public RunHolder(View itemView) {
