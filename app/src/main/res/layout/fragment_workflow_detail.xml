@@ -21,18 +21,10 @@ limitations under the License.
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.apache.taverna.mobile.activities.WorkflowDetailActivity$PlaceholderFragment"
+    tools:context="org.apache.taverna.mobile.activities.WorkflowDetailActivity"
     android:orientation="vertical"
     android:padding="5dp"
     android:background="@color/button_material_light">
-
-    <TextView android:id="@+id/wkf_author"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:typeface="serif"
-        android:textStyle="italic"
-        android:textSize="22sp"
-        android:text="@string/workflow_authorhint" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -52,29 +44,54 @@ limitations under the License.
                 android:id="@+id/wtitle"
                 android:layout_marginTop="5dp"
                 android:hint="@string/detail_title_section1" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
 
+                <TextView android:id="@+id/wkf_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:typeface="serif"
+                    android:textStyle="normal"
+                    android:text="@string/workflow_author"
+                    android:textIsSelectable="true"
+                    android:layout_gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wkf_author_text"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/wcreatedat"
                 android:layout_marginTop="5dp"
-                android:text="@string/created" />
+                android:text="@string/created"/>
 
-            <TextView
+           <!-- <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/wupdatedat"
                 android:layout_marginTop="5dp"
-                android:text="@string/modified" />
+                android:text="@string/modified" />-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/wtype"
                 android:layout_marginTop="5dp"
-                android:text="Type" />
+                android:text="@string/workflow_type_text"
+                android:singleLine="true" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -85,42 +102,52 @@ limitations under the License.
                 android:minLines="3"
                 android:hint="@string/description" />
 
+
+
+
+
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/wkf_image"
                 android:src="@mipmap/ic_loading"
                 android:backgroundTint="@color/accent_material_light"
-                android:backgroundTintMode="src_atop" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:gravity="bottom|right">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/saveToDropboxButton"
-                    android:src="@drawable/dropbox_icon"
-                    android:layout_gravity="left"
-                    android:layout_marginRight="20dp"
-                    android:background="@color/button_material_light" />
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/saveToGoogleDriveButton"
-                    android:src="@drawable/google_drive_icon"
-                    android:layout_gravity="right"
-                    android:background="@color/button_material_light" />
-            </LinearLayout>
+                android:backgroundTintMode="src_atop"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@string/content_loading"
+                android:layout_marginRight="10dp" />
 
         </LinearLayout>
     </ScrollView>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:gravity="bottom|end">
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/saveToDropboxButton"
+            android:src="@drawable/dropbox_icon"
+            android:layout_gravity="start"
+            android:layout_marginRight="20dp"
+            android:contentDescription="@string/savetodropbox"
+            android:background="@color/button_material_light" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/saveToGoogleDriveButton"
+            android:src="@drawable/google_drive_icon"
+            android:layout_gravity="end"
+            android:contentDescription="@string/savetog_drive"
+            android:background="@color/button_material_light" />
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -136,6 +163,7 @@ limitations under the License.
             style="android:buttonBarButtonStyle"
             android:text="@string/play_workflow"
             android:drawableLeft="@android:drawable/ic_menu_edit"
+            android:drawableStart="@android:drawable/ic_menu_edit"
             android:id="@+id/run_wk" />
         <Button
             android:layout_width="wrap_content"
@@ -149,8 +177,10 @@ limitations under the License.
             android:layout_marginRight="2dp"
             android:id="@+id/download_wk"
             android:paddingLeft="5dp"
+            android:paddingStart="5dp"
             android:elegantTextHeight="true"
-            android:drawableLeft="@drawable/ic_download_web" />
+            android:drawableLeft="@drawable/ic_download__web"
+            android:drawableStart="@drawable/ic_download__web"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -160,6 +190,7 @@ limitations under the License.
             style="android:buttonBarButtonStyle"
             android:text="@string/workflow_mark"
             android:drawableLeft="@android:drawable/btn_star_big_off"
+            android:drawableStart="@android:drawable/btn_star_big_off"
             android:id="@+id/mark_wk" />
     </LinearLayout>
 

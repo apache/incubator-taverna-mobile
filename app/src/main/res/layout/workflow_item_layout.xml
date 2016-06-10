@@ -20,164 +20,162 @@ limitations under the License.
 
 -->
 <android.support.v7.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        card_view:cardElevation="@dimen/abc_text_size_menu_material"
-        card_view:cardBackgroundColor="@color/background_floating_material_light"
-        card_view:cardCornerRadius="2dp"
-        card_view:paddingEnd="2dp"
-        card_view:paddingStart="2dp" >
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:card_view="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	card_view:cardBackgroundColor="@color/background_floating_material_light"
+	card_view:cardCornerRadius="2dp"
+	card_view:cardElevation="@dimen/abc_text_size_menu_material"
+	android:layout_marginBottom="@dimen/cardMarginVertical"
+	android:layout_marginLeft="@dimen/cardMarginHorizontal"
+	android:layout_marginRight="@dimen/cardMarginHorizontal"
+	android:layout_marginTop="@dimen/cardMarginVertical"
+	card_view:paddingEnd="2dp"
+	card_view:paddingStart="2dp">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
 
-    <LinearLayout
-            android:id="@+id/wkll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <FrameLayout android:id="@+id/mframe"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-            <ImageView
-                android:id="@+id/author_profile_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:elevation="5dp"
-                android:src="@mipmap/icuserprofiles"
+		<RelativeLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:padding="10dp">
 
-                android:contentDescription="@string/workflow_authorhint"
-                android:scaleType="fitEnd" />
+			<ImageView
+				android:id="@+id/author_profile_image"
+				android:layout_width="116dp"
+				android:layout_height="116dp"
+				android:layout_marginRight="10dp"
+				android:layout_marginEnd="10dp"
+				android:contentDescription="@string/placeholderimage"
+				/>
 
-        <LinearLayout
-                android:id="@+id/linearlayout_workflow_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-            android:showDividers="middle|beginning"
-            android:divider="@color/background_material_dark"
-            android:dividerPadding="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginTop="50dp"
-            android:background="@android:color/transparent">
-                <TextView
-                    android:id="@+id/workflow_author"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:capitalize="characters"
-                    android:textColor="#000"
-                    android:textSize="22dp"
-                    android:hint="@string/workflow_authorhint" />
+			<TextView
+				android:id="@+id/workflow_author"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_toRightOf="@+id/author_profile_image"
+				android:layout_toEndOf="@+id/author_profile_image"
+				android:textSize="16sp"
+				android:hint="@string/workflow_authorhint" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/workflow_title"
-                android:hint="@string/wktitle"
-                android:textColor="#33b5e5"
-                android:textColorHighlight="#33b5ee"
-                android:textColorHint="#33b5e5" />
+			<TextView
+				android:id="@+id/workflow_title"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/workflow_author"
+				android:layout_marginTop="5dp"
+				android:layout_toRightOf="@+id/author_profile_image"
+				android:layout_toEndOf="@+id/author_profile_image"
+				android:textSize="18sp"
+				android:hint="@string/wktitle" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/abc_activity_chooser_view_see_all"
-                android:id="@+id/show_more"
-                android:typeface="serif"
-                android:background="@color/material_deep_teal_200" />
-        </LinearLayout>
-        </FrameLayout>
+		</RelativeLayout>
 
-    </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:id="@+id/layoutinfo"
-            android:showDividers="middle|beginning"
-            android:dividerPadding="1dp">
+		<LinearLayout
+			android:id="@+id/layoutinfo"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:dividerPadding="1dp"
+			android:orientation="vertical"
+			android:showDividers="middle|beginning"
+			android:visibility="gone">
 
-           <!-- <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/created"
-                android:id="@+id/workflow_datecreated"
-                android:gravity="center" />
+			<!-- <TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceLarge"
+					android:text="@string/created"
+					android:id="@+id/workflow_datecreated"
+					android:gravity="center" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/modified"
-                android:id="@+id/workflow_dateupdated"
-                android:layout_gravity="center_vertical"
-                android:gravity="center" />-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:minLines="2"
-                android:id="@+id/workflow_brief_description"
-                android:layout_gravity="center_vertical"
-                android:hint="@string/description" />
-        </LinearLayout>
-        <ImageView
-            android:id="@+id/workflow_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/tavernalogo"
-            android:contentDescription="@string/workflow_component"
-            android:visibility="gone" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-            <Button
-                android:id="@+id/button_view_workflow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="normal"
-                android:layout_weight="0.33"
-                style="android:buttonBarButtonStyle"
-                android:text="@string/workflow_read"
-                android:background="#33b5e5"
-                android:drawableLeft="@android:drawable/ic_menu_view"
-                android:layout_marginLeft="3dp" />
-            <Button
-                android:id="@+id/button_download_workflow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="normal"
-                android:layout_weight="0.33"
-                android:background="#33b5e5"
-                style="android:buttonBarButtonStyle"
-                android:text="@string/workflow_download"
-                android:drawableLeft="@drawable/download"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:visibility="gone" />
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceLarge"
+					android:text="@string/modified"
+					android:id="@+id/workflow_dateupdated"
+					android:layout_gravity="center_vertical"
+					android:gravity="center" />-->
+			<TextView
+				android:id="@+id/workflow_brief_description"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:hint="@string/description"
+				android:minLines="2"
+				android:textAppearance="?android:attr/textAppearanceLarge"/>
+		</LinearLayout>
 
-            <Button
-                android:id="@+id/button_mark_workflow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="normal"
-                android:layout_weight="0.33"
-                android:background="#33b5e5"
-                android:text="@string/workflow_mark"
-                android:drawableLeft="@android:drawable/btn_star_big_off"
-                style="android:buttonBarButtonStyle"
-                android:layout_marginLeft="3dp" />
-            </LinearLayout>
-    </LinearLayout>
+		<ImageView
+			android:id="@+id/workflow_image"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:contentDescription="@string/workflow_component"
+			android:src="@drawable/tavernalogo"
+			android:visibility="gone"/>
 
- </android.support.v7.widget.CardView>
+		<TextView
+			android:id="@+id/show_more"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/material_deep_teal_200"
+			android:text="@string/abc_activity_chooser_view_see_all"
+			android:textAppearance="?android:attr/textAppearanceLarge"
+			android:typeface="serif"
+			/>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="10dp">
+
+			<Button
+				android:id="@+id/button_view_workflow"
+				style="android:buttonBarButtonStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="3dp"
+				android:layout_marginStart="3dp"
+				android:layout_weight="0.33"
+				android:background="#33b5e5"
+				android:drawableLeft="@android:drawable/ic_menu_view"
+				android:drawableStart="@android:drawable/ic_menu_view"
+				android:text="@string/workflow_read"
+				android:textStyle="normal"/>
+
+			<Button
+				android:id="@+id/button_download_workflow"
+				style="android:buttonBarButtonStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="2dp"
+				android:layout_marginRight="2dp"
+				android:layout_weight="0.33"
+				android:background="#33b5e5"
+				android:drawableLeft="@drawable/download"
+				android:drawableStart="@drawable/download"
+				android:text="@string/workflow_download"
+				android:textStyle="normal"
+				android:visibility="gone"/>
+
+			<Button
+				android:id="@+id/button_mark_workflow"
+				style="android:buttonBarButtonStyle"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="3dp"
+				android:layout_marginStart="3dp"
+				android:layout_weight="0.33"
+				android:background="#33b5e5"
+				android:drawableLeft="@android:drawable/btn_star_big_off"
+				android:drawableStart="@android:drawable/btn_star_big_off"
+				android:text="@string/workflow_mark"
+				android:textStyle="normal"/>
+		</LinearLayout>
+	</LinearLayout>
+
+</android.support.v7.widget.CardView>

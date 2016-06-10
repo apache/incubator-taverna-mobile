@@ -29,135 +29,185 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.MimeTypeMap;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.fragments.FavoriteFragment;
-import org.apache.taverna.mobile.fragments.NavigationDrawerFragment;
-import org.apache.taverna.mobile.fragments.WorkflowItemFragment;
+import org.apache.taverna.mobile.fragments.Workflow_viewpager;
+import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.utils.WorkflowOpen;
 
 import java.io.File;
 
-public class DashboardMainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks{
-
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+public class DashboardMainActivity extends AppCompatActivity
+{
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
-    private CharSequence mTitle;
-
-    static final int NUM_ITEMS = 2;
+    private CharSequence mTitle = "Dashboard";
     private final int SELECT_WORKFLOW = 10;
     public static final String APP_DIRECTORY_NAME = "TavernaMobile";
     private  Dialog aboutDialog;
-    MyAdapter mAdapter;
-    ViewPager mPager;
+	private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard_main);
+
+	    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+	    if (navigationView != null) {
+		    setupDrawerContent(navigationView);
+	    }
+
+
+	    mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         setUpWorkflowDirectory(this);
         aboutDialog = new Dialog(this);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+	    /**
+	     * Setting the Fragment in FrameLayout
+	     */
+	    if (savedInstanceState == null) {
 
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
-        //manage tabs and swipe
-        mAdapter = new MyAdapter(getSupportFragmentManager());
+		    FragmentManager fragmentManager = getSupportFragmentManager();
+		    Fragment fragment;
 
-        mPager = (ViewPager)findViewById(R.id.pager);
-        mPager.setAdapter(mAdapter);
+		    fragment = new Workflow_viewpager();
+		    fragmentManager.beginTransaction()
+				    .replace(R.id.frame_container, fragment)
+				    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+				    .commit();
+
+
+	    }
 
     }
 
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        switch(position+1){
-            case 1://return home
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, WorkflowItemFragment.newInstance("param1", "param2"))
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                        .commit();
-                try {
-                    mPager.setCurrentItem(0);
-                }catch (NullPointerException np){
-                    np.printStackTrace();
-                }
-                break;
-            case 2: //open workflow
-                Intent workflowSelectIntent = new Intent(Intent.ACTION_GET_CONTENT)
-                        .setDataAndTypeAndNormalize(Uri.parse(String.format("%s%s%s",
-                                        Environment.getExternalStorageDirectory(),
-                                        File.separator, APP_DIRECTORY_NAME)),
-                                "application/vnd.taverna.t2flow+xml");
 
-                Intent loadWorkflowIntent = Intent.createChooser(workflowSelectIntent,
-                        "Choose Workflow (t2flow or xml)");
-                startActivityForResult(loadWorkflowIntent, SELECT_WORKFLOW);
+	/**
+	 *
+	 * @param navigationView Design Support NavigationView  OnClick Listener Event
+	 */
+	private void setupDrawerContent(final NavigationView navigationView) {
+		navigationView.setNavigationItemSelectedListener(
+				new NavigationView.OnNavigationItemSelectedListener()
+				{
 
-                break;
-            case 3: //show usage
-                aboutDialog.setTitle("USage");
-                aboutDialog.setContentView(R.layout.usage_layout);
-                aboutDialog.show();
-                break;
-            case 4: //show about
-                TextView about = new TextView(getApplicationContext());
-                about.setTextSize(21);
-                about.setTextColor(Color.BLACK);
-                about.setPadding(3,3,3,3);
-                about.setText(getResources().getString(R.string.about));
+					@Override
+					public boolean onNavigationItemSelected(MenuItem menuItem)
+					{
 
-                aboutDialog.setTitle("About Taverna Mobile");
-                aboutDialog.setContentView(about);
-                aboutDialog.show();
-                break;
-            case 5://open settings/preference activity
-                startActivity(new Intent(this, SettingsActivity.class));
-                overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
-                break;
-            case 6: //logout user
-                this.finish();
-                break;
-            default:
-                break;
-        }
-    }
+
+						FragmentManager fragmentManager = getSupportFragmentManager();
+						Fragment fragment;
+
+						switch (menuItem.getItemId())
+						{
+							case R.id.nav_dashboard:
+
+								fragment = new Workflow_viewpager();
+								fragmentManager.beginTransaction()
+										.replace(R.id.frame_container, fragment)
+										.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+										.commit();
+
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+							case R.id.nav_announcement:
+
+								fragment = new AnnouncementFragment();
+								fragmentManager.beginTransaction()
+										.replace(R.id.frame_container, fragment)
+										.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+										.commit();
+
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+
+							case R.id.nav_openworkflow:
+
+								Intent workflowSelectIntent =
+										new Intent(Intent.ACTION_GET_CONTENT)
+												.setDataAndTypeAndNormalize(Uri.parse(String.format("%s%s%s",
+																Environment.getExternalStorageDirectory(),
+																File.separator, APP_DIRECTORY_NAME)),
+														"application/vnd.taverna.t2flow+xml");
+
+								Intent loadWorkflowIntent = Intent.createChooser(workflowSelectIntent,
+										"Choose Workflow (t2flow or xml)");
+								startActivityForResult(loadWorkflowIntent, SELECT_WORKFLOW);
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+							case R.id.nav_usage:
+
+                                aboutDialog.setCanceledOnTouchOutside(true);
+								aboutDialog.setTitle("Usage");
+								aboutDialog.setContentView(R.layout.usage_layout);
+								aboutDialog.show();
+
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+
+							case R.id.nav_about:
+
+                                TableLayout about =  (TableLayout) getLayoutInflater().inflate(R.layout.about, null);
+
+                                aboutDialog.setCanceledOnTouchOutside(true);
+								aboutDialog.setTitle("About Taverna Mobile");
+								aboutDialog.setContentView(about);
+								aboutDialog.show();
+
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+
+							case R.id.nav_settings:
+
+								startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
+								overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+
+							case R.id.nav_logout:
+
+								finish();
+								menuItem.setChecked(true);
+								mDrawerLayout.closeDrawers();
+								return true;
+
+						}
+						return true;
+					}
+				});
+	}
+
+
+
+
 
     @Override
     public void onActivityResult(int requestCode , int resultCode, Intent data){
@@ -191,28 +241,7 @@ public class DashboardMainActivity extends ActionBarActivity
         return type;
     }
 
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_activity_dashboard_main);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_openworkflow);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_usage);
-                break;
-            case 4:
-                mTitle = getString(R.string.title_about);
-                break;
-            case 5:
-                mTitle = getString(R.string.title_activity_settings);
-                break;
-            case 6:
-                mTitle = getString(R.string.title_exit);
-                break;
-        }
-    }
+
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -256,63 +285,23 @@ public class DashboardMainActivity extends ActionBarActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            MenuInflater mi = getMenuInflater();
-                mi.inflate(R.menu.dashboard_main, menu);
-          /*  //get the searchview and set the searchable configuration
-            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-            SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-            //assuming this activity is the searchable activity
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-            searchView.setSubmitButtonEnabled(true);
-//            searchView.setIconifiedByDefault(false);*/
 
-            restoreActionBar();
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.dashboard_main, menu);
+		restoreActionBar();
+		return true;
+	}
 
-    @Override
+
+	@Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+	    switch (item.getItemId()) {
+		    case android.R.id.home:
+			    mDrawerLayout.openDrawer(GravityCompat.START);
+			    return true;
+	    }
+	    return super.onOptionsItemSelected(item);
     }
 
-    public class MyAdapter extends FragmentPagerAdapter {
-        public MyAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public int getCount() {
-            return NUM_ITEMS;
-        }
-        @Override
-        public String getPageTitle(int position){
-            switch(position+1){
-                case 2:
-                    return (DashboardMainActivity.this).getResources().getString(R.string.title_favorite);
-
-                case 1:
-                    return (DashboardMainActivity.this).getResources().getString(R.string.title_explore);
-            }
-            return "";
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            switch(position+1){
-                case 1:
-                    return WorkflowItemFragment.newInstance("Workflows","Running ...");
-                case 2:
-                    return FavoriteFragment.newInstance(position);
-            }
-            return WorkflowItemFragment.newInstance("","");
-        }
-    }
 }

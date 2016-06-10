@@ -25,18 +25,15 @@ package org.apache.taverna.mobile.activities;
 * under the License.
 */
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,19 +45,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
-import org.apache.taverna.mobile.tavernamobile.User;
-import org.apache.taverna.mobile.tavernamobile.Workflow;
-import org.apache.taverna.mobile.utils.HttpUtil;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -72,7 +60,7 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new LoginFragment())
@@ -164,7 +152,7 @@ public class LoginActivity extends ActionBarActivity {
                 String whoAmI = "http://www.myexperiment.org/whoami.xml";
 
                 String response = null;
-                HttpURLConnection con = null;
+                HttpURLConnection con;
                 try {
                     URL url = new URL(whoAmI);
                     con = (HttpURLConnection) url.openConnection();

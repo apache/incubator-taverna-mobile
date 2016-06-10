@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <resources>
-    <string name="app_name">TavernaMobile</string>
+    <string name="app_name">Taverna Mobile</string>
     <string name="hello_world"> Empty </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_flash_screen">Taverna Mobile</string>
@@ -42,11 +42,8 @@ limitations under the License.
     <string name="title_openworkflow">Open Workflow</string>
     <string name="menu_search">Search</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_example">Example action</string>
-    <string name="completebrand">Powered By Apache Taverna</string>
+    <string name="completebrand">Powered by <a href="http://taverna.incubator.apache.org">Apache Taverna</a></string>
     <string name="search_hint"> Search workflows by name</string>
 
     <string name="workflow_download">Download</string>
@@ -55,11 +52,13 @@ limitations under the License.
     <string name="workflow_authorhint">Workflow Author  </string>
     <string name="workflow_component">Workflow component</string>
     <string name="favorite_empty"> No Favorites Added Yet</string>
-    <string name="workflow_empty"> No <b>Workflows</b> Available. Check your Connection to the Internet or Pull down to refresh</string>
+    <string name="workflow_empty"> No <b>Workflows</b> Available. Pull down to refresh (or check your internet connection)</string>
     <string name="workflow_run_empty"> <b>Workflows History</b> empty. No runs have been created for this workflow</string>
     <string name="wktitle">TITLE</string>
     <string name="marked">Marked On</string>
-    <string name="created">Created :</string>
+    <string name="workflow_type_text">Type: %1$s</string>
+    <string name="workflow_author">Uploaded by:</string>
+    <string name="created">Created: %1$s</string>
     <string name="modified">Modified :</string>
     <string name="description">Workflow Description</string>
     <string name="title_activity_workflow_detail">Workflow Detail</string>
@@ -70,11 +69,11 @@ limitations under the License.
     <string name="detail_title_section3">Licence | Policy</string>
     <string name="detail_title_section4"> About </string>
     <string name="play_workflow">Create Run</string>
-    <string name="err_workflow_conn">Unable to fetch latest workflows. Please check your network connectivity</string>
+    <string name="err_workflow_conn">Unable to fetch latest workflows. Please check your network connection</string>
     
     <string name="downloadfailed">Download Failed. Please try again</string>
     <string name="downloadprogress">Workflow download in progress</string>
-    <string name="downloaderror">Unable to start Download. Check your internet connectivity</string>
+    <string name="downloaderror">Unable to start Download. Please check your internet connection</string>
     <string name="downloadduplicate">Already Downloading</string>
     <string name="downloadcomplete">  download complete</string>
     <string name="seemore"> More Info &amp;raquo</string>
@@ -85,10 +84,10 @@ limitations under the License.
     
     <string name="emailerr">Username must not be empty</string>
     <string name="passworderr">Password must not be empty</string>
-    <string name="about">Mobile Application for managing Taverna workflows on the fly.<br/>
-                         View, run and download workflows at your convenience on your android mobile
-                        device. \n\n <br/>Developed during Google Summer of Code 2015
-        under Apache Taverna. \n Powered by MyExperiment<br/></string>
+    <string name="version_number">v1.0</string>
+    <string name="about">Mobile Application for managing Taverna workflows.\n\nCopyright © 2015&#8211;2016 The Apache Software Foundation, Licensed under the Apache License, Version 2.0.</string>
+    <string name="about2">View, run and download workflows on your Android mobile device.</string>
+    <string name="about3">Originally developed during Google Summer of Code 2015 for the <a href="http://taverna.incubator.apache.org">Apache Taverna project</a>.</string>
     <string name="playerconfig">Configure Player Account</string>
     <string name="playerconfig_summary">Username used to login to Taverna player portal</string>
     <string name="playeruser">Username/email</string>
@@ -110,4 +109,21 @@ limitations under the License.
     <string name="usage_detail_text">The details screen allows users to run particular worklows and provides detailed information about the workflows. Workflows can also be downloaded from here. Workflows can also be marked from this screen which would save much more data for offline use than on the dashboard screen. This screen also provides a set of runs for the workflow from other users</string>
     <string name="runid_text">Workflow Run ID:</string>
 
+    <string name="announcement">Announcements</string>
+    <string name="logo_desc">Application Logo</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_Date">Date</string>
+    <string name="dialog_author">Author</string>
+    <string name="dialog_title">Title</string>
+    <string name="workflow_datemarked">Date workflow was marked</string>
+    <string name="buttondelete">Image Button to delete a locally stored workflow</string>
+    <string name="savetog_drive">Save to google Drive</string>
+    <string name="savetodropbox">Save to drop box</string>
+    <string name="content_loading">Content laoding</string>
+    <string name="contentdesc">Announcement icon placeholder</string>
+    <string name="placeholderimage">Placeholder for author</string>
+    <string name="logout">Logout</string>
+    <string name="abouttext">About</string>
+    <string name="workflows">Open Workflow</string>
+    <string name="title_wokflow">Workflows</string>
 </resources>

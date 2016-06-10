@@ -31,9 +31,9 @@ import android.app.LoaderManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -55,7 +55,6 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ZoomControls;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.ProgressListener;
@@ -65,7 +64,6 @@ import com.dropbox.client2.session.AppKeyPair;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
-import org.apache.taverna.mobile.activities.RunResult;
 import org.apache.taverna.mobile.adapters.WorkflowAdapter;
 import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
 import org.apache.taverna.mobile.tavernamobile.User;
@@ -81,7 +79,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -89,7 +86,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.CharsetEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -138,7 +134,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     }
 
     public static WorkflowdetailFragment getInstance(){
-        return WorkflowdetailFragment.getInstance();
+        return new WorkflowdetailFragment();
     }
 
     public WorkflowdetailFragment() {
@@ -190,15 +186,9 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         return rootView;
     }
 
-    /**
-     * Called when a fragment is first attached to its activity.
-     * {@link #onCreate(android.os.Bundle)} will be called after this.
-     *
-     * @param activity
-     */
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
         cont = getActivity();
     }
 
@@ -209,7 +199,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 if (((TextView)rootView.findViewById(R.id.wtype)).getText().toString().contains("Taverna 2"))
                     new WorkflowProcessTask(getActivity()).execute(download_url);
                 else
-                    Toast.makeText(getActivity(), "Sorry! only Type 2 workflows can be run as of now.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Sorry! Only Taverna 2 workflows can be run.", Toast.LENGTH_LONG).show();
                 break;
             case R.id.download_wk:
                 // start the android Download manager to start downloading a remote workflow file
@@ -225,14 +215,14 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 break;
             case R.id.mark_wk:
 
-                ArrayList<Object> mfav = new ArrayList<Object>();
+                ArrayList<Object> mfav = new ArrayList<>();
                 String favs = sharedPreferences.getString(WorkflowAdapter.FAVORITE_LIST_DB, "");
                 //save current workflow as favorite
                 mfav.add(currentWorkflow.getId());
                 mfav.add(currentWorkflow.getWorkflow_author());
                 mfav.add(currentWorkflow.getWorkflow_title());
                 mfav.add(currentWorkflow.getWorkflow_description());
-                mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
+                mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()));
                 mfav.add(currentWorkflow.getWorkflow_details_url());
                 mfav.add(((TextView) rootView.findViewById(R.id.wkf_author)).getText());
                 int result = new Workflow_DB(getActivity(), WorkflowAdapter.WORKFLOW_FAVORITE_KEY).insert(mfav);
@@ -242,7 +232,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                      view.setBackgroundResource(R.drawable.abc_list_selector_disabled_holo_light);
 
                 }else if(result == -1){
-                    Toast.makeText(getActivity(),"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Sorry! This workflow has already been marked as a favourite",Toast.LENGTH_SHORT).show();
                 }else
                     Toast.makeText(getActivity(),"Error!, please try again",Toast.LENGTH_SHORT).show();
                 break;
@@ -313,8 +303,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
     public static void setWorkflowDetails(final Workflow wk){
         currentWorkflow = wk;
-        final TextView author = (TextView) rootView.findViewById(R.id.wkf_author);
-        final TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
+        final TextView author = (TextView) rootView.findViewById(R.id.wkf_author_text);
+        //final TextView updated = (TextView) rootView.findViewById(R.id.wupdatedat);
         final TextView type = (TextView) rootView.findViewById(R.id.wtype);
         final TextView title = (TextView) rootView.findViewById(R.id.wtitle);
         final TextView desc = (TextView) rootView.findViewById(R.id.wdescription);
@@ -327,13 +317,22 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 //load necessary widgets
 
                 //set widget data
+                //Use android resources to insert text into placeholder
+                Resources resources = cont.getResources();
                 User uploader = wk.getUploader();
-                author.setText("Uploader ->" + uploader != null?uploader.getName():"Unknown");
+                //String uploaderText = String.format(resources.getString(R.string.workflow_author), uploader != null ? uploader.getName():"Unknown");
+                author.setText((uploader != null) ? uploader.getName() : "Unknown");
                 title.setText(wk.getWorkflow_title());
-                desc.setText(wk.getWorkflow_description());
-                createdat.setText("Created : " + wk.getWorkflow_datecreated());
-                updated.setText("Workflow Description");
-                type.setText("Type-> "+wk.getWorkflow_Type());
+                if (wk.getWorkflow_description() != null) {
+                    desc.setText(wk.getWorkflow_description());
+                } else {
+                    desc.setVisibility(View.GONE); //Not sure I trust this! Needs investigating.
+                }
+                String createdAtText = String.format(resources.getString(R.string.created), wk.getWorkflow_datecreated());
+                createdat.setText(createdAtText);
+                //updated.setText("Workflow Description");
+                String typeText = String.format(resources.getString(R.string.workflow_type_text), wk.getWorkflow_Type());
+                type.setText(typeText);
 
                   //preview.setImageURI(Uri.parse(wk.getWorkflow_preview()));
                 new LoadImageThread(preview, wk.getWorkflow_preview()).execute();
@@ -397,7 +396,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             Bitmap myBitmap = null;
             try {
                 URL url = new URL(src);
-                HttpURLConnection connection = null;
+                HttpURLConnection connection;
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setDoInput(true);
                 connection.connect();

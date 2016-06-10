@@ -28,7 +28,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.util.Linkify;
@@ -203,7 +202,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         viewHolder.btn_mark_workflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Object> mfav = new ArrayList<Object>();
+                ArrayList<Object> mfav = new ArrayList<>();
                 //save current workflow as favorite
                 mfav.add(wid); mfav.add(author);mfav.add(title);mfav.add(desc_full);
                 mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()));
@@ -227,9 +226,9 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                   // }
                     Toast.makeText(context, "Workflow marked as favorite", Toast.LENGTH_SHORT).show();
                 }else if(saved == -1){
-                    Toast.makeText(context,"sorry!, this workflow has already been marked as favorite",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Sorry! This workflow has already been marked as a favourite",Toast.LENGTH_SHORT).show();
                 }else
-                    Toast.makeText(context,"Error!, please try again",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Error! Please try again",Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -289,7 +288,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
            // wk_created = (TextView) v.findViewById(R.id.workflow_datecreated);
            // wk_modified = (TextView) v.findViewById(R.id.workflow_dateupdated);
             wk_description = (TextView) v.findViewById(R.id.workflow_brief_description);
-
             //cache buttons
             btn_download_workflow = (Button) v.findViewById(R.id.button_download_workflow);
             btn_mark_workflow = (Button) v.findViewById(R.id.button_mark_workflow);
@@ -309,8 +307,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
 
         @Override
         protected Void doInBackground(String ... strings) {
-            URL url = null;
-            HttpURLConnection connection = null;
+            URL url;
+            HttpURLConnection connection;
             try {
                 url = new URL(strings[0]); //fetch workflow detail
                 connection = (HttpURLConnection) url.openConnection();
