@@ -10,8 +10,8 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 public class BaseApiManager {
 
 
-    public TavernaService mTavernaService;
     final String ENDPOINT = "http://www.myexperiment.org/";
+    public TavernaService mTavernaService;
 
     public BaseApiManager() {
 

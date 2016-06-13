@@ -166,7 +166,7 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
         }
         sharedPreferences.edit().putString(WorkflowAdapter.FAVORITE_LIST_DB, Arrays.toString
                 (charsequence)
-                ).apply();
+        ).apply();
     }
 
     @Override

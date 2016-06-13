@@ -272,7 +272,7 @@ public class RunFragment extends Fragment implements View.OnClickListener {
                 connection.connect(); //send request
 
                 InputStream dis = connection.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(dis,"UTF-8"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(dis, "UTF-8"));
 
                 String jsonData = "";
                 while ((jsonData = br.readLine()) != null) {

@@ -67,10 +67,10 @@ import java.util.List;
  * Created by Larry Akah on 6/8/15.
  */
 public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHolder> {
-    private static final String TAG = "WorkflowAdapter";
     public static final String WORKFLOW_FAVORITE_KEY = "WORKFLOW_FAVORITES"; //workflow key used
     // to save workflows when marked as favorites
     public static final String FAVORITE_LIST_DB = "FAVORITE_LIST";
+    private static final String TAG = "WorkflowAdapter";
     public WorkflowDB favDB; //favorited keeps items that have been favorited in order to
     // identify them during
     private Context context;

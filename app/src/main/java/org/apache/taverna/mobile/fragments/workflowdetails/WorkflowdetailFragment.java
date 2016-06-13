@@ -106,19 +106,19 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     private static final String BOX_APP_SECRET = "3uuuw36mm7jkflc";
     public static String mWorkfloId = "";
     public static Context cont;
-    public String workflow_uri;
     static View rootView;
     static Animation zoomin;
     static Animation zoomout;
     static Workflow currentWorkflow = null;
     private static ProgressDialog progressDialog;
     private static String download_url;
-    private  boolean mLoadState = false;
-    private  boolean mDropupload = false;
+    public String workflow_uri;
     public AlertDialog runDialog;
     public AlertDialog.Builder alertDialogBuilder;
     public boolean isZoomIn;
     SharedPreferences sharedPreferences;
+    private boolean mLoadState = false;
+    private boolean mDropupload = false;
     private DownloadManager downloadManager;
     private long wid;
 
@@ -234,6 +234,10 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         WorkflowdetailFragment.rootView = rootView;
     }
 
+    public static void setCont(Context cont) {
+        WorkflowdetailFragment.cont = cont;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
@@ -286,12 +290,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         return rootView;
     }
 
-    public static void setCont(Context cont) {
-        WorkflowdetailFragment.cont = cont;
-    }
-
     /**
-
      * Called when a fragment is first attached to its activity.
      * {@link #onCreate(android.os.Bundle)} will be called after this.
      */
@@ -507,7 +506,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
                 String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" +
                         tavernaPlayerAPI.getPlayerUserPassword(this.context);
-                String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(Charset.forName("UTF-8")), Base64
+                String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(Charset
+                        .forName("UTF-8")), Base64
                         .DEFAULT);
 
                 connection.setRequestProperty("Authorization", basicAuth);
@@ -521,7 +521,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 Log.i("Authorization ", "" + connection.getRequestProperty("Authorization"));
 
                 InputStream dis = connection.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(dis,"UTF-8"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(dis, "UTF-8"));
 
                 String jsonData = "";
                 while ((jsonData = br.readLine()) != null) {
@@ -668,11 +668,12 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
                 String user = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" +
                         tavernaPlayerAPI.getPlayerUserPassword(this.context);
-                String basicAuth = "Basic " + Base64.encodeToString(user.getBytes(Charset.forName("UTF-8")), Base64
+                String basicAuth = "Basic " + Base64.encodeToString(user.getBytes(Charset.forName
+                        ("UTF-8")), Base64
                         .DEFAULT);
                 //read the file from remote resource and encode the stream with a base64 algorithm
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(wconn
-                        .getInputStream(),"UTF-8"));
+                        .getInputStream(), "UTF-8"));
                 String str = "";
                 while ((str = bufferedReader.readLine()) != null) {
                     sb.append(str); //in this string builder we have read the workflow( as
@@ -707,7 +708,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 dos.close();
 
                 InputStream dis = connection.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(dis,"UTF-8"));
+                BufferedReader br = new BufferedReader(new InputStreamReader(dis, "UTF-8"));
                 while ((str = br.readLine()) != null) {
                     sb.append(str);
                 }

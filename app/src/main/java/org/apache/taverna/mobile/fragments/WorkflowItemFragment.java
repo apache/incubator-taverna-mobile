@@ -89,12 +89,12 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
      */
     private static RecyclerView mListView;
     private static View rootView;
-    private  boolean stateOn = false;
     private static TextView noDataText;
     private static LruCache<String, Bitmap> avatarCache;
     private static WorkflowAdapter workflowAdapter;
     //variables for controlling the infinite scroll mechanism
     private static int previousTotal = 0;
+    private boolean stateOn = false;
     private Animation in;
     private ProgressDialog mProgressDialog; //progressbar used to indicate the state of the
     // workflow loaders
@@ -131,6 +131,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     public static void setIsRefreshData(boolean isRefreshData) {
         WorkflowItemFragment.isRefreshData = isRefreshData;
     }
+
     public static WorkflowItemFragment newInstance(String param1, String param2) {
         WorkflowItemFragment fragment = new WorkflowItemFragment();
         Bundle args = new Bundle();

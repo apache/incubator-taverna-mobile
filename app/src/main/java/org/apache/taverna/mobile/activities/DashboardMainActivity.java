@@ -146,7 +146,8 @@ public class DashboardMainActivity extends AppCompatActivity {
                                                 .setDataAndTypeAndNormalize(
                                                         Uri.parse(String.format("%s%s%s",
                                                         Environment.getExternalStorageDirectory(),
-                                                        File.separator, APP_DIRECTORY_NAME)),
+                                                        File.separator,
+                                                        APP_DIRECTORY_NAME)),
                                                         "application/vnd.taverna.t2flow+xml");
 
                                 Intent loadWorkflowIntent = Intent.createChooser

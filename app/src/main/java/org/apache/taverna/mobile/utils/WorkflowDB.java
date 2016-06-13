@@ -50,9 +50,9 @@ public class WorkflowDB {
 
     private static final String TAG = "WorkflowDB";
     private final String ENTITY_KEY;
+    private final ArrayList<String> ITEM_IDS;
     private Context context;
     private SharedPreferences msharedpreference;
-    private final ArrayList<String> ITEM_IDS;
     private JSONObject dataobj; //hold all entries for a given ENTITY_KEY
 
     /**

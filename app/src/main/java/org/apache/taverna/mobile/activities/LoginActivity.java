@@ -199,7 +199,7 @@ public class LoginActivity extends ActionBarActivity {
                         con.connect();
                     }
                     BufferedReader br = new BufferedReader(new InputStreamReader(con
-                            .getInputStream(),"UTF-8"));
+                            .getInputStream(), "UTF-8"));
                     StringBuilder sb = new StringBuilder();
                     String s = "";
                     while ((s = br.readLine()) != null) {

@@ -101,7 +101,8 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                     connection = (HttpURLConnection) workflowurl.openConnection();
                     String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" +
                             tavernaPlayerAPI.getPlayerUserPassword(this.context);
-                    String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(Charset.forName("UTF-8")),
+                    String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(Charset
+                            .forName("UTF-8")),
                             Base64.DEFAULT);
 
                     connection.setRequestProperty("Authorization", basicAuth);
@@ -167,7 +168,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                 return workflow;
                 case TYPE_RUN_HISTORY: {
                     Log.e(TAG, "Downloading run history");
-                    BufferedReader br = new BufferedReader(new InputStreamReader(dis,"UTF-8"));
+                    BufferedReader br = new BufferedReader(new InputStreamReader(dis, "UTF-8"));
                     StringBuffer sb = new StringBuffer();
                     String jsonData = "";
                     while ((jsonData = br.readLine()) != null) {
@@ -209,7 +210,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                 }
                 return workflow;
                 default:
-                    BufferedReader br = new BufferedReader(new InputStreamReader(dis,"UTF-8"));
+                    BufferedReader br = new BufferedReader(new InputStreamReader(dis, "UTF-8"));
                     StringBuffer sb = new StringBuffer();
                     String jsonData = "";
                     while ((jsonData = br.readLine()) != null) {
