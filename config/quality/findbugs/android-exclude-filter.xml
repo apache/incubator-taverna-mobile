@@ -7,6 +7,9 @@
         <Class name="~.*\.Manifest\$.*"/>
     </Match>
 
+    <Match>
+        <Bug pattern="DM_DEFAULT_ENCODING" />
+    </Match>
 
     <!-- All bugs in test classes, except for JUnit-specific bugs -->
     <Match>
