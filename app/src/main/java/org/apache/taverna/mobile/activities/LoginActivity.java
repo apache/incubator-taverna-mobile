@@ -36,6 +36,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,6 +56,7 @@ import java.net.URL;
 
 
 public class LoginActivity extends ActionBarActivity {
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,15 +174,16 @@ public class LoginActivity extends ActionBarActivity {
                     con.connect();
                     int status = con.getResponseCode();
                     response = String.valueOf(status);
-                    if (status != HttpURLConnection.HTTP_OK) {
-                        if (status == HttpURLConnection.HTTP_MOVED_PERM ||
-                                status == HttpURLConnection.HTTP_MOVED_TEMP ||
-                                status == HttpURLConnection.HTTP_SEE_OTHER || status == 307) {
-                            redirect = true;
-                        }
+                    if (status != HttpURLConnection.HTTP_OK
+                            && (status == HttpURLConnection.HTTP_MOVED_PERM ||
+                            status == HttpURLConnection.HTTP_MOVED_TEMP ||
+                            status == HttpURLConnection.HTTP_SEE_OTHER || status == 307)) {
 
+                        redirect = true;
                     }
-                    System.out.println("Status code: " + status);
+
+
+                    Log.d(TAG, "Status code: " + status);
                     if (redirect) {
                         // get redirect url from "location" header field
                         String newUrl = con.getHeaderField("Location");
@@ -191,7 +194,7 @@ public class LoginActivity extends ActionBarActivity {
                         // open the new connection again
                         con = (HttpURLConnection) new URL(newUrl).openConnection();
                         con.setRequestProperty("Cookie", cookies);
-                        System.out.println("Redirect to URL : " + newUrl);
+                        Log.d(TAG, "Redirect to URL : " + newUrl);
                         con.connect();
                     }
                     BufferedReader br = new BufferedReader(new InputStreamReader(con
@@ -202,16 +205,16 @@ public class LoginActivity extends ActionBarActivity {
                         sb.append(s);
                     }
                     br.close();
-                    System.out.println("data: " + sb.toString());
+                    Log.d(TAG, "data: " + sb.toString());
 
                     con.disconnect();
 
                     return response;
 
                 } catch (MalformedURLException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "doInBackground: ", e);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "doInBackground: ", e);
                 }
 
                 return response;

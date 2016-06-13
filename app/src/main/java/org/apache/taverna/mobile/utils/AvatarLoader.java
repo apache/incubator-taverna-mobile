@@ -32,6 +32,7 @@ import org.apache.taverna.mobile.utils.xmlparsers.AvatarXMLParser;
 import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParserRules;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +46,7 @@ import java.net.URL;
  * Created by Larry AKah on 6/29/15.
  */
 public class AvatarLoader extends AsyncTask<String, Void, Void> {
+    private static final String TAG = "AvatarLoader";
     WorkflowAdapter.ViewHolder vh;
 
     public AvatarLoader(WorkflowAdapter.ViewHolder userViewHolder) {
@@ -72,9 +74,9 @@ public class AvatarLoader extends AsyncTask<String, Void, Void> {
             avatarXMLParser.parse(input, new User(strings[1], this.vh));
 
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doInBackground: ", e);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doInBackground: ", e);
         }
 
         return null;

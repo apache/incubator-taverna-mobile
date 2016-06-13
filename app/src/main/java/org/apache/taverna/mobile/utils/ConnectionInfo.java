@@ -25,11 +25,11 @@ import android.util.Log;
 
 
 public class ConnectionInfo {
-    private static String TAG;
+    private static final String TAG = "ConnectionInfo";
     private static Context context;
 
     public ConnectionInfo(Context context) {
-        TAG = this.getClass().getName();
+
         Log.i(TAG, "Utils: ");
         ConnectionInfo.context = context;
     }
@@ -41,10 +41,11 @@ public class ConnectionInfo {
         if (connectivity != null) {
             NetworkInfo[] info = connectivity.getAllNetworkInfo();
             if (info != null)
-                for (int i = 0; i < info.length; i++)
+                for (int i = 0; i < info.length; i++) {
                     if (info[i].getState() == NetworkInfo.State.CONNECTED) {
                         return true;
                     }
+                }
 
         }
         return false;

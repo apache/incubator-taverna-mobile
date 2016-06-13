@@ -206,8 +206,9 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     public void showProgressbar(boolean status) {
         if (status) {
             mProgressBar.setVisibility(View.VISIBLE);
-        } else
+        } else {
             mProgressBar.setVisibility(View.GONE);
+        }
     }
 
     @Override

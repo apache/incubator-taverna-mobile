@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -43,6 +44,7 @@ import static org.apache.taverna.mobile.activities.DashboardMainActivity.APP_DIR
  */
 public class RunFragment extends Fragment implements View.OnClickListener {
 
+    private static final String TAG = "RunFragment";
     private View rootView;
     private TextView runIdTextView, runNameTextView;
     private ImageButton status;
@@ -116,16 +118,17 @@ public class RunFragment extends Fragment implements View.OnClickListener {
             runIdTextView.setText(runId);
             runNameTextView.setText(runName);
 
-            if (runState.contains("Pending"))
+            if (runState.contains("Pending")) {
                 status.setImageResource(android.R.drawable.presence_busy);
-            else if (runState.contains("Running"))
+            } else if (runState.contains("Running")) {
                 status.setImageResource(android.R.drawable.presence_away);
-            else if (runState.contains("Finished"))
+            } else if (runState.contains("Finished")) {
                 status.setImageResource(android.R.drawable.presence_online);
-            else if (runState.contains("Failed"))
+            } else if (runState.contains("Failed")) {
                 status.setImageResource(android.R.drawable.presence_offline);
-            else
+            } else {
                 status.setImageResource(android.R.drawable.presence_invisible);
+            }
 
             runStateTextView.setText(runState);
             runStartTime.setHint(runStarted);
@@ -137,7 +140,7 @@ public class RunFragment extends Fragment implements View.OnClickListener {
             downloadLogs.setOnClickListener(this);
             reloadRunResult();
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(TAG, "onResume: ", e);
         }
     }
 
@@ -169,7 +172,7 @@ public class RunFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.buttonWorkflowDownloadOutput:
                 try {
-                    System.out.println("output url: " + run_output_url);
+                    Log.d(TAG, "output url: " + run_output_url);
                     if (run_output_url.isEmpty()) {
                         Toast.makeText(getActivity(), "No run logs available", Toast.LENGTH_LONG)
                                 .show();
@@ -179,18 +182,18 @@ public class RunFragment extends Fragment implements View.OnClickListener {
                                         (getActivity()).getString(
                                         APP_DIRECTORY_NAME + "/Runoutput/outputs",
                                         "/TavernaMobile/Runouput/outputs/")),
-                                new TavernaPlayerAPI(getActivity()).PLAYER_RUN_URL +
+                                new TavernaPlayerAPI(getActivity()).mPlayerRunUrl +
                                         run_output_url.substring(0, 5));
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "onClick: ", e);
                     Toast.makeText(getActivity(), "Error downloading run output", Toast
                             .LENGTH_LONG).show();
                 }
                 break;
             case R.id.downloadRunLogs:
                 try {
-                    System.out.println("run logs: " + run_logs_url);
+                    Log.d(TAG, "run logs: " + run_logs_url);
                     if (run_logs_url.isEmpty()) {
                         Toast.makeText(getActivity(), "No run logs available", Toast.LENGTH_LONG)
                                 .show();
@@ -200,11 +203,11 @@ public class RunFragment extends Fragment implements View.OnClickListener {
                                         (getActivity()).getString(
                                         APP_DIRECTORY_NAME + "/Runoutput/logs/",
                                         "/TavernaMobile/Runoutput/logs")),
-                                new TavernaPlayerAPI(getActivity()).PLAYER_RUN_URL + run_logs_url
+                                new TavernaPlayerAPI(getActivity()).mPlayerRunUrl + run_logs_url
                                         .substring(0, 5));
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "onClick: ", e);
                     Toast.makeText(getActivity(), "Error downloading run logs", Toast
                             .LENGTH_LONG).show();
                 }
@@ -222,22 +225,22 @@ public class RunFragment extends Fragment implements View.OnClickListener {
                         runEndTime.setHint(runInfo.getString("finish_time"));
                         runStateTextView.setText(runInfo.getString("status_message"));
 
-                        if (runInfo.getString("status_message").contains("Pending"))
+                        if (runInfo.getString("status_message").contains("Pending")) {
                             status.setImageResource(android.R.drawable.presence_busy);
-                        else if (runInfo.getString("status_message").contains("Running"))
+                        } else if (runInfo.getString("status_message").contains("Running")) {
                             status.setImageResource(android.R.drawable.presence_away);
-                        else if (runInfo.getString("status_message").contains("Finished"))
+                        } else if (runInfo.getString("status_message").contains("Finished")) {
                             status.setImageResource(android.R.drawable.presence_online);
-                        else if (runInfo.getString("status_message").contains("Failed"))
+                        } else if (runInfo.getString("status_message").contains("Failed")) {
                             status.setImageResource(android.R.drawable.presence_offline);
-                        else
+                        } else {
                             status.setImageResource(android.R.drawable.presence_invisible);
-
+                        }
                         run_output_url = runInfo.has("outputs_zip") ? runInfo.getString
                                 ("outputs_zip") : "";
                         run_logs_url = runInfo.has("log") ? runInfo.getString("log") : "";
                     } catch (JSONException e) {
-                        e.printStackTrace();
+                        Log.e(TAG, "run: ", e);
                     }
                 }
             });
@@ -260,7 +263,7 @@ public class RunFragment extends Fragment implements View.OnClickListener {
             StringBuffer sb = new StringBuffer();
             try {
 
-                URL workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_URL +
+                URL workflowurl = new URL(new TavernaPlayerAPI(this.context).mPlayerRunUrl +
                         this.runid);
                 HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
 
@@ -284,9 +287,9 @@ public class RunFragment extends Fragment implements View.OnClickListener {
                 updateRun(this.context, runInfo);
 
             } catch (IOException ex) {
-                ex.printStackTrace();
+                Log.e(TAG, "run: ", ex);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG, "run: ", e);
             }
         }
     }

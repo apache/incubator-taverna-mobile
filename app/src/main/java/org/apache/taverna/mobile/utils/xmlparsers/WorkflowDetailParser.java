@@ -49,7 +49,8 @@ public class WorkflowDetailParser extends XMLParser {
     protected void doEndDocument(Object userObject) {
         if (userObject instanceof User) {
             WorkflowItemFragment.startLoadingAvatar((User) userObject);
-        } else
+        } else {
             WorkflowdetailFragment.setWorkflowDetails((Workflow) userObject);
+        }
     }
 }

@@ -143,15 +143,15 @@ public class DashboardMainActivity extends AppCompatActivity {
 
                                 Intent workflowSelectIntent =
                                         new Intent(Intent.ACTION_GET_CONTENT)
-                                                .setDataAndTypeAndNormalize(Uri.parse(String
-                                                        .format("%s%s%s",
+                                                .setDataAndTypeAndNormalize(
+                                                        Uri.parse(String.format("%s%s%s",
                                                         Environment.getExternalStorageDirectory(),
                                                         File.separator, APP_DIRECTORY_NAME)),
                                                         "application/vnd.taverna.t2flow+xml");
 
                                 Intent loadWorkflowIntent = Intent.createChooser
                                         (workflowSelectIntent,
-                                        "Choose Workflow (t2flow or xml)");
+                                                "Choose Workflow (t2flow or xml)");
                                 startActivityForResult(loadWorkflowIntent, SELECT_WORKFLOW);
                                 menuItem.setChecked(true);
                                 mDrawerLayout.closeDrawers();
@@ -208,20 +208,18 @@ public class DashboardMainActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            if (requestCode == SELECT_WORKFLOW) {
-                String workflowPath = data.getData().getPath();
-                //   Toast.makeText(getBaseContext(), "Path: "+workflowPath, Toast.LENGTH_LONG)
-                // .show();
-                String type = getMimeType(data.getData().getPath());
-                if (type == "text/xml" || type == "application/vnd.taverna.t2flow+xml") {
+        if (resultCode == RESULT_OK && requestCode == SELECT_WORKFLOW) {
+            String workflowPath = data.getData().getPath();
+            //   Toast.makeText(getBaseContext(), "Path: "+workflowPath, Toast.LENGTH_LONG)
+            // .show();
+            String type = getMimeType(data.getData().getPath());
+            if (type.equals("text/xml") || type.equals("application/vnd.taverna.t2flow+xml")) {
 
-                    new WorkflowOpen(this).execute(workflowPath);
-                } else {
-                    Toast.makeText(getBaseContext(), "Invalid worklow. Please try again", Toast
-                            .LENGTH_LONG).show();
+                new WorkflowOpen(this).execute(workflowPath);
+            } else {
+                Toast.makeText(getBaseContext(), "Invalid worklow. Please try again", Toast
+                        .LENGTH_LONG).show();
 
-                }
             }
         }
     }

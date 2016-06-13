@@ -128,17 +128,18 @@ public class WorkflowPreviewImageView extends ImageView {
                                     deltaX = -(x + right);
                                 }
                             } else {
-                            //if the image doesnt fit in the width or height
-                            //limit both up and down and left and right
-                                if (x + deltaX > 0)
+                                //if the image doesnt fit in the width or height
+                                //limit both up and down and left and right
+                                if (x + deltaX > 0) {
                                     deltaX = -x;
-                                else if (x + deltaX < -right)
+                                } else if (x + deltaX < -right) {
                                     deltaX = -(x + right);
-
-                                if (y + deltaY > 0)
+                                }
+                                if (y + deltaY > 0) {
                                     deltaY = -y;
-                                else if (y + deltaY < -bottom)
+                                } else if (y + deltaY < -bottom) {
                                     deltaY = -(y + bottom);
+                                }
                             }
                             //move the image with the matrix
                             matrix.postTranslate(deltaX, deltaY);
@@ -237,15 +238,17 @@ public class WorkflowPreviewImageView extends ImageView {
                     float y = m[Matrix.MTRANS_Y];
                     if (mScaleFactor < 1) {
                         if (Math.round(origWidth * saveScale) < width) {
-                            if (y < -bottom)
+                            if (y < -bottom) {
                                 matrix.postTranslate(0, -(y + bottom));
-                            else if (y > 0)
+                            } else if (y > 0) {
                                 matrix.postTranslate(0, -y);
+                            }
                         } else {
-                            if (x < -right)
+                            if (x < -right) {
                                 matrix.postTranslate(-(x + right), 0);
-                            else if (x > 0)
+                            } else if (x > 0) {
                                 matrix.postTranslate(-x, 0);
+                            }
                         }
                     }
                 }
@@ -256,14 +259,16 @@ public class WorkflowPreviewImageView extends ImageView {
                 float x = m[Matrix.MTRANS_X];
                 float y = m[Matrix.MTRANS_Y];
                 if (mScaleFactor < 1) {
-                    if (x < -right)
+                    if (x < -right) {
                         matrix.postTranslate(-(x + right), 0);
-                    else if (x > 0)
+                    } else if (x > 0) {
                         matrix.postTranslate(-x, 0);
-                    if (y < -bottom)
+                    }
+                    if (y < -bottom) {
                         matrix.postTranslate(0, -(y + bottom));
-                    else if (y > 0)
+                    } else if (y > 0) {
                         matrix.postTranslate(0, -y);
+                    }
                 }
             }
             return true;

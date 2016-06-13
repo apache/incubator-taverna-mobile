@@ -23,7 +23,7 @@ import android.support.v7.widget.RecyclerView;
 
 
 public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener {
-    public static String TAG = EndlessRecyclerOnScrollListener.class.getSimpleName();
+    public static final String TAG = EndlessRecyclerOnScrollListener.class.getSimpleName();
     int firstVisibleItem, visibleItemCount, totalItemCount;
     private int previousTotal = 0; // The total number of items in the dataset after the last load
     private boolean loading = true; // True if we are still waiting for the last set of data to
@@ -46,11 +46,11 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
         totalItemCount = mLinearLayoutManager.getItemCount();
         firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
 
-        if (loading) {
-            if (totalItemCount > previousTotal + 1) {
-                loading = false;
-                previousTotal = totalItemCount;
-            }
+        if (loading && totalItemCount > previousTotal + 1) {
+
+            loading = false;
+            previousTotal = totalItemCount;
+
         }
         if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem +
                 visibleThreshold)) {

@@ -76,7 +76,7 @@ public class User {
         this.userViewHolder = userViewHolder;
     }
 
-    public String getRow_id() {
+    public String getRowId() {
         return this.row_id;
     }
 
@@ -84,27 +84,27 @@ public class User {
         this.id = id;
     }
 
-    public String getCreated_at() {
+    public String getCreatedAt() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreatedAt(String created_at) {
         this.created_at = created_at;
     }
 
-    public String getDetails_uri() {
+    public String getDetailsUri() {
         return this.details_uri;
     }
 
-    public void setDetails_uri(String details_uri) {
+    public void setDetailsUri(String details_uri) {
         this.details_uri = details_uri;
     }
 
-    public String getAvatar_url() {
+    public String getAvatarUrl() {
         return this.avatar_url;
     }
 
-    public void setAvatar_url(String avatar_url) {
+    public void setAvatarUrl(String avatar_url) {
         this.avatar_url = avatar_url;
     }
 

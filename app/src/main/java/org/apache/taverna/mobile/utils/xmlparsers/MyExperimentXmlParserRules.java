@@ -62,20 +62,20 @@ public class MyExperimentXmlParserRules {
                 userObject) {
             switch (index) {
                 case 0: //uri
-                    mWorkflow.setWorkflow_details_url(value);
-                    ((Workflow) userObject).setWorkflow_details_url(value);
+                    mWorkflow.setWorkflowDetailsUrl(value);
+                    ((Workflow) userObject).setWorkflowDetailsUrl(value);
                     break;
                 case 1: //resource
-                    mWorkflow.setWorkflow_web_url(value);
-                    ((Workflow) userObject).setWorkflow_web_url(value);
+                    mWorkflow.setWorkflowWebUrl(value);
+                    ((Workflow) userObject).setWorkflowWebUrl(value);
                     break;
                 case 2: //id
                     mWorkflow.setId(Integer.parseInt(value));
                     ((Workflow) userObject).setId(Integer.parseInt(value));
                     break;
                 case 3://version
-                    mWorkflow.setWorkflow_versions(value);
-                    ((Workflow) userObject).setWorkflow_versions(value);
+                    mWorkflow.setWorkflowVersions(value);
+                    ((Workflow) userObject).setWorkflowVersions(value);
                     break;
             }
         }
@@ -90,8 +90,8 @@ public class MyExperimentXmlParserRules {
 
         @Override
         public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
-            mWorkflow.setWorkflow_title(text);
-            ((Workflow) userObject).setWorkflow_title(text);
+            mWorkflow.setWorkflowTitle(text);
+            ((Workflow) userObject).setWorkflowTitle(text);
         }
     }
 
@@ -105,8 +105,8 @@ public class MyExperimentXmlParserRules {
         @Override
         public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
 
-            mWorkflow.setWorkflow_description(String.valueOf(Html.fromHtml(text)));
-            ((Workflow) userObject).setWorkflow_description(String.valueOf(Html.fromHtml(text)));
+            mWorkflow.setWorkflowDescription(String.valueOf(Html.fromHtml(text)));
+            ((Workflow) userObject).setWorkflowDescription(String.valueOf(Html.fromHtml(text)));
         }
     }
 
@@ -133,8 +133,8 @@ public class MyExperimentXmlParserRules {
 
         @Override
         public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
-            mWorkflow.setWorkflow_Type(text);
-            ((Workflow) userObject).setWorkflow_Type(text);
+            mWorkflow.setWorkflowType(text);
+            ((Workflow) userObject).setWorkflowType(text);
         }
     }
 
@@ -159,9 +159,9 @@ public class MyExperimentXmlParserRules {
                     }
                     break;
                 case 1:
-                    muser.setDetails_uri(value);
+                    muser.setDetailsUri(value);
                     if ((userObject instanceof User)) {
-                        ((User) userObject).setDetails_uri(value);
+                        ((User) userObject).setDetailsUri(value);
                     }
                     break;
                 case 2:
@@ -199,10 +199,10 @@ public class MyExperimentXmlParserRules {
                 userObject) {
             switch (index) {
                 case 0:
-                    ((User) userObject).setAvatar_url(value);
+                    ((User) userObject).setAvatarUrl(value);
                     break;
                 case 1:
-                    ((User) userObject).setDetails_uri(value);
+                    ((User) userObject).setDetailsUri(value);
                     break;
                 case 2:
                     ((User) userObject).setId(value);
@@ -228,8 +228,8 @@ public class MyExperimentXmlParserRules {
 
         @Override
         public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
-            mWorkflow.setWorkflow_datecreated(text);
-            ((Workflow) userObject).setWorkflow_datecreated(text);
+            mWorkflow.setWorkflowDatecreated(text);
+            ((Workflow) userObject).setWorkflowDatecreated(text);
 
         }
     }
@@ -243,8 +243,8 @@ public class MyExperimentXmlParserRules {
 
         @Override
         public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
-            mWorkflow.setWorkflow_preview(text);
-            ((Workflow) userObject).setWorkflow_preview(text);
+            mWorkflow.setWorkflowPreview(text);
+            ((Workflow) userObject).setWorkflowPreview(text);
         }
     }
 
@@ -263,8 +263,8 @@ public class MyExperimentXmlParserRules {
 
         @Override
         public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
-            mWorkflow.setWorkflow_licence_type("Licence By " + text);
-            ((Workflow) userObject).setWorkflow_licence_type("Licence By " + text);
+            mWorkflow.setWorkflowLicenceType("Licence By " + text);
+            ((Workflow) userObject).setWorkflowLicenceType("Licence By " + text);
         }
     }
 
@@ -278,8 +278,8 @@ public class MyExperimentXmlParserRules {
 
         @Override
         public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
-            mWorkflow.setWorkflow_remote_url(text);
-            ((Workflow) userObject).setWorkflow_remote_url(text);
+            mWorkflow.setWorkflowRemoteUrl(text);
+            ((Workflow) userObject).setWorkflowRemoteUrl(text);
         }
     }
 
@@ -292,8 +292,8 @@ public class MyExperimentXmlParserRules {
 
         @Override
         public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
-            mWorkflow.setWorkflow_content_type(text);
-            ((Workflow) userObject).setWorkflow_content_type(text);
+            mWorkflow.setWorkflowContentType(text);
+            ((Workflow) userObject).setWorkflowContentType(text);
         }
     }
 
@@ -312,9 +312,9 @@ public class MyExperimentXmlParserRules {
 
         @Override
         public void handleParsedCharacters(XMLParser parser, String text, Object userObject) {
-            mWorkflow.setWorkflow_tags(new ArrayList<String>() {
+            mWorkflow.setWorkflowTags(new ArrayList<String>() {
             });
-            ((Workflow) userObject).setWorkflow_tags(new ArrayList<String>() {
+            ((Workflow) userObject).setWorkflowTags(new ArrayList<String>() {
             });
 
         }
@@ -367,9 +367,9 @@ public class MyExperimentXmlParserRules {
                 workflowListObject) {
             //add the  workflow to the workflow list
             this.workflow = new Workflow("", desc, id, url);
-            this.workflow.setWorkflow_details_url(uri);
-            this.workflow.setWorkflow_title(text);
-            this.workflow.setWorkflow_author("");
+            this.workflow.setWorkflowDetailsUrl(uri);
+            this.workflow.setWorkflowTitle(text);
+            this.workflow.setWorkflowAuthor("");
             wlist.add(this.workflow);
             //WorkflowLoader.loadedWorkflows.add(this.workflow);
             ((List<Workflow>) workflowListObject).add(this.workflow);

@@ -43,6 +43,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.util.Linkify;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ import java.util.List;
  * Created by Larry Akah on 6/8/15.
  */
 public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHolder> {
+    private static final String TAG = "WorkflowAdapter";
     public static final String WORKFLOW_FAVORITE_KEY = "WORKFLOW_FAVORITES"; //workflow key used
     // to save workflows when marked as favorites
     public static final String FAVORITE_LIST_DB = "FAVORITE_LIST";
@@ -109,12 +111,12 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
      * "something changed"} event if more specific data is not available.</p>
      * <p/>
      * <p>Components registering observers with an adapter are responsible for
-     * {@link #unregisterAdapterDataObserver(android.support.v7.widget.RecyclerView
+     * {@link #registerAdapterDataObserver(android.support.v7.widget.RecyclerView
      * .AdapterDataObserver)
      * unregistering} those observers when finished.</p>
      *
      * @param observer Observer to register
-     * @see #unregisterAdapterDataObserver(android.support.v7.widget.RecyclerView
+     * @see #registerAdapterDataObserver(android.support.v7.widget.RecyclerView
      * .AdapterDataObserver)
      */
     @Override
@@ -154,11 +156,11 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder viewHolder, int i) {
 
         final long wid = workflowList.get(i).getId();
-        final String author = workflowList.get(i).getWorkflow_author();
+        final String author = workflowList.get(i).getWorkflowAuthor();
 //        final String author = workflowList.get(i).getUploader().getName();
-        final String title = workflowList.get(i).getWorkflow_title();
-        String description = workflowList.get(i).getWorkflow_description();
-        final String uri = workflowList.get(i).getWorkflow_details_url();
+        final String title = workflowList.get(i).getWorkflowTitle();
+        String description = workflowList.get(i).getWorkflowDescription();
+        final String uri = workflowList.get(i).getWorkflowDetailsUrl();
         final String desc_full = description;
 
         if (description.length() > 80) description = description.substring(0, 79) + " ...";
@@ -168,26 +170,27 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         Linkify.addLinks(viewHolder.wk_description, Linkify.WEB_URLS);
 
         final Intent it = new Intent();
-        System.out.println("Workflow_uri:" + uri);
+        Log.d(TAG, "Workflow_uri:" + uri);
         it.setClass(context, WorkflowDetailActivity.class);
 //        it.putExtra("workflowid", workflow.get(i).getId()); //workflow_url
         it.putExtra("uri", uri); //uri
         it.putExtra("wtitle", title); //pass this workflow's title to the detail activity so the
         // corresponding run can be fetched
         it.putExtra("wid", wid);
-        WorkflowdetailFragment.WORKFLO_ID = title; //workflow.get(i).getId();
+        WorkflowdetailFragment.mWorkfloId = title; //workflow.get(i).getId();
 
         //determine whether to mark button as favorited or not
         final String favs = PreferenceManager.getDefaultSharedPreferences(context).getString
                 (FAVORITE_LIST_DB, "");
         String[] ids = favs.split(",");
         if (ids.length > 0) {
-            for (String id : ids)
+            for (String id : ids) {
                 if (id.equalsIgnoreCase("" + wid)) {
                     viewHolder.btn_mark_workflow.setBackgroundResource(R.drawable
                             .abc_list_selector_disabled_holo_light);
                     break;
                 }
+            }
         }
 
         viewHolder.btn_view_workflow.setOnClickListener(new View.OnClickListener() {
@@ -234,9 +237,9 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 } else if (saved == -1) {
                     Toast.makeText(context, "Sorry! This workflow has already been marked as a " +
                             "favourite", Toast.LENGTH_SHORT).show();
-                } else
+                } else {
                     Toast.makeText(context, "Error! Please try again", Toast.LENGTH_SHORT).show();
-
+                }
             }
         });
         viewHolder.wk_showmore.setText(Html.fromHtml(context.getResources().getString(R.string
@@ -244,10 +247,11 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
         viewHolder.wk_showmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (viewHolder.infolayout.getVisibility() == View.GONE)
+                if (viewHolder.infolayout.getVisibility() == View.GONE) {
                     viewHolder.infolayout.setVisibility(View.VISIBLE);
-                else
+                } else {
                     viewHolder.infolayout.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -333,9 +337,9 @@ public class WorkflowAdapter extends RecyclerView.Adapter<WorkflowAdapter.ViewHo
                 detailMinParser.parse(input, new User(strings[1], this.mViewHolder));
 
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                Log.e(TAG, "doInBackground: ", e);
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e(TAG, "doInBackground: ", e);
             }
             return null;
         }

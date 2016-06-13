@@ -11,7 +11,7 @@ public class BaseApiManager {
 
 
     public TavernaService mTavernaService;
-    String ENDPOINT = "http://www.myexperiment.org/";
+    final String ENDPOINT = "http://www.myexperiment.org/";
 
     public BaseApiManager() {
 

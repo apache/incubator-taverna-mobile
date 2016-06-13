@@ -37,6 +37,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,7 @@ import java.util.List;
  */
 public class WorkflowRunHistoryFragment extends Fragment implements LoaderManager
         .LoaderCallbacks<Workflow> {
-
+    private static final String TAG = "WorkflowRunHistoryFragment";
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM2 = "param2";
     private static String workflowID; //represents a run name that matches the given workflow
@@ -146,9 +147,9 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
     public void onLoadFinished(Loader<Workflow> workflowLoader, Workflow workflow) {
 
         try {
-            if (workflow.getWorkflow_runs() != null | workflow.getWorkflow_runs().size() != 0) {
+            if (workflow.getWorkflowRuns() != null | workflow.getWorkflowRuns().size() != 0) {
 
-                runAdapter.setRunList(workflow.getWorkflow_runs());
+                runAdapter.setRunList(workflow.getWorkflowRuns());
                 mRecyclerView.setAdapter(runAdapter);
                 mRecyclerView.setVisibility(View.VISIBLE);
                 emptyRunHistoryTextView.setVisibility(View.GONE);
@@ -158,7 +159,7 @@ public class WorkflowRunHistoryFragment extends Fragment implements LoaderManage
                 emptyRunHistoryTextView.setVisibility(View.VISIBLE);
             }
         } catch (NullPointerException np) {
-            np.printStackTrace();
+            Log.e(TAG, "onLoadFinished: ", np);
         }
 
         // progressDialog.dismiss();

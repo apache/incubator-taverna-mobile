@@ -23,6 +23,7 @@ import java.net.URL;
  */
 public class RunTask extends AsyncTask<String, Void, String> {
 
+    private static final String TAG = "RunTask";
     private Context context;
     private ProgressDialog progressDialog;
 
@@ -43,7 +44,7 @@ public class RunTask extends AsyncTask<String, Void, String> {
         StringBuffer sb = new StringBuffer();
         try {
             TavernaPlayerAPI tavernaPlayerAPI = new TavernaPlayerAPI();
-            URL workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_URL);
+            URL workflowurl = new URL(new TavernaPlayerAPI(this.context).mPlayerRunUrl);
             HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
             String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" +
                     tavernaPlayerAPI.getPlayerUserPassword(this.context);
@@ -79,7 +80,7 @@ public class RunTask extends AsyncTask<String, Void, String> {
             return sb.toString();
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Log.e(TAG, "doInBackground: ", ex);
         }
         return sb.toString();
     }

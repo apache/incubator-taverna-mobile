@@ -35,6 +35,7 @@ import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ import java.util.List;
  */
 public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkflowAdapter
         .FViewHolder> {
-
+    private static final String TAG = "FavoriteWorkflowAdapter";
     public WorkflowDB favDB;
     private Context context;
     private List<ArrayList<Object>> dataSet;
@@ -126,9 +127,9 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
                     favDB.delete(String.valueOf(data.get(0)));
                     notifyDataSetChanged();
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "onClick: ", e);
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    Log.e(TAG, "onClick: ", ex);
                 }
 
             }

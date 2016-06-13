@@ -22,64 +22,65 @@ public class Runs {
 
     ;
 
-    public long getRun_id() {
+    public long getRunId() {
         return run_id;
     }
 
-    public void setRun_id(long run_id) {
+    public void setrunId(long run_id) {
         this.run_id = run_id;
     }
 
-    public long getRun_workflow_id() {
+    public long getRunWorkflowId() {
         return run_workflow_id;
     }
 
-    public void setRun_workflow_id(long run_workflow_id) {
+    public void setRunWorkflowId(long run_workflow_id) {
         this.run_workflow_id = run_workflow_id;
     }
 
     public RunState getState() {
-        if (state.equalsIgnoreCase("finished"))
+        if (state.equalsIgnoreCase("finished")) {
             return RunState.FINISHED;
-        else if (state.equalsIgnoreCase("failed"))
+        } else if (state.equalsIgnoreCase("failed")) {
             return RunState.FAILED;
-        else
+        } else {
             return RunState.RUNNING;
+        }
     }
 
     public void setState(String state) {
         this.state = state;
     }
 
-    public String getRun_name() {
+    public String getRunName() {
         return run_name;
     }
 
-    public void setRun_name(String run_name) {
+    public void setRunName(String run_name) {
         this.run_name = run_name;
     }
 
-    public String getRun_started_date() {
+    public String getRunStartedDate() {
         return run_started_date;
     }
 
-    public void setRun_started_date(String run_started_date) {
+    public void setRunStartedDate(String run_started_date) {
         this.run_started_date = run_started_date;
     }
 
-    public String getRun_author() {
+    public String getRunAuthor() {
         return run_author;
     }
 
-    public void setRun_author(String run_author) {
+    public void setRunAuthor(String run_author) {
         this.run_author = run_author;
     }
 
-    public String getRun_ended_date() {
+    public String getRunEndedDate() {
         return run_ended_date;
     }
 
-    public void setRun_ended_date(String run_ended_date) {
+    public void setRunEndedDate(String run_ended_date) {
         this.run_ended_date = run_ended_date;
     }
 

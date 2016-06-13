@@ -57,9 +57,8 @@ import java.net.URL;
  */
 public class DetailsLoader extends AsyncTaskLoader<Workflow> {
 
+    private static final String TAG = "DetailsLoader";
     private LoadType lt;
-
-    ;
     private String uri;
     private Workflow workflow;
     private Context context;
@@ -97,7 +96,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                     dis = connection.getInputStream();
                     break;
                 case TYPE_RUN_HISTORY:
-                    workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_URL);
+                    workflowurl = new URL(new TavernaPlayerAPI(this.context).mPlayerRunUrl);
                     connection = (HttpURLConnection) workflowurl.openConnection();
                     String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" +
                             tavernaPlayerAPI.getPlayerUserPassword(this.context);
@@ -113,10 +112,10 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                     dis = connection.getInputStream();
                     break;
                 case TYPE_POLICY:
-                    workflowurl = new URL(new TavernaPlayerAPI(this.context).SERVER_BASE_URL);
+                    workflowurl = new URL(new TavernaPlayerAPI(this.context).mServerBaseUrl);
                     break;
                 default:
-                    workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_WORKFLOW_URL);
+                    workflowurl = new URL(new TavernaPlayerAPI(this.context).mPlayerWorkFlowUrl);
                     break;
             }
 
@@ -159,14 +158,14 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                             title, description, type,
                             attrlicetype, attrType, uploader, attrUploader, date, preview,
                             licetype, contenturi, contentType, tags, attrTags});
-                    //   System.out.println(sb.toString());
+                    //   Log.e(TAG, sb.toString());
                     parser.parse(dis, this.workflow);
                 }
                     dis.close();
                 //br.close();
                 return workflow;
                 case TYPE_RUN_HISTORY: {
-                    System.out.println("Downloading run history");
+                    Log.e(TAG, "Downloading run history");
                     BufferedReader br = new BufferedReader(new InputStreamReader(dis));
                     StringBuffer sb = new StringBuffer();
                     String jsonData = "";
@@ -187,16 +186,17 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                         JSONObject userobj = jsonObject.getJSONObject("user");
                         String username = userobj.getString("name");
                         StringBuffer nm = new StringBuffer(), ur = new StringBuffer();
-                        for (String n : name.toLowerCase().split(" "))
+                        for (String n : name.toLowerCase().split(" ")) {
                             nm.append(n);
-                        for (String p : uri.toLowerCase().split(" "))
+                        }
+                        for (String p : uri.toLowerCase().split(" ")) {
                             ur.append(p);
-
+                        }
                         if (nm.toString().equals(ur.toString())) {
                             Runs mrun = new Runs(name, started, ended, state);
-                            mrun.setRun_id(id);
-                            mrun.setRun_workflow_id(workflow_id);
-                            mrun.setRun_author(username);
+                            mrun.setrunId(id);
+                            mrun.setRunWorkflowId(workflow_id);
+                            mrun.setRunAuthor(username);
 
                             workflow.addWorkflowRun(mrun);
                         }
@@ -220,11 +220,11 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
             }
 
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            Log.e(TAG, "loadInBackground: ", e);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "loadInBackground: ", e);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(TAG, "loadInBackground: ", e);
         }
         return workflow;
     }
@@ -273,6 +273,6 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
  * js.getString("description"),
  * js.getInt("id"),
  * js.getString("url"));
- * workflow.setWorkflow_datecreated(created_at);
- * workflow.setWorkflow_datemodified(updated_at);
+ * workflow.setWorkflowDatecreated(created_at);
+ * workflow.setWorkflowDatemodified(updated_at);
  **/

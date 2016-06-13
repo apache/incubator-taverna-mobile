@@ -49,6 +49,7 @@ import java.util.List;
  */
 public class WorkflowLoader extends AsyncTask<String, Object, Object> { //WorkflowLoaderMain {
 
+    private static final String TAG = "WorkflowLoader";
     private Context ctx;
     private List<Workflow> userWorkflows;
     private SwipeRefreshLayout refreshLayout;
@@ -86,13 +87,13 @@ public class WorkflowLoader extends AsyncTask<String, Object, Object> { //Workfl
             xmlParser.parse(dis, this.userWorkflows);
 
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doInBackground: ", e);
         } catch (ProtocolException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doInBackground: ", e);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doInBackground: ", e);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Log.e(TAG, "doInBackground: ", ex);
         }
         return this.userWorkflows;
     }
@@ -100,6 +101,6 @@ public class WorkflowLoader extends AsyncTask<String, Object, Object> { //Workfl
     @Override
     protected void onPostExecute(Object o) {
         refreshLayout.setRefreshing(false);
-        System.out.println("Workflow Count: " + this.userWorkflows.size());
+        Log.i(TAG, "Workflow Count: " + this.userWorkflows.size());
     }
 }

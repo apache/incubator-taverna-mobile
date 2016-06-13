@@ -99,10 +99,11 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
      * The fragment argument representing the section number for this
      * fragment.
      */
+    private static final String TAG = "WorkflowdetailFragment";
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static final String BOX_APP_KEY = "doicbvkfyzligh2";
     private static final String BOX_APP_SECRET = "3uuuw36mm7jkflc";
-    public static String WORKFLO_ID = "";
+    public static String mWorkfloId = "";
     public static Context cont;
     public static String workflow_uri;
     static View rootView;
@@ -111,8 +112,8 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     static Workflow currentWorkflow = null;
     private static ProgressDialog progressDialog;
     private static String download_url;
-    private static boolean LOAD_STATE = false;
-    private static boolean DROPUPLOAD = false;
+    private static boolean mLoadState = false;
+    private static boolean mDropupload = false;
     public AlertDialog runDialog;
     public AlertDialog.Builder alertDialogBuilder;
     public boolean isZoomIn;
@@ -150,7 +151,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         final TextView desc = (TextView) rootView.findViewById(R.id.wdescription);
         final TextView createdat = (TextView) rootView.findViewById(R.id.wcreatedat);
         final ImageView preview = (ImageView) rootView.findViewById(R.id.wkf_image);
-        WORKFLO_ID = wk.getWorkflow_title();
+        //mWorkfloId = wk.getWorkflowTitle();
         ((Activity) cont).runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -163,24 +164,24 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 //String uploaderText = String.format(resources.getString(R.string
                 // .workflow_author), uploader != null ? uploader.getName():"Unknown");
                 author.setText((uploader != null) ? uploader.getName() : "Unknown");
-                title.setText(wk.getWorkflow_title());
-                if (wk.getWorkflow_description() != null) {
-                    desc.setText(wk.getWorkflow_description());
+                title.setText(wk.getWorkflowTitle());
+                if (wk.getWorkflowDescription() != null) {
+                    desc.setText(wk.getWorkflowDescription());
                 } else {
                     //desc.setVisibility(View.INVISIBLE); //Not sure I trust this! Needs
                     // investigating.
                 }
                 String createdAtText = String.format(resources.getString(R.string.created), wk
-                        .getWorkflow_datecreated());
+                        .getWorkflowDatecreated());
                 createdat.setText(createdAtText);
                 //updated.setText("Workflow Description");
                 String typeText = String.format(resources.getString(R.string.workflow_type_text),
-                        wk.getWorkflow_Type());
+                        wk.getWorkflowType());
                 type.setText(typeText);
 
-                //preview.setImageURI(Uri.parse(wk.getWorkflow_preview()));
-                new LoadImageThread(preview, wk.getWorkflow_preview()).execute();
-                download_url = wk.getWorkflow_remote_url();
+                //preview.setImageURI(Uri.parse(wk.getWorkflowPreview()));
+                new LoadImageThread(preview, wk.getWorkflowPreview()).execute();
+                download_url = wk.getWorkflowRemoteUrl();
                 zoomin.setAnimationListener(new Animation.AnimationListener() {
 
                     @Override
@@ -239,7 +240,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
         progressDialog.setCancelable(false);
-        //   WORKFLO_ID = workflowid;
+        //   mWorkfloId = workflowid;
         zoomin = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomin);
         zoomout = AnimationUtils.loadAnimation(getActivity(), R.anim.zoomout);
 
@@ -255,12 +256,13 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         final String favs = sharedPreferences.getString(WorkflowAdapter.FAVORITE_LIST_DB, "");
         String[] ids = favs.split(",");
         if (ids.length > 0) {
-            for (String id : ids)
+            for (String id : ids) {
                 if (id.equalsIgnoreCase("" + wid)) {
                     mark_workflow.setBackgroundResource(R.drawable
                             .abc_list_selector_disabled_holo_light);
                     break;
                 }
+            }
         }
         rootView.findViewById(R.id.saveToDropboxButton).setOnClickListener(this);
         rootView.findViewById(R.id.saveToGoogleDriveButton).setOnClickListener(this);
@@ -297,11 +299,12 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
         switch (view.getId()) {
             case R.id.run_wk:
                 if (((TextView) rootView.findViewById(R.id.wtype)).getText().toString().contains
-                        ("Taverna 2"))
+                        ("Taverna 2")) {
                     new WorkflowProcessTask(getActivity()).execute(download_url);
-                else
+                } else {
                     Toast.makeText(getActivity(), "Sorry! Only Taverna 2 workflows can be run.",
                             Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.download_wk:
                 // start the android Download manager to start downloading a remote workflow file
@@ -313,7 +316,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                             DashboardMainActivity.APP_DIRECTORY_NAME, "/")),
                             download_url);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "onClick: ", e);
                 }
 
                 break;
@@ -323,11 +326,11 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 String favs = sharedPreferences.getString(WorkflowAdapter.FAVORITE_LIST_DB, "");
                 //save current workflow as favorite
                 mfav.add(currentWorkflow.getId());
-                mfav.add(currentWorkflow.getWorkflow_author());
-                mfav.add(currentWorkflow.getWorkflow_title());
-                mfav.add(currentWorkflow.getWorkflow_description());
+                mfav.add(currentWorkflow.getWorkflowAuthor());
+                mfav.add(currentWorkflow.getWorkflowTitle());
+                mfav.add(currentWorkflow.getWorkflowDescription());
                 mfav.add(SimpleDateFormat.getDateTimeInstance().format(new Date()).toString());
-                mfav.add(currentWorkflow.getWorkflow_details_url());
+                mfav.add(currentWorkflow.getWorkflowDetailsUrl());
                 mfav.add(((TextView) rootView.findViewById(R.id.wkf_author)).getText());
                 int result = new WorkflowDB(getActivity(), WorkflowAdapter
                         .WORKFLOW_FAVORITE_KEY).insert(mfav);
@@ -341,16 +344,17 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 } else if (result == -1) {
                     Toast.makeText(getActivity(), "Sorry! This workflow has already been marked " +
                             "as a favourite", Toast.LENGTH_SHORT).show();
-                } else
+                } else {
                     Toast.makeText(getActivity(), "Error!, please try again", Toast.LENGTH_SHORT)
                             .show();
+                }
                 break;
             case R.id.saveToDropboxButton:
                 String authToken = PreferenceManager.getDefaultSharedPreferences(getActivity())
                         .getString("dropboxauth", "");
-                if (authToken.isEmpty())
+                if (authToken.isEmpty()) {
                     mDBApi.getSession().startOAuth2Authentication(getActivity());
-                else {
+                } else {
                     mDBApi.getSession().setOAuth2AccessToken(authToken);
                     new WorkflowDriveUpload().execute(download_url);
                 }
@@ -369,12 +373,12 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     @Override
     public void onResume() {
         super.onResume();
-        if (!LOAD_STATE)
+        if (!mLoadState)
             workflow_uri = getActivity().getIntent().getStringExtra("uri");
 
         getActivity().getLoaderManager().initLoader(1, null, this).forceLoad();
 
-        if (mDBApi.getSession().authenticationSuccessful() && !DROPUPLOAD) {
+        if (mDBApi.getSession().authenticationSuccessful() && !mDropupload) {
             try {
                 // Required to complete auth, sets the access token on the session
                 mDBApi.getSession().finishAuthentication();
@@ -391,7 +395,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        LOAD_STATE = true;
+        mLoadState = true;
     }
 
     @Override
@@ -453,7 +457,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 myBitmap = BitmapFactory.decodeStream(input);
 //                imageView.setImageBitmap(myBitmap);
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e(TAG, "doInBackground: ", e);
             }
             return myBitmap;
         }
@@ -487,7 +491,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             try {
 
                 URL workflowurl = new URL(new TavernaPlayerAPI(this.context)
-                        .PLAYER_RUN_FRAMEWORK_URL + params[0]);
+                        .mPlayerRunFrameworkUrl + params[0]);
                 HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
                 String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" +
                         tavernaPlayerAPI.getPlayerUserPassword(this.context);
@@ -516,7 +520,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 return sb.toString();
 
             } catch (IOException ex) {
-                ex.printStackTrace();
+                Log.e(TAG, "doInBackground: ", ex);
             }
             return sb.toString();
         }
@@ -566,7 +570,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                                 // name/input json object
 
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                Log.e(TAG, "onClick: ", e);
                             }
 
                         }
@@ -576,9 +580,9 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                             //start a run task to execute the run.
                             new RunTask(ctx).execute(json.toString());
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.e(TAG, "onClick: ", e);
                         } catch (Exception ex) {
-                            ex.printStackTrace();
+                            Log.e(TAG, "onClick: ", ex);
                         }
 
                     }
@@ -595,7 +599,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 runDialog = alertDialogBuilder.create();
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG, "onPostExecute: ", e);
             }
             progressDialog.dismiss();
 
@@ -633,12 +637,12 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
         @Override
         protected String doInBackground(String... params) {
-            StringBuffer sb = new StringBuffer();
+            StringBuffer sb = new StringBuffer(53);
             try {
                 //prepare connection requests
                 URL workflowurl = new URL(params[0]); //the resource xml file representing the
                 // workflow to be uploaded to the player
-                String playerurl = new TavernaPlayerAPI(this.context).PLAYER_BASE_URL +
+                String playerurl = new TavernaPlayerAPI(this.context).mPlayerBaseUrl +
                         "workflows.json";
                 TavernaPlayerAPI tavernaPlayerAPI = new TavernaPlayerAPI();
 
@@ -658,10 +662,11 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(wconn
                         .getInputStream()));
                 String str = "";
-                while ((str = bufferedReader.readLine()) != null)
+                while ((str = bufferedReader.readLine()) != null) {
                     sb.append(str); //in this string builder we have read the workflow( as
-                // .t2flow or .xml) workflow from remote resource. Now we need to post that to
-                // the player.
+                    // .t2flow or .xml) workflow from remote resource. Now we need to post that to
+                    // the player.
+                }
                 bufferedReader.close();
                 wconn.disconnect();
 
@@ -671,7 +676,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 String post = "{\"workflow\":" + data + "}";
                 //clear sb so that we can use it again to fetch results from this post request
                 sb.delete(0, sb.length() - 1);
-                System.out.println("BODY=>" + post);
+                Log.d(TAG, "BODY=>" + post);
                 connection.setRequestMethod("POST");
                 connection.setRequestProperty("Authorization", basicAuth);
                 connection.setRequestProperty("Accept", "*/*");
@@ -691,11 +696,12 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
 
                 InputStream dis = connection.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(dis));
-                while ((str = br.readLine()) != null)
+                while ((str = br.readLine()) != null) {
                     sb.append(str);
+                }
                 connection.disconnect();
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e(TAG, "doInBackground: ", e);
                 sb.append("Error reading remote workflow. Please try again later");
             }
 
@@ -719,7 +725,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 new WorkflowRunTask(getActivity()).execute(workflowJson.getString("id"));
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG, "onPostExecute: ", e);
             }
 
         }
@@ -764,13 +770,13 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
                 //  metaDataEntry = mDBApi.metadata("/"+Uri.parse(files[0]).getLastPathSegment(),
                 // 1, null, false, null);
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                Log.e(TAG, "doInBackground: ", e);
             } catch (DropboxException e) {
-                e.printStackTrace();
+                Log.e(TAG, "doInBackground: ", e);
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                Log.e(TAG, "doInBackground: ", e);
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e(TAG, "doInBackground: ", e);
             }
 
             return response.rev;
@@ -781,7 +787,7 @@ public class WorkflowdetailFragment extends Fragment implements View.OnClickList
             if (null != s) {
                 Toast.makeText(getActivity(), "File Saved to dropbox. Reference: " + s, Toast
                         .LENGTH_LONG).show();
-                DROPUPLOAD = true;
+                mDropupload = true;
             } else {
                 Toast.makeText(getActivity(), "Failed to save to dropbox " + s, Toast
                         .LENGTH_LONG).show();

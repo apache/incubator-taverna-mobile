@@ -101,10 +101,10 @@ public class RunAdapter extends RecyclerView.Adapter<RunAdapter.RunHolder> {
     @Override
     public void onBindViewHolder(RunHolder holder, int position) {
         Runs lRun = runList.get(position);
-        holder.runtitle.setText(lRun.getRun_name());
-        holder.runstarted.setText(lRun.getRun_started_date());
-        holder.runfinished.setText(lRun.getRun_ended_date());
-        holder.runAuthor.setText("Author->" + lRun.getRun_author());
+        holder.runtitle.setText(lRun.getRunName());
+        holder.runstarted.setText(lRun.getRunStartedDate());
+        holder.runfinished.setText(lRun.getRunEndedDate());
+        holder.runAuthor.setText("Author->" + lRun.getRunAuthor());
         switch (lRun.getState()) {
             case RUNNING:
                 holder.runStatus.setImageResource(android.R.drawable.presence_busy);

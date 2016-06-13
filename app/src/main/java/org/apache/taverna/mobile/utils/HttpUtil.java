@@ -12,6 +12,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.apache.taverna.mobile.tavernamobile.User;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.net.CookieStore;
 import java.net.HttpURLConnection;
@@ -44,7 +46,7 @@ import java.net.HttpURLConnection;
  * Created by Larry Akah on 6/18/15.
  */
 public class HttpUtil {
-
+    private static final String TAG = "HttpUtil";
     public <T> Object doPostAuthenticate() {
         User muser = new User("", null);
 
@@ -73,16 +75,16 @@ public class HttpUtil {
                 }
             }
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doGetRequestResponse: ", e);
             return e.getMessage();
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doGetRequestResponse: ", e);
             return e.getMessage();
         } catch (ClientProtocolException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doGetRequestResponse: ", e);
             return e.getMessage();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doGetRequestResponse: ", e);
             return e.getMessage();
         }
 

@@ -37,6 +37,7 @@ import java.net.URL;
  */
 public class WorkflowOpen extends AsyncTask<String, Void, String> {
 
+    private static final String TAG = "WorkflowOpen";
     TavernaPlayerAPI tavernaPlayerAPI = new TavernaPlayerAPI();
     private Context context;
     private ProgressDialog progressDialog;
@@ -59,14 +60,14 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
      */
     @Override
     protected String doInBackground(String... params) {
-        StringBuffer sb = new StringBuffer();
+        StringBuffer sb = new StringBuffer(55);
         String str = "";
         try {
 
             //prepare connection requests
             File objectFile = new File(params[0]); //the resource xml file representing the
             // workflow to be uploaded to the player
-            String playerurl = new TavernaPlayerAPI(this.context).PLAYER_BASE_URL + "workflows" +
+            String playerurl = new TavernaPlayerAPI(this.context).getplayerBaseUrl() + "workflows" +
                     ".json";
             URL posturl = new URL(playerurl);
             HttpURLConnection connection = (HttpURLConnection) posturl.openConnection();
@@ -85,7 +86,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
                 }
                 br.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e(TAG, "doInBackground: ", e);
             }
 
             String data = "{\"document\":\"data:application/octet-stream;base64," +
@@ -94,7 +95,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
             String post = "{\"workflow\":" + data + "}";
             //clear sb so that we can use it again to fetch results from this post request
             sb.delete(0, sb.length() - 1);
-            System.out.println("BODY=>" + post);
+            Log.i(TAG, "BODY=>" + post);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Authorization", basicAuth);
             connection.setRequestProperty("Accept", "*/*");
@@ -114,13 +115,14 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
 
             InputStream dis = connection.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(dis));
-            while ((str = br.readLine()) != null)
+            while ((str = br.readLine()) != null) {
                 sb.append(str);
-            System.out.println("Post Response Code: " + connection.getResponseCode());
-            System.out.println("Post response message: " + connection.getResponseMessage());
+            }
+            Log.i(TAG, "Post Response Code: " + connection.getResponseCode());
+            Log.i(TAG, "Post response message: " + connection.getResponseMessage());
             connection.disconnect();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doInBackground: ", e);
             sb.append("Error reading remote workflow. Please try again later");
         }
 
@@ -138,14 +140,14 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         progressDialog.dismiss();
-        System.out.println(s);
+        Log.i(TAG, s);
         s = s.substring(1, s.length());
         try {
             JSONObject workflowJson = new JSONObject(s);
             new WorkflowRunTask(this.context).execute(workflowJson.getString("id"));
 
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(TAG, "onPostExecute: ", e);
         }
 
     }
@@ -192,7 +194,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
             try {
 
                 URL workflowurl = new URL(new TavernaPlayerAPI(this.context)
-                        .PLAYER_RUN_FRAMEWORK_URL + params[0]);
+                        .mPlayerRunFrameworkUrl + params[0]);
                 HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
                 String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" +
                         tavernaPlayerAPI.getPlayerUserPassword(this.context);
@@ -219,7 +221,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
                 return sb.toString();
 
             } catch (IOException ex) {
-                ex.printStackTrace();
+                Log.e(TAG, "doInBackground: ", ex);
             }
             return sb.toString();
         }
@@ -269,7 +271,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
                                 // name/input json object
 
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                Log.e(TAG, "onClick: ", e);
                             }
 
                         }
@@ -279,7 +281,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
                             //start a run task to execute the run.
                             new RunTask(ctx).execute(json.toString());
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            Log.e(TAG, "onClick: ", e);
                         }
 
                     }
@@ -296,7 +298,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
                 runDialog = alertDialogBuilder.create();
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG, "onPostExecute: ", e);
             }
             progressDialog.dismiss();
             runDialog.show();

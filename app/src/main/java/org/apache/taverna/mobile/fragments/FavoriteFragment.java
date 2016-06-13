@@ -35,6 +35,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -55,6 +56,7 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
      * The fragment argument representing the section number for this
      * fragment.
      */
+    private static final String TAG = "FavoriteFragment";
     private static final String ARG_SECTION_NUMBER = "SECTION_NUMBER";
     public FavoriteWorkflowAdapter favoriteAdapter;
     public WorkflowDB myWorkflowDb;
@@ -114,7 +116,7 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
             favoriteAdapter = new FavoriteWorkflowAdapter(getActivity(), mfavorites);
             favoriteAdapter.registerAdapterDataObserver(dataObserver);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(TAG, "setUpFavoriteData: ", e);
             favoriteAdapter = new FavoriteWorkflowAdapter(getActivity(), Collections
                     .<ArrayList<Object>>emptyList());
             favoriteAdapter.registerAdapterDataObserver(dataObserver);
@@ -182,8 +184,9 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnCreateC
         } else if (title.equals("Remove")) {
             Toast.makeText(getActivity(), "Removing", Toast.LENGTH_SHORT).show();
             return true;
-        } else
+        } else {
             return super.onContextItemSelected(item);
+        }
     }
 
     /**

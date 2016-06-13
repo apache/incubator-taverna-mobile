@@ -48,12 +48,11 @@ import java.util.UUID;
  */
 public class WorkflowDB {
 
-    private final String LIBTAG = getClass().getName();
-    private String ENTITY_KEY;
+    private static final String TAG = "WorkflowDB";
+    private final String ENTITY_KEY;
     private Context context;
     private SharedPreferences msharedpreference;
-    private ArrayList<String> ITEM_IDS;
-    private JSONObject DBJSON;
+    private final ArrayList<String> ITEM_IDS;
     private JSONObject dataobj; //hold all entries for a given ENTITY_KEY
 
     /**
@@ -65,9 +64,8 @@ public class WorkflowDB {
     public WorkflowDB(Context ctx, String entityKey) {
         context = ctx;
         ENTITY_KEY = entityKey;
-        DBJSON = new JSONObject();
         ITEM_IDS = new ArrayList<String>();
-        dataobj = DBJSON;
+        dataobj = new JSONObject();
     }
 
     /**
@@ -124,7 +122,7 @@ public class WorkflowDB {
                     // data returned
                     results.add(mlist);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "get: ", e);
                     continue;
                 }
             }
@@ -148,14 +146,14 @@ public class WorkflowDB {
         }
         try {
             dataobj.put(itemId, jarray); //replace the current entry at the given ID.
-            Log.d(LIBTAG, "" + dataobj.toString(2));
+            Log.d(TAG, "" + dataobj.toString(2));
             operationSucceeded = true;
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(TAG, "update: ", e);
             operationSucceeded = false;
-        } finally {
-            return operationSucceeded;
         }
+        return operationSucceeded;
+
     }
 
     /**
@@ -198,7 +196,7 @@ public class WorkflowDB {
                             results.add(resultArray.getString(j));
                         }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "get: ", e);
                     continue;
                 }
             }
@@ -215,18 +213,19 @@ public class WorkflowDB {
     public boolean save() {
         msharedpreference = PreferenceManager.getDefaultSharedPreferences(context);
         boolean saved = false;
-        if (dataobj != null)
+        if (dataobj != null) {
             try {
                 saved = saveid(ITEM_IDS);
                 if (saved)
                     msharedpreference.edit().putString(ENTITY_KEY, dataobj.toString()).apply();
                 return saved;
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG, "save: ", e);
                 return false;
             }
-        else
+        } else {
             return false;
+        }
     }
 
     /**
@@ -238,14 +237,14 @@ public class WorkflowDB {
         try {
             JSONObject jsonObject = new JSONObject(msharedpreference.getString(ENTITY_KEY, "{" +
                     ENTITY_KEY + ":{}}")); //main json db
-            System.out.println(jsonObject.toString(1));
+            Log.d(TAG, jsonObject.toString(1));
 
             JSONArray jsonArray;
-            if (jsonObject.has("ids"))
+            if (jsonObject.has("ids")) {
                 jsonArray = jsonObject.optJSONArray("ids");
-            else
+            } else {
                 jsonArray = new JSONArray();
-
+            }
             String newItemId = item.get(0).toString(); //use the workflow id as an entity key for
             // the new entity
 
@@ -264,10 +263,10 @@ public class WorkflowDB {
             jsonObject.put(newItemId, newEntity);
             msharedpreference.edit().putString(ENTITY_KEY, jsonObject.toString()).commit();
             long end = System.currentTimeMillis();
-            System.out.println("Insert benchmark length = " + (end - start));
+            Log.d(TAG, "Insert benchmark length = " + (end - start));
             return 1;
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(TAG, "insert: ", e);
         }
         return 0;
     }
