@@ -3,10 +3,10 @@ package org.apache.taverna.mobile.activities;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -25,6 +25,12 @@ package org.apache.taverna.mobile.activities;
  * under the License.
  */
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowAboutFragment;
+import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowLicenceFragment;
+import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowRunHistoryFragment;
+import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowdetailFragment;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -33,12 +39,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowAboutFragment;
-import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowLicenceFragment;
-import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowRunHistoryFragment;
-import org.apache.taverna.mobile.fragments.workflowdetails.WorkflowdetailFragment;
 
 import java.util.Locale;
 
@@ -80,16 +80,17 @@ public class WorkflowDetailActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
-            this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.slide_out_right );
+            this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.slide_out_right);
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         finish();
-        this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.slide_out_right );
+        this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.slide_out_right);
     }
 
     /**
@@ -104,16 +105,17 @@ public class WorkflowDetailActivity extends ActionBarActivity {
 
         @Override
         public Fragment getItem(int position) {
-            switch(position +1){
+            switch (position + 1) {
                 case 1:
-                return WorkflowdetailFragment.newInstance(position + 1);
+                    return WorkflowdetailFragment.newInstance(position + 1);
                 case 2:
                     //System.out.println(""+getIntent().getStringExtra("wtitle"));
-                   return WorkflowRunHistoryFragment.newInstance(getIntent().getStringExtra("wtitle"));
+                    return WorkflowRunHistoryFragment.newInstance(getIntent().getStringExtra
+                            ("wtitle"));
                 case 3:
-                    return WorkflowLicenceFragment.newInstance("","");
+                    return WorkflowLicenceFragment.newInstance("", "");
                 case 4:
-                    return WorkflowAboutFragment.newInstance("","");
+                    return WorkflowAboutFragment.newInstance("", "");
             }
             return WorkflowdetailFragment.newInstance(position + 1);
         }

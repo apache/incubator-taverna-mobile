@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.utils;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -23,16 +23,17 @@ package org.apache.taverna.mobile.utils;
  * specific language governing permissions and limitations
  * under the License.
  */
-import android.content.Context;
-import android.os.AsyncTask;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 
 import com.thebuzzmedia.sjxp.rule.IRule;
 
 import org.apache.taverna.mobile.tavernamobile.Workflow;
 import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParserRules;
 import org.apache.taverna.mobile.utils.xmlparsers.WorkflowParser;
+
+import android.content.Context;
+import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,8 +47,9 @@ import java.util.List;
 /**
  * Created by Larry Akah on 6/13/15.
  */
-public class WorkflowLoader extends AsyncTask<String, Object, Object>{ //WorkflowLoaderMain {
+public class WorkflowLoader extends AsyncTask<String, Object, Object> { //WorkflowLoaderMain {
 
+    private static final String TAG = "WorkflowLoader";
     private Context ctx;
     private List<Workflow> userWorkflows;
     private SwipeRefreshLayout refreshLayout;
@@ -68,27 +70,30 @@ public class WorkflowLoader extends AsyncTask<String, Object, Object>{ //Workflo
     public List<Workflow> doInBackground(String[] pages) {
         //start a network request to fetch user's workflows
 
-        IRule wkflowRule = new MyExperimentXmlParserRules.WorkflowRule(IRule.Type.ATTRIBUTE, "/workflows/workflow", "resource", "uri","id", "version");
-        IRule workflowNameRule = new MyExperimentXmlParserRules.WorkflowRule(IRule.Type.CHARACTER, "/workflows/workflow");
+        IRule wkflowRule = new MyExperimentXmlParserRules.WorkflowRule(IRule.Type.ATTRIBUTE,
+                "/workflows/workflow", "resource", "uri", "id", "version");
+        IRule workflowNameRule = new MyExperimentXmlParserRules.WorkflowRule(IRule.Type
+                .CHARACTER, "/workflows/workflow");
         WorkflowParser xmlParser = new WorkflowParser(new IRule[]{wkflowRule, workflowNameRule});
         try {
-            URL workflowurl = new URL("http://www.myexperiment.org/workflows.xml?page="+Integer.parseInt((pages[0])));
+            URL workflowurl = new URL("http://www.myexperiment.org/workflows.xml?page=" + Integer
+                    .parseInt((pages[0])));
             HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
             connection.setRequestMethod("GET");
             connection.connect(); //send request
-            Log.i("WorkflowLoader","Loading workflows page = "+pages[0]);
+            Log.i("WorkflowLoader", "Loading workflows page = " + pages[0]);
 
             InputStream dis = connection.getInputStream();
             xmlParser.parse(dis, this.userWorkflows);
 
-        }catch (MalformedURLException e) {
-            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            Log.e(TAG, "doInBackground: ", e);
         } catch (ProtocolException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doInBackground: ", e);
         } catch (IOException e) {
-            e.printStackTrace();
-        }catch (Exception ex){
-            ex.printStackTrace();
+            Log.e(TAG, "doInBackground: ", e);
+        } catch (Exception ex) {
+            Log.e(TAG, "doInBackground: ", ex);
         }
         return this.userWorkflows;
     }
@@ -96,6 +101,6 @@ public class WorkflowLoader extends AsyncTask<String, Object, Object>{ //Workflo
     @Override
     protected void onPostExecute(Object o) {
         refreshLayout.setRefreshing(false);
-        System.out.println("Workflow Count: "+this.userWorkflows.size());
+        Log.i(TAG, "Workflow Count: " + this.userWorkflows.size());
     }
 }

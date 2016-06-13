@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.utils.xmlparsers;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -23,6 +23,7 @@ package org.apache.taverna.mobile.utils.xmlparsers;
  * specific language governing permissions and limitations
  * under the License.
  */
+
 import com.thebuzzmedia.sjxp.XMLParser;
 import com.thebuzzmedia.sjxp.XMLParserException;
 import com.thebuzzmedia.sjxp.rule.IRule;

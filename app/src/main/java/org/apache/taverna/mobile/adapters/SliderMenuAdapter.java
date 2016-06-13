@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.adapters;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -24,6 +24,8 @@ package org.apache.taverna.mobile.adapters;
  * under the License.
  */
 
+import org.apache.taverna.mobile.R;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,19 +34,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.apache.taverna.mobile.R;
-
 import java.util.List;
 
 /**
  * Created by root on 6/7/15.
  */
-public class SliderMenuAdapter extends BaseAdapter{
+public class SliderMenuAdapter extends BaseAdapter {
 
     private List<String> dataItems;
     private Context context;
 
-    public SliderMenuAdapter(Context c,List<String> items){
+    public SliderMenuAdapter(Context c, List<String> items) {
         dataItems = items;
         context = c;
     }
@@ -67,11 +67,12 @@ public class SliderMenuAdapter extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        View menuitemview = LayoutInflater.from(context).inflate(R.layout.menu_item_layout, viewGroup, false);
+        View menuitemview = LayoutInflater.from(context).inflate(R.layout.menu_item_layout,
+                viewGroup, false);
 
         ImageView menuicon = (ImageView) menuitemview.findViewById(R.id.menuIcon);
         TextView menuitem = (TextView) menuitemview.findViewById(R.id.menuItemText);
-        switch(i +1){
+        switch (i + 1) {
             case 1:
                 menuicon.setImageResource(R.mipmap.ic_dashboard_home);
                 menuitem.setText(dataItems.get(i));
@@ -100,11 +101,11 @@ public class SliderMenuAdapter extends BaseAdapter{
         return menuitemview;
     }
 
-    public static class ViewHolder{
+    public static class ViewHolder {
         public final ImageView menuicon;
         public final TextView menuitem;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             menuicon = (ImageView) view.findViewById(R.id.menuIcon);
             menuitem = (TextView) view.findViewById(R.id.menuItemText);
         }

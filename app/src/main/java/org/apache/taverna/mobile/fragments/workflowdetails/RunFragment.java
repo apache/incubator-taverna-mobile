@@ -1,12 +1,19 @@
 package org.apache.taverna.mobile.fragments.workflowdetails;
 
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
+import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,12 +24,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
-import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -41,16 +42,21 @@ import static org.apache.taverna.mobile.activities.DashboardMainActivity.APP_DIR
  * Use the {@link RunFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RunFragment extends Fragment implements View.OnClickListener{
+public class RunFragment extends Fragment implements View.OnClickListener {
 
+    private static final String TAG = "RunFragment";
     private View rootView;
-    private TextView runIdTextView,runNameTextView;
+    private TextView runIdTextView, runNameTextView;
     private ImageButton status;
-    private  TextView runStateTextView, runStartTime,runEndTime, runInputsText;
-    private  Button downloadOutput,downloadLogs;
+    private TextView runStateTextView, runStartTime, runEndTime, runInputsText;
+    private Button downloadOutput, downloadLogs;
     private int run_id;
     private String run_output_url = "";
     private String run_logs_url = "";
+
+    public RunFragment() {
+        // Required empty public constructor
+    }
 
     /**
      * Use this factory method to create a new instance of
@@ -65,10 +71,6 @@ public class RunFragment extends Fragment implements View.OnClickListener{
         return fragment;
     }
 
-    public RunFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,23 +78,24 @@ public class RunFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
+            savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_run_result, container, false);
-         runIdTextView = (TextView) rootView.findViewById(R.id.textview_runid);
-         runNameTextView = (TextView) rootView.findViewById(R.id.textView_runName);
-         status = (ImageButton) rootView.findViewById(R.id.statusButton);
-         runStateTextView = (TextView) rootView.findViewById(R.id.statusTextView);
-         runStartTime = (TextView) rootView.findViewById(R.id.start_time);
-         runEndTime = (TextView) rootView.findViewById(R.id.runfinish);
-         runInputsText = (TextView) rootView.findViewById(R.id.runinputsTextView);
-         downloadOutput = (Button) rootView.findViewById(R.id.buttonWorkflowDownloadOutput);
-         downloadLogs = (Button) rootView.findViewById(R.id.downloadRunLogs);
+        runIdTextView = (TextView) rootView.findViewById(R.id.textview_runid);
+        runNameTextView = (TextView) rootView.findViewById(R.id.textView_runName);
+        status = (ImageButton) rootView.findViewById(R.id.statusButton);
+        runStateTextView = (TextView) rootView.findViewById(R.id.statusTextView);
+        runStartTime = (TextView) rootView.findViewById(R.id.start_time);
+        runEndTime = (TextView) rootView.findViewById(R.id.runfinish);
+        runInputsText = (TextView) rootView.findViewById(R.id.runinputsTextView);
+        downloadOutput = (Button) rootView.findViewById(R.id.buttonWorkflowDownloadOutput);
+        downloadLogs = (Button) rootView.findViewById(R.id.downloadRunLogs);
 
         return rootView;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu,MenuInflater menuInflater) {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.run_result, menu);
         return;
@@ -102,41 +105,42 @@ public class RunFragment extends Fragment implements View.OnClickListener{
     public void onResume() {
         super.onResume();
         String runresult = getActivity().getIntent().getStringExtra("runresult");
-        try{
+        try {
             JSONObject resultObject = new JSONObject(runresult);
             String runName = resultObject.getString("name");
             run_id = (int) resultObject.get("id");
-            String runId = ""+run_id;
+            String runId = "" + run_id;
             String runState = resultObject.getString("state");
             String runStarted = resultObject.getString("start_time");
             String runEnded = resultObject.getString("finish_time");
             String runInputs = resultObject.getString("inputs");
 
-                runIdTextView.setText(runId);
-                runNameTextView.setText(runName);
+            runIdTextView.setText(runId);
+            runNameTextView.setText(runName);
 
-                if(runState.contains("Pending"))
-                    status.setImageResource(android.R.drawable.presence_busy);
-            else if (runState.contains("Running"))
-                    status.setImageResource(android.R.drawable.presence_away);
-            else if (runState.contains("Finished"))
-                    status.setImageResource(android.R.drawable.presence_online);
-            else if (runState.contains("Failed"))
-                    status.setImageResource(android.R.drawable.presence_offline);
-            else
+            if (runState.contains("Pending")) {
+                status.setImageResource(android.R.drawable.presence_busy);
+            } else if (runState.contains("Running")) {
+                status.setImageResource(android.R.drawable.presence_away);
+            } else if (runState.contains("Finished")) {
+                status.setImageResource(android.R.drawable.presence_online);
+            } else if (runState.contains("Failed")) {
+                status.setImageResource(android.R.drawable.presence_offline);
+            } else {
                 status.setImageResource(android.R.drawable.presence_invisible);
+            }
 
-                runStateTextView.setText(runState);
-                runStartTime.setHint(runStarted);
-                runEndTime.setHint(runEnded);
-                runInputsText.setText(runInputs);
-                runInputsText.setMovementMethod(new ScrollingMovementMethod());
+            runStateTextView.setText(runState);
+            runStartTime.setHint(runStarted);
+            runEndTime.setHint(runEnded);
+            runInputsText.setText(runInputs);
+            runInputsText.setMovementMethod(new ScrollingMovementMethod());
 
-                downloadOutput.setOnClickListener(this);
-                downloadLogs.setOnClickListener(this);
+            downloadOutput.setOnClickListener(this);
+            downloadLogs.setOnClickListener(this);
             reloadRunResult();
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(TAG, "onResume: ", e);
         }
     }
 
@@ -150,85 +154,96 @@ public class RunFragment extends Fragment implements View.OnClickListener{
             reloadRunResult();
             return true;
         }
-        if(id == android.R.id.home){
-           //getActivity().finish();
+        if (id == android.R.id.home) {
+            //getActivity().finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void reloadRunResult(){
+    private void reloadRunResult() {
         Timer t = new Timer();
-       // t.scheduleAtFixedRate(new RunTimerTask(getActivity(), run_id), 0, 5000);
-        t.schedule(new RunTimerTask(getActivity(),run_id),1);
+        // t.scheduleAtFixedRate(new RunTimerTask(getActivity(), run_id), 0, 5000);
+        t.schedule(new RunTimerTask(getActivity(), run_id), 1);
     }
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.buttonWorkflowDownloadOutput:
                 try {
-                    System.out.println("output url: "+run_output_url);
-                    if(run_output_url.isEmpty()){
-                        Toast.makeText(getActivity(), "No run logs available", Toast.LENGTH_LONG).show();
-                    }else {
+                    Log.d(TAG, "output url: " + run_output_url);
+                    if (run_output_url.isEmpty()) {
+                        Toast.makeText(getActivity(), "No run logs available", Toast.LENGTH_LONG)
+                                .show();
+                    } else {
                         new WorkflowDownloadManager(getActivity()).downloadWorkflow(
-                                new File(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(
-                                        APP_DIRECTORY_NAME + "/Runoutput/outputs", "/TavernaMobile/Runouput/outputs/")),
-                                new TavernaPlayerAPI(getActivity()).PLAYER_RUN_URL + run_output_url.substring(0, 5));
+                                new File(PreferenceManager.getDefaultSharedPreferences
+                                        (getActivity()).getString(
+                                        APP_DIRECTORY_NAME + "/Runoutput/outputs",
+                                        "/TavernaMobile/Runouput/outputs/")),
+                                new TavernaPlayerAPI(getActivity()).mPlayerRunUrl +
+                                        run_output_url.substring(0, 5));
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity(), "Error downloading run output",Toast.LENGTH_LONG).show();
+                    Log.e(TAG, "onClick: ", e);
+                    Toast.makeText(getActivity(), "Error downloading run output", Toast
+                            .LENGTH_LONG).show();
                 }
                 break;
             case R.id.downloadRunLogs:
                 try {
-                    System.out.println("run logs: "+run_logs_url);
-                    if(run_logs_url.isEmpty()){
-                        Toast.makeText(getActivity(), "No run logs available", Toast.LENGTH_LONG).show();
-                    }else {
+                    Log.d(TAG, "run logs: " + run_logs_url);
+                    if (run_logs_url.isEmpty()) {
+                        Toast.makeText(getActivity(), "No run logs available", Toast.LENGTH_LONG)
+                                .show();
+                    } else {
                         new WorkflowDownloadManager(getActivity()).downloadWorkflow(
-                                new File(PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(
-                                        APP_DIRECTORY_NAME + "/Runoutput/logs/", "/TavernaMobile/Runoutput/logs")),
-                                new TavernaPlayerAPI(getActivity()).PLAYER_RUN_URL + run_logs_url.substring(0, 5));
+                                new File(PreferenceManager.getDefaultSharedPreferences
+                                        (getActivity()).getString(
+                                        APP_DIRECTORY_NAME + "/Runoutput/logs/",
+                                        "/TavernaMobile/Runoutput/logs")),
+                                new TavernaPlayerAPI(getActivity()).mPlayerRunUrl + run_logs_url
+                                        .substring(0, 5));
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity(), "Error downloading run logs",Toast.LENGTH_LONG).show();
+                    Log.e(TAG, "onClick: ", e);
+                    Toast.makeText(getActivity(), "Error downloading run logs", Toast
+                            .LENGTH_LONG).show();
                 }
                 break;
         }
     }
 
-    public void updateRun(Context context, final JSONObject runInfo){
-        if(null != runInfo)
-            ((Activity)context).runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    runStartTime.setHint(runInfo.getString("start_time"));
-                    runEndTime.setHint(runInfo.getString("finish_time"));
-                    runStateTextView.setText(runInfo.getString("status_message"));
+    public void updateRun(Context context, final JSONObject runInfo) {
+        if (null != runInfo)
+            ((Activity) context).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        runStartTime.setHint(runInfo.getString("start_time"));
+                        runEndTime.setHint(runInfo.getString("finish_time"));
+                        runStateTextView.setText(runInfo.getString("status_message"));
 
-                if(runInfo.getString("status_message").contains("Pending"))
-                    status.setImageResource(android.R.drawable.presence_busy);
-                else if (runInfo.getString("status_message").contains("Running"))
-                    status.setImageResource(android.R.drawable.presence_away);
-                else if (runInfo.getString("status_message").contains("Finished"))
-                    status.setImageResource(android.R.drawable.presence_online);
-                else if (runInfo.getString("status_message").contains("Failed"))
-                    status.setImageResource(android.R.drawable.presence_offline);
-                else
-                    status.setImageResource(android.R.drawable.presence_invisible);
-
-                run_output_url = runInfo.has("outputs_zip")? runInfo.getString("outputs_zip"):"";
-                run_logs_url = runInfo.has("log")?runInfo.getString("log"):"";
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                        if (runInfo.getString("status_message").contains("Pending")) {
+                            status.setImageResource(android.R.drawable.presence_busy);
+                        } else if (runInfo.getString("status_message").contains("Running")) {
+                            status.setImageResource(android.R.drawable.presence_away);
+                        } else if (runInfo.getString("status_message").contains("Finished")) {
+                            status.setImageResource(android.R.drawable.presence_online);
+                        } else if (runInfo.getString("status_message").contains("Failed")) {
+                            status.setImageResource(android.R.drawable.presence_offline);
+                        } else {
+                            status.setImageResource(android.R.drawable.presence_invisible);
+                        }
+                        run_output_url = runInfo.has("outputs_zip") ? runInfo.getString
+                                ("outputs_zip") : "";
+                        run_logs_url = runInfo.has("log") ? runInfo.getString("log") : "";
+                    } catch (JSONException e) {
+                        Log.e(TAG, "run: ", e);
+                    }
                 }
-            }
-        });
+            });
     }
 
     private class RunTimerTask extends TimerTask {
@@ -243,11 +258,13 @@ public class RunFragment extends Fragment implements View.OnClickListener{
 
         @Override
         public void run() {
-            //QUERY player for the continuous status of the workflow run and update the ui with the results
+            //QUERY player for the continuous status of the workflow run and update the ui with
+            // the results
             StringBuffer sb = new StringBuffer();
             try {
 
-                URL workflowurl = new URL(new TavernaPlayerAPI(this.context).PLAYER_RUN_URL+this.runid);
+                URL workflowurl = new URL(new TavernaPlayerAPI(this.context).mPlayerRunUrl +
+                        this.runid);
                 HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
 
                 connection.setRequestProperty("Accept", "application/json");
@@ -255,11 +272,11 @@ public class RunFragment extends Fragment implements View.OnClickListener{
                 connection.connect(); //send request
 
                 InputStream dis = connection.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+                BufferedReader br = new BufferedReader(new InputStreamReader(dis, "UTF-8"));
 
                 String jsonData = "";
                 while ((jsonData = br.readLine()) != null) {
-                //json results of the full workflow details
+                    //json results of the full workflow details
                     sb.append(jsonData);
                 }
                 dis.close();
@@ -269,10 +286,10 @@ public class RunFragment extends Fragment implements View.OnClickListener{
                 JSONObject runInfo = new JSONObject(sb.toString());
                 updateRun(this.context, runInfo);
 
-            }catch (IOException ex){
-                ex.printStackTrace();
+            } catch (IOException ex) {
+                Log.e(TAG, "run: ", ex);
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e(TAG, "run: ", e);
             }
         }
     }

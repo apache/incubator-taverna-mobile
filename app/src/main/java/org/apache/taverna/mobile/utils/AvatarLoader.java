@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.utils;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -23,7 +23,6 @@ package org.apache.taverna.mobile.utils;
  * specific language governing permissions and limitations
  * under the License.
  */
-import android.os.AsyncTask;
 
 import com.thebuzzmedia.sjxp.rule.IRule;
 
@@ -32,6 +31,9 @@ import org.apache.taverna.mobile.tavernamobile.User;
 import org.apache.taverna.mobile.utils.xmlparsers.AvatarXMLParser;
 import org.apache.taverna.mobile.utils.xmlparsers.MyExperimentXmlParserRules;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -39,11 +41,14 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * initiates a process to fetch and parse uploader information so as to retrieve the id, name and avatar link
+ * initiates a process to fetch and parse uploader information so as to retrieve the id, name and
+ * avatar link
  * Created by Larry AKah on 6/29/15.
  */
 public class AvatarLoader extends AsyncTask<String, Void, Void> {
+    private static final String TAG = "AvatarLoader";
     WorkflowAdapter.ViewHolder vh;
+
     public AvatarLoader(WorkflowAdapter.ViewHolder userViewHolder) {
         this.vh = userViewHolder;
     }
@@ -59,16 +64,19 @@ public class AvatarLoader extends AsyncTask<String, Void, Void> {
             connection.setDoInput(true);
             connection.connect();
             InputStream input = connection.getInputStream();
-            IRule avatarRule = new MyExperimentXmlParserRules.AuthorRule(IRule.Type.ATTRIBUTE,"/user/avatar", "resource","uri","id");
-            IRule avatarName = new MyExperimentXmlParserRules.AuthorRule(IRule.Type.CHARACTER,"/user/name");
-            AvatarXMLParser avatarXMLParser = new AvatarXMLParser(new IRule[]{avatarRule, avatarName});
+            IRule avatarRule = new MyExperimentXmlParserRules.AuthorRule(IRule.Type.ATTRIBUTE,
+                    "/user/avatar", "resource", "uri", "id");
+            IRule avatarName = new MyExperimentXmlParserRules.AuthorRule(IRule.Type.CHARACTER,
+                    "/user/name");
+            AvatarXMLParser avatarXMLParser = new AvatarXMLParser(new IRule[]{avatarRule,
+                    avatarName});
 
             avatarXMLParser.parse(input, new User(strings[1], this.vh));
 
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doInBackground: ", e);
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "doInBackground: ", e);
         }
 
         return null;

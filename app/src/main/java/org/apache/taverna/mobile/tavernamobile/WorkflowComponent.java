@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.tavernamobile;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -23,9 +23,11 @@ package org.apache.taverna.mobile.tavernamobile;
  * specific language governing permissions and limitations
  * under the License.
  */
+
 /**
  * Created by Larry Akah on 6/8/15.
- * the component elements that make up a workflow's dataflow (e.g. Taverna has sources, sinks, processors, links and coordinations)
+ * the component elements that make up a workflow's dataflow (e.g. Taverna has sources, sinks,
+ * processors, links and coordinations)
  */
 public class WorkflowComponent {
 

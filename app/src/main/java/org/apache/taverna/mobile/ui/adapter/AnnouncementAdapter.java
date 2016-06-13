@@ -18,6 +18,9 @@
  */
 package org.apache.taverna.mobile.ui.adapter;
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.model.Announcement;
+
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,9 +28,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.model.Announcement;
 
 import java.util.List;
 
@@ -37,27 +37,18 @@ import butterknife.ButterKnife;
 
 public class AnnouncementAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Announcement> mAnnouncementList;
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
+    private List<Announcement> mAnnouncementList;
 
 
-    public AnnouncementAdapter( List<Announcement> announcementList) {
+    public AnnouncementAdapter(List<Announcement> announcementList) {
         mAnnouncementList = announcementList;
     }
 
     public void setAnnouncementList(List<Announcement> announcementList) {
         mAnnouncementList = announcementList;
     }
-
-    public static class ProgressViewHolder extends RecyclerView.ViewHolder {
-        public ProgressBar progressBar;
-        public ProgressViewHolder(View v) {
-            super(v);
-            progressBar = (ProgressBar)v.findViewById(R.id.progressBar1);
-        }
-    }
-
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -78,9 +69,10 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if(holder instanceof ViewHolder) {
-            ((ViewHolder) holder).tvAnnouncementTitle.setText(mAnnouncementList.get(position).getContent());
-            Log.e("", "onBindViewHolder: "+mAnnouncementList.get(1).getContent());
+        if (holder instanceof ViewHolder) {
+            ((ViewHolder) holder).tvAnnouncementTitle.setText(mAnnouncementList.get(position)
+                    .getContent());
+            Log.e("", "onBindViewHolder: " + mAnnouncementList.get(1).getContent());
         }
     }
 
@@ -91,9 +83,17 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
-        return mAnnouncementList.get(position)!=null? VIEW_ITEM: VIEW_PROG;
+        return mAnnouncementList.get(position) != null ? VIEW_ITEM : VIEW_PROG;
     }
 
+    public static class ProgressViewHolder extends RecyclerView.ViewHolder {
+        public ProgressBar progressBar;
+
+        public ProgressViewHolder(View v) {
+            super(v);
+            progressBar = (ProgressBar) v.findViewById(R.id.progressBar1);
+        }
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 

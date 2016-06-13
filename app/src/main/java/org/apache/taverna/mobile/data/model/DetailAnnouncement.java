@@ -1,11 +1,11 @@
 package org.apache.taverna.mobile.data.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by Sagar
@@ -13,31 +13,48 @@ import org.simpleframework.xml.Root;
 @Root(name = "announcement")
 public class DetailAnnouncement implements Parcelable {
 
-    @Element(name = "author")
-    private Author author;
+    public static final Parcelable.Creator<DetailAnnouncement> CREATOR = new Parcelable
+            .Creator<DetailAnnouncement>() {
+        @Override
+        public DetailAnnouncement createFromParcel(Parcel source) {
+            return new DetailAnnouncement(source);
+        }
 
-    @Element(name = "title")
-    private String title;
-
-    @Element(name = "text")
-    private String text;
-
-    @Element(name = "created-at")
-    private String date;
-
+        @Override
+        public DetailAnnouncement[] newArray(int size) {
+            return new DetailAnnouncement[size];
+        }
+    };
     @Attribute(name = "resource", required = false)
     String resource;
-
-
     @Attribute(name = "uri", required = false)
     String uri;
-
-
     @Attribute(name = "id", required = false)
     String id;
-
+    @Element(name = "author")
+    private Author author;
+    @Element(name = "title")
+    private String title;
+    @Element(name = "text")
+    private String text;
+    @Element(name = "created-at")
+    private String date;
     @Element(name = "id")
     private String idElement;
+
+    public DetailAnnouncement() {
+    }
+
+    protected DetailAnnouncement(Parcel in) {
+        this.author = in.readParcelable(Author.class.getClassLoader());
+        this.title = in.readString();
+        this.text = in.readString();
+        this.date = in.readString();
+        this.resource = in.readString();
+        this.uri = in.readString();
+        this.id = in.readString();
+        this.idElement = in.readString();
+    }
 
     public String getIdElement() {
         return idElement;
@@ -55,7 +72,6 @@ public class DetailAnnouncement implements Parcelable {
         this.resource = _value;
     }
 
-
     public String getUri() {
         return this.uri;
     }
@@ -64,7 +80,6 @@ public class DetailAnnouncement implements Parcelable {
         this.uri = _value;
     }
 
-
     public String getId() {
         return this.id;
     }
@@ -72,7 +87,6 @@ public class DetailAnnouncement implements Parcelable {
     public void setId(String _value) {
         this.id = _value;
     }
-
 
     public Author getAuthor() {
         return author;
@@ -106,7 +120,6 @@ public class DetailAnnouncement implements Parcelable {
         this.date = date;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -123,32 +136,6 @@ public class DetailAnnouncement implements Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.idElement);
     }
-
-    public DetailAnnouncement() {
-    }
-
-    protected DetailAnnouncement(Parcel in) {
-        this.author = in.readParcelable(Author.class.getClassLoader());
-        this.title = in.readString();
-        this.text = in.readString();
-        this.date = in.readString();
-        this.resource = in.readString();
-        this.uri = in.readString();
-        this.id = in.readString();
-        this.idElement = in.readString();
-    }
-
-    public static final Parcelable.Creator<DetailAnnouncement> CREATOR = new Parcelable.Creator<DetailAnnouncement>() {
-        @Override
-        public DetailAnnouncement createFromParcel(Parcel source) {
-            return new DetailAnnouncement(source);
-        }
-
-        @Override
-        public DetailAnnouncement[] newArray(int size) {
-            return new DetailAnnouncement[size];
-        }
-    };
 }
 
 

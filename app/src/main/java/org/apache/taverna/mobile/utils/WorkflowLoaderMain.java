@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.utils;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -23,10 +23,11 @@ package org.apache.taverna.mobile.utils;
  * specific language governing permissions and limitations
  * under the License.
  */
-import android.content.AsyncTaskLoader;
-import android.content.Context;
 
 import org.apache.taverna.mobile.tavernamobile.Workflow;
+
+import android.content.AsyncTaskLoader;
+import android.content.Context;
 
 import java.util.List;
 

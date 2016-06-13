@@ -25,16 +25,16 @@ package org.apache.taverna.mobile.activities;
 * under the License.
 */
 
-import android.app.Activity;
+import org.apache.taverna.mobile.R;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,26 +47,17 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.tavernamobile.TavernaPlayerAPI;
-import org.apache.taverna.mobile.tavernamobile.User;
-import org.apache.taverna.mobile.tavernamobile.Workflow;
-import org.apache.taverna.mobile.utils.HttpUtil;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 
 public class LoginActivity extends ActionBarActivity {
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,13 +78,13 @@ public class LoginActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-      return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class LoginFragment extends Fragment implements View.OnClickListener{
+    public static class LoginFragment extends Fragment implements View.OnClickListener {
 
         private View rootView;
         private Button loginButton;
@@ -122,9 +113,11 @@ public class LoginActivity extends ActionBarActivity {
             if (i == R.id.loginbutton) {
                 logginRemain = loginCheck.isChecked();
                 if (logginRemain) {
-                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putBoolean("pref_logged_in",true).apply();
+                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit()
+                            .putBoolean("pref_logged_in", true).apply();
                 } else {
-                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putBoolean("pref_logged_in",false).apply();
+                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit()
+                            .putBoolean("pref_logged_in", false).apply();
                 }
                 if (email.getText().toString().isEmpty()) {
                     email.setError(getString(R.string.emailerr));
@@ -132,17 +125,18 @@ public class LoginActivity extends ActionBarActivity {
                     password.setError(getString(R.string.passworderr));
                 } else {
                     // login request
-                    new LoginTask(getActivity()).execute(email.getText().toString(), password.getText().toString());
+                    new LoginTask(getActivity()).execute(email.getText().toString(), password
+                            .getText().toString());
                 }
 
             }
         }
 
-        private class LoginTask extends AsyncTask<String, Void, String>{
-            private Context context;
-            private ProgressDialog pd;
+        private class LoginTask extends AsyncTask<String, Void, String> {
             String cookie;
             String userurl;
+            private Context context;
+            private ProgressDialog pd;
 
             private LoginTask(Context context) {
                 this.context = context;
@@ -174,22 +168,24 @@ public class LoginActivity extends ActionBarActivity {
 
                     String authentication = userName + ":" + password;
                     con.setRequestMethod("GET");
-                    con.setRequestProperty("Authorization", "Basic " + Base64.encodeToString(authentication.getBytes(), Base64.DEFAULT));
+                    con.setRequestProperty("Authorization", "Basic " + Base64.encodeToString
+                            (authentication.getBytes(Charset.forName("UTF-8")), Base64.DEFAULT));
                     con.setInstanceFollowRedirects(true);
                     HttpURLConnection.setFollowRedirects(true);
                     con.connect();
                     int status = con.getResponseCode();
                     response = String.valueOf(status);
-                    if(status != HttpURLConnection.HTTP_OK){
-                        if (status == HttpURLConnection.HTTP_MOVED_PERM ||
-                                status == HttpURLConnection.HTTP_MOVED_TEMP ||
-                                status == HttpURLConnection.HTTP_SEE_OTHER || status == 307){
-                            redirect = true;
-                        }
+                    if (status != HttpURLConnection.HTTP_OK
+                            && (status == HttpURLConnection.HTTP_MOVED_PERM ||
+                            status == HttpURLConnection.HTTP_MOVED_TEMP ||
+                            status == HttpURLConnection.HTTP_SEE_OTHER || status == 307)) {
 
+                        redirect = true;
                     }
-                    System.out.println("Status code: "+status);
-                    if(redirect) {
+
+
+                    Log.d(TAG, "Status code: " + status);
+                    if (redirect) {
                         // get redirect url from "location" header field
                         String newUrl = con.getHeaderField("Location");
                         this.userurl = newUrl;
@@ -199,26 +195,27 @@ public class LoginActivity extends ActionBarActivity {
                         // open the new connection again
                         con = (HttpURLConnection) new URL(newUrl).openConnection();
                         con.setRequestProperty("Cookie", cookies);
-                        System.out.println("Redirect to URL : " + newUrl);
+                        Log.d(TAG, "Redirect to URL : " + newUrl);
                         con.connect();
                     }
-                    BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    BufferedReader br = new BufferedReader(new InputStreamReader(con
+                            .getInputStream(), "UTF-8"));
                     StringBuilder sb = new StringBuilder();
                     String s = "";
-                    while((s = br.readLine())!= null ){
+                    while ((s = br.readLine()) != null) {
                         sb.append(s);
                     }
                     br.close();
-                    System.out.println("data: "+sb.toString());
+                    Log.d(TAG, "data: " + sb.toString());
 
                     con.disconnect();
 
                     return response;
 
                 } catch (MalformedURLException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "doInBackground: ", e);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "doInBackground: ", e);
                 }
 
                 return response;
@@ -227,20 +224,24 @@ public class LoginActivity extends ActionBarActivity {
             @Override
             protected void onPostExecute(String response) {
                 pd.dismiss();
-                if(response != null) {
-                    switch(Integer.parseInt(response)){
+                if (response != null) {
+                    switch (Integer.parseInt(response)) {
                         case 401:
-                            Toast.makeText(getActivity(), getActivity().getString(R.string.auth_err), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), getActivity().getString(R.string
+                                    .auth_err), Toast.LENGTH_LONG).show();
                             break;
                         case 200:
                         case 307:
-                            this.context.startActivity(new Intent(this.context, DashboardMainActivity.class));
-                            getActivity().overridePendingTransition(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top);
+                            this.context.startActivity(new Intent(this.context,
+                                    DashboardMainActivity.class));
+                            getActivity().overridePendingTransition(R.anim.abc_slide_in_bottom, R
+                                    .anim.abc_slide_out_top);
                             getActivity().finish();
                             break;
                     }
-                }else{
-                    Toast.makeText(getActivity(), getActivity().getString(R.string.servererr), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), getActivity().getString(R.string.servererr),
+                            Toast.LENGTH_LONG).show();
                 }
             }
         }

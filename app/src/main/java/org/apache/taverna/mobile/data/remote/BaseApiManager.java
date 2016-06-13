@@ -10,13 +10,12 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 public class BaseApiManager {
 
 
-    String ENDPOINT = "http://www.myexperiment.org/";
-
+    final String ENDPOINT = "http://www.myexperiment.org/";
     public TavernaService mTavernaService;
 
-    public BaseApiManager(){
+    public BaseApiManager() {
 
-        mTavernaService = createApi(TavernaService.class,ENDPOINT);
+        mTavernaService = createApi(TavernaService.class, ENDPOINT);
     }
 
     /******** Helper class that sets up a new services *******/
@@ -29,10 +28,10 @@ public class BaseApiManager {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
-        return  retrofit.create(clazz);
+        return retrofit.create(clazz);
     }
 
-    public TavernaService getTavernaApi(){
+    public TavernaService getTavernaApi() {
         return mTavernaService;
     }
 }

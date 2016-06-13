@@ -1,12 +1,12 @@
 package org.apache.taverna.mobile.activities;
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.fragments.workflowdetails.RunFragment;
+
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.fragments.workflowdetails.RunFragment;
 
 public class RunResult extends ActionBarActivity {
 
@@ -30,7 +30,7 @@ public class RunResult extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-       this.finish();
+        this.finish();
 
         return super.onOptionsItemSelected(item);
     }

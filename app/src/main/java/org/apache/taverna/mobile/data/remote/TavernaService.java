@@ -1,7 +1,7 @@
 package org.apache.taverna.mobile.data.remote;
 
-import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.Announcements;
+import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;

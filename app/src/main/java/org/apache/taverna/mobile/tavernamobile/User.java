@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.tavernamobile;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -24,10 +24,10 @@ package org.apache.taverna.mobile.tavernamobile;
  * under the License.
  */
 
-import android.graphics.Bitmap;
-
 import org.apache.taverna.mobile.adapters.WorkflowAdapter;
 import org.simpleframework.xml.Element;
+
+import android.graphics.Bitmap;
 
 import java.util.List;
 
@@ -56,11 +56,13 @@ public class User {
     @Element(required = false)
     protected String website;
     protected String details_uri;
+    protected List<Workflow> user_workflows; //a list of workflows owned by this user
     private String avatar_url;
-    private String row_id; //identifies the row  to which this user is being loaded in, in the workflow listview
+    private String row_id; //identifies the row  to which this user is being loaded in, in the
+    // workflow listview
     private WorkflowAdapter.ViewHolder userViewHolder;
 
-    public User(String rid, WorkflowAdapter.ViewHolder vh){
+    public User(String rid, WorkflowAdapter.ViewHolder vh) {
         super();
         row_id = rid;
         this.userViewHolder = vh;
@@ -74,37 +76,35 @@ public class User {
         this.userViewHolder = userViewHolder;
     }
 
-    public String getRow_id() {
+    public String getRowId() {
         return this.row_id;
     }
-
-    protected List<Workflow> user_workflows; //a list of workflows owned by this user
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public String getCreated_at() {
+    public String getCreatedAt() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreatedAt(String created_at) {
         this.created_at = created_at;
     }
 
-    public String getDetails_uri() {
+    public String getDetailsUri() {
         return this.details_uri;
     }
 
-    public void setDetails_uri(String details_uri) {
+    public void setDetailsUri(String details_uri) {
         this.details_uri = details_uri;
     }
 
-    public String getAvatar_url() {
+    public String getAvatarUrl() {
         return this.avatar_url;
     }
 
-    public void setAvatar_url(String avatar_url) {
+    public void setAvatarUrl(String avatar_url) {
         this.avatar_url = avatar_url;
     }
 
@@ -165,7 +165,7 @@ public class User {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "This is the user object";
     }
 }

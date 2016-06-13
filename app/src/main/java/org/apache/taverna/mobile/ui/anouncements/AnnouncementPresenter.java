@@ -18,12 +18,13 @@
  */
 package org.apache.taverna.mobile.ui.anouncements;
 
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Announcements;
+import org.apache.taverna.mobile.data.model.DetailAnnouncement;
+import org.apache.taverna.mobile.ui.base.BasePresenter;
+
 import android.util.Log;
 
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.DetailAnnouncement;
-import org.apache.taverna.mobile.data.model.Announcements;
-import org.apache.taverna.mobile.ui.base.BasePresenter;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -37,7 +38,7 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
     private Subscription mSubscriptions;
 
 
-    public AnnouncementPresenter(DataManager dataManager){
+    public AnnouncementPresenter(DataManager dataManager) {
         mDataManager = dataManager;
     }
 
@@ -52,7 +53,7 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
     }
 
-    public void loadAllAnnouncement(int pageNumber){
+    public void loadAllAnnouncement(int pageNumber) {
 
         mSubscriptions = mDataManager.getAllAnnouncement(pageNumber)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -73,11 +74,12 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                     @Override
                     public void onNext(Announcements announcement) {
                         getMvpView().showAllAnouncement(announcement);
-                        Log.d(LOG_TAG,announcement.getAnnouncement().get(1).getResource());
+                        Log.d(LOG_TAG, announcement.getAnnouncement().get(1).getResource());
                     }
                 });
     }
-    public void loadAnnouncementDetails(String id){
+
+    public void loadAnnouncementDetails(String id) {
 
         mSubscriptions = mDataManager.getAnnouncementDetail(id)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -90,7 +92,7 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(LOG_TAG,e.getMessage());
+                        Log.d(LOG_TAG, e.getMessage());
                         getMvpView().showWaitProgress(false);
                         getMvpView().showErrorSnackBar();
                     }

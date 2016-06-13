@@ -2,10 +2,10 @@ package org.apache.taverna.mobile.broadcastreceivers;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -23,14 +23,15 @@ package org.apache.taverna.mobile.broadcastreceivers;
  * specific language governing permissions and limitations
  * under the License.
  */
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
+
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.utils.WorkflowDownloadManager;
 
 public class WorkflowDownloadReceiver extends BroadcastReceiver {
     public WorkflowDownloadReceiver() {
@@ -43,19 +44,21 @@ public class WorkflowDownloadReceiver extends BroadcastReceiver {
         DownloadManager mgr = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         WorkflowDownloadManager wdm = new WorkflowDownloadManager(context, mgr);
 
-        DownloadManager.Query query = new DownloadManager.Query(); //ask for information about the download queue
+        DownloadManager.Query query = new DownloadManager.Query(); //ask for information about
+        // the download queue
         query.setFilterById(receivedID);
         Cursor cur = mgr.query(query);
         int index = cur.getColumnIndex(DownloadManager.COLUMN_STATUS);
-//        String workflow = cur.getString(cur.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+//        String workflow = cur.getString(cur.getColumnIndex(DownloadManager
+// .COLUMN_LOCAL_FILENAME));
 
-        if(cur.moveToFirst()) {
-            if(cur.getInt(index) == DownloadManager.STATUS_SUCCESSFUL){
+        if (cur.moveToFirst()) {
+            if (cur.getInt(index) == DownloadManager.STATUS_SUCCESSFUL) {
                 wdm.sendNotification(context.getResources().getString(R.string.downloadcomplete));
-            }else{
+            } else {
                 wdm.sendNotification(context.getResources().getString(R.string.downloadfailed));
             }
-        }else{
+        } else {
             wdm.sendNotification(context.getResources().getString(R.string.downloadfailed));
         }
         cur.close();

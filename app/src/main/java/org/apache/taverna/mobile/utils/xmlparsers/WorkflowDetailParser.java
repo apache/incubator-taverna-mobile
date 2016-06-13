@@ -12,10 +12,10 @@ import org.apache.taverna.mobile.tavernamobile.Workflow;
 /**
  * Apache Taverna Mobile
  * Copyright 2015 The Apache Software Foundation
-
+ *
  * This product includes software developed at
  * The Apache Software Foundation (http://www.apache.org/).
-
+ *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements. See the NOTICE file
  * distributed with this work for additional information
@@ -47,9 +47,10 @@ public class WorkflowDetailParser extends XMLParser {
     //deliver results when parsing has completed and all the information required has been retrieved
     @Override
     protected void doEndDocument(Object userObject) {
-        if(userObject instanceof User){
-          WorkflowItemFragment.startLoadingAvatar((User) userObject);
-        }else
-        WorkflowdetailFragment.setWorkflowDetails((Workflow) userObject);
+        if (userObject instanceof User) {
+            WorkflowItemFragment.startLoadingAvatar((User) userObject);
+        } else {
+            WorkflowdetailFragment.setWorkflowDetails((Workflow) userObject);
+        }
     }
 }
