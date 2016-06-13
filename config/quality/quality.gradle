@@ -1,5 +1,6 @@
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
+apply plugin: 'findbugs'
 
 dependencies {
     checkstyle 'com.puppycrawl.tools:checkstyle:6.5'
@@ -8,7 +9,7 @@ dependencies {
 def qualityConfigDir = "$project.rootDir/config/quality";
 def reportsDir = "$project.buildDir/reports"
 
-check.dependsOn 'checkstyle', 'pmd'
+check.dependsOn 'checkstyle', 'pmd','findbugs'
 
 task checkstyle(type: Checkstyle, group: 'Verification', description: 'Runs code style checks') {
     configFile file("$qualityConfigDir/checkstyle/checkstyle-config.xml")
@@ -45,4 +46,33 @@ task pmd(type: Pmd, group: 'Verification', description: 'Inspect sourcecode for 
             destination "$reportsDir/pmd/pmd.html"
         }
     }
+}
+
+task findbugs(type: FindBugs,
+        group: 'Verification',
+        description: 'Inspect java bytecode for bugs',
+        dependsOn: ['compileDebugSources','compileReleaseSources']) {
+
+    ignoreFailures = false
+    effort = "max"
+    reportLevel = "high"
+    excludeFilter = new File("$qualityConfigDir/findbugs/android-exclude-filter.xml")
+    classes = files("$project.rootDir/app/build/intermediates/classes")
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination "$reportsDir/findbugs/findbugs.xml"
+        }
+        html {12
+            destination "$reportsDir/findbugs/findbugs.html"
+        }
+    }
+
+    classpath = files()
 }
