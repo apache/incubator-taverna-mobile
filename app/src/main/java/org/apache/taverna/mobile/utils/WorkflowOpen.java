@@ -31,6 +31,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 /**
  * Read the selected xml file from storage and upload to player to generate workflowRun
@@ -74,7 +75,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
 
             String user = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" +
                     tavernaPlayerAPI.getPlayerUserPassword(this.context);
-            String basicAuth = "Basic " + Base64.encodeToString(user.getBytes(), Base64.DEFAULT);
+            String basicAuth = "Basic " + Base64.encodeToString(user.getBytes(Charset.forName("UTF-8")), Base64.DEFAULT);
             //read the file from remote resource and encode the stream with a base64 algorithm
 
             try {
@@ -90,7 +91,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
             }
 
             String data = "{\"document\":\"data:application/octet-stream;base64," +
-                    Base64.encodeToString(sb.toString().getBytes("UTF-8"), Base64.URL_SAFE |
+                    Base64.encodeToString(sb.toString().getBytes(Charset.forName("UTF-8")), Base64.URL_SAFE |
                             Base64.NO_WRAP).replace('-', '+') + "\"}";
             String post = "{\"workflow\":" + data + "}";
             //clear sb so that we can use it again to fetch results from this post request
@@ -114,7 +115,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
             dos.close();
 
             InputStream dis = connection.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+            BufferedReader br = new BufferedReader(new InputStreamReader(dis,"UTF-8"));
             while ((str = br.readLine()) != null) {
                 sb.append(str);
             }
@@ -198,7 +199,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
                 HttpURLConnection connection = (HttpURLConnection) workflowurl.openConnection();
                 String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" +
                         tavernaPlayerAPI.getPlayerUserPassword(this.context);
-                String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(), Base64
+                String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(Charset.forName("UTF-8")), Base64
                         .DEFAULT);
 
                 connection.setRequestProperty("Authorization", basicAuth);
@@ -210,7 +211,7 @@ public class WorkflowOpen extends AsyncTask<String, Void, String> {
                 Log.i("Authorization ", "" + connection.getRequestProperty("Authorization"));
 
                 InputStream dis = connection.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+                BufferedReader br = new BufferedReader(new InputStreamReader(dis,"UTF-8"));
 
                 String jsonData = "";
                 while ((jsonData = br.readLine()) != null) {

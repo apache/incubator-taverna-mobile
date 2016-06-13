@@ -53,6 +53,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 
 public class LoginActivity extends ActionBarActivity {
@@ -168,7 +169,7 @@ public class LoginActivity extends ActionBarActivity {
                     String authentication = userName + ":" + password;
                     con.setRequestMethod("GET");
                     con.setRequestProperty("Authorization", "Basic " + Base64.encodeToString
-                            (authentication.getBytes(), Base64.DEFAULT));
+                            (authentication.getBytes(Charset.forName("UTF-8")), Base64.DEFAULT));
                     con.setInstanceFollowRedirects(true);
                     HttpURLConnection.setFollowRedirects(true);
                     con.connect();
@@ -198,7 +199,7 @@ public class LoginActivity extends ActionBarActivity {
                         con.connect();
                     }
                     BufferedReader br = new BufferedReader(new InputStreamReader(con
-                            .getInputStream()));
+                            .getInputStream(),"UTF-8"));
                     StringBuilder sb = new StringBuilder();
                     String s = "";
                     while ((s = br.readLine()) != null) {

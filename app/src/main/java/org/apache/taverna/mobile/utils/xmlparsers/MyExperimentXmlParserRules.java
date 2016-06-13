@@ -40,7 +40,7 @@ import java.util.List;
  */
 public class MyExperimentXmlParserRules {
 
-    public static Workflow mWorkflow = new Workflow();
+    public static final Workflow mWorkflow = new Workflow();
 
     public MyExperimentXmlParserRules() {
     }

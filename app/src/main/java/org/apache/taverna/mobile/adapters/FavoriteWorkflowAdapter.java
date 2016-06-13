@@ -45,6 +45,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -163,8 +164,9 @@ public class FavoriteWorkflowAdapter extends RecyclerView.Adapter<FavoriteWorkfl
                 break;
             }
         }
-        sharedPreferences.edit().putString(WorkflowAdapter.FAVORITE_LIST_DB, charsequence
-                .toString()).apply();
+        sharedPreferences.edit().putString(WorkflowAdapter.FAVORITE_LIST_DB, Arrays.toString
+                (charsequence)
+                ).apply();
     }
 
     @Override

@@ -48,6 +48,7 @@ import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 /**
  * Loads workflow details from the myexperiment API and presents them on the UI .The class is
@@ -100,7 +101,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                     connection = (HttpURLConnection) workflowurl.openConnection();
                     String userpass = tavernaPlayerAPI.getPlayerUserName(this.context) + ":" +
                             tavernaPlayerAPI.getPlayerUserPassword(this.context);
-                    String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(),
+                    String basicAuth = "Basic " + Base64.encodeToString(userpass.getBytes(Charset.forName("UTF-8")),
                             Base64.DEFAULT);
 
                     connection.setRequestProperty("Authorization", basicAuth);
@@ -166,7 +167,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                 return workflow;
                 case TYPE_RUN_HISTORY: {
                     Log.e(TAG, "Downloading run history");
-                    BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+                    BufferedReader br = new BufferedReader(new InputStreamReader(dis,"UTF-8"));
                     StringBuffer sb = new StringBuffer();
                     String jsonData = "";
                     while ((jsonData = br.readLine()) != null) {
@@ -208,7 +209,7 @@ public class DetailsLoader extends AsyncTaskLoader<Workflow> {
                 }
                 return workflow;
                 default:
-                    BufferedReader br = new BufferedReader(new InputStreamReader(dis));
+                    BufferedReader br = new BufferedReader(new InputStreamReader(dis,"UTF-8"));
                     StringBuffer sb = new StringBuffer();
                     String jsonData = "";
                     while ((jsonData = br.readLine()) != null) {

@@ -89,7 +89,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
      */
     private static RecyclerView mListView;
     private static View rootView;
-    private static boolean stateOn = false;
+    private  boolean stateOn = false;
     private static TextView noDataText;
     private static LruCache<String, Bitmap> avatarCache;
     private static WorkflowAdapter workflowAdapter;
@@ -116,6 +116,21 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     public WorkflowItemFragment() {
     }
 
+    public static void setCx(Context cx) {
+        WorkflowItemFragment.cx = cx;
+    }
+
+    public static void setRootView(View rootView) {
+        WorkflowItemFragment.rootView = rootView;
+    }
+
+    public static void setIsLoadMoreData(boolean isLoadMoreData) {
+        WorkflowItemFragment.isLoadMoreData = isLoadMoreData;
+    }
+
+    public static void setIsRefreshData(boolean isRefreshData) {
+        WorkflowItemFragment.isRefreshData = isRefreshData;
+    }
     public static WorkflowItemFragment newInstance(String param1, String param2) {
         WorkflowItemFragment fragment = new WorkflowItemFragment();
         Bundle args = new Bundle();
@@ -132,8 +147,8 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
             public void run() {
                 WorkflowItemFragment.workflowAdapter = new WorkflowAdapter(cx, data);
                 if (isLoadMoreData) {
-                    isLoadMoreData = false;
-                    isRefreshData = false;
+                    setIsLoadMoreData(false);
+                    setIsRefreshData(false);
                     ((WorkflowAdapter) mListView.getAdapter()).addItems(data, previousTotal);
                 } else {
                     mListView.swapAdapter(workflowAdapter, false);
@@ -202,7 +217,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        cx = getActivity();
+        setCx(getActivity());
         mLinearLayoutManager = new LinearLayoutManager(cx);
         scrollListener = new InfiniteScrollListener();
         workflowObserver = new RecyclerView.AdapterDataObserver() {
@@ -228,7 +243,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_item, container, false);
+        setRootView(inflater.inflate(R.layout.fragment_item, container, false));
         noDataText = (TextView) rootView.findViewById(android.R.id.empty);
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.refresh);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -281,7 +296,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        rootView = null;
+        setRootView(null);
     }
 
     @Override
@@ -369,8 +384,8 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
 
     @Override
     public void onRefresh() {
-        isRefreshData = true;
-        isLoadMoreData = false;
+        setIsRefreshData(true);
+        setIsLoadMoreData(false);
 
         new WorkflowLoader(getActivity(), swipeRefreshLayout).execute("" + 1);
     }
@@ -464,7 +479,7 @@ public class WorkflowItemFragment extends Fragment implements SwipeRefreshLayout
                     visibleThreshold)) {
                 //list has reached end, load more.
                 Toast.makeText(getActivity(), "Loading more", Toast.LENGTH_SHORT).show();
-                isLoadMoreData = true;
+                setIsLoadMoreData(true);
                 currentPage++;
                 new WorkflowLoader(getActivity(), swipeRefreshLayout).execute("" + currentPage);
                 Log.d(TAG, currentPage + "");
