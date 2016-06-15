@@ -1,6 +1,6 @@
 package org.apache.taverna.mobile.data.model;
 
-import org.apache.taverna.mobile.tavernamobile.Workflow;
+
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
