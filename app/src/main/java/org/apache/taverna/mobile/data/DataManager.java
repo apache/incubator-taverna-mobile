@@ -50,7 +50,7 @@ public class DataManager {
     /**
      * @return List of all Workflow
      */
-    public Observable<Workflows> getAllWorkflow(int pageNumber){
+    public Observable<Workflows> getAllWorkflow(int pageNumber) {
         return mBaseApiManager.getTavernaApi().getAllWorkflows(pageNumber);
     }
 }

@@ -25,9 +25,9 @@ public class DetailWorkflow implements Parcelable {
 
     @Element(name = "id")
     private String elementId;
-    @Element(name="description")
+    @Element(name = "description")
     String description;
-    @Element(name="type")
+    @Element(name = "type")
     private Type type;
     @Element(name = "uploader")
     private Uploader uploader;
@@ -37,7 +37,7 @@ public class DetailWorkflow implements Parcelable {
     private String previewUri;
     @Element(name = "svg")
     private String svgUri;
-    @Element(name ="license-type")
+    @Element(name = "license-type")
     private LicenseType licenseType;
     @Element(name = "content-uri")
     String contentUri;
@@ -211,15 +211,16 @@ public class DetailWorkflow implements Parcelable {
         this.tag = in.createTypedArrayList(Tag.CREATOR);
     }
 
-    public static final Parcelable.Creator<DetailWorkflow> CREATOR = new Parcelable.Creator<DetailWorkflow>() {
-        @Override
-        public DetailWorkflow createFromParcel(Parcel source) {
-            return new DetailWorkflow(source);
-        }
+    public static final Parcelable.Creator<DetailWorkflow> CREATOR =
+            new Parcelable.Creator<DetailWorkflow>() {
+                @Override
+                public DetailWorkflow createFromParcel(Parcel source) {
+                    return new DetailWorkflow(source);
+                }
 
-        @Override
-        public DetailWorkflow[] newArray(int size) {
-            return new DetailWorkflow[size];
-        }
-    };
+                @Override
+                public DetailWorkflow[] newArray(int size) {
+                    return new DetailWorkflow[size];
+                }
+            };
 }

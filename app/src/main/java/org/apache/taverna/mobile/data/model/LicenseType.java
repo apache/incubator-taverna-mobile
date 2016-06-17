@@ -73,15 +73,16 @@ public class LicenseType implements Parcelable {
         this.content = in.readString();
     }
 
-    public static final Parcelable.Creator<LicenseType> CREATOR = new Parcelable.Creator<LicenseType>() {
-        @Override
-        public LicenseType createFromParcel(Parcel source) {
-            return new LicenseType(source);
-        }
+    public static final Parcelable.Creator<LicenseType> CREATOR =
+            new Parcelable.Creator<LicenseType>() {
+                @Override
+                public LicenseType createFromParcel(Parcel source) {
+                    return new LicenseType(source);
+                }
 
-        @Override
-        public LicenseType[] newArray(int size) {
-            return new LicenseType[size];
-        }
-    };
+                @Override
+                public LicenseType[] newArray(int size) {
+                    return new LicenseType[size];
+                }
+            };
 }
