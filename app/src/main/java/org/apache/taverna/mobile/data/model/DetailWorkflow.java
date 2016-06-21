@@ -25,6 +25,8 @@ public class DetailWorkflow implements Parcelable {
 
     @Element(name = "id")
     private String elementId;
+    @Element(name = "title")
+    private String title;
     @Element(name = "description")
     String description;
     @Element(name = "type")
@@ -166,6 +168,14 @@ public class DetailWorkflow implements Parcelable {
         this.version = version;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -178,6 +188,7 @@ public class DetailWorkflow implements Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.version);
         dest.writeString(this.elementId);
+        dest.writeString(this.title);
         dest.writeString(this.description);
         dest.writeParcelable(this.type, flags);
         dest.writeParcelable(this.uploader, flags);
@@ -199,6 +210,7 @@ public class DetailWorkflow implements Parcelable {
         this.id = in.readString();
         this.version = in.readString();
         this.elementId = in.readString();
+        this.title = in.readString();
         this.description = in.readString();
         this.type = in.readParcelable(Type.class.getClassLoader());
         this.uploader = in.readParcelable(Uploader.class.getClassLoader());
@@ -211,16 +223,15 @@ public class DetailWorkflow implements Parcelable {
         this.tag = in.createTypedArrayList(Tag.CREATOR);
     }
 
-    public static final Parcelable.Creator<DetailWorkflow> CREATOR =
-            new Parcelable.Creator<DetailWorkflow>() {
-                @Override
-                public DetailWorkflow createFromParcel(Parcel source) {
-                    return new DetailWorkflow(source);
-                }
+    public static final Parcelable.Creator<DetailWorkflow> CREATOR = new Parcelable.Creator<DetailWorkflow>() {
+        @Override
+        public DetailWorkflow createFromParcel(Parcel source) {
+            return new DetailWorkflow(source);
+        }
 
-                @Override
-                public DetailWorkflow[] newArray(int size) {
-                    return new DetailWorkflow[size];
-                }
-            };
+        @Override
+        public DetailWorkflow[] newArray(int size) {
+            return new DetailWorkflow[size];
+        }
+    };
 }
