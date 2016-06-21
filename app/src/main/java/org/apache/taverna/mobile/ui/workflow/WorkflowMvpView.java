@@ -16,29 +16,22 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.data.remote;
+package org.apache.taverna.mobile.ui.workflow;
 
-import org.apache.taverna.mobile.data.model.Announcements;
-import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.DetailWorkflow;
 import org.apache.taverna.mobile.data.model.Workflows;
-
-import retrofit2.http.GET;
-import retrofit2.http.Query;
-import rx.Observable;
+import org.apache.taverna.mobile.ui.base.MvpView;
 
 
-public interface TavernaService {
+public interface WorkflowMvpView extends MvpView {
 
-    @GET("/announcements.xml")
-    Observable<Announcements> getAllAnnouncements(@Query("page") int pageNumber);
+    void showAllWorkflow(Workflows workflows);
 
-    @GET("/announcement.xml")
-    Observable<DetailAnnouncement> getAnnouncement(@Query("id") String id);
+    void showProgressbar(boolean b);
 
-    @GET("/workflows.xml")
-    Observable<Workflows> getAllWorkflows(@Query("page") int pageNumber);
+    void showErrorSnackBar();
 
-    @GET("/workflow.xml")
-    Observable<DetailWorkflow> getDetailWorkflow(@Query("id") String id);
+    void showWaitProgress(boolean b);
+
+    void showWorkflowDetail(DetailWorkflow detailWorkflow);
 }
