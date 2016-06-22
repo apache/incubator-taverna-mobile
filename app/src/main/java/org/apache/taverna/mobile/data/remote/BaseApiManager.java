@@ -26,6 +26,7 @@ public class BaseApiManager {
                 .baseUrl(ENDPOINT)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(new TavernaOkHttpClient().getTavernaOkHttpClient())
                 .build();
 
         return retrofit.create(clazz);
