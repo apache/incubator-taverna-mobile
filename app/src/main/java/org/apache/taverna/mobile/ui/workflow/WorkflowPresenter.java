@@ -79,7 +79,7 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
 
     }
 
-    public void loadDetailWorkFlow(List<Workflow> workflowList){
+    public void loadDetailWorkFlow(List<Workflow> workflowList) {
         for (int i = 0; i < workflowList.size(); i++) {
             mDataManager.getDetailWorkflow(workflowList.get(i).getId())
                     .observeOn(AndroidSchedulers.mainThread())
