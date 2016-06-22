@@ -27,7 +27,7 @@ public class DetailWorkflow implements Parcelable {
     private String elementId;
     @Element(name = "title")
     private String title;
-    @Element(name = "description")
+    @Element(name = "description", required = false)
     String description;
     @Element(name = "type")
     private Type type;
