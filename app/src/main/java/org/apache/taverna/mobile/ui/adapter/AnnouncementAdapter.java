@@ -22,7 +22,6 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.model.Announcement;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +71,6 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (holder instanceof ViewHolder) {
             ((ViewHolder) holder).tvAnnouncementTitle.setText(mAnnouncementList.get(position)
                     .getContent());
-            Log.e("", "onBindViewHolder: " + mAnnouncementList.get(1).getContent());
         }
     }
 
