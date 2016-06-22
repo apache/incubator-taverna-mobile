@@ -45,7 +45,7 @@ public class DetailWorkflow implements Parcelable {
     String contentUri;
     @Element(name = "content-type")
     String contentType;
-    @ElementList(name = "tags", inline = true, required = false)
+    @ElementList(name = "tags")
     List<Tag> tag;
 
     public String getContentType() {
@@ -223,15 +223,16 @@ public class DetailWorkflow implements Parcelable {
         this.tag = in.createTypedArrayList(Tag.CREATOR);
     }
 
-    public static final Parcelable.Creator<DetailWorkflow> CREATOR = new Parcelable.Creator<DetailWorkflow>() {
-        @Override
-        public DetailWorkflow createFromParcel(Parcel source) {
-            return new DetailWorkflow(source);
-        }
+    public static final Parcelable.Creator<DetailWorkflow> CREATOR =
+            new Parcelable.Creator<DetailWorkflow>() {
+                @Override
+                public DetailWorkflow createFromParcel(Parcel source) {
+                    return new DetailWorkflow(source);
+                }
 
-        @Override
-        public DetailWorkflow[] newArray(int size) {
-            return new DetailWorkflow[size];
-        }
-    };
+                @Override
+                public DetailWorkflow[] newArray(int size) {
+                    return new DetailWorkflow[size];
+                }
+            };
 }

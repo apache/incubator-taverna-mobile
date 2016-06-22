@@ -1,6 +1,7 @@
 package org.apache.taverna.mobile.fragments;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -61,7 +62,7 @@ public class WorkflowViewpager extends Fragment {
          * Dynamically Adding tabs
          * To add the new Tab "Go to res/values/category_id and add new title and category id"
          */
-        adapter.addFragment(new WorkflowItemFragment(), getResources().getString(R.string
+        adapter.addFragment(new WorkflowFragment(), getResources().getString(R.string
                 .title_explore));
         adapter.addFragment(new FavoriteFragment(), getResources().getString(R.string
                 .title_favorite));
