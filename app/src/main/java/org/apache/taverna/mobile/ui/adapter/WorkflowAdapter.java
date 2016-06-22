@@ -21,7 +21,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private final List<DetailWorkflow> detailWorkflowList;
     private final Context context;
 
-    public WorkflowAdapter(List<DetailWorkflow> detailWorkflowList ,Context context) {
+    public WorkflowAdapter(List<DetailWorkflow> detailWorkflowList, Context context) {
         this.detailWorkflowList = detailWorkflowList;
         this.context = context;
     }
@@ -50,10 +50,9 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: "+detailWorkflowList.size());
+        Log.d(TAG, "getItemCount: " + detailWorkflowList.size());
         return detailWorkflowList.size();
     }
-
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
