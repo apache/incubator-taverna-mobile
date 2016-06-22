@@ -45,7 +45,7 @@ public class DetailWorkflow implements Parcelable {
     String contentUri;
     @Element(name = "content-type")
     String contentType;
-    @ElementList(name = "tags", inline = true, required = false)
+    @ElementList(name = "tags")
     List<Tag> tag;
 
     public String getContentType() {
