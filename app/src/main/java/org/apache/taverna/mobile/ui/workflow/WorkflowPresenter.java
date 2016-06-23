@@ -55,7 +55,9 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
     }
 
     public void loadAllWorkflow(int pageNumber) {
-        getMvpView().showProgressbar(true);
+        if (pageNumber == 1) {
+            getMvpView().showProgressbar(true);
+        }
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
         mSubscriptions = mDataManager.getAllWorkflow(pageNumber)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -73,6 +75,7 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
 
                     @Override
                     public void onNext(Workflows workflows) {
+                        getMvpView().removeLoadMoreProgressbar();
                         loadDetailWorkFlow(workflows.getWorkflowList());
                     }
                 });
