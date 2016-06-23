@@ -29,4 +29,6 @@ public interface WorkflowMvpView extends MvpView {
     void showErrorSnackBar();
 
     void showWorkflowDetail(DetailWorkflow detailWorkflow);
+
+    void removeLoadMoreProgressbar();
 }
