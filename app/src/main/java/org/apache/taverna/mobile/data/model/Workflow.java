@@ -1,23 +1,40 @@
 package org.apache.taverna.mobile.data.model;
 
 import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Text;
+import org.simpleframework.xml.Element;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 
 public class Workflow implements Parcelable {
+
     @Attribute(name = "resource", required = false)
     String resource;
+
     @Attribute(name = "uri", required = false)
     String uri;
+
     @Attribute(name = "id", required = false)
     String id;
+
     @Attribute(name = "version", required = false)
     String version;
-    @Text
-    String content;
+
+    @Element(name = "title")
+    private String title;
+
+    @Element(name = "type")
+    private Type type;
+
+    @Element(name = "uploader")
+    private Uploader uploader;
+
+    @Element(name = "created-at")
+    private String createdAt;
+
+    @Element(name = "svg")
+    private String svgUri;
 
     public String getResource() {
         return resource;
@@ -51,13 +68,46 @@ public class Workflow implements Parcelable {
         this.version = version;
     }
 
-    public String getContent() {
-        return content;
+    public String getTitle() {
+        return title;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTitle(String title) {
+        this.title = title;
     }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public Uploader getUploader() {
+        return uploader;
+    }
+
+    public void setUploader(Uploader uploader) {
+        this.uploader = uploader;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getSvgUri() {
+        return svgUri;
+    }
+
+    public void setSvgUri(String svgUri) {
+        this.svgUri = svgUri;
+    }
+
 
     @Override
     public int describeContents() {
@@ -70,7 +120,11 @@ public class Workflow implements Parcelable {
         dest.writeString(this.uri);
         dest.writeString(this.id);
         dest.writeString(this.version);
-        dest.writeString(this.content);
+        dest.writeString(this.title);
+        dest.writeParcelable(this.type, flags);
+        dest.writeParcelable(this.uploader, flags);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.svgUri);
     }
 
     public Workflow() {
@@ -81,7 +135,11 @@ public class Workflow implements Parcelable {
         this.uri = in.readString();
         this.id = in.readString();
         this.version = in.readString();
-        this.content = in.readString();
+        this.title = in.readString();
+        this.type = in.readParcelable(Type.class.getClassLoader());
+        this.uploader = in.readParcelable(Uploader.class.getClassLoader());
+        this.createdAt = in.readString();
+        this.svgUri = in.readString();
     }
 
     public static final Creator<Workflow> CREATOR = new Creator<Workflow>() {
