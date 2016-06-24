@@ -23,8 +23,11 @@ import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.DetailWorkflow;
 import org.apache.taverna.mobile.data.model.Workflows;
 
+import java.util.Map;
+
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 import rx.Observable;
 
 
@@ -37,7 +40,7 @@ public interface TavernaService {
     Observable<DetailAnnouncement> getAnnouncement(@Query("id") String id);
 
     @GET("/workflows.xml")
-    Observable<Workflows> getAllWorkflows(@Query("page") int pageNumber);
+    Observable<Workflows> getAllWorkflows(@QueryMap Map<String, String> options);
 
     @GET("/workflow.xml")
     Observable<DetailWorkflow> getDetailWorkflow(@Query("id") String id);
