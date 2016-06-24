@@ -18,7 +18,7 @@
  */
 package org.apache.taverna.mobile.ui.workflow;
 
-import org.apache.taverna.mobile.data.model.DetailWorkflow;
+import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.ui.base.MvpView;
 
 
@@ -28,7 +28,7 @@ public interface WorkflowMvpView extends MvpView {
 
     void showErrorSnackBar();
 
-    void showWorkflowDetail(DetailWorkflow detailWorkflow);
+    void showWorkflows(Workflows workflows);
 
     void removeLoadMoreProgressbar();
 }

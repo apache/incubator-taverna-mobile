@@ -19,12 +19,8 @@
 package org.apache.taverna.mobile.ui.workflow;
 
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.DetailWorkflow;
-import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
-
-import java.util.List;
 
 import rx.Observer;
 import rx.Subscription;
@@ -76,34 +72,10 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
                     @Override
                     public void onNext(Workflows workflows) {
                         getMvpView().removeLoadMoreProgressbar();
-                        loadDetailWorkFlow(workflows.getWorkflowList());
+                        getMvpView().showWorkflows(workflows);
                     }
                 });
 
     }
 
-    public void loadDetailWorkFlow(List<Workflow> workflowList) {
-        for (int i = 0; i < workflowList.size(); i++) {
-            mDataManager.getDetailWorkflow(workflowList.get(i).getId())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(new Observer<DetailWorkflow>() {
-                        @Override
-                        public void onCompleted() {
-                            getMvpView().showProgressbar(false);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            getMvpView().showProgressbar(false);
-                            getMvpView().showErrorSnackBar();
-                        }
-
-                        @Override
-                        public void onNext(DetailWorkflow detailWorkflow) {
-                            getMvpView().showWorkflowDetail(detailWorkflow);
-                        }
-                    });
-        }
-    }
 }
