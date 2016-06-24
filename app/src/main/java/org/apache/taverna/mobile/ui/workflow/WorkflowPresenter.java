@@ -87,6 +87,7 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
         option.put("elements", "title,type,uploader,svg,created-at");
         option.put("page", String.valueOf(pageNumber));
         option.put("num", String.valueOf(10));
+        option.put("order","reverse");
         return option;
     }
 

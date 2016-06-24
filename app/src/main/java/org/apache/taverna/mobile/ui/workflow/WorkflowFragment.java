@@ -121,7 +121,6 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView {
 
     @Override
     public void showWorkflows(Workflows workflows) {
-        mWorkflowList.clear();
         mWorkflowList.addAll(workflows.getWorkflowList());
         mWorkflowAdapter.notifyDataSetChanged();
     }
