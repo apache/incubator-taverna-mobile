@@ -87,8 +87,10 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder) {
+
             Workflow workflow = mWorkflowList.get(position);
-            ((ViewHolder) holder).tvDate.setText(workflow.getCreatedAt());
+            String date=workflow.getCreatedAt().substring(0,workflow.getCreatedAt().indexOf(' '));
+            ((ViewHolder) holder).tvDate.setText(date);
             ((ViewHolder) holder).tvTitle.setText(workflow.getTitle());
             ((ViewHolder) holder).tvType.setText(workflow.getType().getContent());
             ((ViewHolder) holder).tvUploader.setText(workflow.getUploader().getContent());
@@ -96,6 +98,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             requestBuilder
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .load(uri)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
                     .into(((ViewHolder) holder).ivWorkflowImage);
         }
     }
