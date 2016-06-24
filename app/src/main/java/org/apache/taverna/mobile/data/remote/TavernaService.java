@@ -33,15 +33,15 @@ import rx.Observable;
 
 public interface TavernaService {
 
-    @GET("announcements.xml")
+    @GET(APIEndPoint.ALLANNOUNCEMENT)
     Observable<Announcements> getAllAnnouncements(@Query("page") int pageNumber);
 
-    @GET("announcement.xml")
+    @GET(APIEndPoint.ANNOUNCEMENT)
     Observable<DetailAnnouncement> getAnnouncement(@Query("id") String id);
 
-    @GET("workflows.xml")
+    @GET(APIEndPoint.ALLWORKFLOW)
     Observable<Workflows> getAllWorkflows(@QueryMap Map<String, String> options);
 
-    @GET("workflow.xml")
+    @GET(APIEndPoint.WORKFLOW)
     Observable<DetailWorkflow> getDetailWorkflow(@Query("id") String id);
 }
