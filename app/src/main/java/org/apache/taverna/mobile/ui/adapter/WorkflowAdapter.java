@@ -89,7 +89,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (holder instanceof ViewHolder) {
 
             Workflow workflow = mWorkflowList.get(position);
-            String date=workflow.getCreatedAt().substring(0,workflow.getCreatedAt().indexOf(' '));
+            String date = workflow.getCreatedAt()
+                    .substring(0, workflow.getCreatedAt().indexOf(' '));
             ((ViewHolder) holder).tvDate.setText(date);
             ((ViewHolder) holder).tvTitle.setText(workflow.getTitle());
             ((ViewHolder) holder).tvType.setText(workflow.getType().getContent());
@@ -128,12 +129,14 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView tvUploader;
         @BindView(R.id.ivWorkflowImage)
         ImageView ivWorkflowImage;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
         }
     }
+
     public static class ProgressViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.progressBar1)
         public ProgressBar progressBar;
