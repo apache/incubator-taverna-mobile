@@ -8,7 +8,7 @@ import com.bumptech.glide.load.resource.file.FileToStreamDecoder;
 import com.caverock.androidsvg.SVG;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.model.DetailWorkflow;
+import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.utils.SvgDecoder;
 import org.apache.taverna.mobile.utils.SvgDrawableTranscoder;
 import org.apache.taverna.mobile.utils.SvgSoftwareLayerSetter;
@@ -38,19 +38,20 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private static final String TAG = WorkflowAdapter.class.getName();
 
-    private final List<DetailWorkflow> detailWorkflowList;
+    private final List<Workflow> mWorkflowList;
 
     private final Context context;
 
     private GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> requestBuilder;
 
-    public WorkflowAdapter(List<DetailWorkflow> detailWorkflowList, Context context) {
-        this.detailWorkflowList = detailWorkflowList;
+    public WorkflowAdapter(List<Workflow> mWorkflowList, Context context) {
+        this.mWorkflowList = mWorkflowList;
         this.context = context;
     }
 
-    public void addWorkflow(DetailWorkflow detailWorkflow) {
-        this.detailWorkflowList.add(detailWorkflow);
+    public void addWorkflow(Workflow workflow) {
+        this.mWorkflowList.add(workflow);
+        this.notifyDataSetChanged();
 
     }
 
@@ -86,12 +87,12 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder) {
-            DetailWorkflow detailWorkflow = detailWorkflowList.get(position);
-            ((ViewHolder) holder).tvDate.setText(detailWorkflow.getCreatedAt());
-            ((ViewHolder) holder).tvTitle.setText(detailWorkflow.getTitle());
-            ((ViewHolder) holder).tvType.setText(detailWorkflow.getType().getContent());
-            ((ViewHolder) holder).tvUploader.setText(detailWorkflow.getUploader().getContent());
-            Uri uri = Uri.parse(detailWorkflow.getSvgUri());
+            Workflow workflow = mWorkflowList.get(position);
+            ((ViewHolder) holder).tvDate.setText(workflow.getCreatedAt());
+            ((ViewHolder) holder).tvTitle.setText(workflow.getTitle());
+            ((ViewHolder) holder).tvType.setText(workflow.getType().getContent());
+            ((ViewHolder) holder).tvUploader.setText(workflow.getUploader().getContent());
+            Uri uri = Uri.parse(workflow.getSvgUri());
             requestBuilder
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .load(uri)
@@ -101,13 +102,13 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: " + detailWorkflowList.size());
-        return detailWorkflowList.size();
+        Log.d(TAG, "getItemCount: " + mWorkflowList.size());
+        return mWorkflowList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return detailWorkflowList.get(position) != null ? VIEW_ITEM : VIEW_PROG;
+        return mWorkflowList.get(position) != null ? VIEW_ITEM : VIEW_PROG;
     }
 
 

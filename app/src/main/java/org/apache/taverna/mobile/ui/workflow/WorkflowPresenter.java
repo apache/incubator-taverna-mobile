@@ -22,6 +22,9 @@ import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -55,18 +58,18 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
             getMvpView().showProgressbar(true);
         }
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
-        mSubscriptions = mDataManager.getAllWorkflow(pageNumber)
+        mSubscriptions = mDataManager.getAllWorkflow(getQueryOptions(pageNumber))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Workflows>() {
                     @Override
                     public void onCompleted() {
-
+                        getMvpView().showProgressbar(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        getMvpView().showProgressbar(false);
                     }
 
                     @Override
@@ -77,5 +80,15 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
                 });
 
     }
+
+    private Map<String, String> getQueryOptions(int pageNumber) {
+
+        Map<String, String> option = new HashMap<>();
+        option.put("elements", "title,type,uploader,svg,created-at");
+        option.put("page", String.valueOf(pageNumber));
+        option.put("num", String.valueOf(10));
+        return option;
+    }
+
 
 }

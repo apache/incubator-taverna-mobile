@@ -3,7 +3,8 @@ package org.apache.taverna.mobile.ui.workflow;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.DetailWorkflow;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
 import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
@@ -42,13 +43,13 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView {
 
     private ConnectionInfo mConnectionInfo;
     private int mPageNumber = 1;
-    private List<DetailWorkflow> detailWorkflowList;
+    private List<Workflow> mWorkflowList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        detailWorkflowList = new ArrayList<>();
+        mWorkflowList = new ArrayList<>();
         dataManager = new DataManager();
         mWorkflowPresenter = new WorkflowPresenter(dataManager);
         mConnectionInfo = new ConnectionInfo(getContext());
@@ -67,7 +68,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.hasFixedSize();
-        mWorkflowAdapter = new WorkflowAdapter(detailWorkflowList, getContext());
+        mWorkflowAdapter = new WorkflowAdapter(mWorkflowList, getContext());
         mRecyclerView.setAdapter(mWorkflowAdapter);
 
         showProgressbar(true);
@@ -78,9 +79,9 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView {
             public void onLoadMore(int current_page) {
 
                 if (mConnectionInfo.isConnectingToInternet()
-                        && detailWorkflowList.size() % 25 == 0) {
-                    detailWorkflowList.add(null);
-                    mWorkflowAdapter.notifyItemInserted(detailWorkflowList.size());
+                        && mWorkflowList.size() % 10 == 0) {
+                    mWorkflowList.add(null);
+                    mWorkflowAdapter.notifyItemInserted(mWorkflowList.size());
                     ++mPageNumber;
                     mWorkflowPresenter.loadAllWorkflow(mPageNumber);
                     Log.i(LOG_TAG, "Loading more");
@@ -119,17 +120,16 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView {
     }
 
     @Override
-    public void showWorkflowDetail(DetailWorkflow detailWorkflow) {
-
-        detailWorkflowList.add(detailWorkflow);
+    public void showWorkflows(Workflows workflows) {
+        mWorkflowList.clear();
+        mWorkflowList.addAll(workflows.getWorkflowList());
         mWorkflowAdapter.notifyDataSetChanged();
-
     }
 
     @Override
     public void removeLoadMoreProgressbar() {
         if (mPageNumber != 1) {
-            detailWorkflowList.remove(detailWorkflowList.size() - 1);
+            mWorkflowList.remove(mWorkflowList.size() - 1);
             mWorkflowAdapter.notifyDataSetChanged();
 
         }

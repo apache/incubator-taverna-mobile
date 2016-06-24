@@ -24,7 +24,6 @@ import org.apache.taverna.mobile.data.model.DetailWorkflow;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.data.remote.BaseApiManager;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import rx.Observable;
@@ -54,11 +53,8 @@ public class DataManager {
     /**
      * @return List of all Workflow
      */
-    public Observable<Workflows> getAllWorkflow(int pageNumber) {
-        Map<String, String> data = new HashMap<>();
-        data.put("elements", "title,type,uploader,svg");
-        data.put("page", String.valueOf(pageNumber));
-        return mBaseApiManager.getTavernaApi().getAllWorkflows(data);
+    public Observable<Workflows> getAllWorkflow(Map<String, String> options) {
+        return mBaseApiManager.getTavernaApi().getAllWorkflows(options);
     }
 
     /**
