@@ -58,6 +58,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
+
         requestBuilder = Glide.with(context)
                 .using(Glide.buildStreamModelLoader(Uri.class, context), InputStream.class)
                 .from(Uri.class)
@@ -70,6 +71,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 .error(R.drawable.tavernalogo)
                 .animate(android.R.anim.fade_in)
                 .listener(new SvgSoftwareLayerSetter<Uri>());
+
         if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(
                     R.layout.item_recyclerview_dashboard, parent, false);
@@ -91,11 +93,14 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             Workflow workflow = mWorkflowList.get(position);
             String date = workflow.getCreatedAt()
                     .substring(0, workflow.getCreatedAt().indexOf(' '));
+
             ((ViewHolder) holder).tvDate.setText(date);
             ((ViewHolder) holder).tvTitle.setText(workflow.getTitle());
             ((ViewHolder) holder).tvType.setText(workflow.getType().getContent());
             ((ViewHolder) holder).tvUploader.setText(workflow.getUploader().getContent());
+
             Uri uri = Uri.parse(workflow.getSvgUri());
+
             requestBuilder
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .load(uri)
@@ -121,12 +126,16 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         @BindView(R.id.tvDate)
         TextView tvDate;
+
         @BindView(R.id.tvTitle)
         TextView tvTitle;
+
         @BindView(R.id.tvType)
         TextView tvType;
+
         @BindView(R.id.tvUploader)
         TextView tvUploader;
+
         @BindView(R.id.ivWorkflowImage)
         ImageView ivWorkflowImage;
 
@@ -138,6 +147,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public static class ProgressViewHolder extends RecyclerView.ViewHolder {
+
         @BindView(R.id.progressBar1)
         public ProgressBar progressBar;
 

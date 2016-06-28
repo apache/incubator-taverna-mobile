@@ -29,48 +29,29 @@ import android.os.Parcelable;
 @Root(name = "announcement")
 public class DetailAnnouncement implements Parcelable {
 
-    public static final Parcelable.Creator<DetailAnnouncement> CREATOR = new Parcelable
-            .Creator<DetailAnnouncement>() {
-        @Override
-        public DetailAnnouncement createFromParcel(Parcel source) {
-            return new DetailAnnouncement(source);
-        }
-
-        @Override
-        public DetailAnnouncement[] newArray(int size) {
-            return new DetailAnnouncement[size];
-        }
-    };
     @Attribute(name = "resource", required = false)
     String resource;
+
     @Attribute(name = "uri", required = false)
     String uri;
+
     @Attribute(name = "id", required = false)
     String id;
+
     @Element(name = "author")
     private Author author;
+
     @Element(name = "title")
     private String title;
+
     @Element(name = "text")
     private String text;
+
     @Element(name = "created-at")
     private String date;
+
     @Element(name = "id")
     private String idElement;
-
-    public DetailAnnouncement() {
-    }
-
-    protected DetailAnnouncement(Parcel in) {
-        this.author = in.readParcelable(Author.class.getClassLoader());
-        this.title = in.readString();
-        this.text = in.readString();
-        this.date = in.readString();
-        this.resource = in.readString();
-        this.uri = in.readString();
-        this.id = in.readString();
-        this.idElement = in.readString();
-    }
 
     public String getIdElement() {
         return idElement;
@@ -143,15 +124,41 @@ public class DetailAnnouncement implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.resource);
+        dest.writeString(this.uri);
+        dest.writeString(this.id);
         dest.writeParcelable(this.author, flags);
         dest.writeString(this.title);
         dest.writeString(this.text);
         dest.writeString(this.date);
-        dest.writeString(this.resource);
-        dest.writeString(this.uri);
-        dest.writeString(this.id);
         dest.writeString(this.idElement);
     }
+
+    public DetailAnnouncement() {
+    }
+
+    protected DetailAnnouncement(Parcel in) {
+        this.resource = in.readString();
+        this.uri = in.readString();
+        this.id = in.readString();
+        this.author = in.readParcelable(Author.class.getClassLoader());
+        this.title = in.readString();
+        this.text = in.readString();
+        this.date = in.readString();
+        this.idElement = in.readString();
+    }
+
+    public static final Creator<DetailAnnouncement> CREATOR = new Creator<DetailAnnouncement>() {
+        @Override
+        public DetailAnnouncement createFromParcel(Parcel source) {
+            return new DetailAnnouncement(source);
+        }
+
+        @Override
+        public DetailAnnouncement[] newArray(int size) {
+            return new DetailAnnouncement[size];
+        }
+    };
 }
 
 

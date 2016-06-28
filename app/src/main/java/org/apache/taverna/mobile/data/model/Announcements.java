@@ -30,28 +30,8 @@ import java.util.List;
 @Root(name = "announcements")
 public class Announcements implements Parcelable {
 
-    public static final Parcelable.Creator<Announcements> CREATOR = new Parcelable
-            .Creator<Announcements>() {
-        @Override
-        public Announcements createFromParcel(Parcel source) {
-            return new Announcements(source);
-        }
-
-        @Override
-        public Announcements[] newArray(int size) {
-            return new Announcements[size];
-        }
-    };
     @ElementList(name = "announcement", inline = true, required = false)
     List<Announcement> announcement;
-
-    public Announcements() {
-    }
-
-
-    protected Announcements(Parcel in) {
-        this.announcement = in.createTypedArrayList(Announcement.CREATOR);
-    }
 
     public List<Announcement> getAnnouncement() {
         return this.announcement;
@@ -70,4 +50,24 @@ public class Announcements implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(this.announcement);
     }
+
+    public Announcements() {
+    }
+
+    protected Announcements(Parcel in) {
+        this.announcement = in.createTypedArrayList(Announcement.CREATOR);
+    }
+
+    public static final Parcelable.Creator<Announcements> CREATOR = new Parcelable
+            .Creator<Announcements>() {
+        @Override
+        public Announcements createFromParcel(Parcel source) {
+            return new Announcements(source);
+        }
+
+        @Override
+        public Announcements[] newArray(int size) {
+            return new Announcements[size];
+        }
+    };
 }

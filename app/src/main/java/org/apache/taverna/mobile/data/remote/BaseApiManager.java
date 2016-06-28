@@ -26,12 +26,12 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 public class BaseApiManager {
 
 
-    final String ENDPOINT = "http://www.myexperiment.org/";
+    public static final String END_POINT = "http://www.myexperiment.org/";
     public TavernaService mTavernaService;
 
     public BaseApiManager() {
 
-        mTavernaService = createApi(TavernaService.class, ENDPOINT);
+        mTavernaService = createApi(TavernaService.class, END_POINT);
     }
 
     /******** Helper class that sets up a new services *******/

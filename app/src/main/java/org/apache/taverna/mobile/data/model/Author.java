@@ -27,36 +27,17 @@ import android.os.Parcelable;
 
 public class Author implements Parcelable {
 
-    public static final Parcelable.Creator<Author> CREATOR = new Parcelable.Creator<Author>() {
-        @Override
-        public Author createFromParcel(Parcel source) {
-            return new Author(source);
-        }
-
-        @Override
-        public Author[] newArray(int size) {
-            return new Author[size];
-        }
-    };
     @Attribute(name = "resource", required = false)
     String resource;
+
     @Attribute(name = "uri", required = false)
     String uri;
+
     @Attribute(name = "id", required = false)
     String id;
+
     @Text
     String content;
-
-    public Author() {
-    }
-
-
-    protected Author(Parcel in) {
-        this.resource = in.readString();
-        this.uri = in.readString();
-        this.id = in.readString();
-        this.content = in.readString();
-    }
 
     public String getContent() {
         return content;
@@ -102,4 +83,26 @@ public class Author implements Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.content);
     }
+
+    public Author() {
+    }
+
+    protected Author(Parcel in) {
+        this.resource = in.readString();
+        this.uri = in.readString();
+        this.id = in.readString();
+        this.content = in.readString();
+    }
+
+    public static final Creator<Author> CREATOR = new Creator<Author>() {
+        @Override
+        public Author createFromParcel(Parcel source) {
+            return new Author(source);
+        }
+
+        @Override
+        public Author[] newArray(int size) {
+            return new Author[size];
+        }
+    };
 }

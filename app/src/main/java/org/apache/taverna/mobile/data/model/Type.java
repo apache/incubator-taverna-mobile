@@ -30,10 +30,13 @@ public class Type implements Parcelable {
 
     @Attribute(name = "resource", required = false)
     String resource;
+
     @Attribute(name = "uri", required = false)
     String uri;
+
     @Attribute(name = "id", required = false)
     String id;
+
     @Text
     String content;
 

@@ -34,35 +34,49 @@ public class DetailWorkflow implements Parcelable {
 
     @Attribute(name = "resource", required = false)
     String resource;
+
     @Attribute(name = "uri", required = false)
     String uri;
+
     @Attribute(name = "id", required = false)
     String id;
+
     @Attribute(name = "version", required = false)
     String version;
 
     @Element(name = "id")
     private String elementId;
+
     @Element(name = "title")
     private String title;
+
     @Element(name = "description", required = false)
     String description;
+
     @Element(name = "type")
     private Type type;
+
     @Element(name = "uploader")
     private Uploader uploader;
+
     @Element(name = "created-at")
     private String createdAt;
+
     @Element(name = "preview")
     private String previewUri;
+
     @Element(name = "svg")
     private String svgUri;
+
     @Element(name = "license-type")
     private LicenseType licenseType;
+
     @Element(name = "content-uri")
     String contentUri;
+
     @Element(name = "content-type")
     String contentType;
+
     @ElementList(name = "tags")
     List<Tag> tag;
 
@@ -241,16 +255,15 @@ public class DetailWorkflow implements Parcelable {
         this.tag = in.createTypedArrayList(Tag.CREATOR);
     }
 
-    public static final Parcelable.Creator<DetailWorkflow> CREATOR =
-            new Parcelable.Creator<DetailWorkflow>() {
-                @Override
-                public DetailWorkflow createFromParcel(Parcel source) {
-                    return new DetailWorkflow(source);
-                }
+    public static final Creator<DetailWorkflow> CREATOR = new Creator<DetailWorkflow>() {
+        @Override
+        public DetailWorkflow createFromParcel(Parcel source) {
+            return new DetailWorkflow(source);
+        }
 
-                @Override
-                public DetailWorkflow[] newArray(int size) {
-                    return new DetailWorkflow[size];
-                }
-            };
+        @Override
+        public DetailWorkflow[] newArray(int size) {
+            return new DetailWorkflow[size];
+        }
+    };
 }

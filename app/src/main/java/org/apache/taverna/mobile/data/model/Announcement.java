@@ -27,37 +27,20 @@ import android.os.Parcelable;
 
 public class Announcement implements Parcelable {
 
-    public static final Parcelable.Creator<Announcement> CREATOR = new Parcelable
-            .Creator<Announcement>() {
-        @Override
-        public Announcement createFromParcel(Parcel source) {
-            return new Announcement(source);
-        }
 
-        @Override
-        public Announcement[] newArray(int size) {
-            return new Announcement[size];
-        }
-    };
     @Attribute(name = "resource", required = false)
     String resource;
+
     @Attribute(name = "uri", required = false)
     String uri;
+
     @Attribute(name = "id", required = false)
     String id;
+
     @Text
     String content;
 
-    public Announcement() {
-    }
 
-
-    protected Announcement(Parcel in) {
-        this.resource = in.readString();
-        this.uri = in.readString();
-        this.id = in.readString();
-        this.content = in.readString();
-    }
 
     public String getContent() {
         return content;
@@ -103,4 +86,27 @@ public class Announcement implements Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.content);
     }
+
+    public Announcement() {
+    }
+
+    protected Announcement(Parcel in) {
+        this.resource = in.readString();
+        this.uri = in.readString();
+        this.id = in.readString();
+        this.content = in.readString();
+    }
+
+    public static final Parcelable.Creator<Announcement> CREATOR = new Parcelable
+            .Creator<Announcement>() {
+        @Override
+        public Announcement createFromParcel(Parcel source) {
+            return new Announcement(source);
+        }
+
+        @Override
+        public Announcement[] newArray(int size) {
+            return new Announcement[size];
+        }
+    };
 }

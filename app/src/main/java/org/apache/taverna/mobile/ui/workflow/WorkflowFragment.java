@@ -89,10 +89,9 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView {
         mWorkflowAdapter = new WorkflowAdapter(mWorkflowList, getContext());
         mRecyclerView.setAdapter(mWorkflowAdapter);
 
-        showProgressbar(true);
         mWorkflowPresenter.loadAllWorkflow(mPageNumber);
 
-        mRecyclerView.setOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
+        mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int current_page) {
 
@@ -102,22 +101,15 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView {
                     mWorkflowAdapter.notifyItemInserted(mWorkflowList.size());
                     ++mPageNumber;
                     mWorkflowPresenter.loadAllWorkflow(mPageNumber);
-                    Log.i(LOG_TAG, "Loading more");
+                    Log.d(LOG_TAG, "Loading more");
                 } else if (!mConnectionInfo.isConnectingToInternet()) {
-                    Log.i(LOG_TAG, "Internet not available. Not loading more posts.");
+                    Log.d(LOG_TAG, "Internet not available. Not loading more posts.");
                     showErrorSnackBar();
                 }
             }
         });
 
         return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        mWorkflowPresenter.detachView();
     }
 
     @Override
@@ -150,5 +142,11 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView {
             mWorkflowAdapter.notifyDataSetChanged();
 
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mWorkflowPresenter.detachView();
     }
 }
