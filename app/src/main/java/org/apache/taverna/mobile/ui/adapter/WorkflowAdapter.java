@@ -47,17 +47,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public WorkflowAdapter(List<Workflow> mWorkflowList, Context context) {
         this.mWorkflowList = mWorkflowList;
         this.context = context;
-    }
-
-    public void addWorkflow(Workflow workflow) {
-        this.mWorkflowList.add(workflow);
-        this.notifyDataSetChanged();
-
-    }
-
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder vh;
 
         requestBuilder = Glide.with(context)
                 .using(Glide.buildStreamModelLoader(Uri.class, context), InputStream.class)
@@ -71,6 +60,17 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 .error(R.drawable.tavernalogo)
                 .animate(android.R.anim.fade_in)
                 .listener(new SvgSoftwareLayerSetter<Uri>());
+    }
+
+    public void addWorkflow(Workflow workflow) {
+        this.mWorkflowList.add(workflow);
+        this.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        RecyclerView.ViewHolder vh;
 
         if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(
