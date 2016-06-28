@@ -51,8 +51,8 @@ public class Workflow implements Parcelable {
     @Element(name = "created-at")
     private String createdAt;
 
-    @Element(name = "svg")
-    private String svgUri;
+    @Element(name = "preview")
+    private String previewUri;
 
     public String getResource() {
         return resource;
@@ -118,12 +118,12 @@ public class Workflow implements Parcelable {
         this.createdAt = createdAt;
     }
 
-    public String getSvgUri() {
-        return svgUri;
+    public String getPreviewUri() {
+        return previewUri;
     }
 
-    public void setSvgUri(String svgUri) {
-        this.svgUri = svgUri;
+    public void setPreviewUri(String previewUri) {
+        this.previewUri = previewUri;
     }
 
 
@@ -142,7 +142,7 @@ public class Workflow implements Parcelable {
         dest.writeParcelable(this.type, flags);
         dest.writeParcelable(this.uploader, flags);
         dest.writeString(this.createdAt);
-        dest.writeString(this.svgUri);
+        dest.writeString(this.previewUri);
     }
 
     public Workflow() {
@@ -157,7 +157,7 @@ public class Workflow implements Parcelable {
         this.type = in.readParcelable(Type.class.getClassLoader());
         this.uploader = in.readParcelable(Uploader.class.getClassLoader());
         this.createdAt = in.readString();
-        this.svgUri = in.readString();
+        this.previewUri = in.readString();
     }
 
     public static final Creator<Workflow> CREATOR = new Creator<Workflow>() {

@@ -84,7 +84,7 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
     private Map<String, String> getQueryOptions(int pageNumber) {
 
         Map<String, String> option = new HashMap<>();
-        option.put("elements", "title,type,uploader,svg,created-at");
+        option.put("elements", "title,type,uploader,preview,created-at");
         option.put("page", String.valueOf(pageNumber));
         option.put("num", String.valueOf(10));
         option.put("order", "reverse");

@@ -1,20 +1,12 @@
 package org.apache.taverna.mobile.ui.adapter;
 
-import com.bumptech.glide.GenericRequestBuilder;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.model.StreamEncoder;
-import com.bumptech.glide.load.resource.file.FileToStreamDecoder;
-import com.caverock.androidsvg.SVG;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.utils.SvgDecoder;
-import org.apache.taverna.mobile.utils.SvgDrawableTranscoder;
-import org.apache.taverna.mobile.utils.SvgSoftwareLayerSetter;
 
 import android.content.Context;
-import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.io.InputStream;
 import java.util.List;
 
 import butterknife.BindView;
@@ -42,24 +33,10 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private final Context context;
 
-    private GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> requestBuilder;
-
     public WorkflowAdapter(List<Workflow> mWorkflowList, Context context) {
         this.mWorkflowList = mWorkflowList;
         this.context = context;
 
-        requestBuilder = Glide.with(context)
-                .using(Glide.buildStreamModelLoader(Uri.class, context), InputStream.class)
-                .from(Uri.class)
-                .as(SVG.class)
-                .transcode(new SvgDrawableTranscoder(), PictureDrawable.class)
-                .sourceEncoder(new StreamEncoder())
-                .cacheDecoder(new FileToStreamDecoder<SVG>(new SvgDecoder()))
-                .decoder(new SvgDecoder())
-                .placeholder(R.drawable.tavernalogo)
-                .error(R.drawable.tavernalogo)
-                .animate(android.R.anim.fade_in)
-                .listener(new SvgSoftwareLayerSetter<Uri>());
     }
 
     public void addWorkflow(Workflow workflow) {
@@ -99,11 +76,11 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((ViewHolder) holder).tvType.setText(workflow.getType().getContent());
             ((ViewHolder) holder).tvUploader.setText(workflow.getUploader().getContent());
 
-            Uri uri = Uri.parse(workflow.getSvgUri());
+            Uri uri = Uri.parse(workflow.getPreviewUri());
 
-            requestBuilder
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+            Glide.with(context)
                     .load(uri)
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.placeholder)
                     .into(((ViewHolder) holder).ivWorkflowImage);
