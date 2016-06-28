@@ -31,7 +31,7 @@
                 android:id="@+id/ivWorkflowImage"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/sliding_header"/>
         <TextView
                 android:background="@color/black_background"
