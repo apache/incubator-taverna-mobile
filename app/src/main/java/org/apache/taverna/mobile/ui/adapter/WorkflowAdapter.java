@@ -74,8 +74,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             String title = workflow.getTitle().substring(0,
                     Math.min(workflow.getTitle().length(), 50));
 
-            if(workflow.getTitle().length()>50){
-                title=title+" ... ";
+            if (workflow.getTitle().length() > 50) {
+                title = title + " ... ";
             }
 
             ((ViewHolder) holder).tvDate.setText(date);
