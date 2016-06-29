@@ -43,5 +43,6 @@ public interface TavernaService {
     Observable<Workflows> getAllWorkflows(@QueryMap Map<String, String> options);
 
     @GET(APIEndPoint.WORKFLOW)
-    Observable<DetailWorkflow> getDetailWorkflow(@Query("id") String id);
+    Observable<DetailWorkflow> getDetailWorkflow(@Query("id") String id
+            , @QueryMap Map<String, String> options);
 }
