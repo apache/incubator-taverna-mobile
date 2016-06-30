@@ -56,28 +56,28 @@ public class DetailWorkflow implements Parcelable {
     @Element(name = "type")
     private Type type;
 
-    @Element(name = "uploader")
+    @Element(name = "uploader", required = false)
     private Uploader uploader;
 
-    @Element(name = "created-at")
+    @Element(name = "created-at", required = false)
     private String createdAt;
 
-    @Element(name = "preview")
+    @Element(name = "preview", required = false)
     private String previewUri;
 
-    @Element(name = "svg")
+    @Element(name = "svg", required = false)
     private String svgUri;
 
-    @Element(name = "license-type")
+    @Element(name = "license-type", required = false)
     private LicenseType licenseType;
 
-    @Element(name = "content-uri")
+    @Element(name = "content-uri", required = false)
     String contentUri;
 
-    @Element(name = "content-type")
+    @Element(name = "content-type", required = false)
     String contentType;
 
-    @ElementList(name = "tags")
+    @ElementList(name = "tags", required = false)
     List<Tag> tag;
 
     public String getContentType() {
