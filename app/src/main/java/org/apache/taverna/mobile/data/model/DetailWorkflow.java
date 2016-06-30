@@ -62,6 +62,9 @@ public class DetailWorkflow implements Parcelable {
     @Element(name = "created-at", required = false)
     private String createdAt;
 
+    @Element(name="updated-at", required = false)
+    private String updatedAt;
+
     @Element(name = "preview", required = false)
     private String previewUri;
 
@@ -208,6 +211,17 @@ public class DetailWorkflow implements Parcelable {
         this.title = title;
     }
 
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public DetailWorkflow() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -225,15 +239,13 @@ public class DetailWorkflow implements Parcelable {
         dest.writeParcelable(this.type, flags);
         dest.writeParcelable(this.uploader, flags);
         dest.writeString(this.createdAt);
+        dest.writeString(this.updatedAt);
         dest.writeString(this.previewUri);
         dest.writeString(this.svgUri);
         dest.writeParcelable(this.licenseType, flags);
         dest.writeString(this.contentUri);
         dest.writeString(this.contentType);
         dest.writeTypedList(this.tag);
-    }
-
-    public DetailWorkflow() {
     }
 
     protected DetailWorkflow(Parcel in) {
@@ -247,6 +259,7 @@ public class DetailWorkflow implements Parcelable {
         this.type = in.readParcelable(Type.class.getClassLoader());
         this.uploader = in.readParcelable(Uploader.class.getClassLoader());
         this.createdAt = in.readString();
+        this.updatedAt = in.readString();
         this.previewUri = in.readString();
         this.svgUri = in.readString();
         this.licenseType = in.readParcelable(LicenseType.class.getClassLoader());
