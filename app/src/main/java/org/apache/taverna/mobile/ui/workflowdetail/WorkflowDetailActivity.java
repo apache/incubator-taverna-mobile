@@ -16,7 +16,8 @@ public class WorkflowDetailActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.frame_container, WorkflowDetailFragment.newInstance(getIntent().getStringExtra("id")))
+                    .add(R.id.frame_container
+                            , WorkflowDetailFragment.newInstance(getIntent().getStringExtra("id")))
                     .commit();
         }
 

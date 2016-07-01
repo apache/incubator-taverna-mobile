@@ -52,7 +52,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
     private ConnectionInfo mConnectionInfo;
 
-    private static final String ID="id";
+    private static final String ID = "id";
 
     private String id;
 
@@ -60,7 +60,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
         Bundle args = new Bundle();
 
-        args.putString(ID,id);
+        args.putString(ID, id);
 
         WorkflowDetailFragment fragment = new WorkflowDetailFragment();
         fragment.setArguments(args);
@@ -71,7 +71,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        id=getArguments().getString(ID);
+        id = getArguments().getString(ID);
 
         dataManager = new DataManager();
         mWorkflowDetailPresenter = new WorkflowDetailPresenter(dataManager);

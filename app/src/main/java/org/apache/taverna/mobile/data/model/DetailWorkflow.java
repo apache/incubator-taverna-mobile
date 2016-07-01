@@ -62,7 +62,7 @@ public class DetailWorkflow implements Parcelable {
     @Element(name = "created-at", required = false)
     private String createdAt;
 
-    @Element(name="updated-at", required = false)
+    @Element(name = "updated-at", required = false)
     private String updatedAt;
 
     @Element(name = "preview", required = false)

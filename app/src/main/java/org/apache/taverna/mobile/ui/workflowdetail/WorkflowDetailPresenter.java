@@ -62,7 +62,8 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
     private Map<String, String> getQueryOptions() {
 
         Map<String, String> option = new HashMap<>();
-        option.put("elements", "id,title,type,uploader,preview,created-at,svg,updated-at,description,license-type,tags");
+        option.put("elements", "id,title,type,uploader,preview,created-at,svg,updated-at," +
+                "description,license-type,tags");
         return option;
     }
 }

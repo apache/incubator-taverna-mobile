@@ -47,7 +47,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WorkflowFragment extends Fragment implements WorkflowMvpView, RecyclerItemClickListner.OnItemClickListener {
+public class WorkflowFragment extends Fragment implements WorkflowMvpView,
+        RecyclerItemClickListner.OnItemClickListener {
     public final String LOG_TAG = getClass().getSimpleName();
 
     @BindView(R.id.rvDashboard)
@@ -158,8 +159,8 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView, Recyc
 
     @Override
     public void onItemClick(View childView, int position) {
-        Intent intent=new Intent(getActivity() , WorkflowDetailActivity.class);
-        intent.putExtra("id",mWorkflowList.get(position).getId());
+        Intent intent = new Intent(getActivity(), WorkflowDetailActivity.class);
+        intent.putExtra("id", mWorkflowList.get(position).getId());
         startActivity(intent);
     }
 

@@ -61,8 +61,8 @@ public class DataManager {
      * @return Detail of  Workflow
      */
 
-    public Observable<DetailWorkflow> getDetailWorkflow(String id,Map<String, String> options) {
-        return mBaseApiManager.getTavernaApi().getDetailWorkflow(id,options);
+    public Observable<DetailWorkflow> getDetailWorkflow(String id, Map<String, String> options) {
+        return mBaseApiManager.getTavernaApi().getDetailWorkflow(id, options);
     }
 
 }
