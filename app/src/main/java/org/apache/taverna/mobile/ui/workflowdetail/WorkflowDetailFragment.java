@@ -115,6 +115,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
             mWorkflowDetailPresenter.loadWorkflowDetail(id);
         }else {
 
+            mProgressBar.setVisibility(View.GONE);
             showErrorSnackBar(getString(R.string.no_internet));
         }
     }
