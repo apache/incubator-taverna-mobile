@@ -161,6 +161,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
     public void onItemClick(View childView, int position) {
         Intent intent = new Intent(getActivity(), WorkflowDetailActivity.class);
         intent.putExtra("id", mWorkflowList.get(position).getId());
+        intent.putExtra("title",mWorkflowList.get(position).getTitle());
         startActivity(intent);
     }
 
