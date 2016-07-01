@@ -7,7 +7,7 @@ import org.simpleframework.xml.Root;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-@Root(name="user")
+@Root(name = "user")
 public class User implements Parcelable {
 
     @Attribute(name = "resource", required = false)
@@ -43,7 +43,7 @@ public class User implements Parcelable {
     @Element(name = "website", required = false)
     private String website;
 
-    @Element(name = "avatar",required = false)
+    @Element(name = "avatar", required = false)
     private Avatar avatar;
 
     public String getResource() {

@@ -26,6 +26,6 @@ public class APIEndPoint {
     public static final String ANNOUNCEMENT = "announcement.xml";
     public static final String ALL_WORKFLOW = "workflows.xml";
     public static final String WORKFLOW = "workflow.xml";
-    public static final String USER="user.xml";
+    public static final String USER = "user.xml";
 
 }
