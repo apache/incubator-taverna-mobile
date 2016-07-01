@@ -7,6 +7,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.DetailWorkflow;
+import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import android.os.Bundle;
@@ -112,6 +113,18 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
                 .into(workflowImage);
+    }
+
+    @Override
+    public void setImage(User user) {
+
+        Glide.with(getContext())
+                .load(user.getAvatar().getResource())
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.placeholder)
+                .into(uploaderImage);
+
     }
 
     @Override
