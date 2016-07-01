@@ -21,6 +21,7 @@ package org.apache.taverna.mobile.data.remote;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.DetailWorkflow;
+import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.data.model.Workflows;
 
@@ -50,4 +51,9 @@ public interface TavernaService {
     @GET(APIEndPoint.USER)
     Observable<User> getUserDetail(@Query("id") String id
             , @QueryMap Map<String, String> options);
+
+    @GET(APIEndPoint.LICENCE)
+    Observable<License> getLicenceDetail(@Query("id") String id
+            , @QueryMap Map<String, String> options);
+
 }
