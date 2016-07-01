@@ -2,6 +2,7 @@ package org.apache.taverna.mobile.ui.workflowdetail;
 
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.DetailWorkflow;
+import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 
@@ -88,6 +89,32 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                 });
     }
 
+    public void loadLicenseDetail(String id) {
+
+        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+        mSubscriptions = mDataManager.getLicenseDetail(id, getLicenceQueryOptions())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<License>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        getMvpView().showErrorSnackBar("Something went wrong please try after " +
+                                "sometime");
+                    }
+
+                    @Override
+                    public void onNext(License license) {
+                        getMvpView().showLicence(license);
+                    }
+                });
+    }
+
     private Map<String, String> getDetailQueryOptions() {
 
         Map<String, String> option = new HashMap<>();
@@ -100,6 +127,13 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
 
         Map<String, String> option = new HashMap<>();
         option.put("elements", "avatar");
+        return option;
+    }
+
+    private Map<String, String> getLicenceQueryOptions() {
+
+        Map<String, String> option = new HashMap<>();
+        option.put("elements", "title,description,url,created-at");
         return option;
     }
 

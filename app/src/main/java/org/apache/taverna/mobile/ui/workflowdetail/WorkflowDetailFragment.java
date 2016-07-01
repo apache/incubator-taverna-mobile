@@ -7,6 +7,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.DetailWorkflow;
+import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -64,6 +67,8 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     @BindView(R.id.rootLayout)
     RelativeLayout rootLayout;
 
+    private AlertDialog alertDialog;
+
     private DataManager dataManager;
 
     private WorkflowDetailPresenter mWorkflowDetailPresenter;
@@ -73,6 +78,8 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     private static final String ID = "id";
 
     private String id;
+
+    private String licenceId = null;
 
     public static WorkflowDetailFragment newInstance(String id) {
 
@@ -134,8 +141,19 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.licence:
+
+                if (licenceId == null) {
+
+                    showErrorSnackBar("Please wait");
+                } else if (licenceId.isEmpty()) {
+
+                    showErrorSnackBar("No Licence Found");
+                } else {
+
+                    mWorkflowDetailPresenter.loadLicenseDetail(licenceId);
+                }
 
                 return true;
         }
@@ -158,7 +176,8 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     public void showWorkflowDetail(DetailWorkflow detailWorkflow) {
 
         uploaderName.setText(detailWorkflow.getUploader().getContent());
-        date.setText(detailWorkflow.getUpdatedAt());
+        date.setText(detailWorkflow.getUpdatedAt()
+                .substring(0, detailWorkflow.getUpdatedAt().indexOf(' ')));
         type.setText(detailWorkflow.getType().getContent());
         title.setText(detailWorkflow.getTitle());
         description.loadData(detailWorkflow.getDescription(), "text/html", "utf-8");
@@ -169,6 +188,13 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
                 .into(workflowImage);
+
+        if (detailWorkflow.getLicenseType().getId() == null) {
+            licenceId = "";
+        } else {
+            licenceId = detailWorkflow.getLicenseType().getId();
+        }
+
     }
 
     @Override
@@ -197,6 +223,37 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
         snackbar.show();
 
+    }
+
+    @Override
+    public void showLicence(License license) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        View dialogView = inflater.inflate(R.layout.dialog_licence_detail_workflow, null);
+
+        dialogBuilder.setView(dialogView);
+
+        TextView title = ButterKnife.findById(dialogView, R.id.tvDialogTitle);
+        TextView date = ButterKnife.findById(dialogView, R.id.tvDialogDate);
+        WebView text = ButterKnife.findById(dialogView, R.id.wvDialogText);
+        Button buttonOk = ButterKnife.findById(dialogView, R.id.bDialogOK);
+
+        buttonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        text.loadDataWithBaseURL("", license.getDescription(), "text/html", "utf-8", "");
+        date.setText(license.getCreatedAt().substring(0, license.getCreatedAt().indexOf(' ')));
+        title.setText(license.getTitle());
+
+        alertDialog = dialogBuilder.create();
+
+        alertDialog.show();
     }
 
     @Override
