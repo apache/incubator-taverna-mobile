@@ -101,6 +101,14 @@ limitations under the License.
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+                android:name=".ui.workflowdetail.WorkflowDetailActivity"
+                android:label="@string/title_activity_run_result"
+                android:parentActivityName=".activities.DashboardMainActivity" >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="org.apache.taverna.mobile.activities.DashboardMainActivity" />
+        </activity>
     </application>
 
 </manifest>
