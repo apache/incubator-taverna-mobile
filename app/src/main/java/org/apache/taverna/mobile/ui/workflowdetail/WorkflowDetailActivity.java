@@ -28,7 +28,7 @@ public class WorkflowDetailActivity extends AppCompatActivity {
 
         ActionBar actionbar = getSupportActionBar();
 
-        if(actionbar!=null){
+        if (actionbar != null) {
             actionbar.setHomeButtonEnabled(true);
             actionbar.setDisplayHomeAsUpEnabled(true);
             actionbar.setTitle(getIntent().getStringExtra("title"));

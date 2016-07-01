@@ -110,10 +110,10 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(mConnectionInfo.isConnectingToInternet()) {
+        if (mConnectionInfo.isConnectingToInternet()) {
 
             mWorkflowDetailPresenter.loadWorkflowDetail(id);
-        }else {
+        } else {
 
             mProgressBar.setVisibility(View.GONE);
             showErrorSnackBar(getString(R.string.no_internet));
@@ -162,16 +162,16 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     @Override
     public void showErrorSnackBar(String error) {
 
-            final Snackbar snackbar = Snackbar.make(rootLayout, error, Snackbar
-                    .LENGTH_INDEFINITE);
-            snackbar.setAction("OK", new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    snackbar.dismiss();
-                }
-            });
+        final Snackbar snackbar = Snackbar.make(rootLayout, error, Snackbar
+                .LENGTH_INDEFINITE);
+        snackbar.setAction("OK", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                snackbar.dismiss();
+            }
+        });
 
-            snackbar.show();
+        snackbar.show();
 
     }
 
