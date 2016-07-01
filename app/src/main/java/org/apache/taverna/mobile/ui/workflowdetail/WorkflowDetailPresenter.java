@@ -77,6 +77,8 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                     @Override
                     public void onError(Throwable e) {
                         getMvpView().showProgressbar(false);
+                        getMvpView().showErrorSnackBar("Something went wrong please try after " +
+                                "sometime");
                     }
 
                     @Override

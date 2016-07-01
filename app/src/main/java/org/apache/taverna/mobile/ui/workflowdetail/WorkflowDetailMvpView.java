@@ -12,4 +12,6 @@ public interface WorkflowDetailMvpView extends MvpView {
     void showWorkflowDetail(DetailWorkflow detailWorkflow);
 
     void setImage(User user);
+
+    void showErrorSnackBar(String error);
 }

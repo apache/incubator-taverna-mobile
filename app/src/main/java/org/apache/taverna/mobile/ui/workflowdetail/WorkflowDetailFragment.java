@@ -11,12 +11,17 @@ import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -46,6 +51,15 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
     @BindView(R.id.tvDescription)
     WebView description;
+
+    @BindView(R.id.progressBar)
+    ProgressBar mProgressBar;
+
+    @BindView(R.id.scrollView)
+    ScrollView mScrollView;
+
+    @BindView(R.id.rootLayout)
+    RelativeLayout rootLayout;
 
     private DataManager dataManager;
 
@@ -88,14 +102,31 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
         ButterKnife.bind(this, rootView);
 
         mWorkflowDetailPresenter.attachView(this);
-        mWorkflowDetailPresenter.loadWorkflowDetail(id);
 
         return rootView;
     }
 
     @Override
-    public void showProgressbar(boolean b) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
+        if(mConnectionInfo.isConnectingToInternet()) {
+
+            mWorkflowDetailPresenter.loadWorkflowDetail(id);
+        }else {
+
+            showErrorSnackBar(getString(R.string.no_internet));
+        }
+    }
+
+    @Override
+    public void showProgressbar(boolean b) {
+        if (b) {
+            mProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mProgressBar.setVisibility(View.GONE);
+            mScrollView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -124,6 +155,22 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
                 .into(uploaderImage);
+
+    }
+
+    @Override
+    public void showErrorSnackBar(String error) {
+
+            final Snackbar snackbar = Snackbar.make(rootLayout, error, Snackbar
+                    .LENGTH_INDEFINITE);
+            snackbar.setAction("OK", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    snackbar.dismiss();
+                }
+            });
+
+            snackbar.show();
 
     }
 
