@@ -24,9 +24,12 @@ import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
 import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
+import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -44,7 +47,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WorkflowFragment extends Fragment implements WorkflowMvpView {
+public class WorkflowFragment extends Fragment implements WorkflowMvpView, RecyclerItemClickListner.OnItemClickListener {
     public final String LOG_TAG = getClass().getSimpleName();
 
     @BindView(R.id.rvDashboard)
@@ -86,8 +89,11 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.hasFixedSize();
+
         mWorkflowAdapter = new WorkflowAdapter(mWorkflowList, getContext());
+
         mRecyclerView.setAdapter(mWorkflowAdapter);
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListner(getActivity(), this));
 
         mWorkflowPresenter.loadAllWorkflow(mPageNumber);
 
@@ -148,5 +154,17 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView {
     public void onDestroyView() {
         super.onDestroyView();
         mWorkflowPresenter.detachView();
+    }
+
+    @Override
+    public void onItemClick(View childView, int position) {
+        Intent intent=new Intent(getActivity() , WorkflowDetailActivity.class);
+        intent.putExtra("id",mWorkflowList.get(position).getId());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemLongPress(View childView, int position) {
+
     }
 }
