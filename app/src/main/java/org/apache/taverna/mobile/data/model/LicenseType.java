@@ -36,7 +36,7 @@ public class LicenseType implements Parcelable {
     @Attribute(name = "id", required = false)
     String id;
 
-    @Text
+    @Text(required = false)
     String content;
 
     public String getContent() {
