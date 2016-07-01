@@ -11,6 +11,7 @@ import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -80,6 +81,8 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     private String id;
 
     private String licenceId = null;
+
+    private ProgressDialog dialog;
 
     public static WorkflowDetailFragment newInstance(String id) {
 
@@ -226,7 +229,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     }
 
     @Override
-    public void showLicence(License license) {
+    public void showLicense(License license) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -254,6 +257,15 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
         alertDialog = dialogBuilder.create();
 
         alertDialog.show();
+    }
+
+    @Override
+    public void showLicenseProgress(boolean b) {
+        if (b) {
+            dialog = ProgressDialog.show(getContext(), "Loading", "Please wait...", true, true);
+        } else {
+            dialog.dismiss();
+        }
     }
 
     @Override

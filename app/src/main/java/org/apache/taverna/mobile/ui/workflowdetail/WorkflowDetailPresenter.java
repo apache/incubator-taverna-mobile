@@ -90,6 +90,7 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
     }
 
     public void loadLicenseDetail(String id) {
+        getMvpView().showLicenseProgress(true);
 
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
         mSubscriptions = mDataManager.getLicenseDetail(id, getLicenceQueryOptions())
@@ -98,19 +99,19 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                 .subscribe(new Observer<License>() {
                     @Override
                     public void onCompleted() {
-
+                        getMvpView().showLicenseProgress(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        getMvpView().showLicenseProgress(false);
                         getMvpView().showErrorSnackBar("Something went wrong please try after " +
                                 "sometime");
                     }
 
                     @Override
                     public void onNext(License license) {
-                        getMvpView().showLicence(license);
+                        getMvpView().showLicense(license);
                     }
                 });
     }

@@ -16,5 +16,7 @@ public interface WorkflowDetailMvpView extends MvpView {
 
     void showErrorSnackBar(String error);
 
-    void showLicence(License license);
+    void showLicense(License license);
+
+    void showLicenseProgress(boolean b);
 }
