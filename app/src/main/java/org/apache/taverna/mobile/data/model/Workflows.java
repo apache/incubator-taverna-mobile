@@ -18,27 +18,31 @@
  */
 package org.apache.taverna.mobile.data.model;
 
+
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Root(name = "workflows")
+public class Workflows implements Parcelable {
 
-@Root(name = "announcements")
-public class Announcements implements Parcelable {
+    @ElementList(name = "workflow", inline = true, required = false)
+    List<Workflow> WorkflowList;
 
-    @ElementList(name = "announcement", inline = true, required = false)
-    List<Announcement> announcement;
-
-    public List<Announcement> getAnnouncement() {
-        return this.announcement;
+    public List<Workflow> getWorkflowList() {
+        return WorkflowList;
     }
 
-    public void setAnnouncement(List<Announcement> _value) {
-        this.announcement = _value;
+    public void setWorkflowList(List<Workflow> workflowList) {
+        WorkflowList = workflowList;
+    }
+
+    public Workflows() {
     }
 
     @Override
@@ -48,26 +52,23 @@ public class Announcements implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(this.announcement);
+        dest.writeList(this.WorkflowList);
     }
 
-    public Announcements() {
+    protected Workflows(Parcel in) {
+        this.WorkflowList = new ArrayList<Workflow>();
+        in.readList(this.WorkflowList, Workflow.class.getClassLoader());
     }
 
-    protected Announcements(Parcel in) {
-        this.announcement = in.createTypedArrayList(Announcement.CREATOR);
-    }
-
-    public static final Parcelable.Creator<Announcements> CREATOR = new Parcelable
-            .Creator<Announcements>() {
+    public static final Creator<Workflows> CREATOR = new Creator<Workflows>() {
         @Override
-        public Announcements createFromParcel(Parcel source) {
-            return new Announcements(source);
+        public Workflows createFromParcel(Parcel source) {
+            return new Workflows(source);
         }
 
         @Override
-        public Announcements[] newArray(int size) {
-            return new Announcements[size];
+        public Workflows[] newArray(int size) {
+            return new Workflows[size];
         }
     };
 }

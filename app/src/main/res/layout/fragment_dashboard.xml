@@ -15,12 +15,26 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<resources>
-	<color name="colorPrimary">#2196F3</color>
-	<color name="colorPrimaryDark">#2196F3</color>
-	<color name="colorAccent">#FF4081</color>
-	<color name="window_background">#FFF5F5F5</color>
-	<color name="button_click_background">#e0e0e0</color>
-	<color name="black_background">#882196F3</color>
-	<color name="grey_background">#e0e0e0</color>
-</resources>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvDashboard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:padding="@dimen/item_offset"
+            android:visibility="gone"/>
+
+
+    <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="visible"/>
+</RelativeLayout>

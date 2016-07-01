@@ -1,3 +1,21 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 package org.apache.taverna.mobile.data.model;
 
 import org.simpleframework.xml.Attribute;
@@ -7,54 +25,33 @@ import org.simpleframework.xml.Root;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by Sagar
- */
+
 @Root(name = "announcement")
 public class DetailAnnouncement implements Parcelable {
 
-    public static final Parcelable.Creator<DetailAnnouncement> CREATOR = new Parcelable
-            .Creator<DetailAnnouncement>() {
-        @Override
-        public DetailAnnouncement createFromParcel(Parcel source) {
-            return new DetailAnnouncement(source);
-        }
-
-        @Override
-        public DetailAnnouncement[] newArray(int size) {
-            return new DetailAnnouncement[size];
-        }
-    };
     @Attribute(name = "resource", required = false)
     String resource;
+
     @Attribute(name = "uri", required = false)
     String uri;
+
     @Attribute(name = "id", required = false)
     String id;
+
     @Element(name = "author")
     private Author author;
+
     @Element(name = "title")
     private String title;
+
     @Element(name = "text")
     private String text;
+
     @Element(name = "created-at")
     private String date;
+
     @Element(name = "id")
     private String idElement;
-
-    public DetailAnnouncement() {
-    }
-
-    protected DetailAnnouncement(Parcel in) {
-        this.author = in.readParcelable(Author.class.getClassLoader());
-        this.title = in.readString();
-        this.text = in.readString();
-        this.date = in.readString();
-        this.resource = in.readString();
-        this.uri = in.readString();
-        this.id = in.readString();
-        this.idElement = in.readString();
-    }
 
     public String getIdElement() {
         return idElement;
@@ -127,15 +124,41 @@ public class DetailAnnouncement implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.resource);
+        dest.writeString(this.uri);
+        dest.writeString(this.id);
         dest.writeParcelable(this.author, flags);
         dest.writeString(this.title);
         dest.writeString(this.text);
         dest.writeString(this.date);
-        dest.writeString(this.resource);
-        dest.writeString(this.uri);
-        dest.writeString(this.id);
         dest.writeString(this.idElement);
     }
+
+    public DetailAnnouncement() {
+    }
+
+    protected DetailAnnouncement(Parcel in) {
+        this.resource = in.readString();
+        this.uri = in.readString();
+        this.id = in.readString();
+        this.author = in.readParcelable(Author.class.getClassLoader());
+        this.title = in.readString();
+        this.text = in.readString();
+        this.date = in.readString();
+        this.idElement = in.readString();
+    }
+
+    public static final Creator<DetailAnnouncement> CREATOR = new Creator<DetailAnnouncement>() {
+        @Override
+        public DetailAnnouncement createFromParcel(Parcel source) {
+            return new DetailAnnouncement(source);
+        }
+
+        @Override
+        public DetailAnnouncement[] newArray(int size) {
+            return new DetailAnnouncement[size];
+        }
+    };
 }
 
 

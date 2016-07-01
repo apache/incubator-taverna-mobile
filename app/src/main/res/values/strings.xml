@@ -110,4 +110,5 @@ limitations under the License.
     <string name="runid_text">Workflow Run ID:</string>
 
     <string name="announcement">Announcementss</string>
+    <string name="no_internet">No Internet Connection</string>
 </resources>

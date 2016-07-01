@@ -18,14 +18,14 @@
  */
 package org.apache.taverna.mobile.data.model;
 
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Text;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
-public class Author implements Parcelable {
+public class LicenseType implements Parcelable {
 
     @Attribute(name = "resource", required = false)
     String resource;
@@ -36,7 +36,7 @@ public class Author implements Parcelable {
     @Attribute(name = "id", required = false)
     String id;
 
-    @Text
+    @Text(required = false)
     String content;
 
     public String getContent() {
@@ -47,28 +47,28 @@ public class Author implements Parcelable {
         this.content = content;
     }
 
-    public String getResource() {
-        return this.resource;
+    public String getId() {
+        return id;
     }
 
-    public void setResource(String _value) {
-        this.resource = _value;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getResource() {
+        return resource;
+    }
+
+    public void setResource(String resource) {
+        this.resource = resource;
     }
 
     public String getUri() {
-        return this.uri;
+        return uri;
     }
 
-    public void setUri(String _value) {
-        this.uri = _value;
-    }
-
-    public String getId() {
-        return this.id;
-    }
-
-    public void setId(String _value) {
-        this.id = _value;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     @Override
@@ -84,25 +84,26 @@ public class Author implements Parcelable {
         dest.writeString(this.content);
     }
 
-    public Author() {
+    public LicenseType() {
     }
 
-    protected Author(Parcel in) {
+    protected LicenseType(Parcel in) {
         this.resource = in.readString();
         this.uri = in.readString();
         this.id = in.readString();
         this.content = in.readString();
     }
 
-    public static final Creator<Author> CREATOR = new Creator<Author>() {
-        @Override
-        public Author createFromParcel(Parcel source) {
-            return new Author(source);
-        }
+    public static final Parcelable.Creator<LicenseType> CREATOR =
+            new Parcelable.Creator<LicenseType>() {
+                @Override
+                public LicenseType createFromParcel(Parcel source) {
+                    return new LicenseType(source);
+                }
 
-        @Override
-        public Author[] newArray(int size) {
-            return new Author[size];
-        }
-    };
+                @Override
+                public LicenseType[] newArray(int size) {
+                    return new LicenseType[size];
+                }
+            };
 }
