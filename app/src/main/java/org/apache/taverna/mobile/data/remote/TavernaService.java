@@ -52,8 +52,8 @@ public interface TavernaService {
     Observable<User> getUserDetail(@Query("id") String id
             , @QueryMap Map<String, String> options);
 
-    @GET(APIEndPoint.LICENCE)
-    Observable<License> getLicenceDetail(@Query("id") String id
+    @GET(APIEndPoint.LICENSE)
+    Observable<License> getLicenseDetail(@Query("id") String id
             , @QueryMap Map<String, String> options);
 
 }

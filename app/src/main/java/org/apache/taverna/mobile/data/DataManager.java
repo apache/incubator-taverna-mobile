@@ -79,8 +79,8 @@ public class DataManager {
      * @return Detail of  Licence
      */
 
-    public Observable<License> getLicenceDetail(String id, Map<String, String> options) {
-        return mBaseApiManager.getTavernaApi().getLicenceDetail(id, options);
+    public Observable<License> getLicenseDetail(String id, Map<String, String> options) {
+        return mBaseApiManager.getTavernaApi().getLicenseDetail(id, options);
     }
 
 }
