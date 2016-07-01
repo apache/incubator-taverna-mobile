@@ -21,6 +21,7 @@ package org.apache.taverna.mobile.data;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.DetailWorkflow;
+import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.data.remote.BaseApiManager;
 
@@ -63,6 +64,14 @@ public class DataManager {
 
     public Observable<DetailWorkflow> getDetailWorkflow(String id, Map<String, String> options) {
         return mBaseApiManager.getTavernaApi().getDetailWorkflow(id, options);
+    }
+
+    /**
+     * @return Detail of  User
+     */
+
+    public Observable<User> getUserDetail(String id, Map<String, String> options) {
+        return mBaseApiManager.getTavernaApi().getUserDetail(id, options);
     }
 
 }
