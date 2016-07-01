@@ -22,4 +22,5 @@
 	<color name="window_background">#FFF5F5F5</color>
 	<color name="button_click_background">#e0e0e0</color>
 	<color name="black_background">#882196F3</color>
+	<color name="grey_background">#e0e0e0</color>
 </resources>
