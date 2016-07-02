@@ -19,6 +19,13 @@
 package org.apache.taverna.mobile.data.model;
 
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ForeignKey;
+import com.raizlabs.android.dbflow.annotation.ModelContainer;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+
+import org.apache.taverna.mobile.data.local.TavernaDatabase;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
@@ -29,54 +36,75 @@ import android.os.Parcelable;
 
 import java.util.List;
 
+
+@Table(database = TavernaDatabase.class)
+@ModelContainer
 @Root(name = "workflow")
 public class Workflow implements Parcelable {
 
+    @Column
     @Attribute(name = "resource", required = false)
     String resource;
 
+    @Column
     @Attribute(name = "uri", required = false)
     String uri;
 
+    @PrimaryKey
     @Attribute(name = "id", required = false)
     String id;
 
+    @Column
     @Attribute(name = "version", required = false)
     String version;
 
+    @Column
     @Element(name = "id", required = false)
-    private String elementId;
+    String elementId;
 
+    @Column
     @Element(name = "title")
-    private String title;
+    String title;
 
+    @Column
     @Element(name = "description", required = false)
     String description;
 
+    @Column
+    @ForeignKey
     @Element(name = "type")
-    private Type type;
+    Type type;
 
+    @Column
+    @ForeignKey
     @Element(name = "uploader", required = false)
-    private Uploader uploader;
+    Uploader uploader;
 
+    @Column
     @Element(name = "created-at", required = false)
-    private String createdAt;
+    String createdAt;
 
+    @Column
     @Element(name = "updated-at", required = false)
-    private String updatedAt;
+    String updatedAt;
 
+    @Column
     @Element(name = "preview", required = false)
-    private String previewUri;
+    String previewUri;
 
+    @Column
     @Element(name = "svg", required = false)
-    private String svgUri;
+    String svgUri;
 
+    @Column
     @Element(name = "license-type", required = false)
-    private LicenseType licenseType;
+    LicenseType licenseType;
 
+    @Column
     @Element(name = "content-uri", required = false)
     String contentUri;
 
+    @Column
     @Element(name = "content-type", required = false)
     String contentType;
 

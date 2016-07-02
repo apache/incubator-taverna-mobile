@@ -18,6 +18,12 @@
  */
 package org.apache.taverna.mobile.data.model;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ModelContainer;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+
+import org.apache.taverna.mobile.data.local.TavernaDatabase;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Text;
@@ -25,17 +31,24 @@ import org.simpleframework.xml.Text;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+@Table(database = TavernaDatabase.class)
+@ModelContainer
 @Root(name = "uploader")
 public class Uploader implements Parcelable {
+
+    @Column
     @Attribute(name = "resource", required = false)
     String resource;
 
+    @Column
     @Attribute(name = "uri", required = false)
     String uri;
 
+    @PrimaryKey
     @Attribute(name = "id", required = false)
     String id;
 
+    @Column
     @Text
     String content;
 
