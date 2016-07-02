@@ -25,6 +25,7 @@ import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
+import org.apache.taverna.mobile.data.local.TavernaBaseModel;
 import org.apache.taverna.mobile.data.local.TavernaDatabase;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
@@ -40,7 +41,7 @@ import java.util.List;
 @Table(database = TavernaDatabase.class)
 @ModelContainer
 @Root(name = "workflow")
-public class Workflow implements Parcelable {
+public class Workflow extends TavernaBaseModel implements Parcelable {
 
     @Column
     @Attribute(name = "resource", required = false)
@@ -71,12 +72,12 @@ public class Workflow implements Parcelable {
     String description;
 
     @Column
-    @ForeignKey
+    @ForeignKey(saveForeignKeyModel = true)
     @Element(name = "type")
     Type type;
 
     @Column
-    @ForeignKey
+    @ForeignKey(saveForeignKeyModel = true)
     @Element(name = "uploader", required = false)
     Uploader uploader;
 
@@ -97,6 +98,7 @@ public class Workflow implements Parcelable {
     String svgUri;
 
     @Column
+    @ForeignKey(saveForeignKeyModel = true)
     @Element(name = "license-type", required = false)
     LicenseType licenseType;
 

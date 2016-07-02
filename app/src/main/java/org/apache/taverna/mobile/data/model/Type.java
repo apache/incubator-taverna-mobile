@@ -23,6 +23,7 @@ import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 
+import org.apache.taverna.mobile.data.local.TavernaBaseModel;
 import org.apache.taverna.mobile.data.local.TavernaDatabase;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
@@ -34,7 +35,7 @@ import android.os.Parcelable;
 @Table(database = TavernaDatabase.class)
 @ModelContainer
 @Root(name = "type")
-public class Type implements Parcelable {
+public class Type extends TavernaBaseModel implements Parcelable {
 
     @Column
     @Attribute(name = "resource", required = false)
