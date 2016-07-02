@@ -6,7 +6,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.DetailWorkflow;
+import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
@@ -176,26 +176,26 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     }
 
     @Override
-    public void showWorkflowDetail(DetailWorkflow detailWorkflow) {
+    public void showWorkflowDetail(Workflow workflow) {
 
-        uploaderName.setText(detailWorkflow.getUploader().getContent());
-        date.setText(detailWorkflow.getUpdatedAt()
-                .substring(0, detailWorkflow.getUpdatedAt().indexOf(' ')));
-        type.setText(detailWorkflow.getType().getContent());
-        title.setText(detailWorkflow.getTitle());
-        description.loadData(detailWorkflow.getDescription(), "text/html", "utf-8");
+        uploaderName.setText(workflow.getUploader().getContent());
+        date.setText(workflow.getUpdatedAt()
+                .substring(0, workflow.getUpdatedAt().indexOf(' ')));
+        type.setText(workflow.getType().getContent());
+        title.setText(workflow.getTitle());
+        description.loadData(workflow.getDescription(), "text/html", "utf-8");
 
         Glide.with(getContext())
-                .load(detailWorkflow.getPreviewUri())
+                .load(workflow.getPreviewUri())
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
                 .into(workflowImage);
 
-        if (detailWorkflow.getLicenseType().getId() == null) {
+        if (workflow.getLicenseType().getId() == null) {
             licenceId = "";
         } else {
-            licenceId = detailWorkflow.getLicenseType().getId();
+            licenceId = workflow.getLicenseType().getId();
         }
 
     }

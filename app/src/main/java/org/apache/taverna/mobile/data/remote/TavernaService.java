@@ -20,7 +20,7 @@ package org.apache.taverna.mobile.data.remote;
 
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
-import org.apache.taverna.mobile.data.model.DetailWorkflow;
+import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.data.model.Workflows;
@@ -45,7 +45,7 @@ public interface TavernaService {
     Observable<Workflows> getAllWorkflows(@QueryMap Map<String, String> options);
 
     @GET(APIEndPoint.WORKFLOW)
-    Observable<DetailWorkflow> getDetailWorkflow(@Query("id") String id
+    Observable<Workflow> getDetailWorkflow(@Query("id") String id
             , @QueryMap Map<String, String> options);
 
     @GET(APIEndPoint.USER)

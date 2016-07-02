@@ -1,7 +1,7 @@
 package org.apache.taverna.mobile.ui.workflowdetail;
 
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.DetailWorkflow;
+import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
@@ -42,7 +42,7 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
         mSubscriptions = mDataManager.getDetailWorkflow(id, getDetailQueryOptions())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<DetailWorkflow>() {
+                .subscribe(new Observer<Workflow>() {
                     @Override
                     public void onCompleted() {
                         getMvpView().showProgressbar(false);
@@ -54,9 +54,9 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                     }
 
                     @Override
-                    public void onNext(DetailWorkflow detailWorkflow) {
-                        getMvpView().showWorkflowDetail(detailWorkflow);
-                        loadUserDetail(detailWorkflow.getUploader().getId());
+                    public void onNext(Workflow workflow) {
+                        getMvpView().showWorkflowDetail(workflow);
+                        loadUserDetail(workflow.getUploader().getId());
                     }
                 });
 

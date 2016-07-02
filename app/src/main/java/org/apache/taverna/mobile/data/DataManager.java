@@ -20,7 +20,7 @@ package org.apache.taverna.mobile.data;
 
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
-import org.apache.taverna.mobile.data.model.DetailWorkflow;
+import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.data.model.Workflows;
@@ -63,7 +63,7 @@ public class DataManager {
      * @return Detail of  Workflow
      */
 
-    public Observable<DetailWorkflow> getDetailWorkflow(String id, Map<String, String> options) {
+    public Observable<Workflow> getDetailWorkflow(String id, Map<String, String> options) {
         return mBaseApiManager.getTavernaApi().getDetailWorkflow(id, options);
     }
 
