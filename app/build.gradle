@@ -64,4 +64,9 @@ dependencies {
 
     compile 'com.github.bumptech.glide:glide:3.6.0'
     compile 'com.caverock:androidsvg:1.2.1'
+
+
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:3.0.1"
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:3.0.1"
+    compile "com.github.Raizlabs.DBFlow:dbflow:3.0.1"
 }
