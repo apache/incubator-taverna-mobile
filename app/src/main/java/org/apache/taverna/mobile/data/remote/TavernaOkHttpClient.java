@@ -18,6 +18,8 @@
  */
 package org.apache.taverna.mobile.data.remote;
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -34,6 +36,8 @@ public class TavernaOkHttpClient {
 
         //Interceptor :> Full Body Logger
         builder.addInterceptor(logger);
+
+        builder.addNetworkInterceptor(new StethoInterceptor());
         return builder.build();
 
     }
