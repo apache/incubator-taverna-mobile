@@ -7,7 +7,7 @@ import com.raizlabs.android.dbflow.config.FlowManager;
 
 import android.app.Application;
 
-public class TavernaApplication extends Application{
+public class TavernaApplication extends Application {
 
     @Override
     public void onCreate() {
