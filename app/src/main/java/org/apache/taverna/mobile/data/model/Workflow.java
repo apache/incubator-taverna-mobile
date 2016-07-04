@@ -113,6 +113,9 @@ public class Workflow extends TavernaBaseModel implements Parcelable {
     @ElementList(name = "tags", required = false)
     List<Tag> tag;
 
+    @Column(defaultValue = "0")
+    boolean favourite;
+
     public String getContentType() {
         return contentType;
     }
@@ -249,6 +252,14 @@ public class Workflow extends TavernaBaseModel implements Parcelable {
         this.updatedAt = updatedAt;
     }
 
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
+    }
+
     public Workflow() {
     }
 
@@ -276,6 +287,7 @@ public class Workflow extends TavernaBaseModel implements Parcelable {
         dest.writeString(this.contentUri);
         dest.writeString(this.contentType);
         dest.writeTypedList(this.tag);
+        dest.writeByte(this.favourite ? (byte) 1 : (byte) 0);
     }
 
     protected Workflow(Parcel in) {
@@ -296,6 +308,7 @@ public class Workflow extends TavernaBaseModel implements Parcelable {
         this.contentUri = in.readString();
         this.contentType = in.readString();
         this.tag = in.createTypedArrayList(Tag.CREATOR);
+        this.favourite = in.readByte() != 0;
     }
 
     public static final Creator<Workflow> CREATOR = new Creator<Workflow>() {
