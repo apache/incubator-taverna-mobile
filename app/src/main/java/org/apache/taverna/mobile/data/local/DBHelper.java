@@ -29,7 +29,9 @@ public class DBHelper {
                 for (Workflow workflow : workflows.getWorkflowList()) {
                     if (!workflow.exists()) {
                         workflow.save();
+
                     } else {
+
                         updateWorkflow(workflow).save();
                     }
 
@@ -41,32 +43,34 @@ public class DBHelper {
     }
 
     private Workflow updateWorkflow(Workflow workflow) {
+
         Workflow workflow1 = SQLite.select()
                 .from(Workflow.class)
                 .where(Workflow_Table.id.eq(workflow.getId()))
                 .querySingle();
+
         if (workflow1 != null) {
-            if (workflow.getDescription() == null || !workflow.getDescription().equals(workflow1.getDescription())) {
+            if (workflow.getDescription() != null) {
 
                 workflow1.setDescription(workflow.getDescription());
             }
-            if (workflow.getUpdatedAt() == null || !workflow.getUpdatedAt().equals(workflow1.getUpdatedAt())) {
+            if (workflow.getUpdatedAt() != null ) {
 
                 workflow1.setUpdatedAt(workflow.getUpdatedAt());
             }
-            if (workflow.getSvgUri() == null || !workflow.getSvgUri().equals(workflow1.getSvgUri())) {
+            if (workflow.getSvgUri() != null ) {
 
                 workflow1.setSvgUri(workflow.getSvgUri());
             }
-            if (workflow.getLicenseType() == null || !workflow.getLicenseType().equals(workflow1.getLicenseType())) {
+            if (workflow.getLicenseType() != null ) {
 
                 workflow1.setLicenseType(workflow.getLicenseType());
             }
-            if (workflow.getContentUri() == null || !workflow.getContentUri().equals(workflow1.getContentUri())) {
+            if (workflow.getContentUri() != null ) {
 
                 workflow1.setContentUri(workflow.getContentUri());
             }
-            if (workflow.getContentType() == null || !workflow.getContentType().equals(workflow1.getContentType())) {
+            if (workflow.getContentType() != null ) {
 
                 workflow1.setContentUri(workflow.getContentType());
             }
@@ -82,7 +86,7 @@ public class DBHelper {
             workflow1.setVersion(workflow.getVersion());
 
         }
-        return workflow;
+        return workflow1;
     }
 
 
@@ -91,10 +95,13 @@ public class DBHelper {
             @Override
             public void call(Subscriber<? super Workflow> subscriber) {
                 if (subscriber.isUnsubscribed()) return;
-                workflow.getType().save();
-                workflow.getUploader().save();
-                workflow.getLicenseType().save();
-                workflow.save();
+                if (!workflow.exists()) {
+                    workflow.save();
+
+                } else {
+
+                    updateWorkflow(workflow).save();
+                }
                 subscriber.onNext(workflow);
                 subscriber.onCompleted();
             }
