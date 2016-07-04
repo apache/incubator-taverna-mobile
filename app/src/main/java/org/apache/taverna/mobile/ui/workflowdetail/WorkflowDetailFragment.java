@@ -141,7 +141,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     }
 
     @OnClick(R.id.ivFav)
-    void favClick(View v){
+    void favClick(View v) {
         mWorkflowDetailPresenter.setFavourite(id);
     }
 
@@ -279,14 +279,14 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
     @Override
     public void setFavouriteIcon() {
-            mWorkflowDetailPresenter.getFavourite(id);
+        mWorkflowDetailPresenter.getFavourite(id);
     }
 
     @Override
     public void getFavouriteIcon(boolean b) {
-        if(b){
+        if (b) {
             ivFavourite.setImageResource(R.drawable.ic_star_black_24dp);
-        }else{
+        } else {
             ivFavourite.setImageResource(R.drawable.ic_star_border_black_24dp);
         }
     }
