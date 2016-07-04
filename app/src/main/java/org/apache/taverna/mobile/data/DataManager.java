@@ -18,6 +18,7 @@
  */
 package org.apache.taverna.mobile.data;
 
+import org.apache.taverna.mobile.data.local.DBHelper;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.Workflow;
@@ -29,11 +30,14 @@ import org.apache.taverna.mobile.data.remote.BaseApiManager;
 import java.util.Map;
 
 import rx.Observable;
+import rx.functions.Func1;
 
 
 public class DataManager {
 
     public BaseApiManager mBaseApiManager = new BaseApiManager();
+
+    public DBHelper mDBHelper = new DBHelper();
 
     public DataManager() {
     }
@@ -56,7 +60,13 @@ public class DataManager {
      * @return List of all Workflow
      */
     public Observable<Workflows> getAllWorkflow(Map<String, String> options) {
-        return mBaseApiManager.getTavernaApi().getAllWorkflows(options);
+        return mBaseApiManager.getTavernaApi().getAllWorkflows(options)
+                .concatMap(new Func1<Workflows, Observable<? extends Workflows>>() {
+                    @Override
+                    public Observable<? extends Workflows> call(Workflows workflows) {
+                        return mDBHelper.syncWorkflows(workflows);
+                    }
+                });
     }
 
     /**
@@ -64,7 +74,13 @@ public class DataManager {
      */
 
     public Observable<Workflow> getDetailWorkflow(String id, Map<String, String> options) {
-        return mBaseApiManager.getTavernaApi().getDetailWorkflow(id, options);
+        return mBaseApiManager.getTavernaApi().getDetailWorkflow(id, options)
+                .concatMap(new Func1<Workflow, Observable<? extends Workflow>>() {
+                    @Override
+                    public Observable<? extends Workflow> call(Workflow workflow) {
+                        return mDBHelper.syncWorkflow(workflow);
+                    }
+                });
     }
 
     /**
