@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMvpView {
 
@@ -58,6 +59,9 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
     @BindView(R.id.tvDescription)
     WebView description;
+
+    @BindView(R.id.ivFav)
+    ImageView ivFavourite;
 
     @BindView(R.id.progressBar)
     ProgressBar mProgressBar;
@@ -126,6 +130,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
         if (mConnectionInfo.isConnectingToInternet()) {
 
             mWorkflowDetailPresenter.loadWorkflowDetail(id);
+            mWorkflowDetailPresenter.getFavourite(id);
         } else {
 
             mProgressBar.setVisibility(View.GONE);
@@ -134,6 +139,11 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
         setHasOptionsMenu(true);
 
+    }
+
+    @OnClick(R.id.ivFav)
+    void favClick(View v){
+        mWorkflowDetailPresenter.setFavourite(id);
     }
 
     @Override
@@ -265,6 +275,20 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
             dialog = ProgressDialog.show(getContext(), "Loading", "Please wait...", true, true);
         } else {
             dialog.dismiss();
+        }
+    }
+
+    @Override
+    public void setFavouriteIcon() {
+            mWorkflowDetailPresenter.getFavourite(id);
+    }
+
+    @Override
+    public void getFavouriteIcon(boolean b) {
+        if(b){
+            ivFavourite.setImageResource(R.drawable.ic_star_black_24dp);
+        }else{
+            ivFavourite.setImageResource(R.drawable.ic_star_border_black_24dp);
         }
     }
 

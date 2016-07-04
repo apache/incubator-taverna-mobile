@@ -19,4 +19,8 @@ public interface WorkflowDetailMvpView extends MvpView {
     void showLicense(License license);
 
     void showLicenseProgress(boolean b);
+
+    void setFavouriteIcon();
+
+    void getFavouriteIcon(boolean b);
 }

@@ -1,9 +1,9 @@
 package org.apache.taverna.mobile.ui.workflowdetail;
 
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
+import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 
 import java.util.HashMap;
@@ -116,6 +116,65 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                 });
     }
 
+    public void setFavourite(String id) {
+
+        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+
+        mSubscriptions = mDataManager.setFavoriteWorkflow(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Boolean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getMvpView().showErrorSnackBar("Something went wrong please try after " +
+                                "sometime");
+                    }
+
+                    @Override
+                    public void onNext(Boolean b) {
+                        if (b) {
+                            getMvpView().setFavouriteIcon();
+                            getMvpView().showErrorSnackBar("Add to Favourite ");
+                        } else {
+                            getMvpView().showErrorSnackBar("Something went wrong please try after" +
+                                    "sometime");
+                        }
+
+                    }
+                });
+    }
+
+    public void getFavourite(String id) {
+
+        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+
+        mSubscriptions = mDataManager.getFavoriteWorkflow(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Boolean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getMvpView().showErrorSnackBar("Something went wrong please try after " +
+                                "sometime");
+                    }
+
+                    @Override
+                    public void onNext(Boolean b) {
+                        getMvpView().getFavouriteIcon(b);
+                    }
+                });
+    }
+
     private Map<String, String> getDetailQueryOptions() {
 
         Map<String, String> option = new HashMap<>();
@@ -137,5 +196,6 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
         option.put("elements", "title,description,url,created-at");
         return option;
     }
+
 
 }
