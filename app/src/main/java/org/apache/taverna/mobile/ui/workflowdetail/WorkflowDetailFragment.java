@@ -130,7 +130,6 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
         if (mConnectionInfo.isConnectingToInternet()) {
 
             mWorkflowDetailPresenter.loadWorkflowDetail(id);
-            mWorkflowDetailPresenter.getFavourite(id);
         } else {
 
             mProgressBar.setVisibility(View.GONE);
