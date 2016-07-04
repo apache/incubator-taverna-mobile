@@ -99,4 +99,20 @@ public class DataManager {
         return mBaseApiManager.getTavernaApi().getLicenseDetail(id, options);
     }
 
+    /**
+     * @return Is Workflow toggle Favourite or not
+     */
+
+    public Observable<Boolean> setFavoriteWorkflow(String id) {
+        return mDBHelper.setFavouriteWorkflow(id);
+    }
+
+    /**
+     * @return Is Workflow  Favourite or not
+     */
+
+    public Observable<Boolean> getFavoriteWorkflow(String id) {
+        return mDBHelper.getFavouriteWorkflow(id);
+    }
+
 }

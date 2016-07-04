@@ -28,6 +28,7 @@ public class DBHelper {
                 if (subscriber.isUnsubscribed()) return;
                 for (Workflow workflow : workflows.getWorkflowList()) {
                     if (!workflow.exists()) {
+                        workflow.setFavourite(false);
                         workflow.save();
 
                     } else {
@@ -54,27 +55,31 @@ public class DBHelper {
 
                 workflow1.setDescription(workflow.getDescription());
             }
-            if (workflow.getUpdatedAt() != null ) {
+            if (workflow.getUpdatedAt() != null) {
 
                 workflow1.setUpdatedAt(workflow.getUpdatedAt());
             }
-            if (workflow.getSvgUri() != null ) {
+            if (workflow.getSvgUri() != null) {
 
                 workflow1.setSvgUri(workflow.getSvgUri());
             }
-            if (workflow.getLicenseType() != null ) {
+            if (workflow.getLicenseType() != null) {
 
                 workflow1.setLicenseType(workflow.getLicenseType());
             }
-            if (workflow.getContentUri() != null ) {
+            if (workflow.getContentUri() != null) {
 
                 workflow1.setContentUri(workflow.getContentUri());
             }
-            if (workflow.getContentType() != null ) {
+            if (workflow.getContentType() != null) {
 
                 workflow1.setContentUri(workflow.getContentType());
             }
+            if (workflow.getElementId() != null) {
 
+                workflow1.setElementId(workflow.getElementId());
+            }
+            workflow1.setFavourite(workflow1.isFavourite());
             workflow1.setTitle(workflow.getTitle());
             workflow1.setType(workflow.getType());
             workflow1.setUploader(workflow.getUploader());
@@ -107,6 +112,62 @@ public class DBHelper {
             }
         });
     }
+
+
+    public Observable<Boolean> setFavouriteWorkflow(final String id) {
+        return Observable.create(new Observable.OnSubscribe<Boolean>() {
+            @Override
+            public void call(Subscriber<? super Boolean> subscriber) {
+                if (subscriber.isUnsubscribed()) return;
+                subscriber.onNext(updateFavouriteWorkflow(id));
+                subscriber.onCompleted();
+            }
+        });
+    }
+
+
+    public Observable<Boolean> getFavouriteWorkflow(final String id) {
+        return Observable.create(new Observable.OnSubscribe<Boolean>() {
+            @Override
+            public void call(Subscriber<? super Boolean> subscriber) {
+                if (subscriber.isUnsubscribed()) return;
+                Workflow workflow1 = SQLite.select()
+                        .from(Workflow.class)
+                        .where(Workflow_Table.id.eq(id))
+                        .querySingle();
+
+                if (workflow1 != null) {
+
+                    subscriber.onNext(workflow1.isFavourite());
+                    subscriber.onCompleted();
+                }else{
+
+                    subscriber.onError(null);
+                }
+
+
+
+            }
+        });
+    }
+
+    public boolean updateFavouriteWorkflow(String id) {
+
+        Workflow workflow1 = SQLite.select()
+                .from(Workflow.class)
+                .where(Workflow_Table.id.eq(id))
+                .querySingle();
+
+        if (workflow1 != null) {
+            workflow1.setFavourite(!workflow1.isFavourite());
+            workflow1.save();
+            return true;
+        }
+
+        return false;
+    }
+
+
 
 
 }
