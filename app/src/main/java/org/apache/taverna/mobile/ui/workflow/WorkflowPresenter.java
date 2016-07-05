@@ -54,9 +54,6 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
     }
 
     public void loadAllWorkflow(int pageNumber) {
-        if (pageNumber == 1) {
-            getMvpView().showProgressbar(true);
-        }
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
         mSubscriptions = mDataManager.getAllWorkflow(getQueryOptions(pageNumber))
                 .observeOn(AndroidSchedulers.mainThread())

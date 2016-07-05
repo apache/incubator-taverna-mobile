@@ -28,10 +28,13 @@ import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
 import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
 import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -56,6 +59,9 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
 
     @BindView(R.id.progress_circular)
     ProgressBar mProgressBar;
+
+    @BindView(R.id.swipe_refresh)
+    ScrollChildSwipeRefreshLayout mSwipeRefresh;
 
     private DataManager dataManager;
 
@@ -96,6 +102,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
         mRecyclerView.setAdapter(mWorkflowAdapter);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListner(getActivity(), this));
 
+        showProgressbar(true);
         mWorkflowPresenter.loadAllWorkflow(mPageNumber);
 
         mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
@@ -116,6 +123,29 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
             }
         });
 
+        mSwipeRefresh.setColorSchemeResources(R.color.colorAccent, R.color.colorAccent, R.color
+                .colorPrimary);
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (mConnectionInfo.isConnectingToInternet()) {
+                    if (mSwipeRefresh.isRefreshing()) {
+                        mPageNumber = 1;
+                        mWorkflowPresenter.loadAllWorkflow(mPageNumber);
+                        Log.d(LOG_TAG, "Swipe Refresh");
+                    }
+                } else {
+                    Log.d(LOG_TAG, "NO Internet Connection");
+                    showErrorSnackBar();
+                    if (mSwipeRefresh.isRefreshing()) {
+                        mSwipeRefresh.setRefreshing(false);
+                    }
+                }
+
+            }
+        });
+
+
         return rootView;
     }
 
@@ -134,10 +164,26 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
     @Override
     public void showErrorSnackBar() {
 
+        final Snackbar snackbar = Snackbar.make(mRecyclerView, "NO Internet Connection", Snackbar
+                .LENGTH_INDEFINITE);
+        snackbar.setAction("OK", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                snackbar.dismiss();
+            }
+        });
+
+        snackbar.show();
     }
 
     @Override
     public void showWorkflows(Workflows workflows) {
+
+        if (mSwipeRefresh.isRefreshing()) {
+            mSwipeRefresh.setRefreshing(false);
+            mWorkflowList.clear();
+        }
+
         mWorkflowList.addAll(workflows.getWorkflowList());
         mWorkflowAdapter.notifyDataSetChanged();
     }
