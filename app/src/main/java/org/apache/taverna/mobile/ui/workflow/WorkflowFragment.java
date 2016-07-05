@@ -54,7 +54,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
         RecyclerItemClickListner.OnItemClickListener {
     public final String LOG_TAG = getClass().getSimpleName();
 
-    @BindView(R.id.rvDashboard)
+    @BindView(R.id.rv_workflows)
     RecyclerView mRecyclerView;
 
     @BindView(R.id.progress_circular)
@@ -129,11 +129,14 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
             @Override
             public void onRefresh() {
                 if (mConnectionInfo.isConnectingToInternet()) {
-                    if (mSwipeRefresh.isRefreshing()) {
-                        mPageNumber = 1;
-                        mWorkflowPresenter.loadAllWorkflow(mPageNumber);
-                        Log.d(LOG_TAG, "Swipe Refresh");
-                    }
+
+                    mPageNumber = 1;
+                    mWorkflowPresenter.loadAllWorkflow(mPageNumber);
+
+                    mSwipeRefresh.setRefreshing(true);
+
+                    Log.d(LOG_TAG, "Swipe Refresh");
+
                 } else {
                     Log.d(LOG_TAG, "NO Internet Connection");
                     showErrorSnackBar();
