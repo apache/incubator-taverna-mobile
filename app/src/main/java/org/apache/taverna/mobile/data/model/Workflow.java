@@ -114,7 +114,7 @@ public class Workflow extends TavernaBaseModel implements Parcelable {
     List<Tag> tag;
 
     @Column(defaultValue = "0")
-    boolean favourite;
+    Boolean favourite;
 
     public String getContentType() {
         return contentType;

@@ -56,7 +56,7 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
 
     public void loadWorkflowDetail(String id) {
         getMvpView().showProgressbar(true);
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+
         mSubscriptions = mDataManager.getDetailWorkflow(id, getDetailQueryOptions())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -75,6 +75,7 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                     public void onNext(Workflow workflow) {
                         getMvpView().showWorkflowDetail(workflow);
                         loadUserDetail(workflow.getUploader().getId());
+                        getFavourite(workflow.getId());
                     }
                 });
 
@@ -83,7 +84,7 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
     private void loadUserDetail(String id) {
 
         getMvpView().showProgressbar(true);
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+
         mSubscriptions = mDataManager.getUserDetail(id, getUserQueryOptions())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -108,9 +109,9 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
     }
 
     public void loadLicenseDetail(String id) {
+
         getMvpView().showLicenseProgress(true);
 
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
         mSubscriptions = mDataManager.getLicenseDetail(id, getLicenceQueryOptions())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -136,7 +137,6 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
 
     public void setFavourite(String id) {
 
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
 
         mSubscriptions = mDataManager.setFavoriteWorkflow(id)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -157,7 +157,6 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                     public void onNext(Boolean b) {
                         if (b) {
                             getMvpView().setFavouriteIcon();
-                            getMvpView().showErrorSnackBar("Add to Favourite ");
                         } else {
                             getMvpView().showErrorSnackBar("Something went wrong please try after" +
                                     "sometime");
@@ -169,7 +168,6 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
 
     public void getFavourite(String id) {
 
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
 
         mSubscriptions = mDataManager.getFavoriteWorkflow(id)
                 .observeOn(AndroidSchedulers.mainThread())

@@ -158,11 +158,10 @@ public class DBHelper {
 
                     subscriber.onNext(workflow1.isFavourite());
                     subscriber.onCompleted();
-                }else{
+                } else {
 
                     subscriber.onError(null);
                 }
-
 
 
             }
@@ -184,8 +183,6 @@ public class DBHelper {
 
         return false;
     }
-
-
 
 
 }
