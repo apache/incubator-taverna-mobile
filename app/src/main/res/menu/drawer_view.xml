@@ -18,9 +18,15 @@
 
 	<group android:checkableBehavior="single">
 		<item
-			android:id="@+id/nav_dashboard"
+			android:id="@+id/nav_workflows"
 			android:icon="@drawable/ic_dashboard_home_web"
 			android:title="Workflows"/>
+
+		<item
+				android:id="@+id/nav_favourite_workflow"
+				android:icon="@drawable/ic_star_black_24dp"
+				android:title="Favourite Workflows"/>
+
 		<item
 			android:id="@+id/nav_openworkflow"
 			android:icon="@drawable/ic_openwk_web"

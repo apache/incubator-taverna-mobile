@@ -26,8 +26,10 @@ package org.apache.taverna.mobile.activities;
  */
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.fragments.FavoriteFragment;
 import org.apache.taverna.mobile.fragments.WorkflowViewpager;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
+import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 import org.apache.taverna.mobile.utils.WorkflowOpen;
 
 import android.app.Dialog;
@@ -116,9 +118,9 @@ public class DashboardMainActivity extends AppCompatActivity {
                         Fragment fragment;
 
                         switch (menuItem.getItemId()) {
-                            case R.id.nav_dashboard:
+                            case R.id.nav_workflows:
 
-                                fragment = new WorkflowViewpager();
+                                fragment = new WorkflowFragment();
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container, fragment)
                                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
@@ -127,6 +129,19 @@ public class DashboardMainActivity extends AppCompatActivity {
                                 menuItem.setChecked(true);
                                 mDrawerLayout.closeDrawers();
                                 return true;
+
+                            case R.id.nav_favourite_workflow:
+
+                                fragment = new FavoriteFragment();
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container, fragment)
+                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                                        .commit();
+
+                                menuItem.setChecked(true);
+                                mDrawerLayout.closeDrawers();
+                                return true;
+
                             case R.id.nav_announcement:
 
                                 fragment = new AnnouncementFragment();
