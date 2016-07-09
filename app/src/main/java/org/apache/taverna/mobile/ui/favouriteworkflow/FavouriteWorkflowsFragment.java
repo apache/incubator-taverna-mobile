@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -32,6 +33,8 @@ public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWor
     @BindView(R.id.progress_circular)
     ProgressBar mProgressBar;
 
+    @BindView(R.id.error_no_workflow)
+    TextView tvNoWorkflowError;
     private DataManager dataManager;
 
     private FavouriteWorkflowsPresenter mFavouriteWorkflowsPresenter;
@@ -104,6 +107,6 @@ public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWor
 
     @Override
     public void showNoWorkflowError() {
-
+        tvNoWorkflowError.setVisibility(View.VISIBLE);
     }
 }
