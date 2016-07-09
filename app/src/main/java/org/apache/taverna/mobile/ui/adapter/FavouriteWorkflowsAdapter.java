@@ -45,9 +45,9 @@ public class FavouriteWorkflowsAdapter extends RecyclerView.Adapter<RecyclerView
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
 
-            View v = LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout.item_recyclerview_favourite_workflow_list, parent, false);
-            vh = new ViewHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(
+                R.layout.item_recyclerview_favourite_workflow_list, parent, false);
+        vh = new ViewHolder(v);
 
         return vh;
     }

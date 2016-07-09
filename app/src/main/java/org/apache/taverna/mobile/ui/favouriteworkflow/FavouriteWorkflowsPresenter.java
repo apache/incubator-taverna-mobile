@@ -70,9 +70,9 @@ public class FavouriteWorkflowsPresenter extends BasePresenter<FavouriteWorkflow
 
                     @Override
                     public void onNext(List<Workflow> workflowList) {
-                        if(workflowList.size()!=0) {
+                        if (workflowList.size() != 0) {
                             getMvpView().showWorkflows(workflowList);
-                        }else{
+                        } else {
                             getMvpView().showNoWorkflowError();
                         }
                     }

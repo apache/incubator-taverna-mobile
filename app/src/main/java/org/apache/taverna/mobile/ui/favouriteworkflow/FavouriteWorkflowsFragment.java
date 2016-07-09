@@ -73,7 +73,8 @@ public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWor
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_favourite_workflow_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_favourite_workflow_list,
+                container, false);
 
         ButterKnife.bind(this, rootView);
 
@@ -104,8 +105,9 @@ public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWor
 
     @Override
     public void showErrorSnackBar() {
-        final Snackbar snackbar = Snackbar.make(mRecyclerView, "Error occurred.Please try after some time", Snackbar
-                .LENGTH_INDEFINITE);
+        final Snackbar snackbar = Snackbar.make(mRecyclerView,
+                "Error occurred.Please try after some time", Snackbar
+                        .LENGTH_INDEFINITE);
         snackbar.setAction("OK", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
