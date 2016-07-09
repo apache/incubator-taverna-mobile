@@ -112,4 +112,5 @@ limitations under the License.
     <string name="announcement">Announcementss</string>
     <string name="no_internet">No Internet Connection</string>
     <string name="licence">Licence</string>
+    <string name="no_favourite_workflow_found">No Favourite Workflow Found!!!</string>
 </resources>
