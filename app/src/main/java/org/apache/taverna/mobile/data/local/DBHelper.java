@@ -27,6 +27,8 @@ import org.apache.taverna.mobile.data.model.Workflows;
 
 import android.support.annotation.Nullable;
 
+import java.util.List;
+
 import rx.Observable;
 import rx.Subscriber;
 
@@ -182,6 +184,24 @@ public class DBHelper {
         }
 
         return false;
+    }
+
+    public Observable<List<Workflow>> getFavouriteWorkflow() {
+        return Observable.create(new Observable.OnSubscribe<List<Workflow>>() {
+            @Override
+            public void call(Subscriber<? super List<Workflow>> subscriber) {
+                if (subscriber.isUnsubscribed()) return;
+                List<Workflow> workflows = SQLite.select()
+                        .from(Workflow.class)
+                        .where(Workflow_Table.favourite.eq(true))
+                        .queryList();
+
+                subscriber.onNext(workflows);
+                subscriber.onCompleted();
+
+            }
+        });
+
     }
 
 
