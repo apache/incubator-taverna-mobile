@@ -33,13 +33,10 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -115,15 +112,6 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         View rootView = inflater.inflate(R.layout.fragment_announcement, container, false);
         ButterKnife.bind(this, rootView);
         mAnnouncementPresenter.attachView(this);
-
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-
-        final ActionBar ab = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        if (ab != null) {
-            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
-            ab.setDisplayHomeAsUpEnabled(true);
-        }
 
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
