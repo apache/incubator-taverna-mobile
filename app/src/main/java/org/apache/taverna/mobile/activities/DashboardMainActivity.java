@@ -26,9 +26,8 @@ package org.apache.taverna.mobile.activities;
  */
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.fragments.FavoriteFragment;
-import org.apache.taverna.mobile.fragments.WorkflowViewpager;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
+import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
 import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 import org.apache.taverna.mobile.utils.WorkflowOpen;
 
@@ -48,6 +47,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.MimeTypeMap;
@@ -83,6 +83,16 @@ public class DashboardMainActivity extends AppCompatActivity {
         setUpWorkflowDirectory(this);
         aboutDialog = new Dialog(this);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        final ActionBar ab = getSupportActionBar();
+        if(ab !=null) {
+            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
+
+
         /**
          * Setting the Fragment in FrameLayout
          */
@@ -91,13 +101,11 @@ public class DashboardMainActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             Fragment fragment;
 
-            fragment = new WorkflowViewpager();
+            fragment = new WorkflowFragment();
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_container, fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                     .commit();
-
-
         }
 
     }
@@ -132,7 +140,7 @@ public class DashboardMainActivity extends AppCompatActivity {
 
                             case R.id.nav_favourite_workflow:
 
-                                fragment = new FavoriteFragment();
+                                fragment = new FavouriteWorkflowsFragment();
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container, fragment)
                                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
