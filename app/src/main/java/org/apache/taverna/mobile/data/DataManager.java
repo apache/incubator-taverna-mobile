@@ -27,6 +27,7 @@ import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.data.remote.BaseApiManager;
 
+import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
@@ -113,6 +114,14 @@ public class DataManager {
 
     public Observable<Boolean> getFavoriteWorkflow(String id) {
         return mDBHelper.getFavouriteWorkflow(id);
+    }
+
+    /**
+     * @return Favourite Workflow list
+     */
+
+    public Observable<List<Workflow>> getFavoriteWorkflowList() {
+        return mDBHelper.getFavouriteWorkflow();
     }
 
 }
