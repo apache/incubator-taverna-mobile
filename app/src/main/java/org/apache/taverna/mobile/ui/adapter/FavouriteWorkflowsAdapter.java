@@ -60,15 +60,9 @@ public class FavouriteWorkflowsAdapter extends RecyclerView.Adapter<RecyclerView
             String date = workflow.getCreatedAt()
                     .substring(0, workflow.getCreatedAt().indexOf(' '));
 
-            String title = workflow.getTitle().substring(0,
-                    Math.min(workflow.getTitle().length(), 50));
-
-            if (workflow.getTitle().length() > 50) {
-                title = title + " ... ";
-            }
 
             ((ViewHolder) holder).tvDate.setText(date);
-            ((ViewHolder) holder).tvTitle.setText(title);
+            ((ViewHolder) holder).tvTitle.setText(workflow.getTitle());
             ((ViewHolder) holder).tvType.setText(workflow.getType().getContent());
             ((ViewHolder) holder).tvUploader.setText(workflow.getUploader().getContent());
 
