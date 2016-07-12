@@ -29,6 +29,7 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
 import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
+import org.apache.taverna.mobile.utils.ActivityUtils;
 import org.apache.taverna.mobile.utils.WorkflowOpen;
 
 import android.app.Dialog;
@@ -122,17 +123,17 @@ public class DashboardMainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
 
 
-                        FragmentManager fragmentManager = getSupportFragmentManager();
                         Fragment fragment;
 
                         switch (menuItem.getItemId()) {
                             case R.id.nav_workflows:
 
                                 fragment = new WorkflowFragment();
-                                fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, fragment)
-                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                                        .commit();
+                                ActivityUtils
+                                        .addFragmentToActivity(
+                                                getSupportFragmentManager(),
+                                                fragment,
+                                                R.id.frame_container);
 
                                 menuItem.setChecked(true);
                                 mDrawerLayout.closeDrawers();
@@ -141,11 +142,11 @@ public class DashboardMainActivity extends AppCompatActivity {
                             case R.id.nav_favourite_workflow:
 
                                 fragment = new FavouriteWorkflowsFragment();
-                                fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, fragment)
-                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                                        .commit();
-
+                                ActivityUtils
+                                        .addFragmentToActivity(
+                                                getSupportFragmentManager(),
+                                                fragment,
+                                                R.id.frame_container);
                                 menuItem.setChecked(true);
                                 mDrawerLayout.closeDrawers();
                                 return true;
@@ -153,10 +154,11 @@ public class DashboardMainActivity extends AppCompatActivity {
                             case R.id.nav_announcement:
 
                                 fragment = new AnnouncementFragment();
-                                fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container, fragment)
-                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                                        .commit();
+                                ActivityUtils
+                                        .addFragmentToActivity(
+                                                getSupportFragmentManager(),
+                                                fragment,
+                                                R.id.frame_container);
 
                                 menuItem.setChecked(true);
                                 mDrawerLayout.closeDrawers();
@@ -167,11 +169,11 @@ public class DashboardMainActivity extends AppCompatActivity {
                                 Intent workflowSelectIntent =
                                         new Intent(Intent.ACTION_GET_CONTENT)
                                                 .setDataAndTypeAndNormalize(
-                                                    Uri.parse(String.format("%s%s%s",
-                                                        Environment.getExternalStorageDirectory(),
-                                                        File.separator,
-                                                        APP_DIRECTORY_NAME)),
-                                                    "application/vnd.taverna.t2flow+xml");
+                                                        Uri.parse(String.format("%s%s%s",
+                                                                Environment.getExternalStorageDirectory(),
+                                                                File.separator,
+                                                                APP_DIRECTORY_NAME)),
+                                                        "application/vnd.taverna.t2flow+xml");
 
                                 Intent loadWorkflowIntent = Intent.createChooser
                                         (workflowSelectIntent,
