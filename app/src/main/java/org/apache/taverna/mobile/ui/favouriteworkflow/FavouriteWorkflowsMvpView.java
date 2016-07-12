@@ -32,5 +32,5 @@ public interface FavouriteWorkflowsMvpView extends MvpView {
 
     void showWorkflows(List<Workflow> workflowList);
 
-    void showNoWorkflowError();
+    void showEmptyWorkflow();
 }

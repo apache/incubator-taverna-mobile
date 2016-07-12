@@ -126,7 +126,7 @@ public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWor
     }
 
     @Override
-    public void showNoWorkflowError() {
+    public void showEmptyWorkflow() {
         tvNoWorkflowError.setVisibility(View.VISIBLE);
     }
 }

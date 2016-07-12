@@ -73,7 +73,7 @@ public class FavouriteWorkflowsPresenter extends BasePresenter<FavouriteWorkflow
                         if (workflowList.size() != 0) {
                             getMvpView().showWorkflows(workflowList);
                         } else {
-                            getMvpView().showNoWorkflowError();
+                            getMvpView().showEmptyWorkflow();
                         }
                     }
                 });
