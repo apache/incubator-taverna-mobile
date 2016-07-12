@@ -9,7 +9,6 @@ import org.apache.taverna.mobile.data.model.Workflow;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,7 +89,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount: " + mWorkflowList.size());
+        //Log.d(TAG, "getItemCount: " + mWorkflowList.size());
         return mWorkflowList.size();
     }
 
