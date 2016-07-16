@@ -124,4 +124,12 @@ public class DataManager {
         return mDBHelper.getFavouriteWorkflow();
     }
 
+    /**
+     * @return Favourite Workflow Detail from DBhelper
+     * @param id is the id of workflow
+     */
+
+    public Observable<Workflow> getFavoriteDetailWorkflow(String id) {
+        return mDBHelper.getFavouriteWorkflowDetail(id);
+    }
 }
