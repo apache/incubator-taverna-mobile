@@ -31,6 +31,7 @@ import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.functions.Func0;
 
 
 public class DBHelper {
@@ -199,6 +200,20 @@ public class DBHelper {
                 subscriber.onNext(workflows);
                 subscriber.onCompleted();
 
+            }
+        });
+
+    }
+
+    public Observable<Workflow> getFavouriteWorkflowDetail(final String id) {
+        return Observable.defer(new Func0<Observable<Workflow>>() {
+            @Override
+            public Observable<Workflow> call() {
+                return Observable
+                        .just(SQLite.select()
+                                .from(Workflow.class)
+                                .where(Workflow_Table.id.eq(id))
+                                .querySingle());
             }
         });
 
