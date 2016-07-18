@@ -19,11 +19,7 @@
 package org.apache.taverna.mobile.ui.favouriteworkflow;
 
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.ui.adapter.FavouriteWorkflowsAdapter;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -36,12 +32,20 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.ui.adapter.FavouriteWorkflowsAdapter;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWorkflowsMvpView {
+public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWorkflowsMvpView, RecyclerItemClickListner.OnItemClickListener {
 
     public final String LOG_TAG = getClass().getSimpleName();
 
@@ -53,11 +57,14 @@ public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWor
 
     @BindView(R.id.error_no_workflow)
     TextView tvNoWorkflowError;
+
     private DataManager dataManager;
 
     private FavouriteWorkflowsPresenter mFavouriteWorkflowsPresenter;
 
     private FavouriteWorkflowsAdapter mFavouriteWorkflowsAdapter;
+
+    private List<Workflow> mWorkflowList;
 
 
     @Override
@@ -67,6 +74,8 @@ public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWor
         dataManager = new DataManager();
 
         mFavouriteWorkflowsPresenter = new FavouriteWorkflowsPresenter(dataManager);
+
+        mWorkflowList = new ArrayList<>();
     }
 
     @Override
@@ -80,11 +89,17 @@ public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWor
 
         mFavouriteWorkflowsPresenter.attachView(this);
 
+        mFavouriteWorkflowsAdapter = new FavouriteWorkflowsAdapter(mWorkflowList, getContext());
+
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
 
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.hasFixedSize();
+
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListner(getActivity(), this));
+
+        mRecyclerView.setAdapter(mFavouriteWorkflowsAdapter);
 
         showProgressbar(true);
         mFavouriteWorkflowsPresenter.loadAllWorkflow();
@@ -96,8 +111,10 @@ public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWor
     @Override
     public void showProgressbar(boolean b) {
         if (b) {
+
             mProgressBar.setVisibility(View.VISIBLE);
         } else {
+
             mProgressBar.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
         }
@@ -121,12 +138,25 @@ public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWor
     @Override
     public void showWorkflows(List<Workflow> workflowList) {
 
-        mFavouriteWorkflowsAdapter = new FavouriteWorkflowsAdapter(workflowList, getContext());
-        mRecyclerView.setAdapter(mFavouriteWorkflowsAdapter);
+        mWorkflowList.addAll(workflowList);
+        mFavouriteWorkflowsAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showEmptyWorkflow() {
         tvNoWorkflowError.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onItemClick(View childView, int position) {
+        Intent intent = new Intent(getActivity(), FavouriteWorkflowDetailActivity.class);
+        intent.putExtra("id", mWorkflowList.get(position).getId());
+        intent.putExtra("title", mWorkflowList.get(position).getTitle());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemLongPress(View childView, int position) {
+
     }
 }
