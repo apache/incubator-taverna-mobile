@@ -110,6 +110,15 @@ limitations under the License.
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="org.apache.taverna.mobile.activities.DashboardMainActivity"/>
         </activity>
+
+        <activity
+            android:name=".ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity"
+            android:label="@string/title_activity_run_result"
+            android:parentActivityName=".activities.DashboardMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.apache.taverna.mobile.activities.DashboardMainActivity"/>
+        </activity>
     </application>
 
 </manifest>
