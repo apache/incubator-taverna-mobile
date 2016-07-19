@@ -32,7 +32,8 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class FavouriteWorkflowDetailPresenter extends BasePresenter<FavouriteWorkflowDetailMvpView> {
+public class FavouriteWorkflowDetailPresenter extends
+        BasePresenter<FavouriteWorkflowDetailMvpView> {
 
     public final String LOG_TAG = getClass().getSimpleName();
     private DataManager mDataManager;
@@ -190,7 +191,6 @@ public class FavouriteWorkflowDetailPresenter extends BasePresenter<FavouriteWor
                     }
                 });
     }
-
 
 
     private Map<String, String> getUserQueryOptions() {

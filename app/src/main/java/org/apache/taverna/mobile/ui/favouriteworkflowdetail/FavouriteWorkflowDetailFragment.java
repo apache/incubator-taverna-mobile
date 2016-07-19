@@ -19,6 +19,16 @@
 package org.apache.taverna.mobile.ui.favouriteworkflowdetail;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.License;
+import org.apache.taverna.mobile.data.model.User;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -40,21 +50,12 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.License;
-import org.apache.taverna.mobile.data.model.User;
-import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FavouriteWorkflowDetailFragment extends Fragment implements FavouriteWorkflowDetailMvpView {
+public class FavouriteWorkflowDetailFragment extends Fragment
+        implements FavouriteWorkflowDetailMvpView {
 
     public final String LOG_TAG = getClass().getSimpleName();
 

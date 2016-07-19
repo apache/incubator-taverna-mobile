@@ -19,13 +19,13 @@
 package org.apache.taverna.mobile.ui.favouriteworkflowdetail;
 
 
+import org.apache.taverna.mobile.R;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-
-import org.apache.taverna.mobile.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,11 +53,11 @@ public class FavouriteWorkflowDetailActivity extends AppCompatActivity {
         }
 
 
-
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.frame_container
-                            , FavouriteWorkflowDetailFragment.newInstance(getIntent().getStringExtra("id")))
+                            , FavouriteWorkflowDetailFragment
+                                    .newInstance(getIntent().getStringExtra("id")))
                     .commit();
         }
 

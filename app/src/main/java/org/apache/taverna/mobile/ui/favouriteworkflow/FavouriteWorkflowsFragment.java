@@ -19,6 +19,13 @@
 package org.apache.taverna.mobile.ui.favouriteworkflow;
 
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.ui.adapter.FavouriteWorkflowsAdapter;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -32,20 +39,14 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.ui.adapter.FavouriteWorkflowsAdapter;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FavouriteWorkflowsFragment extends Fragment implements FavouriteWorkflowsMvpView, RecyclerItemClickListner.OnItemClickListener {
+public class FavouriteWorkflowsFragment extends Fragment
+        implements FavouriteWorkflowsMvpView, RecyclerItemClickListner.OnItemClickListener {
 
     public final String LOG_TAG = getClass().getSimpleName();
 
