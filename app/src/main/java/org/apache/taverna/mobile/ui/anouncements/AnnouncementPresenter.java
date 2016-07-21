@@ -26,20 +26,22 @@ import org.apache.taverna.mobile.ui.base.BasePresenter;
 import android.util.Log;
 
 import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 
 public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
 
     public final String LOG_TAG = getClass().getSimpleName();
     private DataManager mDataManager;
-    private Subscription mSubscriptions;
+    private CompositeSubscription mSubscriptions;
 
 
     public AnnouncementPresenter(DataManager dataManager) {
         mDataManager = dataManager;
+
+        mSubscriptions = new CompositeSubscription();
     }
 
     @Override
@@ -55,7 +57,7 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
 
     public void loadAllAnnouncement(int pageNumber) {
 
-        mSubscriptions = mDataManager.getAllAnnouncement(pageNumber)
+        mSubscriptions.add(mDataManager.getAllAnnouncement(pageNumber)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Announcements>() {
@@ -76,12 +78,12 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                         getMvpView().showAllAnouncement(announcement);
                         Log.d(LOG_TAG, announcement.getAnnouncement().get(1).getResource());
                     }
-                });
+                }));
     }
 
     public void loadAnnouncementDetails(String id) {
 
-        mSubscriptions = mDataManager.getAnnouncementDetail(id)
+        mSubscriptions.add(mDataManager.getAnnouncementDetail(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<DetailAnnouncement>() {
@@ -102,7 +104,7 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                         getMvpView().showAnnouncementDetail(detailAnnouncement);
 
                     }
-                });
+                }));
     }
 
 }

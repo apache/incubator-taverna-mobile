@@ -28,20 +28,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 public class FavouriteWorkflowDetailPresenter extends
         BasePresenter<FavouriteWorkflowDetailMvpView> {
 
     public final String LOG_TAG = getClass().getSimpleName();
+
     private DataManager mDataManager;
-    private Subscription mSubscriptions;
+
+    private CompositeSubscription mCompositeSubscription;
 
 
     public FavouriteWorkflowDetailPresenter(DataManager dataManager) {
+
         mDataManager = dataManager;
+
+        mCompositeSubscription = new CompositeSubscription();
     }
 
     @Override
@@ -52,13 +57,13 @@ public class FavouriteWorkflowDetailPresenter extends
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+        if (mCompositeSubscription != null) mCompositeSubscription.unsubscribe();
     }
 
     public void loadWorkflowDetail(String id) {
         getMvpView().showProgressbar(true);
 
-        mSubscriptions = mDataManager.getFavoriteDetailWorkflow(id)
+        mCompositeSubscription.add(mDataManager.getFavoriteDetailWorkflow(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Workflow>() {
@@ -78,7 +83,7 @@ public class FavouriteWorkflowDetailPresenter extends
                         loadUserDetail(workflow.getUploader().getId());
                         getFavourite(workflow.getId());
                     }
-                });
+                }));
 
     }
 
@@ -86,7 +91,7 @@ public class FavouriteWorkflowDetailPresenter extends
 
         getMvpView().showProgressbar(true);
 
-        mSubscriptions = mDataManager.getUserDetail(id, getUserQueryOptions())
+        mCompositeSubscription.add(mDataManager.getUserDetail(id, getUserQueryOptions())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<User>() {
@@ -106,14 +111,14 @@ public class FavouriteWorkflowDetailPresenter extends
                     public void onNext(User user) {
                         getMvpView().setImage(user);
                     }
-                });
+                }));
     }
 
     public void loadLicenseDetail(String id) {
 
         getMvpView().showLicenseProgress(true);
 
-        mSubscriptions = mDataManager.getLicenseDetail(id, getLicenceQueryOptions())
+        mCompositeSubscription.add(mDataManager.getLicenseDetail(id, getLicenceQueryOptions())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<License>() {
@@ -133,13 +138,13 @@ public class FavouriteWorkflowDetailPresenter extends
                     public void onNext(License license) {
                         getMvpView().showLicense(license);
                     }
-                });
+                }));
     }
 
     public void setFavourite(String id) {
 
 
-        mSubscriptions = mDataManager.setFavoriteWorkflow(id)
+        mCompositeSubscription.add(mDataManager.setFavoriteWorkflow(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Boolean>() {
@@ -164,13 +169,13 @@ public class FavouriteWorkflowDetailPresenter extends
                         }
 
                     }
-                });
+                }));
     }
 
     public void getFavourite(String id) {
 
 
-        mSubscriptions = mDataManager.getFavoriteWorkflow(id)
+        mCompositeSubscription.add(mDataManager.getFavoriteWorkflow(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Boolean>() {
@@ -189,7 +194,7 @@ public class FavouriteWorkflowDetailPresenter extends
                     public void onNext(Boolean b) {
                         getMvpView().getFavouriteIcon(b);
                     }
-                });
+                }));
     }
 
 

@@ -28,19 +28,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import rx.Observer;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView> {
 
     public final String LOG_TAG = getClass().getSimpleName();
     private DataManager mDataManager;
-    private Subscription mSubscriptions;
+    private CompositeSubscription mCompositeSubscription;
 
 
     public WorkflowDetailPresenter(DataManager dataManager) {
+
         mDataManager = dataManager;
+        mCompositeSubscription = new CompositeSubscription();
     }
 
     @Override
@@ -51,13 +53,13 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+        if (mCompositeSubscription != null) mCompositeSubscription.unsubscribe();
     }
 
     public void loadWorkflowDetail(String id) {
         getMvpView().showProgressbar(true);
 
-        mSubscriptions = mDataManager.getDetailWorkflow(id, getDetailQueryOptions())
+        mCompositeSubscription.add(mDataManager.getDetailWorkflow(id, getDetailQueryOptions())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Workflow>() {
@@ -77,15 +79,14 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                         loadUserDetail(workflow.getUploader().getId());
                         getFavourite(workflow.getId());
                     }
-                });
-
+                }));
     }
 
     private void loadUserDetail(String id) {
 
         getMvpView().showProgressbar(true);
 
-        mSubscriptions = mDataManager.getUserDetail(id, getUserQueryOptions())
+        mCompositeSubscription.add(mDataManager.getUserDetail(id, getUserQueryOptions())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<User>() {
@@ -105,14 +106,14 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                     public void onNext(User user) {
                         getMvpView().setImage(user);
                     }
-                });
+                }));
     }
 
     public void loadLicenseDetail(String id) {
 
         getMvpView().showLicenseProgress(true);
 
-        mSubscriptions = mDataManager.getLicenseDetail(id, getLicenceQueryOptions())
+        mCompositeSubscription.add(mDataManager.getLicenseDetail(id, getLicenceQueryOptions())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<License>() {
@@ -132,13 +133,13 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                     public void onNext(License license) {
                         getMvpView().showLicense(license);
                     }
-                });
+                }));
     }
 
     public void setFavourite(String id) {
 
 
-        mSubscriptions = mDataManager.setFavoriteWorkflow(id)
+        mCompositeSubscription.add(mDataManager.setFavoriteWorkflow(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Boolean>() {
@@ -163,13 +164,13 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                         }
 
                     }
-                });
+                }));
     }
 
     public void getFavourite(String id) {
 
 
-        mSubscriptions = mDataManager.getFavoriteWorkflow(id)
+        mCompositeSubscription.add(mDataManager.getFavoriteWorkflow(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Boolean>() {
@@ -188,7 +189,7 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                     public void onNext(Boolean b) {
                         getMvpView().getFavouriteIcon(b);
                     }
-                });
+                }));
     }
 
     private Map<String, String> getDetailQueryOptions() {
