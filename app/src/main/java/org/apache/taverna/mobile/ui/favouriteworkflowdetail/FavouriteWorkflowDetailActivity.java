@@ -58,7 +58,8 @@ public class FavouriteWorkflowDetailActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.frame_container
                             , FavouriteWorkflowDetailFragment
-                                    .newInstance(getIntent().getStringExtra(FavouriteWorkflowsFragment.EXTRA_ID)))
+                                    .newInstance(getIntent()
+                                            .getStringExtra(FavouriteWorkflowsFragment.EXTRA_ID)))
                     .commit();
         }
 
