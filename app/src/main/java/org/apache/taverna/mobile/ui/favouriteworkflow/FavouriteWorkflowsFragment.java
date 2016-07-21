@@ -102,7 +102,7 @@ public class FavouriteWorkflowsFragment extends Fragment
 
         mRecyclerView.setAdapter(mFavouriteWorkflowsAdapter);
 
-        showProgressbar(true);
+
         mFavouriteWorkflowsPresenter.loadAllWorkflow();
 
         return rootView;

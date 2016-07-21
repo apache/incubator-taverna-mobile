@@ -52,6 +52,9 @@ public class FavouriteWorkflowsPresenter extends BasePresenter<FavouriteWorkflow
     }
 
     public void loadAllWorkflow() {
+
+        getMvpView().showProgressbar(true);
+
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
         mSubscriptions = mDataManager.getFavoriteWorkflowList()
                 .observeOn(AndroidSchedulers.mainThread())
