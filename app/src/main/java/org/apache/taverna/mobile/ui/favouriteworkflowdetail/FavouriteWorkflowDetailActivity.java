@@ -20,6 +20,7 @@ package org.apache.taverna.mobile.ui.favouriteworkflowdetail;
 
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -49,7 +50,7 @@ public class FavouriteWorkflowDetailActivity extends AppCompatActivity {
         if (actionbar != null) {
             actionbar.setHomeButtonEnabled(true);
             actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setTitle(getIntent().getStringExtra("title"));
+            actionbar.setTitle(getIntent().getStringExtra(FavouriteWorkflowsFragment.EXTRA_TITLE));
         }
 
 
@@ -57,7 +58,7 @@ public class FavouriteWorkflowDetailActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.frame_container
                             , FavouriteWorkflowDetailFragment
-                                    .newInstance(getIntent().getStringExtra("id")))
+                                    .newInstance(getIntent().getStringExtra(FavouriteWorkflowsFragment.EXTRA_ID)))
                     .commit();
         }
 

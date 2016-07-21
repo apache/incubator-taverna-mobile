@@ -50,6 +50,9 @@ public class FavouriteWorkflowsFragment extends Fragment
 
     public final String LOG_TAG = getClass().getSimpleName();
 
+    public static final String EXTRA_ID = "id";
+
+    public static final String EXTRA_TITLE = "title";
     @BindView(R.id.rv_fav_workflows)
     RecyclerView mRecyclerView;
 
@@ -151,8 +154,8 @@ public class FavouriteWorkflowsFragment extends Fragment
     @Override
     public void onItemClick(View childView, int position) {
         Intent intent = new Intent(getActivity(), FavouriteWorkflowDetailActivity.class);
-        intent.putExtra("id", mWorkflowList.get(position).getId());
-        intent.putExtra("title", mWorkflowList.get(position).getTitle());
+        intent.putExtra(EXTRA_ID, mWorkflowList.get(position).getId());
+        intent.putExtra(EXTRA_TITLE, mWorkflowList.get(position).getTitle());
         startActivity(intent);
     }
 
