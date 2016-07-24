@@ -119,6 +119,11 @@ limitations under the License.
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.apache.taverna.mobile.activities.DashboardMainActivity"/>
         </activity>
+
+        <activity android:name=".ui.imagezoom.ImageZoomActivity"
+                  android:label="Image Zoom"
+                  android:exported="true"
+                  />
     </application>
 
 </manifest>
