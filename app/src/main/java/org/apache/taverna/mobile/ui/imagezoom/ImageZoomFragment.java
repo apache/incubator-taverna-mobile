@@ -243,5 +243,9 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
         mAttacher = new PhotoViewAttacher(workflowImage);
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mImageZoomPresenter.detachView();
+    }
 }
