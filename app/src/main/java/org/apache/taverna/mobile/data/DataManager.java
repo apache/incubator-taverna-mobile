@@ -21,9 +21,9 @@ package org.apache.taverna.mobile.data;
 import org.apache.taverna.mobile.data.local.DBHelper;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
-import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
+import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.data.remote.BaseApiManager;
 
@@ -125,11 +125,21 @@ public class DataManager {
     }
 
     /**
-     * @return Favourite Workflow Detail from DBhelper
      * @param id is the id of workflow
+     * @return Favourite Workflow Detail from DBhelper
      */
 
     public Observable<Workflow> getFavoriteDetailWorkflow(String id) {
         return mDBHelper.getFavouriteWorkflowDetail(id);
     }
+
+    /**
+     * @param id is the id of workflow
+     * @return all URI of workflow Image from DBhelper
+     */
+
+    public Observable<Map<String, String>> getImageURI(String id) {
+        return mDBHelper.getImageURI(id);
+    }
+
 }
