@@ -27,9 +27,12 @@ import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
+import org.apache.taverna.mobile.ui.imagezoom.ImageZoomActivity;
+import org.apache.taverna.mobile.ui.imagezoom.ImageZoomFragment;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -161,6 +164,14 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     @OnClick(R.id.ivFav)
     void favClick(View v) {
         mWorkflowDetailPresenter.setFavourite(id);
+    }
+
+
+    @OnClick(R.id.ivWorkflowImage)
+    void zoomImage(View v){
+        Intent intent = new Intent(getActivity(), ImageZoomActivity.class);
+        intent.putExtra(ImageZoomFragment.ID, id);
+        startActivity(intent);
     }
 
     @Override
