@@ -34,44 +34,31 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
 
-    @BindView(R.id.ivWorkflowImage)
-    ImageView workflowImage;
-
-    @BindView(R.id.ivClose)
-    ImageView close;
-
     public static final String ID = "id";
-
-    private static final String SERVER_ERROR = "Sever Error. Please try after sometime";
-
-    private static final String TAG = "ImageZoomFragment";
-
-    private String id;
-
-    private String jpgURI;
-
-    private DataManager dataManager;
-
-    private ImageZoomPresenter mImageZoomPresenter;
-
-    private ConnectionInfo mConnectionInfo;
-
-    PhotoViewAttacher mAttacher;
-
-    // These matrices will be used to scale points of the image
-    Matrix matrix = new Matrix();
-    Matrix savedMatrix = new Matrix();
-
     // The 3 states (events) which the user is trying to perform
     static final int NONE = 0;
     static final int DRAG = 1;
     static final int ZOOM = 2;
+    private static final String SERVER_ERROR = "Sever Error. Please try after sometime";
+    private static final String TAG = "ImageZoomFragment";
+    @BindView(R.id.ivWorkflowImage)
+    ImageView workflowImage;
+    @BindView(R.id.ivClose)
+    ImageView close;
+    PhotoViewAttacher mAttacher;
+    // These matrices will be used to scale points of the image
+    Matrix matrix = new Matrix();
+    Matrix savedMatrix = new Matrix();
     int mode = NONE;
-
     // these PointF objects are used to record the point(s) the user is touching
     PointF start = new PointF();
     PointF mid = new PointF();
     float oldDist = 1f;
+    private String id;
+    private String jpgURI;
+    private DataManager dataManager;
+    private ImageZoomPresenter mImageZoomPresenter;
+    private ConnectionInfo mConnectionInfo;
 
     public static ImageZoomFragment newInstance(String id) {
 
@@ -121,8 +108,6 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
         }
 
 
-
-
     }
 
     @OnClick(R.id.ivClose)
@@ -130,7 +115,6 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
 
         getActivity().finish();
     }
-
 
 
     @Override
@@ -190,7 +174,9 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
                     }
 
                     @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                    public void onResourceReady(GlideDrawable resource,
+                                                GlideAnimation<? super GlideDrawable>
+                                                        glideAnimation) {
                         workflowImage.setImageDrawable(resource.getCurrent());
                         addImageAttacher();
 
@@ -207,13 +193,13 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
                     }
 
                     @Override
-                    public void setRequest(Request request) {
-
+                    public Request getRequest() {
+                        return null;
                     }
 
                     @Override
-                    public Request getRequest() {
-                        return null;
+                    public void setRequest(Request request) {
+
                     }
 
                     @Override

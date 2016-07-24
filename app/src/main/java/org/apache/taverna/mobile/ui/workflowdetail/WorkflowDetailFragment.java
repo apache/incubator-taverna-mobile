@@ -24,9 +24,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
+import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.ui.imagezoom.ImageZoomActivity;
 import org.apache.taverna.mobile.ui.imagezoom.ImageZoomFragment;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
@@ -58,51 +58,34 @@ import butterknife.OnClick;
 
 public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMvpView {
 
+    private static final String ID = "id";
     public final String LOG_TAG = getClass().getSimpleName();
-
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;
-
     @BindView(R.id.tvTitle)
     TextView title;
-
     @BindView(R.id.ivUploader)
     ImageView uploaderImage;
-
     @BindView(R.id.tvUploaderName)
     TextView uploaderName;
-
     @BindView(R.id.tvDate)
     TextView date;
-
     @BindView(R.id.tvType)
     TextView type;
-
     @BindView(R.id.tvDescription)
     WebView description;
-
     @BindView(R.id.ivFav)
     ImageView ivFavourite;
-
     @BindView(R.id.progressBar)
     ProgressBar mProgressBar;
-
     @BindView(R.id.scrollView)
     ScrollView mScrollView;
-
     @BindView(R.id.rootLayout)
     RelativeLayout rootLayout;
-
     private AlertDialog alertDialog;
-
     private DataManager dataManager;
-
     private WorkflowDetailPresenter mWorkflowDetailPresenter;
-
     private ConnectionInfo mConnectionInfo;
-
-    private static final String ID = "id";
-
     private String id;
 
     private String licenceId = null;
@@ -168,7 +151,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
 
     @OnClick(R.id.ivWorkflowImage)
-    void zoomImage(View v){
+    void zoomImage(View v) {
         Intent intent = new Intent(getActivity(), ImageZoomActivity.class);
         intent.putExtra(ImageZoomFragment.ID, id);
         startActivity(intent);

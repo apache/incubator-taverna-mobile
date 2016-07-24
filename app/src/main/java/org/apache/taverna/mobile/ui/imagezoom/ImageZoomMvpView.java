@@ -5,7 +5,7 @@ import org.apache.taverna.mobile.ui.base.MvpView;
 
 import android.content.Context;
 
-public interface ImageZoomMvpView extends MvpView{
+public interface ImageZoomMvpView extends MvpView {
 
     void showErrorSnackBar(String error);
 

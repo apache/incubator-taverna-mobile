@@ -35,14 +35,10 @@ import rx.schedulers.Schedulers;
 
 public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
 
-    private DataManager mDataManager;
-
-    private Subscription mSubscriptions;
-
     public static final String NO_IMAGE_URI = "NO Image Found";
-
-    public static final String DB_ERROR= "There is some problem. Please try after sometime ";
-
+    public static final String DB_ERROR = "There is some problem. Please try after sometime ";
+    private DataManager mDataManager;
+    private Subscription mSubscriptions;
     private GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> requestBuilder;
 
     public ImageZoomPresenter(DataManager dataManager) {
@@ -57,7 +53,8 @@ public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
         super.attachView(mvpView);
 
         requestBuilder = Glide.with(getMvpView().getAppContext())
-                .using(Glide.buildStreamModelLoader(Uri.class, getMvpView().getAppContext()), InputStream.class)
+                .using(Glide.buildStreamModelLoader(Uri.class,
+                        getMvpView().getAppContext()), InputStream.class)
                 .from(Uri.class)
                 .as(SVG.class)
                 .transcode(new SvgDrawableTranscoder(), PictureDrawable.class)
@@ -66,7 +63,7 @@ public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
                 .decoder(new SvgDecoder())
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
-                .override(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL)
+                .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                 .animate(android.R.anim.fade_in);
 
     }
@@ -133,7 +130,9 @@ public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
                     }
 
                     @Override
-                    public void onResourceReady(PictureDrawable resource, GlideAnimation<? super PictureDrawable> glideAnimation) {
+                    public void onResourceReady(PictureDrawable resource,
+                                                GlideAnimation<? super PictureDrawable>
+                                                        glideAnimation) {
                         if (Build.VERSION_CODES.HONEYCOMB <= Build.VERSION.SDK_INT) {
                             imageView.setLayerType(ImageView.LAYER_TYPE_SOFTWARE, null);
                         }
@@ -152,13 +151,13 @@ public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
                     }
 
                     @Override
-                    public void setRequest(Request request) {
-
+                    public Request getRequest() {
+                        return null;
                     }
 
                     @Override
-                    public Request getRequest() {
-                        return null;
+                    public void setRequest(Request request) {
+
                     }
 
                     @Override
