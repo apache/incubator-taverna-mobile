@@ -29,8 +29,6 @@ public interface ImageZoomMvpView extends MvpView {
 
     Context getAppContext();
 
-    void setJPGuri(String uri);
-
     void setJPGImage();
 
     void addImageAttacher();

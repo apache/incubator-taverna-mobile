@@ -29,8 +29,6 @@ import butterknife.ButterKnife;
 
 public class ImageZoomActivity extends AppCompatActivity {
 
-    public static final String ID = "id";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +40,9 @@ public class ImageZoomActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.frame_container
-                            , ImageZoomFragment.newInstance(getIntent().getStringExtra(ID)))
+                            , ImageZoomFragment.newInstance(getIntent().getStringExtra
+                                    (ImageZoomFragment.JPG_URI), getIntent().getStringExtra
+                                    (ImageZoomFragment.SVG_URI)))
                     .commit();
         }
 

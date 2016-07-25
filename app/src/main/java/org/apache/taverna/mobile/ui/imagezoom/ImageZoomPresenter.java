@@ -38,18 +38,13 @@ import com.caverock.androidsvg.SVG;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.local.DBHelper;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 import org.apache.taverna.mobile.utils.SvgDecoder;
 import org.apache.taverna.mobile.utils.SvgDrawableTranscoder;
 
 import java.io.InputStream;
-import java.util.Map;
 
-import rx.Observer;
 import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
 
@@ -92,44 +87,16 @@ public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
     }
 
-    public void loadImage(String id, final ImageView imageView) {
+    public void loadImage(String svgURI, final ImageView imageView) {
 
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
-
-        mSubscriptions = mDataManager.getImageURI(id)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Map<String, String>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        getMvpView().showErrorSnackBar(DB_ERROR);
-                    }
-
-                    @Override
-                    public void onNext(Map<String, String> imageURI) {
-                        if (imageURI.size() != 0) {
-
-                            setSVG(imageURI, imageView);
-
-                            getMvpView().setJPGuri(imageURI.get(DBHelper.JPG_URI));
-                        } else {
-
-                            getMvpView().showErrorSnackBar(NO_IMAGE_URI);
-                        }
-                    }
-                });
+        setSVG(svgURI, imageView);
     }
 
-    private void setSVG(final Map<String, String> imageURI, final ImageView imageView) {
+    private void setSVG(String imageURI, final ImageView imageView) {
 
         requestBuilder
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .load(Uri.parse(imageURI.get(DBHelper.SVG_URI)))
+                .load(Uri.parse(imageURI))
                 .into(new Target<PictureDrawable>() {
                     @Override
                     public void onLoadStarted(Drawable placeholder) {

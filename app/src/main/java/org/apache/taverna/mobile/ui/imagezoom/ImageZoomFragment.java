@@ -20,8 +20,6 @@ package org.apache.taverna.mobile.ui.imagezoom;
 
 
 import android.content.Context;
-import android.graphics.Matrix;
-import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,37 +50,36 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
 
-    public static final String ID = "id";
-    // The 3 states (events) which the user is trying to perform
-    static final int NONE = 0;
-    static final int DRAG = 1;
-    static final int ZOOM = 2;
+    public static final String JPG_URI = "jpgURI";
+
+    public static final String SVG_URI = "svgURI";
+
     private static final String SERVER_ERROR = "Sever Error. Please try after sometime";
+
     private static final String TAG = "ImageZoomFragment";
+
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;
     @BindView(R.id.ivClose)
     ImageView close;
+
     PhotoViewAttacher mAttacher;
-    // These matrices will be used to scale points of the image
-    Matrix matrix = new Matrix();
-    Matrix savedMatrix = new Matrix();
-    int mode = NONE;
-    // these PointF objects are used to record the point(s) the user is touching
-    PointF start = new PointF();
-    PointF mid = new PointF();
-    float oldDist = 1f;
-    private String id;
+
+    private String svgURI;
+
     private String jpgURI;
+
     private DataManager dataManager;
     private ImageZoomPresenter mImageZoomPresenter;
     private ConnectionInfo mConnectionInfo;
 
-    public static ImageZoomFragment newInstance(String id) {
+    public static ImageZoomFragment newInstance(String jpgURI, String svgURI) {
 
         Bundle args = new Bundle();
 
-        args.putString(ID, id);
+        args.putString(JPG_URI, jpgURI);
+
+        args.putString(SVG_URI, svgURI);
 
         ImageZoomFragment fragment = new ImageZoomFragment();
         fragment.setArguments(args);
@@ -94,7 +91,9 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        id = getArguments().getString(ID);
+        svgURI = getArguments().getString(SVG_URI);
+
+        jpgURI = getArguments().getString(JPG_URI);
 
         dataManager = new DataManager();
         mImageZoomPresenter = new ImageZoomPresenter(dataManager);
@@ -119,7 +118,7 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
 
         if (mConnectionInfo.isConnectingToInternet()) {
 
-            mImageZoomPresenter.loadImage(id, workflowImage);
+            mImageZoomPresenter.loadImage(svgURI, workflowImage);
         } else {
 
             showErrorSnackBar(getString(R.string.no_internet));
@@ -166,10 +165,6 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
         return getContext();
     }
 
-    @Override
-    public void setJPGuri(String uri) {
-        jpgURI = uri;
-    }
 
     @Override
     public void setJPGImage() {

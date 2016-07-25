@@ -19,18 +19,6 @@
 package org.apache.taverna.mobile.ui.workflowdetail;
 
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.License;
-import org.apache.taverna.mobile.data.model.User;
-import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.ui.imagezoom.ImageZoomActivity;
-import org.apache.taverna.mobile.ui.imagezoom.ImageZoomFragment;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,6 +39,18 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.License;
+import org.apache.taverna.mobile.data.model.User;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.ui.imagezoom.ImageZoomActivity;
+import org.apache.taverna.mobile.ui.imagezoom.ImageZoomFragment;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,6 +91,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     private String licenceId = null;
 
     private ProgressDialog dialog;
+    private Workflow mWorkflow;
 
     public static WorkflowDetailFragment newInstance(String id) {
 
@@ -153,7 +154,8 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     @OnClick(R.id.ivWorkflowImage)
     void zoomImage(View v) {
         Intent intent = new Intent(getActivity(), ImageZoomActivity.class);
-        intent.putExtra(ImageZoomFragment.ID, id);
+        intent.putExtra(ImageZoomFragment.JPG_URI, mWorkflow.getPreviewUri());
+        intent.putExtra(ImageZoomFragment.SVG_URI, mWorkflow.getSvgUri());
         startActivity(intent);
     }
 
@@ -198,6 +200,8 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
     @Override
     public void showWorkflowDetail(Workflow workflow) {
+
+        this.mWorkflow = workflow;
 
         uploaderName.setText(workflow.getUploader().getContent());
         date.setText(workflow.getUpdatedAt()
