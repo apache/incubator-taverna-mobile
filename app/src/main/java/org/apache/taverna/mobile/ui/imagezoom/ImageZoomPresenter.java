@@ -37,26 +37,18 @@ import com.bumptech.glide.request.target.Target;
 import com.caverock.androidsvg.SVG;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 import org.apache.taverna.mobile.utils.SvgDecoder;
 import org.apache.taverna.mobile.utils.SvgDrawableTranscoder;
 
 import java.io.InputStream;
 
-import rx.Subscription;
-
 public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
 
-    public static final String NO_IMAGE_URI = "NO Image Found";
-    public static final String DB_ERROR = "There is some problem. Please try after sometime ";
-    private DataManager mDataManager;
-    private Subscription mSubscriptions;
+
     private GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> requestBuilder;
 
-    public ImageZoomPresenter(DataManager dataManager) {
-
-        mDataManager = dataManager;
+    public ImageZoomPresenter() {
 
     }
 
@@ -84,7 +76,7 @@ public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+
     }
 
     public void loadImage(String svgURI, final ImageView imageView) {
