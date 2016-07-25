@@ -61,33 +61,50 @@ public class FavouriteWorkflowDetailFragment extends Fragment
         implements FavouriteWorkflowDetailMvpView {
 
     private static final String ID = "id";
+
     public final String LOG_TAG = getClass().getSimpleName();
+
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;
+
     @BindView(R.id.tvTitle)
     TextView title;
+
     @BindView(R.id.ivUploader)
     ImageView uploaderImage;
+
     @BindView(R.id.tvUploaderName)
     TextView uploaderName;
+
     @BindView(R.id.tvDate)
     TextView date;
+
     @BindView(R.id.tvType)
     TextView type;
+
     @BindView(R.id.tvDescription)
     WebView description;
+
     @BindView(R.id.ivFav)
     ImageView ivFavourite;
+
     @BindView(R.id.progressBar)
     ProgressBar mProgressBar;
+
     @BindView(R.id.scrollView)
     ScrollView mScrollView;
+
     @BindView(R.id.rootLayout)
     RelativeLayout rootLayout;
+
     private AlertDialog alertDialog;
+
     private DataManager dataManager;
+
     private FavouriteWorkflowDetailPresenter mWorkflowDetailPresenter;
+
     private ConnectionInfo mConnectionInfo;
+
     private String id;
 
     private String licenceId = null;
@@ -158,9 +175,12 @@ public class FavouriteWorkflowDetailFragment extends Fragment
 
     @OnClick(R.id.ivWorkflowImage)
     void zoomImage(View v) {
+
         Intent intent = new Intent(getActivity(), ImageZoomActivity.class);
+
         intent.putExtra(ImageZoomFragment.JPG_URI, mWorkflow.getPreviewUri());
         intent.putExtra(ImageZoomFragment.SVG_URI, mWorkflow.getSvgUri());
+
         startActivity(intent);
     }
 
@@ -205,7 +225,9 @@ public class FavouriteWorkflowDetailFragment extends Fragment
 
     @Override
     public void showWorkflowDetail(Workflow workflow) {
+
         this.mWorkflow = workflow;
+
         uploaderName.setText(workflow.getUploader().getContent());
         date.setText(workflow.getUpdatedAt()
                 .substring(0, workflow.getUpdatedAt().indexOf(' ')));
@@ -313,6 +335,7 @@ public class FavouriteWorkflowDetailFragment extends Fragment
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
         mWorkflowDetailPresenter.detachView();
     }
 }

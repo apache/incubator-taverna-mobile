@@ -60,6 +60,7 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
 
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;
+
     @BindView(R.id.ivClose)
     ImageView close;
 
@@ -70,7 +71,9 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
     private String jpgURI;
 
     private DataManager dataManager;
+
     private ImageZoomPresenter mImageZoomPresenter;
+
     private ConnectionInfo mConnectionInfo;
 
     public static ImageZoomFragment newInstance(String jpgURI, String svgURI) {
