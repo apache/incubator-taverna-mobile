@@ -24,6 +24,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.utils.ActivityUtils;
 
 import butterknife.ButterKnife;
 
@@ -38,12 +39,14 @@ public class ImageZoomActivity extends AppCompatActivity {
 
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.frame_container
-                            , ImageZoomFragment.newInstance(getIntent().getStringExtra
-                                    (ImageZoomFragment.JPG_URI), getIntent().getStringExtra
-                                    (ImageZoomFragment.SVG_URI)))
-                    .commit();
+
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(),
+                    ImageZoomFragment.newInstance(
+                            getIntent().getStringExtra(ImageZoomFragment.JPG_URI),
+                            getIntent().getStringExtra(ImageZoomFragment.SVG_URI)),
+                    R.id.frame_container);
+
         }
 
     }
