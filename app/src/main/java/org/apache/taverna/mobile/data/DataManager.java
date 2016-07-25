@@ -133,13 +133,5 @@ public class DataManager {
         return mDBHelper.getFavouriteWorkflowDetail(id);
     }
 
-    /**
-     * @param id is the id of workflow
-     * @return all URI of workflow Image from DBhelper
-     */
-
-    public Observable<Map<String, String>> getImageURI(String id) {
-        return mDBHelper.getImageURI(id);
-    }
 
 }

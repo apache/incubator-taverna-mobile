@@ -22,15 +22,12 @@ package org.apache.taverna.mobile.data.local;
 import android.support.annotation.Nullable;
 
 import com.raizlabs.android.dbflow.sql.language.SQLite;
-import com.raizlabs.android.dbflow.sql.language.Select;
 
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.Workflow_Table;
 import org.apache.taverna.mobile.data.model.Workflows;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -225,34 +222,6 @@ public class DBHelper {
 
     }
 
-    public Observable<Map<String, String>> getImageURI(final String id) {
-        return Observable.defer(new Func0<Observable<Map<String, String>>>() {
-            @Override
-            public Observable<Map<String, String>> call() {
-
-                Map<String, String> URI = new HashMap<String, String>();
-
-                Workflow workflow =
-                        new Select(Workflow_Table.svgUri, Workflow_Table
-                                .previewUri)
-                                .from(Workflow.class)
-                                .where(Workflow_Table.id.eq(id))
-                                .querySingle();
-
-                if (workflow != null) {
-
-                    URI.put(SVG_URI, workflow.getSvgUri());
-                    URI.put(JPG_URI, workflow.getPreviewUri());
-
-                    return Observable.just(URI);
-                } else {
-
-                    return Observable.just(URI);
-                }
-
-            }
-        });
-    }
 
 }
 
