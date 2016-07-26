@@ -41,6 +41,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -51,6 +52,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.TableLayout;
 import android.widget.Toast;
@@ -274,7 +276,6 @@ public class DashboardMainActivity extends AppCompatActivity {
     }
 
     private void setUpWorkflowDirectory(Context context) {
-
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             File workflowDirectory = new File(Environment.getExternalStorageDirectory() + File
@@ -295,6 +296,16 @@ public class DashboardMainActivity extends AppCompatActivity {
                     // (Environment.))
                     //        Toast.makeText(context, "Storage Error. Directory not created",
                     // Toast.LENGTH_SHORT).show();
+                    final Snackbar snackbar = Snackbar.make(mDrawerLayout, "Storage error. No workflows can be saved.", Snackbar
+                            .LENGTH_INDEFINITE);
+                    snackbar.setAction("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            snackbar.dismiss();
+                        }
+                    });
+
+                    snackbar.show();
                 }
 //            workflowDirectory.list();
             } else {
