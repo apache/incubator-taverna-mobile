@@ -32,11 +32,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class FlashScreenActivity extends ActionBarActivity {
+public class FlashScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +63,12 @@ public class FlashScreenActivity extends ActionBarActivity {
         //setup initial app settings
         if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean("pref_set", false)) {
             PreferenceManager.getDefaultSharedPreferences(context).edit().putString
-                    ("pref_server_url", "http://heater.cs.man.ac.uk:8090/taverna-2.5.4/").commit();
+                    ("pref_server_url", "http://heater.cs.man.ac.uk:8090/taverna-2.5.4/").apply();
             PreferenceManager.getDefaultSharedPreferences(context).edit().putString
-                    ("pref_player_url", "http://heater.cs.man.ac.uk:3000/").commit();
+                    ("pref_player_url", "http://heater.cs.man.ac.uk:3000/").apply();
         } else {
             PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean("pref_set",
-                    true).commit();
+                    true).apply();
         }
         Handler mhandler = new Handler();
         mhandler.postDelayed(new Runnable() {
