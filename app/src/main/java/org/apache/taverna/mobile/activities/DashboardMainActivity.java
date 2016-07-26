@@ -284,7 +284,7 @@ public class DashboardMainActivity extends AppCompatActivity {
                 if (state) {
                     Toast.makeText(context, "Storage Ready", Toast.LENGTH_SHORT).show();
                     sp.edit().putString(APP_DIRECTORY_NAME, workflowDirectory.getAbsolutePath())
-                            .commit();
+                            .apply();
                     Toast.makeText(context, "Home dir: " + workflowDirectory.getAbsolutePath(),
                             Toast.LENGTH_LONG).show();
                 } else { //directory can't be created either because of restricted access or lack
@@ -301,7 +301,7 @@ public class DashboardMainActivity extends AppCompatActivity {
                 //      Toast.makeText(context, "Directory exists. Home dir: "+workflowDirectory
                 // .getAbsolutePath(), Toast.LENGTH_LONG).show();
                 sp.edit().putString(APP_DIRECTORY_NAME, workflowDirectory.getAbsolutePath())
-                        .commit();
+                        .apply();
             /*else {
                 File mainDir = new File(Environment.getExternalStorageDirectory() + File
                 .separator + APP_DIRECTORY_NAME);
@@ -314,7 +314,7 @@ public class DashboardMainActivity extends AppCompatActivity {
             }
         } else { //use internal memory to save the data
             File home = context.getDir("Workflows", Context.MODE_PRIVATE);
-            sp.edit().putString(APP_DIRECTORY_NAME, home.getAbsolutePath()).commit();
+            sp.edit().putString(APP_DIRECTORY_NAME, home.getAbsolutePath()).apply();
             //     Toast.makeText(context, "Home dir: "+home.getAbsolutePath(), Toast
             // .LENGTH_LONG).show();
         }
