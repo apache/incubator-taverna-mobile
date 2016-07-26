@@ -196,7 +196,7 @@ public class DashboardMainActivity extends AppCompatActivity {
                             case R.id.nav_about:
 
                                 TableLayout about = (TableLayout) getLayoutInflater().inflate(R
-                                        .layout.about, null);
+                                        .layout.about, navigationView, false);
 
                                 aboutDialog.setCanceledOnTouchOutside(true);
                                 aboutDialog.setTitle("About Taverna Mobile");
