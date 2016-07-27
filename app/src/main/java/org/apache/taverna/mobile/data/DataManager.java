@@ -133,5 +133,13 @@ public class DataManager {
         return mDBHelper.getFavouriteWorkflowDetail(id);
     }
 
+    /**
+     * @param credentials is base64 encoded credential
+     * @return User Detail if valid credentials
+     */
+
+    public  Observable<User>  getLoginUserDetail(String credentials){
+        return mBaseApiManager.getTavernaApi().getLoginUserDetail(credentials);
+    }
 
 }
