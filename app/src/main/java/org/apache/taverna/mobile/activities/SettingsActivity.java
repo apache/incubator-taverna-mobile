@@ -173,8 +173,11 @@ public class SettingsActivity extends PreferenceActivity {
      * Shows the simplified settings UI if the device configuration if the
      * device configuration dictates that a simplified, single-pane UI should be
      * shown.
+     * Note that this is only valid for older Honeycomb and below API levels which
+     * the app does not target.
      */
     private void setupSimplePreferencesScreen() {
+        //TODO remove this since the app does not need to support old API levels
         if (!isSimplePreferences(this)) {
             return;
         }
