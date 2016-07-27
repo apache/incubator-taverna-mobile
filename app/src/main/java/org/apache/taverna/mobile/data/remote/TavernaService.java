@@ -28,6 +28,7 @@ import org.apache.taverna.mobile.data.model.Workflows;
 import java.util.Map;
 
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
@@ -55,5 +56,8 @@ public interface TavernaService {
     @GET(APIEndPoint.LICENSE)
     Observable<License> getLicenseDetail(@Query("id") String id
             , @QueryMap Map<String, String> options);
+
+    @GET(APIEndPoint.WHOAMI)
+    Observable<User> getLoginUserDetail(@Header("Authorization") String credentials);
 
 }

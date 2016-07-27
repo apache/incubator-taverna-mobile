@@ -29,4 +29,5 @@ public class APIEndPoint {
     public static final String USER = "user.xml";
     public static final String LICENSE = "license.xml";
 
+    public static final String WHOAMI = "whoami.xml";
 }
