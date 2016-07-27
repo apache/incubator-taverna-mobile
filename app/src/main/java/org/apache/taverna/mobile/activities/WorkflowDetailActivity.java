@@ -36,13 +36,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.Locale;
 
-public class WorkflowDetailActivity extends ActionBarActivity {
+public class WorkflowDetailActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -69,7 +69,9 @@ public class WorkflowDetailActivity extends ActionBarActivity {
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        if (mViewPager != null) {
+            mViewPager.setAdapter(mSectionsPagerAdapter);
+        }
     }
 
     @Override
