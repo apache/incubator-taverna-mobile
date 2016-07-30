@@ -26,6 +26,7 @@ package org.apache.taverna.mobile.activities;
 */
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.ui.login.LoginActivity;
 
 import android.content.Context;
 import android.content.Intent;
