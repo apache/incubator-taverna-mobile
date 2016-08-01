@@ -1,6 +1,7 @@
 package org.apache.taverna.mobile.ui.login;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
@@ -81,10 +83,10 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     private void validateEmail() {
 
         if (mEditTextEmail.getText().toString().trim().isEmpty()) {
+
             mTextInputEmail.setError(getString(R.string.err_login_email));
-
-
         } else {
+
             mTextInputEmail.setError(null);
         }
 
@@ -94,9 +96,10 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     private void validatePassword() {
         if (mEditTextPassword.getText().toString().trim().isEmpty()) {
-            mTextInputPassword.setError(getString(R.string.err_login_password));
 
+            mTextInputPassword.setError(getString(R.string.err_login_password));
         } else {
+
             mTextInputPassword.setError(null);
         }
 
@@ -139,6 +142,8 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     @Override
     public void moveToWorkflowList() {
 
+        startActivity(new Intent(getActivity(), DashboardMainActivity.class));
+        getActivity().finish();
     }
 
     @Override
