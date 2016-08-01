@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 
 import org.apache.taverna.mobile.data.model.User;
 
+import rx.Observable;
+import rx.functions.Func0;
+
 public class PreferencesHelper {
 
     public static final String PREF_FILE_NAME = "taverna_app_pref_file";
@@ -113,31 +116,39 @@ public class PreferencesHelper {
         mPref.edit().putString(PREF_KEY_USER_AVATAR, userAvatar).apply();
     }
 
-    public void saveUserDetail(User user) {
-        if (user.getElementId() != null) {
-            setUserID(user.getElementId());
-        }
-        if (user.getName() != null) {
-            setUserName(user.getName());
-        }
-        if (user.getDescription() != null) {
-            setUserDescription(user.getDescription());
-        }
-        if (user.getEmail() != null) {
-            setUserEmail(user.getEmail());
-        }
-        if (user.getAvatar().getResource() != null) {
-            setUserAvatar(user.getAvatar().getResource());
-        }
-        if (user.getCity() != null) {
-            setUserCity(user.getCity());
-        }
-        if (user.getCountry() != null) {
-            setUserCountry(user.getCountry());
-        }
-        if (user.getWebsite() != null) {
-            setUserWebsite(user.getWebsite());
-        }
+    public Observable<User> saveUserDetail(final User user) {
+        return Observable.defer(new Func0<Observable<User>>() {
+            @Override
+            public Observable<User> call() {
+                if (user.getElementId() != null) {
+                    setUserID(user.getElementId());
+                }
+                if (user.getName() != null) {
+                    setUserName(user.getName());
+                }
+                if (user.getDescription() != null) {
+                    setUserDescription(user.getDescription());
+                }
+                if (user.getEmail() != null) {
+                    setUserEmail(user.getEmail());
+                }
+                if (user.getAvatar().getResource() != null) {
+                    setUserAvatar(user.getAvatar().getResource());
+                }
+                if (user.getCity() != null) {
+                    setUserCity(user.getCity());
+                }
+                if (user.getCountry() != null) {
+                    setUserCountry(user.getCountry());
+                }
+                if (user.getWebsite() != null) {
+                    setUserWebsite(user.getWebsite());
+                }
+                setLoggedInFlag(true);
+                return Observable.just(user);
+            }
+        });
+
     }
 
 }

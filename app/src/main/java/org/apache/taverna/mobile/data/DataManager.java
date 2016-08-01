@@ -153,6 +153,12 @@ public class DataManager {
      */
 
     public  Observable<User>  getLoginUserDetail(String credentials){
-        return mBaseApiManager.getTavernaApi().getLoginUserDetail(credentials);
+        return mBaseApiManager.getTavernaApi().getLoginUserDetail(credentials)
+                .concatMap(new Func1<User, Observable<? extends User>>() {
+                    @Override
+                    public Observable<? extends User> call(User user) {
+                        return mPreferencesHelper.saveUserDetail(user);
+                    }
+                });
     }
 }
