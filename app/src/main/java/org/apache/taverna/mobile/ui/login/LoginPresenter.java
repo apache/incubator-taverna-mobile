@@ -54,7 +54,7 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
 
                     @Override
                     public void onNext(User user) {
-                        getMvpView().saveUser(user);
+
                     }
                 });
     }

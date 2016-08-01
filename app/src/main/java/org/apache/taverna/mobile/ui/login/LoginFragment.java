@@ -19,7 +19,6 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
-import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import butterknife.BindView;
@@ -156,10 +155,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
         requestFocus(mEditTextEmail);
     }
 
-    @Override
-    public void saveUser(User user) {
 
-    }
 
 
     private void requestFocus(View view) {
