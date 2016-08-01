@@ -25,9 +25,6 @@ package org.apache.taverna.mobile.activities;
 * under the License.
 */
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.ui.login.LoginActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +33,11 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.local.PreferencesHelper;
+import org.apache.taverna.mobile.ui.login.LoginActivity;
 
 public class FlashScreenActivity extends AppCompatActivity {
 
@@ -75,8 +77,8 @@ public class FlashScreenActivity extends AppCompatActivity {
         mhandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (!PreferenceManager.getDefaultSharedPreferences(context).getBoolean
-                        ("pref_logged_in", false)) {
+                if (!(new DataManager(new PreferencesHelper(context)).getPreferencesHelper()
+                        .getLoggedInFlag())) {
                     startActivity(new Intent(FlashScreenActivity.this, LoginActivity.class));
                     (FlashScreenActivity.this).finish();
                 } else {
