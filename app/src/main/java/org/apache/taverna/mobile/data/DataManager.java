@@ -19,6 +19,7 @@
 package org.apache.taverna.mobile.data;
 
 import org.apache.taverna.mobile.data.local.DBHelper;
+import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.License;
@@ -40,7 +41,20 @@ public class DataManager {
 
     public DBHelper mDBHelper = new DBHelper();
 
+    private PreferencesHelper mPreferencesHelper;
+
     public DataManager() {
+    }
+
+    public DataManager(PreferencesHelper mPreferencesHelper) {
+        this.mPreferencesHelper = mPreferencesHelper;
+    }
+
+    /**
+     * @return PreferenceHelper
+     */
+    public PreferencesHelper getPreferencesHelper() {
+        return mPreferencesHelper;
     }
 
     /**
@@ -141,5 +155,4 @@ public class DataManager {
     public  Observable<User>  getLoginUserDetail(String credentials){
         return mBaseApiManager.getTavernaApi().getLoginUserDetail(credentials);
     }
-
 }
