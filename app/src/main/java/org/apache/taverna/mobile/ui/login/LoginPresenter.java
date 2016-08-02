@@ -38,19 +38,23 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
     public void login(String username, String password, boolean flagLogin) {
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
 
+        getMvpView().showProgressDialog(true);
+
         mSubscriptions = mDataManager.getLoginUserDetail(getEncodedCredential(username, password)
-                ,flagLogin)
+                , flagLogin)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<User>() {
                     @Override
                     public void onCompleted() {
                         getMvpView().moveToWorkflowList();
+                        getMvpView().showProgressDialog(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         getMvpView().showCredentialError();
+                        getMvpView().showProgressDialog(false);
                     }
 
                     @Override

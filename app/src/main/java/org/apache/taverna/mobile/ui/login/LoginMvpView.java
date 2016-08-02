@@ -10,4 +10,6 @@ public interface LoginMvpView  extends MvpView {
     void showCredentialError();
 
     void showError(String string);
+
+    void showProgressDialog(boolean flag);
 }

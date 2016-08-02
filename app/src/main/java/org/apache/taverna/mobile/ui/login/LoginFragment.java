@@ -1,6 +1,7 @@
 package org.apache.taverna.mobile.ui.login;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -47,6 +48,8 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     private LoginPresenter mLoginPresenter;
     private ConnectionInfo mConnectionInfo;
 
+    private ProgressDialog progressDialog;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +83,10 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
         mEditTextEmail.setOnFocusChangeListener(this);
 
         mEditTextPassword.setOnFocusChangeListener(this);
+
+        progressDialog = new ProgressDialog(getContext());
+
+        progressDialog.setMessage("Please wait");
 
     }
 
@@ -142,6 +149,15 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
         });
 
         snackbar.show();
+    }
+
+    @Override
+    public void showProgressDialog(boolean flag) {
+        if (flag) {
+            progressDialog.show();
+        }else {
+            progressDialog.cancel();
+        }
     }
 
     @Override
