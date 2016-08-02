@@ -20,8 +20,6 @@ package org.apache.taverna.mobile.ui.login;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.utils.ActivityUtils;
@@ -39,16 +37,6 @@ public class LoginActivity extends AppCompatActivity {
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),new LoginFragment(),R
                     .id.container);
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return false;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
     }
 
 
