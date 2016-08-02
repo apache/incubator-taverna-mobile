@@ -35,10 +35,11 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
     }
 
-    public void login(String username, String password) {
+    public void login(String username, String password, boolean flagLogin) {
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
 
-        mSubscriptions = mDataManager.getLoginUserDetail(getEncodedCredential(username, password))
+        mSubscriptions = mDataManager.getLoginUserDetail(getEncodedCredential(username, password)
+                ,flagLogin)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<User>() {

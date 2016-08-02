@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import org.apache.taverna.mobile.R;
@@ -38,6 +39,9 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     @BindView(R.id.input_layout_password)
     TextInputLayout mTextInputPassword;
+
+    @BindView(R.id.cbRemember)
+    CheckBox mCheckBoxRemember;
 
     private DataManager dataManager;
     private LoginPresenter mLoginPresenter;
@@ -113,7 +117,8 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
                     .getText().toString().trim().isEmpty()) {
 
                 mLoginPresenter.login(mEditTextEmail.getText().toString().trim(),
-                        mEditTextPassword.getText().toString().trim());
+                        mEditTextPassword.getText().toString().trim(), mCheckBoxRemember
+                                .isChecked());
 
             } else {
 
@@ -156,8 +161,6 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     }
 
 
-
-
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams
@@ -169,16 +172,23 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     public void onFocusChange(View v, boolean hasFocus) {
         switch (v.getId()) {
             case R.id.etEmail:
-                if(!v.hasFocus()) {
+                if (!v.hasFocus()) {
                     validateEmail();
                 }
                 break;
             case R.id.etPassword:
-                if(!v.hasFocus()) {
+                if (!v.hasFocus()) {
                     validatePassword();
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        mLoginPresenter.detachView();
     }
 
     private class CustomTextWatcher implements TextWatcher {
@@ -207,12 +217,5 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
                     break;
             }
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        mLoginPresenter.detachView();
     }
 }

@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
-import rx.functions.Func0;
 import rx.functions.Func1;
 
 
@@ -150,27 +149,21 @@ public class DataManager {
 
     /**
      * @param credentials is base64 encoded credential
+     * @param flagLogin  is used to maintain the Remain login or not
      * @return User Detail if valid credentials
      */
 
-    public  Observable<User>  getLoginUserDetail(String credentials){
+    public Observable<User> getLoginUserDetail(String credentials, final boolean flagLogin) {
         return mBaseApiManager.getTavernaApi().getLoginUserDetail(credentials)
                 .concatMap(new Func1<User, Observable<? extends User>>() {
                     @Override
                     public Observable<? extends User> call(User user) {
-                        mPreferencesHelper.setLoggedInFlag(true);
+                        mPreferencesHelper.setLoggedInFlag(flagLogin);
 
                         return mPreferencesHelper.saveUserDetail(user);
                     }
                 });
     }
 
-    public Observable<Boolean> getLoggedInFlag(){
-        return Observable.defer(new Func0<Observable<Boolean>>() {
-            @Override
-            public Observable<Boolean> call() {
-                return Observable.just(mPreferencesHelper.getLoggedInFlag());
-            }
-        });
-    }
+
 }
