@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
+import rx.functions.Func0;
 import rx.functions.Func1;
 
 
@@ -157,8 +158,19 @@ public class DataManager {
                 .concatMap(new Func1<User, Observable<? extends User>>() {
                     @Override
                     public Observable<? extends User> call(User user) {
+                        mPreferencesHelper.setLoggedInFlag(true);
+
                         return mPreferencesHelper.saveUserDetail(user);
                     }
                 });
+    }
+
+    public Observable<Boolean> getLoggedInFlag(){
+        return Observable.defer(new Func0<Observable<Boolean>>() {
+            @Override
+            public Observable<Boolean> call() {
+                return Observable.just(mPreferencesHelper.getLoggedInFlag());
+            }
+        });
     }
 }

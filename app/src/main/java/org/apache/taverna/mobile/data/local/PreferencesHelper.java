@@ -144,7 +144,7 @@ public class PreferencesHelper {
                 if (user.getWebsite() != null) {
                     setUserWebsite(user.getWebsite());
                 }
-                setLoggedInFlag(true);
+
                 return Observable.just(user);
             }
         });
