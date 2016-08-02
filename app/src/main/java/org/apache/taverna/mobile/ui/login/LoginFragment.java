@@ -209,4 +209,10 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        mLoginPresenter.detachView();
+    }
 }
