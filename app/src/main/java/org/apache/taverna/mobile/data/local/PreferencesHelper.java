@@ -61,7 +61,7 @@ public class PreferencesHelper {
         mPref.edit().clear().apply();
     }
 
-    public boolean getLoggedInFlag() {
+    public boolean isLoggedInFlag() {
         return mPref.getBoolean(PREF_KEY_LOGGED_IN, false);
     }
 

@@ -42,7 +42,7 @@ public class FlashScreenActivity extends AppCompatActivity {
 
         dataManager = new DataManager(new PreferencesHelper(this));
 
-        if (!dataManager.getPreferencesHelper().getLoggedInFlag()) {
+        if (!dataManager.getPreferencesHelper().isLoggedInFlag()) {
             dataManager.getPreferencesHelper().clear();
             startActivity(new Intent(FlashScreenActivity.this, LoginActivity.class));
             (FlashScreenActivity.this).finish();
