@@ -173,7 +173,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     public void showProgressDialog(boolean flag) {
         if (flag) {
             progressDialog.show();
-        }else {
+        } else {
             progressDialog.cancel();
         }
     }

@@ -25,13 +25,6 @@ package org.apache.taverna.mobile.activities;
  * under the License.
  */
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
-import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
-import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
-import org.apache.taverna.mobile.utils.ActivityUtils;
-import org.apache.taverna.mobile.utils.WorkflowOpen;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -56,6 +49,13 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.TableLayout;
 import android.widget.Toast;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
+import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
+import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
+import org.apache.taverna.mobile.utils.ActivityUtils;
+import org.apache.taverna.mobile.utils.WorkflowOpen;
 
 import java.io.File;
 
@@ -298,8 +298,10 @@ public class DashboardMainActivity extends AppCompatActivity {
                     // (Environment.))
                     //        Toast.makeText(context, "Storage Error. Directory not created",
                     // Toast.LENGTH_SHORT).show();
-                    final Snackbar snackbar = Snackbar.make(mDrawerLayout, "Storage error. No workflows can be saved.", Snackbar
-                            .LENGTH_INDEFINITE);
+                    final Snackbar snackbar = Snackbar.make(
+                            mDrawerLayout,
+                            "Storage error. No workflows can be saved.",
+                            Snackbar.LENGTH_INDEFINITE);
                     snackbar.setAction("OK", new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
