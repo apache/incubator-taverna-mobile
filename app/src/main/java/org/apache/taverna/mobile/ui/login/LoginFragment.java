@@ -68,6 +68,13 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     private ProgressDialog progressDialog;
 
+
+    public static LoginFragment newInstance() {
+
+        LoginFragment fragment = new LoginFragment();
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

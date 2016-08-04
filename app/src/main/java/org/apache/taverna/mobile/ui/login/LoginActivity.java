@@ -34,8 +34,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         if (savedInstanceState == null) {
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), new LoginFragment(), R
-                    .id.container);
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                    LoginFragment.newInstance(), R.id.container);
         }
     }
 
