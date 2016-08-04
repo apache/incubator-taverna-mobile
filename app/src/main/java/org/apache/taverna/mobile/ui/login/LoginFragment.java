@@ -64,7 +64,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     private DataManager dataManager;
     private LoginPresenter mLoginPresenter;
-    private ConnectionInfo mConnectionInfo;
+
 
     private ProgressDialog progressDialog;
 
@@ -75,7 +75,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
         dataManager = new DataManager(new PreferencesHelper(getContext()));
         mLoginPresenter = new LoginPresenter(dataManager);
-        mConnectionInfo = new ConnectionInfo(getContext());
+
     }
 
     @Override
@@ -137,7 +137,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     @OnClick(R.id.bLogin)
     public void login(View v) {
-        if (mConnectionInfo.isConnectingToInternet()) {
+        if (ConnectionInfo.isConnectingToInternet(getContext())) {
             if (!mEditTextEmail.getText().toString().trim().isEmpty() && !mEditTextPassword
                     .getText().toString().trim().isEmpty()) {
 

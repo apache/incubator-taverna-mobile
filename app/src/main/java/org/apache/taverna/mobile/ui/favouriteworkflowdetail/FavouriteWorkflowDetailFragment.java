@@ -103,8 +103,6 @@ public class FavouriteWorkflowDetailFragment extends Fragment
 
     private FavouriteWorkflowDetailPresenter mWorkflowDetailPresenter;
 
-    private ConnectionInfo mConnectionInfo;
-
     private String id;
 
     private String licenceId = null;
@@ -134,7 +132,7 @@ public class FavouriteWorkflowDetailFragment extends Fragment
 
         dataManager = new DataManager();
         mWorkflowDetailPresenter = new FavouriteWorkflowDetailPresenter(dataManager);
-        mConnectionInfo = new ConnectionInfo(getContext());
+
     }
 
     @Override
@@ -154,7 +152,7 @@ public class FavouriteWorkflowDetailFragment extends Fragment
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (mConnectionInfo.isConnectingToInternet()) {
+        if (ConnectionInfo.isConnectingToInternet(getContext())) {
 
             mWorkflowDetailPresenter.loadWorkflowDetail(id);
         } else {

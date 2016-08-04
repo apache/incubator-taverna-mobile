@@ -18,16 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.anouncements;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Announcements;
-import org.apache.taverna.mobile.data.model.DetailAnnouncement;
-import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
-import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -45,6 +35,16 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Announcements;
+import org.apache.taverna.mobile.data.model.DetailAnnouncement;
+import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
+import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,7 +80,6 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
 
     private DetailAnnouncement mAnnouncementDetail;
 
-    private ConnectionInfo mConnectionInfo;
 
     @Override
     public void onItemClick(View childView, int position) {
@@ -102,7 +101,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         mAnnouncements = new Announcements();
         dataManager = new DataManager();
         mAnnouncementPresenter = new AnnouncementPresenter(dataManager);
-        mConnectionInfo = new ConnectionInfo(getContext());
+
     }
 
 
@@ -125,7 +124,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (mConnectionInfo.isConnectingToInternet()) {
+                if (ConnectionInfo.isConnectingToInternet(getContext())) {
                     if (mSwipeRefresh.isRefreshing()) {
                         mPageNumber = 1;
                         mAnnouncementPresenter.loadAllAnnouncement(mPageNumber);
@@ -149,7 +148,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
             @Override
             public void onLoadMore(int current_page) {
 
-                if (mConnectionInfo.isConnectingToInternet()) {
+                if (ConnectionInfo.isConnectingToInternet(getContext())) {
                     mAnnouncements.getAnnouncement().add(null);
                     mAnnouncementAdapter.notifyItemInserted(mAnnouncements.getAnnouncement().size
                             ());

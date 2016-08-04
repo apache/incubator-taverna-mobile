@@ -59,33 +59,48 @@ import butterknife.OnClick;
 public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMvpView {
 
     private static final String ID = "id";
+
     public final String LOG_TAG = getClass().getSimpleName();
+
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;
+
     @BindView(R.id.tvTitle)
     TextView title;
+
     @BindView(R.id.ivUploader)
     ImageView uploaderImage;
+
     @BindView(R.id.tvUploaderName)
     TextView uploaderName;
+
     @BindView(R.id.tvDate)
     TextView date;
+
     @BindView(R.id.tvType)
     TextView type;
+
     @BindView(R.id.tvDescription)
     WebView description;
+
     @BindView(R.id.ivFav)
     ImageView ivFavourite;
+
     @BindView(R.id.progressBar)
     ProgressBar mProgressBar;
+
     @BindView(R.id.scrollView)
     ScrollView mScrollView;
+
     @BindView(R.id.rootLayout)
     RelativeLayout rootLayout;
+
     private AlertDialog alertDialog;
+
     private DataManager dataManager;
+
     private WorkflowDetailPresenter mWorkflowDetailPresenter;
-    private ConnectionInfo mConnectionInfo;
+
     private String id;
 
     private String licenceId = null;
@@ -112,7 +127,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
         dataManager = new DataManager();
         mWorkflowDetailPresenter = new WorkflowDetailPresenter(dataManager);
-        mConnectionInfo = new ConnectionInfo(getContext());
+
     }
 
     @Override
@@ -132,7 +147,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (mConnectionInfo.isConnectingToInternet()) {
+        if (ConnectionInfo.isConnectingToInternet(getContext())) {
 
             mWorkflowDetailPresenter.loadWorkflowDetail(id);
         } else {

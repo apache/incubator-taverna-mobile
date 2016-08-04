@@ -70,7 +70,7 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
 
     private ImageZoomPresenter mImageZoomPresenter;
 
-    private ConnectionInfo mConnectionInfo;
+
 
     public static ImageZoomFragment newInstance(String jpgURI, String svgURI) {
 
@@ -95,7 +95,7 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
         jpgURI = getArguments().getString(JPG_URI);
 
         mImageZoomPresenter = new ImageZoomPresenter();
-        mConnectionInfo = new ConnectionInfo(getContext());
+
     }
 
     @Override
@@ -114,7 +114,7 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (mConnectionInfo.isConnectingToInternet()) {
+        if (ConnectionInfo.isConnectingToInternet(getContext())) {
 
             mImageZoomPresenter.loadImage(svgURI, workflowImage);
         } else {

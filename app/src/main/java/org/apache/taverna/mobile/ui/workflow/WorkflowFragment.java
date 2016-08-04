@@ -19,17 +19,6 @@
 package org.apache.taverna.mobile.ui.workflow;
 
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.data.model.Workflows;
-import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
-import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -43,6 +32,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.data.model.Workflows;
+import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
+import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +69,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
 
     private WorkflowAdapter mWorkflowAdapter;
 
-    private ConnectionInfo mConnectionInfo;
+
     private int mPageNumber = 1;
     private List<Workflow> mWorkflowList;
 
@@ -80,7 +80,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
         mWorkflowList = new ArrayList<>();
         dataManager = new DataManager();
         mWorkflowPresenter = new WorkflowPresenter(dataManager);
-        mConnectionInfo = new ConnectionInfo(getContext());
+
     }
 
     @Override
@@ -109,14 +109,14 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
             @Override
             public void onLoadMore(int current_page) {
 
-                if (mConnectionInfo.isConnectingToInternet()
+                if (ConnectionInfo.isConnectingToInternet(getContext())
                         && mWorkflowList.size() % 10 == 0) {
                     mWorkflowList.add(null);
                     mWorkflowAdapter.notifyItemInserted(mWorkflowList.size());
                     ++mPageNumber;
                     mWorkflowPresenter.loadAllWorkflow(mPageNumber);
                     Log.d(LOG_TAG, "Loading more");
-                } else if (!mConnectionInfo.isConnectingToInternet()) {
+                } else if (!ConnectionInfo.isConnectingToInternet(getContext())) {
                     Log.d(LOG_TAG, "Internet not available. Not loading more posts.");
                     showErrorSnackBar();
                 }
@@ -128,7 +128,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (mConnectionInfo.isConnectingToInternet()) {
+                if (ConnectionInfo.isConnectingToInternet(getContext())) {
 
                     mPageNumber = 1;
                     mWorkflowPresenter.loadAllWorkflow(mPageNumber);

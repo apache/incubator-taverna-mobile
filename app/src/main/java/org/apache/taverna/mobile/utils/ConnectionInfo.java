@@ -26,27 +26,15 @@ import android.util.Log;
 
 public class ConnectionInfo {
     private static final String TAG = "ConnectionInfo";
-    private static Context context;
 
-    public ConnectionInfo(Context context) {
+    public static boolean isConnectingToInternet(Context context) {
 
-        Log.i(TAG, "Utils: ");
-        ConnectionInfo.context = context;
-    }
-
-
-    public boolean isConnectingToInternet() {
+        Log.i(TAG, "isConnectingToInternet: Checking Internet Status");
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context
                 .CONNECTIVITY_SERVICE);
         if (connectivity != null) {
-            NetworkInfo[] info = connectivity.getAllNetworkInfo();
-            if (info != null)
-                for (int i = 0; i < info.length; i++) {
-                    if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                        return true;
-                    }
-                }
-
+            NetworkInfo info = connectivity.getActiveNetworkInfo();
+            if (info != null) return true;
         }
         return false;
     }
