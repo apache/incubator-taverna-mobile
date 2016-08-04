@@ -23,7 +23,7 @@ import org.apache.taverna.mobile.ui.base.MvpView;
 
 public interface LoginMvpView  extends MvpView {
 
-    void moveToWorkflowList();
+    void showDashboardActivity();
 
     void showCredentialError();
 

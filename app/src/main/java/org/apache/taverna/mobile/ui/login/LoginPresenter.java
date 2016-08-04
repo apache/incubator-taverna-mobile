@@ -65,7 +65,7 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
                 .subscribe(new Observer<User>() {
                     @Override
                     public void onCompleted() {
-                        getMvpView().moveToWorkflowList();
+                        getMvpView().showDashboardActivity();
                         getMvpView().showProgressDialog(false);
                     }
 

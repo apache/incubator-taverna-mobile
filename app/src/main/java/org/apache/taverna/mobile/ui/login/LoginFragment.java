@@ -179,7 +179,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     }
 
     @Override
-    public void moveToWorkflowList() {
+    public void showDashboardActivity() {
 
         startActivity(new Intent(getActivity(), DashboardMainActivity.class));
         getActivity().finish();
