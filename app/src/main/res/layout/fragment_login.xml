@@ -65,7 +65,7 @@
                 android:layout_gravity="center"
                 android:background="#E1E1E1"
                 android:padding="10dp"
-                android:text="@string/LoginInfo"
+                android:text="@string/logininfo"
                 android:textSize="20sp"
                 android:textStyle="normal|bold"
                 />
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/keepLogin"/>
+                android:text="@string/keeplogin"/>
 
             <Button
                 android:id="@+id/bLogin"
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:background="@color/colorPrimary"
-                android:contentDescription="@string/bLoginDescription"
+                android:contentDescription="@string/login_button_description"
                 android:text="@string/bLogin"
                 android:textSize="18sp"/>
 
