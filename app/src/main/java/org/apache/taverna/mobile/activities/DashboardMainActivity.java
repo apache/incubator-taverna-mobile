@@ -51,6 +51,8 @@ import android.widget.TableLayout;
 import android.widget.Toast;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
 import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
@@ -69,6 +71,7 @@ public class DashboardMainActivity extends AppCompatActivity {
     private CharSequence mTitle = "Dashboard";
     private Dialog aboutDialog;
     private DrawerLayout mDrawerLayout;
+    private DataManager dataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +113,7 @@ public class DashboardMainActivity extends AppCompatActivity {
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                     .commit();
         }
-
+        dataManager = new DataManager(new PreferencesHelper(this));
     }
 
 
@@ -225,6 +228,7 @@ public class DashboardMainActivity extends AppCompatActivity {
                                 finish();
                                 menuItem.setChecked(true);
                                 mDrawerLayout.closeDrawers();
+                                dataManager.getPreferencesHelper().setLoggedInFlag(false);
                                 return true;
 
                         }
