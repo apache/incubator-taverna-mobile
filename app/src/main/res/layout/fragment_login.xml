@@ -120,16 +120,6 @@
                 android:textSize="18sp"/>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:gravity="center|center_horizontal"
-                android:paddingTop="20dp"
-                android:text="@string/brand"
-                android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>
