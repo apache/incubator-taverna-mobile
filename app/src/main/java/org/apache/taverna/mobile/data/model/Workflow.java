@@ -19,6 +19,9 @@
 package org.apache.taverna.mobile.data.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.ModelContainer;
@@ -31,9 +34,6 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
-
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.util.List;
 
@@ -64,7 +64,7 @@ public class Workflow extends TavernaBaseModel implements Parcelable {
     String elementId;
 
     @Column
-    @Element(name = "title")
+    @Element(name = "title", required = false)
     String title;
 
     @Column
@@ -73,7 +73,7 @@ public class Workflow extends TavernaBaseModel implements Parcelable {
 
     @Column
     @ForeignKey(saveForeignKeyModel = true)
-    @Element(name = "type")
+    @Element(name = "type", required = false)
     Type type;
 
     @Column

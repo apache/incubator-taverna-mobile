@@ -167,13 +167,7 @@ public class DataManager {
     }
 
 
-    public Observable<Workflows> getMyWorkflows(String userID, Map<String, String> options) {
-        return mBaseApiManager.getTavernaApi().getMyWorkflows(userID, options)
-                .concatMap(new Func1<Workflows, Observable<? extends Workflows>>() {
-                    @Override
-                    public Observable<? extends Workflows> call(Workflows workflows) {
-                        return mDBHelper.syncWorkflows(workflows);
-                    }
-                });
+    public Observable<User> getMyWorkflows(String userID, Map<String, String> options) {
+        return mBaseApiManager.getTavernaApi().getUserDetail(userID , options);
     }
 }

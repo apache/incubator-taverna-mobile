@@ -26,7 +26,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,12 +35,8 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.data.model.Workflows;
-import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
 import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
 import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
-import org.apache.taverna.mobile.ui.workflow.WorkflowMvpView;
-import org.apache.taverna.mobile.ui.workflow.WorkflowPresenter;
 import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
@@ -52,7 +47,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyWorkflowFragment extends Fragment implements WorkflowMvpView,
+public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
         RecyclerItemClickListner.OnItemClickListener {
 
     public final String LOG_TAG = getClass().getSimpleName();
@@ -73,7 +68,6 @@ public class MyWorkflowFragment extends Fragment implements WorkflowMvpView,
     private WorkflowAdapter mWorkflowAdapter;
 
 
-    private int mPageNumber = 1;
     private List<Workflow> mWorkflowList;
 
     @Override
@@ -81,7 +75,9 @@ public class MyWorkflowFragment extends Fragment implements WorkflowMvpView,
         super.onCreate(savedInstanceState);
 
         mWorkflowList = new ArrayList<>();
+
         dataManager = new DataManager(new PreferencesHelper(getContext()));
+
         mWorkflowPresenter = new MyWorkflowPresenter(dataManager);
 
     }
@@ -91,7 +87,9 @@ public class MyWorkflowFragment extends Fragment implements WorkflowMvpView,
             savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
         ButterKnife.bind(this, rootView);
+
         mWorkflowPresenter.attachView(this);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -105,52 +103,28 @@ public class MyWorkflowFragment extends Fragment implements WorkflowMvpView,
         mRecyclerView.setAdapter(mWorkflowAdapter);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListner(getActivity(), this));
 
-        showProgressbar(true);
-        mWorkflowPresenter.loadMyWorkflows(mPageNumber);
-
-        mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
-            @Override
-            public void onLoadMore(int current_page) {
-
-                if (ConnectionInfo.isConnectingToInternet(getContext())
-                        && mWorkflowList.size() % 10 == 0) {
-                    mWorkflowList.add(null);
-                    mWorkflowAdapter.notifyItemInserted(mWorkflowList.size());
-                    ++mPageNumber;
-                    mWorkflowPresenter.loadMyWorkflows(mPageNumber);
-                    Log.d(LOG_TAG, "Loading more");
-                } else if (!ConnectionInfo.isConnectingToInternet(getContext())) {
-                    Log.d(LOG_TAG, "Internet not available. Not loading more posts.");
-                    showErrorSnackBar();
-                }
-            }
-        });
+        mWorkflowPresenter.loadMyWorkflows();
 
         mSwipeRefresh.setColorSchemeResources(R.color.colorAccent, R.color.colorAccent, R.color
                 .colorPrimary);
+
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (ConnectionInfo.isConnectingToInternet(getContext())) {
 
-                    mPageNumber = 1;
-                    mWorkflowPresenter.loadMyWorkflows(mPageNumber);
+                    mWorkflowPresenter.loadMyWorkflows();
 
                     mSwipeRefresh.setRefreshing(true);
-
-                    Log.d(LOG_TAG, "Swipe Refresh");
-
                 } else {
-                    Log.d(LOG_TAG, "NO Internet Connection");
-                    showErrorSnackBar();
+
+                    showErrorSnackBar("NO Internet Connection");
                     if (mSwipeRefresh.isRefreshing()) {
                         mSwipeRefresh.setRefreshing(false);
                     }
                 }
-
             }
         });
-
 
         return rootView;
     }
@@ -168,9 +142,9 @@ public class MyWorkflowFragment extends Fragment implements WorkflowMvpView,
     }
 
     @Override
-    public void showErrorSnackBar() {
+    public void showErrorSnackBar(String error) {
 
-        final Snackbar snackbar = Snackbar.make(mRecyclerView, "NO Internet Connection", Snackbar
+        final Snackbar snackbar = Snackbar.make(mRecyclerView, error, Snackbar
                 .LENGTH_INDEFINITE);
         snackbar.setAction("OK", new View.OnClickListener() {
             @Override
@@ -183,24 +157,15 @@ public class MyWorkflowFragment extends Fragment implements WorkflowMvpView,
     }
 
     @Override
-    public void showWorkflows(Workflows workflows) {
+    public void showWorkflow(Workflow workflow) {
 
         if (mSwipeRefresh.isRefreshing()) {
             mSwipeRefresh.setRefreshing(false);
             mWorkflowList.clear();
         }
 
-        mWorkflowList.addAll(workflows.getWorkflowList());
+        mWorkflowList.add(workflow);
         mWorkflowAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void removeLoadMoreProgressbar() {
-        if (mPageNumber != 1) {
-            mWorkflowList.remove(mWorkflowList.size() - 1);
-            mWorkflowAdapter.notifyDataSetChanged();
-
-        }
     }
 
     @Override
