@@ -214,5 +214,12 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
         return option;
     }
 
+    private Map<String, String> getUserWorkflowsQueryOptions() {
+
+        Map<String, String> option = new HashMap<>();
+        option.put("elements", "workflow");
+        return option;
+    }
+
 
 }

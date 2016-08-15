@@ -18,12 +18,12 @@
  */
 package org.apache.taverna.mobile.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
-
-import android.os.Parcel;
-import android.os.Parcelable;
 
 @Root(name = "user")
 public class User implements Parcelable {
@@ -63,6 +63,9 @@ public class User implements Parcelable {
 
     @Element(name = "avatar", required = false)
     private Avatar avatar;
+
+    @Element(name="workflows",required = false)
+    private Workflows workflows;
 
     public String getResource() {
         return resource;
@@ -160,6 +163,17 @@ public class User implements Parcelable {
         this.avatar = avatar;
     }
 
+    public User() {
+    }
+
+    public Workflows getWorkflows() {
+        return workflows;
+    }
+
+    public void setWorkflows(Workflows workflows) {
+        this.workflows = workflows;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -179,9 +193,7 @@ public class User implements Parcelable {
         dest.writeString(this.country);
         dest.writeString(this.website);
         dest.writeParcelable(this.avatar, flags);
-    }
-
-    public User() {
+        dest.writeParcelable(this.workflows, flags);
     }
 
     protected User(Parcel in) {
@@ -197,9 +209,10 @@ public class User implements Parcelable {
         this.country = in.readString();
         this.website = in.readString();
         this.avatar = in.readParcelable(Avatar.class.getClassLoader());
+        this.workflows = in.readParcelable(Workflows.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+    public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
         public User createFromParcel(Parcel source) {
             return new User(source);
@@ -210,5 +223,4 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
-
 }

@@ -154,6 +154,7 @@ public class DataManager {
      */
 
     public Observable<User> getLoginUserDetail(String credentials, final boolean flagLogin) {
+
         return mBaseApiManager.getTavernaApi().getLoginUserDetail(credentials)
                 .concatMap(new Func1<User, Observable<? extends User>>() {
                     @Override
@@ -166,4 +167,13 @@ public class DataManager {
     }
 
 
+    public Observable<Workflows> getMyWorkflows(String userID, Map<String, String> options) {
+        return mBaseApiManager.getTavernaApi().getMyWorkflows(userID, options)
+                .concatMap(new Func1<Workflows, Observable<? extends Workflows>>() {
+                    @Override
+                    public Observable<? extends Workflows> call(Workflows workflows) {
+                        return mDBHelper.syncWorkflows(workflows);
+                    }
+                });
+    }
 }

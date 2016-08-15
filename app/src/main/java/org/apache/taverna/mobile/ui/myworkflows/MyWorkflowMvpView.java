@@ -16,18 +16,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.data.remote;
+package org.apache.taverna.mobile.ui.myworkflows;
 
-//This class contains all the Constants for API End Points
+import org.apache.taverna.mobile.data.model.Workflows;
+import org.apache.taverna.mobile.ui.base.MvpView;
 
-public class APIEndPoint {
+public interface MyWorkflowMvpView extends MvpView {
 
-    public static final String ALL_ANNOUNCEMENT = "announcements.xml";
-    public static final String ANNOUNCEMENT = "announcement.xml";
-    public static final String ALL_WORKFLOW = "workflows.xml";
-    public static final String WORKFLOW = "workflow.xml";
-    public static final String USER = "user.xml";
-    public static final String LICENSE = "license.xml";
-    public static final String WHOAMI = "whoami.xml";
-    public static final String MY_WORKFLOWS = "user.xml";
+    void showProgressbar(boolean b);
+
+    void showErrorSnackBar();
+
+    void showWorkflows(Workflows workflows);
+
+    void removeLoadMoreProgressbar();
 }

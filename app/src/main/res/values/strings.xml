@@ -119,4 +119,5 @@ limitations under the License.
     <string name="login_button_description">Login Button</string>
     <string name="err_login_email">Enter valid email</string>
     <string name="err_login_password">Enter valid password</string>
+    <string name="my_workflows">My Workflows</string>
 </resources>
