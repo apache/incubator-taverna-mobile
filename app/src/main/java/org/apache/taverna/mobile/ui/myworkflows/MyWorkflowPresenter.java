@@ -61,7 +61,7 @@ public class MyWorkflowPresenter extends BasePresenter<MyWorkflowMvpView> {
     public void loadMyWorkflows() {
         getMvpView().showProgressbar(true);
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
-        mSubscriptions = mDataManager.getMyWorkflows("474", getQueryOptions())
+        mSubscriptions = mDataManager.getMyWorkflows(mDataManager.getPreferencesHelper().getUserID(), getQueryOptions())
                 .flatMap(new Func1<User, Observable<Workflow>>() {
                     @Override
                     public Observable<Workflow> call(User user) {
