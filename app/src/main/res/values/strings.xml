@@ -120,4 +120,5 @@ limitations under the License.
     <string name="err_login_email">Enter valid email</string>
     <string name="err_login_password">Enter valid password</string>
     <string name="my_workflows">My Workflows</string>
+    <string name="no_my_workflow">You have not created any workflow yet !!!!!</string>
 </resources>

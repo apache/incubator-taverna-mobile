@@ -30,4 +30,5 @@ public interface MyWorkflowMvpView extends MvpView {
     void showWorkflow(Workflow workflow);
 
 
+    void checkWorkflowSize();
 }

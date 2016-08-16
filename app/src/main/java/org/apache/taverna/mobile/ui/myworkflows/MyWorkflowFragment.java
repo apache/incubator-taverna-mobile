@@ -30,6 +30,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
@@ -60,6 +61,9 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
 
     @BindView(R.id.swipe_refresh)
     ScrollChildSwipeRefreshLayout mSwipeRefresh;
+
+    @BindView(R.id.tvNoWorkflow)
+    TextView mTextViewNoWorkflow;
 
     private DataManager dataManager;
 
@@ -166,6 +170,16 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
 
         mWorkflowList.add(workflow);
         mWorkflowAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void checkWorkflowSize() {
+
+        if (mWorkflowList.size() == 0) {
+            mTextViewNoWorkflow.setVisibility(View.VISIBLE);
+        } else {
+            mTextViewNoWorkflow.setVisibility(View.GONE);
+        }
     }
 
     @Override

@@ -61,18 +61,28 @@ public class MyWorkflowPresenter extends BasePresenter<MyWorkflowMvpView> {
     public void loadMyWorkflows() {
         getMvpView().showProgressbar(true);
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
-        mSubscriptions = mDataManager.getMyWorkflows(mDataManager.getPreferencesHelper().getUserID(), getQueryOptions())
+
+        mSubscriptions = mDataManager.getMyWorkflows(mDataManager.getPreferencesHelper()
+                .getUserID(), getQueryOptions())
                 .flatMap(new Func1<User, Observable<Workflow>>() {
                     @Override
                     public Observable<Workflow> call(User user) {
-                        return Observable.from(user.getWorkflows().getWorkflowList())
-                                .concatMap(new Func1<Workflow, Observable<? extends Workflow>>() {
-                                    @Override
-                                    public Observable<? extends Workflow> call(Workflow workflow) {
-                                        return mDataManager.getDetailWorkflow(workflow.getId(),
-                                                getWorkflowQueryOptions());
-                                    }
-                                });
+                        if (user.getWorkflows().getWorkflowList() != null && user.getWorkflows()
+                                .getWorkflowList().size() != 0) {
+                            return Observable.from(user.getWorkflows().getWorkflowList())
+                                    .concatMap(new Func1<Workflow, Observable<? extends
+                                            Workflow>>() {
+
+                                        @Override
+                                        public Observable<? extends Workflow> call
+                                                (Workflow workflow) {
+                                            return mDataManager.getDetailWorkflow(workflow.getId(),
+                                                    getWorkflowQueryOptions());
+                                        }
+                                    });
+                        } else {
+                            return Observable.empty();
+                        }
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -80,8 +90,9 @@ public class MyWorkflowPresenter extends BasePresenter<MyWorkflowMvpView> {
                 .subscribe(new Observer<Workflow>() {
                     @Override
                     public void onCompleted() {
-                        getMvpView().showProgressbar(false);
 
+                        getMvpView().showProgressbar(false);
+                        getMvpView().checkWorkflowSize();
                     }
 
                     @Override

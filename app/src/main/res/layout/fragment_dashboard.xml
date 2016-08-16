@@ -21,6 +21,15 @@
         android:layout_height="match_parent"
         android:background="@color/grey_background">
 
+    <TextView
+            android:id="@+id/tvNoWorkflow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/no_my_workflow"
+            android:textSize="20sp"
+            android:visibility="gone"/>
+
     <org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout
             android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
