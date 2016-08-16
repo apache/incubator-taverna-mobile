@@ -64,7 +64,7 @@ public class User implements Parcelable {
     @Element(name = "avatar", required = false)
     private Avatar avatar;
 
-    @Element(name="workflows",required = false)
+    @Element(name = "workflows", required = false)
     private Workflows workflows;
 
     public String getResource() {
