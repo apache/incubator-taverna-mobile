@@ -57,7 +57,7 @@ import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
 import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 import org.apache.taverna.mobile.utils.ActivityUtils;
-import org.apache.taverna.mobile.utils.WorkflowOpen;
+
 
 import java.io.File;
 
@@ -247,7 +247,6 @@ public class DashboardMainActivity extends AppCompatActivity {
             String type = getMimeType(data.getData().getPath());
             if (type.equals("text/xml") || type.equals("application/vnd.taverna.t2flow+xml")) {
 
-                new WorkflowOpen(this).execute(workflowPath);
             } else {
                 Toast.makeText(getBaseContext(), "Invalid worklow. Please try again", Toast
                         .LENGTH_LONG).show();
