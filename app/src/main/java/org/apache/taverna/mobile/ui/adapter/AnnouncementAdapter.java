@@ -18,15 +18,15 @@
  */
 package org.apache.taverna.mobile.ui.adapter;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.model.Announcement;
-
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.model.Announcement;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         RecyclerView.ViewHolder vh;
         if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout.item_recyclerview, parent, false);
+                    R.layout.item_recyclerview_announcement, parent, false);
 
             vh = new ViewHolder(v);
         } else {
