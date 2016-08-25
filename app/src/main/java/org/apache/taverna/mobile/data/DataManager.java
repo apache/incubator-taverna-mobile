@@ -31,6 +31,7 @@ import org.apache.taverna.mobile.data.remote.BaseApiManager;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.functions.Func1;
 
@@ -165,5 +166,9 @@ public class DataManager {
                 });
     }
 
+
+    public Observable<ResponseBody> downloadWorkflowContent(String url) {
+        return mBaseApiManager.getTavernaApi().downloadWorkflowContent(url);
+    }
 
 }

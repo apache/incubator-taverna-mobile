@@ -20,17 +20,20 @@ package org.apache.taverna.mobile.data.remote;
 
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
-import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
+import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.Workflows;
 
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 import rx.Observable;
 
 
@@ -59,5 +62,9 @@ public interface TavernaService {
 
     @GET(APIEndPoint.WHOAMI)
     Observable<User> getLoginUserDetail(@Header("Authorization") String credentials);
+
+    @GET
+    @Headers(APIEndPoint.XML_ACCEPT_HEADER)
+    Observable<ResponseBody> downloadWorkflowContent(@Url String workflowContentUrl);
 
 }
