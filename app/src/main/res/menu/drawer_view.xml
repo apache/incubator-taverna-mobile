@@ -24,7 +24,7 @@
 			android:title="All Workflows"/>
 		<item
 			android:id="@+id/nav_my_workflows"
-			android:icon="@drawable/ic_userprofile"
+			android:icon="@drawable/ic_dashboard_home_web"
 			android:title="@string/my_workflows"/>
 		<item
 				android:id="@+id/nav_favourite_workflow"
