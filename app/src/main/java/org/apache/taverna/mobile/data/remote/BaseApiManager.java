@@ -26,13 +26,9 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 public class BaseApiManager {
 
 
-    public static final String END_POINT = "http://www.myexperiment.org/";
-    public TavernaService mTavernaService;
+    public static final String MY_EXPERIMENT_END_POINT = "http://www.myexperiment.org/";
 
-    public BaseApiManager() {
-
-        mTavernaService = createApi(TavernaService.class, END_POINT);
-    }
+    public static final String TAVERNA_PLAYER_END_POINT = "http://139.59.28.12:3000/";
 
     /******** Helper class that sets up a new services *******/
 
@@ -49,6 +45,10 @@ public class BaseApiManager {
     }
 
     public TavernaService getTavernaApi() {
-        return mTavernaService;
+        return createApi(TavernaService.class, MY_EXPERIMENT_END_POINT);
+    }
+
+    public  TavernaPlayerService getTavernaPlayerApi(){
+        return createApi(TavernaPlayerService.class, TAVERNA_PLAYER_END_POINT);
     }
 }
