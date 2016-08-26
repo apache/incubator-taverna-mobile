@@ -31,6 +31,7 @@ import org.apache.taverna.mobile.data.remote.BaseApiManager;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import rx.Observable;
 import rx.functions.Func1;
@@ -166,9 +167,20 @@ public class DataManager {
                 });
     }
 
-
+    /**
+     * @param url is Workflow's content xml URL
+     * @return OkHTTP ResponseBody of download file
+     */
     public Observable<ResponseBody> downloadWorkflowContent(String url) {
         return mBaseApiManager.getTavernaApi().downloadWorkflowContent(url);
+    }
+
+    /**
+     * @param body is body of
+     * @return OkHTTP ResponseBody of requested
+     */
+    public Observable<ResponseBody> uploadWorkflowContent(RequestBody body, String baseAuth) {
+        return mBaseApiManager.getTavernaPlayerApi().uploadWorkflow(body, baseAuth);
     }
 
 }
