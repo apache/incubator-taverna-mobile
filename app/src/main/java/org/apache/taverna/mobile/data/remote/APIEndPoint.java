@@ -32,4 +32,6 @@ public class APIEndPoint {
     public static final String WHOAMI = "whoami.xml";
 
     public static final String XML_ACCEPT_HEADER = "Accept: application/xml";
+    public static final String JSON_CONTENT_HEADER = "Content-Type: application/json";
+    public static final String UTF_CONTENT_ENCODING_HEADER = "Content-Encoding: UTF-8";
 }
