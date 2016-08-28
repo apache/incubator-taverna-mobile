@@ -15,123 +15,146 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/rootLayout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/coords_wrapper"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ProgressBar
+    <RelativeLayout
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"/>
 
-    <ScrollView
+        <ScrollView
             android:id="@+id/scrollView"
-            android:orientation="vertical"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <LinearLayout
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-            <ImageView
+                <ImageView
                     android:id="@+id/ivWorkflowImage"
-                    android:src="@mipmap/ic_launcher"
                     android:layout_width="match_parent"
+                    android:layout_height="300dp"
                     android:scaleType="fitCenter"
-                    android:layout_height="300dp"/>
-            <View
+                    android:src="@mipmap/ic_launcher"/>
+
+                <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/grey_background"/>
 
-            <ImageView
+                <ImageView
                     android:id="@+id/ivFav"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="-20dp"
                     android:layout_gravity="right"
                     android:layout_marginRight="20dp"
+                    android:layout_marginTop="-20dp"
                     android:background="@drawable/background_fav_button"
                     app:srcCompat="@drawable/ic_star_border_black_24dp"/>
 
-            <TextView
+                <TextView
                     android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="title"
-                    android:textSize="20sp"
                     android:padding="10dp"
-                    android:textColor="@android:color/black"/>
+                    android:text="title"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"/>
 
-            <LinearLayout
-                    android:layout_marginTop="5dp"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
-                <ImageView
+                    <ImageView
                         android:id="@+id/ivUploader"
-                        android:src="@mipmap/ic_launcher"
-                        android:paddingLeft="10dp"
                         android:layout_width="50dp"
-                        android:layout_height="50dp"/>
+                        android:layout_height="50dp"
+                        android:paddingLeft="10dp"
+                        android:src="@mipmap/ic_launcher"/>
 
-                <RelativeLayout
+                    <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1">
 
-                    <TextView
+                        <TextView
                             android:id="@+id/tvUploaderName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="name"
                             android:textColor="@android:color/black"
                             android:textSize="18sp"/>
-                    <TextView
+
+                        <TextView
                             android:id="@+id/tvDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
                             android:text="Date"/>
-                    <TextView
+
+                        <TextView
                             android:id="@+id/tvType"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
-                            android:text="type"
-                            android:layout_alignParentRight="true"
                             android:layout_alignParentEnd="true"
-                            android:paddingRight="10dp"
+                            android:layout_alignParentRight="true"
                             android:paddingEnd="10dp"
+                            android:paddingLeft="0dp"
+                            android:paddingRight="10dp"
                             android:paddingStart="0dp"
-                            android:paddingLeft="0dp"/>
-                </RelativeLayout>
+                            android:text="type"/>
+                    </RelativeLayout>
 
-            </LinearLayout>
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="match_parent"
-                          android:padding="15dp"
-                          android:background="@color/grey_background"
-                          android:orientation="vertical">
-                <WebView
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey_background"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <WebView
                         android:id="@+id/tvDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                />
+                        />
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
 
-    </ScrollView>
-</RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/action_button_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        />
+
+
+</android.support.design.widget.CoordinatorLayout>
