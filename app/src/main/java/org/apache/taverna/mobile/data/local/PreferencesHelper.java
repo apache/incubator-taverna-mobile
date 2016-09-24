@@ -31,6 +31,8 @@ public class PreferencesHelper {
 
     public static final String PREF_FILE_NAME = "taverna_app_pref_file";
 
+    private static final String PREF_KEY_PLAYER_LOGGED_IN = "pref_player_logged_in";
+
     private static final String PREF_KEY_LOGGED_IN = "pref_logged_in";
 
     private static final String PREF_KEY_USER_ID = "pref_user_id";
@@ -49,6 +51,7 @@ public class PreferencesHelper {
 
     private static final String PREF_KEY_USER_WEBSITE = "pref_user_website";
 
+    private static final String PREF_KEY_PLAYER_CREDENTIAL = "pref_player_credential";
     private final SharedPreferences mPref;
 
 
@@ -167,6 +170,17 @@ public class PreferencesHelper {
             }
         });
 
+    }
+
+    public boolean isUserPlayerLoggedInFlag() {
+        return mPref.getBoolean(PREF_KEY_PLAYER_LOGGED_IN, false);
+    }
+
+    public void setUserPlayerLoggedInFlag(Boolean flag, String credential) {
+
+        mPref.edit().putBoolean(PREF_KEY_PLAYER_LOGGED_IN, flag).apply();
+
+        mPref.edit().putString(PREF_KEY_PLAYER_CREDENTIAL, credential).apply();
     }
 
 }
