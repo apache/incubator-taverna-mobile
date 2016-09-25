@@ -124,6 +124,11 @@ limitations under the License.
                   android:label="@string/image_zoom"
                   android:exported="true"
                   />
+
+        <activity android:name=".ui.workflowrun.WorkflowRunActivity"
+                  android:label="@string/image_zoom"
+                  android:exported="true"
+            />
     </application>
 
 </manifest>
