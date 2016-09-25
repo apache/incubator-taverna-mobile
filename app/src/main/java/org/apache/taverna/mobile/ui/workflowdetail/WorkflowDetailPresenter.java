@@ -18,28 +18,17 @@
  */
 package org.apache.taverna.mobile.ui.workflowdetail;
 
-import android.util.Base64;
-import android.util.Log;
-
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -203,88 +192,6 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                 }));
     }
 
-    public void runWorkflow(String contentURL) {
-
-        mCompositeSubscription.add(mDataManager.downloadWorkflowContent("http://www.myexperiment" +
-                ".org/workflows/828/download/Pipelined_list_iteration-v.t2flow")
-                .concatMap(new Func1<ResponseBody, Observable<ResponseBody>>() {
-                    @Override
-                    public Observable<ResponseBody> call(ResponseBody responseBody) {
-
-                        StringBuffer sb = new StringBuffer();
-                        String post = "";
-                        String user = "email" + ":" + "password";
-                        String basicAuth = "Basic " + Base64.encodeToString(user.getBytes(),
-                                Base64.DEFAULT);
-                        boolean flag = false;
-                        try {
-
-                            BufferedReader bufferedReader = new BufferedReader(
-                                    new InputStreamReader(responseBody.byteStream()));
-
-                            String str = "";
-
-                            while ((str = bufferedReader.readLine()) != null)
-                                sb.append(str);
-
-                            bufferedReader.close();
-
-                            String data = "{\"document\":\"data:application/octet-stream;base64," +
-                                    Base64.encodeToString(sb.toString().getBytes("UTF-8"), Base64
-                                            .URL_SAFE | Base64.NO_WRAP).replace('-', '+') + "\"}";
-
-                            post = "{\"workflow\":" + data + "}";
-                            flag = true;
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        if (flag) {
-                            RequestBody body =
-                                    RequestBody.create(MediaType.parse("application/json"), post);
-
-                            return mDataManager.uploadWorkflowContent(body, basicAuth.trim());
-                        } else {
-                            return Observable.empty();
-                        }
-
-
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<ResponseBody>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(LOG_TAG, "onError: ", e);
-                    }
-
-                    @Override
-                    public void onNext(ResponseBody responseBody) {
-                        StringBuffer sb = new StringBuffer();
-                        try {
-
-                            BufferedReader bufferedReader = new BufferedReader(
-                                    new InputStreamReader(responseBody.byteStream()));
-
-                            String str = "";
-
-                            while ((str = bufferedReader.readLine()) != null)
-                                sb.append(str);
-
-
-                            bufferedReader.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        Log.e("TAG", "onNext: " + sb.toString());
-                    }
-                }));
-    }
 
     private Map<String, String> getDetailQueryOptions() {
 
