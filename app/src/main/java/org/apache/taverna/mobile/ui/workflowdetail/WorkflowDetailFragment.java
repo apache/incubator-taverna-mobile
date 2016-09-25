@@ -50,6 +50,7 @@ import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.ui.imagezoom.ImageZoomActivity;
 import org.apache.taverna.mobile.ui.imagezoom.ImageZoomFragment;
+import org.apache.taverna.mobile.ui.workflowrun.WorkflowRunActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import butterknife.BindView;
@@ -165,6 +166,12 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
         mWorkflowDetailPresenter.setFavourite(id);
     }
 
+
+    @OnClick(R.id.fabRun)
+    void fabRunClick(View v){
+        Intent intent = new Intent(getActivity(), WorkflowRunActivity.class);
+        startActivity(intent);
+    }
 
     @OnClick(R.id.ivWorkflowImage)
     void zoomImage(View v) {
