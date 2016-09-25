@@ -183,4 +183,9 @@ public class PreferencesHelper {
         mPref.edit().putString(PREF_KEY_PLAYER_CREDENTIAL, credential).apply();
     }
 
+    public String getUserPlayerCredential() {
+        return mPref.getString(PREF_KEY_PLAYER_CREDENTIAL," ");
+    }
+
+
 }
