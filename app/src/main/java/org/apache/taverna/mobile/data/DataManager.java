@@ -23,6 +23,8 @@ import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.License;
+import org.apache.taverna.mobile.data.model.PlayerWorkflow;
+import org.apache.taverna.mobile.data.model.PlayerWorkflowDetail;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.Workflows;
@@ -151,7 +153,7 @@ public class DataManager {
 
     /**
      * @param credentials is base64 encoded credential
-     * @param flagLogin  is used to maintain the Remain login or not
+     * @param flagLogin   is used to maintain the Remain login or not
      * @return User Detail if valid credentials
      */
 
@@ -176,11 +178,35 @@ public class DataManager {
     }
 
     /**
-     * @param body is body of
-     * @return OkHTTP ResponseBody of requested
+     * @param body is body of upload workflow's detail
+     * @param baseAuth is base64 encoded credential
+     * @return Workflow's ID
      */
-    public Observable<ResponseBody> uploadWorkflowContent(RequestBody body, String baseAuth) {
+    public Observable<PlayerWorkflow> uploadWorkflowContent(RequestBody body, String baseAuth) {
         return mBaseApiManager.getTavernaPlayerApi().uploadWorkflow(body, baseAuth);
+    }
+
+    /**
+     * @param credentials is base64 encoded credential
+     * @param flagLogin   is used to maintain the Remain login or not
+     * @return okHTTP ResponseBody
+     */
+
+    public Observable<ResponseBody> authPlayerUserLoginDetail(final String credentials,
+                                                              final boolean flagLogin) {
+        return mBaseApiManager.getTavernaPlayerApi().playerlogin(credentials)
+                .concatMap(new Func1<ResponseBody, Observable<? extends ResponseBody>>() {
+                    @Override
+                    public Observable<? extends ResponseBody> call(ResponseBody responseBody) {
+
+                        return Observable.just(responseBody);
+                    }
+                });
+
+    }
+
+    public Observable<PlayerWorkflowDetail> getWorkflowDetail(int id){
+        return mBaseApiManager.getTavernaPlayerApi().getWorkflowDetail(id);
     }
 
 }
