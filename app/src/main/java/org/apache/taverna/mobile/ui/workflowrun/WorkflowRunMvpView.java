@@ -10,4 +10,6 @@ public interface WorkflowRunMvpView extends MvpView {
     void movetoInputs();
 
     void setInputsAttribute(int id);
+
+    void showError();
 }

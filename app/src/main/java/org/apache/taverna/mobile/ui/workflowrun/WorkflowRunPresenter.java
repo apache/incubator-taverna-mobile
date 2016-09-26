@@ -20,7 +20,6 @@ package org.apache.taverna.mobile.ui.workflowrun;
 
 
 import android.util.Base64;
-import android.util.Log;
 
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.PlayerWorkflow;
@@ -130,7 +129,8 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("TAG", "onError: ", e);
+
+                       getMvpView().showError();
                     }
 
                     @Override

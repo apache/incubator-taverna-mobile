@@ -26,6 +26,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.widget.Toast;
 
 import com.anton46.stepsview.StepsView;
 
@@ -138,6 +139,13 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
         workflowRunURL = "http://139.59.28.12:3000/workflows/"+id+"/runs/new";
         mPager.getAdapter().notifyDataSetChanged();
+    }
+
+    @Override
+    public void showError() {
+        Toast.makeText(this, "Server Error. Please try after sometime", Toast
+                .LENGTH_LONG).show();
+        finish();
     }
 
 
