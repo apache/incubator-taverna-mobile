@@ -66,7 +66,7 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
     String workflowRunURL;
 
-    String workflowURL;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,7 +116,7 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         position =1;
         mPager.setCurrentItem(position);
         mStepsView.setCompletedPosition(position % labels.length).drawView();
-        mWorkflowRunPresenter.runWorkflow("hh");
+        mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(WORKFLOW_URL));
     }
 
     @Override
