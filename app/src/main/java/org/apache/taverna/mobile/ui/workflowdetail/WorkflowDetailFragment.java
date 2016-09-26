@@ -170,6 +170,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     @OnClick(R.id.fabRun)
     void fabRunClick(View v){
         Intent intent = new Intent(getActivity(), WorkflowRunActivity.class);
+        intent.putExtra(WorkflowRunActivity.WORKFLOW_URL,mWorkflow.getContentUri());
         startActivity(intent);
     }
 
