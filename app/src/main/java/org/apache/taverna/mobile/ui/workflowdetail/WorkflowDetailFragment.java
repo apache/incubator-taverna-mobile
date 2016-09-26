@@ -39,6 +39,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -168,10 +169,15 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
 
     @OnClick(R.id.fabRun)
-    void fabRunClick(View v){
-        Intent intent = new Intent(getActivity(), WorkflowRunActivity.class);
-        intent.putExtra(WorkflowRunActivity.WORKFLOW_URL,mWorkflow.getContentUri());
-        startActivity(intent);
+    void fabRunClick(View v) {
+        if (mWorkflow.getType().getContent().toUpperCase().equals("Taverna 2".toUpperCase())) {
+            Intent intent = new Intent(getActivity(), WorkflowRunActivity.class);
+            intent.putExtra(WorkflowRunActivity.WORKFLOW_URL, mWorkflow.getContentUri());
+            startActivity(intent);
+        } else {
+            Toast.makeText(getActivity(), "We can only run Taverna 2 workflow", Toast
+                    .LENGTH_LONG).show();
+        }
     }
 
     @OnClick(R.id.ivWorkflowImage)
