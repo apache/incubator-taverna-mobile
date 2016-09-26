@@ -55,6 +55,7 @@ import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
+import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
 import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 import org.apache.taverna.mobile.utils.ActivityUtils;
 import org.apache.taverna.mobile.utils.WorkflowOpen;
@@ -134,6 +135,19 @@ public class DashboardMainActivity extends AppCompatActivity {
                             case R.id.nav_workflows:
 
                                 fragment = new WorkflowFragment();
+                                ActivityUtils
+                                        .addFragmentToActivity(
+                                                getSupportFragmentManager(),
+                                                fragment,
+                                                R.id.frame_container);
+
+                                menuItem.setChecked(true);
+                                mDrawerLayout.closeDrawers();
+                                return true;
+
+                            case R.id.nav_my_workflows:
+
+                                fragment = new MyWorkflowFragment();
                                 ActivityUtils
                                         .addFragmentToActivity(
                                                 getSupportFragmentManager(),

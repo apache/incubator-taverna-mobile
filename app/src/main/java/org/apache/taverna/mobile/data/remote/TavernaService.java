@@ -63,8 +63,14 @@ public interface TavernaService {
     @GET(APIEndPoint.WHOAMI)
     Observable<User> getLoginUserDetail(@Header("Authorization") String credentials);
 
+
     @GET
     @Headers(APIEndPoint.XML_ACCEPT_HEADER)
     Observable<ResponseBody> downloadWorkflowContent(@Url String workflowContentUrl);
+
+
+    @GET(APIEndPoint.MY_WORKFLOWS)
+    Observable<Workflows> getMyWorkflows(@Query("id") String id,
+                                         @QueryMap Map<String, String> options);
 
 }

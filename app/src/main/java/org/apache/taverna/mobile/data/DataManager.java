@@ -158,6 +158,7 @@ public class DataManager {
      */
 
     public Observable<User> getLoginUserDetail(String credentials, final boolean flagLogin) {
+
         return mBaseApiManager.getTavernaApi().getLoginUserDetail(credentials)
                 .concatMap(new Func1<User, Observable<? extends User>>() {
                     @Override
@@ -209,4 +210,7 @@ public class DataManager {
         return mBaseApiManager.getTavernaPlayerApi().getWorkflowDetail(id);
     }
 
+    public Observable<User> getMyWorkflows(String userID, Map<String, String> options) {
+        return mBaseApiManager.getTavernaApi().getUserDetail(userID , options);
+    }
 }

@@ -28,11 +28,14 @@ public class APIEndPoint {
     public static final String WORKFLOW = "workflow.xml";
     public static final String USER = "user.xml";
     public static final String LICENSE = "license.xml";
-
     public static final String WHOAMI = "whoami.xml";
+
 
     public static final String XML_ACCEPT_HEADER = "Accept: application/xml";
     public static final String JSON_ACCEPT_HEADER = "Accept: application/json";
     public static final String JSON_CONTENT_HEADER = "Content-Type: application/json";
     public static final String UTF_CONTENT_ENCODING_HEADER = "Content-Encoding: UTF-8";
+
+    public static final String MY_WORKFLOWS = "user.xml";
+
 }
