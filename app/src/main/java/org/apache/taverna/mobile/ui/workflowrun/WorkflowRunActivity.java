@@ -47,26 +47,16 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         PlayerLoginFragment.OnSuccessful {
 
     public static final String WORKFLOW_URL = "Workflow_url";
-
-
-    private DataManager dataManager;
-
-    private WorkflowRunPresenter mWorkflowRunPresenter;
-
+    private final String[] labels = {"Player\nLogin", "Download", "Upload", "Inputs &\n Run"};
     @BindView(R.id.stepsView)
     StepsView mStepsView;
-
     @BindView(R.id.viewpager)
     NonSwipeableViewPager mPager;
-
-    private PagerAdapter mPagerAdapter;
-
-    private final String[] labels = {"Player\nLogin","Download", "Upload", "Inputs &\n Run"};
-    int position =0;
-
+    int position = 0;
     String workflowRunURL;
-
-
+    private DataManager dataManager;
+    private WorkflowRunPresenter mWorkflowRunPresenter;
+    private PagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,7 +77,8 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
                 .setLabels(labels)
                 .setBarColorIndicator(
                         getContext().getResources().getColor(R.color.material_blue_grey_800))
-                .setProgressColorIndicator(getContext().getResources().getColor(R.color.colorPrimary))
+                .setProgressColorIndicator(getContext().getResources().getColor(R.color
+                        .colorPrimary))
                 .setLabelColorIndicator(getContext().getResources().getColor(R.color.colorPrimary))
                 .drawView();
 
@@ -95,7 +86,7 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
-        if(dataManager.getPreferencesHelper().isUserPlayerLoggedInFlag()){
+        if (dataManager.getPreferencesHelper().isUserPlayerLoggedInFlag()) {
             mPager.setCurrentItem(++position);
             mStepsView.setCompletedPosition(position % labels.length).drawView();
 
@@ -113,7 +104,7 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
     @Override
     public void onSuccessfulLogin() {
-        position =1;
+        position = 1;
         mPager.setCurrentItem(position);
         mStepsView.setCompletedPosition(position % labels.length).drawView();
         mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(WORKFLOW_URL));
@@ -121,14 +112,14 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
     @Override
     public void movetoUploadWorkflow() {
-        position =2;
+        position = 2;
         mPager.setCurrentItem(position);
         mStepsView.setCompletedPosition(position % labels.length).drawView();
     }
 
     @Override
     public void movetoInputs() {
-        position =3;
+        position = 3;
         mStepsView.setCompletedPosition(position % labels.length).drawView();
         mPager.setCurrentItem(position);
 
@@ -137,7 +128,7 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
     @Override
     public void setInputsAttribute(int id) {
 
-        workflowRunURL = "http://139.59.28.12:3000/workflows/"+id+"/runs/new";
+        workflowRunURL = "http://139.59.28.12:3000/workflows/" + id + "/runs/new";
         mPager.getAdapter().notifyDataSetChanged();
     }
 
@@ -156,7 +147,7 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
         @Override
         public Fragment getItem(int position) {
-            switch (position){
+            switch (position) {
                 case 0:
                     return PlayerLoginFragment.newInstance();
                 case 1:

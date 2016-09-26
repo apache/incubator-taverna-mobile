@@ -43,14 +43,9 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
 
     @BindView(R.id.cbRemember)
     CheckBox mCheckBoxRemember;
-
-
-    private DataManager dataManager;
-
-    private PlayerLoginPresenter mPlayerLoginPresenter;
-
     OnSuccessful mCallback;
-
+    private DataManager dataManager;
+    private PlayerLoginPresenter mPlayerLoginPresenter;
 
     public static PlayerLoginFragment newInstance() {
 
@@ -96,7 +91,6 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
 
 
         //mPlayerLoginPresenter.PlayerLogin("kumarsagar15795@gmail.com", "Sagarishere", true);
-
 
 
     }
@@ -204,6 +198,23 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
         }
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            mCallback = (OnSuccessful) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString()
+                    + " must implement OnSuccessful");
+        }
+    }
+
+
+    public interface OnSuccessful {
+        void onSuccessfulLogin();
+    }
+
     private class CustomTextWatcher implements TextWatcher {
 
         private View view;
@@ -229,24 +240,6 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
                     validatePassword();
                     break;
             }
-        }
-    }
-
-
-    public interface OnSuccessful {
-        void onSuccessfulLogin();
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        try {
-            mCallback = (OnSuccessful) getActivity();
-        } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString()
-                    + " must implement OnSuccessful");
         }
     }
 }

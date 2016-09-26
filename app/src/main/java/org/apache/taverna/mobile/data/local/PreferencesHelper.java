@@ -184,7 +184,7 @@ public class PreferencesHelper {
     }
 
     public String getUserPlayerCredential() {
-        return mPref.getString(PREF_KEY_PLAYER_CREDENTIAL," ");
+        return mPref.getString(PREF_KEY_PLAYER_CREDENTIAL, " ");
     }
 
 

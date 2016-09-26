@@ -21,8 +21,8 @@ public interface TavernaPlayerService {
             APIEndPoint.JSON_CONTENT_HEADER,
             APIEndPoint.JSON_ACCEPT_HEADER,
             APIEndPoint.UTF_CONTENT_ENCODING_HEADER})
-    Observable<PlayerWorkflow> uploadWorkflow(@Body RequestBody body, @Header("Authorization") String
-            authorization);
+    Observable<PlayerWorkflow> uploadWorkflow(@Body RequestBody body, @Header("Authorization")
+            String authorization);
 
     @POST("/users/sign_in")
     @Headers({

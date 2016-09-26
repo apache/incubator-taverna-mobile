@@ -178,7 +178,7 @@ public class DataManager {
     }
 
     /**
-     * @param body is body of upload workflow's detail
+     * @param body     is body of upload workflow's detail
      * @param baseAuth is base64 encoded credential
      * @return Workflow's ID
      */
@@ -205,7 +205,7 @@ public class DataManager {
 
     }
 
-    public Observable<PlayerWorkflowDetail> getWorkflowDetail(int id){
+    public Observable<PlayerWorkflowDetail> getWorkflowDetail(int id) {
         return mBaseApiManager.getTavernaPlayerApi().getWorkflowDetail(id);
     }
 

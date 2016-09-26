@@ -31,7 +31,9 @@ public class BaseApiManager {
 
     public static final String TAVERNA_PLAYER_END_POINT = "http://139.59.28.12:3000/";
 
-    /******** Helper class that sets up a new services with simplexml converter factory *******/
+    /********
+     * Helper class that sets up a new services with simplexml converter factory
+     *******/
 
     private <T> T createSimpleXMLApi(Class<T> clazz, String ENDPOINT) {
 
@@ -45,7 +47,9 @@ public class BaseApiManager {
         return retrofit.create(clazz);
     }
 
-    /******** Helper class that sets up a new services with gson converter factory *******/
+    /********
+     * Helper class that sets up a new services with gson converter factory
+     *******/
 
     private <T> T createJsonApi(Class<T> clazz, String ENDPOINT) {
 
@@ -63,7 +67,7 @@ public class BaseApiManager {
         return createSimpleXMLApi(TavernaService.class, MY_EXPERIMENT_END_POINT);
     }
 
-    public  TavernaPlayerService getTavernaPlayerApi(){
+    public TavernaPlayerService getTavernaPlayerApi() {
         return createJsonApi(TavernaPlayerService.class, TAVERNA_PLAYER_END_POINT);
     }
 }

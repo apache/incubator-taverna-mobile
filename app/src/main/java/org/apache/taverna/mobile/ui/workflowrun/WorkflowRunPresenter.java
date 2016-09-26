@@ -77,7 +77,8 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
                         StringBuffer sb = new StringBuffer();
                         String post = "";
 
-                        String basicAuth = mDataManager.getPreferencesHelper().getUserPlayerCredential();
+                        String basicAuth = mDataManager.getPreferencesHelper()
+                                .getUserPlayerCredential();
                         boolean flag = false;
                         try {
 
@@ -130,17 +131,16 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
                     @Override
                     public void onError(Throwable e) {
 
-                       getMvpView().showError();
+                        getMvpView().showError();
                     }
 
                     @Override
                     public void onNext(PlayerWorkflowDetail playerWorkflowDetail) {
-                        getMvpView().setInputsAttribute(playerWorkflowDetail.getRun().getWorkflowId());
+                        getMvpView().setInputsAttribute(playerWorkflowDetail.getRun()
+                                .getWorkflowId());
                     }
                 });
     }
-
-
 
 
 }

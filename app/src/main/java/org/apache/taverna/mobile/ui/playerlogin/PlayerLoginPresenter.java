@@ -39,7 +39,7 @@ public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
 
         mSubscriptions = mDataManager.authPlayerUserLoginDetail(getEncodedCredential(username,
-                password),loginFlag)
+                password), loginFlag)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<ResponseBody>() {
@@ -57,7 +57,7 @@ public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
                             } else if (((HttpException) e).code() == 406) {
                                 getMvpView().validCredential();
                                 mDataManager.getPreferencesHelper().setUserPlayerLoggedInFlag
-                                        (loginFlag,getEncodedCredential(username, password));
+                                        (loginFlag, getEncodedCredential(username, password));
 
                             }
                         }

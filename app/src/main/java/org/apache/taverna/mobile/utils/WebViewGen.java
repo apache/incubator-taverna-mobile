@@ -47,7 +47,7 @@ public class WebViewGen extends Fragment {
 
         progressBar = (ProgressBar) layout.findViewById(R.id.progressBar);
 
-        web.setWebViewClient(new myWebClient());
+        web.setWebViewClient(new WebClient());
         web.getSettings().setJavaScriptEnabled(true);
         web.getSettings().setBuiltInZoomControls(true);
         web.loadUrl(URL);
@@ -61,7 +61,7 @@ public class WebViewGen extends Fragment {
     }
 
 
-    public class myWebClient extends WebViewClient {
+    public class WebClient extends WebViewClient {
 
 
         @Override
