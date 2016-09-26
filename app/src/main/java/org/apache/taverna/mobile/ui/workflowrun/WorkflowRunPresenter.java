@@ -20,6 +20,7 @@ package org.apache.taverna.mobile.ui.workflowrun;
 
 
 import android.util.Base64;
+import android.util.Log;
 
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.PlayerWorkflow;
@@ -42,7 +43,7 @@ import rx.schedulers.Schedulers;
 
 public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
 
-
+    private static final String TAG = WorkflowRunPresenter.class.getSimpleName();
     private final DataManager mDataManager;
     private Subscription mSubscriptions;
 
@@ -87,8 +88,9 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
 
                             String str = "";
 
-                            while ((str = bufferedReader.readLine()) != null)
+                            while ((str = bufferedReader.readLine()) != null) {
                                 sb.append(str);
+                            }
 
                             bufferedReader.close();
 
@@ -99,7 +101,7 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
                             post = "{\"workflow\":" + data + "}";
                             flag = true;
                         } catch (IOException e) {
-                            e.printStackTrace();
+                            Log.e(TAG, "call: ", e);
                         }
                         if (flag) {
                             RequestBody body =
