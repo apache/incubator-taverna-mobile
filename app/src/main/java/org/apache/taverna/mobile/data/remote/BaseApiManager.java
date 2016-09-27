@@ -32,8 +32,6 @@ public class BaseApiManager {
 
     public static final String MY_EXPERIMENT_END_POINT = "http://www.myexperiment.org/";
 
-    public static final String TAVERNA_PLAYER_END_POINT = new PreferencesHelper
-            (TavernaApplication.getContext()).getPlayerURL();
 
     /********
      * Helper class that sets up a new services with simplexml converter factory
@@ -72,6 +70,7 @@ public class BaseApiManager {
     }
 
     public TavernaPlayerService getTavernaPlayerApi() {
-        return createJsonApi(TavernaPlayerService.class, TAVERNA_PLAYER_END_POINT);
+        return createJsonApi(TavernaPlayerService.class, new PreferencesHelper
+                (TavernaApplication.getContext()).getPlayerURL());
     }
 }

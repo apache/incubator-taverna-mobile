@@ -54,7 +54,7 @@ public class PreferencesHelper {
 
     private static final String PREF_KEY_PLAYER_CREDENTIAL = "pref_player_credential";
 
-    private static final String PREF_KEY_PLAYER_URL = "pref_player_url";
+    public static final String PREF_KEY_PLAYER_URL = "pref_player_url";
 
     private final SharedPreferences mPref;
 
@@ -182,11 +182,17 @@ public class PreferencesHelper {
         return mPref.getBoolean(PREF_KEY_PLAYER_LOGGED_IN, false);
     }
 
-    public void setUserPlayerLoggedInFlag(Boolean flag, String credential) {
+    public void setUserPlayerLoggedInFlagAndCredential(Boolean flag, String credential) {
 
         mPref.edit().putBoolean(PREF_KEY_PLAYER_LOGGED_IN, flag).apply();
 
         mPref.edit().putString(PREF_KEY_PLAYER_CREDENTIAL, credential).apply();
+    }
+
+    public void setUserPlayerLoggedInFlag(Boolean flag) {
+
+        mPref.edit().putBoolean(PREF_KEY_PLAYER_LOGGED_IN, flag).apply();
+
     }
 
     public String getUserPlayerCredential() {
