@@ -19,18 +19,26 @@
 package org.apache.taverna.mobile;
 
 
+import android.app.Application;
+import android.content.Context;
+
 import com.facebook.stetho.Stetho;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 
-import android.app.Application;
-
 public class TavernaApplication extends Application {
+
+    private static TavernaApplication instance;
+
+    public static Context getContext() {
+        return instance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        instance = this;
         FlowManager.init(new FlowConfig.Builder(this).build());
 
         Stetho.initializeWithDefaults(this);
