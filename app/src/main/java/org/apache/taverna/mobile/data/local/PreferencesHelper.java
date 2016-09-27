@@ -21,6 +21,7 @@ package org.apache.taverna.mobile.data.local;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import org.apache.taverna.mobile.data.model.User;
 
@@ -52,11 +53,16 @@ public class PreferencesHelper {
     private static final String PREF_KEY_USER_WEBSITE = "pref_user_website";
 
     private static final String PREF_KEY_PLAYER_CREDENTIAL = "pref_player_credential";
+
+    private static final String PREF_KEY_PLAYER_URL = "pref_player_url";
+
     private final SharedPreferences mPref;
 
+    private final SharedPreferences sharedPref;
 
     public PreferencesHelper(Context context) {
         mPref = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
 
@@ -187,5 +193,7 @@ public class PreferencesHelper {
         return mPref.getString(PREF_KEY_PLAYER_CREDENTIAL, " ");
     }
 
-
+    public String getPlayerURL() {
+        return sharedPref.getString(PREF_KEY_PLAYER_URL, "http://139.59.28.12:3000/");
+    }
 }

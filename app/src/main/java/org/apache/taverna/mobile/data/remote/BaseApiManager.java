@@ -18,6 +18,9 @@
  */
 package org.apache.taverna.mobile.data.remote;
 
+import org.apache.taverna.mobile.TavernaApplication;
+import org.apache.taverna.mobile.data.local.PreferencesHelper;
+
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -29,7 +32,8 @@ public class BaseApiManager {
 
     public static final String MY_EXPERIMENT_END_POINT = "http://www.myexperiment.org/";
 
-    public static final String TAVERNA_PLAYER_END_POINT = "http://139.59.28.12:3000/";
+    public static final String TAVERNA_PLAYER_END_POINT = new PreferencesHelper
+            (TavernaApplication.getContext()).getPlayerURL();
 
     /********
      * Helper class that sets up a new services with simplexml converter factory
