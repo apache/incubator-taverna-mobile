@@ -75,7 +75,7 @@ public class SettingsActivity extends PreferenceActivity {
                     } else {
                         // For all other preferences, set the summary to the value's
                         // simple string representation.
-                        if(preference.getKey().equals(PreferencesHelper.PREF_KEY_PLAYER_URL)){
+                        if (preference.getKey().equals(PreferencesHelper.PREF_KEY_PLAYER_URL)) {
 
                             new PreferencesHelper(TavernaApplication.getContext())
                                     .setUserPlayerLoggedInFlag(false);

@@ -37,8 +37,9 @@ public class TavernaApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-        instance = this;
+        if (instance == null) {
+            instance = this;
+        }
         FlowManager.init(new FlowConfig.Builder(this).build());
 
         Stetho.initializeWithDefaults(this);

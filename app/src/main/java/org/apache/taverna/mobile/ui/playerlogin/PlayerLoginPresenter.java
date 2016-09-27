@@ -76,8 +76,9 @@ public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
                                 getMvpView().showCredentialError();
                             } else if (((HttpException) e).code() == 406) {
                                 getMvpView().validCredential();
-                                mDataManager.getPreferencesHelper().setUserPlayerLoggedInFlagAndCredential
-                                        (loginFlag, getEncodedCredential(username, password));
+                                mDataManager.getPreferencesHelper()
+                                        .setUserPlayerLoggedInFlagAndCredential(loginFlag,
+                                                getEncodedCredential(username, password));
 
                             } else {
                                 getMvpView().showError("Server Error");

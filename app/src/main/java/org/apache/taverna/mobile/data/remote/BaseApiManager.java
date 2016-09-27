@@ -70,7 +70,7 @@ public class BaseApiManager {
     }
 
     public TavernaPlayerService getTavernaPlayerApi() {
-        return createJsonApi(TavernaPlayerService.class, new PreferencesHelper
-                (TavernaApplication.getContext()).getPlayerURL());
+        return createJsonApi(TavernaPlayerService.class,
+                new PreferencesHelper(TavernaApplication.getContext()).getPlayerURL());
     }
 }
