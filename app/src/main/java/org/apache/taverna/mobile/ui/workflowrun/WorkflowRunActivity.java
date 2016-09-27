@@ -127,8 +127,13 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
     @Override
     public void setInputsAttribute(int id) {
+        String playerURL=dataManager.getPreferencesHelper().getPlayerURL();
 
-        workflowRunURL = "http://139.59.28.12:3000/workflows/" + id + "/runs/new";
+        if (playerURL.trim().endsWith("/")){
+            playerURL=playerURL.substring(0,playerURL.length()-1);
+        }
+        workflowRunURL = playerURL+"/workflows/" + id +
+                "/runs/new";
         mPager.getAdapter().notifyDataSetChanged();
     }
 
