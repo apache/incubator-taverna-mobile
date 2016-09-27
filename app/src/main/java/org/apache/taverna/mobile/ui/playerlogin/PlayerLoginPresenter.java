@@ -34,6 +34,8 @@ import rx.schedulers.Schedulers;
 
 public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
 
+    private static final String TAG = PlayerLoginPresenter.class.getSimpleName();
+
     private DataManager mDataManager;
 
     private Subscription mSubscriptions;
@@ -68,7 +70,7 @@ public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("TAG", "onError: ", e);
+                        Log.e(TAG, "onError: ", e);
                         if (e instanceof HttpException) {
                             if (((HttpException) e).code() == 401) {
                                 getMvpView().showCredentialError();
@@ -77,13 +79,15 @@ public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
                                 mDataManager.getPreferencesHelper().setUserPlayerLoggedInFlag
                                         (loginFlag, getEncodedCredential(username, password));
 
+                            } else {
+                                getMvpView().showError("Server Error");
                             }
                         }
                     }
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
-                        Log.e("hello", "onCompleted: " + responseBody.byteStream());
+                        Log.e(TAG, "onCompleted: " + responseBody.byteStream());
                     }
                 });
 
