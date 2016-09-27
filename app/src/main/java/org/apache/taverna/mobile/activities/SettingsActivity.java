@@ -33,6 +33,8 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.TavernaApplication;
+import org.apache.taverna.mobile.data.local.PreferencesHelper;
 
 import java.util.List;
 
@@ -73,6 +75,11 @@ public class SettingsActivity extends PreferenceActivity {
                     } else {
                         // For all other preferences, set the summary to the value's
                         // simple string representation.
+                        if(preference.getKey().equals(PreferencesHelper.PREF_KEY_PLAYER_URL)){
+
+                            new PreferencesHelper(TavernaApplication.getContext())
+                                    .setUserPlayerLoggedInFlag(false);
+                        }
                         preference.setSummary(stringValue);
                     }
                     return true;
