@@ -23,6 +23,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -96,6 +97,9 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
     @BindView(R.id.rootLayout)
     RelativeLayout rootLayout;
+
+    @BindView(R.id.fabRun)
+    FloatingActionButton fabRun;
 
     private AlertDialog alertDialog;
 
@@ -252,6 +256,11 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
             licenceId = workflow.getLicenseType().getId();
         }
 
+        if (mWorkflow.getType().getContent().equals("Taverna 2")) {
+            fabRun.setVisibility(View.VISIBLE);
+        }else {
+            fabRun.setVisibility(View.GONE);
+        }
     }
 
     @Override
