@@ -27,6 +27,10 @@ public class ActivityUtils {
 
     public static void addFragmentToActivity (FragmentManager fragmentManager,
                                               Fragment fragment, int frameId) {
+
+        for(int i = 0; i < fragmentManager.getBackStackEntryCount(); ++i) {
+            fragmentManager.popBackStack();
+        }
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(frameId, fragment);
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
