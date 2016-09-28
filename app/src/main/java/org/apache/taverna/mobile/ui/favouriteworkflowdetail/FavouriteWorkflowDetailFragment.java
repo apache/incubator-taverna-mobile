@@ -41,6 +41,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -52,6 +53,7 @@ import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.ui.imagezoom.ImageZoomActivity;
 import org.apache.taverna.mobile.ui.imagezoom.ImageZoomFragment;
+import org.apache.taverna.mobile.ui.workflowrun.WorkflowRunActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import butterknife.BindView;
@@ -173,6 +175,19 @@ public class FavouriteWorkflowDetailFragment extends Fragment
     @OnClick(R.id.ivFav)
     void favClick(View v) {
         mWorkflowDetailPresenter.setFavourite(id);
+    }
+
+
+    @OnClick(R.id.fabRun)
+    void fabRunClick(View v) {
+        if (mWorkflow.getType().getContent().equals("Taverna 2")) {
+            Intent intent = new Intent(getActivity(), WorkflowRunActivity.class);
+            intent.putExtra(WorkflowRunActivity.WORKFLOW_URL, mWorkflow.getContentUri());
+            startActivity(intent);
+        } else {
+            Toast.makeText(getActivity(), "We can only run Taverna 2 workflow", Toast
+                    .LENGTH_LONG).show();
+        }
     }
 
     @OnClick(R.id.ivWorkflowImage)
