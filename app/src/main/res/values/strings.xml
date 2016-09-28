@@ -115,6 +115,7 @@ limitations under the License.
     <string name="no_favourite_workflow_found">No Favourite Workflow Found!!!</string>
     <string name="image_zoom">Image Zoom</string>
     <string name="hint_email">Email or Username</string>
+    <string name="hint_email_player">Email</string>
     <string name="hint_password">Password</string>
     <string name="login_button_description">Login Button</string>
     <string name="err_login_email">Enter valid email</string>

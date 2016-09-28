@@ -44,7 +44,7 @@ limitations under the License.
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_email"
+            android:hint="@string/hint_email_player"
             android:inputType="textEmailAddress"
             android:singleLine="true"/>
 
