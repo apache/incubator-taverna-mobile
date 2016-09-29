@@ -56,6 +56,8 @@ public class PreferencesHelper {
 
     public static final String PREF_KEY_PLAYER_URL = "pref_player_url";
 
+    public static final String PLAYER_DEFAULT_URL = "http://139.59.28.12:3000/";
+
     private final SharedPreferences mPref;
 
     private final SharedPreferences sharedPref;
@@ -197,6 +199,6 @@ public class PreferencesHelper {
     }
 
     public String getPlayerURL() {
-        return sharedPref.getString(PREF_KEY_PLAYER_URL, "http://139.59.28.12:3000/");
+        return sharedPref.getString(PREF_KEY_PLAYER_URL, PLAYER_DEFAULT_URL);
     }
 }
