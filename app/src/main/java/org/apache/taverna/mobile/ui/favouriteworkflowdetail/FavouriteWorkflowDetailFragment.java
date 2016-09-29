@@ -41,7 +41,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -179,15 +178,10 @@ public class FavouriteWorkflowDetailFragment extends Fragment
 
 
     @OnClick(R.id.fabRun)
-    void fabRunClick(View v) {
-        if (mWorkflow.getType().getContent().equals("Taverna 2")) {
+    void fabClickRunWorkflow(View v) {
             Intent intent = new Intent(getActivity(), WorkflowRunActivity.class);
             intent.putExtra(WorkflowRunActivity.WORKFLOW_URL, mWorkflow.getContentUri());
             startActivity(intent);
-        } else {
-            Toast.makeText(getActivity(), "We can only run Taverna 2 workflow", Toast
-                    .LENGTH_LONG).show();
-        }
     }
 
     @OnClick(R.id.ivWorkflowImage)
@@ -265,7 +259,7 @@ public class FavouriteWorkflowDetailFragment extends Fragment
             licenceId = workflow.getLicenseType().getId();
         }
 
-        if (mWorkflow.getType().getContent().equals("Taverna 2")) {
+        if (mWorkflow.getType().getContent().equals(getString(R.string.t2_workflow_type))) {
             fabRun.setVisibility(View.VISIBLE);
         }else {
             fabRun.setVisibility(View.GONE);

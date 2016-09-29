@@ -36,7 +36,7 @@ import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.DownloadingFragment;
 import org.apache.taverna.mobile.ui.playerlogin.PlayerLoginFragment;
 import org.apache.taverna.mobile.utils.NonSwipeableViewPager;
-import org.apache.taverna.mobile.utils.WebViewGen;
+import org.apache.taverna.mobile.utils.WebViewGenerator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,15 +47,23 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         PlayerLoginFragment.OnSuccessful {
 
     public static final String WORKFLOW_URL = "Workflow_url";
-    private final String[] labels = {"Player\nLogin", "Download", "Upload", "Inputs &\n Run"};
+
+    private String[] labels;
+
     @BindView(R.id.stepsView)
     StepsView mStepsView;
+
     @BindView(R.id.viewpager)
     NonSwipeableViewPager mPager;
+
     int position = 0;
-    String workflowRunURL;
+
+    private String workflowRunURL;
+
     private DataManager dataManager;
+
     private WorkflowRunPresenter mWorkflowRunPresenter;
+
     private PagerAdapter mPagerAdapter;
 
     @Override
@@ -72,6 +80,7 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
         mWorkflowRunPresenter.attachView(this);
 
+        labels=getResources().getStringArray(R.array.player_run_slider_view_labels);
 
         mStepsView.setCompletedPosition(position % labels.length)
                 .setLabels(labels)
@@ -139,7 +148,7 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
     @Override
     public void showError() {
-        Toast.makeText(this, "Server Error. Please try after sometime", Toast
+        Toast.makeText(this, getString(R.string.servererr), Toast
                 .LENGTH_LONG).show();
         finish();
     }
@@ -156,13 +165,11 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
                 case 0:
                     return PlayerLoginFragment.newInstance();
                 case 1:
-                    return DownloadingFragment.newInstance("Downloading Workflow");
+                    return DownloadingFragment.newInstance(getString(R.string.downloading_workflow_lable));
                 case 2:
-                    return DownloadingFragment.newInstance("Uploading Workflow");
-                case 3:
-                    return WebViewGen.newInstance(workflowRunURL);
+                    return DownloadingFragment.newInstance(getString(R.string.uploading_workflow_lable));
                 default:
-                    return DownloadingFragment.newInstance("Uploading1+ Workflow");
+                    return WebViewGenerator.newInstance(workflowRunURL);
 
             }
         }

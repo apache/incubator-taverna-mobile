@@ -183,14 +183,11 @@ public class PreferencesHelper {
     }
 
     public void setUserPlayerLoggedInFlagAndCredential(Boolean flag, String credential) {
-
         mPref.edit().putBoolean(PREF_KEY_PLAYER_LOGGED_IN, flag).apply();
-
         mPref.edit().putString(PREF_KEY_PLAYER_CREDENTIAL, credential).apply();
     }
 
     public void setUserPlayerLoggedInFlag(Boolean flag) {
-
         mPref.edit().putBoolean(PREF_KEY_PLAYER_LOGGED_IN, flag).apply();
 
     }

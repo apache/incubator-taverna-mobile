@@ -21,6 +21,7 @@ package org.apache.taverna.mobile.ui.playerlogin;
 import android.util.Base64;
 import android.util.Log;
 
+import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 
@@ -81,14 +82,14 @@ public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
                                                 getEncodedCredential(username, password));
 
                             } else {
-                                getMvpView().showError("Server Error");
+                                getMvpView().showError(R.string.servererr);
                             }
                         }
                     }
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
-                        Log.e(TAG, "onCompleted: " + responseBody.byteStream());
+                        Log.d(TAG, "onCompleted: " + responseBody.byteStream());
                     }
                 });
 

@@ -16,16 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.ui.playerlogin;
-
-import org.apache.taverna.mobile.ui.base.MvpView;
+package org.apache.taverna.mobile.utils;
 
 
-public interface PlayerLoginMvpView extends MvpView {
+public class Constants {
 
-    void showError(int stringID);
+    public static final String ARGS_MESSAGE = "args_message";
 
-    void showCredentialError();
-
-    void validCredential();
+    public static final String ARGS_URL = "url";
 }

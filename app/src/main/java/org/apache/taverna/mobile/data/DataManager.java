@@ -195,14 +195,7 @@ public class DataManager {
 
     public Observable<ResponseBody> authPlayerUserLoginDetail(final String credentials,
                                                               final boolean flagLogin) {
-        return mBaseApiManager.getTavernaPlayerApi().playerlogin(credentials)
-                .concatMap(new Func1<ResponseBody, Observable<? extends ResponseBody>>() {
-                    @Override
-                    public Observable<? extends ResponseBody> call(ResponseBody responseBody) {
-
-                        return Observable.just(responseBody);
-                    }
-                });
+        return mBaseApiManager.getTavernaPlayerApi().playerlogin(credentials);
 
     }
 

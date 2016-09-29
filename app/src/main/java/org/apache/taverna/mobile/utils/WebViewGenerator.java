@@ -31,18 +31,19 @@ import android.widget.ProgressBar;
 
 import org.apache.taverna.mobile.R;
 
-public class WebViewGen extends Fragment {
-    private static final String PARAM1 = "url";
-    private int flag;
+public class WebViewGenerator extends Fragment {
+
     private ProgressBar progressBar;
+
     private WebView web;
+
     private String url;
 
-    public static WebViewGen newInstance(String URL) {
+    public static WebViewGenerator newInstance(String URL) {
 
         Bundle args = new Bundle();
-        args.putString(PARAM1, URL);
-        WebViewGen fragment = new WebViewGen();
+        args.putString(Constants.ARGS_URL, URL);
+        WebViewGenerator fragment = new WebViewGenerator();
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,7 +52,7 @@ public class WebViewGen extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            url = getArguments().getString(PARAM1);
+            url = getArguments().getString(Constants.ARGS_URL);
         }
     }
 

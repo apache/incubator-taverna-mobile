@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,17 +35,17 @@ import butterknife.ButterKnife;
 
 public class DownloadingFragment extends Fragment {
 
-    private static final String ARGS_MESSAGE = "args_message";
 
-    String message;
+
+    private String message;
 
     @BindView(R.id.tvMessage)
-    TextView tvMessage;
+    TextView tv_Message;
 
     public static DownloadingFragment newInstance(String message) {
 
         Bundle args = new Bundle();
-        args.putString(ARGS_MESSAGE, message);
+        args.putString(Constants.ARGS_MESSAGE, message);
         DownloadingFragment fragment = new DownloadingFragment();
         fragment.setArguments(args);
         return fragment;
@@ -54,9 +55,9 @@ public class DownloadingFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        message = getArguments().getString(ARGS_MESSAGE);
-
+        if(getArguments()!=null) {
+            message = getArguments().getString(Constants.ARGS_MESSAGE);
+        }
     }
 
     @Nullable
@@ -74,7 +75,7 @@ public class DownloadingFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        tvMessage.setText(message);
+        tv_Message.setText(message);
     }
 
 }

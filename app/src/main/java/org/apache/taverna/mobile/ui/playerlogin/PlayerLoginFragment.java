@@ -97,20 +97,11 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
         mEditTextEmail.addTextChangedListener(new CustomTextWatcher(mEditTextEmail));
-
-
-        mEditTextPassword.addTextChangedListener(new CustomTextWatcher(mEditTextPassword));
-
         mEditTextEmail.setOnFocusChangeListener(this);
 
+        mEditTextPassword.addTextChangedListener(new CustomTextWatcher(mEditTextPassword));
         mEditTextPassword.setOnFocusChangeListener(this);
-
-
-        //mPlayerLoginPresenter.PlayerLogin("kumarsagar15795@gmail.com", "Sagarishere", true);
-
-
     }
 
 
@@ -133,17 +124,17 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
 
             } else {
 
-                showError("Please enter valid credential");
+                showError(R.string.error_vaild_credential);
             }
         } else {
 
-            showError("NO Internet Connection");
+            showError(R.string.no_internet);
         }
     }
 
     @Override
-    public void showError(String string) {
-        final Snackbar snackbar = Snackbar.make(mEditTextPassword, string, Snackbar
+    public void showError(int stringID) {
+        final Snackbar snackbar = Snackbar.make(mEditTextPassword, getString(stringID), Snackbar
                 .LENGTH_LONG);
         snackbar.setAction("OK", new View.OnClickListener() {
             @Override
@@ -171,10 +162,8 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     private void validateEmail() {
 
         if (mEditTextEmail.getText().toString().trim().isEmpty()) {
-
             mTextInputEmail.setError(getString(R.string.err_login_email));
         } else {
-
             mTextInputEmail.setError(null);
         }
 
@@ -190,10 +179,8 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
 
     private void validatePassword() {
         if (mEditTextPassword.getText().toString().trim().isEmpty()) {
-
             mTextInputPassword.setError(getString(R.string.err_login_password));
         } else {
-
             mTextInputPassword.setError(null);
         }
 

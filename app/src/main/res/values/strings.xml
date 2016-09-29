@@ -122,4 +122,21 @@ limitations under the License.
     <string name="err_login_password">Enter valid password</string>
     <string name="my_workflows">My Workflows</string>
     <string name="no_my_workflow">You have not created any workflow yet !!!!!</string>
+    <string name="error_vaild_credential">Please enter valid credential</string>
+    <string name="t2_workflow_type">Taverna 2</string>
+
+
+    <string-array name="player_run_slider_view_labels">
+        <item>Player \nLogin</item>
+        <item>Download</item>
+        <item>Upload</item>
+        <item>Inputs &amp;\nRun</item>
+    </string-array>
+
+    <string name="downloading_workflow_lable">Downloading Workflow</string>
+    <string name="uploading_workflow_lable">Uploading Workflow</string>
+    <string name="please_wait">Please Wait ...</string>
+    <string name="headline_taverna_player_portal_login">Taverna Player Portal Login</string>
+    <string name="button_text_login">Login</string>
+
 </resources>

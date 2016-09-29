@@ -43,8 +43,7 @@ public interface TavernaPlayerService {
             String authorization);
 
     @POST("/users/sign_in")
-    @Headers({
-            APIEndPoint.XML_ACCEPT_HEADER})
+    @Headers({APIEndPoint.XML_ACCEPT_HEADER})
     Observable<ResponseBody> playerlogin(@Header("Authorization") String
                                                  authorization);
 
