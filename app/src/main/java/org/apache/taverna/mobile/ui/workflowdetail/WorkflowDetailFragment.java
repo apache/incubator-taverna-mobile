@@ -53,6 +53,7 @@ import org.apache.taverna.mobile.ui.imagezoom.ImageZoomActivity;
 import org.apache.taverna.mobile.ui.imagezoom.ImageZoomFragment;
 import org.apache.taverna.mobile.ui.workflowrun.WorkflowRunActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -175,7 +176,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     void fabClickRunWorkflow(View v) {
 
         Intent intent = new Intent(getActivity(), WorkflowRunActivity.class);
-        intent.putExtra(WorkflowRunActivity.WORKFLOW_URL, mWorkflow.getContentUri());
+        intent.putExtra(Constants.WORKFLOW_URL, mWorkflow.getContentUri());
         startActivity(intent);
 
     }

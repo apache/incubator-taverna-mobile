@@ -35,6 +35,7 @@ import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.DownloadingFragment;
 import org.apache.taverna.mobile.ui.playerlogin.PlayerLoginFragment;
+import org.apache.taverna.mobile.utils.Constants;
 import org.apache.taverna.mobile.utils.NonSwipeableViewPager;
 import org.apache.taverna.mobile.utils.WebViewGenerator;
 
@@ -46,9 +47,7 @@ import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 public class WorkflowRunActivity extends FragmentActivity implements WorkflowRunMvpView,
         PlayerLoginFragment.OnSuccessful {
 
-    public static final String WORKFLOW_URL = "Workflow_url";
 
-    private String[] labels;
 
     @BindView(R.id.stepsView)
     StepsView mStepsView;
@@ -58,6 +57,7 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
     int position = 0;
 
+    private String[] labels;
     private String workflowRunURL;
 
     private DataManager dataManager;
@@ -80,7 +80,7 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
         mWorkflowRunPresenter.attachView(this);
 
-        labels=getResources().getStringArray(R.array.player_run_slider_view_labels);
+        labels = getResources().getStringArray(R.array.player_run_slider_view_labels);
 
         mStepsView.setCompletedPosition(position % labels.length)
                 .setLabels(labels)
@@ -99,7 +99,7 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
             mPager.setCurrentItem(++position);
             mStepsView.setCompletedPosition(position % labels.length).drawView();
 
-            mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(WORKFLOW_URL));
+            mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(Constants.WORKFLOW_URL));
         }
 
     }
@@ -116,7 +116,7 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         position = 1;
         mPager.setCurrentItem(position);
         mStepsView.setCompletedPosition(position % labels.length).drawView();
-        mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(WORKFLOW_URL));
+        mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(Constants.WORKFLOW_URL));
     }
 
     @Override
@@ -165,9 +165,11 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
                 case 0:
                     return PlayerLoginFragment.newInstance();
                 case 1:
-                    return DownloadingFragment.newInstance(getString(R.string.downloading_workflow_lable));
+                    return DownloadingFragment.newInstance(getString(R.string
+                            .downloading_workflow_lable));
                 case 2:
-                    return DownloadingFragment.newInstance(getString(R.string.uploading_workflow_lable));
+                    return DownloadingFragment.newInstance(getString(R.string
+                            .uploading_workflow_lable));
                 default:
                     return WebViewGenerator.newInstance(workflowRunURL);
 

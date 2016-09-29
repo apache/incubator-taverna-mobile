@@ -25,10 +25,10 @@ import android.support.v4.app.FragmentTransaction;
 public class ActivityUtils {
 
 
-    public static void addFragmentToActivity (FragmentManager fragmentManager,
-                                              Fragment fragment, int frameId) {
+    public static void addFragmentToActivity(FragmentManager fragmentManager, Fragment fragment,
+                                             int frameId) {
 
-        for(int i = 0; i < fragmentManager.getBackStackEntryCount(); ++i) {
+        for (int i = 0; i < fragmentManager.getBackStackEntryCount(); ++i) {
             fragmentManager.popBackStack();
         }
         FragmentTransaction transaction = fragmentManager.beginTransaction();

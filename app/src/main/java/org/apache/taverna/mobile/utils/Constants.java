@@ -24,4 +24,6 @@ public class Constants {
     public static final String ARGS_MESSAGE = "args_message";
 
     public static final String ARGS_URL = "url";
+
+    public static final String WORKFLOW_URL = "Workflow_url";
 }

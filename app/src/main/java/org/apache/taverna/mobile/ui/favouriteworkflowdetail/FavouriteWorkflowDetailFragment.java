@@ -54,6 +54,7 @@ import org.apache.taverna.mobile.ui.imagezoom.ImageZoomActivity;
 import org.apache.taverna.mobile.ui.imagezoom.ImageZoomFragment;
 import org.apache.taverna.mobile.ui.workflowrun.WorkflowRunActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -179,9 +180,9 @@ public class FavouriteWorkflowDetailFragment extends Fragment
 
     @OnClick(R.id.fabRun)
     void fabClickRunWorkflow(View v) {
-            Intent intent = new Intent(getActivity(), WorkflowRunActivity.class);
-            intent.putExtra(WorkflowRunActivity.WORKFLOW_URL, mWorkflow.getContentUri());
-            startActivity(intent);
+        Intent intent = new Intent(getActivity(), WorkflowRunActivity.class);
+        intent.putExtra(Constants.WORKFLOW_URL, mWorkflow.getContentUri());
+        startActivity(intent);
     }
 
     @OnClick(R.id.ivWorkflowImage)
@@ -261,7 +262,7 @@ public class FavouriteWorkflowDetailFragment extends Fragment
 
         if (mWorkflow.getType().getContent().equals(getString(R.string.t2_workflow_type))) {
             fabRun.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             fabRun.setVisibility(View.GONE);
         }
 

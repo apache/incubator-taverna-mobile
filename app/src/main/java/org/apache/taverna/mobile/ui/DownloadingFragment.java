@@ -36,11 +36,10 @@ import butterknife.ButterKnife;
 public class DownloadingFragment extends Fragment {
 
 
-
-    private String message;
-
     @BindView(R.id.tvMessage)
     TextView tv_Message;
+
+    private String message;
 
     public static DownloadingFragment newInstance(String message) {
 
@@ -55,7 +54,7 @@ public class DownloadingFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getArguments()!=null) {
+        if (getArguments() != null) {
             message = getArguments().getString(Constants.ARGS_MESSAGE);
         }
     }
