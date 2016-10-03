@@ -3,9 +3,11 @@
 /.idea/workspace.xml
 /.idea/libraries
 .DS_Store
-/build
-/.idea/
+build/
+.idea/
 /app/build
 /app/app.iml
 /simple-xml-2.7.1
-
+incubator-taverna-mobile.iml
+TavernaMobile2.iml
+projectFilesBackup/
