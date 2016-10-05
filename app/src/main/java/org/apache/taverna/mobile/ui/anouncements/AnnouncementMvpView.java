@@ -25,11 +25,13 @@ import org.apache.taverna.mobile.ui.base.MvpView;
 
 public interface AnnouncementMvpView extends MvpView {
 
-    void showAllAnouncement(Announcements announcements);
+    void showAllAnnouncement(Announcements announcements);
+
+    void removeLoadMoreProgressBar();
 
     void showProgressbar(boolean b);
 
-    void showErrorSnackBar();
+    void showSnackBar(int message);
 
     void showWaitProgress(boolean b);
 
