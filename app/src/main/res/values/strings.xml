@@ -14,26 +14,25 @@ limitations under the License.
 -->
 <resources>
     <string name="app_name">Taverna Mobile</string>
-    <string name="hello_world"> Empty </string>
+    <string name="hello_world">Empty</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_flash_screen">Taverna Mobile</string>
     <string name="brand">Powered By MyExperiment</string>
     <string-array name="menus">
-        <item >Usage</item>
+        <item>Usage</item>
         <item>Quit</item>
     </string-array>
     <array name="workflow_info">
-        <item >Date Created</item>
+        <item>Date Created</item>
         <item>Date Modified</item>
         <item>Date Last Run</item>
     </array>
-    <string name="hello_blank_fragment"> About Workflow </string>
+    <string name="hello_blank_fragment">About Workflow</string>
     <string name="logininfo">myExperiment Login</string>
     <string name="loginusername">Email or Username</string>
     <string name="loginpassword">Password</string>
     <string name="bLogin">Login</string>
     <string name="title_activity_dashboard_main">Dashboard</string>
-    <string name="no_internet_connection">No Internet Connection</string>
     <string name="no_more_announcement_available">No More Announcement Available</string>
     <string name="failed_to_fetch_announcement">Failed to fetch announcement</string>
     <string name="ok">OK</string>
@@ -41,23 +40,31 @@ limitations under the License.
     <string name="title_favorite">Favorites</string>
     <string name="title_explore">Workflows</string>
     <string name="title_usage">Usage</string>
-    <string name="title_about">About </string>
+    <string name="title_about">About</string>
     <string name="title_exit">Logout</string>
     <string name="title_openworkflow">Open Workflow</string>
     <string name="menu_search">Search</string>
 
     <string name="action_example">Example action</string>
-    <string name="completebrand">Powered by <a href="http://taverna.incubator.apache.org">Apache Taverna</a></string>
-    <string name="search_hint"> Search workflows by name</string>
+    <string name="completebrand">Powered by
+        <a href="http://taverna.incubator.apache.org">Apache Taverna</a>
+    </string>
+    <string name="search_hint">Search workflows by name</string>
 
     <string name="workflow_download">Download</string>
     <string name="workflow_read">View</string>
     <string name="workflow_mark">Favorite</string>
-    <string name="workflow_authorhint">Workflow Author  </string>
+    <string name="workflow_authorhint">Workflow Author</string>
     <string name="workflow_component">Workflow component</string>
-    <string name="favorite_empty"> No Favorites Added Yet</string>
-    <string name="workflow_empty"> No <b>Workflows</b> Available. Pull down to refresh (or check your internet connection)</string>
-    <string name="workflow_run_empty"> <b>Workflows History</b> empty. No runs have been created for this workflow</string>
+    <string name="favorite_empty">No Favorites Added Yet</string>
+    <string name="workflow_empty">No
+        <b>Workflows</b>
+        Available. Pull down to refresh (or check your internet connection)
+    </string>
+    <string name="workflow_run_empty">
+        <b>Workflows History</b>
+        empty. No runs have been created for this workflow
+    </string>
     <string name="wktitle">TITLE</string>
     <string name="marked">Marked On</string>
     <string name="workflow_type_text">Type: %1$s</string>
@@ -68,30 +75,37 @@ limitations under the License.
     <string name="title_activity_workflow_detail">Workflow Detail</string>
 
 
-    <string name="detail_title_section1">Workflow </string>
+    <string name="detail_title_section1">Workflow</string>
     <string name="detail_title_section2">Run History</string>
     <string name="detail_title_section3">Licence | Policy</string>
-    <string name="detail_title_section4"> About </string>
+    <string name="detail_title_section4">About</string>
     <string name="play_workflow">Create Run</string>
-    <string name="err_workflow_conn">Unable to fetch latest workflows. Please check your network connection</string>
-    
+    <string name="err_workflow_conn">Unable to fetch latest workflows. Please check your network
+        connection
+    </string>
+
     <string name="downloadfailed">Download Failed. Please try again</string>
     <string name="downloadprogress">Workflow download in progress</string>
-    <string name="downloaderror">Unable to start Download. Please check your internet connection</string>
+    <string name="downloaderror">Unable to start Download. Please check your internet connection
+    </string>
     <string name="downloadduplicate">Already Downloading</string>
-    <string name="downloadcomplete">  download complete</string>
-    <string name="seemore"> More Info &amp;raquo</string>
+    <string name="downloadcomplete">download complete</string>
+    <string name="seemore">More Info &amp;raquo</string>
     <string name="loading">Loading details</string>
     <string name="loadworkflows">Loading Workflows</string>
-    <string name="fetchrun">Fetching run components </string>
+    <string name="fetchrun">Fetching run components</string>
     <string name="keeplogin">Remain Logged-in</string>
-    
+
     <string name="emailerr">Username must not be empty</string>
     <string name="passworderr">Password must not be empty</string>
     <string name="version_number">v1.0</string>
-    <string name="about">Mobile Application for managing Taverna workflows.\n\nCopyright © 2015&#8211;2016 The Apache Software Foundation, Licensed under the Apache License, Version 2.0.</string>
+    <string name="about">Mobile Application for managing Taverna workflows.\n\nCopyright © 2015&#8211;2016
+        The Apache Software Foundation, Licensed under the Apache License, Version 2.0.
+    </string>
     <string name="about2">View, run and download workflows on your Android mobile device.</string>
-    <string name="about3">Originally developed during Google Summer of Code 2015 for the <a href="http://taverna.incubator.apache.org">Apache Taverna project</a>.</string>
+    <string name="about3">Originally developed during Google Summer of Code 2015 for the<a
+        href="http://taverna.incubator.apache.org">Apache Taverna project</a>.
+    </string>
     <string name="playerconfig">Configure Player Account</string>
     <string name="playerconfig_summary">Username used to login to Taverna player portal</string>
     <string name="playeruser">Username/email</string>
@@ -104,17 +118,39 @@ limitations under the License.
     <string name="runstarted">Run Started</string>
     <string name="run_finishtime">Run finish Time</string>
     <string name="usage_intro">Usage | Login</string>
-    <string name="usage_login_accounts">When the app is started you are initially prompted with an accounts page to login. Use Your myExperiment account to login. You will need to configure a Taverna player account in the settings when you have successfully logged-in to the app. you can also choose to remain logged-in or not from the login page.</string>
+    <string name="usage_login_accounts">When the app is started you are initially prompted with an
+        accounts page to login. Use Your myExperiment account to login. You will need to configure a
+        Taverna player account in the settings when you have successfully logged-in to the app. you
+        can also choose to remain logged-in or not from the login page.
+    </string>
     <string name="usage_dashboard">Usage | Dashboard</string>
-    <string name="usage_dashboard_Text">Once logged-in to the app, a stream of workflows appears as a stream from which you could view, mark workflows for offline viewing. There are two tabs on the dashboard, the second tab presents a list of marked workflows. there is a menu button the pulls out a navigation drawer menu from the left corner of the dashboard. You can also swipe finger from the extreme left of the screen to pull out the menu. Scrolling to the bottom of the workflow screen will load more workflows. You can pull down to refresh workflows for the initial workflow list. the search bar is used to fetch amongst currently loaded workflows.</string>
+    <string name="usage_dashboard_Text">Once logged-in to the app, a stream of workflows appears as
+        a stream from which you could view, mark workflows for offline viewing. There are two tabs
+        on the dashboard, the second tab presents a list of marked workflows. there is a menu button
+        the pulls out a navigation drawer menu from the left corner of the dashboard. You can also
+        swipe finger from the extreme left of the screen to pull out the menu. Scrolling to the
+        bottom of the workflow screen will load more workflows. You can pull down to refresh
+        workflows for the initial workflow list. the search bar is used to fetch amongst currently
+        loaded workflows.
+    </string>
     <string name="usage_menus">Usage | Menus</string>
-    <string name="usage_menu_Text">The navigation drawer brings up a menu. The workflow menu item allows one to quickly return to the workflow streams page from any screen. The \'Open Workflow\' item allows users to pick a valid workflow from external storage and run it against a Taverna Server through a Taverna Player. Settings allow user to configure player accounts and portal urls. Logout allows users to log-out of the app</string>
+    <string name="usage_menu_Text">The navigation drawer brings up a menu. The workflow menu item
+        allows one to quickly return to the workflow streams page from any screen. The \'Open
+        Workflow\' item allows users to pick a valid workflow from external storage and run it
+        against a Taverna Server through a Taverna Player. Settings allow user to configure player
+        accounts and portal urls. Logout allows users to log-out of the app
+    </string>
     <string name="usage_detail">Usage | Workfow Detail</string>
-    <string name="usage_detail_text">The details screen allows users to run particular worklows and provides detailed information about the workflows. Workflows can also be downloaded from here. Workflows can also be marked from this screen which would save much more data for offline use than on the dashboard screen. This screen also provides a set of runs for the workflow from other users</string>
+    <string name="usage_detail_text">The details screen allows users to run particular worklows and
+        provides detailed information about the workflows. Workflows can also be downloaded from
+        here. Workflows can also be marked from this screen which would save much more data for
+        offline use than on the dashboard screen. This screen also provides a set of runs for the
+        workflow from other users
+    </string>
     <string name="runid_text">Workflow Run ID:</string>
 
     <string name="announcement">Announcementss</string>
-    <string name="no_internet">No Internet Connection</string>
+    <string name="no_internet_connection">No Internet Connection</string>
     <string name="licence">Licence</string>
     <string name="no_favourite_workflow_found">No Favourite Workflow Found!!!</string>
     <string name="image_zoom">Image Zoom</string>

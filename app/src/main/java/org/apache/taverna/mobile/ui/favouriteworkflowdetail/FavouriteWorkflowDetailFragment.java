@@ -164,7 +164,7 @@ public class FavouriteWorkflowDetailFragment extends Fragment
         } else {
 
             mProgressBar.setVisibility(View.GONE);
-            showErrorSnackBar(getString(R.string.no_internet));
+            showErrorSnackBar(getString(R.string.no_internet_connection));
         }
 
         setHasOptionsMenu(true);

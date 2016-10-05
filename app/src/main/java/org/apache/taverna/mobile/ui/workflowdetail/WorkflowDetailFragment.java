@@ -159,7 +159,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
         } else {
 
             mProgressBar.setVisibility(View.GONE);
-            showErrorSnackBar(getString(R.string.no_internet));
+            showErrorSnackBar(getString(R.string.no_internet_connection));
         }
 
         setHasOptionsMenu(true);

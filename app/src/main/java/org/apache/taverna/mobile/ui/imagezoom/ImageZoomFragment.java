@@ -119,7 +119,7 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
             mImageZoomPresenter.loadImage(svgURI, workflowImage);
         } else {
 
-            showErrorSnackBar(getString(R.string.no_internet));
+            showErrorSnackBar(getString(R.string.no_internet_connection));
         }
 
 
