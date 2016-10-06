@@ -18,12 +18,13 @@
  */
 package org.apache.taverna.mobile.ui.anouncements;
 
+import android.util.Log;
+
+import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
-
-import android.util.Log;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -68,15 +69,18 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-//                        Log.d(LOG_TAG,e.getMessage());
                         getMvpView().showProgressbar(false);
-                        getMvpView().showErrorSnackBar();
+                        getMvpView().showSnackBar(R.string.failed_to_fetch_announcement);
                     }
 
                     @Override
                     public void onNext(Announcements announcement) {
-                        getMvpView().showAllAnouncement(announcement);
-                        Log.d(LOG_TAG, announcement.getAnnouncement().get(1).getResource());
+                        if (announcement.getAnnouncement() != null) {
+                            getMvpView().showAllAnnouncement(announcement);
+                        } else {
+                            getMvpView().showSnackBar(R.string.no_more_announcement_available);
+                            getMvpView().removeLoadMoreProgressBar();
+                        }
                     }
                 }));
     }
@@ -96,7 +100,7 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                     public void onError(Throwable e) {
                         Log.d(LOG_TAG, e.getMessage());
                         getMvpView().showWaitProgress(false);
-                        getMvpView().showErrorSnackBar();
+                        getMvpView().showSnackBar(R.string.failed_to_fetch_announcement);
                     }
 
                     @Override

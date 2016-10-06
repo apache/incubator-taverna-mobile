@@ -128,7 +128,7 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
             }
         } else {
 
-            showError(R.string.no_internet);
+            showError(R.string.no_internet_connection);
         }
     }
 

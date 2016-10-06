@@ -54,7 +54,7 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         RecyclerView.ViewHolder vh;
         if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout.item_recyclerview, parent, false);
+                    R.layout.item_announcement, parent, false);
 
             vh = new ViewHolder(v);
         } else {

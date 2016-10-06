@@ -83,9 +83,11 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
 
     @Override
     public void onItemClick(View childView, int position) {
-        showWaitProgress(true);
-        mAnnouncementPresenter.loadAnnouncementDetails(mAnnouncements.getAnnouncement().get
-                (position).getId());
+        if (mAnnouncements.getAnnouncement().get(position) != null && position != -1) {
+            showWaitProgress(true);
+            mAnnouncementPresenter.loadAnnouncementDetails(mAnnouncements.getAnnouncement()
+                    .get(position).getId());
+        }
     }
 
     @Override
@@ -132,7 +134,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
                     }
                 } else {
                     Log.i(LOG_TAG, "NO Internet Connection");
-                    showErrorSnackBar();
+                    showSnackBar(R.string.no_internet_connection);
                     if (mSwipeRefresh.isRefreshing()) {
                         mSwipeRefresh.setRefreshing(false);
                     }
@@ -144,7 +146,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         showProgressbar(true);
         mAnnouncementPresenter.loadAllAnnouncement(mPageNumber);
 
-        mRecyclerView.setOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
+        mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int current_page) {
 
@@ -157,7 +159,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
                     Log.i(LOG_TAG, "Loading more");
                 } else {
                     Log.i(LOG_TAG, "Internet not available. Not loading more posts.");
-                    showErrorSnackBar();
+                    showSnackBar(R.string.no_internet_connection);
                 }
             }
         });
@@ -172,13 +174,13 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
 
 
     @Override
-    public void showAllAnouncement(Announcements announcements) {
+    public void showAllAnnouncement(Announcements announcements) {
         if (mPageNumber == 1) {
             mAnnouncements = announcements;
             mAnnouncementAdapter = new AnnouncementAdapter(mAnnouncements.getAnnouncement());
             mRecyclerView.setAdapter(mAnnouncementAdapter);
         } else {
-            mAnnouncements.getAnnouncement().remove(mAnnouncements.getAnnouncement().size() - 1);
+            removeLoadMoreProgressBar();
             mAnnouncements.getAnnouncement().addAll(announcements.getAnnouncement());
         }
 
@@ -187,6 +189,12 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         if (mSwipeRefresh.isRefreshing()) {
             mSwipeRefresh.setRefreshing(false);
         }
+    }
+
+    @Override
+    public void removeLoadMoreProgressBar() {
+        mAnnouncements.getAnnouncement().remove(mAnnouncements.getAnnouncement().size() - 1);
+        mAnnouncementAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -229,10 +237,10 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         super.onResume();
     }
 
-    public void showErrorSnackBar() {
-        final Snackbar snackbar = Snackbar.make(mRecyclerView, "No Internet Connection", Snackbar
-                .LENGTH_LONG);
-        snackbar.setAction("OK", new View.OnClickListener() {
+    @Override
+    public void showSnackBar(int message) {
+        final Snackbar snackbar = Snackbar.make(mRecyclerView, message, Snackbar.LENGTH_LONG);
+        snackbar.setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 snackbar.dismiss();
