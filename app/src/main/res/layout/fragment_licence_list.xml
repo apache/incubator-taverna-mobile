@@ -9,5 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="org.apache.taverna.mobile.ui.org.apache.taverna.mobile.ui.licences.LicenceFragment"
+    tools:context=".ui.licences.LicenceFragment"
     tools:listitem="@layout/fragment_licence" />

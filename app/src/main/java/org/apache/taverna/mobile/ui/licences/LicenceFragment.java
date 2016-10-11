@@ -3,30 +3,23 @@ package org.apache.taverna.mobile.ui.licences;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import mobile.taverna.apache.org.tavernamobile.R;
+import org.apache.taverna.mobile.R;
 
-import org.apache.taverna.mobile.ui.licences.dummy.DummyContent;
-import org.apache.taverna.mobile.ui.licences.dummy.DummyContent.DummyItem;
-
+import org.apache.taverna.mobile.ui.licences.licence.LicenceContent;
 /**
- * A fragment representing a list of Items.
+ * A fragment representing a list of Licence Items.
  * <p/>
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
 public class LicenceFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
     /**
@@ -36,23 +29,9 @@ public class LicenceFragment extends Fragment {
     public LicenceFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static LicenceFragment newInstance(int columnCount) {
-        LicenceFragment fragment = new LicenceFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
     }
 
     @Override
@@ -64,12 +43,8 @@ public class LicenceFragment extends Fragment {
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyLicenceRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            recyclerView.setAdapter(new LicenceRecyclerViewAdapter(LicenceContent.ITEMS, mListener));
         }
         return view;
     }
@@ -103,7 +78,6 @@ public class LicenceFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(LicenceContent.LicenceItem item);
     }
 }

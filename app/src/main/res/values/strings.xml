@@ -13,6 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <resources>
+    <string name="os_licences">Licence info</string>
     <string name="app_name">Taverna Mobile</string>
     <string name="hello_world">Empty</string>
     <string name="action_settings">Settings</string>
