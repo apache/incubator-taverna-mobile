@@ -36,7 +36,9 @@ public class LicenceRecyclerViewAdapter extends RecyclerView.Adapter<LicenceRecy
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mContentView.setText(mValues.get(position).toString());
+        holder.mLicenceNameView.setText(mValues.get(position).getName());
+        holder.mLicenceVersionView.setText(mValues.get(position).getVersion());
+        holder.mLicenceLicenceView.setText("Unknown");
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,18 +59,22 @@ public class LicenceRecyclerViewAdapter extends RecyclerView.Adapter<LicenceRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mContentView;
+        public final TextView mLicenceNameView;
+        public final TextView mLicenceVersionView;
+        public final TextView mLicenceLicenceView;
         public LicenceItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mLicenceNameView = (TextView) view.findViewById(R.id.licence_name);
+            mLicenceVersionView = (TextView) view.findViewById(R.id.licence_version);
+            mLicenceLicenceView = (TextView) view.findViewById(R.id.licence_licence);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " " + mLicenceNameView.getText() + " " + mLicenceVersionView.getText() + " " + mLicenceLicenceView.getText();
         }
     }
 }

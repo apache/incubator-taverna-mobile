@@ -32,7 +32,7 @@ public class LicenceContent {
                 JSONObject libraryDetails = licenceList.getJSONObject(i);
                 String libraryName = libraryDetails.getString("library");
                 String libraryVersion = libraryDetails.getString("version");
-                addItem(createLicenceItem(i, libraryName, libraryVersion));
+                addItem(createLicenceItem(i, libraryName, libraryVersion, ""));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -43,8 +43,8 @@ public class LicenceContent {
         ITEMS.add(item);
     }
 
-    private static LicenceItem createLicenceItem(int position, String name, String version) {
-        return new LicenceItem(String.valueOf(position), name, version);
+    private static LicenceItem createLicenceItem(int position, String name, String version, String licence) {
+        return new LicenceItem(String.valueOf(position), name, version, licence);
     }
 
     /**
@@ -54,16 +54,34 @@ public class LicenceContent {
         public final String id;
         public final String name;
         public final String version;
+        public final String licence;
 
-        public LicenceItem(String id, String name, String version) {
+        public String getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getVersion() {
+            return version;
+        }
+
+        public String getLicence() {
+            return licence;
+        }
+
+        public LicenceItem(String id, String name, String version, String licence) {
             this.id = id;
             this.name = name;
             this.version = version;
+            this.licence = licence;
         }
 
         @Override
         public String toString() {
-            return name + " " + version;
+            return name + " " + version + " " + licence;
         }
     }
 }
