@@ -12,7 +12,7 @@ android {
     }
     defaultConfig {
         applicationId "mobile.taverna.apache.org.tavernamobile"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
