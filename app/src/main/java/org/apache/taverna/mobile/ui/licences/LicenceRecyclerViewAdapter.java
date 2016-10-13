@@ -38,7 +38,7 @@ public class LicenceRecyclerViewAdapter extends RecyclerView.Adapter<LicenceRecy
         holder.mItem = mValues.get(position);
         holder.mLicenceNameView.setText(mValues.get(position).getName());
         holder.mLicenceVersionView.setText(mValues.get(position).getVersion());
-        holder.mLicenceLicenceView.setText("Unknown");
+        holder.mLicenceLicenceView.setText(mValues.get(position).getLicence());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
