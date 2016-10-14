@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.ui.licences;
+package org.apache.taverna.mobile.ui.licence;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -74,8 +74,7 @@ public class LicenceFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            Type type = new TypeToken<List<org.apache.taverna.mobile.data.model.licence
-                    .LicenceContent>>() {
+            Type type = new TypeToken<List<org.apache.taverna.mobile.data.model.>>() {
             }.getType();
             itemList = gson.fromJson(getString(R.string.licence_data), type);
             recyclerView.setAdapter(new LicenceRecyclerViewAdapter(itemList));
