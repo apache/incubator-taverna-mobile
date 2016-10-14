@@ -55,16 +55,15 @@ import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
-import org.apache.taverna.mobile.ui.licences.licence.LicenceContent;
-import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
 import org.apache.taverna.mobile.ui.licences.LicenceFragment;
+import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
 import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 import org.apache.taverna.mobile.utils.ActivityUtils;
 import org.apache.taverna.mobile.utils.WorkflowOpen;
 
 import java.io.File;
 
-public class DashboardMainActivity extends AppCompatActivity implements LicenceFragment.OnListFragmentInteractionListener {
+public class DashboardMainActivity extends AppCompatActivity {
 
     public static final String APP_DIRECTORY_NAME = "TavernaMobile";
     private final int SELECT_WORKFLOW = 10;
@@ -230,11 +229,10 @@ public class DashboardMainActivity extends AppCompatActivity implements LicenceF
 
                             case R.id.os_licences:
 
-                                fragment = new LicenceFragment();
                                 ActivityUtils
                                         .addFragmentToActivity(
                                                 getSupportFragmentManager(),
-                                                fragment,
+                                                LicenceFragment.newInstance(),
                                                 R.id.frame_container);
 
                                 menuItem.setChecked(true);
@@ -387,8 +385,4 @@ public class DashboardMainActivity extends AppCompatActivity implements LicenceF
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onListFragmentInteraction(LicenceContent.LicenceItem item) {
-
-    }
 }
