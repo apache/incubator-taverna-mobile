@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class LicenceContent {
 
-    @SerializedName("library_name")
     private String name;
 
     private String version;

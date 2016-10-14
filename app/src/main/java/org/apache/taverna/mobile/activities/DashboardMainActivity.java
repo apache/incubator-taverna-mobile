@@ -55,7 +55,7 @@ import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
-import org.apache.taverna.mobile.ui.licences.LicenceFragment;
+import org.apache.taverna.mobile.ui.licence.LicenceFragment;
 import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
 import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 import org.apache.taverna.mobile.utils.ActivityUtils;

@@ -35,6 +35,8 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.model.licence.LicenceContent;
 import org.apache.taverna.mobile.ui.adapter.LicenceRecyclerViewAdapter;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -44,7 +46,7 @@ import java.util.List;
 public class LicenceFragment extends Fragment {
 
 
-    private List<LicenceContent> itemList;
+    //private List<LicenceContent> itemList;
 
     private Gson gson;
 
@@ -74,11 +76,29 @@ public class LicenceFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            Type type = new TypeToken<List<org.apache.taverna.mobile.data.model.>>() {
-            }.getType();
-            itemList = gson.fromJson(getString(R.string.licence_data), type);
-            recyclerView.setAdapter(new LicenceRecyclerViewAdapter(itemList));
+            recyclerView.setAdapter(new LicenceRecyclerViewAdapter(loadJSONFromAsset()));
         }
+    }
+
+    private List<LicenceContent> loadJSONFromAsset() {
+        String json = null;
+        List<LicenceContent> itemList = null;
+        try {
+            InputStream is = getActivity().getAssets().open("licences.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        Type type = new TypeToken<List<LicenceContent>>() {
+        }.getType();
+        itemList = gson.fromJson(json, type);
+
+        return itemList;
     }
 
 
