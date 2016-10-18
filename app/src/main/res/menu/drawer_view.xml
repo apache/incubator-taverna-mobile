@@ -17,48 +17,43 @@
 -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<group android:checkableBehavior="single">
-		<item
-			android:id="@+id/nav_workflows"
-			android:icon="@drawable/ic_dashboard_home_web"
-			android:title="All Workflows"/>
-		<item
-			android:id="@+id/nav_my_workflows"
-			android:icon="@drawable/ic_dashboard_home_web"
-			android:title="@string/my_workflows"/>
-		<item
-				android:id="@+id/nav_favourite_workflow"
-				android:icon="@drawable/ic_star_black_24dp"
-				android:title="Favourite Workflows"/>
-
-		<item
-			android:id="@+id/nav_openworkflow"
-			android:icon="@drawable/ic_openwk_web"
-			android:title="Open Workflow"/>
-		<item
-			android:id="@+id/nav_usage"
-			android:icon="@drawable/ic_usage_web"
-			android:title="Usage"/>
-		<item
-			android:id="@+id/nav_announcement"
-			android:icon="@drawable/ic_announcement_black_24dp"
-			android:title="Announcement"/>
-		<item
-			android:id="@+id/nav_about"
-			android:icon="@drawable/ic_about_web"
-			android:title="About"/>
-		<item
-			android:id="@+id/os_licences"
-			android:icon="@drawable/ic_about_web"
-			android:title="@string/os_licences"/>
-		<item
-			android:id="@+id/nav_settings"
-			android:icon="@drawable/ic_setting_workflows_web"
-			android:title="Settings"/>
-		<item
-			android:id="@+id/nav_logout"
-			android:icon="@drawable/ic_logout_web"
-			android:title="Logout"/>
-	</group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_workflows"
+            android:icon="@drawable/ic_dashboard_home_web"
+            android:title="All Workflows"/>
+        <item
+            android:id="@+id/nav_my_workflows"
+            android:icon="@drawable/ic_dashboard_home_web"
+            android:title="@string/my_workflows"/>
+        <item
+            android:id="@+id/nav_favourite_workflow"
+            android:icon="@drawable/ic_star_black_24dp"
+            android:title="Favourite Workflows"/>
+        <item
+            android:id="@+id/nav_usage"
+            android:icon="@drawable/ic_usage_web"
+            android:title="Usage"/>
+        <item
+            android:id="@+id/nav_announcement"
+            android:icon="@drawable/ic_announcement_black_24dp"
+            android:title="Announcement"/>
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about_web"
+            android:title="About"/>
+        <item
+            android:id="@+id/os_licences"
+            android:icon="@drawable/ic_about_web"
+            android:title="@string/os_licences"/>
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_setting_workflows_web"
+            android:title="Settings"/>
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout_web"
+            android:title="Logout"/>
+    </group>
 
 </menu>

@@ -29,7 +29,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -46,7 +45,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
@@ -59,7 +57,6 @@ import org.apache.taverna.mobile.ui.licence.LicenceFragment;
 import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
 import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 import org.apache.taverna.mobile.utils.ActivityUtils;
-import org.apache.taverna.mobile.utils.WorkflowOpen;
 
 import java.io.File;
 
@@ -184,24 +181,7 @@ public class DashboardMainActivity extends AppCompatActivity {
                                 mDrawerLayout.closeDrawers();
                                 return true;
 
-                            case R.id.nav_openworkflow:
 
-                                Intent workflowSelectIntent =
-                                        new Intent(Intent.ACTION_GET_CONTENT)
-                                                .setDataAndTypeAndNormalize(
-                                                    Uri.parse(String.format("%s%s%s",
-                                                        Environment.getExternalStorageDirectory(),
-                                                        File.separator,
-                                                        APP_DIRECTORY_NAME)),
-                                                    "application/vnd.taverna.t2flow+xml");
-
-                                Intent loadWorkflowIntent = Intent.createChooser
-                                        (workflowSelectIntent,
-                                                "Choose Workflow (t2flow or xml)");
-                                startActivityForResult(loadWorkflowIntent, SELECT_WORKFLOW);
-                                menuItem.setChecked(true);
-                                mDrawerLayout.closeDrawers();
-                                return true;
                             case R.id.nav_usage:
 
                                 aboutDialog.setCanceledOnTouchOutside(true);
@@ -265,38 +245,8 @@ public class DashboardMainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK && requestCode == SELECT_WORKFLOW) {
-            String workflowPath = data.getData().getPath();
-            //   Toast.makeText(getBaseContext(), "Path: "+workflowPath, Toast.LENGTH_LONG)
-            // .show();
-            String type = getMimeType(data.getData().getPath());
-            if (type.equals("text/xml") || type.equals("application/vnd.taverna.t2flow+xml")) {
 
-                new WorkflowOpen(this).execute(workflowPath);
-            } else {
-                Toast.makeText(getBaseContext(), "Invalid worklow. Please try again", Toast
-                        .LENGTH_LONG).show();
 
-            }
-        }
-    }
-
-    /**
-     * Return the mimetype of the file selected to be run as a workflow
-     *
-     * @param url the path to the seleted file
-     * @return the mimetype of the file selected
-     */
-    private String getMimeType(String url) {
-        String type = null;
-        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
-        if (extension != null) {
-            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-        }
-        return type;
-    }
 
 
     public void restoreActionBar() {
