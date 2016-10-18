@@ -1,8 +1,5 @@
 package org.apache.taverna.mobile.data.model.licence;
 
-import com.google.gson.annotations.SerializedName;
-
-
 public class LicenceContent {
 
     private String name;

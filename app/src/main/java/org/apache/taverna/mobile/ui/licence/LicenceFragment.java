@@ -24,6 +24,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,6 @@ import org.apache.taverna.mobile.ui.adapter.LicenceRecyclerViewAdapter;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.util.List;
 
 /**
@@ -46,7 +46,7 @@ import java.util.List;
 public class LicenceFragment extends Fragment {
 
 
-    //private List<LicenceContent> itemList;
+    private static final String TAG = LicenceFragment.class.getSimpleName();
 
     private Gson gson;
 
@@ -91,12 +91,12 @@ public class LicenceFragment extends Fragment {
             is.close();
             json = new String(buffer, "UTF-8");
         } catch (IOException ex) {
-            ex.printStackTrace();
+            Log.i(TAG, IOException.class.getSimpleName());
             return null;
         }
-        Type type = new TypeToken<List<LicenceContent>>() {
-        }.getType();
-        itemList = gson.fromJson(json, type);
+        TypeToken<List<LicenceContent>> typeToken = new TypeToken<List<LicenceContent>>() {
+        };
+        itemList = gson.fromJson(json, typeToken.getType());
 
         return itemList;
     }
