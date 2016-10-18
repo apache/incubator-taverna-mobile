@@ -181,4 +181,26 @@ limitations under the License.
     <string name="please_wait">Please Wait ...</string>
     <string name="headline_taverna_player_portal_login">Taverna Player Portal Login</string>
     <string name="button_text_login">Login</string>
+
+
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <string name="pref_header_general">General</string>
+
+    <!-- Login status info-->
+    <string name="pref_remainLogged_in">Remain Logged-in</string>
+    <string name="pref_login_description">Decide whether or not to be automatically logged-in when the app starts</string>
+    <!-- Player Portal url info -->
+    <string name="pref_player_default"> http://heater.cs.man.ac.uk:3000/</string>   <!-- default value -->
+    <string name="pref_player_title">Configure Taverna player portal</string>
+    <string name="pref_player_des">Configure a different player URL for the app to use. End with the mount point(/)</string>
+
+    <!-- Server Portal url info -->
+    <string name="pref_server_default"> http://heater.cs.man.ac.uk:8090/</string>   <!-- default value -->
+    <string name="pref_server_title">Configure Taverna Server </string>
+    <string name="pref_server_des">Configure a different Taverna Server for the app</string>
+
+    <!-- Strings related to Settings -->
 </resources>
