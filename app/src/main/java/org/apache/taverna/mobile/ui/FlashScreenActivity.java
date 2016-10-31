@@ -25,7 +25,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.activities.DashboardMainActivity;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.login.LoginActivity;

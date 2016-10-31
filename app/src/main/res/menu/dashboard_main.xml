@@ -20,7 +20,7 @@ limitations under the License.
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="org.apache.taverna.mobile.activities.DashboardMainActivity">
+    tools:context="org.apache.taverna.mobile.ui.DashboardMainActivity">
 
     <item android:id="@+id/action_search"
         android:title="@string/menu_search"

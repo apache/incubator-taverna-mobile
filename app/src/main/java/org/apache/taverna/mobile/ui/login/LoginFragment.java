@@ -36,7 +36,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.activities.DashboardMainActivity;
+import org.apache.taverna.mobile.ui.DashboardMainActivity;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.utils.ConnectionInfo;

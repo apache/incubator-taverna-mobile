@@ -45,7 +45,7 @@ limitations under the License.
             </intent-filter>
         </activity>
         <activity
-                android:name=".activities.DashboardMainActivity"
+                android:name=".ui.DashboardMainActivity"
                 android:label="@string/title_activity_dashboard_main"
                 android:launchMode="singleTop">
             <intent-filter>
@@ -56,68 +56,34 @@ limitations under the License.
                     android:name="android.app.searchable"
                     android:resource="@xml/searchable"/>
         </activity>
-        <activity
-                android:name=".activities.WorkflowDetailActivity"
-                android:label="@string/title_activity_workflow_detail"
-                android:parentActivityName=".activities.DashboardMainActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="org.apache.taverna.mobile.activities.DashboardMainActivity"/>
-        </activity>
 
-        <receiver
-                android:name=".broadcastreceivers.WorkflowDownloadReceiver"
-                android:enabled="true"
-                android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
-            </intent-filter>
-        </receiver>
 
         <activity
                 android:name=".activities.SettingsActivity"
                 android:label="@string/title_activity_settings"
-                android:parentActivityName=".activities.DashboardMainActivity">
+                android:parentActivityName=".ui.DashboardMainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="org.apache.taverna.mobile.activities.DashboardMainActivity"/>
+                    android:value="org.apache.taverna.mobile.ui.DashboardMainActivity"/>
         </activity>
-        <activity
-                android:name=".activities.RunResult"
-                android:label="@string/title_activity_run_result"
-                android:parentActivityName=".activities.WorkflowDetailActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="org.apache.taverna.mobile.activities.WorkflowDetailActivity"/>
-        </activity>
-        <activity
-                android:name="com.dropbox.client2.android.AuthActivity"
-                android:launchMode="singleTask"
-                android:configChanges="orientation|keyboard">
-            <intent-filter>
-                <!-- Change this to be db- followed by your app key -->
-                <data android:scheme="db-doicbvkfyzligh2"/>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
+
+
         <activity
                 android:name=".ui.workflowdetail.WorkflowDetailActivity"
                 android:label="@string/title_activity_run_result"
-                android:parentActivityName=".activities.DashboardMainActivity">
+                android:parentActivityName=".ui.DashboardMainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="org.apache.taverna.mobile.activities.DashboardMainActivity"/>
+                    android:value="org.apache.taverna.mobile.ui.DashboardMainActivity"/>
         </activity>
 
         <activity
             android:name=".ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity"
             android:label="@string/title_activity_run_result"
-            android:parentActivityName=".activities.DashboardMainActivity">
+            android:parentActivityName=".ui.DashboardMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.apache.taverna.mobile.activities.DashboardMainActivity"/>
+                android:value="org.apache.taverna.mobile.ui.DashboardMainActivity"/>
         </activity>
 
         <activity android:name=".ui.imagezoom.ImageZoomActivity"
