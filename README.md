@@ -14,6 +14,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
+# Status 
+ [![Build Status](https://travis-ci.org/apache/incubator-taverna-mobile.svg?branch=master)](https://travis-ci.org/apache/incubator-taverna-mobile)
 # Apache Taverna Mobile
 
 Apache Taverna Mobile is an Android app
