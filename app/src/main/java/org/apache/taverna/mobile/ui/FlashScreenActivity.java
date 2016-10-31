@@ -46,7 +46,7 @@ public class FlashScreenActivity extends AppCompatActivity {
             startActivity(new Intent(FlashScreenActivity.this, LoginActivity.class));
             (FlashScreenActivity.this).finish();
         } else {
-            startActivity(new Intent(FlashScreenActivity.this, DashboardMainActivity.class));
+            startActivity(new Intent(FlashScreenActivity.this, DashboardActivity.class));
             (FlashScreenActivity.this).finish();
         }
     }

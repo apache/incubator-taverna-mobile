@@ -45,7 +45,7 @@ limitations under the License.
             </intent-filter>
         </activity>
         <activity
-                android:name=".ui.DashboardMainActivity"
+                android:name=".ui.DashboardActivity"
                 android:label="@string/title_activity_dashboard_main"
                 android:launchMode="singleTop">
             <intent-filter>
@@ -61,29 +61,29 @@ limitations under the License.
         <activity
                 android:name=".activities.SettingsActivity"
                 android:label="@string/title_activity_settings"
-                android:parentActivityName=".ui.DashboardMainActivity">
+                android:parentActivityName=".ui.DashboardActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="org.apache.taverna.mobile.ui.DashboardMainActivity"/>
+                    android:value="org.apache.taverna.mobile.ui.DashboardActivity"/>
         </activity>
 
 
         <activity
                 android:name=".ui.workflowdetail.WorkflowDetailActivity"
                 android:label="@string/title_activity_run_result"
-                android:parentActivityName=".ui.DashboardMainActivity">
+                android:parentActivityName=".ui.DashboardActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="org.apache.taverna.mobile.ui.DashboardMainActivity"/>
+                    android:value="org.apache.taverna.mobile.ui.DashboardActivity"/>
         </activity>
 
         <activity
             android:name=".ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity"
             android:label="@string/title_activity_run_result"
-            android:parentActivityName=".ui.DashboardMainActivity">
+            android:parentActivityName=".ui.DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.apache.taverna.mobile.ui.DashboardMainActivity"/>
+                android:value="org.apache.taverna.mobile.ui.DashboardActivity"/>
         </activity>
 
         <activity android:name=".ui.imagezoom.ImageZoomActivity"

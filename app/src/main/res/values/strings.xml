@@ -15,7 +15,7 @@ limitations under the License.
 <resources>
     <string name="os_licence_version_text">Version:</string>
     <string name="os_licence_licence_text">Licence:</string>
-    <string name="title_nav_os_licences">Licence info</string>
+
     <string name="app_name">Taverna Mobile</string>
     <string name="hello_world">Empty</string>
     <string name="action_settings">Settings</string>
@@ -162,7 +162,7 @@ limitations under the License.
     <string name="login_button_description">Login Button</string>
     <string name="err_login_email">Enter valid email</string>
     <string name="err_login_password">Enter valid password</string>
-    <string name="title_nav_my_workflows">My Workflows</string>
+
     <string name="no_my_workflow">You have not created any workflow yet !!!!!</string>
     <string name="error_vaild_credential">Please enter valid credential</string>
     <string name="t2_workflow_type">Taverna 2</string>
@@ -209,6 +209,7 @@ limitations under the License.
     <string name="tiitle_nav_logout">Logout</string>
     <string name="title_nav_usage">Usage</string>
     <string name="title_nav_about">About</string>
-
+    <string name="title_nav_my_workflows">My Workflows</string>
+    <string name="title_nav_os_licences">Licence info</string>
     <!-- Strings related to Settings -->
 </resources>

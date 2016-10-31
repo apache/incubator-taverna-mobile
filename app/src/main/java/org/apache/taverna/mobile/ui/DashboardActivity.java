@@ -47,7 +47,7 @@ import org.apache.taverna.mobile.utils.ActivityUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DashboardMainActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity {
 
     @BindView(R.id.nav_view)
     NavigationView navigationView;
@@ -71,16 +71,12 @@ public class DashboardMainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        if (navigationView != null) {
-            setupDrawerContent(navigationView);
-        }
+        setupDrawerContent(navigationView);
 
         aboutDialog = new Dialog(this);
 
         setSupportActionBar(toolbar);
-
         final ActionBar ab = getSupportActionBar();
-
         if (ab != null) {
             ab.setHomeAsUpIndicator(R.drawable.ic_menu);
             ab.setDisplayHomeAsUpEnabled(true);
@@ -203,14 +199,12 @@ public class DashboardMainActivity extends AppCompatActivity {
 
                             case R.id.nav_logout:
 
-                                finish();
-
                                 mDrawerLayout.closeDrawers();
                                 dataManager.getPreferencesHelper().setLoggedInFlag(false);
 
                                 startActivity(new Intent(getApplicationContext(),
                                         LoginActivity.class));
-
+                                finish();
                                 return true;
 
                         }

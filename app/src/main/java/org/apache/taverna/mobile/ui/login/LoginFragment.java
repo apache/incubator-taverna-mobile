@@ -36,7 +36,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.ui.DashboardMainActivity;
+import org.apache.taverna.mobile.ui.DashboardActivity;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
@@ -188,7 +188,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     @Override
     public void showDashboardActivity() {
 
-        startActivity(new Intent(getActivity(), DashboardMainActivity.class));
+        startActivity(new Intent(getActivity(), DashboardActivity.class));
         getActivity().finish();
     }
 
