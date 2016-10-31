@@ -15,6 +15,7 @@
    limitations under the License.
 -->
 # Status 
+ [![Join the chat at https://gitter.im/apache/taverna](https://badges.gitter.im/apache/taverna.svg)](https://gitter.im/apache/taverna?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
  [![Build Status](https://travis-ci.org/apache/incubator-taverna-mobile.svg?branch=master)](https://travis-ci.org/apache/incubator-taverna-mobile)
 # Apache Taverna Mobile
 
