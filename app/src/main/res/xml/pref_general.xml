@@ -42,7 +42,7 @@
         android:capitalize="words"
         android:singleLine="true"
         android:maxLines="1" />
-    <EditTextPreference
+   <!--  <EditTextPreference
         android:key="pref_server_url"
         android:title="@string/pref_server_title"
         android:summary="@string/pref_server_des"
@@ -51,7 +51,7 @@
         android:inputType="textCapWords"
         android:capitalize="words"
         android:singleLine="true"
-        android:maxLines="1" />
+        android:maxLines="1" /> -->
     <PreferenceCategory
         android:icon="@drawable/gear_icon"
         android:title="@string/playerconfig">
