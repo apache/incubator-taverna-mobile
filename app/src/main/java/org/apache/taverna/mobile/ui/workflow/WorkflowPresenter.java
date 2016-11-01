@@ -18,6 +18,7 @@
  */
 package org.apache.taverna.mobile.ui.workflow;
 
+import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
@@ -33,7 +34,7 @@ import rx.schedulers.Schedulers;
 
 public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
 
-    public final String LOG_TAG = getClass().getSimpleName();
+    public final String LOG_TAG = WorkflowPresenter.class.getSimpleName();
     private DataManager mDataManager;
     private Subscription mSubscriptions;
 
@@ -54,6 +55,7 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
     }
 
     public void loadAllWorkflow(int pageNumber) {
+        getMvpView().showProgressbar(true);
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
         mSubscriptions = mDataManager.getAllWorkflow(getQueryOptions(pageNumber))
                 .observeOn(AndroidSchedulers.mainThread())
@@ -61,16 +63,18 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
                 .subscribe(new Observer<Workflows>() {
                     @Override
                     public void onCompleted() {
-                        getMvpView().showProgressbar(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         getMvpView().showProgressbar(false);
+                        getMvpView().showSnackBar(R.string.error_failed_to_fetch_workflow);
+                        getMvpView().removeLoadMoreProgressbar();
                     }
 
                     @Override
                     public void onNext(Workflows workflows) {
+                        getMvpView().showProgressbar(false);
                         getMvpView().removeLoadMoreProgressbar();
                         getMvpView().showWorkflows(workflows);
                     }
@@ -79,7 +83,6 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
     }
 
     private Map<String, String> getQueryOptions(int pageNumber) {
-
         Map<String, String> option = new HashMap<>();
         option.put("elements", "title,type,uploader,preview,created-at");
         option.put("page", String.valueOf(pageNumber));

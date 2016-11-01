@@ -26,4 +26,8 @@ public class Constants {
     public static final String ARGS_URL = "url";
 
     public static final String WORKFLOW_URL = "Workflow_url";
+
+    public static final String WORKFLOW_ID = "workflow_id";
+
+    public static final String WORKFLOW_TITLE = "workflow_title";
 }
