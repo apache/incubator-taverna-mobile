@@ -33,7 +33,7 @@ import rx.schedulers.Schedulers;
 
 public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
 
-    public final String LOG_TAG = getClass().getSimpleName();
+    public final String LOG_TAG = WorkflowPresenter.class.getSimpleName();
     private DataManager mDataManager;
     private Subscription mSubscriptions;
 
@@ -54,6 +54,7 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
     }
 
     public void loadAllWorkflow(int pageNumber) {
+        getMvpView().showProgressbar(true);
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
         mSubscriptions = mDataManager.getAllWorkflow(getQueryOptions(pageNumber))
                 .observeOn(AndroidSchedulers.mainThread())
@@ -61,25 +62,25 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
                 .subscribe(new Observer<Workflows>() {
                     @Override
                     public void onCompleted() {
-                        getMvpView().showProgressbar(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         getMvpView().showProgressbar(false);
+                        getMvpView().showSnackBar("Failed to load workflow");
                     }
 
                     @Override
                     public void onNext(Workflows workflows) {
                         getMvpView().removeLoadMoreProgressbar();
                         getMvpView().showWorkflows(workflows);
+                        getMvpView().showProgressbar(false);
                     }
                 });
 
     }
 
     private Map<String, String> getQueryOptions(int pageNumber) {
-
         Map<String, String> option = new HashMap<>();
         option.put("elements", "title,type,uploader,preview,created-at");
         option.put("page", String.valueOf(pageNumber));

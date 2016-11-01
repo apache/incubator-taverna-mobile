@@ -25,12 +25,6 @@
 
 package org.apache.taverna.mobile.ui.adapter;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.model.Workflow;
-
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -40,6 +34,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.model.Workflow;
 
 import java.util.List;
 
@@ -66,7 +66,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void addWorkflow(Workflow workflow) {
         this.mWorkflowList.add(workflow);
         this.notifyDataSetChanged();
-
     }
 
     @Override
@@ -76,12 +75,10 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(
                     R.layout.item_recyclerview_dashboard, parent, false);
-
             vh = new ViewHolder(v);
         } else {
             View v = LayoutInflater.from(parent.getContext()).inflate(
                     R.layout.item_progressbar, parent, false);
-
             vh = new ProgressViewHolder(v);
         }
         return vh;
@@ -94,7 +91,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             Workflow workflow = mWorkflowList.get(position);
             String date = workflow.getCreatedAt()
                     .substring(0, workflow.getCreatedAt().indexOf(' '));
-
 
             ((ViewHolder) holder).tvDate.setText(date);
             ((ViewHolder) holder).tvTitle.setText(workflow.getTitle());
@@ -114,7 +110,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        //Log.d(TAG, "getItemCount: " + mWorkflowList.size());
         return mWorkflowList.size();
     }
 

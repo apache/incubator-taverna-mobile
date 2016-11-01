@@ -19,13 +19,14 @@
 package org.apache.taverna.mobile.ui.workflowdetail;
 
 
-import org.apache.taverna.mobile.R;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,20 +44,21 @@ public class WorkflowDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
-
         ActionBar actionbar = getSupportActionBar();
+
+        String workflowTitle = getIntent().getStringExtra(Constants.WORKFLOW_TITLE);
+        String workflowId = getIntent().getStringExtra(Constants.WORKFLOW_ID);
 
         if (actionbar != null) {
             actionbar.setHomeButtonEnabled(true);
             actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setTitle(getIntent().getStringExtra("title"));
+            actionbar.setTitle(workflowTitle);
         }
 
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.frame_container
-                            , WorkflowDetailFragment.newInstance(getIntent().getStringExtra("id")))
+                    .add(R.id.frame_container, WorkflowDetailFragment.newInstance(workflowId))
                     .commit();
         }
 
