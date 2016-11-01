@@ -37,6 +37,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.model.Workflow;
@@ -74,7 +77,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout.item_recyclerview_dashboard, parent, false);
+                    R.layout.item_workflow_dashboard, parent, false);
             vh = new ViewHolder(v);
         } else {
             View v = LayoutInflater.from(parent.getContext()).inflate(
@@ -85,7 +88,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder) {
 
             Workflow workflow = mWorkflowList.get(position);
@@ -104,7 +107,15 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.placeholder)
-                    .into(((ViewHolder) holder).ivWorkflowImage);
+                    .into(new SimpleTarget<GlideDrawable>() {
+                        @Override
+                        public void onResourceReady(GlideDrawable resource,
+                                GlideAnimation<? super GlideDrawable> glideAnimation) {
+                            ((ViewHolder) holder).ivWorkflowImage.setImageDrawable(resource);
+                            ((ViewHolder) holder).ivWorkflowImage
+                                    .setScaleType(ImageView.ScaleType.FIT_XY);
+                        }
+                    });
         }
     }
 

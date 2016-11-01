@@ -31,8 +31,8 @@
                 android:id="@+id/ivWorkflowImage"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/sliding_header"/>
+                android:scaleType="center"
+                android:src="@drawable/placeholder"/>
         <TextView
                 android:background="@color/black_background"
                 android:id="@+id/tvUploader"

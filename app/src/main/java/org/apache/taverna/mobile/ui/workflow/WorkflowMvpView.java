@@ -26,9 +26,11 @@ public interface WorkflowMvpView extends MvpView {
 
     void showProgressbar(boolean b);
 
-    void showSnackBar(String message);
+    void showSnackBar(int message);
 
     void showWorkflows(Workflows workflows);
 
     void removeLoadMoreProgressbar();
+
+    void addLoadMoreProgressbar();
 }

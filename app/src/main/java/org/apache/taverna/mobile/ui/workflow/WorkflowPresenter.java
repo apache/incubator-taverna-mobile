@@ -18,6 +18,7 @@
  */
 package org.apache.taverna.mobile.ui.workflow;
 
+import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
@@ -67,14 +68,15 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
                     @Override
                     public void onError(Throwable e) {
                         getMvpView().showProgressbar(false);
-                        getMvpView().showSnackBar("Failed to load workflow");
+                        getMvpView().showSnackBar(R.string.error_failed_to_fetch_workflow);
+                        getMvpView().removeLoadMoreProgressbar();
                     }
 
                     @Override
                     public void onNext(Workflows workflows) {
+                        getMvpView().showProgressbar(false);
                         getMvpView().removeLoadMoreProgressbar();
                         getMvpView().showWorkflows(workflows);
-                        getMvpView().showProgressbar(false);
                     }
                 });
 

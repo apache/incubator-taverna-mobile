@@ -99,12 +99,11 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
             public void onLoadMore(int current_page) {
                 if (ConnectionInfo.isConnectingToInternet(getContext())
                         && mWorkflowList.size() % 10 == 0) {
-                    mWorkflowList.add(null);
-                    mWorkflowAdapter.notifyItemInserted(mWorkflowList.size());
+                    addLoadMoreProgressbar();
                     ++mPageNumber;
                     mWorkflowPresenter.loadAllWorkflow(mPageNumber);
                 } else if (!ConnectionInfo.isConnectingToInternet(getContext())) {
-                    showSnackBar(getActivity().getString(R.string.no_internet_connection));
+                    showSnackBar(R.string.no_internet_connection);
                 }
             }
         });
@@ -124,7 +123,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
             mWorkflowPresenter.loadAllWorkflow(mPageNumber);
             mSwipeRefresh.setRefreshing(true);
         } else {
-            showSnackBar(getActivity().getString(R.string.no_internet_connection));
+            showSnackBar(R.string.no_internet_connection);
             if (mSwipeRefresh.isRefreshing()) {
                 mSwipeRefresh.setRefreshing(false);
             }
@@ -133,19 +132,17 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
 
     @Override
     public void showProgressbar(boolean show) {
-        mSwipeRefresh.setRefreshing(show);
         if (show && mWorkflowAdapter.getItemCount() == 0) {
             mProgressBar.setVisibility(View.VISIBLE);
-            mSwipeRefresh.setRefreshing(false);
         } else {
             mProgressBar.setVisibility(View.GONE);
         }
-
     }
 
     @Override
-    public void showSnackBar(String message) {
-        final Snackbar snackbar = Snackbar.make(mRecyclerView, message, Snackbar.LENGTH_INDEFINITE);
+    public void showSnackBar(int message) {
+        final Snackbar snackbar = Snackbar.make(mRecyclerView, getActivity().getString(message),
+                Snackbar.LENGTH_INDEFINITE);
         snackbar.setAction(getActivity().getString(R.string.ok), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -158,6 +155,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
     @Override
     public void showWorkflows(Workflows workflows) {
         if (mPageNumber == 1) {
+            mSwipeRefresh.setRefreshing(false);
             mWorkflowList.clear();
         }
         mWorkflowList.addAll(workflows.getWorkflowList());
@@ -170,6 +168,12 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
             mWorkflowList.remove(mWorkflowList.size() - 1);
             mWorkflowAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void addLoadMoreProgressbar() {
+        mWorkflowList.add(null);
+        mWorkflowAdapter.notifyItemInserted(mWorkflowList.size());
     }
 
     @Override

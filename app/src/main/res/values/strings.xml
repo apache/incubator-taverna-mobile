@@ -162,6 +162,7 @@ limitations under the License.
     <string name="login_button_description">Login Button</string>
     <string name="err_login_email">Enter valid email</string>
     <string name="err_login_password">Enter valid password</string>
+    <string name="error_failed_to_fetch_workflow">Failed to fetch Workflow</string>
 
     <string name="no_my_workflow">You have not created any workflow yet !!!!!</string>
     <string name="error_vaild_credential">Please enter valid credential</string>
