@@ -18,88 +18,38 @@
  */
 package org.apache.taverna.mobile.ui.licence;
 
-import android.content.Context;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import android.webkit.WebView;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.model.licence.LicenceContent;
-import org.apache.taverna.mobile.ui.adapter.LicenceRecyclerViewAdapter;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 /**
- * A fragment representing a list of Licence Items.
+ * A fragment displaying a dialog with the licence info.
  */
-public class LicenceFragment extends Fragment {
+public class LicenceFragment extends DialogFragment {
 
-
-    private static final String TAG = LicenceFragment.class.getSimpleName();
-
-    private Gson gson;
 
     public static LicenceFragment newInstance() {
 
         return new LicenceFragment();
     }
 
+    @NonNull
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        gson = new Gson();
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        WebView view = (WebView) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_licence, null);
+        view.loadUrl("file:///android_asset/licences.html");
+        return new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_Light_Dialog_Alert)
+                .setTitle(getString(R.string.title_nav_os_licences))
+                .setView(view)
+                .setPositiveButton(android.R.string.ok, null)
+                .create();
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_licence_list, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        if (view instanceof RecyclerView) {
-
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(new LicenceRecyclerViewAdapter(loadJSONFromAsset()));
-        }
-    }
-
-    private List<LicenceContent> loadJSONFromAsset() {
-        String json = null;
-        List<LicenceContent> itemList = null;
-        try {
-            InputStream is = getActivity().getAssets().open("licences.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            Log.i(TAG, IOException.class.getSimpleName());
-            return null;
-        }
-        TypeToken<List<LicenceContent>> typeToken = new TypeToken<List<LicenceContent>>() {
-        };
-        itemList = gson.fromJson(json, typeToken.getType());
-
-        return itemList;
-    }
-
 
 }

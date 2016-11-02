@@ -18,7 +18,10 @@
  */
 package org.apache.taverna.mobile.ui;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -28,8 +31,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.TableLayout;
 
 import org.apache.taverna.mobile.R;
@@ -178,13 +183,15 @@ public class DashboardActivity extends AppCompatActivity {
                                 return true;
 
                             case R.id.os_licences:
+                                WebView view = (WebView) getLayoutInflater().inflate(R.layout.fragment_licence, navigationView, false);
+                                view.loadUrl("file:///android_asset/licences.html");
 
+                                LicenceFragment dialog = LicenceFragment.newInstance();
+                                dialog.show(getSupportFragmentManager(), "LicenceDialog");
                                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                                         LicenceFragment.newInstance(), R.id.frame_container);
 
-                                menuItem.setChecked(true);
                                 mDrawerLayout.closeDrawers();
-                                toolbar.setTitle(R.string.title_nav_os_licences);
                                 return true;
 
                             case R.id.nav_settings:
