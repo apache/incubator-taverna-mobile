@@ -58,6 +58,10 @@ public class PreferencesHelper {
 
     public static final String PLAYER_DEFAULT_URL = "http://139.59.28.12:3000/";
 
+    public static final String PREF_KEY_PLAYER_USER_EMAIL = "pref_user";
+
+    public static final String PREF_KEY_PLAYER_USER_PASSWORD = "pref_password";
+
     private final SharedPreferences mPref;
 
     private final SharedPreferences sharedPref;
@@ -127,6 +131,14 @@ public class PreferencesHelper {
 
     private void setUserDescription(String userDescription) {
         mPref.edit().putString(PREF_KEY_USER_DESCRIPTION, userDescription).apply();
+    }
+
+    public String getPlayerUserEmail() {
+        return sharedPref.getString(PREF_KEY_PLAYER_USER_EMAIL, null);
+    }
+
+    public String getPlayerUserPassword() {
+        return sharedPref.getString(PREF_KEY_PLAYER_USER_PASSWORD, null);
     }
 
     public String getUserEmail() {

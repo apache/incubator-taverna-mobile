@@ -27,6 +27,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,6 +91,10 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
         View rootView = inflater.inflate(R.layout.fragment_player_login_layout, container, false);
         ButterKnife.bind(this, rootView);
         mPlayerLoginPresenter.attachView(this);
+        String email = dataManager.getPreferencesHelper().getPlayerUserEmail();
+        String pw = dataManager.getPreferencesHelper().getPlayerUserPassword();
+        mEditTextEmail.setText(email);
+        mEditTextPassword.setText(pw);
         return rootView;
     }
 
