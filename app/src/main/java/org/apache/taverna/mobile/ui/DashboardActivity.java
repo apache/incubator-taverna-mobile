@@ -183,9 +183,7 @@ public class DashboardActivity extends AppCompatActivity {
                                 return true;
 
                             case R.id.os_licences:
-                                WebView view = (WebView) getLayoutInflater().inflate(R.layout.fragment_licence, navigationView, false);
-                                view.loadUrl("file:///android_asset/licences.html");
-
+                                
                                 LicenceFragment dialog = LicenceFragment.newInstance();
                                 dialog.show(getSupportFragmentManager(), "LicenceDialog");
                                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
