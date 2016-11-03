@@ -18,10 +18,8 @@
  */
 package org.apache.taverna.mobile.ui;
 
-import android.app.AlertDialog;
+
 import android.app.Dialog;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -29,9 +27,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
@@ -43,7 +41,6 @@ import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
-import org.apache.taverna.mobile.ui.licence.LicenceFragment;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
 import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
 import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
@@ -64,7 +61,7 @@ public class DashboardActivity extends AppCompatActivity {
     Toolbar toolbar;
 
 
-    private Dialog aboutDialog;
+    private Dialog dialog;
     private DataManager dataManager;
     private Fragment fragment;
 
@@ -78,7 +75,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         setupDrawerContent(navigationView);
 
-        aboutDialog = new Dialog(this);
+        dialog = new Dialog(this);
+
 
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
@@ -163,10 +161,10 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_usage:
 
-                                aboutDialog.setCanceledOnTouchOutside(true);
-                                aboutDialog.setTitle(getString(R.string.title_nav_usage));
-                                aboutDialog.setContentView(R.layout.usage_layout);
-                                aboutDialog.show();
+                                dialog.setCanceledOnTouchOutside(true);
+                                dialog.setTitle(getString(R.string.title_nav_usage));
+                                dialog.setContentView(R.layout.usage_layout);
+                                dialog.show();
                                 mDrawerLayout.closeDrawers();
                                 return true;
 
@@ -175,20 +173,29 @@ public class DashboardActivity extends AppCompatActivity {
                                 TableLayout about = (TableLayout) getLayoutInflater().inflate(R
                                         .layout.about, navigationView, false);
 
-                                aboutDialog.setCanceledOnTouchOutside(true);
-                                aboutDialog.setTitle(getString(R.string.title_nav_usage));
-                                aboutDialog.setContentView(about);
-                                aboutDialog.show();
+                                dialog.setCanceledOnTouchOutside(true);
+                                dialog.setTitle(getString(R.string.title_nav_usage));
+                                dialog.setContentView(about);
+                                dialog.show();
                                 mDrawerLayout.closeDrawers();
                                 return true;
 
                             case R.id.os_licences:
-                                
-                                LicenceFragment dialog = LicenceFragment.newInstance();
-                                dialog.show(getSupportFragmentManager(), "LicenceDialog");
-                                ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                                        LicenceFragment.newInstance(), R.id.frame_container);
 
+                                WebView webView = (WebView) getLayoutInflater().inflate(R.layout
+                                        .fragment_licence, navigationView, false);
+
+                                webView.getSettings().setUseWideViewPort(true);
+                                webView.loadUrl("file:///android_asset/licences.html");
+
+                                AlertDialog alertDialog = new AlertDialog.Builder
+                                        (DashboardActivity.this, R.style.Theme_Taverna_Dialog)
+                                        .setTitle(getString(R.string.title_nav_os_licences))
+                                        .setView(webView)
+                                        .setPositiveButton(android.R.string.ok, null)
+                                        .create();
+
+                                alertDialog.show();
                                 mDrawerLayout.closeDrawers();
                                 return true;
 
