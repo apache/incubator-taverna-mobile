@@ -188,8 +188,8 @@ public class DashboardActivity extends AppCompatActivity {
                                 webView.getSettings().setUseWideViewPort(true);
                                 webView.loadUrl("file:///android_asset/licences.html");
 
-                                AlertDialog alertDialog = new AlertDialog.Builder
-                                        (DashboardActivity.this, R.style.Theme_Taverna_Dialog)
+                                AlertDialog alertDialog = new AlertDialog.Builder(DashboardActivity
+                                        .this, R.style.Theme_Taverna_Dialog)
                                         .setTitle(getString(R.string.title_nav_os_licences))
                                         .setView(webView)
                                         .setPositiveButton(android.R.string.ok, null)
