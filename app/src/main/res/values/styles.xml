@@ -32,4 +32,6 @@ limitations under the License.
 		<item name="android:orientation">vertical</item>
 	</style>
 
+	<style name="Theme.Taverna.Dialog" parent="Theme.AppCompat.Light.Dialog"/>
+
 </resources>
