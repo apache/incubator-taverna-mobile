@@ -174,7 +174,7 @@ public class DashboardActivity extends AppCompatActivity {
                                         .layout.about, navigationView, false);
 
                                 dialog.setCanceledOnTouchOutside(true);
-                                dialog.setTitle(getString(R.string.title_nav_usage));
+                                dialog.setTitle(getString(R.string.title_about));
                                 dialog.setContentView(about);
                                 dialog.show();
                                 mDrawerLayout.closeDrawers();
