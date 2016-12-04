@@ -18,12 +18,33 @@ android {
         versionName "1.0"
         multiDexEnabled true
     }
+
+    sourceSets {
+        def commonTestDir = 'src/commonTest/java'
+
+        main {
+            java.srcDirs = ['src/main/java']
+        }
+        androidTest {
+            java.srcDirs = ['src/androidTest/java/']
+            java.srcDir commonTestDir
+        }
+        test {
+            java.srcDirs = ['src/test/java/']
+            java.srcDir commonTestDir
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
 }
 repositories {
     jcenter()
@@ -55,7 +76,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.0'
 // Because RxAndroid releases are few and far between, it is recommended you also
 // explicitly depend on RxJava's latest version for bug fixes and new features.
-    compile 'io.reactivex:rxjava:1.1.4'
+    compile 'io.reactivex:rxjava:1.1.5'
 
     compile('org.simpleframework:simple-xml:2.7.+'){
         exclude module: 'stax'
@@ -80,5 +101,9 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
 
     compile 'com.anton46:stepsview:0.0.2'
+
+    //Dependencies for JUNit and unit tests.
+    testCompile "junit:junit:4.12"
+    testCompile "org.mockito:mockito-all:1.10.19"
 
 }
