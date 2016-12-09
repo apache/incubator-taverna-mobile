@@ -38,10 +38,12 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
 
 
 public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView, View
@@ -64,6 +66,7 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     OnSuccessful mCallback;
     private DataManager dataManager;
     private PlayerLoginPresenter mPlayerLoginPresenter;
+    private Subscription mSubscriptions;
 
     public static PlayerLoginFragment newInstance() {
 
@@ -119,17 +122,22 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     @OnClick(R.id.bLogin)
     public void login(View v) {
         if (ConnectionInfo.isConnectingToInternet(getContext())) {
-            if (!mEditTextEmail.getText().toString().trim().isEmpty() && !mEditTextPassword
-                    .getText().toString().trim().isEmpty()) {
-
-                mPlayerLoginPresenter.playerLogin(mEditTextEmail.getText().toString().trim(),
+            String workflowURL = getActivity().getIntent().getStringExtra(Constants.WORKFLOW_URL);
+            mPlayerLoginPresenter.playerLogin(workflowURL, mEditTextEmail.getText().toString().trim(),
                         mEditTextPassword.getText().toString().trim(), mCheckBoxRemember
                                 .isChecked());
 
-            } else {
-
-                showError(R.string.error_vaild_credential);
-            }
+//            if (!mEditTextEmail.getText().toString().trim().isEmpty() && !mEditTextPassword
+//                    .getText().toString().trim().isEmpty()) {
+//
+//                mPlayerLoginPresenter.playerLogin(mEditTextEmail.getText().toString().trim(),
+//                        mEditTextPassword.getText().toString().trim(), mCheckBoxRemember
+//                                .isChecked());
+//
+//            } else {
+//
+//                showError(R.string.error_vaild_credential);
+//            }
         } else {
 
             showError(R.string.no_internet_connection);
@@ -158,10 +166,9 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     }
 
     @Override
-    public void validCredential() {
-        mCallback.onSuccessfulLogin();
+    public void validCredential(String runID) {
+        mCallback.onSuccessfulLogin(runID);
     }
-
 
     private void validateEmail() {
 
@@ -221,7 +228,7 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
 
 
     public interface OnSuccessful {
-        void onSuccessfulLogin();
+        void onSuccessfulLogin(String runID);
     }
 
     private class CustomTextWatcher implements TextWatcher {

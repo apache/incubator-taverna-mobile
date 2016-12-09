@@ -113,6 +113,7 @@ limitations under the License.
     <string name="playeruser">Username/email</string>
     <string name="playerpass">Password</string>
     <string name="servererr">Server error. Please try again later</string>
+    <string name="general_run_err">There was an error while creating the run. Please try again.</string>
     <string name="auth_err">Invalid login credentials</string>
     <string name="myexperimenttitle">Configure MyExperiment Account</string>
     <string name="myexperimentsummary">Username used to login to MyExperiment</string>
@@ -180,6 +181,7 @@ limitations under the License.
     <string name="uploading_workflow_lable">Uploading Workflow</string>
     <string name="please_wait">Please Wait ...</string>
     <string name="headline_taverna_player_portal_login">Taverna Player Portal Login</string>
+    <string name="headline_taverna_server_login">Taverna Server Login</string>
     <string name="button_text_login">Login</string>
 
 

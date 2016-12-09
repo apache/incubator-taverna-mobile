@@ -27,5 +27,6 @@ public interface PlayerLoginMvpView extends MvpView {
 
     void showCredentialError();
 
-    void validCredential();
+    void validCredential(String runID);
+
 }

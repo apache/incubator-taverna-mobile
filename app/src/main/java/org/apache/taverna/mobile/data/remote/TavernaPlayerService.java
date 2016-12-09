@@ -34,11 +34,13 @@ import rx.Observable;
 
 public interface TavernaPlayerService {
 
-    @POST("/workflows.json")
+    @POST("rest/runs")
     @Headers({
-            APIEndPoint.JSON_CONTENT_HEADER,
-            APIEndPoint.JSON_ACCEPT_HEADER,
-            APIEndPoint.UTF_CONTENT_ENCODING_HEADER})
+            "Content-type: application/vnd.taverna.t2flow+xml"
+ //           APIEndPoint.JSON_CONTENT_HEADER,
+   //         APIEndPoint.JSON_ACCEPT_HEADER,
+     //       APIEndPoint.UTF_CONTENT_ENCODING_HEADER
+            })
     Observable<PlayerWorkflow> uploadWorkflow(@Body RequestBody body, @Header("Authorization")
             String authorization);
 

@@ -31,7 +31,7 @@ limitations under the License.
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="24sp"
-        android:text="@string/headline_taverna_player_portal_login"/>
+        android:text="@string/headline_taverna_server_login"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_below="@id/header"
@@ -79,7 +79,7 @@ limitations under the License.
         android:id="@+id/bLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_text_login"
+        android:text="@string/play_workflow"
         android:layout_marginTop="20dp"
         android:layout_below="@id/cbRemember"/>
 

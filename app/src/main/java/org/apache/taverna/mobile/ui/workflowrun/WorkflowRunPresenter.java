@@ -94,18 +94,18 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
 
                             bufferedReader.close();
 
-                            String data = "{\"document\":\"data:application/octet-stream;base64," +
-                                    Base64.encodeToString(sb.toString().getBytes("UTF-8"), Base64
-                                            .URL_SAFE | Base64.NO_WRAP).replace('-', '+') + "\"}";
+                            //String data = "{\"document\":\"data:application/octet-stream;base64," +
+                            //        Base64.encodeToString(sb.toString().getBytes("UTF-8"), Base64
+                            //                .URL_SAFE | Base64.NO_WRAP).replace('-', '+') + "\"}";
 
-                            post = "{\"workflow\":" + data + "}";
+                           /// post = "{\"workflow\":" + data + "}";
                             flag = true;
                         } catch (IOException e) {
                             Log.e(TAG, "call: ", e);
                         }
                         if (flag) {
                             RequestBody body =
-                                    RequestBody.create(MediaType.parse("application/json"), post);
+                                    RequestBody.create(MediaType.parse("application/vnd.taverna.t2flow+xml"), sb.toString());
 
                             return mDataManager.uploadWorkflowContent(body, basicAuth.trim());
                         } else {

@@ -23,13 +23,24 @@ import android.util.Log;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.PlayerWorkflow;
+import org.apache.taverna.mobile.data.model.PlayerWorkflowDetail;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
+import org.apache.taverna.mobile.utils.Constants;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.adapter.rxjava.HttpException;
+import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 
@@ -56,42 +67,116 @@ public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
     }
 
-    public void playerLogin(final String username, final String password, final boolean loginFlag) {
+    public void playerLogin(final String workflowURL, final String username, final String password, final boolean loginFlag) {
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
 
-        mSubscriptions = mDataManager.authPlayerUserLoginDetail(getEncodedCredential(username,
-                password), loginFlag)
+        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+
+        mSubscriptions = mDataManager.downloadWorkflowContent(workflowURL)
+                .concatMap(new Func1<ResponseBody, Observable<PlayerWorkflow>>() {
+                    @Override
+                    public Observable<PlayerWorkflow> call(ResponseBody responseBody) {
+
+                        StringBuffer sb = new StringBuffer();
+                        String post = "";
+
+                        String basicAuth = getEncodedCredential(username, password);
+                         //       mDataManager.getPreferencesHelper()
+                         //       .getUserPlayerCredential();
+                        boolean flag = false;
+                        try {
+
+                            BufferedReader bufferedReader = new BufferedReader(
+                                    new InputStreamReader(responseBody.byteStream()));
+
+                            String str = "";
+
+                            while ((str = bufferedReader.readLine()) != null) {
+                                sb.append(str);
+                            }
+
+                            bufferedReader.close();
+
+                            //String data = "{\"document\":\"data:application/octet-stream;base64," +
+                            //        Base64.encodeToString(sb.toString().getBytes("UTF-8"), Base64
+                            //                .URL_SAFE | Base64.NO_WRAP).replace('-', '+') + "\"}";
+
+                            /// post = "{\"workflow\":" + data + "}";
+                            flag = true;
+                        } catch (IOException e) {
+                            Log.e(TAG, "call: ", e);
+                        }
+                        if (flag) {
+                            RequestBody body =
+                                    RequestBody.create(MediaType.parse("application/vnd.taverna.t2flow+xml"), sb.toString());
+
+                            return mDataManager.uploadWorkflowContent(body, basicAuth.trim());
+                        } else {
+                            return Observable.empty();
+                        }
+
+
+                    }
+                })
+                .concatMap(new Func1<PlayerWorkflow, Observable<PlayerWorkflowDetail>>() {
+                    @Override
+                    public Observable<PlayerWorkflowDetail> call(PlayerWorkflow playerWorkflow) {
+
+                        return mDataManager.getWorkflowDetail(playerWorkflow.getId());
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<ResponseBody>() {
+                .subscribe(new Observer<PlayerWorkflowDetail>() {
                     @Override
                     public void onCompleted() {
-
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e(TAG, "onError: ", e);
-                        if (e instanceof HttpException) {
-                            if (((HttpException) e).code() == 401) {
-                                getMvpView().showCredentialError();
-                            } else if (((HttpException) e).code() == 406) {
-                                getMvpView().validCredential();
-                                mDataManager.getPreferencesHelper()
-                                        .setUserPlayerLoggedInFlagAndCredential(loginFlag,
-                                                getEncodedCredential(username, password));
 
-                            } else {
-                                getMvpView().showError(R.string.servererr);
-                            }
-                        }
+                        getMvpView().showError(R.string.general_run_err);
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-                        Log.d(TAG, "onCompleted: " + responseBody.byteStream());
+                    public void onNext(PlayerWorkflowDetail playerWorkflowDetail) {
+                        getMvpView().validCredential(playerWorkflowDetail.getRun().getName());
                     }
                 });
+
+//        mSubscriptions = mDataManager.authPlayerUserLoginDetail(getEncodedCredential(username,
+//                password), loginFlag)
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.io())
+//                .subscribe(new Observer<ResponseBody>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        Log.e(TAG, "onError: ", e);
+//                        if (e instanceof HttpException) {
+//                            if (((HttpException) e).code() == 401) {
+//                                getMvpView().showCredentialError();
+//                            } else if (((HttpException) e).code() == 406) {
+//                                getMvpView().validCredential();
+//                                mDataManager.getPreferencesHelper()
+//                                        .setUserPlayerLoggedInFlagAndCredential(loginFlag,
+//                                                getEncodedCredential(username, password));
+//
+//                            } else {
+//                                getMvpView().showError(R.string.servererr);
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onNext(ResponseBody responseBody) {
+//                        Log.d(TAG, "onCompleted: " + responseBody.byteStream());
+//                    }
+//                });
 
     }
 

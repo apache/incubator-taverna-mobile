@@ -112,11 +112,12 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
 
     @Override
-    public void onSuccessfulLogin() {
+    public void onSuccessfulLogin(String runID) {
         position = 1;
         mPager.setCurrentItem(position);
         mStepsView.setCompletedPosition(position % labels.length).drawView();
         mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(Constants.WORKFLOW_URL));
+        mWorkflowRunPresenter.runWorkflow(runID);
     }
 
     @Override

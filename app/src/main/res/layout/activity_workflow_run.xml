@@ -27,7 +27,9 @@ limitations under the License.
         android:id="@+id/stepsView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        >
+
+    </com.anton46.stepsview.StepsView>
 
     <org.apache.taverna.mobile.utils.NonSwipeableViewPager
         android:id="@+id/viewpager"
