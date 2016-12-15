@@ -30,10 +30,12 @@ import org.apache.taverna.mobile.ui.base.BasePresenter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -43,6 +45,7 @@ import rx.schedulers.Schedulers;
 
 public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
 
+    private List<String> inputs;
     private static final String TAG = WorkflowRunPresenter.class.getSimpleName();
     private final DataManager mDataManager;
     private Subscription mSubscriptions;
@@ -71,9 +74,9 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
 
         mSubscriptions = mDataManager.downloadWorkflowContent(contentURL)
-                .concatMap(new Func1<ResponseBody, Observable<PlayerWorkflow>>() {
+                .concatMap(new Func1<ResponseBody, Observable<Response<ResponseBody>>>() {
                     @Override
-                    public Observable<PlayerWorkflow> call(ResponseBody responseBody) {
+                    public Observable<Response<ResponseBody>> call(ResponseBody responseBody) {
 
                         StringBuffer sb = new StringBuffer();
                         String post = "";
@@ -115,19 +118,12 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
 
                     }
                 })
-                .concatMap(new Func1<PlayerWorkflow, Observable<PlayerWorkflowDetail>>() {
-                    @Override
-                    public Observable<PlayerWorkflowDetail> call(PlayerWorkflow playerWorkflow) {
-
-                        return mDataManager.getWorkflowDetail(playerWorkflow.getId());
-                    }
-                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<PlayerWorkflowDetail>() {
+                .subscribe(new Observer<Response<ResponseBody>>() {
                     @Override
                     public void onCompleted() {
-                        getMvpView().movetoInputs();
+                        getMvpView().moveToInputs();
                     }
 
                     @Override
@@ -137,12 +133,37 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
                     }
 
                     @Override
-                    public void onNext(PlayerWorkflowDetail playerWorkflowDetail) {
-                        getMvpView().setInputsAttribute(playerWorkflowDetail.getRun()
-                                .getWorkflowId());
+                    public void onNext(Response playerWorkflowDetail) {
+                       // getMvpView().setInputsAttribute(playerWorkflowDetail.getRun()
+                        //        .getWorkflowId());
                     }
                 });
     }
 
+    public void showWorkflowInputs(String runLocation) {
+        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+        String basicAuth = mDataManager.getPreferencesHelper()
+                .getUserPlayerCredential();
+        mSubscriptions = mDataManager.getWorkflowInputs(basicAuth.trim(), runLocation)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Response<ResponseBody>>() {
+                    @Override
+                    public void onCompleted() {
+                        getMvpView().setInputs(inputs);
+                    }
 
-}
+                    @Override
+                    public void onError(Throwable e) {
+
+                        getMvpView().showError();
+                    }
+
+                    @Override
+                    public void onNext(Response inputsResponse) {
+                        //Set the inputs
+                    }
+                });
+    }
+
+    }

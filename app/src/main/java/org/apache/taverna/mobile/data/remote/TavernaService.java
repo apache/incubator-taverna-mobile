@@ -35,6 +35,7 @@ import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 import rx.Observable;
+import rx.Subscription;
 
 
 public interface TavernaService {
@@ -73,4 +74,5 @@ public interface TavernaService {
     Observable<Workflows> getMyWorkflows(@Query("id") String id,
                                          @QueryMap Map<String, String> options);
 
+    Subscription getWorkflowInputs(String runLocationID);
 }

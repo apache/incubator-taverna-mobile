@@ -39,6 +39,8 @@ import org.apache.taverna.mobile.utils.Constants;
 import org.apache.taverna.mobile.utils.NonSwipeableViewPager;
 import org.apache.taverna.mobile.utils.WebViewGenerator;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -110,14 +112,18 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         mWorkflowRunPresenter.detachView();
     }
 
-
+    /**
+     * Get the URL location of the run and start monitoring it
+     * @param runLocation The URL on the server of the run
+     */
     @Override
-    public void onSuccessfulLogin(String runID) {
+    public void onRunStart(String runLocation) {
         position = 1;
         mPager.setCurrentItem(position);
         mStepsView.setCompletedPosition(position % labels.length).drawView();
-        mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(Constants.WORKFLOW_URL));
-        mWorkflowRunPresenter.runWorkflow(runID);
+        mWorkflowRunPresenter.showWorkflowInputs(runLocation);
+        //mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(Constants.WORKFLOW_URL));
+        //mWorkflowRunPresenter.runWorkflow(runID);
     }
 
     @Override
@@ -128,11 +134,16 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
     }
 
     @Override
-    public void movetoInputs() {
+    public void moveToInputs() {
         position = 3;
         mStepsView.setCompletedPosition(position % labels.length).drawView();
         mPager.setCurrentItem(position);
 
+    }
+
+    @Override
+    public void setInputs(List<String> inputs) {
+        //Update the view or something?
     }
 
     @Override
@@ -153,7 +164,6 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
                 .LENGTH_LONG).show();
         finish();
     }
-
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {

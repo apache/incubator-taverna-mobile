@@ -21,13 +21,17 @@ package org.apache.taverna.mobile.ui.workflowrun;
 
 import org.apache.taverna.mobile.ui.base.MvpView;
 
+import java.util.List;
+
 public interface WorkflowRunMvpView extends MvpView {
 
     void movetoUploadWorkflow();
 
-    void movetoInputs();
-
     void setInputsAttribute(int id);
 
     void showError();
+
+    void moveToInputs();
+
+    void setInputs(List<String> inputs);
 }

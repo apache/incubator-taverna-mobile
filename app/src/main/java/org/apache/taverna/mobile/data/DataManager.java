@@ -35,7 +35,9 @@ import java.util.Map;
 
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 import rx.Observable;
+import rx.Subscription;
 import rx.functions.Func1;
 
 
@@ -183,7 +185,7 @@ public class DataManager {
      * @param baseAuth is base64 encoded credential
      * @return Workflow's ID
      */
-    public Observable<PlayerWorkflow> uploadWorkflowContent(RequestBody body, String baseAuth) {
+    public Observable<Response<ResponseBody>> uploadWorkflowContent(RequestBody body, String baseAuth) {
         return mBaseApiManager.getTavernaPlayerApi().uploadWorkflow(body, baseAuth);
     }
 
@@ -205,5 +207,10 @@ public class DataManager {
 
     public Observable<User> getMyWorkflows(String userID, Map<String, String> options) {
         return mBaseApiManager.getTavernaApi().getUserDetail(userID , options);
+    }
+
+    public Observable<Response<ResponseBody>> getWorkflowInputs(String auth, String runLocationID) {
+        return mBaseApiManager.getTavernaPlayerApi().getInputs(auth, runLocationID);
+
     }
 }

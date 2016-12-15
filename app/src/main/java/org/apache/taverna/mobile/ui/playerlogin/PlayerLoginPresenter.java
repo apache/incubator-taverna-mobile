@@ -32,9 +32,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.Observer;
@@ -73,9 +75,9 @@ public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
 
         mSubscriptions = mDataManager.downloadWorkflowContent(workflowURL)
-                .concatMap(new Func1<ResponseBody, Observable<PlayerWorkflow>>() {
+                .concatMap(new Func1<ResponseBody, Observable<Response<ResponseBody>>>() {
                     @Override
-                    public Observable<PlayerWorkflow> call(ResponseBody responseBody) {
+                    public Observable<Response<ResponseBody>> call(ResponseBody responseBody) {
 
                         StringBuffer sb = new StringBuffer();
                         String post = "";
@@ -117,32 +119,43 @@ public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
 
 
                     }
-                })
-                .concatMap(new Func1<PlayerWorkflow, Observable<PlayerWorkflowDetail>>() {
-                    @Override
-                    public Observable<PlayerWorkflowDetail> call(PlayerWorkflow playerWorkflow) {
+                }).observeOn(AndroidSchedulers.mainThread())
+                   .subscribeOn(Schedulers.io())
+                   .subscribe(new Observer<Response<ResponseBody>>() {
 
-                        return mDataManager.getWorkflowDetail(playerWorkflow.getId());
-                    }
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<PlayerWorkflowDetail>() {
                     @Override
                     public void onCompleted() {
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
 
-                        getMvpView().showError(R.string.general_run_err);
                     }
 
                     @Override
-                    public void onNext(PlayerWorkflowDetail playerWorkflowDetail) {
-                        getMvpView().validCredential(playerWorkflowDetail.getRun().getName());
+                    public void onNext(Response response) {
+                        getMvpView().runLocation(response.headers().get("Location"));
                     }
                 });
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.io())
+//                .subscribe(new Observer<PlayerWorkflowDetail>() {
+//                    @Override
+//                    public void onCompleted() {
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                        getMvpView().showError(R.string.general_run_err);
+//                    }
+//
+//                    @Override
+//                    public void onNext(PlayerWorkflowDetail playerWorkflowDetail) {
+//                        getMvpView().validCredential(playerWorkflowDetail.getRun().getName());
+//                    }
+//                });
 
 //        mSubscriptions = mDataManager.authPlayerUserLoginDetail(getEncodedCredential(username,
 //                password), loginFlag)

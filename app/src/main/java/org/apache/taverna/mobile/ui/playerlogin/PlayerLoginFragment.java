@@ -166,8 +166,8 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     }
 
     @Override
-    public void validCredential(String runID) {
-        mCallback.onSuccessfulLogin(runID);
+    public void runLocation(String runID) {
+        mCallback.onRunStart(runID);
     }
 
     private void validateEmail() {
@@ -228,7 +228,7 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
 
 
     public interface OnSuccessful {
-        void onSuccessfulLogin(String runID);
+        void onRunStart(String runID);
     }
 
     private class CustomTextWatcher implements TextWatcher {
