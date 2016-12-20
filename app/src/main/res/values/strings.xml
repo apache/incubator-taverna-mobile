@@ -105,8 +105,7 @@ limitations under the License.
         The Apache Software Foundation, Licensed under the Apache License, Version 2.0.
     </string>
     <string name="about2">View, run and download workflows on your Android mobile device.</string>
-    <string name="about3">Originally developed during Google Summer of Code 2015 for the<a
-        href="http://taverna.incubator.apache.org">Apache Taverna project</a>.
+    <string name="about3">Originally developed during Google Summer of Code 2015 for the <a href="http://taverna.incubator.apache.org">Apache Taverna project</a>.
     </string>
     <string name="playerconfig">Configure Player Account</string>
     <string name="playerconfig_summary">Username used to login to Taverna player portal</string>
@@ -181,7 +180,7 @@ limitations under the License.
     <string name="uploading_workflow_lable">Uploading Workflow</string>
     <string name="please_wait">Please Wait ...</string>
     <string name="headline_taverna_player_portal_login">Taverna Player Portal Login</string>
-    <string name="headline_taverna_server_login">Taverna Server Login</string>
+    <string name="headline_taverna_server_login">Create Workflow Run</string>
     <string name="button_text_login">Login</string>
 
 
@@ -214,5 +213,6 @@ limitations under the License.
     <string name="title_nav_about">About</string>
     <string name="title_nav_my_workflows">My Workflows</string>
     <string name="title_nav_os_licences">Licence info</string>
+    <string name="header_taverna_server_inputs">Workflow Inputs</string>
     <!-- Strings related to Settings -->
 </resources>
