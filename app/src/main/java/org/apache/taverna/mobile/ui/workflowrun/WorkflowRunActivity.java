@@ -19,6 +19,7 @@
 package org.apache.taverna.mobile.ui.workflowrun;
 
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -48,7 +49,7 @@ import butterknife.ButterKnife;
 import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
 public class WorkflowRunActivity extends FragmentActivity implements WorkflowRunMvpView,
-        TavernaServerCreateRunFragment.OnSuccessful {
+        TavernaServerCreateRunFragment.OnSuccessful, TavernaServerInputsFragment.OnFragmentInteractionListener {
 
 
 
@@ -164,6 +165,11 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         Toast.makeText(this, getString(R.string.servererr), Toast
                 .LENGTH_LONG).show();
         finish();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+        //TODO something when the inputs are set
     }
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
