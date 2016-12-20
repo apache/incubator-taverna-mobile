@@ -144,6 +144,7 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
         if (mSubscriptions != null) mSubscriptions.unsubscribe();
         String basicAuth = mDataManager.getPreferencesHelper()
                 .getUserPlayerCredential();
+        //TODO trim the runLocation to get the UUID for the run
         mSubscriptions = mDataManager.getWorkflowInputs(basicAuth.trim(), runLocation)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
