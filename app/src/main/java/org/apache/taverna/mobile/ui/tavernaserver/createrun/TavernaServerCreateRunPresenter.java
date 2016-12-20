@@ -16,28 +16,22 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.ui.playerlogin;
+package org.apache.taverna.mobile.ui.tavernaserver.createrun;
 
 import android.util.Base64;
 import android.util.Log;
 
-import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.PlayerWorkflow;
-import org.apache.taverna.mobile.data.model.PlayerWorkflowDetail;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
-import org.apache.taverna.mobile.utils.Constants;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
-import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -46,20 +40,20 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 
-public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
+public class TavernaServerCreateRunPresenter extends BasePresenter<TavernaServerCreateRunMvpView> {
 
-    private static final String TAG = PlayerLoginPresenter.class.getSimpleName();
+    private static final String TAG = TavernaServerCreateRunPresenter.class.getSimpleName();
 
     private DataManager mDataManager;
 
     private Subscription mSubscriptions;
 
-    public PlayerLoginPresenter(DataManager dataManager) {
+    public TavernaServerCreateRunPresenter(DataManager dataManager) {
         mDataManager = dataManager;
     }
 
     @Override
-    public void attachView(PlayerLoginMvpView mvpView) {
+    public void attachView(TavernaServerCreateRunMvpView mvpView) {
         super.attachView(mvpView);
     }
 

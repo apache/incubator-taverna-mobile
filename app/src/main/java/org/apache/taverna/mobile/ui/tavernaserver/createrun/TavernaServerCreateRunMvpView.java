@@ -16,12 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.ui.playerlogin;
+package org.apache.taverna.mobile.ui.tavernaserver.createrun;
 
 import org.apache.taverna.mobile.ui.base.MvpView;
 
 
-public interface PlayerLoginMvpView extends MvpView {
+public interface TavernaServerCreateRunMvpView extends MvpView {
 
     void showError(int stringID);
 

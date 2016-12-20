@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.ui.playerlogin;
+package org.apache.taverna.mobile.ui.tavernaserver.createrun;
 
 
 import android.content.Context;
@@ -46,7 +46,7 @@ import butterknife.OnClick;
 import rx.Subscription;
 
 
-public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView, View
+public class TavernaServerCreateRunFragment extends Fragment implements TavernaServerCreateRunMvpView, View
         .OnFocusChangeListener {
 
     @BindView(R.id.etEmail)
@@ -65,14 +65,14 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     CheckBox mCheckBoxRemember;
     OnSuccessful mCallback;
     private DataManager dataManager;
-    private PlayerLoginPresenter mPlayerLoginPresenter;
+    private TavernaServerCreateRunPresenter tavernaPlayerCreateRunPresenter;
     private Subscription mSubscriptions;
 
-    public static PlayerLoginFragment newInstance() {
+    public static TavernaServerCreateRunFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        PlayerLoginFragment fragment = new PlayerLoginFragment();
+        TavernaServerCreateRunFragment fragment = new TavernaServerCreateRunFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -82,7 +82,7 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
         super.onCreate(savedInstanceState);
 
         dataManager = new DataManager(new PreferencesHelper(getContext()));
-        mPlayerLoginPresenter = new PlayerLoginPresenter(dataManager);
+        tavernaPlayerCreateRunPresenter = new TavernaServerCreateRunPresenter(dataManager);
 
     }
 
@@ -92,7 +92,7 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
 
         View rootView = inflater.inflate(R.layout.fragment_player_login_layout, container, false);
         ButterKnife.bind(this, rootView);
-        mPlayerLoginPresenter.attachView(this);
+        tavernaPlayerCreateRunPresenter.attachView(this);
         String email = dataManager.getPreferencesHelper().getPlayerUserEmail();
         String pw = dataManager.getPreferencesHelper().getPlayerUserPassword();
         mEditTextEmail.setText(email);
@@ -115,7 +115,7 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mPlayerLoginPresenter.detachView();
+        tavernaPlayerCreateRunPresenter.detachView();
     }
 
 
@@ -123,21 +123,18 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     public void login(View v) {
         if (ConnectionInfo.isConnectingToInternet(getContext())) {
             String workflowURL = getActivity().getIntent().getStringExtra(Constants.WORKFLOW_URL);
-            mPlayerLoginPresenter.playerLogin(workflowURL, mEditTextEmail.getText().toString().trim(),
+
+            if (!mEditTextEmail.getText().toString().trim().isEmpty() && !mEditTextPassword
+                    .getText().toString().trim().isEmpty()) {
+
+                tavernaPlayerCreateRunPresenter.playerLogin(workflowURL, mEditTextEmail.getText().toString().trim(),
                         mEditTextPassword.getText().toString().trim(), mCheckBoxRemember
                                 .isChecked());
 
-//            if (!mEditTextEmail.getText().toString().trim().isEmpty() && !mEditTextPassword
-//                    .getText().toString().trim().isEmpty()) {
-//
-//                mPlayerLoginPresenter.playerLogin(mEditTextEmail.getText().toString().trim(),
-//                        mEditTextPassword.getText().toString().trim(), mCheckBoxRemember
-//                                .isChecked());
-//
-//            } else {
-//
-//                showError(R.string.error_vaild_credential);
-//            }
+            } else {
+
+                showError(R.string.error_vaild_credential);
+            }
         } else {
 
             showError(R.string.no_internet_connection);
