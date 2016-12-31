@@ -119,6 +119,10 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return mWorkflowList.get(position) != null ? VIEW_ITEM : VIEW_PROG;
     }
 
+    public Workflow getItem(int position) {
+        return mWorkflowList != null ? mWorkflowList.get(position) : null;
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
