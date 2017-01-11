@@ -37,9 +37,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.model.Workflow;
@@ -107,15 +104,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.placeholder)
-                    .into(new SimpleTarget<GlideDrawable>() {
-                        @Override
-                        public void onResourceReady(GlideDrawable resource,
-                                GlideAnimation<? super GlideDrawable> glideAnimation) {
-                            ((ViewHolder) holder).ivWorkflowImage.setImageDrawable(resource);
-                            ((ViewHolder) holder).ivWorkflowImage
-                                    .setScaleType(ImageView.ScaleType.FIT_XY);
-                        }
-                    });
+                    .fitCenter()
+                    .into(((ViewHolder) holder).ivWorkflowImage);
         }
     }
 
@@ -127,6 +117,10 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemViewType(int position) {
         return mWorkflowList.get(position) != null ? VIEW_ITEM : VIEW_PROG;
+    }
+
+    public Workflow getItem(int position) {
+        return mWorkflowList != null ? mWorkflowList.get(position) : null;
     }
 
 

@@ -214,5 +214,6 @@ limitations under the License.
     <string name="title_nav_my_workflows">My Workflows</string>
     <string name="title_nav_os_licences">Licence info</string>
     <string name="header_taverna_server_inputs">Workflow Inputs</string>
-    <!-- Strings related to Settings -->
+    <!-- Strings related to message -->
+    <string name="msg_no_workflow_found">No matching criteria workflow found</string>
 </resources>
