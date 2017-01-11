@@ -170,7 +170,7 @@ limitations under the License.
 
 
     <string-array name="player_run_slider_view_labels">
-        <item>Player \nLogin</item>
+        <item>Create \nRun</item>
         <item>Download</item>
         <item>Upload</item>
         <item>Inputs &amp;\nRun</item>
