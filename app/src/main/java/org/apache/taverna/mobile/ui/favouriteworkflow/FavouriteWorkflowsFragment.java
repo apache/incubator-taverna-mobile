@@ -19,13 +19,8 @@
 package org.apache.taverna.mobile.ui.favouriteworkflow;
 
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.ui.adapter.FavouriteWorkflowsAdapter;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity;
-
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -33,11 +28,24 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.ui.adapter.FavouriteWorkflowsAdapter;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity;
+import org.apache.taverna.mobile.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,13 +54,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FavouriteWorkflowsFragment extends Fragment
-        implements FavouriteWorkflowsMvpView, RecyclerItemClickListner.OnItemClickListener {
+        implements FavouriteWorkflowsMvpView, RecyclerItemClickListner.OnItemClickListener,
+        SearchView.OnCloseListener, SearchView.OnQueryTextListener {
 
     public final String LOG_TAG = getClass().getSimpleName();
 
-    public static final String EXTRA_ID = "id";
 
-    public static final String EXTRA_TITLE = "title";
     @BindView(R.id.rv_fav_workflows)
     RecyclerView mRecyclerView;
 
@@ -69,6 +76,8 @@ public class FavouriteWorkflowsFragment extends Fragment
     private FavouriteWorkflowsAdapter mFavouriteWorkflowsAdapter;
 
     private List<Workflow> mWorkflowList;
+    private SearchView searchView;
+    private FavouriteWorkflowsAdapter mSearchFavouriteWorkflowAdapter;
 
 
     @Override
@@ -80,6 +89,7 @@ public class FavouriteWorkflowsFragment extends Fragment
         mFavouriteWorkflowsPresenter = new FavouriteWorkflowsPresenter(dataManager);
 
         mWorkflowList = new ArrayList<>();
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -153,14 +163,90 @@ public class FavouriteWorkflowsFragment extends Fragment
 
     @Override
     public void onItemClick(View childView, int position) {
-        Intent intent = new Intent(getActivity(), FavouriteWorkflowDetailActivity.class);
-        intent.putExtra(EXTRA_ID, mWorkflowList.get(position).getId());
-        intent.putExtra(EXTRA_TITLE, mWorkflowList.get(position).getTitle());
-        startActivity(intent);
+
+        if (searchView.isIconified() || TextUtils.isEmpty(searchView.getQuery())) {
+            if (mFavouriteWorkflowsAdapter.getItem(position) != null && position != -1) {
+                Intent intent = new Intent(getActivity(), FavouriteWorkflowDetailActivity.class);
+                intent.putExtra(Constants.WORKFLOW_ID, mFavouriteWorkflowsAdapter
+                        .getItem(position).getId());
+                intent.putExtra(Constants.WORKFLOW_TITLE, mFavouriteWorkflowsAdapter
+                        .getItem(position).getTitle());
+                startActivity(intent);
+            }
+        } else {
+            if (mSearchFavouriteWorkflowAdapter.getItem(position) != null && position != -1) {
+                Intent intent = new Intent(getActivity(), FavouriteWorkflowDetailActivity.class);
+                intent.putExtra(Constants.WORKFLOW_ID, mSearchFavouriteWorkflowAdapter
+                        .getItem(position).getId());
+                intent.putExtra(Constants.WORKFLOW_TITLE, mSearchFavouriteWorkflowAdapter
+                        .getItem(position).getTitle());
+                startActivity(intent);
+            }
+        }
     }
 
     @Override
     public void onItemLongPress(View childView, int position) {
 
     }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context
+                .SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity()
+                .getComponentName()));
+        searchView.setSubmitButtonEnabled(false);
+        searchView.setOnQueryTextListener(this);
+        searchView.setOnCloseListener(this);
+    }
+
+
+    private void performSearch(String search) {
+        mSearchFavouriteWorkflowAdapter = new FavouriteWorkflowsAdapter(new ArrayList<Workflow>(),
+                getContext());
+        FavouriteWorkflowsAdapter wk = mFavouriteWorkflowsAdapter;
+        if (!TextUtils.isEmpty(search)) {
+            if (null != wk)
+                for (int i = 0; i < wk.getItemCount(); i++) {
+                    Workflow workflow = wk.getItem(i);
+                    if (workflow.getTitle().toLowerCase().contains(search.toLowerCase())) {
+                        mSearchFavouriteWorkflowAdapter.addWorkflow(workflow);
+                    }
+                }
+
+            mRecyclerView.swapAdapter(mSearchFavouriteWorkflowAdapter, true);
+            if (mSearchFavouriteWorkflowAdapter.getItemCount() == 0)
+
+                Toast.makeText(getActivity(), getString(R.string.msg_no_workflow_found), Toast
+                        .LENGTH_SHORT).show();
+        } else {
+            mRecyclerView.swapAdapter(mFavouriteWorkflowsAdapter, true);
+        }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        performSearch(query);
+        searchView.clearFocus();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        performSearch(newText);
+        return true;
+    }
+
+
+    @Override
+    public boolean onClose() {
+        return false;
+    }
+
+
 }

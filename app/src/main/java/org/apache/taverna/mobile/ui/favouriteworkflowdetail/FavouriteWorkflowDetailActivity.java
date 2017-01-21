@@ -19,14 +19,14 @@
 package org.apache.taverna.mobile.ui.favouriteworkflowdetail;
 
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,7 +50,7 @@ public class FavouriteWorkflowDetailActivity extends AppCompatActivity {
         if (actionbar != null) {
             actionbar.setHomeButtonEnabled(true);
             actionbar.setDisplayHomeAsUpEnabled(true);
-            actionbar.setTitle(getIntent().getStringExtra(FavouriteWorkflowsFragment.EXTRA_TITLE));
+            actionbar.setTitle(getIntent().getStringExtra(Constants.WORKFLOW_TITLE));
         }
 
 
@@ -59,7 +59,7 @@ public class FavouriteWorkflowDetailActivity extends AppCompatActivity {
                     .add(R.id.frame_container
                             , FavouriteWorkflowDetailFragment
                                     .newInstance(getIntent()
-                                            .getStringExtra(FavouriteWorkflowsFragment.EXTRA_ID)))
+                                            .getStringExtra(Constants.WORKFLOW_ID)))
                     .commit();
         }
 
