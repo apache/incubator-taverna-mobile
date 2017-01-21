@@ -197,7 +197,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
 
     @Override
     public void onItemClick(View childView, int position) {
-        if (searchView.isIconified()) {
+        if (searchView.isIconified() || TextUtils.isEmpty(searchView.getQuery())) {
             if (mWorkflowAdapter.getItem(position) != null && position != -1) {
                 Intent intent = new Intent(getActivity(), WorkflowDetailActivity.class);
                 intent.putExtra(Constants.WORKFLOW_ID, mWorkflowAdapter.getItem(position).getId());
@@ -276,7 +276,8 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
 
     @Override
     public boolean onClose() {
-        return false;
+        mRecyclerView.swapAdapter(mWorkflowAdapter, true);
+        return true;
     }
 
 
