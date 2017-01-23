@@ -73,4 +73,9 @@ public class BaseApiManager {
         return createJsonApi(TavernaPlayerService.class,
                 new PreferencesHelper(TavernaApplication.getContext()).getPlayerURL());
     }
+
+    public TavernaServerService getTavernaServerApi() {
+        return createSimpleXMLApi(TavernaServerService.class,
+                new PreferencesHelper(TavernaApplication.getContext()).getPlayerURL());
+    }
 }

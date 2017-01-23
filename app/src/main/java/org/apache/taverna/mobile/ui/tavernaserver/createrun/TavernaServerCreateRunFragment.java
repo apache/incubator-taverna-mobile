@@ -126,7 +126,8 @@ public class TavernaServerCreateRunFragment extends Fragment implements TavernaS
 
             if (!mEditTextEmail.getText().toString().trim().isEmpty() && !mEditTextPassword
                     .getText().toString().trim().isEmpty()) {
-
+                getActivity().getIntent().putExtra(Constants.SERVER_USER, mEditTextEmail.getText().toString().trim());
+                getActivity().getIntent().putExtra(Constants.SERVER_PASS, mEditTextPassword.getText().toString().trim());
                 tavernaPlayerCreateRunPresenter.playerLogin(workflowURL, mEditTextEmail.getText().toString().trim(),
                         mEditTextPassword.getText().toString().trim(), mCheckBoxRemember
                                 .isChecked());

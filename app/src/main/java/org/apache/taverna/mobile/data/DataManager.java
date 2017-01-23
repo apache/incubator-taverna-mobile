@@ -22,6 +22,7 @@ import org.apache.taverna.mobile.data.local.DBHelper;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
+import org.apache.taverna.mobile.data.model.Inputs;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.PlayerWorkflow;
 import org.apache.taverna.mobile.data.model.PlayerWorkflowDetail;
@@ -186,7 +187,7 @@ public class DataManager {
      * @return Workflow's ID
      */
     public Observable<Response<ResponseBody>> uploadWorkflowContent(RequestBody body, String baseAuth) {
-        return mBaseApiManager.getTavernaPlayerApi().uploadWorkflow(body, baseAuth);
+        return mBaseApiManager.getTavernaServerApi().uploadWorkflow(body, baseAuth);
     }
 
     /**
@@ -209,8 +210,8 @@ public class DataManager {
         return mBaseApiManager.getTavernaApi().getUserDetail(userID , options);
     }
 
-    public Observable<Response<ResponseBody>> getWorkflowInputs(String auth, String runLocationID) {
-        return mBaseApiManager.getTavernaPlayerApi().getInputs(auth, runLocationID);
+    public Observable<Inputs> getWorkflowInputs(String auth, String runLocationID) {
+        return mBaseApiManager.getTavernaServerApi().getInputs(auth, runLocationID);
 
     }
 }

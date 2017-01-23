@@ -23,6 +23,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Inputs;
 import org.apache.taverna.mobile.data.model.PlayerWorkflow;
 import org.apache.taverna.mobile.data.model.PlayerWorkflowDetail;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
@@ -140,31 +141,4 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
                 });
     }
 
-    public void showWorkflowInputs(String runLocation) {
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
-        String basicAuth = mDataManager.getPreferencesHelper()
-                .getUserPlayerCredential();
-        //TODO trim the runLocation to get the UUID for the run
-        mSubscriptions = mDataManager.getWorkflowInputs(basicAuth.trim(), runLocation)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Response<ResponseBody>>() {
-                    @Override
-                    public void onCompleted() {
-                        getMvpView().setInputs(inputs);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                        getMvpView().showError();
-                    }
-
-                    @Override
-                    public void onNext(Response inputsResponse) {
-                        //Set the inputs
-                    }
-                });
-    }
-
-    }
+}

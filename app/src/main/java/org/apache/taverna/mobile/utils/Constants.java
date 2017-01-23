@@ -30,4 +30,11 @@ public class Constants {
     public static final String WORKFLOW_ID = "workflow_id";
 
     public static final String WORKFLOW_TITLE = "workflow_title";
+
+    public static final String SERVER_PASS = "server_pass";
+
+    public static final String SERVER_USER = "server_user";
+
+    public static final String RUN_LOCATION = "run_location";
+
 }

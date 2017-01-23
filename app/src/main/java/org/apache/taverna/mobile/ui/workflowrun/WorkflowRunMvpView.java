@@ -19,6 +19,7 @@
 package org.apache.taverna.mobile.ui.workflowrun;
 
 
+import org.apache.taverna.mobile.data.model.Inputs;
 import org.apache.taverna.mobile.ui.base.MvpView;
 
 import java.util.List;
@@ -33,5 +34,5 @@ public interface WorkflowRunMvpView extends MvpView {
 
     void moveToInputs();
 
-    void setInputs(List<String> inputs);
+    void setInputs(Inputs inputs);
 }

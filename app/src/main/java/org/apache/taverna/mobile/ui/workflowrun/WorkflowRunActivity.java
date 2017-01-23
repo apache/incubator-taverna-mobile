@@ -27,6 +27,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.anton46.stepsview.StepsView;
@@ -34,6 +35,7 @@ import com.anton46.stepsview.StepsView;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
+import org.apache.taverna.mobile.data.model.Inputs;
 import org.apache.taverna.mobile.ui.DownloadingFragment;
 import org.apache.taverna.mobile.ui.tavernaserver.createrun.TavernaServerCreateRunFragment;
 import org.apache.taverna.mobile.ui.tavernaserver.inputs.TavernaServerInputsFragment;
@@ -41,11 +43,12 @@ import org.apache.taverna.mobile.utils.Constants;
 import org.apache.taverna.mobile.utils.NonSwipeableViewPager;
 import org.apache.taverna.mobile.utils.WebViewGenerator;
 
-import java.util.List;
+import java.lang.ref.WeakReference;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.R.attr.fragment;
 import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
 public class WorkflowRunActivity extends FragmentActivity implements WorkflowRunMvpView,
@@ -69,6 +72,14 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
     private WorkflowRunPresenter mWorkflowRunPresenter;
 
     private PagerAdapter mPagerAdapter;
+
+    private TavernaServerInputsFragment tavernaServerInputsFragment;
+
+    private WeakReference<Fragment> createRunsFragment;
+    private WeakReference<Fragment> inputsFragment;
+    private WeakReference<Fragment> downloadingFragment;
+    private WeakReference<Fragment> webviewFragment;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,12 +110,12 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
-        if (dataManager.getPreferencesHelper().isUserPlayerLoggedInFlag()) {
-            mPager.setCurrentItem(++position);
-            mStepsView.setCompletedPosition(position % labels.length).drawView();
-
-            mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(Constants.WORKFLOW_URL));
-        }
+//        if (dataManager.getPreferencesHelper().isUserPlayerLoggedInFlag()) {
+//            mPager.setCurrentItem(++position);
+//            mStepsView.setCompletedPosition(position % labels.length).drawView();
+//
+//            mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(Constants.WORKFLOW_URL));
+//        }
 
     }
 
@@ -123,7 +134,11 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         position = 1;
         mPager.setCurrentItem(position);
         mStepsView.setCompletedPosition(position % labels.length).drawView();
-        mWorkflowRunPresenter.showWorkflowInputs(runLocation);
+        getIntent().putExtra(runLocation, Constants.RUN_LOCATION);
+        String password = getIntent().getStringExtra(Constants.SERVER_PASS);
+        String username = getIntent().getStringExtra(Constants.SERVER_USER);
+        ((TavernaServerInputsFragment)inputsFragment.get()).fetchInputs(username, password, runLocation);
+
         //mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(Constants.WORKFLOW_URL));
         //mWorkflowRunPresenter.runWorkflow(runID);
     }
@@ -140,11 +155,10 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         position = 3;
         mStepsView.setCompletedPosition(position % labels.length).drawView();
         mPager.setCurrentItem(position);
-
     }
 
     @Override
-    public void setInputs(List<String> inputs) {
+    public void setInputs(Inputs inputs) {
         //Update the view or something?
     }
 
@@ -168,8 +182,9 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onFragmentInteraction(Inputs inputs) {
         //TODO something when the inputs are set
+        System.out.println("Inputs returned to run activity");
     }
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
@@ -194,9 +209,37 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         }
 
         @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            // It's fairly easy to communicate from fragment to activity but
+            // the other way is tricky. This is the 'best' way I found to do
+            // it. See http://stackoverflow.com/questions/14035090/how-to-get-existing-fragments-when-using-fragmentpageradapter
+            // Really Android, you should be able to do this in a simpler way
+            Fragment createdFragment = (Fragment) super.instantiateItem(container, position);
+            // save the appropriate reference depending on position
+            switch (position) {
+                case 0:
+                    createRunsFragment = new WeakReference<Fragment>(createdFragment);
+                    break;
+                case 1:
+                    inputsFragment = new WeakReference<Fragment>(createdFragment);
+                    break;
+                case 2:
+                    downloadingFragment = new WeakReference<Fragment>(createdFragment);
+                    break;
+                case 3:
+                    webviewFragment = new WeakReference<Fragment>(createdFragment);
+            }
+            return createdFragment;
+        }
+
+        @Override
         public int getCount() {
             return 4;
         }
+    }
+
+    public interface RunIDListener {
+        void onRunLocation();
     }
 
 

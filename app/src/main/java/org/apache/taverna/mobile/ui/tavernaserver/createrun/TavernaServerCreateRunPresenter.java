@@ -18,6 +18,7 @@
  */
 package org.apache.taverna.mobile.ui.tavernaserver.createrun;
 
+import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
 
@@ -129,61 +130,11 @@ public class TavernaServerCreateRunPresenter extends BasePresenter<TavernaServer
 
                     @Override
                     public void onNext(Response response) {
-                        getMvpView().runLocation(response.headers().get("Location"));
+                        Uri uri = Uri.parse(response.headers().get("Location"));
+                        String uuid = uri.getLastPathSegment();
+                        getMvpView().runLocation(uuid);
                     }
                 });
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Observer<PlayerWorkflowDetail>() {
-//                    @Override
-//                    public void onCompleted() {
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//
-//                        getMvpView().showError(R.string.general_run_err);
-//                    }
-//
-//                    @Override
-//                    public void onNext(PlayerWorkflowDetail playerWorkflowDetail) {
-//                        getMvpView().validCredential(playerWorkflowDetail.getRun().getName());
-//                    }
-//                });
-
-//        mSubscriptions = mDataManager.authPlayerUserLoginDetail(getEncodedCredential(username,
-//                password), loginFlag)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.io())
-//                .subscribe(new Observer<ResponseBody>() {
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Log.e(TAG, "onError: ", e);
-//                        if (e instanceof HttpException) {
-//                            if (((HttpException) e).code() == 401) {
-//                                getMvpView().showCredentialError();
-//                            } else if (((HttpException) e).code() == 406) {
-//                                getMvpView().validCredential();
-//                                mDataManager.getPreferencesHelper()
-//                                        .setUserPlayerLoggedInFlagAndCredential(loginFlag,
-//                                                getEncodedCredential(username, password));
-//
-//                            } else {
-//                                getMvpView().showError(R.string.servererr);
-//                            }
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onNext(ResponseBody responseBody) {
-//                        Log.d(TAG, "onCompleted: " + responseBody.byteStream());
-//                    }
-//                });
 
     }
 

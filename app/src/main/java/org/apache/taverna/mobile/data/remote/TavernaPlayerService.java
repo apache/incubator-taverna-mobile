@@ -49,7 +49,8 @@ public interface TavernaPlayerService {
     Observable<Response<ResponseBody>> startWorkflowRun(@Body RequestBody body, @Header("Authorization")
             String authorization);
 
-    @GET("rest/runs/{uuid}/input/baclava")
+    @GET("rest/runs/{uuid}/input/expected")
+    @Headers({APIEndPoint.XML_ACCEPT_HEADER})
     Observable<Response<ResponseBody>> getInputs(@Header("Authorization")
             String authorization, @Path("uuid") String runLocationID);
 
