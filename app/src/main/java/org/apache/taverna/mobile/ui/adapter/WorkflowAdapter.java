@@ -25,6 +25,12 @@
 
 package org.apache.taverna.mobile.ui.adapter;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.model.Workflow;
+
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -34,12 +40,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.model.Workflow;
 
 import java.util.List;
 
@@ -66,6 +66,13 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void addWorkflow(Workflow workflow) {
         this.mWorkflowList.add(workflow);
         this.notifyDataSetChanged();
+    }
+
+    public void removeLastNullWorkflow(){
+        if(mWorkflowList.get(mWorkflowList.size()-1)==null) {
+            this.mWorkflowList.remove(mWorkflowList.size() - 1);
+            this.notifyDataSetChanged();
+        }
     }
 
     @Override
