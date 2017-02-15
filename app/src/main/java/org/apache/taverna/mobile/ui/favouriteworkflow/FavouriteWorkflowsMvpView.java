@@ -33,4 +33,8 @@ public interface FavouriteWorkflowsMvpView extends MvpView {
     void showWorkflows(List<Workflow> workflowList);
 
     void showEmptyWorkflow();
+
+    void performSearch(String search);
+
+
 }

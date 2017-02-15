@@ -21,10 +21,15 @@ package org.apache.taverna.mobile.ui.favouriteworkflow;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
+import org.apache.taverna.mobile.utils.RxSearch;
+
+import android.support.v7.widget.SearchView;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import rx.Observer;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -81,6 +86,29 @@ public class FavouriteWorkflowsPresenter extends BasePresenter<FavouriteWorkflow
                     }
                 });
 
+    }
+
+
+    public void attachSearchHandler(SearchView searchView) {
+        RxSearch.fromSearchView(searchView)
+                .debounce(300, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        getMvpView().performSearch(s);
+                    }
+                });
     }
 
 

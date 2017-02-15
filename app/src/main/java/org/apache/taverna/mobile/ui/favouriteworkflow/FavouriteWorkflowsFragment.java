@@ -19,6 +19,14 @@
 package org.apache.taverna.mobile.ui.favouriteworkflow;
 
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.ui.adapter.FavouriteWorkflowsAdapter;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity;
+import org.apache.taverna.mobile.utils.Constants;
+
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -39,14 +47,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.ui.adapter.FavouriteWorkflowsAdapter;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity;
-import org.apache.taverna.mobile.utils.Constants;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,8 +54,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FavouriteWorkflowsFragment extends Fragment
-        implements FavouriteWorkflowsMvpView, RecyclerItemClickListner.OnItemClickListener,
-        SearchView.OnCloseListener, SearchView.OnQueryTextListener {
+        implements FavouriteWorkflowsMvpView, RecyclerItemClickListner.OnItemClickListener {
 
     public final String LOG_TAG = getClass().getSimpleName();
 
@@ -164,7 +163,7 @@ public class FavouriteWorkflowsFragment extends Fragment
     @Override
     public void onItemClick(View childView, int position) {
 
-        if (searchView.isIconified() || TextUtils.isEmpty(searchView.getQuery())) {
+        if (searchView.isIconified() && TextUtils.isEmpty(searchView.getQuery())) {
             if (mFavouriteWorkflowsAdapter.getItem(position) != null && position != -1) {
                 Intent intent = new Intent(getActivity(), FavouriteWorkflowDetailActivity.class);
                 intent.putExtra(Constants.WORKFLOW_ID, mFavouriteWorkflowsAdapter
@@ -201,12 +200,11 @@ public class FavouriteWorkflowsFragment extends Fragment
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity()
                 .getComponentName()));
         searchView.setSubmitButtonEnabled(false);
-        searchView.setOnQueryTextListener(this);
-        searchView.setOnCloseListener(this);
+        mFavouriteWorkflowsPresenter.attachSearchHandler(searchView);
     }
 
-
-    private void performSearch(String search) {
+    @Override
+    public void performSearch(String search) {
         mSearchFavouriteWorkflowAdapter = new FavouriteWorkflowsAdapter(new ArrayList<Workflow>(),
                 getContext());
         FavouriteWorkflowsAdapter wk = mFavouriteWorkflowsAdapter;
@@ -227,25 +225,6 @@ public class FavouriteWorkflowsFragment extends Fragment
         } else {
             mRecyclerView.swapAdapter(mFavouriteWorkflowsAdapter, true);
         }
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        performSearch(query);
-        searchView.clearFocus();
-        return true;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        performSearch(newText);
-        return true;
-    }
-
-
-    @Override
-    public boolean onClose() {
-        return false;
     }
 
 
