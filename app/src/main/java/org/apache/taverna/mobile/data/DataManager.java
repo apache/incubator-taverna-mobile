@@ -25,6 +25,7 @@ import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.PlayerWorkflow;
 import org.apache.taverna.mobile.data.model.PlayerWorkflowDetail;
+import org.apache.taverna.mobile.data.model.Search;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.Workflows;
@@ -205,5 +206,9 @@ public class DataManager {
 
     public Observable<User> getMyWorkflows(String userID, Map<String, String> options) {
         return mBaseApiManager.getTavernaApi().getUserDetail(userID , options);
+    }
+
+    public Observable<Search> getSearchWorkflowResult(Map<String, String> options) {
+        return mBaseApiManager.getTavernaApi().getSearchWorkflowResult(options);
     }
 }

@@ -21,6 +21,7 @@ package org.apache.taverna.mobile.data.remote;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.data.model.License;
+import org.apache.taverna.mobile.data.model.Search;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.Workflows;
@@ -72,5 +73,9 @@ public interface TavernaService {
     @GET(APIEndPoint.MY_WORKFLOWS)
     Observable<Workflows> getMyWorkflows(@Query("id") String id,
                                          @QueryMap Map<String, String> options);
+
+
+    @GET(APIEndPoint.SEARCH)
+    Observable<Search> getSearchWorkflowResult(@QueryMap Map<String, String> options);
 
 }
