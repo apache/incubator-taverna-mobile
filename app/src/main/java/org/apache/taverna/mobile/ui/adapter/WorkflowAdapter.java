@@ -68,8 +68,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.notifyDataSetChanged();
     }
 
-    public void removeLastNullWorkflow(){
-        if(mWorkflowList.get(mWorkflowList.size()-1)==null) {
+    public void removeLastNullWorkflow() {
+        if (mWorkflowList.get(mWorkflowList.size() - 1) == null) {
             this.mWorkflowList.remove(mWorkflowList.size() - 1);
             this.notifyDataSetChanged();
         }

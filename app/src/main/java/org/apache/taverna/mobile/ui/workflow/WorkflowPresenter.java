@@ -44,13 +44,13 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
 
     public final String LOG_TAG = WorkflowPresenter.class.getSimpleName();
     private DataManager mDataManager;
-    private Subscription  mSearchViewSubscription;
+    private Subscription mSearchViewSubscription;
     private CompositeSubscription mSubscriptions;
 
 
     public WorkflowPresenter(DataManager dataManager) {
         mDataManager = dataManager;
-        mSubscriptions =new CompositeSubscription();
+        mSubscriptions = new CompositeSubscription();
     }
 
     @Override
@@ -127,7 +127,7 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
 
     public void searchWorkflow(int pageNumber, String query) {
         if (!TextUtils.isEmpty(query)) {
-            if(pageNumber== 1) {
+            if (pageNumber == 1) {
                 getMvpView().showSwipeRefreshLayout(true);
             }
             mSubscriptions.add(mDataManager.getSearchWorkflowResult(getSearchQueryOptions

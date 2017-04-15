@@ -276,7 +276,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
             mRecyclerView.swapAdapter(mSearchWorkflowAdapter, true);
         } else {
             mRecyclerView.swapAdapter(mWorkflowAdapter, true);
-            mSearchPageNumber=1;
+            mSearchPageNumber = 1;
         }
     }
 
@@ -286,7 +286,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
             mSearchWorkflowList.clear();   // to remove local search
             mSearchWorkflowList.addAll(workflowList);
             mSearchWorkflowAdapter.notifyDataSetChanged();
-        }else{
+        } else {
             mSearchWorkflowList.addAll(workflowList);
             mSearchWorkflowAdapter.notifyDataSetChanged();
         }
