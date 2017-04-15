@@ -18,8 +18,11 @@
  */
 package org.apache.taverna.mobile.ui.workflow;
 
+import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.ui.base.MvpView;
+
+import java.util.List;
 
 
 public interface WorkflowMvpView extends MvpView {
@@ -33,4 +36,11 @@ public interface WorkflowMvpView extends MvpView {
     void removeLoadMoreProgressbar();
 
     void addLoadMoreProgressbar();
+
+    void performSearch(String query);
+
+    void showSearchResult(List<Workflow> workflowList);
+
+    void showSwipeRefreshLayout(boolean flag);
+
 }

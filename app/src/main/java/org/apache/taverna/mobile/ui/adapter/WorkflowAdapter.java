@@ -108,7 +108,7 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             Glide.with(context)
                     .load(uri)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.placeholder)
                     .fitCenter()

@@ -19,6 +19,18 @@
 package org.apache.taverna.mobile.ui.workflow;
 
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.data.model.Workflows;
+import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
+import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.Constants;
+import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
+
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -37,19 +49,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.data.model.Workflows;
-import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
-import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-import org.apache.taverna.mobile.utils.Constants;
-import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +57,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WorkflowFragment extends Fragment implements WorkflowMvpView,
-        RecyclerItemClickListner.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener,
-        SearchView.OnQueryTextListener, SearchView
-                .OnCloseListener {
+        RecyclerItemClickListner.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+
     public final String LOG_TAG = getClass().getSimpleName();
 
     @BindView(R.id.rv_workflows)
@@ -77,7 +75,10 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
     private WorkflowAdapter mSearchWorkflowAdapter;
 
     private int mPageNumber = 1;
+
+    private int mSearchPageNumber = 1;
     private List<Workflow> mWorkflowList;
+    private List<Workflow> mSearchWorkflowList;
 
     private SearchView searchView;
 
@@ -85,6 +86,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mWorkflowList = new ArrayList<>();
+        mSearchWorkflowList = new ArrayList<>();
         DataManager dataManager = new DataManager();
         mWorkflowPresenter = new WorkflowPresenter(dataManager);
         setHasOptionsMenu(true);
@@ -111,10 +113,17 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
             @Override
             public void onLoadMore(int current_page) {
                 if (ConnectionInfo.isConnectingToInternet(getContext())
-                        && mWorkflowList.size() % 10 == 0) {
-                    addLoadMoreProgressbar();
-                    ++mPageNumber;
-                    mWorkflowPresenter.loadAllWorkflow(mPageNumber);
+                        && mRecyclerView.getAdapter().getItemCount() % 10 == 0) {
+                    if (searchView.isIconified() || TextUtils.isEmpty(searchView.getQuery())) {
+                        addLoadMoreProgressbar();
+                        ++mPageNumber;
+                        mWorkflowPresenter.loadAllWorkflow(mPageNumber);
+                    } else {
+                        addLoadMoreProgressbar();
+                        ++mSearchPageNumber;
+                        mWorkflowPresenter.searchWorkflow(mSearchPageNumber, searchView.getQuery()
+                                .toString());
+                    }
                 } else if (!ConnectionInfo.isConnectingToInternet(getContext())) {
                     showSnackBar(R.string.no_internet_connection);
                 }
@@ -131,14 +140,17 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
 
     @Override
     public void onRefresh() {
-        if (ConnectionInfo.isConnectingToInternet(getContext())) {
-            mPageNumber = 1;
-            mWorkflowPresenter.loadAllWorkflow(mPageNumber);
-            mSwipeRefresh.setRefreshing(true);
-        } else {
-            showSnackBar(R.string.no_internet_connection);
-            if (mSwipeRefresh.isRefreshing()) {
-                mSwipeRefresh.setRefreshing(false);
+        if (searchView.isIconified()) {
+            if (ConnectionInfo.isConnectingToInternet(getContext())) {
+                mPageNumber = 1;
+                mSearchPageNumber = 1;
+                mWorkflowPresenter.loadAllWorkflow(mPageNumber);
+                mSwipeRefresh.setRefreshing(true);
+            } else {
+                showSnackBar(R.string.no_internet_connection);
+                if (mSwipeRefresh.isRefreshing()) {
+                    mSwipeRefresh.setRefreshing(false);
+                }
             }
         }
     }
@@ -155,7 +167,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
     @Override
     public void showSnackBar(int message) {
         final Snackbar snackbar = Snackbar.make(mRecyclerView, getActivity().getString(message),
-                Snackbar.LENGTH_INDEFINITE);
+                Snackbar.LENGTH_SHORT);
         snackbar.setAction(getActivity().getString(R.string.ok), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,16 +189,14 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
 
     @Override
     public void removeLoadMoreProgressbar() {
-        if (mPageNumber != 1) {
-            mWorkflowList.remove(mWorkflowList.size() - 1);
-            mWorkflowAdapter.notifyDataSetChanged();
+        if (mPageNumber != 1 || mSearchPageNumber != 1) {
+            ((WorkflowAdapter) mRecyclerView.getAdapter()).removeLastNullWorkflow();
         }
     }
 
     @Override
     public void addLoadMoreProgressbar() {
-        mWorkflowList.add(null);
-        mWorkflowAdapter.notifyItemInserted(mWorkflowList.size());
+        ((WorkflowAdapter) mRecyclerView.getAdapter()).addWorkflow(null);
     }
 
     @Override
@@ -197,7 +207,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
 
     @Override
     public void onItemClick(View childView, int position) {
-        if (searchView.isIconified() || TextUtils.isEmpty(searchView.getQuery())) {
+        if (searchView.isIconified() && TextUtils.isEmpty(searchView.getQuery())) {
             if (mWorkflowAdapter.getItem(position) != null && position != -1) {
                 Intent intent = new Intent(getActivity(), WorkflowDetailActivity.class);
                 intent.putExtra(Constants.WORKFLOW_ID, mWorkflowAdapter.getItem(position).getId());
@@ -232,52 +242,65 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity()
                 .getComponentName()));
         searchView.setSubmitButtonEnabled(false);
-        searchView.setOnQueryTextListener(this);
-        searchView.setOnCloseListener(this);
+        searchView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View view) {
+                mWorkflowPresenter.attachSearchHandler(searchView);
+                mSearchWorkflowList.clear();
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(View view) {
+                mRecyclerView.swapAdapter(mWorkflowAdapter, true);
+                mSwipeRefresh.setRefreshing(false);
+                mSearchWorkflowList.clear();
+                mSearchPageNumber = 1;
+            }
+        });
+
     }
 
+    @Override
+    public void performSearch(String search) {
 
-    private void performSearch(String search) {
-        mSearchWorkflowAdapter = new WorkflowAdapter(new ArrayList<Workflow>(),
-                getContext());
+        mSearchWorkflowAdapter = new WorkflowAdapter(mSearchWorkflowList, getContext());
         WorkflowAdapter wk = mWorkflowAdapter;
         if (!TextUtils.isEmpty(search)) {
-            if (null != wk)
+            if (wk != null)
                 for (int i = 0; i < wk.getItemCount(); i++) {
                     Workflow workflow = wk.getItem(i);
                     if (workflow.getTitle().toLowerCase().contains(search.toLowerCase())) {
                         mSearchWorkflowAdapter.addWorkflow(workflow);
                     }
                 }
-
             mRecyclerView.swapAdapter(mSearchWorkflowAdapter, true);
-            if (mSearchWorkflowAdapter.getItemCount() == 0)
-
-                Toast.makeText(getActivity(), getString(R.string.msg_no_workflow_found), Toast
-                        .LENGTH_SHORT).show();
         } else {
             mRecyclerView.swapAdapter(mWorkflowAdapter, true);
+            mSearchPageNumber=1;
         }
     }
 
     @Override
-    public boolean onQueryTextSubmit(String query) {
-        performSearch(query);
-        searchView.clearFocus();
-        return true;
+    public void showSearchResult(List<Workflow> workflowList) {
+        if (mSearchPageNumber == 1) {
+            mSearchWorkflowList.clear();   // to remove local search
+            mSearchWorkflowList.addAll(workflowList);
+            mSearchWorkflowAdapter.notifyDataSetChanged();
+        }else{
+            mSearchWorkflowList.addAll(workflowList);
+            mSearchWorkflowAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
-    public boolean onQueryTextChange(String newText) {
-        performSearch(newText);
-        return true;
-    }
-
-
-    @Override
-    public boolean onClose() {
-        mRecyclerView.swapAdapter(mWorkflowAdapter, true);
-        return true;
+    public void showSwipeRefreshLayout(boolean flag) {
+        if (flag) {
+            mSwipeRefresh.setRefreshing(flag);
+        } else {
+            if (mSwipeRefresh.isRefreshing()) {
+                mSwipeRefresh.setRefreshing(flag);
+            }
+        }
     }
 
 
