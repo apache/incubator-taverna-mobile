@@ -56,8 +56,8 @@ public class FavouriteWorkflowsPresenterTest {
     @Test
     public void loadAllWorkflow_validWorkflowList_ReturnsResults() {
 
-        when(dataManager.getFavoriteWorkflowList()).thenReturn
-                (Observable.just(workflows.getWorkflowList()));
+        when(dataManager.getFavoriteWorkflowList()).thenReturn(
+                Observable.just(workflows.getWorkflowList()));
 
         favouriteWorkflowsPresenter.loadAllWorkflow();
 
@@ -73,8 +73,8 @@ public class FavouriteWorkflowsPresenterTest {
         Workflows workflows = new Workflows();
         workflows.setWorkflowList(new ArrayList<Workflow>());
 
-        when(dataManager.getFavoriteWorkflowList()).thenReturn
-                (Observable.just(workflows.getWorkflowList()));
+        when(dataManager.getFavoriteWorkflowList()).thenReturn(
+                Observable.just(workflows.getWorkflowList()));
 
         favouriteWorkflowsPresenter.loadAllWorkflow();
 
@@ -87,8 +87,8 @@ public class FavouriteWorkflowsPresenterTest {
     @Test
     public void loadAllWorkflow_RuntimeError_ShowError() {
 
-        when(dataManager.getFavoriteWorkflowList()).thenReturn
-                (Observable.<List<Workflow>>error(new RuntimeException()));
+        when(dataManager.getFavoriteWorkflowList()).thenReturn(
+                Observable.<List<Workflow>>error(new RuntimeException()));
 
         favouriteWorkflowsPresenter.loadAllWorkflow();
 

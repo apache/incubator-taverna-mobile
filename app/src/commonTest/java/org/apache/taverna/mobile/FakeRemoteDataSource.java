@@ -15,10 +15,11 @@ public class FakeRemoteDataSource {
     }
 
     public static DetailAnnouncement getAnnouncement() {
-        return mTestDataFactory.getObjectTypeBean(DetailAnnouncement.class, FakeXMLName.ANNOUNCEMENT_XML);
+        return mTestDataFactory.getObjectTypeBean(DetailAnnouncement.class,
+                FakeXMLName.ANNOUNCEMENT_XML);
     }
 
-    public static Workflows getWorkflowList(){
+    public static Workflows getWorkflowList() {
         return mTestDataFactory.getObjectTypeBean(Workflows.class, FakeXMLName.WORKFLOWS_XML);
     }
 }

@@ -55,8 +55,8 @@ public class AnnouncementPresenterTest {
     @Test
     public void loadAllAnnouncement_validAnnouncementsData_ReturnsResults() {
 
-        when(dataManager.getAllAnnouncement(1)).thenReturn
-                (Observable.just(announcements));
+        when(dataManager.getAllAnnouncement(1)).thenReturn(
+                Observable.just(announcements));
 
         announcementPresenter.loadAllAnnouncement(1);
 
@@ -70,8 +70,8 @@ public class AnnouncementPresenterTest {
     public void loadAllAnnouncement_NULLAnnouncementsData_RemoveLoadMore() {
 
         Announcements announcements = new Announcements();
-        when(dataManager.getAllAnnouncement(1)).thenReturn
-                (Observable.just(announcements));
+        when(dataManager.getAllAnnouncement(1)).thenReturn(
+                Observable.just(announcements));
 
         announcementPresenter.loadAllAnnouncement(1);
 
