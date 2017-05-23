@@ -105,6 +105,11 @@ dependencies {
 
     compile 'com.anton46:stepsview:0.0.2'
 
+    //Dependencies for LeakCanary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+
     //Dependencies for JUNit and unit tests.
     testCompile "junit:junit:4.12"
     testCompile "org.mockito:mockito-all:1.10.19"
