@@ -18,6 +18,16 @@
  */
 package org.apache.taverna.mobile.ui.myworkflows;
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.local.PreferencesHelper;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
+import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -33,16 +43,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
-import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
-import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -207,7 +207,7 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem item=menu.findItem(R.id.action_search);
+        MenuItem item = menu.findItem(R.id.action_search);
         item.setVisible(false);
     }
 }

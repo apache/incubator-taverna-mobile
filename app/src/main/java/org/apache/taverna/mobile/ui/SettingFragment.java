@@ -50,7 +50,7 @@ public class SettingFragment extends PreferenceFragmentCompat implements SharedP
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem item=menu.findItem(R.id.action_search);
+        MenuItem item = menu.findItem(R.id.action_search);
         item.setVisible(false);
     }
 }

@@ -208,6 +208,7 @@ public class PreferencesHelper {
     }
 
     public String getPlayerURL() {
-        return sharedPref.getString(mContext.getString(R.string.pref_key_player_url), PLAYER_DEFAULT_URL);
+        return sharedPref.getString(mContext.getString(R.string.pref_key_player_url),
+                PLAYER_DEFAULT_URL);
     }
 }
