@@ -25,7 +25,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <CheckBoxPreference
-        android:key="pref_logged_in"
+        android:key="@string/pref_key_logged_in"
         android:title="@string/pref_remainLogged_in"
         android:summary="@string/pref_login_description"
         android:defaultValue="true" />
@@ -33,7 +33,7 @@
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
     <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
     <EditTextPreference
-        android:key="pref_player_url"
+        android:key="@string/pref_key_player_url"
         android:title="@string/pref_player_title"
         android:summary="@string/pref_player_des"
         android:defaultValue="@string/pref_player_default"
@@ -54,22 +54,22 @@
         android:maxLines="1" /> -->
     <PreferenceCategory
         android:icon="@drawable/gear_icon"
-        android:title="@string/playerconfig">
+        android:title="@string/pref_category_title_player_config">
         <EditTextPreference
-            android:key="pref_user"
-            android:title="@string/playeruser"
-            android:icon="@mipmap/icuserprofiles"
-            android:summary="@string/playerconfig_summary"
+            android:key="@string/pref_key_player_user"
+            android:title="@string/pref_title_player_user"
+            android:icon="@mipmap/ic_user_profiles"
+            android:summary="@string/pref_summary_player_user"
             android:defaultValue="default"
             android:selectAllOnFocus="true"
             android:inputType="textEmailAddress|textPersonName"
             android:singleLine="true"
             android:maxLines="1" />
         <EditTextPreference
-            android:key="pref_password"
-            android:title="@string/playerpass"
+            android:key="pref_key_player_password"
+            android:title="@string/pref_title_player_pass"
             android:icon="@android:drawable/ic_secure"
-            android:summary="Taverna Player Password"
+            android:summary="@string/pref_summary_player_pass"
             android:defaultValue="default"
             android:selectAllOnFocus="true"
             android:inputType="textPassword"
@@ -78,23 +78,22 @@
         </PreferenceCategory>
     <PreferenceCategory
         android:icon="@drawable/gear_icon"
-        android:summary="@string/myexperimentsummary"
-        android:title="@string/myexperimenttitle">
+        android:title="@string/pref_category_title_myexperiment">
         <EditTextPreference
-            android:key="myexperimentuser"
-            android:title="@string/playeruser"
-            android:icon="@mipmap/icuserprofiles"
-            android:summary="@string/myexperimentsummary"
+            android:key="@string/pref_key_myexperiment_user"
+            android:title="@string/pref_title_myexperiment_user"
+            android:icon="@mipmap/ic_user_profiles"
+            android:summary="@string/pref_summary_myexperiment_user"
             android:defaultValue="default"
             android:selectAllOnFocus="true"
             android:inputType="textEmailAddress|textPersonName"
             android:singleLine="true"
             android:maxLines="1" />
         <EditTextPreference
-            android:key="myexperimentpass"
-            android:title="@string/playerpass"
+            android:key="@string/pref_key_myexperiment_pass"
+            android:title="@string/pref_title_player_pass"
             android:icon="@android:drawable/ic_secure"
-            android:summary="Myexperiment password"
+            android:summary="@string/pref_summary_myexperiment_pass"
             android:defaultValue="default"
             android:selectAllOnFocus="true"
             android:inputType="textPassword"

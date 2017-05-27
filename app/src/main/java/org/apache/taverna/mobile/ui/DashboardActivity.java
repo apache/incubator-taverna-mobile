@@ -64,6 +64,7 @@ public class DashboardActivity extends AppCompatActivity {
     private Dialog dialog;
     private DataManager dataManager;
     private Fragment fragment;
+    private MenuItem item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,12 +202,12 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_settings:
 
-                                startActivity(new Intent(getApplicationContext(),
-                                        SettingsActivity.class));
-                                overridePendingTransition(android.R.anim.slide_in_left, android.R
-                                        .anim.slide_out_right);
+                                ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                                        new SettingFragment(), R.id.frame_container);
 
+                                menuItem.setChecked(true);
                                 mDrawerLayout.closeDrawers();
+                                toolbar.setTitle(R.string.title_nav_settings);
                                 return true;
 
                             case R.id.nav_logout:
@@ -229,7 +230,6 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.dashboard_main, menu);
-
         return true;
     }
 

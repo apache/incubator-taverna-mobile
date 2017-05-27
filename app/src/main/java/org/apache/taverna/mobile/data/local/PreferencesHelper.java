@@ -19,22 +19,21 @@
 package org.apache.taverna.mobile.data.local;
 
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.model.User;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
-import org.apache.taverna.mobile.data.model.User;
 
 import rx.Observable;
 import rx.functions.Func0;
 
 public class PreferencesHelper {
 
-    public static final String PREF_FILE_NAME = "taverna_app_pref_file";
+    public static final String PREF_KEY_PLAYER_LOGGED_IN = "pref_player_logged_in";
 
-    private static final String PREF_KEY_PLAYER_LOGGED_IN = "pref_player_logged_in";
-
-    private static final String PREF_KEY_LOGGED_IN = "pref_logged_in";
+    public static final String PREF_KEY_PLAYER_URL = "pref_key_player_url";
 
     private static final String PREF_KEY_USER_ID = "pref_user_id";
 
@@ -53,8 +52,7 @@ public class PreferencesHelper {
     private static final String PREF_KEY_USER_WEBSITE = "pref_user_website";
 
     private static final String PREF_KEY_PLAYER_CREDENTIAL = "pref_player_credential";
-
-    public static final String PREF_KEY_PLAYER_URL = "pref_player_url";
+    private static final String PREF_KEY_LOGGED_IN = "pref_key_logged_in";
 
     public static final String PLAYER_DEFAULT_URL = "http://139.59.28.12:3000/";
 
@@ -62,99 +60,98 @@ public class PreferencesHelper {
 
     public static final String PREF_KEY_PLAYER_USER_PASSWORD = "pref_password";
 
-    private final SharedPreferences mPref;
-
     private final SharedPreferences sharedPref;
+    private Context mContext;
 
     public PreferencesHelper(Context context) {
-        mPref = context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        mContext = context;
     }
 
 
     public void clear() {
-        mPref.edit().clear().apply();
+        sharedPref.edit().clear().apply();
     }
 
     public boolean isLoggedInFlag() {
-        return mPref.getBoolean(PREF_KEY_LOGGED_IN, false);
+        return sharedPref.getBoolean(mContext.getString(R.string.pref_key_logged_in), false);
     }
 
     public void setLoggedInFlag(Boolean flag) {
-        mPref.edit().putBoolean(PREF_KEY_LOGGED_IN, flag).apply();
+        sharedPref.edit().putBoolean(mContext.getString(R.string.pref_key_logged_in), flag).apply();
     }
 
     public String getUserWebsite() {
-        return mPref.getString(PREF_KEY_USER_WEBSITE, null);
+        return sharedPref.getString(PREF_KEY_USER_WEBSITE, null);
     }
 
     private void setUserWebsite(String website) {
-        mPref.edit().putString(PREF_KEY_USER_WEBSITE, website).apply();
+        sharedPref.edit().putString(PREF_KEY_USER_WEBSITE, website).apply();
     }
 
     public String getUserCountry() {
-        return mPref.getString(PREF_KEY_USER_COUNTRY, null);
+        return sharedPref.getString(PREF_KEY_USER_COUNTRY, null);
     }
 
     private void setUserCountry(String country) {
-        mPref.edit().putString(PREF_KEY_USER_COUNTRY, country).apply();
+        sharedPref.edit().putString(PREF_KEY_USER_COUNTRY, country).apply();
     }
 
     public String getUserCity() {
-        return mPref.getString(PREF_KEY_USER_CITY, null);
+        return sharedPref.getString(PREF_KEY_USER_CITY, null);
     }
 
     private void setUserCity(String city) {
-        mPref.edit().putString(PREF_KEY_USER_CITY, city).apply();
+        sharedPref.edit().putString(PREF_KEY_USER_CITY, city).apply();
     }
 
     public String getUserID() {
-        return mPref.getString(PREF_KEY_USER_ID, null);
+        return sharedPref.getString(PREF_KEY_USER_ID, null);
     }
 
     private void setUserID(String userID) {
-        mPref.edit().putString(PREF_KEY_USER_ID, userID).apply();
+        sharedPref.edit().putString(PREF_KEY_USER_ID, userID).apply();
     }
 
     public String getUserName() {
-        return mPref.getString(PREF_KEY_USER_NAME, null);
+        return sharedPref.getString(PREF_KEY_USER_NAME, null);
     }
 
     private void setUserName(String userName) {
-        mPref.edit().putString(PREF_KEY_USER_NAME, userName).apply();
+        sharedPref.edit().putString(PREF_KEY_USER_NAME, userName).apply();
 
     }
 
     public String getUserDescription() {
-        return mPref.getString(PREF_KEY_USER_DESCRIPTION, null);
+        return sharedPref.getString(PREF_KEY_USER_DESCRIPTION, null);
     }
 
     private void setUserDescription(String userDescription) {
-        mPref.edit().putString(PREF_KEY_USER_DESCRIPTION, userDescription).apply();
+        sharedPref.edit().putString(PREF_KEY_USER_DESCRIPTION, userDescription).apply();
     }
 
     public String getPlayerUserEmail() {
-        return sharedPref.getString(PREF_KEY_PLAYER_USER_EMAIL, null);
+        return sharedPref.getString(mContext.getString(R.string.pref_key_player_user), "");
     }
 
     public String getPlayerUserPassword() {
-        return sharedPref.getString(PREF_KEY_PLAYER_USER_PASSWORD, null);
+        return sharedPref.getString(mContext.getString(R.string.pref_key_player_password), "");
     }
 
     public String getUserEmail() {
-        return mPref.getString(PREF_KEY_USER_EMAIL, null);
+        return sharedPref.getString(PREF_KEY_USER_EMAIL, null);
     }
 
     private void setUserEmail(String userEmail) {
-        mPref.edit().putString(PREF_KEY_USER_EMAIL, userEmail).apply();
+        sharedPref.edit().putString(PREF_KEY_USER_EMAIL, userEmail).apply();
     }
 
     public String getUserAvatar() {
-        return mPref.getString(PREF_KEY_USER_AVATAR, null);
+        return sharedPref.getString(PREF_KEY_USER_AVATAR, null);
     }
 
     private void setUserAvatar(String userAvatar) {
-        mPref.edit().putString(PREF_KEY_USER_AVATAR, userAvatar).apply();
+        sharedPref.edit().putString(PREF_KEY_USER_AVATAR, userAvatar).apply();
     }
 
     public Observable<User> saveUserDetail(final User user) {
@@ -193,24 +190,24 @@ public class PreferencesHelper {
     }
 
     public boolean isUserPlayerLoggedInFlag() {
-        return mPref.getBoolean(PREF_KEY_PLAYER_LOGGED_IN, false);
-    }
-
-    public void setUserPlayerLoggedInFlagAndCredential(Boolean flag, String credential) {
-        mPref.edit().putBoolean(PREF_KEY_PLAYER_LOGGED_IN, flag).apply();
-        mPref.edit().putString(PREF_KEY_PLAYER_CREDENTIAL, credential).apply();
+        return sharedPref.getBoolean(PREF_KEY_PLAYER_LOGGED_IN, false);
     }
 
     public void setUserPlayerLoggedInFlag(Boolean flag) {
-        mPref.edit().putBoolean(PREF_KEY_PLAYER_LOGGED_IN, flag).apply();
+        sharedPref.edit().putBoolean(PREF_KEY_PLAYER_LOGGED_IN, flag).apply();
 
+    }
+
+    public void setUserPlayerLoggedInFlagAndCredential(Boolean flag, String credential) {
+        sharedPref.edit().putBoolean(PREF_KEY_PLAYER_LOGGED_IN, flag).apply();
+        sharedPref.edit().putString(PREF_KEY_PLAYER_CREDENTIAL, credential).apply();
     }
 
     public String getUserPlayerCredential() {
-        return mPref.getString(PREF_KEY_PLAYER_CREDENTIAL, " ");
+        return sharedPref.getString(PREF_KEY_PLAYER_CREDENTIAL, "");
     }
 
     public String getPlayerURL() {
-        return sharedPref.getString(PREF_KEY_PLAYER_URL, PLAYER_DEFAULT_URL);
+        return sharedPref.getString(mContext.getString(R.string.pref_key_player_url), PLAYER_DEFAULT_URL);
     }
 }
