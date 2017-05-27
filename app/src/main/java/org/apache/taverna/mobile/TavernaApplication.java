@@ -25,6 +25,7 @@ import android.content.Context;
 import com.facebook.stetho.Stetho;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.squareup.leakcanary.LeakCanary;
 
 public class TavernaApplication extends Application {
 
@@ -43,6 +44,11 @@ public class TavernaApplication extends Application {
         FlowManager.init(new FlowConfig.Builder(this).build());
 
         Stetho.initializeWithDefaults(this);
+
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
 
     }
 }
