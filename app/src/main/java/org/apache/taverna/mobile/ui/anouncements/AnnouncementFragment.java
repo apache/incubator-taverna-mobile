@@ -29,6 +29,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -103,7 +105,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         mAnnouncements = new Announcements();
         dataManager = new DataManager();
         mAnnouncementPresenter = new AnnouncementPresenter(dataManager);
-
+        setHasOptionsMenu(true);
     }
 
 
@@ -257,5 +259,12 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         } else {
             dialog.dismiss();
         }
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem item=menu.findItem(R.id.action_search);
+        item.setVisible(false);
     }
 }

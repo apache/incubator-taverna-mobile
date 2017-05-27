@@ -19,6 +19,16 @@
 package org.apache.taverna.mobile.ui;
 
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.local.PreferencesHelper;
+import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
+import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
+import org.apache.taverna.mobile.ui.login.LoginActivity;
+import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
+import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
+import org.apache.taverna.mobile.utils.ActivityUtils;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,17 +44,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.TableLayout;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.activities.SettingsActivity;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
-import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
-import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
-import org.apache.taverna.mobile.ui.login.LoginActivity;
-import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
-import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
-import org.apache.taverna.mobile.utils.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

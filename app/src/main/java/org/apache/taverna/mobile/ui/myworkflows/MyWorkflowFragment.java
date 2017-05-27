@@ -27,6 +27,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -84,6 +86,7 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
 
         mWorkflowPresenter = new MyWorkflowPresenter(dataManager);
 
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -199,5 +202,12 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
     @Override
     public void onItemLongPress(View childView, int position) {
 
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem item=menu.findItem(R.id.action_search);
+        item.setVisible(false);
     }
 }
