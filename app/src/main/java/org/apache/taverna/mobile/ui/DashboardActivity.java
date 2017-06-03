@@ -19,6 +19,16 @@
 package org.apache.taverna.mobile.ui;
 
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.local.PreferencesHelper;
+import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
+import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
+import org.apache.taverna.mobile.ui.login.LoginActivity;
+import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
+import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
+import org.apache.taverna.mobile.utils.ActivityUtils;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,17 +44,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.TableLayout;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.activities.SettingsActivity;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
-import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
-import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
-import org.apache.taverna.mobile.ui.login.LoginActivity;
-import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
-import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
-import org.apache.taverna.mobile.utils.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,6 +63,7 @@ public class DashboardActivity extends AppCompatActivity {
     private Dialog dialog;
     private DataManager dataManager;
     private Fragment fragment;
+    private MenuItem item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,12 +201,12 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_settings:
 
-                                startActivity(new Intent(getApplicationContext(),
-                                        SettingsActivity.class));
-                                overridePendingTransition(android.R.anim.slide_in_left, android.R
-                                        .anim.slide_out_right);
+                                ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                                        new SettingFragment(), R.id.frame_container);
 
+                                menuItem.setChecked(true);
                                 mDrawerLayout.closeDrawers();
+                                toolbar.setTitle(R.string.title_nav_settings);
                                 return true;
 
                             case R.id.nav_logout:
@@ -229,7 +229,6 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.dashboard_main, menu);
-
         return true;
     }
 

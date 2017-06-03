@@ -108,14 +108,15 @@ limitations under the License.
     <string name="about3">Originally developed during Google Summer of Code 2015 for the<a
         href="http://taverna.incubator.apache.org">Apache Taverna project</a>.
     </string>
-    <string name="playerconfig">Configure Player Account</string>
-    <string name="playerconfig_summary">Username used to login to Taverna player portal</string>
-    <string name="playeruser">Username/email</string>
-    <string name="playerpass">Password</string>
+    <string name="pref_category_title_player_config">Configure Player Account</string>
+    <string name="pref_summary_player_user">Username used to login to Taverna player portal</string>
+    <string name="pref_title_player_user">Username/email</string>
+    <string name="pref_title_player_pass">Password</string>
+    <string name="pref_title_myexperiment_user">Username/email</string>
     <string name="servererr">Server error. Please try again later</string>
     <string name="auth_err">Invalid login credentials</string>
-    <string name="myexperimenttitle">Configure MyExperiment Account</string>
-    <string name="myexperimentsummary">Username used to login to MyExperiment</string>
+    <string name="pref_category_title_myexperiment">Configure MyExperiment Account</string>
+    <string name="pref_summary_myexperiment_user">Username used to login to MyExperiment</string>
     <string name="title_activity_run_result">Workflow Run Result</string>
     <string name="runstarted">Run Started</string>
     <string name="run_finishtime">Run finish Time</string>
@@ -190,6 +191,7 @@ limitations under the License.
     <string name="pref_header_general">General</string>
 
     <!-- Login status info-->
+    <string name="pref_key_logged_in">pref_logged_in</string>
     <string name="pref_remainLogged_in">Remain Logged-in</string>
     <string name="pref_login_description">Decide whether or not to be automatically logged-in when the app starts</string>
     <!-- Player Portal url info -->
@@ -214,4 +216,12 @@ limitations under the License.
     <string name="title_nav_os_licences">Licence info</string>
     <!-- Strings related to message -->
     <string name="msg_no_workflow_found">No matching criteria workflow found</string>
+
+    <string name="pref_key_player_url">pref_player_url</string>
+    <string name="pref_key_player_user">pref_key_player_user</string>
+    <string name="pref_key_player_password">pref_key_player_password</string>
+    <string name="pref_summary_player_pass">Taverna Player Password</string>
+    <string name="pref_key_myexperiment_user">pref_myexperimentuser</string>
+    <string name="pref_key_myexperiment_pass">pref_myexperimentpass</string>
+    <string name="pref_summary_myexperiment_pass">Myexperiment password</string>
 </resources>

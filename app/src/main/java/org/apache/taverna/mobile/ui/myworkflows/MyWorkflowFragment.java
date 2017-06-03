@@ -18,20 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.myworkflows;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
@@ -41,6 +27,22 @@ import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
 import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +86,7 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
 
         mWorkflowPresenter = new MyWorkflowPresenter(dataManager);
 
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -199,5 +202,12 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
     @Override
     public void onItemLongPress(View childView, int position) {
 
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        item.setVisible(false);
     }
 }

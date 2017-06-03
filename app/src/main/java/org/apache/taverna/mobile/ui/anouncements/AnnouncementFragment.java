@@ -18,6 +18,16 @@
  */
 package org.apache.taverna.mobile.ui.anouncements;
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Announcements;
+import org.apache.taverna.mobile.data.model.DetailAnnouncement;
+import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
+import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -29,22 +39,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Announcements;
-import org.apache.taverna.mobile.data.model.DetailAnnouncement;
-import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
-import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -103,7 +105,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         mAnnouncements = new Announcements();
         dataManager = new DataManager();
         mAnnouncementPresenter = new AnnouncementPresenter(dataManager);
-
+        setHasOptionsMenu(true);
     }
 
 
@@ -257,5 +259,12 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         } else {
             dialog.dismiss();
         }
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem item = menu.findItem(R.id.action_search);
+        item.setVisible(false);
     }
 }

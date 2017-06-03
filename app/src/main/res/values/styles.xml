@@ -22,6 +22,7 @@ limitations under the License.
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
 		<item name="android:windowBackground">@color/window_background</item>
+		<item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
 	</style>
 
 	<style name="Widget.CardContent" parent="android:Widget">
