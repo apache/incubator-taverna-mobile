@@ -19,6 +19,12 @@
 package org.apache.taverna.mobile.ui.login;
 
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.local.PreferencesHelper;
+import org.apache.taverna.mobile.ui.DashboardActivity;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,12 +40,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.ui.DashboardActivity;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -118,7 +118,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     private void validateEmail() {
 
-        if (mEditTextEmail.getText().toString().trim().isEmpty()) {
+        if (mEditTextEmail.getText().toString().trim().length() > 0) {
 
             mTextInputEmail.setError(getString(R.string.err_login_email));
         } else {
@@ -131,7 +131,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
 
     private void validatePassword() {
-        if (mEditTextPassword.getText().toString().trim().isEmpty()) {
+        if (mEditTextPassword.getText().toString().trim().length() > 0) {
 
             mTextInputPassword.setError(getString(R.string.err_login_password));
         } else {
@@ -145,8 +145,8 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     @OnClick(R.id.bLogin)
     public void login(View v) {
         if (ConnectionInfo.isConnectingToInternet(getContext())) {
-            if (!mEditTextEmail.getText().toString().trim().isEmpty() && !mEditTextPassword
-                    .getText().toString().trim().isEmpty()) {
+            if (mEditTextEmail.getText().toString().trim().length() > 0 && mEditTextPassword
+                    .getText().toString().trim().length() > 0) {
 
                 mLoginPresenter.login(mEditTextEmail.getText().toString().trim(),
                         mEditTextPassword.getText().toString().trim(), mCheckBoxRemember

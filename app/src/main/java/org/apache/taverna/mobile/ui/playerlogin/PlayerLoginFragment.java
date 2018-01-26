@@ -19,6 +19,11 @@
 package org.apache.taverna.mobile.ui.playerlogin;
 
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.local.PreferencesHelper;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -33,11 +38,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -119,8 +119,8 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     @OnClick(R.id.bLogin)
     public void login(View v) {
         if (ConnectionInfo.isConnectingToInternet(getContext())) {
-            if (!mEditTextEmail.getText().toString().trim().isEmpty() && !mEditTextPassword
-                    .getText().toString().trim().isEmpty()) {
+            if (mEditTextEmail.getText().toString().trim().length() > 0 && mEditTextPassword
+                    .getText().toString().trim().length() > 0) {
 
                 mPlayerLoginPresenter.playerLogin(mEditTextEmail.getText().toString().trim(),
                         mEditTextPassword.getText().toString().trim(), mCheckBoxRemember
@@ -165,7 +165,7 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
 
     private void validateEmail() {
 
-        if (mEditTextEmail.getText().toString().trim().isEmpty()) {
+        if (mEditTextEmail.getText().toString().trim().length() > 0) {
             mTextInputEmail.setError(getString(R.string.err_login_email));
         } else {
             mTextInputEmail.setError(null);
@@ -182,7 +182,7 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     }
 
     private void validatePassword() {
-        if (mEditTextPassword.getText().toString().trim().isEmpty()) {
+        if (mEditTextPassword.getText().toString().trim().length() > 0) {
             mTextInputPassword.setError(getString(R.string.err_login_password));
         } else {
             mTextInputPassword.setError(null);
