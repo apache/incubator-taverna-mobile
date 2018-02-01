@@ -48,6 +48,10 @@
             android:id="@+id/os_licences"
             android:icon="@drawable/ic_about_web"
             android:title="@string/title_nav_os_licences"/>
+    <item
+        android:id="@+id/apache_licences"
+        android:icon="@drawable/ic_about_web"
+        android:title="@string/title_nav_apache_licences"/>
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_settings"

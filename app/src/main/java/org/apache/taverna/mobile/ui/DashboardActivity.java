@@ -106,6 +106,7 @@ public class DashboardActivity extends AppCompatActivity {
      * @param navigationView Design Support NavigationView  OnClick Listener Event
      */
     private void setupDrawerContent(final NavigationView navigationView) {
+
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -196,6 +197,25 @@ public class DashboardActivity extends AppCompatActivity {
                                         .create();
 
                                 alertDialog.show();
+                                mDrawerLayout.closeDrawers();
+                                return true;
+
+                            case R.id.apache_licences:
+
+                                WebView lWebView = (WebView) getLayoutInflater().inflate(R.layout
+                                        .fragment_licence, navigationView, false);
+
+                                lWebView.getSettings().setUseWideViewPort(true);
+                                lWebView.loadUrl("file:///android_asset/apache_licence_notice.html");
+
+                                AlertDialog lAlertDialog = new AlertDialog.Builder(DashboardActivity
+                                        .this, R.style.Theme_Taverna_Dialog)
+                                        .setTitle(getString(R.string.title_nav_apache_licences))
+                                        .setView(lWebView)
+                                        .setPositiveButton(android.R.string.ok, null)
+                                        .create();
+
+                                lAlertDialog.show();
                                 mDrawerLayout.closeDrawers();
                                 return true;
 
