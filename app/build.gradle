@@ -4,7 +4,6 @@ apply from: '../config/quality/quality.gradle'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
     useLibrary 'org.apache.http.legacy'
     lintOptions {
         abortOnError false
@@ -48,6 +47,7 @@ android {
         unitTests.returnDefaultValues = true
     }
 
+    buildToolsVersion '27.0.3'
 }
 repositories {
     jcenter()

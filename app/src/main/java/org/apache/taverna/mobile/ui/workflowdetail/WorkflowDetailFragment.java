@@ -307,10 +307,10 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
         dialogBuilder.setView(dialogView);
 
-        TextView title = ButterKnife.findById(dialogView, R.id.tvDialogTitle);
-        TextView date = ButterKnife.findById(dialogView, R.id.tvDialogDate);
-        WebView text = ButterKnife.findById(dialogView, R.id.wvDialogText);
-        Button buttonOk = ButterKnife.findById(dialogView, R.id.bDialogOK);
+        TextView title = dialogView.findViewById(R.id.tvDialogTitle);
+        TextView date = dialogView.findViewById(R.id.tvDialogDate);
+        WebView text = dialogView.findViewById(R.id.wvDialogText);
+        Button buttonOk = dialogView.findViewById(R.id.bDialogOK);
 
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override

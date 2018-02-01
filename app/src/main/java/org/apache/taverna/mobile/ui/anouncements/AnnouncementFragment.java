@@ -215,11 +215,11 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.detail_annoucement_dialog_layout, null);
         dialogBuilder.setView(dialogView);
-        TextView title = ButterKnife.findById(dialogView, R.id.tvDialogTitle);
-        TextView date = ButterKnife.findById(dialogView, R.id.tvDialogDate);
-        TextView author = ButterKnife.findById(dialogView, R.id.tvDialogAuthor);
-        WebView text = ButterKnife.findById(dialogView, R.id.wvDialogText);
-        Button buttonOk = ButterKnife.findById(dialogView, R.id.bDialogOK);
+        TextView title = dialogView.findViewById(R.id.tvDialogTitle);
+        TextView date = dialogView.findViewById(R.id.tvDialogDate);
+        TextView author = dialogView.findViewById(R.id.tvDialogAuthor);
+        WebView text = dialogView.findViewById(R.id.wvDialogText);
+        Button buttonOk = dialogView.findViewById(R.id.bDialogOK);
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
