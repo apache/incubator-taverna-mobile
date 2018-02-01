@@ -32,7 +32,7 @@ This module was created during Google Summer of Code 2015.
 
 ## License
 
-(c) 2015-2016 Apache Software Foundation
+(c) 2015-2018 Apache Software Foundation
 
 This product includes software developed at The [Apache Software
 Foundation](http://www.apache.org/).
