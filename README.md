@@ -68,8 +68,9 @@ before accepting a larger contribution.
 # Building and install requirements
 
 * Android Studio at least version 3.0.0+
-* Android Build tools version 26.0.2
-* gradle version 4.1+
+* Android Build tools version 27.0.3
+* Android SDK for API 27
+* gradle version 4.4
 * Support libraries for CardViews and recycler views. These are already configured in the gradle files
 Import the project as Android Studio Project into Android Studio after downloading from the github repository.
 Create and startup a virtual device or connecct your mobile device if ready.
