@@ -47,7 +47,7 @@ android {
         unitTests.returnDefaultValues = true
     }
 
-    buildToolsVersion '27.0.3'
+    buildToolsVersion rootProject.ext.buildToolsVersion
 }
 repositories {
     jcenter()
