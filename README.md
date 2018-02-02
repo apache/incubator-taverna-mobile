@@ -124,18 +124,18 @@ The defaults for this applications uses a development instance of Taverna Server
 You can start our own [Taverna Server](https://hub.docker.com/r/taverna/taverna-server/) with 
 [Docker](https://www.docker.com/):
 
-    docker run -p 8090:8080 --name taverna-server -d taverna/taverna-server:2.5.4
+    docker run -p 8081:8080 -d --name taverna taverna/taverna-server:3.1.0
 
 And a [Taverna Player](https://hub.docker.com/r/fbacall/taverna-player-portal/):
 
-    docker run --name taverna-portal --link taverna-server:taverna -p 3000:3000 -d fbacall/taverna-player-portal
+    docker run --name taverna-portal --link taverna:taverna -p 3000:3000 -d fbacall/taverna-player-portal
 
 Then edit [app/src/main/res/values/strings\_activity\_settings.xml](app/src/main/res/values/strings_activity_settings.xml) to set:
 
 
 ```xml
     <string name="pref_player_default"> http://example.com:3000/</string>   <!-- default value -->
-    <string name="pref_server_default"> http://example.com:8090/</string>   <!-- default value -->
+    <string name="pref_server_default"> http://example.com:8081/</string>   <!-- default value -->
 ```
 
 .. where you= replace `example.com` with the hostname or IP address of your server running Docker. 
