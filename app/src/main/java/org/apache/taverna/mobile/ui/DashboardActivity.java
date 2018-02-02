@@ -206,7 +206,8 @@ public class DashboardActivity extends AppCompatActivity {
                                         .fragment_licence, navigationView, false);
 
                                 lWebView.getSettings().setUseWideViewPort(true);
-                                lWebView.loadUrl("file:///android_asset/apache_licence_notice.html");
+                                lWebView.
+                                        loadUrl("file:///android_asset/apache_licence_notice.html");
 
                                 AlertDialog lAlertDialog = new AlertDialog.Builder(DashboardActivity
                                         .this, R.style.Theme_Taverna_Dialog)
