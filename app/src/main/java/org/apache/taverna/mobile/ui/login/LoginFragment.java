@@ -68,6 +68,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     private ProgressDialog progressDialog;
 
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";  //email verification
 
     public static LoginFragment newInstance() {
 
@@ -118,9 +119,9 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     private void validateEmail() {
 
-        if (mEditTextEmail.getText().toString().trim().length() > 0) {
+        if (mEditTextEmail.getText().toString().trim().length() > 0 && mEditTextEmail.getText().toString().trim().matches(emailPattern)) {
 
-            mTextInputEmail.setError(getString(R.string.err_login_email));
+            mTextInputEmail.setError(null);
         } else {
 
             mTextInputEmail.setError(null);
@@ -133,7 +134,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     private void validatePassword() {
         if (mEditTextPassword.getText().toString().trim().length() > 0) {
 
-            mTextInputPassword.setError(getString(R.string.err_login_password));
+            mTextInputPassword.setError(null);
         } else {
 
             mTextInputPassword.setError(null);
@@ -196,8 +197,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     public void showCredentialError() {
         showError("Please enter valid credential");
 
-        mTextInputEmail.setError(getString(R.string.err_login_email));
-        mTextInputPassword.setError(getString(R.string.err_login_password));
+
         requestFocus(mEditTextEmail);
     }
 
