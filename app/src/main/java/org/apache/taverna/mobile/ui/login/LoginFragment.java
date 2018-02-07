@@ -68,7 +68,6 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     private ProgressDialog progressDialog;
 
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";  //email verification
 
     public static LoginFragment newInstance() {
 
@@ -119,7 +118,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     private void validateEmail() {
 
-        if (mEditTextEmail.getText().toString().trim().length() > 0 && mEditTextEmail.getText().toString().trim().matches(emailPattern)) {
+        if (mEditTextEmail.getText().toString().trim().length() > 0) {
 
             mTextInputEmail.setError(null);
         } else {
