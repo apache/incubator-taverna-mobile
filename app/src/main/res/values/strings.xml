@@ -162,8 +162,10 @@ limitations under the License.
     <string name="hint_email_player">Email</string>
     <string name="hint_password">Password</string>
     <string name="login_button_description">Login Button</string>
-    <string name="err_login_email">Enter valid email</string>
-    <string name="err_login_password">Enter valid password</string>
+    <string name="err_login_email">Please check email/Username</string>
+    <string name="valid_email">Valid email</string>
+    <string name="err_login_password">Please check password</string>
+    <string name="empty_pass_err">Password field is empty</string>
     <string name="error_failed_to_fetch_workflow">Failed to fetch Workflow</string>
 
     <string name="no_my_workflow">You have not created any workflow yet !!!!!</string>
