@@ -76,7 +76,7 @@ Import the project as Android Studio Project into Android Studio after downloadi
 Create and startup a virtual device or connecct your mobile device if ready.
 Once the devices are ready, build and run the project. Select the target devvice on which to install and launch the app.
 Once installed, you get a flash screen containing the logo and Name of the app and some powered by Text.
-* Also import AndroidStyle.xml to your android studio's codestyle. ( You can found this file at the project's root [file link](https://github.com/apache/incubator-taverna-mobile/blob/master/))
+* Also import AndroidStyle.xml to your android studio's codestyle. ( You can found this file at the project's root [file link](https://github.com/apache/incubator-taverna-mobile/blob/master/AndroidStyle.xml))
 
 
 # Usage | Quick start
