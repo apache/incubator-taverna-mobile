@@ -30,6 +30,7 @@ import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 import org.apache.taverna.mobile.utils.ActivityUtils;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -232,12 +233,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_logout:
 
-                                mDrawerLayout.closeDrawers();
-                                dataManager.getPreferencesHelper().setLoggedInFlag(false);
-
-                                startActivity(new Intent(getApplicationContext(),
-                                        LoginActivity.class));
-                                finish();
+                                signOutConfirmation();
                                 return true;
 
                         }
@@ -251,6 +247,28 @@ public class DashboardActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.dashboard_main, menu);
         return true;
+    }
+
+    private void signOutConfirmation() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.sign_out)
+                .setMessage(R.string.sign_out_message)
+                .setPositiveButton(R.string.sign_out, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        signOut();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    private void signOut() {
+        mDrawerLayout.closeDrawers();
+        dataManager.getPreferencesHelper().setLoggedInFlag(false);
+
+        startActivity(new Intent(getApplicationContext(),
+                LoginActivity.class));
+        finish();
     }
 
 
