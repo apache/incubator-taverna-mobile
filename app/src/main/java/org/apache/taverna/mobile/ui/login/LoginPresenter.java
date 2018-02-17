@@ -25,10 +25,11 @@ import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+
 
 public class LoginPresenter extends BasePresenter<LoginMvpView> {
 
@@ -36,10 +37,11 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
 
     private DataManager mDataManager;
 
-    private Subscription mSubscriptions;
+    private CompositeDisposable compositeDisposable;
 
     public LoginPresenter(DataManager dataManager) {
         mDataManager = dataManager;
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -50,23 +52,20 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+        compositeDisposable.clear();
     }
 
     public void login(String username, String password, boolean flagLogin) {
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
-
+        checkViewAttached();
         getMvpView().showProgressDialog(true);
-
-        mSubscriptions = mDataManager.getLoginUserDetail(getEncodedCredential(username, password)
-                , flagLogin)
+        compositeDisposable.add(mDataManager
+                .getLoginUserDetail(getEncodedCredential(username, password), flagLogin)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<User>() {
+                .subscribeWith(new DisposableObserver<User>() {
                     @Override
-                    public void onCompleted() {
-                        getMvpView().showDashboardActivity();
-                        getMvpView().showProgressDialog(false);
+                    public void onNext(User value) {
+
                     }
 
                     @Override
@@ -76,16 +75,15 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
                     }
 
                     @Override
-                    public void onNext(User user) {
-
+                    public void onComplete() {
+                        getMvpView().showDashboardActivity();
+                        getMvpView().showProgressDialog(false);
                     }
-                });
+                }));
     }
 
     private String getEncodedCredential(String username, String password) {
-
         return "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64
                 .NO_WRAP);
     }
-
 }

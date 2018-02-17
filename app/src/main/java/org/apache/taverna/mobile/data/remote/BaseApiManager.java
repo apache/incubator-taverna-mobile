@@ -22,7 +22,7 @@ import org.apache.taverna.mobile.TavernaApplication;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
@@ -42,7 +42,7 @@ public class BaseApiManager {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ENDPOINT)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(new TavernaOkHttpClient().getTavernaOkHttpClient())
                 .build();
 
@@ -58,7 +58,7 @@ public class BaseApiManager {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ENDPOINT)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(new TavernaOkHttpClient().getTavernaOkHttpClient())
                 .build();
 
