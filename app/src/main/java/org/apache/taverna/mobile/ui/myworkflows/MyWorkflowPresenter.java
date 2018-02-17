@@ -28,12 +28,13 @@ import org.apache.taverna.mobile.ui.base.BasePresenter;
 import java.util.HashMap;
 import java.util.Map;
 
-import rx.Observable;
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Function;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class MyWorkflowPresenter extends BasePresenter<MyWorkflowMvpView> {
 
@@ -41,10 +42,11 @@ public class MyWorkflowPresenter extends BasePresenter<MyWorkflowMvpView> {
 
     private DataManager mDataManager;
 
-    private Subscription mSubscriptions;
+    private CompositeDisposable compositeDisposable;
 
     public MyWorkflowPresenter(DataManager dataManager) {
         mDataManager = dataManager;
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -55,27 +57,26 @@ public class MyWorkflowPresenter extends BasePresenter<MyWorkflowMvpView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+        compositeDisposable.clear();
     }
 
     public void loadMyWorkflows() {
+        checkViewAttached();
         getMvpView().showProgressbar(true);
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
-
-        mSubscriptions = mDataManager.getMyWorkflows(mDataManager.getPreferencesHelper()
+        compositeDisposable.clear();
+        compositeDisposable.add(mDataManager.getMyWorkflows(mDataManager.getPreferencesHelper()
                 .getUserID(), getQueryOptions())
-                .flatMap(new Func1<User, Observable<Workflow>>() {
+                .flatMap(new Function<User, ObservableSource<Workflow>>() {
                     @Override
-                    public Observable<Workflow> call(User user) {
+                    public ObservableSource<Workflow> apply(User user) throws Exception {
                         if (user.getWorkflows().getWorkflowList() != null && user.getWorkflows()
                                 .getWorkflowList().size() != 0) {
-                            return Observable.from(user.getWorkflows().getWorkflowList())
-                                    .concatMap(new Func1<Workflow, Observable<? extends
-                                            Workflow>>() {
-
+                            return Observable.fromIterable(user.getWorkflows().getWorkflowList())
+                                    .concatMap(new Function<Workflow,
+                                            ObservableSource<Workflow>>() {
                                         @Override
-                                        public Observable<? extends Workflow> call
-                                                (Workflow workflow) {
+                                        public ObservableSource<Workflow> apply(Workflow workflow)
+                                                throws Exception {
                                             return mDataManager.getDetailWorkflow(workflow.getId(),
                                                     getWorkflowQueryOptions());
                                         }
@@ -87,12 +88,10 @@ public class MyWorkflowPresenter extends BasePresenter<MyWorkflowMvpView> {
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Workflow>() {
+                .subscribeWith(new DisposableObserver<Workflow>() {
                     @Override
-                    public void onCompleted() {
-
-                        getMvpView().showProgressbar(false);
-                        getMvpView().checkWorkflowSize();
+                    public void onNext(Workflow workflow) {
+                        getMvpView().showWorkflow(workflow);
                     }
 
                     @Override
@@ -102,23 +101,20 @@ public class MyWorkflowPresenter extends BasePresenter<MyWorkflowMvpView> {
                     }
 
                     @Override
-                    public void onNext(Workflow workflow) {
-                        getMvpView().showWorkflow(workflow);
+                    public void onComplete() {
+                        getMvpView().showProgressbar(false);
+                        getMvpView().checkWorkflowSize();
                     }
-                });
-
+                }));
     }
 
     private Map<String, String> getQueryOptions() {
-
         Map<String, String> option = new HashMap<>();
         option.put("elements", "workflows");
         return option;
     }
 
-
     private Map<String, String> getWorkflowQueryOptions() {
-
         Map<String, String> option = new HashMap<>();
         option.put("elements", "title,type,uploader,preview,created-at");
         return option;
