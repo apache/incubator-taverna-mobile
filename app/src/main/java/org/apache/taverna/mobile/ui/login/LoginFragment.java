@@ -118,7 +118,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     private void validateEmail() {
 
-        if (mEditTextEmail.getText().toString().trim().length() > 0) {
+        if (mEditTextEmail.getText().toString().trim().length() == 0) {
 
             mTextInputEmail.setError(getString(R.string.err_login_email));
         } else {
@@ -131,7 +131,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
 
     private void validatePassword() {
-        if (mEditTextPassword.getText().toString().trim().length() > 0) {
+        if (mEditTextPassword.getText().toString().trim().length() == 0) {
 
             mTextInputPassword.setError(getString(R.string.err_login_password));
         } else {
