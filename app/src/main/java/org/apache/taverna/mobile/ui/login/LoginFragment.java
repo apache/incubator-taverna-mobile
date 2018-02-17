@@ -187,8 +187,9 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     @Override
     public void showDashboardActivity() {
-
-        startActivity(new Intent(getActivity(), DashboardActivity.class));
+        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
         getActivity().finish();
     }
 
