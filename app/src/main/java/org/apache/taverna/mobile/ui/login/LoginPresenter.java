@@ -36,7 +36,6 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
     public final String LOG_TAG = getClass().getSimpleName();
 
     private DataManager mDataManager;
-
     private CompositeDisposable compositeDisposable;
 
     public LoginPresenter(DataManager dataManager) {
@@ -65,7 +64,8 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
                 .subscribeWith(new DisposableObserver<User>() {
                     @Override
                     public void onNext(User value) {
-
+                        getMvpView().showDashboardActivity();
+                        getMvpView().showProgressDialog(false);
                     }
 
                     @Override
@@ -76,8 +76,7 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
 
                     @Override
                     public void onComplete() {
-                        getMvpView().showDashboardActivity();
-                        getMvpView().showProgressDialog(false);
+
                     }
                 }));
     }

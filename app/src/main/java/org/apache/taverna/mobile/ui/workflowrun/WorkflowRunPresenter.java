@@ -66,7 +66,7 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
     }
 
     public void runWorkflow(String contentURL) {
-        compositeDisposable.clear();
+        checkViewAttached();
         compositeDisposable.add(mDataManager.downloadWorkflowContent(contentURL)
                 .concatMap(new Function<ResponseBody, ObservableSource<PlayerWorkflow>>() {
 

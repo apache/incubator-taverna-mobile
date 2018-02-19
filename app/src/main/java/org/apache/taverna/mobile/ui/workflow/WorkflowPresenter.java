@@ -115,7 +115,6 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
 
                     }
                 }));
-        compositeDisposable.add(compositeDisposable);
     }
 
     public void detachSearchHandler() {

@@ -37,7 +37,6 @@ public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
     private static final String TAG = PlayerLoginPresenter.class.getSimpleName();
 
     private DataManager mDataManager;
-
     private CompositeDisposable compositeDisposable;
 
     public PlayerLoginPresenter(DataManager dataManager) {
