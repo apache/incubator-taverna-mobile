@@ -38,9 +38,7 @@ public class FavouriteWorkflowDetailPresenter extends
     public final String LOG_TAG = getClass().getSimpleName();
 
     private DataManager mDataManager;
-
     private CompositeDisposable compositeDisposable;
-
 
     public FavouriteWorkflowDetailPresenter(DataManager dataManager) {
         mDataManager = dataManager;
@@ -143,8 +141,8 @@ public class FavouriteWorkflowDetailPresenter extends
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableObserver<Boolean>() {
                     @Override
-                    public void onNext(Boolean b) {
-                        if (b) {
+                    public void onNext(Boolean favoriteStatus) {
+                        if (favoriteStatus) {
                             getMvpView().setFavouriteIcon();
                         } else {
                             getMvpView().showErrorSnackBar("Something went wrong please try after" +

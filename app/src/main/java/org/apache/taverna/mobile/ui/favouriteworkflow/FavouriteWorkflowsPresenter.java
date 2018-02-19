@@ -94,8 +94,8 @@ public class FavouriteWorkflowsPresenter extends BasePresenter<FavouriteWorkflow
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<String>() {
                     @Override
-                    public void onNext(String s) {
-                        getMvpView().performSearch(s);
+                    public void onNext(String searchQuery) {
+                        getMvpView().performSearch(searchQuery);
                     }
 
                     @Override
