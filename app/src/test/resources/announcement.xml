@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <announcement uri='http://www.myexperiment.org/announcement.xml?id=6' resource='http://www.myexperiment.org/announcements/6'>
+  <id>1</id>
   <author uri='http://www.myexperiment.org/user.xml?id=16' resource='http://www.myexperiment.org/users/16'>David De Roure</author>
   <title>myExperiment in IEEE Intelligent Systems</title>
   <text>&lt;p&gt;myExperiment is discussed by Jim Hendler in his article &lt;i&gt;Reinventing Academic Publishing, Part 3 &lt;/i&gt;in IEEE Intelligent Systems January/February 2008, page 2-3.&lt;/p&gt;</text>
