@@ -168,8 +168,8 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableObserver<Boolean>() {
                     @Override
-                    public void onNext(Boolean b) {
-                        getMvpView().getFavouriteIcon(b);
+                    public void onNext(Boolean favoriteStatus) {
+                        getMvpView().getFavouriteIcon(favoriteStatus);
                     }
 
                     @Override
