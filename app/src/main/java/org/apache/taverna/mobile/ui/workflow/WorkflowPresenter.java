@@ -98,10 +98,10 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableObserver<String>() {
                     @Override
-                    public void onNext(String s) {
-                        getMvpView().performSearch(s);
-                        if (!TextUtils.isEmpty(s)) {
-                            searchWorkflow(1, s);
+                    public void onNext(String searchText) {
+                        getMvpView().performSearch(searchText);
+                        if (!TextUtils.isEmpty(searchText)) {
+                            searchWorkflow(1, searchText);
                         }
                     }
 
