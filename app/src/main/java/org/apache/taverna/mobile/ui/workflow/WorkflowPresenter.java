@@ -135,7 +135,8 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
                         @Override
                         public void onNext(Search search) {
                             getMvpView().removeLoadMoreProgressbar();
-                            if (search.getWorkflowList().size() > 0) {
+                            if (search.getWorkflowList() != null &&
+                                    search.getWorkflowList().size() > 0) {
                                 getMvpView().showSearchResult(search.getWorkflowList());
                             } else {
                                 getMvpView().showSnackBar(R.string.msg_no_workflow_found);
