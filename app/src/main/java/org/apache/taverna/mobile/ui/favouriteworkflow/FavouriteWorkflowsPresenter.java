@@ -18,31 +18,32 @@
  */
 package org.apache.taverna.mobile.ui.favouriteworkflow;
 
+import android.support.v7.widget.SearchView;
+
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 import org.apache.taverna.mobile.utils.RxSearch;
 
-import android.support.v7.widget.SearchView;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import rx.Observer;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+
 
 public class FavouriteWorkflowsPresenter extends BasePresenter<FavouriteWorkflowsMvpView> {
 
     public final String LOG_TAG = getClass().getSimpleName();
-    private DataManager mDataManager;
-    private Subscription mSubscriptions;
 
+    private DataManager mDataManager;
+    private CompositeDisposable compositeDisposable;
 
     public FavouriteWorkflowsPresenter(DataManager dataManager) {
         mDataManager = dataManager;
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -53,20 +54,19 @@ public class FavouriteWorkflowsPresenter extends BasePresenter<FavouriteWorkflow
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+        compositeDisposable.clear();
     }
 
     public void loadAllWorkflow() {
-
+        checkViewAttached();
         getMvpView().showProgressbar(true);
-
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
-        mSubscriptions = mDataManager.getFavoriteWorkflowList()
+        compositeDisposable.add(mDataManager.getFavoriteWorkflowList()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<List<Workflow>>() {
+                .subscribeWith(new DisposableObserver<List<Workflow>>() {
+
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                         getMvpView().showProgressbar(false);
                     }
 
@@ -84,19 +84,18 @@ public class FavouriteWorkflowsPresenter extends BasePresenter<FavouriteWorkflow
                             getMvpView().showEmptyWorkflow();
                         }
                     }
-                });
-
+                }));
     }
 
-
     public void attachSearchHandler(SearchView searchView) {
+        checkViewAttached();
         RxSearch.fromSearchView(searchView)
                 .debounce(300, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<String>() {
+                .subscribeWith(new DisposableObserver<String>() {
                     @Override
-                    public void onCompleted() {
-
+                    public void onNext(String searchQuery) {
+                        getMvpView().performSearch(searchQuery);
                     }
 
                     @Override
@@ -105,11 +104,10 @@ public class FavouriteWorkflowsPresenter extends BasePresenter<FavouriteWorkflow
                     }
 
                     @Override
-                    public void onNext(String s) {
-                        getMvpView().performSearch(s);
+                    public void onComplete() {
+
                     }
                 });
     }
-
 
 }
