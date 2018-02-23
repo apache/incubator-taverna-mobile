@@ -177,7 +177,6 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
     @OnClick(R.id.fabRun)
     void fabClickRunWorkflow(View v) {
-
         Intent intent = new Intent(getActivity(), WorkflowRunActivity.class);
         intent.putExtra(Constants.WORKFLOW_URL, mWorkflow.getContentUri());
         startActivity(intent);
@@ -204,19 +203,15 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
             case R.id.licence:
 
                 if (licenceId == null) {
-
                     showErrorSnackBar("Please wait");
                 } else if (licenceId.isEmpty()) {
-
                     showErrorSnackBar("No Licence Found");
                 } else {
-
                     mWorkflowDetailPresenter.loadLicenseDetail(licenceId);
                 }
 
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
 
     }
@@ -271,19 +266,16 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
     @Override
     public void setImage(User user) {
-
         Glide.with(getContext())
                 .load(user.getAvatar().getResource())
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .placeholder(R.drawable.placeholder)
                 .error(R.drawable.placeholder)
                 .into(uploaderImage);
-
     }
 
     @Override
     public void showErrorSnackBar(String error) {
-
         final Snackbar snackbar = Snackbar.make(rootLayout, error, Snackbar
                 .LENGTH_INDEFINITE);
         snackbar.setAction("OK", new View.OnClickListener() {
@@ -292,9 +284,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
                 snackbar.dismiss();
             }
         });
-
         snackbar.show();
-
     }
 
     @Override
