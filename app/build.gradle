@@ -86,6 +86,7 @@ dependencies {
 
     //Dependencies for butterknife
     implementation "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
 
     implementation "io.reactivex.rxjava2:rxjava:2.0.1"
