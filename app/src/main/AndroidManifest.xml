@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 Apache Taverna Mobile
 Copyright 2015 The Apache Software Foundation
 This product includes software developed at
@@ -19,83 +18,75 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="org.apache.taverna.mobile">
+    package="org.apache.taverna.mobile">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-            android:name=".TavernaApplication"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:largeHeap="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Taverna">
+        android:name=".TavernaApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/Theme.Taverna">
         <activity
-                android:name=".ui.login.LoginActivity"
-                android:label="@string/app_name">
-        </activity>
+            android:name=".ui.login.LoginActivity"
+            android:label="@string/app_name" />
         <activity
-                android:name=".ui.FlashScreenActivity"
-                android:label="@string/title_activity_flash_screen">
+            android:name=".ui.FlashScreenActivity"
+            android:label="@string/title_activity_flash_screen">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".ui.DashboardActivity"
-                android:label="@string/title_activity_dashboard_main"
-                android:launchMode="singleTop">
+            android:name=".ui.DashboardActivity"
+            android:label="@string/title_activity_dashboard_main"
+            android:launchMode="singleTop">
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
 
             <meta-data
-                    android:name="android.app.searchable"
-                    android:resource="@xml/searchable"/>
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
-
-
         <activity
-                android:name=".activities.SettingsActivity"
-                android:label="@string/title_activity_settings"
-                android:parentActivityName=".ui.DashboardActivity">
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".ui.DashboardActivity">
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="org.apache.taverna.mobile.ui.DashboardActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.apache.taverna.mobile.ui.DashboardActivity" />
         </activity>
-
-
         <activity
-                android:name=".ui.workflowdetail.WorkflowDetailActivity"
-                android:label="@string/title_activity_run_result"
-                android:parentActivityName=".ui.DashboardActivity">
+            android:name=".ui.workflowdetail.WorkflowDetailActivity"
+            android:label="@string/title_activity_run_result"
+            android:parentActivityName=".ui.DashboardActivity">
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="org.apache.taverna.mobile.ui.DashboardActivity"/>
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.apache.taverna.mobile.ui.DashboardActivity" />
         </activity>
-
         <activity
             android:name=".ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity"
             android:label="@string/title_activity_run_result"
             android:parentActivityName=".ui.DashboardActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.apache.taverna.mobile.ui.DashboardActivity"/>
+                android:value="org.apache.taverna.mobile.ui.DashboardActivity" />
         </activity>
-
-        <activity android:name=".ui.imagezoom.ImageZoomActivity"
-                  android:label="@string/image_zoom"
-                  android:exported="true"
-                  />
-
-        <activity android:name=".ui.workflowrun.WorkflowRunActivity"
-                  android:label="@string/image_zoom"
-                  android:exported="true"
-            />
+        <activity
+            android:name=".ui.imagezoom.ImageZoomActivity"
+            android:exported="true"
+            android:label="@string/image_zoom" />
+        <activity
+            android:name=".ui.workflowrun.WorkflowRunActivity"
+            android:exported="true"
+            android:label="@string/image_zoom" />
     </application>
 
 </manifest>

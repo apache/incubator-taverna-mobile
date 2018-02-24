@@ -22,6 +22,7 @@ package org.apache.taverna.mobile.ui;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
+import org.apache.taverna.mobile.ui.usage.UsageFragment;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
@@ -160,14 +161,15 @@ public class DashboardActivity extends AppCompatActivity {
                                 toolbar.setTitle(R.string.title_nav_announcement);
                                 return true;
 
-
                             case R.id.nav_usage:
 
-                                dialog.setCanceledOnTouchOutside(true);
-                                dialog.setTitle(getString(R.string.title_nav_usage));
-                                dialog.setContentView(R.layout.usage_layout);
-                                dialog.show();
+                                fragment = new UsageFragment();
+                                ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                                        fragment, R.id.frame_container);
+
+                                menuItem.setChecked(true);
                                 mDrawerLayout.closeDrawers();
+                                toolbar.setTitle(R.string.title_nav_usage);
                                 return true;
 
                             case R.id.nav_about:
