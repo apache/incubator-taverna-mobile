@@ -22,7 +22,7 @@ package org.apache.taverna.mobile.ui;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
-import org.apache.taverna.mobile.ui.Usage.UsageFragment;
+import org.apache.taverna.mobile.ui.usage.UsageFragment;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
