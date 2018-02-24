@@ -198,5 +198,20 @@ public class DBHelper {
     }
 
 
+
+    public void clearFavouriteWorkflow() {
+        List<Workflow> workflowList = SQLite.select()
+                .from(Workflow.class)
+                .where(Workflow_Table.favourite.eq(true))
+                .queryList();
+
+        for (Workflow workflow : workflowList) {
+            workflow.setFavourite(!workflow.isFavourite());
+            workflow.save();
+        }
+
+    }
+
+
 }
 
