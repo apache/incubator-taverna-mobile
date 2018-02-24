@@ -73,27 +73,19 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
 
 
     public static ImageZoomFragment newInstance(String jpgURI, String svgURI) {
-
         Bundle args = new Bundle();
-
         args.putString(JPG_URI, jpgURI);
-
         args.putString(SVG_URI, svgURI);
-
         ImageZoomFragment fragment = new ImageZoomFragment();
         fragment.setArguments(args);
-
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         svgURI = getArguments().getString(SVG_URI);
-
         jpgURI = getArguments().getString(JPG_URI);
-
         mImageZoomPresenter = new ImageZoomPresenter();
 
     }
@@ -115,19 +107,14 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
         super.onActivityCreated(savedInstanceState);
 
         if (ConnectionInfo.isConnectingToInternet(getContext())) {
-
             mImageZoomPresenter.loadImage(svgURI, workflowImage);
         } else {
-
             showErrorSnackBar(getString(R.string.no_internet_connection));
         }
-
-
     }
 
     @OnClick(R.id.ivClose)
     public void closeActivity(View v) {
-
         getActivity().finish();
     }
 
@@ -136,20 +123,16 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
     public void showErrorSnackBar(String error) {
 
         final Snackbar snackbar = Snackbar.make(workflowImage, error, Snackbar.LENGTH_INDEFINITE);
-
         snackbar.setAction("OK", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 snackbar.dismiss();
                 getActivity().finish();
             }
         });
-
         snackbar.show();
 
         Handler handler = new Handler();
-
         handler.postDelayed(new Runnable() {
             public void run() {
                 snackbar.dismiss();
