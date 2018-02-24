@@ -264,7 +264,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void signOut() {
         mDrawerLayout.closeDrawers();
-        dataManager.getPreferencesHelper().setLoggedInFlag(false);
+        dataManager.getPreferencesHelper().clear();
+        dataManager.mDBHelper.clearFavouriteWorkflow();
 
         startActivity(new Intent(getApplicationContext(),
                 LoginActivity.class));
