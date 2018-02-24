@@ -183,6 +183,9 @@ limitations under the License.
     <string name="please_wait">Please Wait ...</string>
     <string name="headline_taverna_player_portal_login">Taverna Player Portal Login</string>
     <string name="button_text_login">Login</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_out_message">Do you really want to sign out?</string>
+
 
 
     <string name="title_activity_settings">Settings</string>
