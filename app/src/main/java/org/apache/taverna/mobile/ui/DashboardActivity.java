@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui;
 
-
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
@@ -164,7 +163,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_usage:
 
-                                Intent i= new Intent(DashboardActivity.this,UsageActivity.class);
+                                Intent i = new Intent(DashboardActivity.this, UsageActivity.class);
                                 startActivity(i);
                                 mDrawerLayout.closeDrawers();
                                 return true;
