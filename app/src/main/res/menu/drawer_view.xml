@@ -35,11 +35,11 @@
             android:id="@+id/nav_announcement"
             android:icon="@drawable/ic_announcement_black_24dp"
             android:title="@string/title_nav_announcement"/>
-    </group>
         <item
             android:id="@+id/nav_usage"
             android:icon="@drawable/ic_usage_web"
             android:title="@string/title_nav_usage"/>
+    </group>
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_about_web"

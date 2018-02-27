@@ -26,6 +26,7 @@ import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
 import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
+import org.apache.taverna.mobile.ui.usage.UsageActivity;
 import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 import org.apache.taverna.mobile.utils.ActivityUtils;
 
@@ -163,10 +164,8 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_usage:
 
-                                dialog.setCanceledOnTouchOutside(true);
-                                dialog.setTitle(getString(R.string.title_nav_usage));
-                                dialog.setContentView(R.layout.usage_layout);
-                                dialog.show();
+                                Intent i= new Intent(DashboardActivity.this,UsageActivity.class);
+                                startActivity(i);
                                 mDrawerLayout.closeDrawers();
                                 return true;
 
