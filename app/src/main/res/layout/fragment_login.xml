@@ -18,6 +18,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
@@ -30,8 +32,8 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/brand"
@@ -42,10 +44,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/logo"
+            android:typeface="serif"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="@dimen/appName_text_margin"
             android:text="@string/app_name"
-            android:textSize="25sp"/>
+            android:textSize="@dimen/text_size" />
 
         <LinearLayout
             android:id="@+id/loginlayout"
@@ -53,31 +56,31 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvAppName"
             android:layout_centerInParent="true"
-            android:layout_marginTop="20dp"
-            android:background="@android:color/white"
+            android:layout_marginTop="@dimen/login_layout_marginTop"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="@dimen/login_layout_padding">
 
             <TextView
                 android:id="@+id/tvLoginInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="#E1E1E1"
-                android:padding="10dp"
+                android:background="@color/grey_background"
+                android:padding="@dimen/login_info_padding"
                 android:text="@string/logininfo"
-                android:textSize="20sp"
-                android:textStyle="normal|bold"
-                />
+                android:textSize="@dimen/login_text_size"
+                android:textStyle="normal|bold" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="@dimen/input_layout_email_margin">
 
                 <EditText
                     android:id="@+id/etEmail"
+                    android:drawableStart="@drawable/ic_person_black_24dp"
+                    android:drawablePadding="@dimen/layout_padding"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
@@ -90,11 +93,13 @@
                 android:id="@+id/input_layout_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/login_layout_marginTop"
                 app:passwordToggleEnabled="true">
 
                 <EditText
                     android:id="@+id/etPassword"
+                    android:drawableStart="@drawable/ic_lock_black_24dp"
+                    android:drawablePadding="@dimen/layout_padding"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_password"
@@ -110,17 +115,28 @@
                 android:checked="true"
                 android:text="@string/keeplogin"/>
 
-            <Button
+            <android.support.v7.widget.AppCompatButton
                 android:id="@+id/bLogin"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:textColor="@color/white"
                 android:background="@color/colorPrimary"
+                android:layout_marginBottom="@dimen/loginButton_marginBottom"
+                android:layout_marginTop="@dimen/loginButton_marginTop"
                 android:contentDescription="@string/login_button_description"
-                android:text="@string/bLogin"
-                android:textSize="18sp"/>
+                android:text="@string/bLogin" />
 
+            <android.support.v7.widget.AppCompatButton
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/bRegister"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:text="@string/create_an_account"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@color/primary"/>
 
         </LinearLayout>
+
+
     </RelativeLayout>
 </ScrollView>

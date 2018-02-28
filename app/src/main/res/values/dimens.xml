@@ -30,4 +30,16 @@ limitations under the License.
     <dimen name="item_offset">3dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="layout_padding">8dp</dimen>
+    <dimen name="text_size">25sp</dimen>
+    <dimen name="login_layout_padding">20dp</dimen>
+    <dimen name="login_layout_marginTop">20dp</dimen>
+    <dimen name="login_info_padding">10dp</dimen>
+    <dimen name="login_text_size">20sp</dimen>
+    <dimen name="input_layout_email_margin">10dp</dimen>
+    <dimen name="loginButton_marginBottom">8dp</dimen>
+    <dimen name="loginButton_marginTop">30dp</dimen>
+    <dimen name="appName_text_margin">12dp</dimen>
+
+
 </resources>

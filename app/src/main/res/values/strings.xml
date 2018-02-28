@@ -98,6 +98,7 @@ limitations under the License.
     <string name="loadworkflows">Loading Workflows</string>
     <string name="fetchrun">Fetching run components</string>
     <string name="keeplogin">Remain Logged-in</string>
+    <string name="create_an_account">Create a myExperiment account</string>
 
     <string name="emailerr">Username must not be empty</string>
     <string name="passworderr">Password must not be empty</string>
