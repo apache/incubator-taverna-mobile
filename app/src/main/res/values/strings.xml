@@ -106,8 +106,7 @@ limitations under the License.
         The Apache Software Foundation, Licensed under the Apache License, Version 2.0.
     </string>
     <string name="about2">View, run and download workflows on your Android mobile device.</string>
-    <string name="about3">Originally developed during Google Summer of Code 2015 for the<a
-        href="http://taverna.incubator.apache.org">Apache Taverna project</a>.
+    <string name="about3">Originally developed during Google Summer of Code 2015 for the<a href="http://taverna.incubator.apache.org">Apache Taverna project</a>.
     </string>
     <string name="pref_category_title_player_config">Configure Player Account</string>
     <string name="pref_summary_player_user">Username used to login to Taverna player portal</string>
@@ -185,7 +184,6 @@ limitations under the License.
     <string name="button_text_login">Login</string>
     <string name="sign_out">Sign Out</string>
     <string name="sign_out_message">Do you really want to sign out?</string>
-
 
 
     <string name="title_activity_settings">Settings</string>
