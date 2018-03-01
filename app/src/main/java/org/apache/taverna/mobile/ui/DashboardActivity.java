@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui;
 
-
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
@@ -26,10 +25,12 @@ import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
 import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
+import org.apache.taverna.mobile.ui.usage.UsageActivity;
 import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 import org.apache.taverna.mobile.utils.ActivityUtils;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -162,10 +163,8 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_usage:
 
-                                dialog.setCanceledOnTouchOutside(true);
-                                dialog.setTitle(getString(R.string.title_nav_usage));
-                                dialog.setContentView(R.layout.usage_layout);
-                                dialog.show();
+                                Intent i = new Intent(DashboardActivity.this, UsageActivity.class);
+                                startActivity(i);
                                 mDrawerLayout.closeDrawers();
                                 return true;
 
@@ -232,12 +231,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_logout:
 
-                                mDrawerLayout.closeDrawers();
-                                dataManager.getPreferencesHelper().setLoggedInFlag(false);
-
-                                startActivity(new Intent(getApplicationContext(),
-                                        LoginActivity.class));
-                                finish();
+                                signOutConfirmation();
                                 return true;
 
                         }
@@ -251,6 +245,29 @@ public class DashboardActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.dashboard_main, menu);
         return true;
+    }
+
+    private void signOutConfirmation() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.sign_out)
+                .setMessage(R.string.sign_out_message)
+                .setPositiveButton(R.string.sign_out, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        signOut();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    private void signOut() {
+        mDrawerLayout.closeDrawers();
+        dataManager.getPreferencesHelper().clear();
+        dataManager.mDBHelper.clearFavouriteWorkflow();
+
+        startActivity(new Intent(getApplicationContext(),
+                LoginActivity.class));
+        finish();
     }
 
 

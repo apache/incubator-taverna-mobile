@@ -27,22 +27,20 @@ import org.apache.taverna.mobile.ui.base.BasePresenter;
 import java.util.HashMap;
 import java.util.Map;
 
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView> {
 
     public final String LOG_TAG = getClass().getSimpleName();
     private DataManager mDataManager;
-    private CompositeSubscription mCompositeSubscription;
-
+    private CompositeDisposable compositeDisposable;
 
     public WorkflowDetailPresenter(DataManager dataManager) {
-
         mDataManager = dataManager;
-        mCompositeSubscription = new CompositeSubscription();
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -53,46 +51,45 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
     @Override
     public void detachView() {
         super.detachView();
-        if (mCompositeSubscription != null) mCompositeSubscription.unsubscribe();
+        compositeDisposable.clear();
     }
 
     public void loadWorkflowDetail(String id) {
+        checkViewAttached();
         getMvpView().showProgressbar(true);
-
-        mCompositeSubscription.add(mDataManager.getDetailWorkflow(id, getDetailQueryOptions())
+        compositeDisposable.add(mDataManager.getDetailWorkflow(id, getDetailQueryOptions())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Workflow>() {
-                    @Override
-                    public void onCompleted() {
-                        getMvpView().showProgressbar(false);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        getMvpView().showProgressbar(false);
-                    }
-
+                .subscribeWith(new DisposableObserver<Workflow>() {
                     @Override
                     public void onNext(Workflow workflow) {
                         getMvpView().showWorkflowDetail(workflow);
                         loadUserDetail(workflow.getUploader().getId());
                         getFavourite(workflow.getId());
                     }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getMvpView().showProgressbar(false);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        getMvpView().showProgressbar(false);
+                    }
                 }));
     }
 
     private void loadUserDetail(String id) {
-
+        checkViewAttached();
         getMvpView().showProgressbar(true);
-
-        mCompositeSubscription.add(mDataManager.getUserDetail(id, getUserQueryOptions())
+        compositeDisposable.add(mDataManager.getUserDetail(id, getUserQueryOptions())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<User>() {
+                .subscribeWith(new DisposableObserver<User>() {
                     @Override
-                    public void onCompleted() {
-                        getMvpView().showProgressbar(false);
+                    public void onNext(User user) {
+                        getMvpView().setImage(user);
                     }
 
                     @Override
@@ -103,23 +100,22 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                     }
 
                     @Override
-                    public void onNext(User user) {
-                        getMvpView().setImage(user);
+                    public void onComplete() {
+                        getMvpView().showProgressbar(false);
                     }
                 }));
     }
 
     public void loadLicenseDetail(String id) {
-
+        checkViewAttached();
         getMvpView().showLicenseProgress(true);
-
-        mCompositeSubscription.add(mDataManager.getLicenseDetail(id, getLicenceQueryOptions())
+        compositeDisposable.add(mDataManager.getLicenseDetail(id, getLicenceQueryOptions())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<License>() {
+                .subscribeWith(new DisposableObserver<License>() {
                     @Override
-                    public void onCompleted() {
-                        getMvpView().showLicenseProgress(false);
+                    public void onNext(License license) {
+                        getMvpView().showLicense(license);
                     }
 
                     @Override
@@ -130,30 +126,18 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                     }
 
                     @Override
-                    public void onNext(License license) {
-                        getMvpView().showLicense(license);
+                    public void onComplete() {
+                        getMvpView().showLicenseProgress(false);
                     }
                 }));
     }
 
     public void setFavourite(String id) {
-
-
-        mCompositeSubscription.add(mDataManager.setFavoriteWorkflow(id)
+        checkViewAttached();
+        compositeDisposable.add(mDataManager.setFavoriteWorkflow(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Boolean>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        getMvpView().showErrorSnackBar("Something went wrong please try after " +
-                                "sometime");
-                    }
-
+                .subscribeWith(new DisposableObserver<Boolean>() {
                     @Override
                     public void onNext(Boolean b) {
                         if (b) {
@@ -162,21 +146,6 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                             getMvpView().showErrorSnackBar("Something went wrong please try after" +
                                     "sometime");
                         }
-
-                    }
-                }));
-    }
-
-    public void getFavourite(String id) {
-
-
-        mCompositeSubscription.add(mDataManager.getFavoriteWorkflow(id)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Boolean>() {
-                    @Override
-                    public void onCompleted() {
-
                     }
 
                     @Override
@@ -186,15 +155,38 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
                     }
 
                     @Override
-                    public void onNext(Boolean b) {
-                        getMvpView().getFavouriteIcon(b);
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    public void getFavourite(String id) {
+        checkViewAttached();
+        compositeDisposable.add(mDataManager.getFavoriteWorkflow(id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(new DisposableObserver<Boolean>() {
+                    @Override
+                    public void onNext(Boolean favoriteStatus) {
+                        getMvpView().getFavouriteIcon(favoriteStatus);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getMvpView().showErrorSnackBar("Something went wrong please try after " +
+                                "sometime");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 }));
     }
 
 
     private Map<String, String> getDetailQueryOptions() {
-
         Map<String, String> option = new HashMap<>();
         option.put("elements", "id,title,type,uploader,preview,created-at,svg,updated-at," +
                 "description,license-type,tags,content-uri");
@@ -202,25 +194,20 @@ public class WorkflowDetailPresenter extends BasePresenter<WorkflowDetailMvpView
     }
 
     private Map<String, String> getUserQueryOptions() {
-
         Map<String, String> option = new HashMap<>();
         option.put("elements", "avatar");
         return option;
     }
 
     private Map<String, String> getLicenceQueryOptions() {
-
         Map<String, String> option = new HashMap<>();
         option.put("elements", "title,description,url,created-at");
         return option;
     }
 
     private Map<String, String> getUserWorkflowsQueryOptions() {
-
         Map<String, String> option = new HashMap<>();
         option.put("elements", "workflow");
         return option;
     }
-
-
 }

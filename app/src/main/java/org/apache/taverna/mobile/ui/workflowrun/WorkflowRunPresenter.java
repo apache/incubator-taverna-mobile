@@ -31,50 +31,48 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Function;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import rx.Observable;
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 
 public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
 
     private static final String TAG = WorkflowRunPresenter.class.getSimpleName();
-    private final DataManager mDataManager;
-    private Subscription mSubscriptions;
 
+    private final DataManager mDataManager;
+    private CompositeDisposable compositeDisposable;
 
     public WorkflowRunPresenter(DataManager dataManager) {
         mDataManager = dataManager;
-
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
     public void attachView(WorkflowRunMvpView mvpView) {
-
         super.attachView(mvpView);
-
     }
 
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+        compositeDisposable.clear();
     }
 
-
     public void runWorkflow(String contentURL) {
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+        checkViewAttached();
+        compositeDisposable.add(mDataManager.downloadWorkflowContent(contentURL)
+                .concatMap(new Function<ResponseBody, ObservableSource<PlayerWorkflow>>() {
 
-        mSubscriptions = mDataManager.downloadWorkflowContent(contentURL)
-                .concatMap(new Func1<ResponseBody, Observable<PlayerWorkflow>>() {
                     @Override
-                    public Observable<PlayerWorkflow> call(ResponseBody responseBody) {
-
+                    public ObservableSource<PlayerWorkflow> apply(ResponseBody responseBody)
+                            throws Exception {
                         StringBuffer sb = new StringBuffer();
                         String post = "";
 
@@ -111,38 +109,34 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
                         } else {
                             return Observable.empty();
                         }
-
-
                     }
                 })
-                .concatMap(new Func1<PlayerWorkflow, Observable<PlayerWorkflowDetail>>() {
-                    @Override
-                    public Observable<PlayerWorkflowDetail> call(PlayerWorkflow playerWorkflow) {
+                .concatMap(new Function<PlayerWorkflow, ObservableSource<PlayerWorkflowDetail>>() {
 
+                    @Override
+                    public ObservableSource<PlayerWorkflowDetail> apply(
+                            PlayerWorkflow playerWorkflow) throws Exception {
                         return mDataManager.getWorkflowDetail(playerWorkflow.getId());
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<PlayerWorkflowDetail>() {
-                    @Override
-                    public void onCompleted() {
-                        getMvpView().movetoInputs();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                        getMvpView().showError();
-                    }
-
+                .subscribeWith(new DisposableObserver<PlayerWorkflowDetail>() {
                     @Override
                     public void onNext(PlayerWorkflowDetail playerWorkflowDetail) {
                         getMvpView().setInputsAttribute(playerWorkflowDetail.getRun()
                                 .getWorkflowId());
                     }
-                });
+
+                    @Override
+                    public void onError(Throwable e) {
+                        getMvpView().showError();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
     }
-
-
 }

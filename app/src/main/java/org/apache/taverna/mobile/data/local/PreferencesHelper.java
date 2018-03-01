@@ -26,8 +26,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import rx.Observable;
-import rx.functions.Func0;
+import java.util.concurrent.Callable;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+
 
 public class PreferencesHelper {
 
@@ -155,9 +158,9 @@ public class PreferencesHelper {
     }
 
     public Observable<User> saveUserDetail(final User user) {
-        return Observable.defer(new Func0<Observable<User>>() {
+        return Observable.defer(new Callable<ObservableSource<? extends User>>() {
             @Override
-            public Observable<User> call() {
+            public ObservableSource<? extends User> call() throws Exception {
                 if (user.getElementId() != null) {
                     setUserID(user.getElementId());
                 }
@@ -186,7 +189,6 @@ public class PreferencesHelper {
                 return Observable.just(user);
             }
         });
-
     }
 
     public boolean isUserPlayerLoggedInFlag() {

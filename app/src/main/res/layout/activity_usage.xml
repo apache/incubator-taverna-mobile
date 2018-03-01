@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/usageLinearLayoutPadding">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/usageCardViewPaddingBotton">
+
+                <TextView
+                    android:id="@+id/usage_login_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="@dimen/cardTitleTopPadding"
+                    android:text="@string/usage_intro"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/usageCardTitleTextSize" />
+
+                <TextView
+                    android:id="@+id/usage_login_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/usageCardContentMarginTop"
+                    android:fontFamily="sans-serif-condensed"
+                    android:paddingBottom="@dimen/usageContentPaddingBottom"
+                    android:paddingLeft="@dimen/usageContentPaddingLeft"
+                    android:paddingRight="@dimen/usageContentPaddingRight"
+                    android:text="@string/usage_login_accounts"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/usageContentTextSize" />
+
+            </android.support.v7.widget.CardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/usageCardSpaceHeight" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/usageCardViewPaddingBotton">
+
+                <TextView
+                    android:id="@+id/usage_dashboard_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="@dimen/cardTitleTopPadding"
+                    android:text="@string/usage_dashboard"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/usageCardTitleTextSize" />
+
+                <TextView
+                    android:id="@+id/usage_dashboard_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/usageCardContentMarginTop"
+                    android:fontFamily="sans-serif-condensed"
+                    android:paddingBottom="@dimen/usageContentPaddingBottom"
+                    android:paddingLeft="@dimen/usageContentPaddingLeft"
+                    android:paddingRight="@dimen/usageContentPaddingRight"
+                    android:text="@string/usage_dashboard_Text"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/usageContentTextSize" />
+
+            </android.support.v7.widget.CardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/usageCardSpaceHeight" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/usageCardViewPaddingBotton">
+
+                <TextView
+                    android:id="@+id/usage_menu_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="@dimen/cardTitleTopPadding"
+                    android:text="@string/usage_menus"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/usageCardTitleTextSize" />
+
+                <TextView
+                    android:id="@+id/menu_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/usageCardContentMarginTop"
+                    android:fontFamily="sans-serif-condensed"
+                    android:paddingBottom="@dimen/usageContentPaddingBottom"
+                    android:paddingLeft="@dimen/usageContentPaddingLeft"
+                    android:paddingRight="@dimen/usageContentPaddingRight"
+                    android:text="@string/usage_menu_Text"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/usageContentTextSize" />
+
+            </android.support.v7.widget.CardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/usageCardSpaceHeight" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/usageCardViewPaddingBotton">
+
+                <TextView
+                    android:id="@+id/workflow_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="@dimen/cardTitleTopPadding"
+                    android:text="@string/usage_detail"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="@dimen/usageCardTitleTextSize" />
+
+                <TextView
+                    android:id="@+id/workflow_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/usageCardContentMarginTop"
+                    android:fontFamily="sans-serif-condensed"
+                    android:paddingBottom="@dimen/usageContentPaddingLeft"
+                    android:paddingLeft="@dimen/usageContentPaddingRight"
+                    android:paddingRight="@dimen/usageContentPaddingRight"
+                    android:text="@string/usage_detail_text"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/usageContentTextSize" />
+
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>
+

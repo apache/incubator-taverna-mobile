@@ -32,25 +32,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import rx.Observer;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
-
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
 
     public final String LOG_TAG = WorkflowPresenter.class.getSimpleName();
     private DataManager mDataManager;
-    private Subscription mSearchViewSubscription;
-    private CompositeSubscription mSubscriptions;
+    private CompositeDisposable compositeDisposable;
 
 
     public WorkflowPresenter(DataManager dataManager) {
         mDataManager = dataManager;
-        mSubscriptions = new CompositeSubscription();
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -61,19 +57,21 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
-
+        compositeDisposable.clear();
     }
 
     public void loadAllWorkflow(int pageNumber) {
+        checkViewAttached();
         getMvpView().showProgressbar(true);
-
-        mSubscriptions.add(mDataManager.getAllWorkflow(getQueryOptions(pageNumber))
+        compositeDisposable.add(mDataManager.getAllWorkflow(getQueryOptions(pageNumber))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Workflows>() {
+                .subscribeWith(new DisposableObserver<Workflows>() {
                     @Override
-                    public void onCompleted() {
+                    public void onNext(Workflows workflows) {
+                        getMvpView().showProgressbar(false);
+                        getMvpView().removeLoadMoreProgressbar();
+                        getMvpView().showWorkflows(workflows);
                     }
 
                     @Override
@@ -84,25 +82,27 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
                     }
 
                     @Override
-                    public void onNext(Workflows workflows) {
-                        getMvpView().showProgressbar(false);
-                        getMvpView().removeLoadMoreProgressbar();
-                        getMvpView().showWorkflows(workflows);
+                    public void onComplete() {
+
                     }
                 }));
 
     }
 
     public void attachSearchHandler(final SearchView searchView) {
-        mSearchViewSubscription = RxSearch.fromSearchView(searchView)
+        checkViewAttached();
+        compositeDisposable.add(RxSearch.fromSearchView(searchView)
                 .distinctUntilChanged()
                 .debounce(300, TimeUnit.MILLISECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<String>() {
+                .subscribeWith(new DisposableObserver<String>() {
                     @Override
-                    public void onCompleted() {
-
+                    public void onNext(String searchText) {
+                        getMvpView().performSearch(searchText);
+                        if (!TextUtils.isEmpty(searchText)) {
+                            searchWorkflow(1, searchText);
+                        }
                     }
 
                     @Override
@@ -111,33 +111,36 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
                     }
 
                     @Override
-                    public void onNext(String s) {
-                        getMvpView().performSearch(s);
-                        if (!TextUtils.isEmpty(s)) {
-                            searchWorkflow(1, s);
-                        }
+                    public void onComplete() {
+
                     }
-                });
-        mSubscriptions.add(mSearchViewSubscription);
+                }));
     }
 
     public void detachSearchHandler() {
-        if (mSearchViewSubscription != null) mSearchViewSubscription.unsubscribe();
+        compositeDisposable.clear();
     }
 
     public void searchWorkflow(int pageNumber, String query) {
+        checkViewAttached();
         if (!TextUtils.isEmpty(query)) {
             if (pageNumber == 1) {
                 getMvpView().showSwipeRefreshLayout(true);
             }
-            mSubscriptions.add(mDataManager.getSearchWorkflowResult(getSearchQueryOptions
+            compositeDisposable.add(mDataManager.getSearchWorkflowResult(getSearchQueryOptions
                     (pageNumber, query))
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe(new Subscriber<Search>() {
+                    .subscribeWith(new DisposableObserver<Search>() {
                         @Override
-                        public void onCompleted() {
-                            getMvpView().showSwipeRefreshLayout(false);
+                        public void onNext(Search search) {
+                            getMvpView().removeLoadMoreProgressbar();
+                            if (search.getWorkflowList() != null &&
+                                    search.getWorkflowList().size() > 0) {
+                                getMvpView().showSearchResult(search.getWorkflowList());
+                            } else {
+                                getMvpView().showSnackBar(R.string.msg_no_workflow_found);
+                            }
                         }
 
                         @Override
@@ -146,13 +149,8 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
                         }
 
                         @Override
-                        public void onNext(Search search) {
-                            getMvpView().removeLoadMoreProgressbar();
-                            if (search.getWorkflowList().size() > 0) {
-                                getMvpView().showSearchResult(search.getWorkflowList());
-                            } else {
-                                getMvpView().showSnackBar(R.string.msg_no_workflow_found);
-                            }
+                        public void onComplete() {
+                            getMvpView().showSwipeRefreshLayout(false);
                         }
                     }));
         }
@@ -167,13 +165,10 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
         return option;
     }
 
-
     private Map<String, String> getSearchQueryOptions(int pageNumber, String query) {
         Map<String, String> option = getQueryOptions(pageNumber);
         option.put("query", query);
         option.put("type", "workflow");
         return option;
     }
-
-
 }

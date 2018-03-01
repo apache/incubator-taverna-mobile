@@ -4,52 +4,55 @@ import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
-import rx.Scheduler;
-import rx.android.plugins.RxAndroidPlugins;
-import rx.android.plugins.RxAndroidSchedulersHook;
-import rx.plugins.RxJavaPlugins;
-import rx.plugins.RxJavaSchedulersHook;
-import rx.schedulers.Schedulers;
+import java.util.concurrent.Callable;
+
+import io.reactivex.Scheduler;
+import io.reactivex.android.plugins.RxAndroidPlugins;
+import io.reactivex.functions.Function;
+import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class RxSchedulersOverrideRule implements TestRule {
 
-    private final RxJavaSchedulersHook mRxJavaSchedulersHook = new RxJavaSchedulersHook() {
-        @Override
-        public Scheduler getIOScheduler() {
-            return Schedulers.immediate();
-        }
+    private final Function<Callable<Scheduler>, Scheduler> mRxAndroidSchedulersHook =
+            new Function<Callable<Scheduler>, Scheduler>() {
+                @Override
+                public Scheduler apply(Callable<Scheduler> schedulerCallable)
+                        throws Exception {
+                    return getScheduler();
+                }
+            };
 
-        @Override
-        public Scheduler getNewThreadScheduler() {
-            return Schedulers.immediate();
-        }
-    };
-
-    private final RxAndroidSchedulersHook mRxAndroidSchedulersHook = new RxAndroidSchedulersHook() {
-        @Override
-        public Scheduler getMainThreadScheduler() {
-            return Schedulers.immediate();
-        }
-    };
-
+    private final Function<Scheduler, Scheduler> mRxJavaImmediateScheduler =
+            new Function<Scheduler, Scheduler>() {
+                @Override
+                public Scheduler apply(Scheduler scheduler) throws Exception {
+                    return getScheduler();
+                }
+            };
 
     @Override
     public Statement apply(final Statement base, Description description) {
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
+                RxAndroidPlugins.reset();
+                RxAndroidPlugins.setInitMainThreadSchedulerHandler(mRxAndroidSchedulersHook);
 
-                RxAndroidPlugins.getInstance().reset();
-                RxAndroidPlugins.getInstance().registerSchedulersHook(mRxAndroidSchedulersHook);
-                RxJavaPlugins.getInstance().reset();
-                RxJavaPlugins.getInstance().registerSchedulersHook(mRxJavaSchedulersHook);
+                RxJavaPlugins.reset();
+                RxJavaPlugins.setIoSchedulerHandler(mRxJavaImmediateScheduler);
+                RxJavaPlugins.setNewThreadSchedulerHandler(mRxJavaImmediateScheduler);
 
                 base.evaluate();
 
-                RxAndroidPlugins.getInstance().reset();
-                RxJavaPlugins.getInstance().reset();
+                RxAndroidPlugins.reset();
+                RxJavaPlugins.reset();
             }
         };
+    }
+
+    public Scheduler getScheduler() {
+        return Schedulers.trampoline();
     }
 }
