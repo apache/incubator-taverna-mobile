@@ -24,6 +24,18 @@ limitations under the License.
     <dimen name="announcementCardMarginHorizontal">5dp</dimen>
     <dimen name="announcementCardMarginVertical">4dp</dimen>
 
+    <!--Usage Activity Layout Dimens-->
+    <dimen name="usageCardTitleTextSize">25sp</dimen>
+    <dimen name="cardTitleTopPadding">3sp</dimen>
+    <dimen name="usageCardContentMarginTop">45sp</dimen>
+    <dimen name="usageContentPaddingBottom">10sp</dimen>
+    <dimen name="usageContentPaddingLeft">10sp</dimen>
+    <dimen name="usageContentPaddingRight">10sp</dimen>
+    <dimen name="usageContentTextSize">13sp</dimen>
+    <dimen name="usageLinearLayoutPadding">10sp</dimen>
+    <dimen name="usageCardViewPaddingBotton">10sp</dimen>
+    <dimen name="usageCardSpaceHeight">10sp</dimen>
+
     <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
          https://developer.android.com/design/patterns/navigation-drawer.html -->
     <dimen name="navigation_drawer_width">240dp</dimen>

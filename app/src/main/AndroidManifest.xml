@@ -96,6 +96,7 @@ limitations under the License.
                   android:label="@string/image_zoom"
                   android:exported="true"
             />
+        <activity android:name=".ui.usage.UsageActivity" />
     </application>
 
 </manifest>
