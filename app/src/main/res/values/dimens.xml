@@ -36,6 +36,32 @@ limitations under the License.
     <dimen name="usageCardViewPaddingBotton">10sp</dimen>
     <dimen name="usageCardSpaceHeight">10sp</dimen>
 
+    <!--Fragment Detail Workflow Dimens-->
+    <dimen name="ivWorkflowImage_height">300dp</dimen>
+    <dimen name="view_height">1sp</dimen>
+    <dimen name="ivFav_width">55dp</dimen>
+    <dimen name="ivFav_height">55dp</dimen>
+    <dimen name="ivFav_marginRight">16dp</dimen>
+    <dimen name="ivFav_marginTop">-27dp</dimen>
+    <dimen name="ivFav_borderWidth">0sp</dimen>
+    <dimen name="tvTitle_padding">10sp</dimen>
+    <dimen name="tvTitle_textSize">20sp</dimen>
+    <dimen name="LinearLayout_margin_top">5sp</dimen>
+    <dimen name="ivUploader_width">50sp</dimen>
+    <dimen name="ivUploader_height">50sp</dimen>
+    <dimen name="ivUploader_paddingLeft">10sp</dimen>
+    <dimen name="relLay2_width">0sp</dimen>
+    <dimen name="relLay2_height">50sp</dimen>
+    <dimen name="relLay2_marginLeft">10sp</dimen>
+    <dimen name="relLay2_marginStart">10sp</dimen>
+    <dimen name="tvUploaderName_textSize">18sp</dimen>
+    <dimen name="tvType_paddingEnd">10sp</dimen>
+    <dimen name="tvType_paddingLeft">0sp</dimen>
+    <dimen name="tvType_paddingRight">10sp</dimen>
+    <dimen name="tvType_paddingStart">0sp</dimen>
+    <dimen name="linLay2_padding">15sp</dimen>
+    <dimen name="tvDescription_padding">5sp</dimen>
+
     <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
          https://developer.android.com/design/patterns/navigation-drawer.html -->
     <dimen name="navigation_drawer_width">240dp</dimen>
