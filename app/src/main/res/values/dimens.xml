@@ -20,6 +20,12 @@ limitations under the License.
     <dimen name="cardMarginHorizontal">10dp</dimen>
     <dimen name="cardMarginVertical">8dp</dimen>
 
+    <dimen name="workflowImageView_height">498dp</dimen>
+    <dimen name="closeImageView_margin">8dp</dimen>
+    <dimen name="closeImageView_width">30dp</dimen>
+    <dimen name="closeImageView_height">30dp</dimen>
+
+
     <!--Announcement Card margin-->
     <dimen name="announcementCardMarginHorizontal">5dp</dimen>
     <dimen name="announcementCardMarginVertical">4dp</dimen>

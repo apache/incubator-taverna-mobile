@@ -116,8 +116,9 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
     @OnClick(R.id.ivClose)
     public void closeActivity(View v) {
         getActivity().finish();
-    }
+        getActivity().overridePendingTransition(R.anim.slide_in_down, R.anim.slide_out_down);
 
+    }
 
     @Override
     public void showErrorSnackBar(String error) {

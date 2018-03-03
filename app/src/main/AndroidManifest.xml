@@ -90,6 +90,7 @@ limitations under the License.
         <activity android:name=".ui.imagezoom.ImageZoomActivity"
                   android:label="@string/image_zoom"
                   android:exported="true"
+                  android:theme="@style/ImageZoom.Theme"
                   />
 
         <activity android:name=".ui.workflowrun.WorkflowRunActivity"
