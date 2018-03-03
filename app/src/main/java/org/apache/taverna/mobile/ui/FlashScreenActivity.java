@@ -29,6 +29,13 @@ import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 public class FlashScreenActivity extends AppCompatActivity {
 
     private DataManager dataManager;
@@ -40,15 +47,27 @@ public class FlashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flash_screen);
 
         dataManager = new DataManager(new PreferencesHelper(this));
+        Observable.timer(2, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        if (!dataManager.getPreferencesHelper().isLoggedInFlag()) {
+                            dataManager.getPreferencesHelper().clear();
+                            startActivity(new Intent(FlashScreenActivity.this,
+                                    LoginActivity.class));
+                            (FlashScreenActivity.this).finish();
+                        } else {
+                            startActivity(new Intent(FlashScreenActivity.this,
+                                    DashboardActivity.class));
+                            (FlashScreenActivity.this).finish();
+                        }
+                    }
+                });
 
-        if (!dataManager.getPreferencesHelper().isLoggedInFlag()) {
-            dataManager.getPreferencesHelper().clear();
-            startActivity(new Intent(FlashScreenActivity.this, LoginActivity.class));
-            (FlashScreenActivity.this).finish();
-        } else {
-            startActivity(new Intent(FlashScreenActivity.this, DashboardActivity.class));
-            (FlashScreenActivity.this).finish();
-        }
+
+
     }
 
 

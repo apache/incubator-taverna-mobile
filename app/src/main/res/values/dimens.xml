@@ -78,6 +78,8 @@ limitations under the License.
     <dimen name="loginButton_marginBottom">8dp</dimen>
     <dimen name="loginButton_marginTop">30dp</dimen>
     <dimen name="appName_text_margin">12dp</dimen>
+    <dimen name="title_text_size">40sp</dimen>
+    <dimen name="logo_margin_top">40dp</dimen>
 
 
 </resources>
