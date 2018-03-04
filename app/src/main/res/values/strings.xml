@@ -233,4 +233,11 @@ limitations under the License.
     <string name="pref_key_myexperiment_user">pref_myexperimentuser</string>
     <string name="pref_key_myexperiment_pass">pref_myexperimentpass</string>
     <string name="pref_summary_myexperiment_pass">Myexperiment password</string>
+
+    <string-array name="workflow_images_options">
+        <item>Download image</item>
+        <item>Share image</item>
+        <item>Open in browser</item>
+    </string-array>
+
 </resources>

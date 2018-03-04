@@ -24,6 +24,9 @@ limitations under the License.
     <dimen name="closeImageView_margin">8dp</dimen>
     <dimen name="closeImageView_width">30dp</dimen>
     <dimen name="closeImageView_height">30dp</dimen>
+    <dimen name="dotsImageView_width">30dp</dimen>
+    <dimen name="dotsImageView_height">30dp</dimen>
+
 
 
     <!--Announcement Card margin-->

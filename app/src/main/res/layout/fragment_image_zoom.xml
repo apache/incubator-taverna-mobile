@@ -36,4 +36,13 @@
         android:background="@android:color/black"
         android:src="@drawable/ic_clear_white_24dp" />
 
+    <ImageView
+        android:id="@+id/ivdots"
+        android:layout_width="@dimen/dotsImageView_width"
+        android:layout_height="@dimen/dotsImageView_height"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/ivClose"
+        android:background="@android:color/black"
+        android:src="@drawable/ic_dots_white_24dp" />
+
 </RelativeLayout>
