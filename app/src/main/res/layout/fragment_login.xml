@@ -32,8 +32,8 @@
 
         <ImageView
             android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_height"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/brand"
@@ -113,14 +113,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/checkbox_margin_top"
                 android:text="@string/keeplogin"/>
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/bLogin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/login_height"
                 android:textColor="@color/white"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/login_button"
                 android:layout_marginBottom="@dimen/loginButton_marginBottom"
                 android:layout_marginTop="@dimen/loginButton_marginTop"
                 android:contentDescription="@string/login_button_description"
@@ -129,11 +131,12 @@
             <android.support.v7.widget.AppCompatButton
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:id="@+id/bRegister"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/signup_height"
                 android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/signup_margin_top"
                 android:text="@string/create_an_account"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="@color/primary"/>
+                android:textColor="@color/colorPrimaryDark"/>
 
         </LinearLayout>
 
