@@ -40,6 +40,8 @@ limitations under the License.
     <string name="no_more_announcement_available">No More Announcement Available</string>
     <string name="failed_to_fetch_announcement">Failed to fetch announcement</string>
     <string name="ok">OK</string>
+    <string name="workflowImage_description">ImageView to display workflow images</string>
+    <string name="close_imageView">ImageView to close the activity</string>
 
 
     <string name="title_explore">Workflows</string>
@@ -231,4 +233,11 @@ limitations under the License.
     <string name="pref_key_myexperiment_user">pref_myexperimentuser</string>
     <string name="pref_key_myexperiment_pass">pref_myexperimentpass</string>
     <string name="pref_summary_myexperiment_pass">Myexperiment password</string>
+
+    <string-array name="workflow_images_options">
+        <item>Download image</item>
+        <item>Share image</item>
+        <item>Open in browser</item>
+    </string-array>
+
 </resources>

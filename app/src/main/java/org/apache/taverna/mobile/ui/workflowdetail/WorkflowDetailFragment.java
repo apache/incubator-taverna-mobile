@@ -189,6 +189,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
         intent.putExtra(ImageZoomFragment.JPG_URI, mWorkflow.getPreviewUri());
         intent.putExtra(ImageZoomFragment.SVG_URI, mWorkflow.getSvgUri());
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up);
     }
 
     @Override

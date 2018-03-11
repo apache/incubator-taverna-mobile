@@ -35,4 +35,9 @@ limitations under the License.
 
 	<style name="Theme.Taverna.Dialog" parent="Theme.AppCompat.Light.Dialog"/>
 
+	<style name="ImageZoom.Theme" parent="Base.Theme.Taverna">
+		<item name="colorPrimaryDark">@android:color/background_dark</item>
+		<item name="android:windowBackground">@android:color/black</item>
+	</style>
+
 </resources>
