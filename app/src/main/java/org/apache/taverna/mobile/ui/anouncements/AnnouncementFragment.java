@@ -210,6 +210,9 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
 
     @Override
     public void showAnnouncementDetail(DetailAnnouncement detailAnnouncement) {
+        if (alertDialog != null && alertDialog.isShowing()) {
+            alertDialog.dismiss();
+        }
         mAnnouncementDetail = detailAnnouncement;
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -255,6 +258,9 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     @Override
     public void showWaitProgress(boolean b) {
         if (b) {
+            if (dialog != null && dialog.isShowing()) {
+                dialog.dismiss();
+            }
             dialog = ProgressDialog.show(getContext(), "Loading", "Please wait...", true);
         } else {
             dialog.dismiss();
