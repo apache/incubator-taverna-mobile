@@ -28,6 +28,7 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
+import org.apache.taverna.mobile.ui.tutorial.TutorialActivity;
 
 import java.util.concurrent.TimeUnit;
 
@@ -39,13 +40,14 @@ import io.reactivex.schedulers.Schedulers;
 public class FlashScreenActivity extends AppCompatActivity {
 
     private DataManager dataManager;
+    private PreferencesHelper preferencesHelper;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash_screen);
-
+        preferencesHelper = new PreferencesHelper(this);
         dataManager = new DataManager(new PreferencesHelper(this));
         Observable.timer(2, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
@@ -55,9 +57,16 @@ public class FlashScreenActivity extends AppCompatActivity {
                     public void accept(Long aLong) throws Exception {
                         if (!dataManager.getPreferencesHelper().isLoggedInFlag()) {
                             dataManager.getPreferencesHelper().clear();
-                            startActivity(new Intent(FlashScreenActivity.this,
-                                    LoginActivity.class));
-                            (FlashScreenActivity.this).finish();
+                            if (preferencesHelper.isFirstTimeLaunch()) {
+                                startActivity(new Intent(FlashScreenActivity.this,
+                                        TutorialActivity.class));
+                                (FlashScreenActivity.this).finish();
+
+                            } else {
+                                startActivity(new Intent(FlashScreenActivity.this,
+                                        LoginActivity.class));
+                                (FlashScreenActivity.this).finish();
+                            }
                         } else {
                             startActivity(new Intent(FlashScreenActivity.this,
                                     DashboardActivity.class));
@@ -66,10 +75,5 @@ public class FlashScreenActivity extends AppCompatActivity {
                     }
                 });
 
-
-
     }
-
-
-
 }

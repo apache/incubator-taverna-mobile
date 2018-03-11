@@ -231,4 +231,17 @@ limitations under the License.
     <string name="pref_key_myexperiment_user">pref_myexperimentuser</string>
     <string name="pref_key_myexperiment_pass">pref_myexperimentpass</string>
     <string name="pref_summary_myexperiment_pass">Myexperiment password</string>
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Login</string>
+
+    <string name="slide_2_title">Dashboard</string>
+
+    <string name="slide_3_title">Workflow</string>
+
+    <string name="slide_4_title">Menus</string>
+
 </resources>

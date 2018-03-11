@@ -37,13 +37,17 @@ limitations under the License.
                 android:label="@string/app_name">
         </activity>
         <activity
-                android:name=".ui.FlashScreenActivity"
-                android:label="@string/title_activity_flash_screen">
+                android:name=".ui.FlashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+                android:name=".ui.tutorial.TutorialActivity"
+                android:theme="@style/Tutorial.Theme.Taverna"
+                android:label="@string/title_activity_flash_screen">
         </activity>
         <activity
                 android:name=".ui.DashboardActivity"
