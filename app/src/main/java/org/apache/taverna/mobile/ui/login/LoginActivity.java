@@ -24,8 +24,8 @@ import android.support.v7.app.AppCompatActivity;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.utils.ActivityUtils;
 
-
 public class LoginActivity extends AppCompatActivity {
+
     private static final String TAG = "LoginActivity";
 
     @Override
@@ -38,6 +38,4 @@ public class LoginActivity extends AppCompatActivity {
                     LoginFragment.newInstance(), R.id.container);
         }
     }
-
-
 }

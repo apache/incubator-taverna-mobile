@@ -32,24 +32,20 @@ import org.apache.taverna.mobile.utils.Constants;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 public class DownloadingFragment extends Fragment {
 
-
     @BindView(R.id.tvMessage)
-    TextView tv_Message;
 
+    TextView tv_Message;
     private String message;
 
     public static DownloadingFragment newInstance(String message) {
-
         Bundle args = new Bundle();
         args.putString(Constants.ARGS_MESSAGE, message);
         DownloadingFragment fragment = new DownloadingFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +61,6 @@ public class DownloadingFragment extends Fragment {
             Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_downloading, container, false);
-
         ButterKnife.bind(this, rootView);
         return rootView;
     }
@@ -73,8 +68,6 @@ public class DownloadingFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         tv_Message.setText(message);
     }
-
 }

@@ -58,7 +58,6 @@ public class FavouriteWorkflowsFragment extends Fragment
 
     public final String LOG_TAG = getClass().getSimpleName();
 
-
     @BindView(R.id.rv_fav_workflows)
     RecyclerView mRecyclerView;
 
@@ -69,24 +68,17 @@ public class FavouriteWorkflowsFragment extends Fragment
     TextView tvNoWorkflowError;
 
     private DataManager dataManager;
-
     private FavouriteWorkflowsPresenter mFavouriteWorkflowsPresenter;
-
     private FavouriteWorkflowsAdapter mFavouriteWorkflowsAdapter;
-
     private List<Workflow> mWorkflowList;
     private SearchView searchView;
     private FavouriteWorkflowsAdapter mSearchFavouriteWorkflowAdapter;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         dataManager = new DataManager();
-
         mFavouriteWorkflowsPresenter = new FavouriteWorkflowsPresenter(dataManager);
-
         mWorkflowList = new ArrayList<>();
         setHasOptionsMenu(true);
     }
@@ -99,9 +91,7 @@ public class FavouriteWorkflowsFragment extends Fragment
                 container, false);
 
         ButterKnife.bind(this, rootView);
-
         mFavouriteWorkflowsPresenter.attachView(this);
-
         mFavouriteWorkflowsAdapter = new FavouriteWorkflowsAdapter(mWorkflowList, getContext());
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -109,25 +99,18 @@ public class FavouriteWorkflowsFragment extends Fragment
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.hasFixedSize();
-
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListner(getActivity(), this));
-
         mRecyclerView.setAdapter(mFavouriteWorkflowsAdapter);
 
-
         mFavouriteWorkflowsPresenter.loadAllWorkflow();
-
         return rootView;
     }
-
 
     @Override
     public void showProgressbar(boolean b) {
         if (b) {
-
             mProgressBar.setVisibility(View.VISIBLE);
         } else {
-
             mProgressBar.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
         }
@@ -144,13 +127,11 @@ public class FavouriteWorkflowsFragment extends Fragment
                 snackbar.dismiss();
             }
         });
-
         snackbar.show();
     }
 
     @Override
     public void showWorkflows(List<Workflow> workflowList) {
-
         mWorkflowList.addAll(workflowList);
         mFavouriteWorkflowsAdapter.notifyDataSetChanged();
     }
@@ -162,7 +143,6 @@ public class FavouriteWorkflowsFragment extends Fragment
 
     @Override
     public void onItemClick(View childView, int position) {
-
         if (searchView.isIconified() && TextUtils.isEmpty(searchView.getQuery())) {
             if (mFavouriteWorkflowsAdapter.getItem(position) != null && position != -1) {
                 Intent intent = new Intent(getActivity(), FavouriteWorkflowDetailActivity.class);
@@ -189,14 +169,12 @@ public class FavouriteWorkflowsFragment extends Fragment
 
     }
 
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context
                 .SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity()
                 .getComponentName()));
         searchView.setSubmitButtonEnabled(false);
@@ -216,10 +194,8 @@ public class FavouriteWorkflowsFragment extends Fragment
                         mSearchFavouriteWorkflowAdapter.addWorkflow(workflow);
                     }
                 }
-
             mRecyclerView.swapAdapter(mSearchFavouriteWorkflowAdapter, true);
             if (mSearchFavouriteWorkflowAdapter.getItemCount() == 0)
-
                 Toast.makeText(getActivity(), getString(R.string.msg_no_workflow_found), Toast
                         .LENGTH_SHORT).show();
         } else {

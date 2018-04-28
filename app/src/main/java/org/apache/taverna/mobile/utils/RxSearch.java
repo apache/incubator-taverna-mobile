@@ -6,7 +6,6 @@ import android.support.v7.widget.SearchView;
 import io.reactivex.Observable;
 import io.reactivex.subjects.BehaviorSubject;
 
-
 public class RxSearch {
 
     public static Observable<String> fromSearchView(@NonNull final SearchView searchView) {
@@ -28,7 +27,6 @@ public class RxSearch {
                 return true;
             }
         });
-
         return subject;
     }
 }

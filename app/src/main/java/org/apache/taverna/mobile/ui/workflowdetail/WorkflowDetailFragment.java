@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.workflowdetail;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -105,24 +104,16 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     FloatingActionButton fabRun;
 
     private AlertDialog alertDialog;
-
     private DataManager dataManager;
-
     private WorkflowDetailPresenter mWorkflowDetailPresenter;
-
     private String id;
-
     private String licenceId = null;
-
     private ProgressDialog dialog;
     private Workflow mWorkflow;
 
     public static WorkflowDetailFragment newInstance(String id) {
-
         Bundle args = new Bundle();
-
         args.putString(ID, id);
-
         WorkflowDetailFragment fragment = new WorkflowDetailFragment();
         fragment.setArguments(args);
         return fragment;
@@ -131,42 +122,30 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         id = getArguments().getString(ID);
-
         dataManager = new DataManager();
         mWorkflowDetailPresenter = new WorkflowDetailPresenter(dataManager);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_detail_workflow, container, false);
-
         ButterKnife.bind(this, rootView);
-
         mWorkflowDetailPresenter.attachView(this);
-
         return rootView;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         if (ConnectionInfo.isConnectingToInternet(getContext())) {
-
             mWorkflowDetailPresenter.loadWorkflowDetail(id);
         } else {
-
             mProgressBar.setVisibility(View.GONE);
             showErrorSnackBar(getString(R.string.no_internet_connection));
         }
-
         setHasOptionsMenu(true);
-
     }
 
     @OnClick(R.id.ivFav)
@@ -180,7 +159,6 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
         Intent intent = new Intent(getActivity(), WorkflowRunActivity.class);
         intent.putExtra(Constants.WORKFLOW_URL, mWorkflow.getContentUri());
         startActivity(intent);
-
     }
 
     @OnClick(R.id.ivWorkflowImage)
@@ -209,11 +187,9 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
                 } else {
                     mWorkflowDetailPresenter.loadLicenseDetail(licenceId);
                 }
-
                 return true;
         }
         return super.onOptionsItemSelected(item);
-
     }
 
     @Override
@@ -228,7 +204,6 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
     @Override
     public void showWorkflowDetail(Workflow workflow) {
-
         this.mWorkflow = workflow;
 
         uploaderName.setText(workflow.getUploader().getContent());
@@ -241,8 +216,8 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
         Glide.with(getContext())
                 .load(workflow.getPreviewUri())
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.drawable.placeholder)
-                .error(R.drawable.placeholder)
+                .placeholder(R.drawable.ic_image_black_24dp)
+                .error(R.drawable.ic_image_black_24dp)
                 .into(new SimpleTarget<GlideDrawable>() {
                     @Override
                     public void onResourceReady(GlideDrawable resource,
@@ -269,8 +244,8 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
         Glide.with(getContext())
                 .load(user.getAvatar().getResource())
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.drawable.placeholder)
-                .error(R.drawable.placeholder)
+                .placeholder(R.drawable.ic_image_black_24dp)
+                .error(R.drawable.ic_image_black_24dp)
                 .into(uploaderImage);
     }
 
@@ -290,18 +265,15 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     @Override
     public void showLicense(License license) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
-
         LayoutInflater inflater = getActivity().getLayoutInflater();
-
         View dialogView = inflater.inflate(R.layout.dialog_licence_detail_workflow, null);
-
         dialogBuilder.setView(dialogView);
 
         TextView title = dialogView.findViewById(R.id.tvDialogTitle);
         TextView date = dialogView.findViewById(R.id.tvDialogDate);
         WebView text = dialogView.findViewById(R.id.wvDialogText);
-        Button buttonOk = dialogView.findViewById(R.id.bDialogOK);
 
+        Button buttonOk = dialogView.findViewById(R.id.bDialogOK);
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -312,9 +284,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
         text.loadDataWithBaseURL("", license.getDescription(), "text/html", "utf-8", "");
         date.setText(license.getCreatedAt().substring(0, license.getCreatedAt().indexOf(' ')));
         title.setText(license.getTitle());
-
         alertDialog = dialogBuilder.create();
-
         alertDialog.show();
     }
 

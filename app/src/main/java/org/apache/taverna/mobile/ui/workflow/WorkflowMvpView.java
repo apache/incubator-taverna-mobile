@@ -24,7 +24,6 @@ import org.apache.taverna.mobile.ui.base.MvpView;
 
 import java.util.List;
 
-
 public interface WorkflowMvpView extends MvpView {
 
     void showProgressbar(boolean b);

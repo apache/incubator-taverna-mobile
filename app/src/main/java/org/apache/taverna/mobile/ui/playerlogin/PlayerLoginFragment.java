@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.playerlogin;
 
-
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
@@ -43,7 +42,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
 public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView, View
         .OnFocusChangeListener {
 
@@ -62,13 +60,12 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     @BindView(R.id.cbRemember)
     CheckBox mCheckBoxRemember;
     OnSuccessful mCallback;
+
     private DataManager dataManager;
     private PlayerLoginPresenter mPlayerLoginPresenter;
 
     public static PlayerLoginFragment newInstance() {
-
         Bundle args = new Bundle();
-
         PlayerLoginFragment fragment = new PlayerLoginFragment();
         fragment.setArguments(args);
         return fragment;
@@ -77,17 +74,14 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         dataManager = new DataManager(new PreferencesHelper(getContext()));
         mPlayerLoginPresenter = new PlayerLoginPresenter(dataManager);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.fragment_player_login_layout, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_player_login, container, false);
         ButterKnife.bind(this, rootView);
         mPlayerLoginPresenter.attachView(this);
         String email = dataManager.getPreferencesHelper().getPlayerUserEmail();
@@ -100,14 +94,11 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         mEditTextEmail.addTextChangedListener(new CustomTextWatcher(mEditTextEmail));
         mEditTextEmail.setOnFocusChangeListener(this);
-
         mEditTextPassword.addTextChangedListener(new CustomTextWatcher(mEditTextPassword));
         mEditTextPassword.setOnFocusChangeListener(this);
     }
-
 
     @Override
     public void onDestroyView() {
@@ -115,23 +106,18 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
         mPlayerLoginPresenter.detachView();
     }
 
-
     @OnClick(R.id.bLogin)
     public void login(View v) {
         if (ConnectionInfo.isConnectingToInternet(getContext())) {
             if (mEditTextEmail.getText().toString().trim().length() > 0 && mEditTextPassword
                     .getText().toString().trim().length() > 0) {
-
                 mPlayerLoginPresenter.playerLogin(mEditTextEmail.getText().toString().trim(),
                         mEditTextPassword.getText().toString().trim(), mCheckBoxRemember
                                 .isChecked());
-
             } else {
-
                 showError(R.string.error_vaild_credential);
             }
         } else {
-
             showError(R.string.no_internet_connection);
         }
     }
@@ -146,7 +132,6 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
                 snackbar.dismiss();
             }
         });
-
         snackbar.show();
     }
 
@@ -162,16 +147,12 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
         mCallback.onSuccessfulLogin();
     }
 
-
     private void validateEmail() {
-
         if (mEditTextEmail.getText().toString().trim().length() > 0) {
             mTextInputEmail.setError(getString(R.string.err_login_email));
         } else {
             mTextInputEmail.setError(null);
         }
-
-
     }
 
     private void requestFocus(View view) {
@@ -187,8 +168,6 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
         } else {
             mTextInputPassword.setError(null);
         }
-
-
     }
 
     @Override
@@ -210,7 +189,6 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         try {
             mCallback = (OnSuccessful) getActivity();
         } catch (ClassCastException e) {
@@ -219,13 +197,11 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
         }
     }
 
-
     public interface OnSuccessful {
         void onSuccessfulLogin();
     }
 
     private class CustomTextWatcher implements TextWatcher {
-
         private View view;
 
         private CustomTextWatcher(View view) {

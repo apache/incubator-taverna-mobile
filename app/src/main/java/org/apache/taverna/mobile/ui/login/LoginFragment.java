@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.login;
 
-
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
@@ -67,15 +66,11 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     private DataManager dataManager;
     private LoginPresenter mLoginPresenter;
-
-
     private ProgressDialog progressDialog;
 
     private final String myExperimentURL = "https://www.myexperiment.org/users/new";
 
-
     public static LoginFragment newInstance() {
-
         LoginFragment fragment = new LoginFragment();
         return fragment;
     }
@@ -83,17 +78,13 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         dataManager = new DataManager(new PreferencesHelper(getContext()));
         mLoginPresenter = new LoginPresenter(dataManager);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         ButterKnife.bind(this, rootView);
         mLoginPresenter.attachView(this);
@@ -103,48 +94,29 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
         mEditTextEmail.addTextChangedListener(new CustomTextWatcher(mEditTextEmail));
-
-
         mEditTextPassword.addTextChangedListener(new CustomTextWatcher(mEditTextPassword));
-
         mEditTextEmail.setOnFocusChangeListener(this);
-
         mEditTextPassword.setOnFocusChangeListener(this);
-
         progressDialog = new ProgressDialog(getContext());
-
         progressDialog.setMessage("Please wait");
-
     }
 
 
     private void validateEmail() {
-
         if (mEditTextEmail.getText().toString().trim().length() == 0) {
-
             mTextInputEmail.setError(getString(R.string.err_login_email));
         } else {
-
             mTextInputEmail.setError(null);
         }
-
-
     }
-
 
     private void validatePassword() {
         if (mEditTextPassword.getText().toString().trim().length() == 0) {
-
             mTextInputPassword.setError(getString(R.string.err_login_password));
         } else {
-
             mTextInputPassword.setError(null);
         }
-
-
     }
 
     @OnClick(R.id.bLogin)
@@ -152,17 +124,13 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
         if (ConnectionInfo.isConnectingToInternet(getContext())) {
             if (mEditTextEmail.getText().toString().trim().length() > 0 && mEditTextPassword
                     .getText().toString().trim().length() > 0) {
-
                 mLoginPresenter.login(mEditTextEmail.getText().toString().trim(),
                         mEditTextPassword.getText().toString().trim(), mCheckBoxRemember
                                 .isChecked());
-
             } else {
-
                 showError("Please enter valid credential");
             }
         } else {
-
             showError("NO Internet Connection");
         }
     }
@@ -191,7 +159,6 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
                 snackbar.dismiss();
             }
         });
-
         snackbar.show();
     }
 
@@ -215,12 +182,10 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     @Override
     public void showCredentialError() {
         showError("Please enter valid credential");
-
         mTextInputEmail.setError(getString(R.string.err_login_email));
         mTextInputPassword.setError(getString(R.string.err_login_password));
         requestFocus(mEditTextEmail);
     }
-
 
     private void requestFocus(View view) {
         if (view.requestFocus()) {
@@ -248,12 +213,10 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         mLoginPresenter.detachView();
     }
 
     private class CustomTextWatcher implements TextWatcher {
-
         private View view;
 
         private CustomTextWatcher(View view) {

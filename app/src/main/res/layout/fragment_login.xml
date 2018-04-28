@@ -15,7 +15,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -70,11 +71,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/my_experiment_logo_height"
                     android:layout_gravity="center"
-                    android:src="@drawable/myexlogo"
+                    android:src="@drawable/ic_myexperiment_logo"
                     android:padding="@dimen/login_info_padding"/>
 
             </LinearLayout>
-
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_email"
@@ -127,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_height"
                 android:textColor="@color/white"
-                android:background="@drawable/login_button"
+                android:background="@drawable/btn_login_background"
                 android:layout_marginBottom="@dimen/loginButton_marginBottom"
                 android:layout_marginTop="@dimen/loginButton_marginTop"
                 android:contentDescription="@string/login_button_description"
@@ -164,6 +164,6 @@
 
         </LinearLayout>
 
-
     </RelativeLayout>
+
 </ScrollView>

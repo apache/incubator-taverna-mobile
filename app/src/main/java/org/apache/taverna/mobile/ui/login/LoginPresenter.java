@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.login;
 
-
 import android.util.Base64;
 
 import org.apache.taverna.mobile.data.DataManager;
@@ -29,7 +28,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-
 
 public class LoginPresenter extends BasePresenter<LoginMvpView> {
 

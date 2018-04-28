@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.data.local;
 
-
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.model.User;
 
@@ -31,48 +30,33 @@ import java.util.concurrent.Callable;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 
-
 public class PreferencesHelper {
 
-    public static final String PREF_KEY_PLAYER_LOGGED_IN = "pref_player_logged_in";
-
-    public static final String PREF_KEY_PLAYER_URL = "pref_key_player_url";
-
     private static final String PREF_KEY_USER_ID = "pref_user_id";
-
     private static final String PREF_KEY_USER_NAME = "pref_user_name";
-
     private static final String PREF_KEY_USER_DESCRIPTION = "pref_user_description";
-
     private static final String PREF_KEY_USER_EMAIL = "pref_user_email";
-
     private static final String PREF_KEY_USER_AVATAR = "pref_user_avatar";
-
     private static final String PREF_KEY_USER_CITY = "pref_user_city";
-
     private static final String PREF_KEY_USER_COUNTRY = "pref_user_country";
-
     private static final String PREF_KEY_USER_WEBSITE = "pref_user_website";
-
     private static final String PREF_KEY_PLAYER_CREDENTIAL = "pref_player_credential";
     private static final String PREF_KEY_LOGGED_IN = "pref_key_logged_in";
+    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
+    public static final String PREF_KEY_PLAYER_LOGGED_IN = "pref_player_logged_in";
+    public static final String PREF_KEY_PLAYER_URL = "pref_key_player_url";
     public static final String PLAYER_DEFAULT_URL = "http://139.59.28.12:3000/";
-
     public static final String PREF_KEY_PLAYER_USER_EMAIL = "pref_user";
-
     public static final String PREF_KEY_PLAYER_USER_PASSWORD = "pref_password";
 
     private final SharedPreferences sharedPref;
     private Context mContext;
 
-    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
-
     public PreferencesHelper(Context context) {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         mContext = context;
     }
-
 
     public void clear() {
         sharedPref.edit().clear().apply();
@@ -124,7 +108,6 @@ public class PreferencesHelper {
 
     private void setUserName(String userName) {
         sharedPref.edit().putString(PREF_KEY_USER_NAME, userName).apply();
-
     }
 
     public String getUserDescription() {
@@ -196,7 +179,6 @@ public class PreferencesHelper {
                 if (user.getWebsite() != null) {
                     setUserWebsite(user.getWebsite());
                 }
-
                 return Observable.just(user);
             }
         });

@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.workflowrun;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -47,8 +46,6 @@ import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 public class WorkflowRunActivity extends FragmentActivity implements WorkflowRunMvpView,
         PlayerLoginFragment.OnSuccessful {
 
-
-
     @BindView(R.id.stepsView)
     StepsView mStepsView;
 
@@ -59,11 +56,8 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
     private String[] labels;
     private String workflowRunURL;
-
     private DataManager dataManager;
-
     private WorkflowRunPresenter mWorkflowRunPresenter;
-
     private PagerAdapter mPagerAdapter;
 
     @Override
@@ -71,15 +65,10 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_workflow_run);
-
         ButterKnife.bind(this);
-
         dataManager = new DataManager(new PreferencesHelper(getContext()));
-
         mWorkflowRunPresenter = new WorkflowRunPresenter(dataManager);
-
         mWorkflowRunPresenter.attachView(this);
-
         labels = getResources().getStringArray(R.array.player_run_slider_view_labels);
 
         mStepsView.setCompletedPosition(position % labels.length)
@@ -91,17 +80,14 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
                 .setLabelColorIndicator(getContext().getResources().getColor(R.color.colorPrimary))
                 .drawView();
 
-
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
         if (dataManager.getPreferencesHelper().isUserPlayerLoggedInFlag()) {
             mPager.setCurrentItem(++position);
             mStepsView.setCompletedPosition(position % labels.length).drawView();
-
             mWorkflowRunPresenter.runWorkflow(getIntent().getStringExtra(Constants.WORKFLOW_URL));
         }
-
     }
 
     @Override
@@ -131,13 +117,11 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
         position = 3;
         mStepsView.setCompletedPosition(position % labels.length).drawView();
         mPager.setCurrentItem(position);
-
     }
 
     @Override
     public void setInputsAttribute(int id) {
         String playerURL = dataManager.getPreferencesHelper().getPlayerURL();
-
         if (playerURL.trim().endsWith("/")) {
             playerURL = playerURL.substring(0, playerURL.length() - 1);
         }
@@ -152,7 +136,6 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
                 .LENGTH_LONG).show();
         finish();
     }
-
 
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {
@@ -181,6 +164,4 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
             return 4;
         }
     }
-
-
 }

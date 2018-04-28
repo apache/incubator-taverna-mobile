@@ -65,7 +65,6 @@ public class Run implements Parcelable {
         this.inputsAttributes = inputsAttributes;
     }
 
-
     @Override
     public int describeContents() {
         return 0;

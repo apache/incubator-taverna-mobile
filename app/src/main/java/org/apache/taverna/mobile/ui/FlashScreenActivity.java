@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -42,7 +41,6 @@ public class FlashScreenActivity extends AppCompatActivity {
     private DataManager dataManager;
     private PreferencesHelper preferencesHelper;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +59,6 @@ public class FlashScreenActivity extends AppCompatActivity {
                                 startActivity(new Intent(FlashScreenActivity.this,
                                         TutorialActivity.class));
                                 (FlashScreenActivity.this).finish();
-
                             } else {
                                 startActivity(new Intent(FlashScreenActivity.this,
                                         LoginActivity.class));
@@ -74,6 +71,5 @@ public class FlashScreenActivity extends AppCompatActivity {
                         }
                     }
                 });
-
     }
 }

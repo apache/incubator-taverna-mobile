@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.data.model;
 
-
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 

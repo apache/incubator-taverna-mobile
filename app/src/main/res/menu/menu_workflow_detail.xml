@@ -15,12 +15,14 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto"
-      >
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
-            android:id="@+id/licence"
-            android:title="@string/licence"
-            android:orderInCategory="100"
-            app:showAsAction="never"/>
+        android:id="@+id/licence"
+        android:title="@string/licence"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
 </menu>

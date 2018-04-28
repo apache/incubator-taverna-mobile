@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.workflowdetail;
 
-
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;

@@ -19,7 +19,6 @@
 package org.apache.taverna.mobile.data.remote;
 
 //This class contains all the Constants for API End Points
-
 public class APIEndPoint {
 
     public static final String ALL_ANNOUNCEMENT = "announcements.xml";
@@ -38,5 +37,4 @@ public class APIEndPoint {
     public static final String UTF_CONTENT_ENCODING_HEADER = "Content-Encoding: UTF-8";
 
     public static final String MY_WORKFLOWS = "user.xml";
-
 }

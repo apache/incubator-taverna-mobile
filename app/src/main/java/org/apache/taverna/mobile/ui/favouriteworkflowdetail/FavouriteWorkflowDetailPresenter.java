@@ -63,6 +63,7 @@ public class FavouriteWorkflowDetailPresenter extends
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableObserver<Workflow>() {
+
                     @Override
                     public void onNext(Workflow workflow) {
                         getMvpView().showWorkflowDetail(workflow);

@@ -30,7 +30,6 @@ rat {
     plainOutput = true
 }
 
-
 ext {
     // Sdk and tools
     minSdkVersion = 17

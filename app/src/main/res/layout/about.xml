@@ -19,11 +19,12 @@ limitations under the License.
     android:layout_height="wrap_content"
     android:stretchColumns="*"
     android:padding="15sp">
+
     <TableRow>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/tavernalogo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_taverna_logo"
             android:layout_gravity="left|center"/>
         <TextView
             android:id="@+id/name_info"
@@ -46,6 +47,7 @@ limitations under the License.
             style="@android:style/TextAppearance.DeviceDefault.Medium"
             android:textStyle="bold" />
     </TableRow>
+
     <TableRow>
         <TextView
             android:id="@+id/legal_text"
@@ -59,6 +61,7 @@ limitations under the License.
             android:text="@string/about"
             android:textStyle="normal" />
     </TableRow>
+
     <TableRow>
         <TextView
             android:id="@+id/gsoc_text"
@@ -73,4 +76,5 @@ limitations under the License.
             android:autoLink="web"
             android:textStyle="normal" />
     </TableRow>
+
 </TableLayout>

@@ -60,7 +60,6 @@ public class DashboardActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-
     private Dialog dialog;
     private DataManager dataManager;
     private Fragment fragment;
@@ -69,54 +68,35 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_dashboard_main);
-
         ButterKnife.bind(this);
-
         setupDrawerContent(navigationView);
-
         dialog = new Dialog(this);
-
 
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+            ab.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
-
-        /**
-         * Setting the Fragment in FrameLayout
-         */
         if (savedInstanceState == null) {
-
             fragment = new WorkflowFragment();
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment,
                     R.id.frame_container);
-
             navigationView.setCheckedItem(R.id.nav_workflows);
         }
-
         dataManager = new DataManager(new PreferencesHelper(this));
     }
 
-
-    /**
-     * @param navigationView Design Support NavigationView  OnClick Listener Event
-     */
     private void setupDrawerContent(final NavigationView navigationView) {
-
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
 
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-
                         switch (menuItem.getItemId()) {
                             case R.id.nav_workflows:
-
                                 fragment = new WorkflowFragment();
                                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                                         fragment, R.id.frame_container);
@@ -124,11 +104,9 @@ public class DashboardActivity extends AppCompatActivity {
                                 menuItem.setChecked(true);
                                 mDrawerLayout.closeDrawers();
                                 toolbar.setTitle(R.string.title_nav_all_workflows);
-
                                 return true;
 
                             case R.id.nav_my_workflows:
-
                                 fragment = new MyWorkflowFragment();
                                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                                         fragment, R.id.frame_container);
@@ -139,7 +117,6 @@ public class DashboardActivity extends AppCompatActivity {
                                 return true;
 
                             case R.id.nav_favourite_workflow:
-
                                 fragment = new FavouriteWorkflowsFragment();
                                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                                         fragment, R.id.frame_container);
@@ -150,7 +127,6 @@ public class DashboardActivity extends AppCompatActivity {
                                 return true;
 
                             case R.id.nav_announcement:
-
                                 fragment = new AnnouncementFragment();
                                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                                         fragment, R.id.frame_container);
@@ -160,9 +136,7 @@ public class DashboardActivity extends AppCompatActivity {
                                 toolbar.setTitle(R.string.title_nav_announcement);
                                 return true;
 
-
                             case R.id.nav_usage:
-
                                 Intent intent = new Intent(DashboardActivity.this,
                                         UsageActivity.class);
                                 startActivity(intent);
@@ -170,10 +144,8 @@ public class DashboardActivity extends AppCompatActivity {
                                 return true;
 
                             case R.id.nav_about:
-
                                 TableLayout about = (TableLayout) getLayoutInflater().inflate(R
                                         .layout.about, navigationView, false);
-
                                 dialog.setCanceledOnTouchOutside(true);
                                 dialog.setTitle(getString(R.string.title_about));
                                 dialog.setContentView(about);
@@ -182,7 +154,6 @@ public class DashboardActivity extends AppCompatActivity {
                                 return true;
 
                             case R.id.os_licences:
-
                                 WebView webView = (WebView) getLayoutInflater().inflate(R.layout
                                         .fragment_licence, navigationView, false);
 
@@ -195,13 +166,11 @@ public class DashboardActivity extends AppCompatActivity {
                                         .setView(webView)
                                         .setPositiveButton(android.R.string.ok, null)
                                         .create();
-
                                 alertDialog.show();
                                 mDrawerLayout.closeDrawers();
                                 return true;
 
                             case R.id.apache_licences:
-
                                 WebView lWebView = (WebView) getLayoutInflater().inflate(R.layout
                                         .fragment_licence, navigationView, false);
 
@@ -215,32 +184,26 @@ public class DashboardActivity extends AppCompatActivity {
                                         .setView(lWebView)
                                         .setPositiveButton(android.R.string.ok, null)
                                         .create();
-
                                 lAlertDialog.show();
                                 mDrawerLayout.closeDrawers();
                                 return true;
 
                             case R.id.nav_settings:
-
                                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                                         new SettingFragment(), R.id.frame_container);
-
                                 menuItem.setChecked(true);
                                 mDrawerLayout.closeDrawers();
                                 toolbar.setTitle(R.string.title_nav_settings);
                                 return true;
 
                             case R.id.nav_logout:
-
                                 signOutConfirmation();
                                 return true;
-
                         }
                         return true;
                     }
                 });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -265,12 +228,10 @@ public class DashboardActivity extends AppCompatActivity {
         mDrawerLayout.closeDrawers();
         dataManager.getPreferencesHelper().clear();
         dataManager.mDBHelper.clearFavouriteWorkflow();
-
         startActivity(new Intent(getApplicationContext(),
                 LoginActivity.class));
         finish();
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

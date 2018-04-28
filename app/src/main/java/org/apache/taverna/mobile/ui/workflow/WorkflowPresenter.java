@@ -43,7 +43,6 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
     private DataManager mDataManager;
     private CompositeDisposable compositeDisposable;
 
-
     public WorkflowPresenter(DataManager dataManager) {
         mDataManager = dataManager;
         compositeDisposable = new CompositeDisposable();
@@ -86,7 +85,6 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
 
                     }
                 }));
-
     }
 
     public void attachSearchHandler(final SearchView searchView) {

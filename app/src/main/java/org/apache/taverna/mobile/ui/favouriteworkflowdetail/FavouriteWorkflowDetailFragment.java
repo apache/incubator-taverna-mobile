@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.favouriteworkflowdetail;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -64,7 +63,6 @@ public class FavouriteWorkflowDetailFragment extends Fragment
         implements FavouriteWorkflowDetailMvpView {
 
     private static final String ID = "id";
-
     public final String LOG_TAG = getClass().getSimpleName();
 
     @BindView(R.id.ivWorkflowImage)
@@ -104,27 +102,17 @@ public class FavouriteWorkflowDetailFragment extends Fragment
     FloatingActionButton fabRun;
 
     private AlertDialog alertDialog;
-
     private DataManager dataManager;
-
     private FavouriteWorkflowDetailPresenter mWorkflowDetailPresenter;
-
     private String id;
-
     private String licenceId = null;
-
     private ProgressDialog dialog;
-
     private ActionBar actionBar;
-
     private Workflow mWorkflow;
 
     public static FavouriteWorkflowDetailFragment newInstance(String id) {
-
         Bundle args = new Bundle();
-
         args.putString(ID, id);
-
         FavouriteWorkflowDetailFragment fragment = new FavouriteWorkflowDetailFragment();
         fragment.setArguments(args);
         return fragment;
@@ -133,24 +121,17 @@ public class FavouriteWorkflowDetailFragment extends Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         id = getArguments().getString(ID);
-
         dataManager = new DataManager();
         mWorkflowDetailPresenter = new FavouriteWorkflowDetailPresenter(dataManager);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_detail_workflow, container, false);
-
         ButterKnife.bind(this, rootView);
-
         mWorkflowDetailPresenter.attachView(this);
-
         return rootView;
     }
 
@@ -159,17 +140,12 @@ public class FavouriteWorkflowDetailFragment extends Fragment
         super.onActivityCreated(savedInstanceState);
 
         if (ConnectionInfo.isConnectingToInternet(getContext())) {
-
             mWorkflowDetailPresenter.loadWorkflowDetail(id);
         } else {
-
             mProgressBar.setVisibility(View.GONE);
             showErrorSnackBar(getString(R.string.no_internet_connection));
         }
-
         setHasOptionsMenu(true);
-
-
     }
 
     @OnClick(R.id.ivFav)
@@ -187,12 +163,9 @@ public class FavouriteWorkflowDetailFragment extends Fragment
 
     @OnClick(R.id.ivWorkflowImage)
     void zoomImage(View v) {
-
         Intent intent = new Intent(getActivity(), ImageZoomActivity.class);
-
         intent.putExtra(ImageZoomFragment.JPG_URI, mWorkflow.getPreviewUri());
         intent.putExtra(ImageZoomFragment.SVG_URI, mWorkflow.getSvgUri());
-
         startActivity(intent);
     }
 
@@ -217,12 +190,9 @@ public class FavouriteWorkflowDetailFragment extends Fragment
 
                     mWorkflowDetailPresenter.loadLicenseDetail(licenceId);
                 }
-
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
-
     }
 
     @Override
@@ -250,8 +220,8 @@ public class FavouriteWorkflowDetailFragment extends Fragment
         Glide.with(getContext())
                 .load(workflow.getPreviewUri())
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.drawable.placeholder)
-                .error(R.drawable.placeholder)
+                .placeholder(R.drawable.ic_image_black_24dp)
+                .error(R.drawable.ic_image_black_24dp)
                 .into(workflowImage);
 
         if (workflow.getLicenseType().getId() == null) {
@@ -265,24 +235,21 @@ public class FavouriteWorkflowDetailFragment extends Fragment
         } else {
             fabRun.setVisibility(View.GONE);
         }
-
     }
 
     @Override
     public void setImage(User user) {
-
         Glide.with(getContext())
                 .load(user.getAvatar().getResource())
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.drawable.placeholder)
-                .error(R.drawable.placeholder)
+                .placeholder(R.drawable.ic_image_black_24dp)
+                .error(R.drawable.ic_image_black_24dp)
                 .into(uploaderImage);
 
     }
 
     @Override
     public void showErrorSnackBar(String error) {
-
         final Snackbar snackbar = Snackbar.make(rootLayout, error, Snackbar
                 .LENGTH_INDEFINITE);
         snackbar.setAction("OK", new View.OnClickListener() {
@@ -291,26 +258,22 @@ public class FavouriteWorkflowDetailFragment extends Fragment
                 snackbar.dismiss();
             }
         });
-
         snackbar.show();
-
     }
 
     @Override
     public void showLicense(License license) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
-
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         View dialogView = inflater.inflate(R.layout.dialog_licence_detail_workflow, null);
-
         dialogBuilder.setView(dialogView);
 
         TextView title = dialogView.findViewById(R.id.tvDialogTitle);
         TextView date = dialogView.findViewById(R.id.tvDialogDate);
         WebView text = dialogView.findViewById(R.id.wvDialogText);
-        Button buttonOk = dialogView.findViewById(R.id.bDialogOK);
 
+        Button buttonOk = dialogView.findViewById(R.id.bDialogOK);
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -321,9 +284,7 @@ public class FavouriteWorkflowDetailFragment extends Fragment
         text.loadDataWithBaseURL("", license.getDescription(), "text/html", "utf-8", "");
         date.setText(license.getCreatedAt().substring(0, license.getCreatedAt().indexOf(' ')));
         title.setText(license.getTitle());
-
         alertDialog = dialogBuilder.create();
-
         alertDialog.show();
     }
 
@@ -353,7 +314,6 @@ public class FavouriteWorkflowDetailFragment extends Fragment
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         mWorkflowDetailPresenter.detachView();
     }
 }

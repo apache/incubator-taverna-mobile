@@ -18,14 +18,15 @@
  */
 package org.apache.taverna.mobile.data.model;
 
-
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Text;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 @Root(name = "tag")
+
 public class Tag implements Parcelable {
 
     @Attribute(name = "resource", required = false)

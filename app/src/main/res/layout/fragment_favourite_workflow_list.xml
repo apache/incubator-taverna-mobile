@@ -16,34 +16,35 @@
    limitations under the License.
 -->
 <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grey_background">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_background">
 
     <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_fav_workflows"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:padding="@dimen/item_offset"
-            android:visibility="gone"/>
+        android:id="@+id/rv_fav_workflows"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="@dimen/item_offset"
+        android:visibility="gone"/>
 
     <ProgressBar
-            android:id="@+id/progress_circular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:visibility="visible"/>
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="visible"/>
 
     <TextView
-            android:id="@+id/error_no_workflow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/no_favourite_workflow_found"
-            android:textStyle="bold"
-            android:visibility="gone"
-            android:textSize="20sp"/>
+        android:id="@+id/error_no_workflow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_favourite_workflow_found"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:textSize="20sp"/>
+
 </RelativeLayout>

@@ -18,16 +18,17 @@ limitations under the License.
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
->
+        android:layout_height="match_parent">
 
     <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
         <include
                 layout="@layout/appbar"/>
+
         <FrameLayout
                 android:id="@+id/frame_container"
                 android:layout_width="match_parent"

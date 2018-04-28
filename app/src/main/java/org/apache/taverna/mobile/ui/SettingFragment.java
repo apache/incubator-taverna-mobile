@@ -9,7 +9,6 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
 public class SettingFragment extends PreferenceFragmentCompat implements SharedPreferences
         .OnSharedPreferenceChangeListener {
 

@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.imagezoom;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -34,20 +33,15 @@ public class ImageZoomActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_zoom);
-
         ButterKnife.bind(this);
 
-
         if (savedInstanceState == null) {
-
             ActivityUtils.addFragmentToActivity(
                     getSupportFragmentManager(),
                     ImageZoomFragment.newInstance(
                             getIntent().getStringExtra(ImageZoomFragment.JPG_URI),
                             getIntent().getStringExtra(ImageZoomFragment.SVG_URI)),
                     R.id.frame_container);
-
         }
-
     }
 }

@@ -7,6 +7,7 @@ import org.simpleframework.xml.Root;
 import java.util.List;
 
 @Root(name = "workflows")
+
 public class Search {
 
     @Attribute(name = "query", required = false)

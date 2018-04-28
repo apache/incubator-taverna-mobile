@@ -33,13 +33,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 public class AnnouncementAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
     private List<Announcement> mAnnouncementList;
-
 
     public AnnouncementAdapter(List<Announcement> announcementList) {
         mAnnouncementList = announcementList;
@@ -94,7 +92,6 @@ public class AnnouncementAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-
         @BindView(R.id.textview_announcement)
         TextView tvAnnouncementTitle;
 

@@ -25,7 +25,6 @@ import org.simpleframework.xml.Root;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 @Root(name = "announcement")
 public class DetailAnnouncement implements Parcelable {
 

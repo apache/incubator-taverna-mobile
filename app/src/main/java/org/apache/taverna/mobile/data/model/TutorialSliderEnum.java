@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.data.model;
 
-
 import org.apache.taverna.mobile.R;
 
 public enum TutorialSliderEnum {
@@ -37,6 +36,4 @@ public enum TutorialSliderEnum {
     public int getLayoutId() {
         return layoutId;
     }
-
-
 }

@@ -24,7 +24,6 @@ import android.support.v4.app.FragmentTransaction;
 
 public class ActivityUtils {
 
-
     public static void addFragmentToActivity(FragmentManager fragmentManager, Fragment fragment,
                                              int frameId) {
 
@@ -36,5 +35,4 @@ public class ActivityUtils {
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
         transaction.commit();
     }
-
 }

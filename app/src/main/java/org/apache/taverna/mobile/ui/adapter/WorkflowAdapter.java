@@ -50,17 +50,13 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
-
     private static final String TAG = WorkflowAdapter.class.getName();
-
     private final List<Workflow> mWorkflowList;
-
     private final Context context;
 
     public WorkflowAdapter(List<Workflow> mWorkflowList, Context context) {
         this.mWorkflowList = mWorkflowList;
         this.context = context;
-
     }
 
     public void addWorkflow(Workflow workflow) {
@@ -78,7 +74,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-
         if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(
                     R.layout.item_workflow_dashboard, parent, false);
@@ -94,7 +89,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder) {
-
             Workflow workflow = mWorkflowList.get(position);
             String date = workflow.getCreatedAt()
                     .substring(0, workflow.getCreatedAt().indexOf(' '));
@@ -103,14 +97,13 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ((ViewHolder) holder).tvTitle.setText(workflow.getTitle());
             ((ViewHolder) holder).tvType.setText(workflow.getType().getContent());
             ((ViewHolder) holder).tvUploader.setText(workflow.getUploader().getContent());
-
             Uri uri = Uri.parse(workflow.getPreviewUri());
 
             Glide.with(context)
                     .load(uri)
                     .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                    .placeholder(R.drawable.placeholder)
-                    .error(R.drawable.placeholder)
+                    .placeholder(R.drawable.ic_image_black_24dp)
+                    .error(R.drawable.ic_image_black_24dp)
                     .fitCenter()
                     .into(((ViewHolder) holder).ivWorkflowImage);
         }
@@ -129,7 +122,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public Workflow getItem(int position) {
         return mWorkflowList != null ? mWorkflowList.get(position) : null;
     }
-
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -151,7 +143,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
         }
     }
 

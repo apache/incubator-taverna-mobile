@@ -23,12 +23,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-
 public class ConnectionInfo {
     private static final String TAG = "ConnectionInfo";
-
     public static boolean isConnectingToInternet(Context context) {
-
         Log.i(TAG, "isConnectingToInternet: Checking Internet Status");
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context
                 .CONNECTIVITY_SERVICE);
@@ -38,5 +35,4 @@ public class ConnectionInfo {
         }
         return false;
     }
-
 }

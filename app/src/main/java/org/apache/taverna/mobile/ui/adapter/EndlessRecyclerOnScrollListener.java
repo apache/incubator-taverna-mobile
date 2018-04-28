@@ -21,8 +21,8 @@ package org.apache.taverna.mobile.ui.adapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-
 public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScrollListener {
+
     public static final String TAG = EndlessRecyclerOnScrollListener.class.getSimpleName();
     int firstVisibleItem, visibleItemCount, totalItemCount;
     private int previousTotal = 0; // The total number of items in the dataset after the last load
@@ -45,7 +45,6 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
         totalItemCount = mLinearLayoutManager.getItemCount();
         firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
 
-
         if (totalItemCount < previousTotal) {
             previousTotal = 0;
         }
@@ -54,8 +53,8 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
 
             loading = false;
             previousTotal = totalItemCount;
-
         }
+
         if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem +
                 visibleThreshold)) {
             // End has been reached
@@ -65,6 +64,5 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
             loading = true;
         }
     }
-
     public abstract void onLoadMore(int current_page);
 }

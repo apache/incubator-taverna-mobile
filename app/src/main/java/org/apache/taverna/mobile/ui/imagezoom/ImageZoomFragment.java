@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.imagezoom;
 
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -50,11 +49,8 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
 
     public static final String JPG_URI = "jpgURI";
-
     public static final String SVG_URI = "svgURI";
-
     private static final String SERVER_ERROR = "Sever Error. Please try after sometime";
-
 
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;
@@ -63,14 +59,9 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
     ImageView close;
 
     PhotoViewAttacher mAttacher;
-
     private String svgURI;
-
     private String jpgURI;
-
     private ImageZoomPresenter mImageZoomPresenter;
-
-
 
     public static ImageZoomFragment newInstance(String jpgURI, String svgURI) {
         Bundle args = new Bundle();
@@ -87,25 +78,19 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
         svgURI = getArguments().getString(SVG_URI);
         jpgURI = getArguments().getString(JPG_URI);
         mImageZoomPresenter = new ImageZoomPresenter();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.fragment_image_zoom, container, false);
-
         ButterKnife.bind(this, rootView);
-
         mImageZoomPresenter.attachView(this);
-
         return rootView;
     }
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         if (ConnectionInfo.isConnectingToInternet(getContext())) {
             mImageZoomPresenter.loadImage(svgURI, workflowImage);
         } else {
@@ -118,10 +103,8 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
         getActivity().finish();
     }
 
-
     @Override
     public void showErrorSnackBar(String error) {
-
         final Snackbar snackbar = Snackbar.make(workflowImage, error, Snackbar.LENGTH_INDEFINITE);
         snackbar.setAction("OK", new View.OnClickListener() {
             @Override
@@ -131,7 +114,6 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
             }
         });
         snackbar.show();
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
@@ -146,15 +128,13 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
         return getContext();
     }
 
-
     @Override
     public void setJPGImage() {
-
 
         Glide.with(getContext())
                 .load(jpgURI)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.ic_image_black_24dp)
                 .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                 .into(new Target<GlideDrawable>() {
                     @Override
@@ -173,7 +153,6 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
                                                         glideAnimation) {
                         workflowImage.setImageDrawable(resource.getCurrent());
                         addImageAttacher();
-
                     }
 
                     @Override
@@ -211,7 +190,6 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
 
                     }
                 });
-
     }
 
     @Override

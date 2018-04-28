@@ -40,11 +40,8 @@ public class FavouriteWorkflowDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_workflow);
-
         ButterKnife.bind(this);
-
         setSupportActionBar(mToolbar);
-
         ActionBar actionbar = getSupportActionBar();
 
         if (actionbar != null) {
@@ -52,7 +49,6 @@ public class FavouriteWorkflowDetailActivity extends AppCompatActivity {
             actionbar.setDisplayHomeAsUpEnabled(true);
             actionbar.setTitle(getIntent().getStringExtra(Constants.WORKFLOW_TITLE));
         }
-
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -62,6 +58,5 @@ public class FavouriteWorkflowDetailActivity extends AppCompatActivity {
                                             .getStringExtra(Constants.WORKFLOW_ID)))
                     .commit();
         }
-
     }
 }

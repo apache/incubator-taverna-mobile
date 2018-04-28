@@ -26,7 +26,6 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-
 @Root(name = "announcements")
 public class Announcements implements Parcelable {
 

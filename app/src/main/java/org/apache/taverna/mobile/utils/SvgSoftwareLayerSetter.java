@@ -27,13 +27,6 @@ import android.graphics.drawable.PictureDrawable;
 import android.os.Build;
 import android.widget.ImageView;
 
-/**
- * Listener which updates the {@link ImageView} to be software rendered,
- * because {@link com.caverock.androidsvg.SVG SVG}/{@link android.graphics.Picture Picture}
- * can't render on a hardware backed {@link android.graphics.Canvas Canvas}.
- *
- * @param <T> not used, here to prevent unchecked warnings at usage
- */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class SvgSoftwareLayerSetter<T> implements RequestListener<T, PictureDrawable> {
 

@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.workflowrun;
 
-
 import android.util.Base64;
 import android.util.Log;
 
@@ -75,27 +74,21 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
                             throws Exception {
                         StringBuffer sb = new StringBuffer();
                         String post = "";
-
                         String basicAuth = mDataManager.getPreferencesHelper()
                                 .getUserPlayerCredential();
                         boolean flag = false;
                         try {
-
                             BufferedReader bufferedReader = new BufferedReader(
                                     new InputStreamReader(responseBody.byteStream()));
-
                             String str = "";
 
                             while ((str = bufferedReader.readLine()) != null) {
                                 sb.append(str);
                             }
-
                             bufferedReader.close();
-
                             String data = "{\"document\":\"data:application/octet-stream;base64," +
                                     Base64.encodeToString(sb.toString().getBytes("UTF-8"), Base64
                                             .URL_SAFE | Base64.NO_WRAP).replace('-', '+') + "\"}";
-
                             post = "{\"workflow\":" + data + "}";
                             flag = true;
                         } catch (IOException e) {
@@ -104,7 +97,6 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
                         if (flag) {
                             RequestBody body =
                                     RequestBody.create(MediaType.parse("application/json"), post);
-
                             return mDataManager.uploadWorkflowContent(body, basicAuth.trim());
                         } else {
                             return Observable.empty();

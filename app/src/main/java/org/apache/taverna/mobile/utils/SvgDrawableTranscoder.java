@@ -26,9 +26,6 @@ import com.caverock.androidsvg.SVG;
 import android.graphics.Picture;
 import android.graphics.drawable.PictureDrawable;
 
-/**
- * Convert the {@link SVG}'s internal representation to an Android-compatible one ({@link Picture}).
- */
 public class SvgDrawableTranscoder implements ResourceTranscoder<SVG, PictureDrawable> {
     @Override
     public Resource<PictureDrawable> transcode(Resource<SVG> toTranscode) {

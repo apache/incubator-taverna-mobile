@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.utils;
 
-
 public class Constants {
 
     public static final String ARGS_MESSAGE = "args_message";

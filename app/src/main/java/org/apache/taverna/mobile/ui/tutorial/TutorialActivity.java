@@ -39,7 +39,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
 public class TutorialActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
     @BindView(R.id.slide_pager)
@@ -60,23 +59,18 @@ public class TutorialActivity extends AppCompatActivity implements ViewPager.OnP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferencesHelper = new PreferencesHelper(this);
-
         setContentView(R.layout.activity_tutorial);
-
         ButterKnife.bind(this);
-
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().getDecorView()
                     .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
-
         addBottomDots(0);
 
         TutorialSliderAdapter tutorialSliderAdapter = new TutorialSliderAdapter(this);
         slidePager.setAdapter(tutorialSliderAdapter);
         slidePager.addOnPageChangeListener(this);
-
     }
 
     @OnClick(R.id.btn_skip)
@@ -96,7 +90,6 @@ public class TutorialActivity extends AppCompatActivity implements ViewPager.OnP
 
     public void addBottomDots(int currentPage) {
         TextView[] dots = new TextView[TutorialSliderEnum.values().length];
-
         int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
         int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
 
@@ -131,7 +124,6 @@ public class TutorialActivity extends AppCompatActivity implements ViewPager.OnP
     @Override
     public void onPageSelected(int position) {
         addBottomDots(position);
-
         if (position == TutorialSliderEnum.values().length - 1) {
             bNext.setText(getString(R.string.start));
             bSkip.setVisibility(View.GONE);
@@ -139,7 +131,6 @@ public class TutorialActivity extends AppCompatActivity implements ViewPager.OnP
             bNext.setText(getString(R.string.next));
             bSkip.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override

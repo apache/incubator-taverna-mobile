@@ -41,6 +41,7 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:padding="@dimen/item_offset"/>
+
     </org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout>
 
     <ProgressBar
@@ -50,4 +51,5 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:visibility="visible"/>
+
 </RelativeLayout>

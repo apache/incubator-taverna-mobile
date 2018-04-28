@@ -29,8 +29,8 @@ import android.widget.Scroller;
 import java.lang.reflect.Field;
 
 public class NonSwipeableViewPager extends ViewPager {
-
     private static final String TAG = NonSwipeableViewPager.class.getSimpleName();
+
     public NonSwipeableViewPager(Context context) {
         super(context);
         setMyScroller();
@@ -54,7 +54,6 @@ public class NonSwipeableViewPager extends ViewPager {
     }
 
     //down one is added for smooth scrolling
-
     private void setMyScroller() {
         try {
             Class<?> viewpager = ViewPager.class;
@@ -67,6 +66,7 @@ public class NonSwipeableViewPager extends ViewPager {
     }
 
     public class MyScroller extends Scroller {
+
         public MyScroller(Context context) {
             super(context, new DecelerateInterpolator());
         }

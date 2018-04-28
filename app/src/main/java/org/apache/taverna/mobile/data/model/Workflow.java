@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.data.model;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -36,7 +35,6 @@ import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
 import java.util.List;
-
 
 @Table(database = TavernaDatabase.class)
 @ModelContainer

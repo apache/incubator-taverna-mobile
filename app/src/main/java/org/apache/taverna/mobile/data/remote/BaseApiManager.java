@@ -26,26 +26,21 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-
 public class BaseApiManager {
 
-
     public static final String MY_EXPERIMENT_END_POINT = "http://www.myexperiment.org/";
-
 
     /********
      * Helper class that sets up a new services with simplexml converter factory
      *******/
 
     private <T> T createSimpleXMLApi(Class<T> clazz, String ENDPOINT) {
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ENDPOINT)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(new TavernaOkHttpClient().getTavernaOkHttpClient())
                 .build();
-
         return retrofit.create(clazz);
     }
 
@@ -54,14 +49,12 @@ public class BaseApiManager {
      *******/
 
     private <T> T createJsonApi(Class<T> clazz, String ENDPOINT) {
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ENDPOINT)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(new TavernaOkHttpClient().getTavernaOkHttpClient())
                 .build();
-
         return retrofit.create(clazz);
     }
 

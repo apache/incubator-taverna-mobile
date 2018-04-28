@@ -20,11 +20,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_workflows"
-            android:icon="@drawable/ic_dashboard_home_web"
+            android:icon="@drawable/ic_storage_black_24dp"
             android:title="@string/title_nav_all_workflows"/>
         <item
             android:id="@+id/nav_my_workflows"
-            android:icon="@drawable/ic_dashboard_home_web"
+            android:icon="@drawable/ic_storage_black_24dp"
             android:title="@string/title_nav_my_workflows"/>
         <item
             android:id="@+id/nav_favourite_workflow"
@@ -36,32 +36,34 @@
             android:icon="@drawable/ic_announcement_black_24dp"
             android:title="@string/title_nav_announcement"/>
     </group>
+
         <item
             android:id="@+id/nav_usage"
-            android:icon="@drawable/ic_usage_web"
+            android:icon="@drawable/ic_content_paste_black_24dp"
             android:title="@string/title_nav_usage"/>
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_about_web"
+            android:icon="@drawable/ic_perm_device_information_black_24dp"
             android:title="@string/title_nav_about"/>
         <item
             android:id="@+id/os_licences"
-            android:icon="@drawable/ic_about_web"
+            android:icon="@drawable/ic_info_outline_black_24dp"
             android:title="@string/title_nav_os_licences"/>
     <item
         android:id="@+id/apache_licences"
-        android:icon="@drawable/ic_about_web"
+        android:icon="@drawable/ic_info_outline_black_24dp"
         android:title="@string/title_nav_apache_licences"/>
+
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_setting_workflows_web"
+            android:icon="@drawable/ic_settings_black_24dp"
             android:title="@string/title_nav_settings"/>
     </group>
+
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_logout_web"
+            android:icon="@drawable/ic_reply_all_black_24dp"
             android:title="@string/tiitle_nav_logout"/>
-
 
 </menu>

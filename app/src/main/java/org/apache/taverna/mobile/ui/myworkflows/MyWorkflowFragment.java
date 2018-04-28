@@ -68,24 +68,16 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
     TextView mTextViewNoWorkflow;
 
     private DataManager dataManager;
-
     private MyWorkflowPresenter mWorkflowPresenter;
-
     private WorkflowAdapter mWorkflowAdapter;
-
-
     private List<Workflow> mWorkflowList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mWorkflowList = new ArrayList<>();
-
         dataManager = new DataManager(new PreferencesHelper(getContext()));
-
         mWorkflowPresenter = new MyWorkflowPresenter(dataManager);
-
         setHasOptionsMenu(true);
     }
 
@@ -94,9 +86,7 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
             savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
         ButterKnife.bind(this, rootView);
-
         mWorkflowPresenter.attachView(this);
 
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -104,27 +94,20 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.hasFixedSize();
-
         mWorkflowAdapter = new WorkflowAdapter(mWorkflowList, getContext());
-
         mRecyclerView.setAdapter(mWorkflowAdapter);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListner(getActivity(), this));
-
         mWorkflowPresenter.loadMyWorkflows();
 
         mSwipeRefresh.setColorSchemeResources(R.color.colorAccent, R.color.colorAccent, R.color
                 .colorPrimary);
-
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (ConnectionInfo.isConnectingToInternet(getContext())) {
-
                     mWorkflowPresenter.loadMyWorkflows();
-
                     mSwipeRefresh.setRefreshing(true);
                 } else {
-
                     showErrorSnackBar("NO Internet Connection");
                     if (mSwipeRefresh.isRefreshing()) {
                         mSwipeRefresh.setRefreshing(false);
@@ -132,25 +115,21 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
                 }
             }
         });
-
         return rootView;
     }
 
     @Override
     public void showProgressbar(boolean b) {
-
         if (b) {
             mProgressBar.setVisibility(View.VISIBLE);
         } else {
             mProgressBar.setVisibility(View.GONE);
             mRecyclerView.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override
     public void showErrorSnackBar(String error) {
-
         final Snackbar snackbar = Snackbar.make(mRecyclerView, error, Snackbar
                 .LENGTH_INDEFINITE);
         snackbar.setAction("OK", new View.OnClickListener() {
@@ -159,25 +138,21 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
                 snackbar.dismiss();
             }
         });
-
         snackbar.show();
     }
 
     @Override
     public void showWorkflow(Workflow workflow) {
-
         if (mSwipeRefresh.isRefreshing()) {
             mSwipeRefresh.setRefreshing(false);
             mWorkflowList.clear();
         }
-
         mWorkflowList.add(workflow);
         mWorkflowAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void checkWorkflowSize() {
-
         if (mWorkflowList.size() == 0) {
             mTextViewNoWorkflow.setVisibility(View.VISIBLE);
         } else {

@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.workflow;
 
-
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Workflow;
@@ -73,13 +72,10 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
     private WorkflowPresenter mWorkflowPresenter;
     private WorkflowAdapter mWorkflowAdapter;
     private WorkflowAdapter mSearchWorkflowAdapter;
-
     private int mPageNumber = 1;
-
     private int mSearchPageNumber = 1;
     private List<Workflow> mWorkflowList;
     private List<Workflow> mSearchWorkflowList;
-
     private SearchView searchView;
 
     @Override
@@ -133,10 +129,8 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
         mSwipeRefresh.setColorSchemeColors(getActivity()
                 .getResources().getIntArray(R.array.swipeRefreshColors));
         mSwipeRefresh.setOnRefreshListener(this);
-
         return rootView;
     }
-
 
     @Override
     public void onRefresh() {
@@ -238,7 +232,6 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context
                 .SEARCH_SERVICE);
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity()
                 .getComponentName()));
         searchView.setSubmitButtonEnabled(false);
@@ -257,12 +250,10 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
                 mSearchPageNumber = 1;
             }
         });
-
     }
 
     @Override
     public void performSearch(String search) {
-
         mSearchWorkflowAdapter = new WorkflowAdapter(mSearchWorkflowList, getContext());
         WorkflowAdapter wk = mWorkflowAdapter;
         if (!TextUtils.isEmpty(search)) {
@@ -302,6 +293,4 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
             }
         }
     }
-
-
 }

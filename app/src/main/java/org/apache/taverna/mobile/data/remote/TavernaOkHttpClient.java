@@ -25,20 +25,15 @@ import okhttp3.logging.HttpLoggingInterceptor;
 
 public class TavernaOkHttpClient {
 
-
     public OkHttpClient getTavernaOkHttpClient() {
 
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-
         //Enable Full Body Logging
         HttpLoggingInterceptor logger = new HttpLoggingInterceptor();
         logger.setLevel(HttpLoggingInterceptor.Level.BODY);
-
         //Interceptor :> Full Body Logger
         builder.addInterceptor(logger);
-
         builder.addNetworkInterceptor(new StethoInterceptor());
         return builder.build();
-
     }
 }

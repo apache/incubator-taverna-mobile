@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.imagezoom;
 
-
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
@@ -45,7 +44,6 @@ import java.io.InputStream;
 
 public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
 
-
     private GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> requestBuilder;
 
     public ImageZoomPresenter() {
@@ -54,9 +52,7 @@ public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
 
     @Override
     public void attachView(ImageZoomMvpView mvpView) {
-
         super.attachView(mvpView);
-
         requestBuilder = Glide.with(getMvpView().getAppContext())
                 .using(Glide.buildStreamModelLoader(Uri.class,
                         getMvpView().getAppContext()), InputStream.class)
@@ -66,26 +62,22 @@ public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
                 .sourceEncoder(new StreamEncoder())
                 .cacheDecoder(new FileToStreamDecoder<SVG>(new SvgDecoder()))
                 .decoder(new SvgDecoder())
-                .placeholder(R.drawable.placeholder)
-                .error(R.drawable.placeholder)
+                .placeholder(R.drawable.ic_image_black_24dp)
+                .error(R.drawable.ic_image_black_24dp)
                 .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                 .animate(android.R.anim.fade_in);
-
     }
 
     @Override
     public void detachView() {
         super.detachView();
-
     }
 
     public void loadImage(String svgURI, final ImageView imageView) {
-
         setSVG(svgURI, imageView);
     }
 
     private void setSVG(String imageURI, final ImageView imageView) {
-
         requestBuilder
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .load(Uri.parse(imageURI))
@@ -98,11 +90,9 @@ public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
                     @Override
                     public void onLoadFailed(Exception e, Drawable errorDrawable) {
                         imageView.setImageDrawable(errorDrawable);
-
                         if (Build.VERSION_CODES.HONEYCOMB <= Build.VERSION.SDK_INT) {
                             imageView.setLayerType(ImageView.LAYER_TYPE_NONE, null);
                         }
-
                         getMvpView().setJPGImage();
                     }
 
@@ -152,8 +142,5 @@ public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
 
                     }
                 });
-
     }
-
-
 }

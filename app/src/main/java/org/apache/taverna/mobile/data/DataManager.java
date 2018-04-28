@@ -43,9 +43,7 @@ import okhttp3.ResponseBody;
 public class DataManager {
 
     public BaseApiManager mBaseApiManager = new BaseApiManager();
-
     public DBHelper mDBHelper = new DBHelper();
-
     private PreferencesHelper mPreferencesHelper;
 
     public DataManager() {
@@ -197,7 +195,6 @@ public class DataManager {
     public Observable<ResponseBody> authPlayerUserLoginDetail(final String credentials,
                                                               final boolean flagLogin) {
         return mBaseApiManager.getTavernaPlayerApi().playerlogin(credentials);
-
     }
 
     public Observable<PlayerWorkflowDetail> getWorkflowDetail(int id) {

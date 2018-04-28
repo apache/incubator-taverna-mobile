@@ -34,13 +34,10 @@ import org.apache.taverna.mobile.R;
 public class WebViewGenerator extends Fragment {
 
     private ProgressBar progressBar;
-
     private WebView web;
-
     private String url;
 
     public static WebViewGenerator newInstance(String URL) {
-
         Bundle args = new Bundle();
         args.putString(Constants.ARGS_URL, URL);
         WebViewGenerator fragment = new WebViewGenerator();
@@ -61,52 +58,37 @@ public class WebViewGenerator extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         View layout = inflater.inflate(R.layout.webviewgen, container, false);
-
-        web = (WebView) layout.findViewById(R.id.webView);
-
-        progressBar = (ProgressBar) layout.findViewById(R.id.progressBar);
-
+        web = layout.findViewById(R.id.webView);
+        progressBar = layout.findViewById(R.id.progressBar);
         web.setWebViewClient(new WebClient());
         web.getSettings().setJavaScriptEnabled(true);
         web.getSettings().setBuiltInZoomControls(true);
         web.loadUrl(url);
         web.canGoBack();
         return layout;
-
     }
 
     private void getServer() {
 
     }
 
-
     public class WebClient extends WebViewClient {
-
-
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-
             super.onPageStarted(view, url, favicon);
-
         }
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
             progressBar.setVisibility(View.VISIBLE);
             view.loadUrl(url);
             return true;
-
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
-
             super.onPageFinished(view, url);
-
             progressBar.setVisibility(View.GONE);
         }
     }
-
-
 }

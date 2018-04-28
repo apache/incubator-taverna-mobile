@@ -121,6 +121,7 @@
                             android:paddingLeft="@dimen/tvType_paddingLeft"
                             android:paddingRight="@dimen/tvType_paddingRight"
                             android:paddingStart="@dimen/tvType_paddingStart"/>
+
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -136,13 +137,14 @@
                         android:id="@+id/tvDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/tvDescription_padding"
-                        />
+                        android:padding="@dimen/tvDescription_padding" />
+
                 </LinearLayout>
 
             </LinearLayout>
 
         </ScrollView>
+
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -154,6 +156,5 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_play_arrow_black_24dp"
         />
-
 
 </android.support.design.widget.CoordinatorLayout>

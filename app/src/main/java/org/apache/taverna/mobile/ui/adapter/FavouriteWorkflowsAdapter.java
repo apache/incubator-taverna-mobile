@@ -48,21 +48,17 @@ import butterknife.ButterKnife;
 public class FavouriteWorkflowsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final String TAG = FavouriteWorkflowsAdapter.class.getName();
-
     private final List<Workflow> mWorkflowList;
-
     private final Context context;
 
     public FavouriteWorkflowsAdapter(List<Workflow> mWorkflowList, Context context) {
         this.mWorkflowList = mWorkflowList;
         this.context = context;
-
     }
 
     public void addWorkflow(Workflow workflow) {
         this.mWorkflowList.add(workflow);
         this.notifyDataSetChanged();
-
     }
 
     @Override
@@ -72,18 +68,15 @@ public class FavouriteWorkflowsAdapter extends RecyclerView.Adapter<RecyclerView
         View v = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.item_recyclerview_favourite_workflow_list, parent, false);
         vh = new ViewHolder(v);
-
         return vh;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ViewHolder) {
-
             Workflow workflow = mWorkflowList.get(position);
             String date = workflow.getCreatedAt()
                     .substring(0, workflow.getCreatedAt().indexOf(' '));
-
 
             ((ViewHolder) holder).tvDate.setText(date);
             ((ViewHolder) holder).tvTitle.setText(workflow.getTitle());
@@ -95,8 +88,8 @@ public class FavouriteWorkflowsAdapter extends RecyclerView.Adapter<RecyclerView
             Glide.with(context)
                     .load(uri)
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .placeholder(R.drawable.placeholder)
-                    .error(R.drawable.placeholder)
+                    .placeholder(R.drawable.ic_image_black_24dp)
+                    .error(R.drawable.ic_image_black_24dp)
                     .into(((ViewHolder) holder).ivWorkflowImage);
         }
     }

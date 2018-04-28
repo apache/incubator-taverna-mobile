@@ -53,22 +53,22 @@
         android:singleLine="true"
         android:maxLines="1" /> -->
     <PreferenceCategory
-        android:icon="@drawable/gear_icon"
+        android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/pref_category_title_player_config">
         <EditTextPreference
             android:key="@string/pref_key_player_user"
             android:title="@string/pref_title_player_user"
-            android:icon="@mipmap/ic_user_profiles"
+            android:icon="@drawable/ic_account_circle_blue_24dp"
             android:summary="@string/pref_summary_player_user"
             android:defaultValue="default"
             android:selectAllOnFocus="true"
             android:inputType="textEmailAddress|textPersonName"
             android:singleLine="true"
-            android:maxLines="1" />
+            android:maxLines="1"/>
         <EditTextPreference
             android:key="pref_key_player_password"
             android:title="@string/pref_title_player_pass"
-            android:icon="@android:drawable/ic_secure"
+            android:icon="@drawable/ic_lock_grey_24dp"
             android:summary="@string/pref_summary_player_pass"
             android:defaultValue="default"
             android:selectAllOnFocus="true"
@@ -77,12 +77,12 @@
             android:maxLines="1" />
         </PreferenceCategory>
     <PreferenceCategory
-        android:icon="@drawable/gear_icon"
+        android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/pref_category_title_myexperiment">
         <EditTextPreference
             android:key="@string/pref_key_myexperiment_user"
             android:title="@string/pref_title_myexperiment_user"
-            android:icon="@mipmap/ic_user_profiles"
+            android:icon="@drawable/ic_account_circle_blue_24dp"
             android:summary="@string/pref_summary_myexperiment_user"
             android:defaultValue="default"
             android:selectAllOnFocus="true"
@@ -92,7 +92,7 @@
         <EditTextPreference
             android:key="@string/pref_key_myexperiment_pass"
             android:title="@string/pref_title_player_pass"
-            android:icon="@android:drawable/ic_secure"
+            android:icon="@drawable/ic_lock_grey_24dp"
             android:summary="@string/pref_summary_myexperiment_pass"
             android:defaultValue="default"
             android:selectAllOnFocus="true"

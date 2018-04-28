@@ -24,7 +24,6 @@ import org.simpleframework.xml.Text;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 public class Author implements Parcelable {
 
     @Attribute(name = "resource", required = false)

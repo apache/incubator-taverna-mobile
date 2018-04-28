@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile;
 
-
 import android.app.Application;
 import android.content.Context;
 
@@ -42,13 +41,10 @@ public class TavernaApplication extends Application {
             instance = this;
         }
         FlowManager.init(new FlowConfig.Builder(this).build());
-
         Stetho.initializeWithDefaults(this);
-
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
         LeakCanary.install(this);
-
     }
 }

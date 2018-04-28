@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.data.local;
 
-
 import android.support.annotation.Nullable;
 
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -33,11 +32,9 @@ import java.util.concurrent.Callable;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 
-
 public class DBHelper {
 
     public static final String SVG_URI = "svgURI";
-
     public static final String JPG_URI = "jpgURI";
 
     public DBHelper() {
@@ -55,11 +52,9 @@ public class DBHelper {
                         workflow.setFavourite(false);
                         workflow.save();
                     } else {
-
                         updateWorkflow(workflow).save();
                     }
                 }
-
                 return Observable.just(workflows);
             }
         });
@@ -74,31 +69,24 @@ public class DBHelper {
 
         if (workflow1 != null) {
             if (workflow.getDescription() != null) {
-
                 workflow1.setDescription(workflow.getDescription());
             }
             if (workflow.getUpdatedAt() != null) {
-
                 workflow1.setUpdatedAt(workflow.getUpdatedAt());
             }
             if (workflow.getSvgUri() != null) {
-
                 workflow1.setSvgUri(workflow.getSvgUri());
             }
             if (workflow.getLicenseType() != null) {
-
                 workflow1.setLicenseType(workflow.getLicenseType());
             }
             if (workflow.getContentUri() != null) {
-
                 workflow1.setContentUri(workflow.getContentUri());
             }
             if (workflow.getContentType() != null) {
-
                 workflow1.setContentUri(workflow.getContentType());
             }
             if (workflow.getElementId() != null) {
-
                 workflow1.setElementId(workflow.getElementId());
             }
             workflow1.setFavourite(workflow1.isFavourite());
@@ -111,7 +99,6 @@ public class DBHelper {
             workflow1.setUri(workflow.getUri());
             workflow1.setId(workflow.getId());
             workflow1.setVersion(workflow.getVersion());
-
         }
         return workflow1;
     }
@@ -158,18 +145,15 @@ public class DBHelper {
     }
 
     public boolean updateFavouriteWorkflow(String id) {
-
         Workflow workflow1 = SQLite.select()
                 .from(Workflow.class)
                 .where(Workflow_Table.id.eq(id))
                 .querySingle();
-
         if (workflow1 != null) {
             workflow1.setFavourite(!workflow1.isFavourite());
             workflow1.save();
             return true;
         }
-
         return false;
     }
 
@@ -197,21 +181,15 @@ public class DBHelper {
         });
     }
 
-
-
     public void clearFavouriteWorkflow() {
         List<Workflow> workflowList = SQLite.select()
                 .from(Workflow.class)
                 .where(Workflow_Table.favourite.eq(true))
                 .queryList();
-
         for (Workflow workflow : workflowList) {
             workflow.setFavourite(!workflow.isFavourite());
             workflow.save();
         }
-
     }
-
-
 }
 

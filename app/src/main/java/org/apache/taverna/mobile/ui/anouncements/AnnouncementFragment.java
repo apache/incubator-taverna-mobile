@@ -51,7 +51,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 public class AnnouncementFragment extends Fragment implements RecyclerItemClickListner
         .OnItemClickListener, AnnouncementMvpView {
 
@@ -67,21 +66,13 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     ProgressBar mProgressBar;
 
     private AlertDialog alertDialog;
-
     private ProgressDialog dialog;
-
     private Announcements mAnnouncements;
-
     private DataManager dataManager;
-
     private AnnouncementPresenter mAnnouncementPresenter;
-
     private AnnouncementAdapter mAnnouncementAdapter;
-
     private int mPageNumber = 1;
-
     private DetailAnnouncement mAnnouncementDetail;
-
 
     @Override
     public void onItemClick(View childView, int position) {
@@ -97,7 +88,6 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
 
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +98,6 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         setHasOptionsMenu(true);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
@@ -116,12 +105,10 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         ButterKnife.bind(this, rootView);
         mAnnouncementPresenter.attachView(this);
 
-
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListner(getActivity(), this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-
 
         mSwipeRefresh.setColorSchemeResources(R.color.colorAccent, R.color.colorAccent, R.color
                 .colorPrimary);
@@ -141,7 +128,6 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
                         mSwipeRefresh.setRefreshing(false);
                     }
                 }
-
             }
         });
 
@@ -173,7 +159,6 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         super.onDestroyView();
         mAnnouncementPresenter.detachView();
     }
-
 
     @Override
     public void showAllAnnouncement(Announcements announcements) {
@@ -216,7 +201,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
         mAnnouncementDetail = detailAnnouncement;
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.detail_annoucement_dialog_layout, null);
+        View dialogView = inflater.inflate(R.layout.dialog_detail_annoucement, null);
         dialogBuilder.setView(dialogView);
         TextView title = dialogView.findViewById(R.id.tvDialogTitle);
         TextView date = dialogView.findViewById(R.id.tvDialogDate);
@@ -251,7 +236,6 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
                 snackbar.dismiss();
             }
         });
-
         snackbar.show();
     }
 

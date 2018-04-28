@@ -26,10 +26,10 @@ import android.view.ViewGroup;
 
 import org.apache.taverna.mobile.data.model.TutorialSliderEnum;
 
-
 public class TutorialSliderAdapter extends PagerAdapter {
 
     private Context context;
+
     public TutorialSliderAdapter(Context context) {
         this.context = context;
     }
@@ -54,6 +54,5 @@ public class TutorialSliderAdapter extends PagerAdapter {
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
     }
-
 
 }

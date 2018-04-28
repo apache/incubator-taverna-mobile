@@ -35,6 +35,7 @@ import android.os.Parcelable;
 @Table(database = TavernaDatabase.class)
 @ModelContainer
 @Root(name = "type")
+
 public class Type extends TavernaBaseModel implements Parcelable {
 
     @Column

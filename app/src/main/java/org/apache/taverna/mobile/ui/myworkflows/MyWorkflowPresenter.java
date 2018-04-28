@@ -41,7 +41,6 @@ public class MyWorkflowPresenter extends BasePresenter<MyWorkflowMvpView> {
     public final String LOG_TAG = getClass().getSimpleName();
 
     private DataManager mDataManager;
-
     private CompositeDisposable compositeDisposable;
 
     public MyWorkflowPresenter(DataManager dataManager) {

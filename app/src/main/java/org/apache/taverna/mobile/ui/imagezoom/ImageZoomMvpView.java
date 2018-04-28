@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.imagezoom;
 
-
 import android.content.Context;
 
 import org.apache.taverna.mobile.ui.base.MvpView;
