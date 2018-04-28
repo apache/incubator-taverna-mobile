@@ -46,7 +46,7 @@
             android:layout_below="@+id/logo"
             android:typeface="serif"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/appName_text_margin"
+            android:layout_marginTop="@dimen/app_name_text_margin"
             android:text="@string/app_name"
             android:textSize="@dimen/text_size" />
 
@@ -128,8 +128,8 @@
                 android:layout_height="@dimen/login_height"
                 android:textColor="@color/white"
                 android:background="@drawable/login_button"
-                android:layout_marginBottom="@dimen/loginButton_marginBottom"
-                android:layout_marginTop="@dimen/loginButton_marginTop"
+                android:layout_marginBottom="@dimen/login_button_margin_bottom"
+                android:layout_marginTop="@dimen/login_button_margin_top"
                 android:contentDescription="@string/login_button_description"
                 android:text="@string/bLogin" />
 
