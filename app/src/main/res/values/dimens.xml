@@ -17,50 +17,50 @@ limitations under the License.
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="app_bar_top_padding">0dp</dimen>
-    <dimen name="cardMarginHorizontal">10dp</dimen>
-    <dimen name="cardMarginVertical">8dp</dimen>
+    <dimen name="card_margin_horizontal">10dp</dimen>
+    <dimen name="card_margin_vertical">8dp</dimen>
 
     <!--Announcement Card margin-->
-    <dimen name="announcementCardMarginHorizontal">5dp</dimen>
-    <dimen name="announcementCardMarginVertical">4dp</dimen>
+    <dimen name="announcement_card_margin_horizontal">5dp</dimen>
+    <dimen name="announcement_card_margin_vertical">4dp</dimen>
 
     <!--Usage Activity Layout Dimens-->
-    <dimen name="usageCardTitleTextSize">25sp</dimen>
-    <dimen name="cardTitleTopPadding">3sp</dimen>
-    <dimen name="usageCardContentMarginTop">45sp</dimen>
-    <dimen name="usageContentPaddingBottom">10sp</dimen>
-    <dimen name="usageContentPaddingLeft">10sp</dimen>
-    <dimen name="usageContentPaddingRight">10sp</dimen>
-    <dimen name="usageContentTextSize">13sp</dimen>
-    <dimen name="usageLinearLayoutPadding">10sp</dimen>
-    <dimen name="usageCardViewPaddingBotton">10sp</dimen>
-    <dimen name="usageCardSpaceHeight">10sp</dimen>
+    <dimen name="usage_card_title_text_size">25sp</dimen>
+    <dimen name="card_title_top_padding">3sp</dimen>
+    <dimen name="usage_card_content_margin_top">45sp</dimen>
+    <dimen name="usage_content_padding_bottom">10sp</dimen>
+    <dimen name="usage_content_padding_left">10sp</dimen>
+    <dimen name="usage_content_padding_right">10sp</dimen>
+    <dimen name="usage_content_text_size">13sp</dimen>
+    <dimen name="usage_linear_layout_padding">10sp</dimen>
+    <dimen name="usage_card_view_padding_bottom">10sp</dimen>
+    <dimen name="usage_card_space_height">10sp</dimen>
 
     <!--Fragment Detail Workflow Dimens-->
-    <dimen name="ivWorkflowImage_height">300dp</dimen>
+    <dimen name="iv_workflow_image_height">300dp</dimen>
     <dimen name="view_height">1sp</dimen>
-    <dimen name="ivFav_width">55dp</dimen>
-    <dimen name="ivFav_height">55dp</dimen>
-    <dimen name="ivFav_marginRight">16dp</dimen>
-    <dimen name="ivFav_marginTop">-27dp</dimen>
-    <dimen name="ivFav_borderWidth">0sp</dimen>
-    <dimen name="tvTitle_padding">10sp</dimen>
-    <dimen name="tvTitle_textSize">20sp</dimen>
-    <dimen name="LinearLayout_margin_top">5sp</dimen>
-    <dimen name="ivUploader_width">50sp</dimen>
-    <dimen name="ivUploader_height">50sp</dimen>
-    <dimen name="ivUploader_paddingLeft">10sp</dimen>
-    <dimen name="relLay2_width">0sp</dimen>
-    <dimen name="relLay2_height">50sp</dimen>
-    <dimen name="relLay2_marginLeft">10sp</dimen>
-    <dimen name="relLay2_marginStart">10sp</dimen>
-    <dimen name="tvUploaderName_textSize">18sp</dimen>
-    <dimen name="tvType_paddingEnd">10sp</dimen>
-    <dimen name="tvType_paddingLeft">0sp</dimen>
-    <dimen name="tvType_paddingRight">10sp</dimen>
-    <dimen name="tvType_paddingStart">0sp</dimen>
+    <dimen name="iv_fav_width">55dp</dimen>
+    <dimen name="iv_fav_height">55dp</dimen>
+    <dimen name="iv_fav_margin_right">16dp</dimen>
+    <dimen name="iv_fav_margin_top">-27dp</dimen>
+    <dimen name="iv_fav_border_width">0sp</dimen>
+    <dimen name="tv_title_padding">10sp</dimen>
+    <dimen name="tv_title_text_size">20sp</dimen>
+    <dimen name="linear_layout_margin_top">5sp</dimen>
+    <dimen name="iv_uploader_width">50sp</dimen>
+    <dimen name="iv_uploader_height">50sp</dimen>
+    <dimen name="iv_uploader_padding_left">10sp</dimen>
+    <dimen name="rel_lay2_width">0sp</dimen>
+    <dimen name="rel_lay2_height">50sp</dimen>
+    <dimen name="rel_lay2_margin_left">10sp</dimen>
+    <dimen name="rel_lay2_margin_start">10sp</dimen>
+    <dimen name="tv_uploader_name_text_size">18sp</dimen>
+    <dimen name="tv_type_padding_end">10sp</dimen>
+    <dimen name="tv_type_padding_left">0sp</dimen>
+    <dimen name="tv_type_padding_right">10sp</dimen>
+    <dimen name="tv_type_padding_start">0sp</dimen>
     <dimen name="linLay2_padding">15sp</dimen>
-    <dimen name="tvDescription_padding">5sp</dimen>
+    <dimen name="tv_description_padding">5sp</dimen>
 
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="item_offset">3dp</dimen>
@@ -74,9 +74,9 @@ limitations under the License.
     <dimen name="my_experiment_logo_height">50dp</dimen>
     <dimen name="login_text_size">20sp</dimen>
     <dimen name="input_layout_email_margin">20dp</dimen>
-    <dimen name="loginButton_marginBottom">8dp</dimen>
-    <dimen name="loginButton_marginTop">10dp</dimen>
-    <dimen name="appName_text_margin">12dp</dimen>
+    <dimen name="login_button_margin_bottom">8dp</dimen>
+    <dimen name="login_button_margin_top">10dp</dimen>
+    <dimen name="app_name_text_margin">12dp</dimen>
     <dimen name="title_text_size">40sp</dimen>
     <dimen name="logo_margin_top">40dp</dimen>
     <dimen name="disc_text_size">5dp</dimen>
@@ -103,6 +103,6 @@ limitations under the License.
     <dimen name="slide_desc">16dp</dimen>
     <dimen name="desc_padding">40dp</dimen>
     <dimen name="margin_top">20dp</dimen>
-    <dimen name="tutorialView_height">1dp</dimen>
+    <dimen name="tutorial_view_height">1dp</dimen>
 
 </resources>
