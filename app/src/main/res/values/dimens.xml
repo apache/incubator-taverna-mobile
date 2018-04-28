@@ -62,8 +62,6 @@ limitations under the License.
     <dimen name="linLay2_padding">15sp</dimen>
     <dimen name="tvDescription_padding">5sp</dimen>
 
-    <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
-         https://developer.android.com/design/patterns/navigation-drawer.html -->
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="item_offset">3dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
@@ -91,6 +89,11 @@ limitations under the License.
     <dimen name="logo_height">70dp</dimen>
     <dimen name="logo_width">70dp</dimen>
     <dimen name="login_button_radius">80dp</dimen>
+
+    <!--fragment_dashboard and fragment_fav_workflow_list dimens -->
+    <dimen name="relative_layout_margin_bottom">25sp</dimen>
+    <dimen name="center_icon_height_width">130sp</dimen>
+    <dimen name="message_text_size">15sp</dimen>
 
     <!-- Tutorial Screen -->
     <dimen name="dots_height">30dp</dimen>

@@ -42,7 +42,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,8 +64,8 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
     @BindView(R.id.swipe_refresh)
     ScrollChildSwipeRefreshLayout mSwipeRefresh;
 
-    @BindView(R.id.tvNoWorkflow)
-    TextView mTextViewNoWorkflow;
+    @BindView(R.id.layout_empty_workflows)
+    RelativeLayout mTextViewNoWorkflow;
 
     private DataManager dataManager;
 
