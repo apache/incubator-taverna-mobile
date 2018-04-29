@@ -19,8 +19,9 @@
  [![Build Status](https://travis-ci.org/apache/incubator-taverna-mobile.svg?branch=master)](https://travis-ci.org/apache/incubator-taverna-mobile)
 # Apache Taverna Mobile
 
-Apache Taverna Mobile is an Android app
-for controlling an [Apache Taverna Server](http://taverna.incubator.apache.org/documentation/server/)
+<img align="right" src="https://user-images.githubusercontent.com/31414276/39404787-9f656d00-4bb7-11e8-847b-25f56b9e9ea6.png" width ="112px" height ="auto">
+
+Apache Taverna Mobile is an Android app for controlling an [Apache Taverna Server](http://taverna.incubator.apache.org/documentation/server/)
 for remotely running
 [Apache Taverna](http://taverna.incubator.apache.org/) workflows.
 
