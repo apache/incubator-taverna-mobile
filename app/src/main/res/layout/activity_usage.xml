@@ -33,16 +33,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="@dimen/usageLinearLayoutPadding">
+            android:orientation="vertical">
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="@dimen/usageCardViewPaddingBotton">
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/usageCardViewPaddingBotton"
+                android:layout_marginRight="@dimen/usageCardViewPaddingBotton"
+                android:layout_marginLeft="@dimen/usageCardViewPaddingBotton"
+                android:layout_marginTop="@dimen/usageCardViewPaddingBotton"
+                >
 
                 <TextView
-                    android:id="@+id/usage_login_title"
+                    android:id="@+id/text_login_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -53,7 +56,7 @@
                     android:textSize="@dimen/usageCardTitleTextSize" />
 
                 <TextView
-                    android:id="@+id/usage_login_content"
+                    android:id="@+id/text_login_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/usageCardContentMarginTop"
@@ -73,11 +76,13 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/usageCardViewPaddingBotton"
+                android:layout_marginLeft="@dimen/usageCardViewPaddingBotton"
                 android:paddingBottom="@dimen/usageCardViewPaddingBotton">
 
                 <TextView
-                    android:id="@+id/usage_dashboard_title"
+                    android:id="@+id/text_dashboard_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -88,7 +93,7 @@
                     android:textSize="@dimen/usageCardTitleTextSize" />
 
                 <TextView
-                    android:id="@+id/usage_dashboard_content"
+                    android:id="@+id/text_dashboard_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/usageCardContentMarginTop"
@@ -108,11 +113,13 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/usageCardViewPaddingBotton"
+                android:layout_marginLeft="@dimen/usageCardViewPaddingBotton"
                 android:paddingBottom="@dimen/usageCardViewPaddingBotton">
 
                 <TextView
-                    android:id="@+id/usage_menu_title"
+                    android:id="@+id/text_menu_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -123,7 +130,7 @@
                     android:textSize="@dimen/usageCardTitleTextSize" />
 
                 <TextView
-                    android:id="@+id/menu_content"
+                    android:id="@+id/text_menu_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/usageCardContentMarginTop"
@@ -143,11 +150,13 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="@dimen/usageCardViewPaddingBotton">
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/usageCardViewPaddingBotton"
+                android:layout_marginRight="@dimen/usageCardViewPaddingBotton"
+                android:layout_marginLeft="@dimen/usageCardViewPaddingBotton">
 
                 <TextView
-                    android:id="@+id/workflow_title"
+                    android:id="@+id/text_workflow_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -158,7 +167,7 @@
                     android:textSize="@dimen/usageCardTitleTextSize" />
 
                 <TextView
-                    android:id="@+id/workflow_content"
+                    android:id="@+id/text_workflow_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/usageCardContentMarginTop"
@@ -171,7 +180,13 @@
                     android:textSize="@dimen/usageContentTextSize" />
 
             </android.support.v7.widget.CardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/usageCardSpaceHeight" />
+
         </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>
