@@ -24,10 +24,82 @@ limitations under the License.
     <dimen name="announcementCardMarginHorizontal">5dp</dimen>
     <dimen name="announcementCardMarginVertical">4dp</dimen>
 
+    <!--Usage Activity Layout Dimens-->
+    <dimen name="usageCardTitleTextSize">25sp</dimen>
+    <dimen name="cardTitleTopPadding">3sp</dimen>
+    <dimen name="usageCardContentMarginTop">45sp</dimen>
+    <dimen name="usageContentPaddingBottom">10sp</dimen>
+    <dimen name="usageContentPaddingLeft">10sp</dimen>
+    <dimen name="usageContentPaddingRight">10sp</dimen>
+    <dimen name="usageContentTextSize">13sp</dimen>
+    <dimen name="usageLinearLayoutPadding">10sp</dimen>
+    <dimen name="usageCardViewPaddingBotton">10sp</dimen>
+    <dimen name="usageCardSpaceHeight">10sp</dimen>
+
+    <!--Fragment Detail Workflow Dimens-->
+    <dimen name="ivWorkflowImage_height">300dp</dimen>
+    <dimen name="view_height">1sp</dimen>
+    <dimen name="ivFav_width">55dp</dimen>
+    <dimen name="ivFav_height">55dp</dimen>
+    <dimen name="ivFav_marginRight">16dp</dimen>
+    <dimen name="ivFav_marginTop">-27dp</dimen>
+    <dimen name="ivFav_borderWidth">0sp</dimen>
+    <dimen name="tvTitle_padding">10sp</dimen>
+    <dimen name="tvTitle_textSize">20sp</dimen>
+    <dimen name="LinearLayout_margin_top">5sp</dimen>
+    <dimen name="ivUploader_width">50sp</dimen>
+    <dimen name="ivUploader_height">50sp</dimen>
+    <dimen name="ivUploader_paddingLeft">10sp</dimen>
+    <dimen name="relLay2_width">0sp</dimen>
+    <dimen name="relLay2_height">50sp</dimen>
+    <dimen name="relLay2_marginLeft">10sp</dimen>
+    <dimen name="relLay2_marginStart">10sp</dimen>
+    <dimen name="tvUploaderName_textSize">18sp</dimen>
+    <dimen name="tvType_paddingEnd">10sp</dimen>
+    <dimen name="tvType_paddingLeft">0sp</dimen>
+    <dimen name="tvType_paddingRight">10sp</dimen>
+    <dimen name="tvType_paddingStart">0sp</dimen>
+    <dimen name="linLay2_padding">15sp</dimen>
+    <dimen name="tvDescription_padding">5sp</dimen>
+
     <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
          https://developer.android.com/design/patterns/navigation-drawer.html -->
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="item_offset">3dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="layout_padding">8dp</dimen>
+    <dimen name="text_size">25sp</dimen>
+    <dimen name="login_layout_padding">20dp</dimen>
+    <dimen name="login_layout_marginTop">15dp</dimen>
+    <dimen name="login_info_padding">7dp</dimen>
+    <dimen name="my_experiment_logo_height">50dp</dimen>
+    <dimen name="login_text_size">20sp</dimen>
+    <dimen name="input_layout_email_margin">20dp</dimen>
+    <dimen name="loginButton_marginBottom">8dp</dimen>
+    <dimen name="loginButton_marginTop">10dp</dimen>
+    <dimen name="appName_text_margin">12dp</dimen>
+    <dimen name="title_text_size">40sp</dimen>
+    <dimen name="logo_margin_top">40dp</dimen>
+    <dimen name="disc_text_size">5dp</dimen>
+    <dimen name="disc_margin_top">10dp</dimen>
+
+    <dimen name="signup_margin_top">2dp</dimen>
+    <dimen name="signup_height">50dp</dimen>
+    <dimen name="login_height">50dp</dimen>
+    <dimen name="checkbox_margin_top">30dp</dimen>
+    <dimen name="logo_height">70dp</dimen>
+    <dimen name="logo_width">70dp</dimen>
+    <dimen name="login_button_radius">80dp</dimen>
+
+    <!-- Tutorial Screen -->
+    <dimen name="dots_height">30dp</dimen>
+    <dimen name="dots_margin_bottom">20dp</dimen>
+    <dimen name="img_width_height">120dp</dimen>
+    <dimen name="slide_title">30dp</dimen>
+    <dimen name="slide_desc">16dp</dimen>
+    <dimen name="desc_padding">40dp</dimen>
+    <dimen name="margin_top">20dp</dimen>
+    <dimen name="tutorialView_height">1dp</dimen>
+
 </resources>

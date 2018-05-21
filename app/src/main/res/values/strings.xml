@@ -32,7 +32,7 @@ limitations under the License.
         <item>Date Last Run</item>
     </array>
     <string name="hello_blank_fragment">About Workflow</string>
-    <string name="logininfo">myExperiment Login</string>
+    <string name="login_info">Login</string>
     <string name="loginusername">Email or Username</string>
     <string name="loginpassword">Password</string>
     <string name="bLogin">Login</string>
@@ -98,6 +98,7 @@ limitations under the License.
     <string name="loadworkflows">Loading Workflows</string>
     <string name="fetchrun">Fetching run components</string>
     <string name="keeplogin">Remain Logged-in</string>
+    <string name="create_an_account">Create a myExperiment account</string>
 
     <string name="emailerr">Username must not be empty</string>
     <string name="passworderr">Password must not be empty</string>
@@ -230,4 +231,21 @@ limitations under the License.
     <string name="pref_key_myexperiment_user">pref_myexperimentuser</string>
     <string name="pref_key_myexperiment_pass">pref_myexperimentpass</string>
     <string name="pref_summary_myexperiment_pass">Myexperiment password</string>
+
+    <!--Disclaimer:-->
+    <string name="disclaimer_title">Disclaimer:</string>
+    <string name="disclaimer_content">myExperiment\'s Logo is nothing to do with Apache Taverna and is copyright to myExperiment</string>
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Login</string>
+
+    <string name="slide_2_title">Dashboard</string>
+
+    <string name="slide_3_title">Workflow</string>
+
+    <string name="slide_4_title">Menus</string>
+
 </resources>

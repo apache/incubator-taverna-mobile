@@ -23,4 +23,8 @@
 
     </style>
 
+    <style name="Tutorial.Theme.Taverna" parent="Base.Theme.Taverna">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
 </resources>

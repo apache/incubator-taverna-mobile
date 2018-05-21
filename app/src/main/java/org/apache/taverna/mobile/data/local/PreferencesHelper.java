@@ -66,6 +66,8 @@ public class PreferencesHelper {
     private final SharedPreferences sharedPref;
     private Context mContext;
 
+    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+
     public PreferencesHelper(Context context) {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         mContext = context;
@@ -155,6 +157,15 @@ public class PreferencesHelper {
 
     private void setUserAvatar(String userAvatar) {
         sharedPref.edit().putString(PREF_KEY_USER_AVATAR, userAvatar).apply();
+    }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        sharedPref.edit().putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
+        sharedPref.edit().commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return sharedPref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 
     public Observable<User> saveUserDetail(final User user) {

@@ -27,8 +27,11 @@ import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -67,6 +70,8 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
 
     private ProgressDialog progressDialog;
+
+    private final String myExperimentURL = "https://www.myexperiment.org/users/new";
 
 
     public static LoginFragment newInstance() {
@@ -159,6 +164,20 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
         } else {
 
             showError("NO Internet Connection");
+        }
+    }
+
+    @OnClick(R.id.bRegister)
+    public void register(View v) {
+        if (Build.VERSION.SDK_INT < 15) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setData(Uri.parse(myExperimentURL));
+            startActivity(intent);
+        } else {
+            CustomTabsIntent.Builder customTabsIntentBuilder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = customTabsIntentBuilder.build();
+            customTabsIntent.launchUrl(getActivity(), Uri.parse(myExperimentURL));
         }
     }
 
