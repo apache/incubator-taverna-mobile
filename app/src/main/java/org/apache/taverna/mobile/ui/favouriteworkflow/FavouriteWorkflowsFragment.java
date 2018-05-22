@@ -44,7 +44,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -64,8 +64,8 @@ public class FavouriteWorkflowsFragment extends Fragment
     @BindView(R.id.progress_circular)
     ProgressBar mProgressBar;
 
-    @BindView(R.id.error_no_workflow)
-    TextView tvNoWorkflowError;
+    @BindView(R.id.layout_empty_fav_workflow)
+    RelativeLayout tvNoWorkflowError;
 
     private DataManager dataManager;
     private FavouriteWorkflowsPresenter mFavouriteWorkflowsPresenter;

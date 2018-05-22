@@ -40,7 +40,7 @@ import retrofit2.http.Url;
 public interface TavernaService {
 
     @GET(APIEndPoint.ALL_ANNOUNCEMENT)
-    Observable<Announcements> getAllAnnouncements(@Query("page") int pageNumber);
+    Observable<Announcements> getAllAnnouncements(@QueryMap Map<String, String> options);
 
     @GET(APIEndPoint.ANNOUNCEMENT)
     Observable<DetailAnnouncement> getAnnouncement(@Query("id") String id);
