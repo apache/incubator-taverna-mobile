@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.imagezoom;
 
-
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;

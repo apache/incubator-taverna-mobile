@@ -28,6 +28,8 @@ import org.apache.taverna.mobile.utils.RxSearch;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
@@ -38,9 +40,12 @@ public class FavouriteWorkflowsPresenter extends BasePresenter<FavouriteWorkflow
 
     public final String LOG_TAG = getClass().getSimpleName();
 
-    private DataManager mDataManager;
     private CompositeDisposable compositeDisposable;
 
+    @Inject
+    DataManager mDataManager;
+
+    @Inject
     public FavouriteWorkflowsPresenter(DataManager dataManager) {
         mDataManager = dataManager;
         compositeDisposable = new CompositeDisposable();

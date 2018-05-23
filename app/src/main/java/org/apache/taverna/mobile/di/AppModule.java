@@ -16,20 +16,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile;
+package org.apache.taverna.mobile.di;
 
-import org.apache.taverna.mobile.di.AppComponent;
+import android.content.Context;
 
+import org.apache.taverna.mobile.TavernaApplication;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
+import dagger.Binds;
+import dagger.Module;
 
-public class TavernaApplication extends DaggerApplication {
+@Module
+public abstract class AppModule {
 
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        AppComponent appComponent = DaggerAppComponent.builder().application(this).build();
-        appComponent.inject(this);
-        return appComponent;
-    }
+    @Binds
+    abstract Context provideContext(TavernaApplication application);
 
 }

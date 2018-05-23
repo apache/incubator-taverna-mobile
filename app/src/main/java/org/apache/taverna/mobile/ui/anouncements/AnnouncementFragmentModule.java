@@ -16,20 +16,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile;
+package org.apache.taverna.mobile.ui.anouncements;
 
-import org.apache.taverna.mobile.di.AppComponent;
+import dagger.Module;
+import dagger.Provides;
 
+@Module
+public class AnnouncementFragmentModule {
 
-import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
-
-public class TavernaApplication extends DaggerApplication {
-
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        AppComponent appComponent = DaggerAppComponent.builder().application(this).build();
-        appComponent.inject(this);
-        return appComponent;
+    @Provides
+    AnnouncementMvpView provideAnnouncementMvpView(AnnouncementFragment announcementFragment){
+        return announcementFragment;
     }
 
 }

@@ -16,20 +16,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile;
+package org.apache.taverna.mobile.ui;
 
-import org.apache.taverna.mobile.di.AppComponent;
+import org.apache.taverna.mobile.data.DataManager;
 
+import dagger.Binds;
+import dagger.Module;
+import dagger.Provides;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
+@Module
+public abstract class DashboardActivityModule {
 
-public class TavernaApplication extends DaggerApplication {
-
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        AppComponent appComponent = DaggerAppComponent.builder().application(this).build();
-        appComponent.inject(this);
-        return appComponent;
-    }
+    @Binds
+    abstract DataManager provideDataManager(DataManager dataManager);
 
 }

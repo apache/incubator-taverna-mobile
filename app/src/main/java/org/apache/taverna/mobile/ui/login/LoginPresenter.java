@@ -25,6 +25,8 @@ import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
@@ -35,9 +37,12 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
 
     public final String LOG_TAG = getClass().getSimpleName();
 
-    private DataManager mDataManager;
     private CompositeDisposable compositeDisposable;
 
+    @Inject
+    DataManager mDataManager;
+
+    @Inject
     public LoginPresenter(DataManager dataManager) {
         mDataManager = dataManager;
         compositeDisposable = new CompositeDisposable();

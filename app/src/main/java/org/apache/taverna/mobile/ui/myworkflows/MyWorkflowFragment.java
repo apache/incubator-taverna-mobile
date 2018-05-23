@@ -47,13 +47,25 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.DaggerFragment;
 
-public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
+public class MyWorkflowFragment extends DaggerFragment implements MyWorkflowMvpView,
         RecyclerItemClickListner.OnItemClickListener {
 
     public final String LOG_TAG = getClass().getSimpleName();
+
+    @Inject
+    DataManager dataManager;
+
+    @Inject
+    MyWorkflowPresenter mWorkflowPresenter;
+
+    @Inject
+    WorkflowAdapter mWorkflowAdapter;
 
     @BindView(R.id.rv_workflows)
     RecyclerView mRecyclerView;
@@ -66,13 +78,6 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
 
     @BindView(R.id.layout_empty_workflows)
     RelativeLayout mTextViewNoWorkflow;
-
-    private DataManager dataManager;
-
-    private MyWorkflowPresenter mWorkflowPresenter;
-
-    private WorkflowAdapter mWorkflowAdapter;
-
 
     private List<Workflow> mWorkflowList;
 

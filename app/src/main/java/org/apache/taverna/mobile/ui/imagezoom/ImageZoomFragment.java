@@ -42,6 +42,8 @@ import com.bumptech.glide.request.target.Target;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -55,6 +57,8 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
 
     private static final String SERVER_ERROR = "Sever Error. Please try after sometime";
 
+    @Inject
+    ImageZoomPresenter mImageZoomPresenter;
 
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;
@@ -67,10 +71,6 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
     private String svgURI;
 
     private String jpgURI;
-
-    private ImageZoomPresenter mImageZoomPresenter;
-
-
 
     public static ImageZoomFragment newInstance(String jpgURI, String svgURI) {
         Bundle args = new Bundle();

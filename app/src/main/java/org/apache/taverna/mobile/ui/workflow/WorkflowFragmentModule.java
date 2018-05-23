@@ -16,20 +16,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile;
+package org.apache.taverna.mobile.ui.workflow;
 
-import org.apache.taverna.mobile.di.AppComponent;
+import dagger.Provides;
 
+public class WorkflowFragmentModule {
 
-import dagger.android.AndroidInjector;
-import dagger.android.DaggerApplication;
-
-public class TavernaApplication extends DaggerApplication {
-
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        AppComponent appComponent = DaggerAppComponent.builder().application(this).build();
-        appComponent.inject(this);
-        return appComponent;
+    @Provides
+    WorkflowMvpView provideWorkflowMvpView(WorkflowFragment workflowFragment){
+        return workflowFragment;
     }
-
 }

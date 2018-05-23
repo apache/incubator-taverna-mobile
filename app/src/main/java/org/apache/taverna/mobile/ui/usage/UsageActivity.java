@@ -28,8 +28,9 @@ import org.apache.taverna.mobile.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.support.DaggerAppCompatActivity;
 
-public class UsageActivity extends AppCompatActivity {
+public class UsageActivity extends DaggerAppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;

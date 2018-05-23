@@ -30,8 +30,9 @@ import org.apache.taverna.mobile.utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.support.DaggerAppCompatActivity;
 
-public class WorkflowDetailActivity extends AppCompatActivity {
+public class WorkflowDetailActivity extends DaggerAppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;

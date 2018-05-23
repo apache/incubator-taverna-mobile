@@ -35,12 +35,18 @@ import org.apache.taverna.mobile.data.model.TutorialSliderEnum;
 import org.apache.taverna.mobile.ui.adapter.TutorialSliderAdapter;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.support.DaggerAppCompatActivity;
 
 
-public class TutorialActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class TutorialActivity extends DaggerAppCompatActivity implements ViewPager.OnPageChangeListener {
+
+    @Inject
+    PreferencesHelper preferencesHelper;
 
     @BindView(R.id.slide_pager)
     ViewPager slidePager;
@@ -53,8 +59,6 @@ public class TutorialActivity extends AppCompatActivity implements ViewPager.OnP
 
     @BindView(R.id.btn_next)
     Button bNext;
-
-    private PreferencesHelper preferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

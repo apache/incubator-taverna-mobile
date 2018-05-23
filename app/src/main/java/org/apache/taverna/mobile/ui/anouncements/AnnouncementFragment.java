@@ -31,7 +31,6 @@ import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -48,14 +47,26 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.DaggerFragment;
 
 
-public class AnnouncementFragment extends Fragment implements RecyclerItemClickListner
+public class AnnouncementFragment extends DaggerFragment implements RecyclerItemClickListner
         .OnItemClickListener, AnnouncementMvpView {
 
     public final String LOG_TAG = getClass().getSimpleName();
+
+    @Inject
+    AnnouncementPresenter mAnnouncementPresenter;
+
+    @Inject
+    DataManager dataManager;
+
+    @Inject
+    AnnouncementAdapter mAnnouncementAdapter;
 
     @BindView(R.id.rv_movies)
     RecyclerView mRecyclerView;
@@ -71,12 +82,6 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     private ProgressDialog dialog;
 
     private Announcements mAnnouncements;
-
-    private DataManager dataManager;
-
-    private AnnouncementPresenter mAnnouncementPresenter;
-
-    private AnnouncementAdapter mAnnouncementAdapter;
 
     private int mPageNumber = 1;
 

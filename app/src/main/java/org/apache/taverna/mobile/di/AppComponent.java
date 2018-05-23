@@ -16,20 +16,32 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile;
+package org.apache.taverna.mobile.di;
 
-import org.apache.taverna.mobile.di.AppComponent;
-
-
+import org.apache.taverna.mobile.TavernaApplication;
+import javax.inject.Singleton;
+import dagger.BindsInstance;
+import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
+import dagger.android.support.AndroidSupportInjectionModule;
 
-public class TavernaApplication extends DaggerApplication {
+@Singleton
+@Component(modules = {
+        AndroidSupportInjectionModule.class,
+        AppModule.class,
+        ActivityBuilder.class})
+public interface AppComponent extends AndroidInjector<DaggerApplication> {
 
-    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
-        AppComponent appComponent = DaggerAppComponent.builder().application(this).build();
-        appComponent.inject(this);
-        return appComponent;
+    void inject(TavernaApplication app);
+
+    @Override
+    void inject(DaggerApplication instance);
+
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        Builder application(TavernaApplication application);
+        AppComponent build();
     }
-
 }

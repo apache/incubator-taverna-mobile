@@ -39,13 +39,22 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.DaggerFragment;
 
 
-public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView, View
+public class PlayerLoginFragment extends DaggerFragment implements PlayerLoginMvpView, View
         .OnFocusChangeListener {
+
+    @Inject
+    DataManager dataManager;
+
+    @Inject
+    PlayerLoginPresenter mPlayerLoginPresenter;
 
     @BindView(R.id.etEmail)
     EditText mEditTextEmail;
@@ -62,8 +71,6 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     @BindView(R.id.cbRemember)
     CheckBox mCheckBoxRemember;
     OnSuccessful mCallback;
-    private DataManager dataManager;
-    private PlayerLoginPresenter mPlayerLoginPresenter;
 
     public static PlayerLoginFragment newInstance() {
 

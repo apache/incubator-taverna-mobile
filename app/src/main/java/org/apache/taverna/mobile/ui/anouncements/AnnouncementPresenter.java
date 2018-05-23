@@ -19,12 +19,13 @@
 package org.apache.taverna.mobile.ui.anouncements;
 
 import android.util.Log;
-
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -35,17 +36,15 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
 
     public final String LOG_TAG = getClass().getSimpleName();
 
-    private DataManager mDataManager;
     private CompositeDisposable compositeDisposable;
 
+    @Inject
+    DataManager mDataManager;
+
+    @Inject
     public AnnouncementPresenter(DataManager dataManager) {
         mDataManager = dataManager;
         compositeDisposable = new CompositeDisposable();
-    }
-
-    @Override
-    public void attachView(AnnouncementMvpView mvpView) {
-        super.attachView(mvpView);
     }
 
     @Override
