@@ -101,6 +101,9 @@ limitations under the License.
                   android:exported="true"
             />
         <activity android:name=".ui.usage.UsageActivity" />
+        <activity android:name=".ui.userprofile.UserProfileActivity"/>
+        <activity android:name=".ui.favouriteworkflow.FavouriteWorkflowsActivity"/>
+        <activity android:name=".ui.myworkflows.MyWorkflowsActivity"/>
     </application>
 
 </manifest>
