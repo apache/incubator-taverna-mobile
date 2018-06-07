@@ -151,7 +151,7 @@ public class PreferencesHelper {
         sharedPref.edit().putString(PREF_KEY_USER_EMAIL, userEmail).apply();
     }
 
-    public String getUserAvatar() {
+    public String getUserAvatarUrl() {
         return sharedPref.getString(PREF_KEY_USER_AVATAR, null);
     }
 

@@ -44,6 +44,7 @@ limitations under the License.
 
     <string name="title_explore">Workflows</string>
     <string name="title_usage">Usage</string>
+    <string name="title_user_profile">Profile</string>
     <string name="title_about">About</string>
     <string name="title_exit">Logout</string>
     <string name="menu_search">Search</string>
@@ -107,8 +108,7 @@ limitations under the License.
         The Apache Software Foundation, Licensed under the Apache License, Version 2.0.
     </string>
     <string name="about2">View, run and download workflows on your Android mobile device.</string>
-    <string name="about3">Originally developed during Google Summer of Code 2015 for the<a
-        href="http://taverna.incubator.apache.org">Apache Taverna project</a>.
+    <string name="about3">Originally developed during Google Summer of Code 2015 for the<a href="http://taverna.incubator.apache.org">Apache Taverna project</a>.
     </string>
     <string name="pref_category_title_player_config">Configure Player Account</string>
     <string name="pref_summary_player_user">Username used to login to Taverna player portal</string>
@@ -187,8 +187,6 @@ limitations under the License.
     <string name="sign_out">Sign Out</string>
     <string name="sign_out_message">Do you really want to sign out?</string>
 
-
-
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
@@ -241,11 +239,22 @@ limitations under the License.
     <string name="start">GOT IT</string>
 
     <string name="slide_1_title">Login</string>
-
     <string name="slide_2_title">Dashboard</string>
-
     <string name="slide_3_title">Workflow</string>
-
     <string name="slide_4_title">Menus</string>
+
+    <!-- Nav Header placeholders -->
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+
+    <!-- User profile column titles -->
+    <string name="empty_fields">&lt;NA&gt;</string>
+    <string name="user_name">Username</string>
+    <string name="user_email">Email</string>
+    <string name="user_website">Website</string>
+    <string name="user_city">City</string>
+    <string name="user_country">Country</string>
+    <string name="user_my_workflow">My Workflow</string>
+    <string name="user_my_favorite_workflow">Favorite Workflows</string>
 
 </resources>

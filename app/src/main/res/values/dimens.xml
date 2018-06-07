@@ -105,4 +105,25 @@ limitations under the License.
     <dimen name="margin_top">20dp</dimen>
     <dimen name="tutorial_view_height">1dp</dimen>
 
+    <!-- User Profile Dimens -->
+   <dimen name="top_background_height">170dp</dimen>
+    <dimen name="user_image_height">90dp</dimen>
+    <dimen name="user_name_text_size">20dp</dimen>
+    <dimen name="user_name_margin_top">5dp</dimen>
+    <dimen name="user_description_margin_top">10dp</dimen>
+    <dimen name="coloumn_linear_layout_padding">15dp</dimen>
+    <dimen name="row_title_text_size">15dp</dimen>
+    <dimen name="row_title_margin_left">10dp</dimen>
+    <dimen name="row_entry_text_size">13dp</dimen>
+    <dimen name="row_entry_padding_right">20dp</dimen>
+
+    <!-- Navigation Header Dimens -->
+    <dimen name="nav_image_height">170dp</dimen>
+    <dimen name="layout_marginBottom">10dp</dimen>
+    <dimen name="tv_layout_marginLeft">16dp</dimen>
+    <dimen name="tv_textSize">14sp</dimen>
+    <dimen name="user_image_length">70dp</dimen>
+    <dimen name="user_image_margin_left">10dp</dimen>
+    <dimen name="user_image_margin_top">55dp</dimen>
+
 </resources>
