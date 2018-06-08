@@ -143,14 +143,14 @@ limitations under the License.
         allows one to quickly return to the workflow streams page from any screen. The \'Open
         Workflow\' item allows users to pick a valid workflow from external storage and run it
         against a Taverna Server through a Taverna Player. Settings allow user to configure player
-        accounts and portal urls. Logout allows users to log-out of the app
+        accounts and portal urls. Logout allows users to log-out of the app.
     </string>
     <string name="usage_detail">Usage | Workfow Detail</string>
     <string name="usage_detail_text">The details screen allows users to run particular worklows and
         provides detailed information about the workflows. Workflows can also be downloaded from
         here. Workflows can also be marked from this screen which would save much more data for
         offline use than on the dashboard screen. This screen also provides a set of runs for the
-        workflow from other users
+        workflow from other users.
     </string>
     <string name="runid_text">Workflow Run ID:</string>
 
