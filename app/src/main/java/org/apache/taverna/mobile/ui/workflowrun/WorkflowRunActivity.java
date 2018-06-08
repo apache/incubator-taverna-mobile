@@ -55,6 +55,9 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
     @Inject
     WorkflowRunPresenter mWorkflowRunPresenter;
 
+    @Inject
+    PlayerLoginFragment playerLoginFragment;
+
     @BindView(R.id.stepsView)
     StepsView mStepsView;
 

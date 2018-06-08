@@ -26,6 +26,8 @@ import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 
 import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
@@ -55,7 +57,9 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
 
     public void loadAllAnnouncement(int pageNumber) {
         checkViewAttached();
-        compositeDisposable.add(mDataManager.getAllAnnouncement(pageNumber)
+        getMvpView().showProgressbar(true);
+        compositeDisposable.add(mDataManager.getAllAnnouncement(
+                getAnnouncementQueryOptions(pageNumber))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(new DisposableObserver<Announcements>() {
@@ -107,6 +111,14 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                         getMvpView().showWaitProgress(false);
                     }
                 }));
+    }
+
+
+    private Map<String, String> getAnnouncementQueryOptions(int PageNumber) {
+        Map<String, String> option = new HashMap<>();
+        option.put("order", "reverse");
+        option.put("page", String.valueOf(PageNumber));
+        return option;
     }
 
 }
