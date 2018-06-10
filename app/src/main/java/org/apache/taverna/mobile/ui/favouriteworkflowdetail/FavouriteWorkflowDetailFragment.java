@@ -56,16 +56,25 @@ import org.apache.taverna.mobile.ui.workflowrun.WorkflowRunActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 import org.apache.taverna.mobile.utils.Constants;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.DaggerFragment;
 
-public class FavouriteWorkflowDetailFragment extends Fragment
+public class FavouriteWorkflowDetailFragment extends DaggerFragment
         implements FavouriteWorkflowDetailMvpView {
 
     private static final String ID = "id";
 
     public final String LOG_TAG = getClass().getSimpleName();
+
+    @Inject
+    DataManager dataManager;
+
+    @Inject
+    FavouriteWorkflowDetailPresenter mWorkflowDetailPresenter;
 
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;
@@ -104,10 +113,6 @@ public class FavouriteWorkflowDetailFragment extends Fragment
     FloatingActionButton fabRun;
 
     private AlertDialog alertDialog;
-
-    private DataManager dataManager;
-
-    private FavouriteWorkflowDetailPresenter mWorkflowDetailPresenter;
 
     private String id;
 

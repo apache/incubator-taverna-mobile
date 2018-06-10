@@ -32,7 +32,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -50,14 +49,28 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.DaggerFragment;
 
-public class FavouriteWorkflowsFragment extends Fragment
+public class FavouriteWorkflowsFragment extends DaggerFragment
         implements FavouriteWorkflowsMvpView, RecyclerItemClickListner.OnItemClickListener {
 
     public final String LOG_TAG = getClass().getSimpleName();
 
+    @Inject
+    DataManager dataManager;
+
+    @Inject
+    FavouriteWorkflowsPresenter mFavouriteWorkflowsPresenter;
+
+    @Inject
+    FavouriteWorkflowsAdapter mFavouriteWorkflowsAdapter;
+
+    @Inject
+    FavouriteWorkflowsAdapter mSearchFavouriteWorkflowAdapter;
 
     @BindView(R.id.rv_fav_workflows)
     RecyclerView mRecyclerView;
@@ -68,16 +81,8 @@ public class FavouriteWorkflowsFragment extends Fragment
     @BindView(R.id.layout_empty_fav_workflow)
     RelativeLayout tvNoWorkflowError;
 
-    private DataManager dataManager;
-
-    private FavouriteWorkflowsPresenter mFavouriteWorkflowsPresenter;
-
-    private FavouriteWorkflowsAdapter mFavouriteWorkflowsAdapter;
-
     private List<Workflow> mWorkflowList;
     private SearchView searchView;
-    private FavouriteWorkflowsAdapter mSearchFavouriteWorkflowAdapter;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

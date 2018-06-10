@@ -16,30 +16,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.ui.login;
+package org.apache.taverna.mobile.ui;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import org.apache.taverna.mobile.data.DataManager;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.utils.ActivityUtils;
+import dagger.Binds;
+import dagger.Module;
+import dagger.Provides;
 
-import dagger.android.support.DaggerAppCompatActivity;
+@Module
+public abstract class DashboardActivityModule {
 
-
-public class LoginActivity extends DaggerAppCompatActivity {
-    private static final String TAG = "LoginActivity";
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        if (savedInstanceState == null) {
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    LoginFragment.newInstance(), R.id.container);
-        }
-    }
-
+    @Binds
+    abstract DataManager provideDataManager(DataManager dataManager);
 
 }

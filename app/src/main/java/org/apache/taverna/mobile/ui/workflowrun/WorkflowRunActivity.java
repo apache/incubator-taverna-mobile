@@ -39,6 +39,8 @@ import org.apache.taverna.mobile.utils.Constants;
 import org.apache.taverna.mobile.utils.NonSwipeableViewPager;
 import org.apache.taverna.mobile.utils.WebViewGenerator;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -47,7 +49,14 @@ import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 public class WorkflowRunActivity extends FragmentActivity implements WorkflowRunMvpView,
         PlayerLoginFragment.OnSuccessful {
 
+    @Inject
+    DataManager dataManager;
 
+    @Inject
+    WorkflowRunPresenter mWorkflowRunPresenter;
+
+    @Inject
+    PlayerLoginFragment playerLoginFragment;
 
     @BindView(R.id.stepsView)
     StepsView mStepsView;
@@ -59,10 +68,6 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
 
     private String[] labels;
     private String workflowRunURL;
-
-    private DataManager dataManager;
-
-    private WorkflowRunPresenter mWorkflowRunPresenter;
 
     private PagerAdapter mPagerAdapter;
 

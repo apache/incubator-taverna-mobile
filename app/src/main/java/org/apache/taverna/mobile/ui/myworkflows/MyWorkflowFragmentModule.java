@@ -16,30 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.ui.login;
+package org.apache.taverna.mobile.ui.myworkflows;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import dagger.Module;
+import dagger.Provides;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.utils.ActivityUtils;
+@Module
+public class MyWorkflowFragmentModule {
 
-import dagger.android.support.DaggerAppCompatActivity;
-
-
-public class LoginActivity extends DaggerAppCompatActivity {
-    private static final String TAG = "LoginActivity";
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        if (savedInstanceState == null) {
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    LoginFragment.newInstance(), R.id.container);
-        }
+    @Provides
+    MyWorkflowMvpView provideMyWorkflowMvpView(MyWorkflowFragment myWorkflowFragment){
+        return myWorkflowFragment;
     }
-
-
 }

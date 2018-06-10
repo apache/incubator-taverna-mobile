@@ -25,11 +25,14 @@ import android.util.Log;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.PlayerWorkflow;
 import org.apache.taverna.mobile.data.model.PlayerWorkflowDetail;
+import org.apache.taverna.mobile.data.remote.TavernaService;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -46,9 +49,12 @@ public class WorkflowRunPresenter extends BasePresenter<WorkflowRunMvpView> {
 
     private static final String TAG = WorkflowRunPresenter.class.getSimpleName();
 
-    private final DataManager mDataManager;
     private CompositeDisposable compositeDisposable;
 
+    @Inject
+    DataManager mDataManager;
+
+    @Inject
     public WorkflowRunPresenter(DataManager dataManager) {
         mDataManager = dataManager;
         compositeDisposable = new CompositeDisposable();

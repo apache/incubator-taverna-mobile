@@ -32,16 +32,21 @@ import org.apache.taverna.mobile.ui.tutorial.TutorialActivity;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
+import dagger.android.support.DaggerAppCompatActivity;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class FlashScreenActivity extends AppCompatActivity {
+public class FlashScreenActivity extends DaggerAppCompatActivity {
 
-    private DataManager dataManager;
-    private PreferencesHelper preferencesHelper;
+    @Inject
+    DataManager dataManager;
 
+    @Inject
+    PreferencesHelper preferencesHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

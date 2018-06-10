@@ -40,7 +40,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,17 +54,37 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static org.apache.taverna.mobile.TavernaApplication.getContext;
+import dagger.android.AndroidInjection;
+import dagger.android.support.DaggerAppCompatActivity;
 
-public class DashboardActivity extends AppCompatActivity {
+import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
+
+public class DashboardActivity extends DaggerAppCompatActivity {
+
+    @Inject
+    DataManager mDataManager;
+
+    @Inject
+    AnnouncementFragment announcementFragment;
+
+    @Inject
+    FavouriteWorkflowsFragment favouriteWorkflowsFragment;
+
+    @Inject
+    MyWorkflowFragment myWorkflowFragment;
+
+    @Inject
+    WorkflowFragment workflowFragment;
 
     @BindView(R.id.nav_view)
-    NavigationView navigationView;
+    NavigationView mNavigationView;
 
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
@@ -74,19 +93,19 @@ public class DashboardActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     private Dialog dialog;
-    private DataManager dataManager;
     private Fragment fragment;
     private MenuItem item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_dashboard_main);
 
         ButterKnife.bind(this);
 
-        setupDrawerContent(navigationView);
+        setupDrawerContent(mNavigationView);
 
         dialog = new Dialog(this);
 
@@ -103,14 +122,14 @@ public class DashboardActivity extends AppCompatActivity {
          */
         if (savedInstanceState == null) {
 
-            fragment = new WorkflowFragment();
+            workflowFragment = new WorkflowFragment();
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), fragment,
                     R.id.frame_container);
 
-            navigationView.setCheckedItem(R.id.nav_workflows);
+            mNavigationView.setCheckedItem(R.id.nav_workflows);
         }
 
-        dataManager = new DataManager(new PreferencesHelper(this));
+        mDataManager = new DataManager(new PreferencesHelper(this));
 
         setNavHeader();
     }
@@ -130,7 +149,7 @@ public class DashboardActivity extends AppCompatActivity {
                         switch (menuItem.getItemId()) {
                             case R.id.nav_workflows:
 
-                                fragment = new WorkflowFragment();
+                                workflowFragment = new WorkflowFragment();
                                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                                         fragment, R.id.frame_container);
 
@@ -142,7 +161,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_my_workflows:
 
-                                fragment = new MyWorkflowFragment();
+                                myWorkflowFragment = new MyWorkflowFragment();
                                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                                         fragment, R.id.frame_container);
 
@@ -153,7 +172,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_favourite_workflow:
 
-                                fragment = new FavouriteWorkflowsFragment();
+                                favouriteWorkflowsFragment = new FavouriteWorkflowsFragment();
                                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                                         fragment, R.id.frame_container);
 
@@ -164,7 +183,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_announcement:
 
-                                fragment = new AnnouncementFragment();
+                                announcementFragment = new AnnouncementFragment();
                                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                                         fragment, R.id.frame_container);
 
@@ -276,8 +295,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void signOut() {
         mDrawerLayout.closeDrawers();
-        dataManager.getPreferencesHelper().clear();
-        dataManager.mDBHelper.clearFavouriteWorkflow();
+        mDataManager.getPreferencesHelper().clear();
+        mDataManager.mDBHelper.clearFavouriteWorkflow();
 
         startActivity(new Intent(getApplicationContext(),
                 LoginActivity.class));
@@ -286,8 +305,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void setNavHeader() {
 
-        View headerView =  navigationView.getHeaderView(0);
-        String avatarUrl = dataManager.getPreferencesHelper().getUserAvatarUrl();
+        View headerView =  mNavigationView.getHeaderView(0);
+        String avatarUrl = mDataManager.getPreferencesHelper().getUserAvatarUrl();
         final CircleImageView navUserAvatar = headerView.findViewById(R.id.nav_user_avatar);
 
         Glide.with(getContext())
@@ -311,11 +330,11 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        String userName = dataManager.getPreferencesHelper().getUserName();
+        String userName = mDataManager.getPreferencesHelper().getUserName();
         TextView navUserName = headerView.findViewById(R.id.nav_user_name);
         navUserName.setText(userName);
 
-        String userEmail = dataManager.getPreferencesHelper().getUserEmail();
+        String userEmail = mDataManager.getPreferencesHelper().getUserEmail();
         TextView navUserEmail = headerView.findViewById(R.id.nav_user_email);
         navUserEmail.setText(userEmail);
 
@@ -334,7 +353,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(navigationView)) {
+        if (mDrawerLayout.isDrawerOpen(mNavigationView)) {
             mDrawerLayout.closeDrawers();
         } else {
             super.onBackPressed();

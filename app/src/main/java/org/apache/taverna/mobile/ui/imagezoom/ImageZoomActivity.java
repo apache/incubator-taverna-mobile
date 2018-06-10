@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.imagezoom;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -27,8 +26,9 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.utils.ActivityUtils;
 
 import butterknife.ButterKnife;
+import dagger.android.support.DaggerAppCompatActivity;
 
-public class ImageZoomActivity extends AppCompatActivity {
+public class ImageZoomActivity extends DaggerAppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +36,6 @@ public class ImageZoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image_zoom);
 
         ButterKnife.bind(this);
-
 
         if (savedInstanceState == null) {
 

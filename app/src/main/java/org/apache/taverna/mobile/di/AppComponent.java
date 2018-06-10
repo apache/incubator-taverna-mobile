@@ -16,30 +16,32 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.ui.login;
+package org.apache.taverna.mobile.di;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import org.apache.taverna.mobile.TavernaApplication;
+import javax.inject.Singleton;
+import dagger.BindsInstance;
+import dagger.Component;
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
+import dagger.android.support.AndroidSupportInjectionModule;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.utils.ActivityUtils;
+@Singleton
+@Component(modules = {
+        AndroidSupportInjectionModule.class,
+        AppModule.class,
+        ActivityBuilder.class})
+public interface AppComponent extends AndroidInjector<DaggerApplication> {
 
-import dagger.android.support.DaggerAppCompatActivity;
-
-
-public class LoginActivity extends DaggerAppCompatActivity {
-    private static final String TAG = "LoginActivity";
+    void inject(TavernaApplication app);
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    void inject(DaggerApplication instance);
 
-        if (savedInstanceState == null) {
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    LoginFragment.newInstance(), R.id.container);
-        }
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        Builder application(TavernaApplication application);
+        AppComponent build();
     }
-
-
 }

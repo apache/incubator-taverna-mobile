@@ -11,13 +11,19 @@ import android.view.MenuItem;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.utils.ActivityUtils;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.support.DaggerAppCompatActivity;
 
-public class FavouriteWorkflowsActivity extends AppCompatActivity {
+public class FavouriteWorkflowsActivity extends DaggerAppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+
+    @Inject
+    FavouriteWorkflowsFragment favouriteWorkflowsFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

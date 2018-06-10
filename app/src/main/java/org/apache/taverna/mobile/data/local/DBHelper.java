@@ -198,7 +198,6 @@ public class DBHelper {
     }
 
 
-
     public void clearFavouriteWorkflow() {
         List<Workflow> workflowList = SQLite.select()
                 .from(Workflow.class)

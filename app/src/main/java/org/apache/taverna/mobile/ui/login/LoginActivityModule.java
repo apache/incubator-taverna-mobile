@@ -18,28 +18,30 @@
  */
 package org.apache.taverna.mobile.ui.login;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import org.apache.taverna.mobile.data.remote.TavernaService;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.utils.ActivityUtils;
+import dagger.Binds;
+import dagger.Module;
+import dagger.Provides;
 
-import dagger.android.support.DaggerAppCompatActivity;
+@Module
+public abstract class LoginActivityModule extends LoginFragment{
 
+    LoginMvpView loginMvpView;
+    TavernaService tavernaService;
 
-public class LoginActivity extends DaggerAppCompatActivity {
-    private static final String TAG = "LoginActivity";
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        if (savedInstanceState == null) {
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    LoginFragment.newInstance(), R.id.container);
-        }
+    @Provides
+    LoginMvpView loginMvpView() {
+        this.loginMvpView = loginMvpView();
+        return loginMvpView;
     }
 
+    @Provides
+    TavernaService tavernaService() {
+        this.tavernaService = tavernaService();
+        return tavernaService;
+    }
 
+    @Binds
+    abstract LoginMvpView provideLoginMvpView(LoginActivity loginActivity);
 }

@@ -34,7 +34,6 @@ import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -44,11 +43,20 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.DaggerFragment;
 
-public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocusChangeListener {
+public class LoginFragment extends DaggerFragment implements LoginMvpView, View.OnFocusChangeListener {
+
+    @Inject
+    DataManager dataManager;
+
+    @Inject
+    LoginPresenter mLoginPresenter;
 
     @BindView(R.id.etEmail)
     EditText mEditTextEmail;
@@ -65,14 +73,9 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     @BindView(R.id.cbRemember)
     CheckBox mCheckBoxRemember;
 
-    private DataManager dataManager;
-    private LoginPresenter mLoginPresenter;
-
-
     private ProgressDialog progressDialog;
 
     private final String myExperimentURL = "https://www.myexperiment.org/users/new";
-
 
     public static LoginFragment newInstance() {
 

@@ -53,26 +53,33 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.DaggerFragment;
 
-public class WorkflowFragment extends Fragment implements WorkflowMvpView,
+public class WorkflowFragment extends DaggerFragment implements WorkflowMvpView,
         RecyclerItemClickListner.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     public final String LOG_TAG = getClass().getSimpleName();
+
+    @Inject
+    WorkflowPresenter mWorkflowPresenter;
+
+    @Inject
+    WorkflowAdapter mWorkflowAdapter;
+
+    @Inject
+    WorkflowAdapter mSearchWorkflowAdapter;
 
     @BindView(R.id.rv_workflows)
     RecyclerView mRecyclerView;
 
     @BindView(R.id.progress_circular)
     ProgressBar mProgressBar;
-
     @BindView(R.id.swipe_refresh)
     ScrollChildSwipeRefreshLayout mSwipeRefresh;
-
-    private WorkflowPresenter mWorkflowPresenter;
-    private WorkflowAdapter mWorkflowAdapter;
-    private WorkflowAdapter mSearchWorkflowAdapter;
 
     private int mPageNumber = 1;
 

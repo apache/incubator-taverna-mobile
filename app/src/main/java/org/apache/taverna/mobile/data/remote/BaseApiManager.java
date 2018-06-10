@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.taverna.mobile.data.remote;
 
 import org.apache.taverna.mobile.TavernaApplication;
@@ -29,48 +30,73 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 public class BaseApiManager {
 
+    private Retrofit retrofitJson;
+    private Retrofit retrofitXml;
+    private TavernaService tavernaService;
+    private TavernaPlayerService tavernaPlayerService;
+
+
+    public BaseApiManager() {
+        createJsonService();
+        createJsonApiService();
+    }
+
+    public void initXmlService() {
+        tavernaService = createSimpleXMLApi(TavernaService.class);
+
+    }
+
+    public  void initJsonService() {
+        tavernaPlayerService = createJsonApi(TavernaPlayerService.class,
+                new PreferencesHelper(TavernaApplication.getContext()).getPlayerURL());
+    }
 
     public static final String MY_EXPERIMENT_END_POINT = "http://www.myexperiment.org/";
-
 
     /********
      * Helper class that sets up a new services with simplexml converter factory
      *******/
 
-    private <T> T createSimpleXMLApi(Class<T> clazz, String ENDPOINT) {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ENDPOINT)
+    private void createJsonService() {
+        retrofitXml = new Retrofit.Builder()
+                .baseUrl(MY_EXPERIMENT_END_POINT)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(new TavernaOkHttpClient().getTavernaOkHttpClient())
                 .build();
 
-        return retrofit.create(clazz);
+        initXmlService();
+    }
+
+    private <T> T createSimpleXMLApi(Class<T> clazz) {
+        return retrofitXml.create(clazz);
     }
 
     /********
      * Helper class that sets up a new services with gson converter factory
      *******/
 
-    private <T> T createJsonApi(Class<T> clazz, String ENDPOINT) {
+    private void createJsonApiService(){
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ENDPOINT)
+        retrofitJson = new Retrofit.Builder()
+                .baseUrl(MY_EXPERIMENT_END_POINT)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(new TavernaOkHttpClient().getTavernaOkHttpClient())
                 .build();
 
-        return retrofit.create(clazz);
+        initJsonService();
+    }
+
+    private <T> T createJsonApi(Class<T> clazz) {
+        return retrofitJson.create(clazz);
     }
 
     public TavernaService getTavernaApi() {
-        return createSimpleXMLApi(TavernaService.class, MY_EXPERIMENT_END_POINT);
+        return tavernaService;
     }
 
     public TavernaPlayerService getTavernaPlayerApi() {
-        return createJsonApi(TavernaPlayerService.class,
-                new PreferencesHelper(TavernaApplication.getContext()).getPlayerURL());
+        return tavernaPlayerService;
     }
 }

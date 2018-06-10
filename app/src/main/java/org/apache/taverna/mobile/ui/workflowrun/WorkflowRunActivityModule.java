@@ -16,30 +16,38 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.ui.login;
+package org.apache.taverna.mobile.ui.workflowrun;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import org.apache.taverna.mobile.data.remote.TavernaService;
+import org.apache.taverna.mobile.ui.base.MvpView;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.utils.ActivityUtils;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
-import dagger.android.support.DaggerAppCompatActivity;
+import dagger.Binds;
+import dagger.Module;
+import dagger.Provides;
 
+@Module
+public abstract class WorkflowRunActivityModule {
 
-public class LoginActivity extends DaggerAppCompatActivity {
-    private static final String TAG = "LoginActivity";
+    WorkflowRunMvpView workflowRunMvpView;
+    TavernaService tavernaService;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        if (savedInstanceState == null) {
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    LoginFragment.newInstance(), R.id.container);
-        }
+    @Provides
+    WorkflowRunMvpView workflowRunMvpView() {
+        this.workflowRunMvpView = workflowRunMvpView();
+        return workflowRunMvpView;
     }
 
+    @Provides
+    TavernaService tavernaService() {
+        this.tavernaService = tavernaService();
+        return tavernaService;
+    }
+
+    @Binds
+    abstract WorkflowRunMvpView provideWorkflowRunMvpView(WorkflowRunActivity workflowRunActivity);
 
 }
+

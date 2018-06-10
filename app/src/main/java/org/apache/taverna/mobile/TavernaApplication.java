@@ -18,16 +18,22 @@
  */
 package org.apache.taverna.mobile;
 
-
-import android.app.Application;
 import android.content.Context;
-
 import com.facebook.stetho.Stetho;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.squareup.leakcanary.LeakCanary;
+import org.apache.taverna.mobile.di.AppComponent;
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
 
-public class TavernaApplication extends Application {
+public class TavernaApplication extends DaggerApplication {
+
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        AppComponent appComponent = DaggerAppComponent.builder().application(this).build();
+        appComponent.inject(this);
+        return appComponent;
+    }
 
     private static TavernaApplication instance;
 
@@ -51,4 +57,5 @@ public class TavernaApplication extends Application {
         LeakCanary.install(this);
 
     }
+
 }
