@@ -55,14 +55,18 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static org.apache.taverna.mobile.TavernaApplication.getContext;
+import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
 public class DashboardActivity extends AppCompatActivity {
+
+    @Inject DataManager dataManager;
 
     @BindView(R.id.nav_view)
     NavigationView navigationView;
@@ -74,7 +78,6 @@ public class DashboardActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     private Dialog dialog;
-    private DataManager dataManager;
     private Fragment fragment;
     private MenuItem item;
 
@@ -109,8 +112,6 @@ public class DashboardActivity extends AppCompatActivity {
 
             navigationView.setCheckedItem(R.id.nav_workflows);
         }
-
-        dataManager = new DataManager(new PreferencesHelper(this));
 
         setNavHeader();
     }
@@ -277,7 +278,7 @@ public class DashboardActivity extends AppCompatActivity {
     private void signOut() {
         mDrawerLayout.closeDrawers();
         dataManager.getPreferencesHelper().clear();
-        dataManager.mDBHelper.clearFavouriteWorkflow();
+        dataManager.getDBHelper().clearFavouriteWorkflow();
 
         startActivity(new Intent(getApplicationContext(),
                 LoginActivity.class));

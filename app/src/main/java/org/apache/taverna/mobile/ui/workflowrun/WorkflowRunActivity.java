@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.workflowrun;
 
-
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -34,20 +33,27 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.DownloadingFragment;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.playerlogin.PlayerLoginFragment;
 import org.apache.taverna.mobile.utils.Constants;
 import org.apache.taverna.mobile.utils.NonSwipeableViewPager;
 import org.apache.taverna.mobile.utils.WebViewGenerator;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
-public class WorkflowRunActivity extends FragmentActivity implements WorkflowRunMvpView,
+public class WorkflowRunActivity extends BaseActivity implements WorkflowRunMvpView,
         PlayerLoginFragment.OnSuccessful {
 
-
+    @Inject
+    DataManager dataManager;
+    @Inject
+    WorkflowRunPresenter mWorkflowRunPresenter;
+    PagerAdapter mPagerAdapter;
 
     @BindView(R.id.stepsView)
     StepsView mStepsView;
@@ -60,23 +66,15 @@ public class WorkflowRunActivity extends FragmentActivity implements WorkflowRun
     private String[] labels;
     private String workflowRunURL;
 
-    private DataManager dataManager;
-
-    private WorkflowRunPresenter mWorkflowRunPresenter;
-
-    private PagerAdapter mPagerAdapter;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getActivityComponent().inject(this);
         setContentView(R.layout.activity_workflow_run);
 
         ButterKnife.bind(this);
 
-        dataManager = new DataManager(new PreferencesHelper(getContext()));
 
-        mWorkflowRunPresenter = new WorkflowRunPresenter(dataManager);
 
         mWorkflowRunPresenter.attachView(this);
 

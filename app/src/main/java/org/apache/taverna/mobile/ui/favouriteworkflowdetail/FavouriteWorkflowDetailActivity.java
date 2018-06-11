@@ -26,12 +26,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FavouriteWorkflowDetailActivity extends AppCompatActivity {
+public class FavouriteWorkflowDetailActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;

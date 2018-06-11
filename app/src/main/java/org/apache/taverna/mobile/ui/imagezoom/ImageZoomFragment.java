@@ -40,7 +40,10 @@ import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,6 +58,7 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
 
     private static final String SERVER_ERROR = "Sever Error. Please try after sometime";
 
+    @Inject ImageZoomPresenter mImageZoomPresenter;
 
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;
@@ -67,10 +71,6 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
     private String svgURI;
 
     private String jpgURI;
-
-    private ImageZoomPresenter mImageZoomPresenter;
-
-
 
     public static ImageZoomFragment newInstance(String jpgURI, String svgURI) {
         Bundle args = new Bundle();
@@ -86,7 +86,6 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
         super.onCreate(savedInstanceState);
         svgURI = getArguments().getString(SVG_URI);
         jpgURI = getArguments().getString(JPG_URI);
-        mImageZoomPresenter = new ImageZoomPresenter();
 
     }
 
@@ -95,7 +94,7 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
             savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_image_zoom, container, false);
-
+        ((BaseActivity) getActivity()).getActivityComponent().inject(this);
         ButterKnife.bind(this, rootView);
 
         mImageZoomPresenter.attachView(this);

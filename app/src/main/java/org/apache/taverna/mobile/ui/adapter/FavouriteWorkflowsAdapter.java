@@ -42,6 +42,8 @@ import org.apache.taverna.mobile.data.model.Workflow;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -50,8 +52,8 @@ public class FavouriteWorkflowsAdapter extends RecyclerView.Adapter<RecyclerView
     private static final String TAG = FavouriteWorkflowsAdapter.class.getName();
 
     private final List<Workflow> mWorkflowList;
-
     private final Context context;
+
 
     public FavouriteWorkflowsAdapter(List<Workflow> mWorkflowList, Context context) {
         this.mWorkflowList = mWorkflowList;

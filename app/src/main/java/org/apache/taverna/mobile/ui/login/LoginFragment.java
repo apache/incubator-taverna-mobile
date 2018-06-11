@@ -23,6 +23,7 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.DashboardActivity;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import android.app.ProgressDialog;
@@ -44,11 +45,16 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocusChangeListener {
+
+    @Inject DataManager dataManager;
+    @Inject LoginPresenter mLoginPresenter;
 
     @BindView(R.id.etEmail)
     EditText mEditTextEmail;
@@ -65,14 +71,9 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     @BindView(R.id.cbRemember)
     CheckBox mCheckBoxRemember;
 
-    private DataManager dataManager;
-    private LoginPresenter mLoginPresenter;
-
-
     private ProgressDialog progressDialog;
 
     private final String myExperimentURL = "https://www.myexperiment.org/users/new";
-
 
     public static LoginFragment newInstance() {
 
@@ -85,9 +86,6 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
         super.onCreate(savedInstanceState);
 
 
-        dataManager = new DataManager(new PreferencesHelper(getContext()));
-        mLoginPresenter = new LoginPresenter(dataManager);
-
     }
 
     @Override
@@ -95,6 +93,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
             savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
+        ((BaseActivity) getActivity()).getActivityComponent().inject(this);
         ButterKnife.bind(this, rootView);
         mLoginPresenter.attachView(this);
         return rootView;

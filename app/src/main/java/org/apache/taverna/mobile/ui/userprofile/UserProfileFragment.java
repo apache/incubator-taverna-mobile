@@ -17,8 +17,11 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsActivity;
-import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowsActivity;
+import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +29,8 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserProfileFragment extends Fragment {
+
+    @Inject DataManager dataManager;
 
     @BindView(R.id.user_name)
     TextView mUserName;
@@ -48,8 +53,6 @@ public class UserProfileFragment extends Fragment {
     @BindView(R.id.user_country)
     TextView mUserCountry;
 
-    private DataManager dataManager;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_user_profile, parent, false);
@@ -58,6 +61,7 @@ public class UserProfileFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        ((BaseActivity) getActivity()).getActivityComponent().inject(this);
         ButterKnife.bind(this, view);
 
         setUserDetail();
@@ -66,7 +70,7 @@ public class UserProfileFragment extends Fragment {
 
     @OnClick(R.id.my_workflow_layout)
     void myWorkflows(View v) {
-        Intent intent = new Intent(getActivity(), MyWorkflowsActivity.class);
+        Intent intent = new Intent(getActivity(), MyWorkflowActivity.class);
         getActivity().startActivity(intent);
     }
 
@@ -77,8 +81,6 @@ public class UserProfileFragment extends Fragment {
     }
 
     private void setUserDetail() {
-
-        dataManager = new DataManager(new PreferencesHelper(getContext()));
 
         String userName = dataManager.getPreferencesHelper().getUserName();
         String userDescription = dataManager.getPreferencesHelper().getUserDescription();

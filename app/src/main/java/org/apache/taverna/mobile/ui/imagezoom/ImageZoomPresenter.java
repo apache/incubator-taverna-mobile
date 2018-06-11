@@ -43,11 +43,13 @@ import org.apache.taverna.mobile.utils.SvgDrawableTranscoder;
 
 import java.io.InputStream;
 
-public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
+import javax.inject.Inject;
 
+public class ImageZoomPresenter extends BasePresenter<ImageZoomMvpView> {
 
     private GenericRequestBuilder<Uri, InputStream, SVG, PictureDrawable> requestBuilder;
 
+    @Inject
     public ImageZoomPresenter() {
 
     }

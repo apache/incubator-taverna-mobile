@@ -33,14 +33,16 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.data.model.TutorialSliderEnum;
 import org.apache.taverna.mobile.ui.adapter.TutorialSliderAdapter;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
-public class TutorialActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class TutorialActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
 
     @BindView(R.id.slide_pager)
     ViewPager slidePager;
@@ -54,12 +56,13 @@ public class TutorialActivity extends AppCompatActivity implements ViewPager.OnP
     @BindView(R.id.btn_next)
     Button bNext;
 
-    private PreferencesHelper preferencesHelper;
+    @Inject
+    PreferencesHelper preferencesHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferencesHelper = new PreferencesHelper(this);
+        getActivityComponent().inject(this);
 
         setContentView(R.layout.activity_tutorial);
 

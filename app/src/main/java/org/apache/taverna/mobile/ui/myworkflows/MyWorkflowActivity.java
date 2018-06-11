@@ -9,12 +9,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.utils.ActivityUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyWorkflowsActivity extends AppCompatActivity {
+public class MyWorkflowActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;

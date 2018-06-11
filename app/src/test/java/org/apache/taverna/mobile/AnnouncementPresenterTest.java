@@ -43,7 +43,7 @@ public class AnnouncementPresenterTest {
     @Before
     public void setUp() {
 
-        announcementPresenter = new AnnouncementPresenter(dataManager);
+
         announcementPresenter.attachView(announcementMvpView);
 
         announcements = FakeRemoteDataSource.getAnnouncements();

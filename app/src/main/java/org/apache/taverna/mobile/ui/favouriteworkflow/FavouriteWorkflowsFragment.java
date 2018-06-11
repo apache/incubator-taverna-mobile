@@ -18,12 +18,12 @@
  */
 package org.apache.taverna.mobile.ui.favouriteworkflow;
 
-
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.ui.adapter.FavouriteWorkflowsAdapter;
 import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity;
 import org.apache.taverna.mobile.utils.Constants;
 
@@ -50,6 +50,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -58,6 +60,10 @@ public class FavouriteWorkflowsFragment extends Fragment
 
     public final String LOG_TAG = getClass().getSimpleName();
 
+    @Inject DataManager dataManager;
+    @Inject FavouriteWorkflowsPresenter mFavouriteWorkflowsPresenter;
+    FavouriteWorkflowsAdapter mFavouriteWorkflowsAdapter;
+    FavouriteWorkflowsAdapter mSearchFavouriteWorkflowAdapter;
 
     @BindView(R.id.rv_fav_workflows)
     RecyclerView mRecyclerView;
@@ -68,24 +74,12 @@ public class FavouriteWorkflowsFragment extends Fragment
     @BindView(R.id.layout_empty_fav_workflow)
     RelativeLayout tvNoWorkflowError;
 
-    private DataManager dataManager;
-
-    private FavouriteWorkflowsPresenter mFavouriteWorkflowsPresenter;
-
-    private FavouriteWorkflowsAdapter mFavouriteWorkflowsAdapter;
-
-    private List<Workflow> mWorkflowList;
+    List<Workflow> mWorkflowList;
     private SearchView searchView;
-    private FavouriteWorkflowsAdapter mSearchFavouriteWorkflowAdapter;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        dataManager = new DataManager();
-
-        mFavouriteWorkflowsPresenter = new FavouriteWorkflowsPresenter(dataManager);
 
         mWorkflowList = new ArrayList<>();
         setHasOptionsMenu(true);
@@ -97,7 +91,7 @@ public class FavouriteWorkflowsFragment extends Fragment
 
         View rootView = inflater.inflate(R.layout.fragment_favourite_workflow_list,
                 container, false);
-
+        ((BaseActivity) getActivity()).getActivityComponent().inject(this);
         ButterKnife.bind(this, rootView);
 
         mFavouriteWorkflowsPresenter.attachView(this);

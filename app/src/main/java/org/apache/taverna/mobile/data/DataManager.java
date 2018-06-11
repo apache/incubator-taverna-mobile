@@ -34,25 +34,34 @@ import org.apache.taverna.mobile.data.remote.BaseApiManager;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
+@Singleton
 public class DataManager {
 
-    public BaseApiManager mBaseApiManager = new BaseApiManager();
+    private BaseApiManager mBaseApiManager;
 
-    public DBHelper mDBHelper = new DBHelper();
+    private DBHelper mDBHelper;
 
     private PreferencesHelper mPreferencesHelper;
 
-    public DataManager() {
+    @Inject
+    public DataManager(BaseApiManager baseApiManager, DBHelper dbHelper, PreferencesHelper
+            mPreferencesHelper) {
+        this.mPreferencesHelper = mPreferencesHelper;
+        this.mBaseApiManager = baseApiManager;
+        this.mDBHelper = dbHelper;
     }
 
-    public DataManager(PreferencesHelper mPreferencesHelper) {
-        this.mPreferencesHelper = mPreferencesHelper;
+    public DBHelper getDBHelper() {
+        return mDBHelper;
     }
 
     /**

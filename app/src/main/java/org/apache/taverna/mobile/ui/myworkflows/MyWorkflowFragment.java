@@ -24,6 +24,7 @@ import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
 import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
@@ -47,6 +48,8 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -54,6 +57,10 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
         RecyclerItemClickListner.OnItemClickListener {
 
     public final String LOG_TAG = getClass().getSimpleName();
+
+    @Inject DataManager dataManager;
+    @Inject MyWorkflowPresenter mWorkflowPresenter;
+    WorkflowAdapter mWorkflowAdapter;
 
     @BindView(R.id.rv_workflows)
     RecyclerView mRecyclerView;
@@ -67,13 +74,6 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
     @BindView(R.id.layout_empty_workflows)
     RelativeLayout mTextViewNoWorkflow;
 
-    private DataManager dataManager;
-
-    private MyWorkflowPresenter mWorkflowPresenter;
-
-    private WorkflowAdapter mWorkflowAdapter;
-
-
     private List<Workflow> mWorkflowList;
 
     @Override
@@ -82,9 +82,6 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
 
         mWorkflowList = new ArrayList<>();
 
-        dataManager = new DataManager(new PreferencesHelper(getContext()));
-
-        mWorkflowPresenter = new MyWorkflowPresenter(dataManager);
 
         setHasOptionsMenu(true);
     }
@@ -94,7 +91,7 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
             savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
+        ((BaseActivity) getActivity()).getActivityComponent().inject(this);
         ButterKnife.bind(this, rootView);
 
         mWorkflowPresenter.attachView(this);

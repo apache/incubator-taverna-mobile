@@ -30,9 +30,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 
 public class AnnouncementAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
