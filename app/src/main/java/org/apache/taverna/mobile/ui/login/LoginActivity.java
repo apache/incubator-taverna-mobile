@@ -18,14 +18,14 @@
  */
 package org.apache.taverna.mobile.ui.login;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-
 import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.utils.ActivityUtils;
 
+import android.os.Bundle;
 
-public class LoginActivity extends AppCompatActivity {
+
+public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";
 
     @Override

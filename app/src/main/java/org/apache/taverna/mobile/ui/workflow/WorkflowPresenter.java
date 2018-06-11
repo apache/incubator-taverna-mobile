@@ -32,6 +32,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
@@ -40,10 +42,11 @@ import io.reactivex.schedulers.Schedulers;
 public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
 
     public final String LOG_TAG = WorkflowPresenter.class.getSimpleName();
+
     private DataManager mDataManager;
     private CompositeDisposable compositeDisposable;
 
-
+    @Inject
     public WorkflowPresenter(DataManager dataManager) {
         mDataManager = dataManager;
         compositeDisposable = new CompositeDisposable();

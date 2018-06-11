@@ -50,11 +50,14 @@ import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.License;
 import org.apache.taverna.mobile.data.model.User;
 import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.imagezoom.ImageZoomActivity;
 import org.apache.taverna.mobile.ui.imagezoom.ImageZoomFragment;
 import org.apache.taverna.mobile.ui.workflowrun.WorkflowRunActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 import org.apache.taverna.mobile.utils.Constants;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,6 +69,9 @@ public class FavouriteWorkflowDetailFragment extends Fragment
     private static final String ID = "id";
 
     public final String LOG_TAG = getClass().getSimpleName();
+
+    @Inject DataManager dataManager;
+    @Inject FavouriteWorkflowDetailPresenter mWorkflowDetailPresenter;
 
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;
@@ -105,10 +111,6 @@ public class FavouriteWorkflowDetailFragment extends Fragment
 
     private AlertDialog alertDialog;
 
-    private DataManager dataManager;
-
-    private FavouriteWorkflowDetailPresenter mWorkflowDetailPresenter;
-
     private String id;
 
     private String licenceId = null;
@@ -136,8 +138,6 @@ public class FavouriteWorkflowDetailFragment extends Fragment
 
         id = getArguments().getString(ID);
 
-        dataManager = new DataManager();
-        mWorkflowDetailPresenter = new FavouriteWorkflowDetailPresenter(dataManager);
 
     }
 
@@ -146,7 +146,7 @@ public class FavouriteWorkflowDetailFragment extends Fragment
             savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_detail_workflow, container, false);
-
+        ((BaseActivity) getActivity()).getActivityComponent().inject(this);
         ButterKnife.bind(this, rootView);
 
         mWorkflowDetailPresenter.attachView(this);

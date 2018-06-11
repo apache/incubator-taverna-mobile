@@ -18,19 +18,19 @@
  */
 package org.apache.taverna.mobile.ui;
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.ui.login.LoginActivity;
+import org.apache.taverna.mobile.ui.tutorial.TutorialActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
-import org.apache.taverna.mobile.ui.login.LoginActivity;
-import org.apache.taverna.mobile.ui.tutorial.TutorialActivity;
-
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -39,16 +39,14 @@ import io.reactivex.schedulers.Schedulers;
 
 public class FlashScreenActivity extends AppCompatActivity {
 
-    private DataManager dataManager;
-    private PreferencesHelper preferencesHelper;
-
+    @Inject
+    DataManager dataManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash_screen);
-        preferencesHelper = new PreferencesHelper(this);
-        dataManager = new DataManager(new PreferencesHelper(this));
+
         Observable.timer(2, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -57,7 +55,7 @@ public class FlashScreenActivity extends AppCompatActivity {
                     public void accept(Long aLong) throws Exception {
                         if (!dataManager.getPreferencesHelper().isLoggedInFlag()) {
                             dataManager.getPreferencesHelper().clear();
-                            if (preferencesHelper.isFirstTimeLaunch()) {
+                            if (dataManager.getPreferencesHelper().isFirstTimeLaunch()) {
                                 startActivity(new Intent(FlashScreenActivity.this,
                                         TutorialActivity.class));
                                 (FlashScreenActivity.this).finish();

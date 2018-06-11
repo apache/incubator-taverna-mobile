@@ -54,8 +54,8 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final String TAG = WorkflowAdapter.class.getName();
 
     private final List<Workflow> mWorkflowList;
-
     private final Context context;
+
 
     public WorkflowAdapter(List<Workflow> mWorkflowList, Context context) {
         this.mWorkflowList = mWorkflowList;

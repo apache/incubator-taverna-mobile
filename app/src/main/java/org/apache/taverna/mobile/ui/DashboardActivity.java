@@ -18,9 +18,14 @@
  */
 package org.apache.taverna.mobile.ui;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
@@ -49,20 +54,18 @@ import android.webkit.WebView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static org.apache.taverna.mobile.TavernaApplication.getContext;
+import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
 public class DashboardActivity extends AppCompatActivity {
+
+    @Inject DataManager dataManager;
 
     @BindView(R.id.nav_view)
     NavigationView navigationView;
@@ -74,7 +77,6 @@ public class DashboardActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     private Dialog dialog;
-    private DataManager dataManager;
     private Fragment fragment;
     private MenuItem item;
 
@@ -109,8 +111,6 @@ public class DashboardActivity extends AppCompatActivity {
 
             navigationView.setCheckedItem(R.id.nav_workflows);
         }
-
-        dataManager = new DataManager(new PreferencesHelper(this));
 
         setNavHeader();
     }
@@ -277,7 +277,7 @@ public class DashboardActivity extends AppCompatActivity {
     private void signOut() {
         mDrawerLayout.closeDrawers();
         dataManager.getPreferencesHelper().clear();
-        dataManager.mDBHelper.clearFavouriteWorkflow();
+        dataManager.getDBHelper().clearFavouriteWorkflow();
 
         startActivity(new Intent(getApplicationContext(),
                 LoginActivity.class));

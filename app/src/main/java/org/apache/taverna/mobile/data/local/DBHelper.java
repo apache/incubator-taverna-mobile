@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.data.local;
 
-
 import android.support.annotation.Nullable;
 
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -30,16 +29,21 @@ import org.apache.taverna.mobile.data.model.Workflows;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 
 
+@Singleton
 public class DBHelper {
 
     public static final String SVG_URI = "svgURI";
 
     public static final String JPG_URI = "jpgURI";
 
+    @Inject
     public DBHelper() {
 
     }

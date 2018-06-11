@@ -19,31 +19,34 @@
 package org.apache.taverna.mobile;
 
 
-import android.app.Application;
-import android.content.Context;
-
 import com.facebook.stetho.Stetho;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.squareup.leakcanary.LeakCanary;
 
+import org.apache.taverna.mobile.injection.component.ApplicationComponent;
+import org.apache.taverna.mobile.injection.component.DaggerApplicationComponent;
+import org.apache.taverna.mobile.injection.module.ApplicationModule;
+
+import android.app.Application;
+import android.content.Context;
+
 public class TavernaApplication extends Application {
 
-    private static TavernaApplication instance;
+    ApplicationComponent mApplicationComponent;
 
-    public static Context getContext() {
-        return instance;
+    public static TavernaApplication get(Context context) {
+        return (TavernaApplication) context.getApplicationContext();
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        if (instance == null) {
-            instance = this;
-        }
-        FlowManager.init(new FlowConfig.Builder(this).build());
 
-        Stetho.initializeWithDefaults(this);
+        FlowManager.init(new FlowConfig.Builder(this).build());
+        if (BuildConfig.DEBUG) {
+            Stetho.initializeWithDefaults(this);
+        }
 
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
@@ -51,4 +54,19 @@ public class TavernaApplication extends Application {
         LeakCanary.install(this);
 
     }
+
+    public ApplicationComponent getComponent() {
+        if (mApplicationComponent == null) {
+            mApplicationComponent = DaggerApplicationComponent.builder()
+                    .applicationModule(new ApplicationModule(this))
+                    .build();
+        }
+        return mApplicationComponent;
+    }
+
+
+    public void setComponent(ApplicationComponent applicationComponent) {
+        mApplicationComponent = applicationComponent;
+    }
+
 }

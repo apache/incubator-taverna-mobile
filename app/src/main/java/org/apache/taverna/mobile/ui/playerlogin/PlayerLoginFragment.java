@@ -21,7 +21,7 @@ package org.apache.taverna.mobile.ui.playerlogin;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import android.content.Context;
@@ -39,6 +39,8 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -46,6 +48,9 @@ import butterknife.OnClick;
 
 public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView, View
         .OnFocusChangeListener {
+
+    @Inject DataManager dataManager;
+    @Inject PlayerLoginPresenter mPlayerLoginPresenter;
 
     @BindView(R.id.etEmail)
     EditText mEditTextEmail;
@@ -62,13 +67,10 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     @BindView(R.id.cbRemember)
     CheckBox mCheckBoxRemember;
     OnSuccessful mCallback;
-    private DataManager dataManager;
-    private PlayerLoginPresenter mPlayerLoginPresenter;
 
     public static PlayerLoginFragment newInstance() {
 
         Bundle args = new Bundle();
-
         PlayerLoginFragment fragment = new PlayerLoginFragment();
         fragment.setArguments(args);
         return fragment;
@@ -78,8 +80,6 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        dataManager = new DataManager(new PreferencesHelper(getContext()));
-        mPlayerLoginPresenter = new PlayerLoginPresenter(dataManager);
 
     }
 
@@ -88,6 +88,7 @@ public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView,
             savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_player_login_layout, container, false);
+        ((BaseActivity) getActivity()).getActivityComponent().inject(this);
         ButterKnife.bind(this, rootView);
         mPlayerLoginPresenter.attachView(this);
         String email = dataManager.getPreferencesHelper().getPlayerUserEmail();

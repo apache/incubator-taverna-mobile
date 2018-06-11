@@ -28,6 +28,8 @@ import org.apache.taverna.mobile.ui.base.BasePresenter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -41,9 +43,9 @@ public class MyWorkflowPresenter extends BasePresenter<MyWorkflowMvpView> {
     public final String LOG_TAG = getClass().getSimpleName();
 
     private DataManager mDataManager;
-
     private CompositeDisposable compositeDisposable;
 
+    @Inject
     public MyWorkflowPresenter(DataManager dataManager) {
         mDataManager = dataManager;
         compositeDisposable = new CompositeDisposable();

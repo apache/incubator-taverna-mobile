@@ -32,9 +32,7 @@ import org.apache.taverna.mobile.utils.Constants;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 public class DownloadingFragment extends Fragment {
-
 
     @BindView(R.id.tvMessage)
     TextView tv_Message;
@@ -49,7 +47,6 @@ public class DownloadingFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,5 +73,4 @@ public class DownloadingFragment extends Fragment {
 
         tv_Message.setText(message);
     }
-
 }

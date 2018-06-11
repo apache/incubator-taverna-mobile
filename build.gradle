@@ -49,4 +49,5 @@ ext {
     butterKnifeVersion = '9.0.0-SNAPSHOT'
     stetho='1.5.0'
     leakcanary ='1.5.4'
+    dagger='2.8'
 }

@@ -18,8 +18,10 @@
  */
 package org.apache.taverna.mobile.data.remote;
 
-import org.apache.taverna.mobile.TavernaApplication;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -27,11 +29,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 
+@Singleton
 public class BaseApiManager {
 
 
     public static final String MY_EXPERIMENT_END_POINT = "http://www.myexperiment.org/";
 
+
+    PreferencesHelper mPreferencesHelper;
+
+    @Inject
+    public BaseApiManager(PreferencesHelper preferencesHelper) {
+        mPreferencesHelper = preferencesHelper;
+    }
 
     /********
      * Helper class that sets up a new services with simplexml converter factory
@@ -70,7 +80,6 @@ public class BaseApiManager {
     }
 
     public TavernaPlayerService getTavernaPlayerApi() {
-        return createJsonApi(TavernaPlayerService.class,
-                new PreferencesHelper(TavernaApplication.getContext()).getPlayerURL());
+        return createJsonApi(TavernaPlayerService.class, mPreferencesHelper.getPlayerURL());
     }
 }
