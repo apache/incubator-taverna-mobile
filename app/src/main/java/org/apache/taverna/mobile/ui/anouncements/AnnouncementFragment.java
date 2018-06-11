@@ -25,6 +25,7 @@ import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
 import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
 import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 
@@ -48,14 +49,22 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 
 public class AnnouncementFragment extends Fragment implements RecyclerItemClickListner
         .OnItemClickListener, AnnouncementMvpView {
 
     public final String LOG_TAG = getClass().getSimpleName();
+
+    @Inject
+    DataManager dataManager;
+    @Inject
+    AnnouncementPresenter mAnnouncementPresenter;
+
+    AnnouncementAdapter mAnnouncementAdapter;
 
     @BindView(R.id.rv_movies)
     RecyclerView mRecyclerView;
@@ -71,12 +80,6 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     private ProgressDialog dialog;
 
     private Announcements mAnnouncements;
-
-    private DataManager dataManager;
-
-    private AnnouncementPresenter mAnnouncementPresenter;
-
-    private AnnouncementAdapter mAnnouncementAdapter;
 
     private int mPageNumber = 1;
 
@@ -101,10 +104,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mAnnouncements = new Announcements();
-        dataManager = new DataManager();
-        mAnnouncementPresenter = new AnnouncementPresenter(dataManager);
+        ((BaseActivity) getActivity()).getActivityComponent().inject(this);
         setHasOptionsMenu(true);
     }
 

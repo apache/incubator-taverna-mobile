@@ -18,19 +18,20 @@
  */
 package org.apache.taverna.mobile.ui.userprofile;
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
+import org.apache.taverna.mobile.utils.ActivityUtils;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.utils.ActivityUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class UserProfileActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -55,7 +56,6 @@ public class UserProfileActivity extends AppCompatActivity {
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                     new UserProfileFragment(), R.id.frame_container);
         }
-
     }
 
     @Override

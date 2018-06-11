@@ -18,9 +18,9 @@
  */
 package org.apache.taverna.mobile.data.local;
 
-
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.model.User;
+import org.apache.taverna.mobile.injection.ApplicationContext;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -28,10 +28,13 @@ import android.preference.PreferenceManager;
 
 import java.util.concurrent.Callable;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 
-
+@Singleton
 public class PreferencesHelper {
 
     public static final String PREF_KEY_PLAYER_LOGGED_IN = "pref_player_logged_in";
@@ -63,16 +66,16 @@ public class PreferencesHelper {
 
     public static final String PREF_KEY_PLAYER_USER_PASSWORD = "pref_password";
 
+    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+
     private final SharedPreferences sharedPref;
     private Context mContext;
 
-    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
-
-    public PreferencesHelper(Context context) {
+    @Inject
+    public PreferencesHelper(@ApplicationContext  Context context) {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         mContext = context;
     }
-
 
     public void clear() {
         sharedPref.edit().clear().apply();

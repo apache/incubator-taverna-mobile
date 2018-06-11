@@ -19,16 +19,16 @@
 package org.apache.taverna.mobile.ui.imagezoom;
 
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
+import org.apache.taverna.mobile.utils.ActivityUtils;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.utils.ActivityUtils;
 
 import butterknife.ButterKnife;
 
-public class ImageZoomActivity extends AppCompatActivity {
+public class ImageZoomActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

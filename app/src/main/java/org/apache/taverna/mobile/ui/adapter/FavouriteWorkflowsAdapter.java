@@ -25,6 +25,12 @@
 
 package org.apache.taverna.mobile.ui.adapter;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.model.Workflow;
+
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -33,12 +39,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.model.Workflow;
 
 import java.util.List;
 
@@ -50,8 +50,8 @@ public class FavouriteWorkflowsAdapter extends RecyclerView.Adapter<RecyclerView
     private static final String TAG = FavouriteWorkflowsAdapter.class.getName();
 
     private final List<Workflow> mWorkflowList;
-
     private final Context context;
+
 
     public FavouriteWorkflowsAdapter(List<Workflow> mWorkflowList, Context context) {
         this.mWorkflowList = mWorkflowList;

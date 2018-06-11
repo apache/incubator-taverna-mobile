@@ -24,9 +24,7 @@ import org.simpleframework.xml.Text;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 public class Announcement implements Parcelable {
-
 
     @Attribute(name = "resource", required = false)
     String resource;
@@ -39,8 +37,6 @@ public class Announcement implements Parcelable {
 
     @Text
     String content;
-
-
 
     public String getContent() {
         return content;
@@ -87,10 +83,8 @@ public class Announcement implements Parcelable {
         dest.writeString(this.content);
     }
 
-    public Announcement() {
-    }
 
-    protected Announcement(Parcel in) {
+    public Announcement(Parcel in) {
         this.resource = in.readString();
         this.uri = in.readString();
         this.id = in.readString();

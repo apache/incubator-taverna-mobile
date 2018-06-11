@@ -25,12 +25,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.apache.taverna.mobile.data.model.TutorialSliderEnum;
+import org.apache.taverna.mobile.injection.ApplicationContext;
+
+import javax.inject.Inject;
 
 
 public class TutorialSliderAdapter extends PagerAdapter {
 
     private Context context;
-    public TutorialSliderAdapter(Context context) {
+
+    @Inject
+    public TutorialSliderAdapter(@ApplicationContext Context context) {
         this.context = context;
     }
 

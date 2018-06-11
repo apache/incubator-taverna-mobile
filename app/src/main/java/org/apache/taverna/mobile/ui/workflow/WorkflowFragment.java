@@ -18,14 +18,13 @@
  */
 package org.apache.taverna.mobile.ui.workflow;
 
-
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
 import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
 import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 import org.apache.taverna.mobile.utils.Constants;
@@ -53,6 +52,8 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -60,6 +61,11 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
         RecyclerItemClickListner.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     public final String LOG_TAG = getClass().getSimpleName();
+
+    @Inject
+    WorkflowPresenter mWorkflowPresenter;
+    WorkflowAdapter mWorkflowAdapter;
+    WorkflowAdapter mSearchWorkflowAdapter;
 
     @BindView(R.id.rv_workflows)
     RecyclerView mRecyclerView;
@@ -69,10 +75,6 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
 
     @BindView(R.id.swipe_refresh)
     ScrollChildSwipeRefreshLayout mSwipeRefresh;
-
-    private WorkflowPresenter mWorkflowPresenter;
-    private WorkflowAdapter mWorkflowAdapter;
-    private WorkflowAdapter mSearchWorkflowAdapter;
 
     private int mPageNumber = 1;
 
@@ -87,8 +89,6 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
         super.onCreate(savedInstanceState);
         mWorkflowList = new ArrayList<>();
         mSearchWorkflowList = new ArrayList<>();
-        DataManager dataManager = new DataManager();
-        mWorkflowPresenter = new WorkflowPresenter(dataManager);
         setHasOptionsMenu(true);
     }
 
@@ -96,6 +96,7 @@ public class WorkflowFragment extends Fragment implements WorkflowMvpView,
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        ((BaseActivity) getActivity()).getActivityComponent().inject(this);
         ButterKnife.bind(this, rootView);
         mWorkflowPresenter.attachView(this);
 
