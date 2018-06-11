@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui;
 
-
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.local.PreferencesHelper;
@@ -26,10 +25,13 @@ import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
 import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
+import org.apache.taverna.mobile.ui.usage.UsageActivity;
+import org.apache.taverna.mobile.ui.userprofile.UserProfileActivity;
 import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 import org.apache.taverna.mobile.utils.ActivityUtils;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -42,11 +44,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.TableLayout;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static org.apache.taverna.mobile.TavernaApplication.getContext;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -58,7 +72,6 @@ public class DashboardActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
 
     private Dialog dialog;
     private DataManager dataManager;
@@ -76,7 +89,6 @@ public class DashboardActivity extends AppCompatActivity {
         setupDrawerContent(navigationView);
 
         dialog = new Dialog(this);
-
 
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
@@ -99,6 +111,8 @@ public class DashboardActivity extends AppCompatActivity {
         }
 
         dataManager = new DataManager(new PreferencesHelper(this));
+
+        setNavHeader();
     }
 
 
@@ -162,10 +176,9 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_usage:
 
-                                dialog.setCanceledOnTouchOutside(true);
-                                dialog.setTitle(getString(R.string.title_nav_usage));
-                                dialog.setContentView(R.layout.usage_layout);
-                                dialog.show();
+                                Intent intent = new Intent(DashboardActivity.this,
+                                        UsageActivity.class);
+                                startActivity(intent);
                                 mDrawerLayout.closeDrawers();
                                 return true;
 
@@ -232,12 +245,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                             case R.id.nav_logout:
 
-                                mDrawerLayout.closeDrawers();
-                                dataManager.getPreferencesHelper().setLoggedInFlag(false);
-
-                                startActivity(new Intent(getApplicationContext(),
-                                        LoginActivity.class));
-                                finish();
+                                signOutConfirmation();
                                 return true;
 
                         }
@@ -253,6 +261,66 @@ public class DashboardActivity extends AppCompatActivity {
         return true;
     }
 
+    private void signOutConfirmation() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.sign_out)
+                .setMessage(R.string.sign_out_message)
+                .setPositiveButton(R.string.sign_out, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        signOut();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    private void signOut() {
+        mDrawerLayout.closeDrawers();
+        dataManager.getPreferencesHelper().clear();
+        dataManager.mDBHelper.clearFavouriteWorkflow();
+
+        startActivity(new Intent(getApplicationContext(),
+                LoginActivity.class));
+        finish();
+    }
+
+    private void setNavHeader() {
+
+        View headerView =  navigationView.getHeaderView(0);
+        String avatarUrl = dataManager.getPreferencesHelper().getUserAvatarUrl();
+        final CircleImageView navUserAvatar = headerView.findViewById(R.id.nav_user_avatar);
+
+        Glide.with(getContext())
+                .load(avatarUrl)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .placeholder(R.drawable.ic_account_circle_black_24dp)
+                .error(R.drawable.ic_account_circle_black_24dp)
+                .into(new SimpleTarget<GlideDrawable>() {
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<?
+                            super GlideDrawable> glideAnimation) {
+                        navUserAvatar.setImageDrawable(resource);
+                    }
+                });
+
+        navUserAvatar.setOnClickListener(new View.OnClickListener() {
+            @OnClick
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, UserProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        String userName = dataManager.getPreferencesHelper().getUserName();
+        TextView navUserName = headerView.findViewById(R.id.nav_user_name);
+        navUserName.setText(userName);
+
+        String userEmail = dataManager.getPreferencesHelper().getUserEmail();
+        TextView navUserEmail = headerView.findViewById(R.id.nav_user_email);
+        navUserEmail.setText(userEmail);
+
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -264,4 +332,12 @@ public class DashboardActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(navigationView)) {
+            mDrawerLayout.closeDrawers();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

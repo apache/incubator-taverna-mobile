@@ -28,6 +28,7 @@ import org.apache.taverna.mobile.data.model.Workflows;
 
 import java.util.Map;
 
+import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -35,13 +36,12 @@ import retrofit2.http.Headers;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
-import rx.Observable;
 
 
 public interface TavernaService {
 
     @GET(APIEndPoint.ALL_ANNOUNCEMENT)
-    Observable<Announcements> getAllAnnouncements(@Query("page") int pageNumber);
+    Observable<Announcements> getAllAnnouncements(@QueryMap Map<String, String> options);
 
     @GET(APIEndPoint.ANNOUNCEMENT)
     Observable<DetailAnnouncement> getAnnouncement(@Query("id") String id);

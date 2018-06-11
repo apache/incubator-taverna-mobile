@@ -26,23 +26,24 @@ import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subscriptions.CompositeSubscription;
+import java.util.HashMap;
+import java.util.Map;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
 
     public final String LOG_TAG = getClass().getSimpleName();
-    private DataManager mDataManager;
-    private CompositeSubscription mSubscriptions;
 
+    private DataManager mDataManager;
+    private CompositeDisposable compositeDisposable;
 
     public AnnouncementPresenter(DataManager dataManager) {
         mDataManager = dataManager;
-
-        mSubscriptions = new CompositeSubscription();
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -53,18 +54,26 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+        compositeDisposable.clear();
     }
 
     public void loadAllAnnouncement(int pageNumber) {
-
-        mSubscriptions.add(mDataManager.getAllAnnouncement(pageNumber)
+        checkViewAttached();
+        getMvpView().showProgressbar(true);
+        compositeDisposable.add(mDataManager.getAllAnnouncement(
+                getAnnouncementQueryOptions(pageNumber))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Announcements>() {
+                .subscribeWith(new DisposableObserver<Announcements>() {
+
                     @Override
-                    public void onCompleted() {
-                        getMvpView().showProgressbar(false);
+                    public void onNext(Announcements announcements) {
+                        if (announcements.getAnnouncement() != null) {
+                            getMvpView().showAllAnnouncement(announcements);
+                        } else {
+                            getMvpView().showSnackBar(R.string.no_more_announcement_available);
+                            getMvpView().removeLoadMoreProgressBar();
+                        }
                     }
 
                     @Override
@@ -74,26 +83,22 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                     }
 
                     @Override
-                    public void onNext(Announcements announcement) {
-                        if (announcement.getAnnouncement() != null) {
-                            getMvpView().showAllAnnouncement(announcement);
-                        } else {
-                            getMvpView().showSnackBar(R.string.no_more_announcement_available);
-                            getMvpView().removeLoadMoreProgressBar();
-                        }
+                    public void onComplete() {
+                        getMvpView().showProgressbar(false);
                     }
                 }));
     }
 
     public void loadAnnouncementDetails(String id) {
-
-        mSubscriptions.add(mDataManager.getAnnouncementDetail(id)
+        checkViewAttached();
+        compositeDisposable.add(mDataManager.getAnnouncementDetail(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<DetailAnnouncement>() {
+                .subscribeWith(new DisposableObserver<DetailAnnouncement>() {
+
                     @Override
-                    public void onCompleted() {
-                        getMvpView().showWaitProgress(false);
+                    public void onNext(DetailAnnouncement detailAnnouncement) {
+                        getMvpView().showAnnouncementDetail(detailAnnouncement);
                     }
 
                     @Override
@@ -104,11 +109,18 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
                     }
 
                     @Override
-                    public void onNext(DetailAnnouncement detailAnnouncement) {
-                        getMvpView().showAnnouncementDetail(detailAnnouncement);
-
+                    public void onComplete() {
+                        getMvpView().showWaitProgress(false);
                     }
                 }));
+    }
+
+
+    private Map<String, String> getAnnouncementQueryOptions(int PageNumber) {
+        Map<String, String> option = new HashMap<>();
+        option.put("order", "reverse");
+        option.put("page", String.valueOf(PageNumber));
+        return option;
     }
 
 }

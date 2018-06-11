@@ -25,24 +25,23 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
-import retrofit2.adapter.rxjava.HttpException;
-import rx.Observer;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
+import retrofit2.HttpException;
 
 public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
 
     private static final String TAG = PlayerLoginPresenter.class.getSimpleName();
 
     private DataManager mDataManager;
-
-    private Subscription mSubscriptions;
+    private CompositeDisposable compositeDisposable;
 
     public PlayerLoginPresenter(DataManager dataManager) {
         mDataManager = dataManager;
+        compositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -53,20 +52,19 @@ public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
     @Override
     public void detachView() {
         super.detachView();
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
+        compositeDisposable.clear();
     }
 
     public void playerLogin(final String username, final String password, final boolean loginFlag) {
-        if (mSubscriptions != null) mSubscriptions.unsubscribe();
-
-        mSubscriptions = mDataManager.authPlayerUserLoginDetail(getEncodedCredential(username,
-                password), loginFlag)
+        compositeDisposable.clear();
+        compositeDisposable.add(mDataManager
+                .authPlayerUserLoginDetail(getEncodedCredential(username, password), loginFlag)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<ResponseBody>() {
+                .subscribeWith(new DisposableObserver<ResponseBody>() {
                     @Override
-                    public void onCompleted() {
-
+                    public void onNext(ResponseBody responseBody) {
+                        Log.d(TAG, "onCompleted: " + responseBody.byteStream());
                     }
 
                     @Override
@@ -88,15 +86,13 @@ public class PlayerLoginPresenter extends BasePresenter<PlayerLoginMvpView> {
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-                        Log.d(TAG, "onCompleted: " + responseBody.byteStream());
-                    }
-                });
+                    public void onComplete() {
 
+                    }
+                }));
     }
 
     private String getEncodedCredential(String username, String password) {
-
         return "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64
                 .NO_WRAP);
     }

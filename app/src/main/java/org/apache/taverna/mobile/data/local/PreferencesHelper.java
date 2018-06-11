@@ -26,8 +26,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import rx.Observable;
-import rx.functions.Func0;
+import java.util.concurrent.Callable;
+
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+
 
 public class PreferencesHelper {
 
@@ -62,6 +65,8 @@ public class PreferencesHelper {
 
     private final SharedPreferences sharedPref;
     private Context mContext;
+
+    private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
     public PreferencesHelper(Context context) {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -146,7 +151,7 @@ public class PreferencesHelper {
         sharedPref.edit().putString(PREF_KEY_USER_EMAIL, userEmail).apply();
     }
 
-    public String getUserAvatar() {
+    public String getUserAvatarUrl() {
         return sharedPref.getString(PREF_KEY_USER_AVATAR, null);
     }
 
@@ -154,10 +159,19 @@ public class PreferencesHelper {
         sharedPref.edit().putString(PREF_KEY_USER_AVATAR, userAvatar).apply();
     }
 
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        sharedPref.edit().putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
+        sharedPref.edit().commit();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return sharedPref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
+    }
+
     public Observable<User> saveUserDetail(final User user) {
-        return Observable.defer(new Func0<Observable<User>>() {
+        return Observable.defer(new Callable<ObservableSource<? extends User>>() {
             @Override
-            public Observable<User> call() {
+            public ObservableSource<? extends User> call() throws Exception {
                 if (user.getElementId() != null) {
                     setUserID(user.getElementId());
                 }
@@ -186,7 +200,6 @@ public class PreferencesHelper {
                 return Observable.just(user);
             }
         });
-
     }
 
     public boolean isUserPlayerLoggedInFlag() {

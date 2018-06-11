@@ -27,8 +27,11 @@ import org.apache.taverna.mobile.utils.ConnectionInfo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -67,6 +70,8 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
 
     private ProgressDialog progressDialog;
+
+    private final String myExperimentURL = "https://www.myexperiment.org/users/new";
 
 
     public static LoginFragment newInstance() {
@@ -118,7 +123,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     private void validateEmail() {
 
-        if (mEditTextEmail.getText().toString().trim().length() > 0) {
+        if (mEditTextEmail.getText().toString().trim().length() == 0) {
 
             mTextInputEmail.setError(getString(R.string.err_login_email));
         } else {
@@ -131,7 +136,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
 
     private void validatePassword() {
-        if (mEditTextPassword.getText().toString().trim().length() > 0) {
+        if (mEditTextPassword.getText().toString().trim().length() == 0) {
 
             mTextInputPassword.setError(getString(R.string.err_login_password));
         } else {
@@ -162,6 +167,20 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
         }
     }
 
+    @OnClick(R.id.bRegister)
+    public void register(View v) {
+        if (Build.VERSION.SDK_INT < 15) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setData(Uri.parse(myExperimentURL));
+            startActivity(intent);
+        } else {
+            CustomTabsIntent.Builder customTabsIntentBuilder = new CustomTabsIntent.Builder();
+            CustomTabsIntent customTabsIntent = customTabsIntentBuilder.build();
+            customTabsIntent.launchUrl(getActivity(), Uri.parse(myExperimentURL));
+        }
+    }
+
     @Override
     public void showError(String string) {
         final Snackbar snackbar = Snackbar.make(mEditTextPassword, string, Snackbar
@@ -187,8 +206,9 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
     @Override
     public void showDashboardActivity() {
-
-        startActivity(new Intent(getActivity(), DashboardActivity.class));
+        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
         getActivity().finish();
     }
 

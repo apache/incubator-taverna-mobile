@@ -28,10 +28,10 @@ import org.apache.taverna.mobile.data.model.Workflow_Table;
 import org.apache.taverna.mobile.data.model.Workflows;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func0;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 
 
 public class DBHelper {
@@ -46,23 +46,21 @@ public class DBHelper {
 
     @Nullable
     public Observable<Workflows> syncWorkflows(final Workflows workflows) {
-        return Observable.create(new Observable.OnSubscribe<Workflows>() {
+        return Observable.defer(new Callable<ObservableSource<? extends Workflows>>() {
             @Override
-            public void call(Subscriber<? super Workflows> subscriber) {
-                if (subscriber.isUnsubscribed()) return;
+            public ObservableSource<? extends Workflows> call() throws Exception {
+
                 for (Workflow workflow : workflows.getWorkflowList()) {
                     if (!workflow.exists()) {
                         workflow.setFavourite(false);
                         workflow.save();
-
                     } else {
 
                         updateWorkflow(workflow).save();
                     }
-
                 }
-                subscriber.onNext(workflows);
-                subscriber.onCompleted();
+
+                return Observable.just(workflows);
             }
         });
     }
@@ -118,58 +116,43 @@ public class DBHelper {
         return workflow1;
     }
 
-
     public Observable<Workflow> syncWorkflow(final Workflow workflow) {
-        return Observable.create(new Observable.OnSubscribe<Workflow>() {
+        return Observable.defer(new Callable<ObservableSource<? extends Workflow>>() {
             @Override
-            public void call(Subscriber<? super Workflow> subscriber) {
-                if (subscriber.isUnsubscribed()) return;
+            public ObservableSource<? extends Workflow> call() throws Exception {
                 if (!workflow.exists()) {
                     workflow.save();
-
                 } else {
-
                     updateWorkflow(workflow).save();
                 }
-                subscriber.onNext(workflow);
-                subscriber.onCompleted();
+                return Observable.just(workflow);
             }
         });
     }
 
-
     public Observable<Boolean> setFavouriteWorkflow(final String id) {
-        return Observable.create(new Observable.OnSubscribe<Boolean>() {
+        return Observable.defer(new Callable<ObservableSource<? extends Boolean>>() {
             @Override
-            public void call(Subscriber<? super Boolean> subscriber) {
-                if (subscriber.isUnsubscribed()) return;
-                subscriber.onNext(updateFavouriteWorkflow(id));
-                subscriber.onCompleted();
+            public ObservableSource<? extends Boolean> call() throws Exception {
+                return Observable.just(updateFavouriteWorkflow(id));
             }
         });
     }
 
 
     public Observable<Boolean> getFavouriteWorkflow(final String id) {
-        return Observable.create(new Observable.OnSubscribe<Boolean>() {
+        return Observable.defer(new Callable<ObservableSource<? extends Boolean>>() {
             @Override
-            public void call(Subscriber<? super Boolean> subscriber) {
-                if (subscriber.isUnsubscribed()) return;
-                Workflow workflow1 = SQLite.select()
+            public ObservableSource<? extends Boolean> call() throws Exception {
+                Workflow workflow = SQLite.select()
                         .from(Workflow.class)
                         .where(Workflow_Table.id.eq(id))
                         .querySingle();
-
-                if (workflow1 != null) {
-
-                    subscriber.onNext(workflow1.isFavourite());
-                    subscriber.onCompleted();
+                if (workflow != null) {
+                    return Observable.just(workflow.isFavourite());
                 } else {
-
-                    subscriber.onError(null);
+                    return Observable.just(null);
                 }
-
-
             }
         });
     }
@@ -191,34 +174,41 @@ public class DBHelper {
     }
 
     public Observable<List<Workflow>> getFavouriteWorkflow() {
-        return Observable.create(new Observable.OnSubscribe<List<Workflow>>() {
+        return Observable.defer(new Callable<ObservableSource<? extends List<Workflow>>>() {
             @Override
-            public void call(Subscriber<? super List<Workflow>> subscriber) {
-                if (subscriber.isUnsubscribed()) return;
-                List<Workflow> workflows = SQLite.select()
+            public ObservableSource<? extends List<Workflow>> call() throws Exception {
+                return Observable.just(SQLite.select()
                         .from(Workflow.class)
                         .where(Workflow_Table.favourite.eq(true))
-                        .queryList();
-
-                subscriber.onNext(workflows);
-                subscriber.onCompleted();
-
+                        .queryList());
             }
         });
-
     }
 
     public Observable<Workflow> getFavouriteWorkflowDetail(final String id) {
-        return Observable.defer(new Func0<Observable<Workflow>>() {
+        return Observable.defer(new Callable<ObservableSource<? extends Workflow>>() {
             @Override
-            public Observable<Workflow> call() {
-                return Observable
-                        .just(SQLite.select()
+            public ObservableSource<? extends Workflow> call() throws Exception {
+                return Observable.just(SQLite.select()
                                 .from(Workflow.class)
                                 .where(Workflow_Table.id.eq(id))
                                 .querySingle());
             }
         });
+    }
+
+
+
+    public void clearFavouriteWorkflow() {
+        List<Workflow> workflowList = SQLite.select()
+                .from(Workflow.class)
+                .where(Workflow_Table.favourite.eq(true))
+                .queryList();
+
+        for (Workflow workflow : workflowList) {
+            workflow.setFavourite(!workflow.isFavourite());
+            workflow.save();
+        }
 
     }
 

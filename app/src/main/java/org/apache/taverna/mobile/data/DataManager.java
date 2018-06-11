@@ -34,11 +34,11 @@ import org.apache.taverna.mobile.data.remote.BaseApiManager;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.Function;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import rx.Observable;
-import rx.functions.Func1;
-
 
 public class DataManager {
 
@@ -65,8 +65,8 @@ public class DataManager {
     /**
      * @return List of all Announcement
      */
-    public Observable<Announcements> getAllAnnouncement(int pageNumber) {
-        return mBaseApiManager.getTavernaApi().getAllAnnouncements(pageNumber);
+    public Observable<Announcements> getAllAnnouncement(Map<String, String> options) {
+        return mBaseApiManager.getTavernaApi().getAllAnnouncements( options);
     }
 
     /**
@@ -81,9 +81,10 @@ public class DataManager {
      */
     public Observable<Workflows> getAllWorkflow(Map<String, String> options) {
         return mBaseApiManager.getTavernaApi().getAllWorkflows(options)
-                .concatMap(new Func1<Workflows, Observable<? extends Workflows>>() {
+                .concatMap(new Function<Workflows, ObservableSource<? extends Workflows>>() {
                     @Override
-                    public Observable<? extends Workflows> call(Workflows workflows) {
+                    public ObservableSource<? extends Workflows> apply(Workflows workflows)
+                            throws Exception {
                         return mDBHelper.syncWorkflows(workflows);
                     }
                 });
@@ -95,9 +96,10 @@ public class DataManager {
 
     public Observable<Workflow> getDetailWorkflow(String id, Map<String, String> options) {
         return mBaseApiManager.getTavernaApi().getDetailWorkflow(id, options)
-                .concatMap(new Func1<Workflow, Observable<? extends Workflow>>() {
+                .concatMap(new Function<Workflow, ObservableSource<? extends Workflow>>() {
                     @Override
-                    public Observable<? extends Workflow> call(Workflow workflow) {
+                    public ObservableSource<? extends Workflow> apply(Workflow workflow)
+                            throws Exception {
                         return mDBHelper.syncWorkflow(workflow);
                     }
                 });
@@ -159,13 +161,11 @@ public class DataManager {
      */
 
     public Observable<User> getLoginUserDetail(String credentials, final boolean flagLogin) {
-
         return mBaseApiManager.getTavernaApi().getLoginUserDetail(credentials)
-                .concatMap(new Func1<User, Observable<? extends User>>() {
+                .concatMap(new Function<User, ObservableSource<? extends User>>() {
                     @Override
-                    public Observable<? extends User> call(User user) {
+                    public ObservableSource<? extends User> apply(User user) throws Exception {
                         mPreferencesHelper.setLoggedInFlag(flagLogin);
-
                         return mPreferencesHelper.saveUserDetail(user);
                     }
                 });
@@ -205,7 +205,7 @@ public class DataManager {
     }
 
     public Observable<User> getMyWorkflows(String userID, Map<String, String> options) {
-        return mBaseApiManager.getTavernaApi().getUserDetail(userID , options);
+        return mBaseApiManager.getTavernaApi().getUserDetail(userID, options);
     }
 
     public Observable<Search> getSearchWorkflowResult(Map<String, String> options) {

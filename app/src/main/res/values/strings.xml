@@ -32,7 +32,7 @@ limitations under the License.
         <item>Date Last Run</item>
     </array>
     <string name="hello_blank_fragment">About Workflow</string>
-    <string name="logininfo">myExperiment Login</string>
+    <string name="login_info">Login</string>
     <string name="loginusername">Email or Username</string>
     <string name="loginpassword">Password</string>
     <string name="bLogin">Login</string>
@@ -44,6 +44,7 @@ limitations under the License.
 
     <string name="title_explore">Workflows</string>
     <string name="title_usage">Usage</string>
+    <string name="title_user_profile">Profile</string>
     <string name="title_about">About</string>
     <string name="title_exit">Logout</string>
     <string name="menu_search">Search</string>
@@ -98,6 +99,7 @@ limitations under the License.
     <string name="loadworkflows">Loading Workflows</string>
     <string name="fetchrun">Fetching run components</string>
     <string name="keeplogin">Remain Logged-in</string>
+    <string name="create_an_account">Create a myExperiment account</string>
 
     <string name="emailerr">Username must not be empty</string>
     <string name="passworderr">Password must not be empty</string>
@@ -106,8 +108,7 @@ limitations under the License.
         The Apache Software Foundation, Licensed under the Apache License, Version 2.0.
     </string>
     <string name="about2">View, run and download workflows on your Android mobile device.</string>
-    <string name="about3">Originally developed during Google Summer of Code 2015 for the<a
-        href="http://taverna.incubator.apache.org">Apache Taverna project</a>.
+    <string name="about3">Originally developed during Google Summer of Code 2015 for the<a href="http://taverna.incubator.apache.org">Apache Taverna project</a>.
     </string>
     <string name="pref_category_title_player_config">Configure Player Account</string>
     <string name="pref_summary_player_user">Username used to login to Taverna player portal</string>
@@ -142,21 +143,21 @@ limitations under the License.
         allows one to quickly return to the workflow streams page from any screen. The \'Open
         Workflow\' item allows users to pick a valid workflow from external storage and run it
         against a Taverna Server through a Taverna Player. Settings allow user to configure player
-        accounts and portal urls. Logout allows users to log-out of the app
+        accounts and portal urls. Logout allows users to log-out of the app.
     </string>
     <string name="usage_detail">Usage | Workfow Detail</string>
     <string name="usage_detail_text">The details screen allows users to run particular worklows and
         provides detailed information about the workflows. Workflows can also be downloaded from
         here. Workflows can also be marked from this screen which would save much more data for
         offline use than on the dashboard screen. This screen also provides a set of runs for the
-        workflow from other users
+        workflow from other users.
     </string>
     <string name="runid_text">Workflow Run ID:</string>
 
     <string name="announcement">Announcementss</string>
     <string name="no_internet_connection">No Internet Connection</string>
     <string name="licence">Licence</string>
-    <string name="no_favourite_workflow_found">No Favourite Workflow Found!!!</string>
+    <string name="no_favourite_workflow_found">No Favourite Workflow Found !</string>
     <string name="image_zoom">Image Zoom</string>
     <string name="hint_email">Email or Username</string>
     <string name="hint_email_player">Email</string>
@@ -166,7 +167,7 @@ limitations under the License.
     <string name="err_login_password">Enter valid password</string>
     <string name="error_failed_to_fetch_workflow">Failed to fetch Workflow</string>
 
-    <string name="no_my_workflow">You have not created any workflow yet !!!!!</string>
+    <string name="no_my_workflow">You have not created any workflow yet !</string>
     <string name="error_vaild_credential">Please enter valid credential</string>
     <string name="t2_workflow_type">Taverna 2</string>
 
@@ -183,7 +184,8 @@ limitations under the License.
     <string name="please_wait">Please Wait ...</string>
     <string name="headline_taverna_player_portal_login">Taverna Player Portal Login</string>
     <string name="button_text_login">Login</string>
-
+    <string name="sign_out">Sign Out</string>
+    <string name="sign_out_message">Do you really want to sign out?</string>
 
     <string name="title_activity_settings">Settings</string>
 
@@ -227,4 +229,32 @@ limitations under the License.
     <string name="pref_key_myexperiment_user">pref_myexperimentuser</string>
     <string name="pref_key_myexperiment_pass">pref_myexperimentpass</string>
     <string name="pref_summary_myexperiment_pass">Myexperiment password</string>
+
+    <!--Disclaimer:-->
+    <string name="disclaimer_title">Disclaimer:</string>
+    <string name="disclaimer_content">myExperiment\'s Logo is nothing to do with Apache Taverna and is copyright to myExperiment</string>
+
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Login</string>
+    <string name="slide_2_title">Dashboard</string>
+    <string name="slide_3_title">Workflow</string>
+    <string name="slide_4_title">Menus</string>
+
+    <!-- Nav Header placeholders -->
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+
+    <!-- User profile column titles -->
+    <string name="empty_fields">&lt;NA&gt;</string>
+    <string name="user_name">Username</string>
+    <string name="user_email">Email</string>
+    <string name="user_website">Website</string>
+    <string name="user_city">City</string>
+    <string name="user_country">Country</string>
+    <string name="user_my_workflow">My Workflow</string>
+    <string name="user_my_favorite_workflow">Favorite Workflows</string>
+
 </resources>

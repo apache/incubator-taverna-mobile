@@ -15,7 +15,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import rx.Observable;
+import java.util.HashMap;
+import java.util.Map;
+
+import io.reactivex.Observable;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -35,6 +38,7 @@ public class AnnouncementPresenterTest {
     Announcements announcements;
     DetailAnnouncement announcement;
     private AnnouncementPresenter announcementPresenter;
+    private Map<String, String> option;
 
     @Before
     public void setUp() {
@@ -45,6 +49,9 @@ public class AnnouncementPresenterTest {
         announcements = FakeRemoteDataSource.getAnnouncements();
         announcement = FakeRemoteDataSource.getAnnouncement();
 
+        option = new HashMap<>();
+        option.put("order", "reverse");
+        option.put("page", String.valueOf(1));
     }
 
     @After
@@ -55,7 +62,7 @@ public class AnnouncementPresenterTest {
     @Test
     public void loadAllAnnouncement_validAnnouncementsData_ReturnsResults() {
 
-        when(dataManager.getAllAnnouncement(1)).thenReturn(
+        when(dataManager.getAllAnnouncement(option)).thenReturn(
                 Observable.just(announcements));
 
         announcementPresenter.loadAllAnnouncement(1);
@@ -70,7 +77,7 @@ public class AnnouncementPresenterTest {
     public void loadAllAnnouncement_NULLAnnouncementsData_RemoveLoadMore() {
 
         Announcements announcements = new Announcements();
-        when(dataManager.getAllAnnouncement(1)).thenReturn(
+        when(dataManager.getAllAnnouncement(option)).thenReturn(
                 Observable.just(announcements));
 
         announcementPresenter.loadAllAnnouncement(1);
@@ -85,8 +92,8 @@ public class AnnouncementPresenterTest {
     public void loadAllAnnouncement_RuntimeError_ShowError() {
 
 
-        when(dataManager.getAllAnnouncement(1)).thenReturn(Observable.<Announcements>error(new
-                RuntimeException()));
+        when(dataManager.getAllAnnouncement(option)).thenReturn(
+                Observable.<Announcements>error(new RuntimeException()));
 
         announcementPresenter.loadAllAnnouncement(1);
 

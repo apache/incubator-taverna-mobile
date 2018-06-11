@@ -21,10 +21,10 @@
     android:id="@+id/cv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/announcementCardMarginVertical"
-    android:layout_marginLeft="@dimen/announcementCardMarginHorizontal"
-    android:layout_marginRight="@dimen/announcementCardMarginHorizontal"
-    android:layout_marginTop="@dimen/announcementCardMarginVertical"
+    android:layout_marginBottom="@dimen/announcement_card_margin_vertical"
+    android:layout_marginLeft="@dimen/announcement_card_margin_horizontal"
+    android:layout_marginRight="@dimen/announcement_card_margin_horizontal"
+    android:layout_marginTop="@dimen/announcement_card_margin_vertical"
     app:cardCornerRadius="2dp"
     app:cardElevation="2pt">
 
