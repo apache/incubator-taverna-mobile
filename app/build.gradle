@@ -88,8 +88,8 @@ dependencies {
     implementation "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
 
-    implementation "io.reactivex.rxjava2:rxjava:2.0.1"
-    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJava2Version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxJava2Version."
 
     implementation("org.simpleframework:simple-xml:2.7.+") {
         exclude module: 'stax'
