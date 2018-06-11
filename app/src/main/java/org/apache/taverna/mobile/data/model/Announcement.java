@@ -24,11 +24,6 @@ import org.simpleframework.xml.Text;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import dagger.Provides;
-
 public class Announcement implements Parcelable {
 
     @Attribute(name = "resource", required = false)

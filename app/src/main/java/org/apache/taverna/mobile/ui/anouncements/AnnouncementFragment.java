@@ -22,8 +22,6 @@ import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Announcements;
 import org.apache.taverna.mobile.data.model.DetailAnnouncement;
-import org.apache.taverna.mobile.injection.component.ActivityComponent;
-import org.apache.taverna.mobile.injection.module.ActivityModule;
 import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
 import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
 import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;

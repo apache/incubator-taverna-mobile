@@ -18,26 +18,24 @@
  */
 package org.apache.taverna.mobile.ui.workflowrun;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
-import android.widget.Toast;
-
 import com.anton46.stepsview.StepsView;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.DownloadingFragment;
 import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.playerlogin.PlayerLoginFragment;
 import org.apache.taverna.mobile.utils.Constants;
 import org.apache.taverna.mobile.utils.NonSwipeableViewPager;
 import org.apache.taverna.mobile.utils.WebViewGenerator;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 

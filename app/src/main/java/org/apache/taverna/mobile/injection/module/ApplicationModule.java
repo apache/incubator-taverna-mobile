@@ -1,15 +1,9 @@
 package org.apache.taverna.mobile.injection.module;
 
-import android.app.Application;
-import android.content.Context;
-import android.content.SharedPreferences;
-
-import com.raizlabs.android.dbflow.annotation.Database;
-
-import org.apache.taverna.mobile.data.remote.TavernaService;
 import org.apache.taverna.mobile.injection.ApplicationContext;
 
-import javax.inject.Singleton;
+import android.app.Application;
+import android.content.Context;
 
 import dagger.Module;
 import dagger.Provides;

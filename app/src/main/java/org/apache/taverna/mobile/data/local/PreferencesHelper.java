@@ -20,7 +20,6 @@ package org.apache.taverna.mobile.data.local;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.model.User;
-import org.apache.taverna.mobile.injection.ActivityContext;
 import org.apache.taverna.mobile.injection.ApplicationContext;
 
 import android.content.Context;
@@ -32,7 +31,6 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import dagger.Provides;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 

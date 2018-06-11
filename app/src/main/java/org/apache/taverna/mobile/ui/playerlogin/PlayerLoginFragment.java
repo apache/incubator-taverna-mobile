@@ -21,7 +21,6 @@ package org.apache.taverna.mobile.ui.playerlogin;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
 

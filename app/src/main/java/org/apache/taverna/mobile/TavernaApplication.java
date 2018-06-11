@@ -35,12 +35,16 @@ public class TavernaApplication extends Application {
 
     ApplicationComponent mApplicationComponent;
 
+    public static TavernaApplication get(Context context) {
+        return (TavernaApplication) context.getApplicationContext();
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         FlowManager.init(new FlowConfig.Builder(this).build());
-        if(BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this);
         }
 
@@ -49,10 +53,6 @@ public class TavernaApplication extends Application {
         }
         LeakCanary.install(this);
 
-    }
-
-    public static TavernaApplication get(Context context) {
-        return (TavernaApplication) context.getApplicationContext();
     }
 
     public ApplicationComponent getComponent() {

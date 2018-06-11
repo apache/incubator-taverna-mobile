@@ -20,7 +20,6 @@ package org.apache.taverna.mobile.ui.myworkflows;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
 import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;

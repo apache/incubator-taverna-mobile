@@ -19,7 +19,6 @@
 package org.apache.taverna.mobile.ui.workflow;
 
 import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Workflow;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
