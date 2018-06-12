@@ -3,6 +3,7 @@ package org.apache.taverna.mobile.injection.component;
 import org.apache.taverna.mobile.injection.PerActivity;
 import org.apache.taverna.mobile.injection.module.ActivityModule;
 import org.apache.taverna.mobile.ui.DashboardActivity;
+import org.apache.taverna.mobile.ui.FlashScreenActivity;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsActivity;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
@@ -75,4 +76,6 @@ public interface ActivityComponent {
     void inject(WorkflowDetailFragment workflowDetailFragment);
 
     void inject(WorkflowRunActivity workflowRunActivity);
+
+    void inject(FlashScreenActivity flashScreenActivity);
 }

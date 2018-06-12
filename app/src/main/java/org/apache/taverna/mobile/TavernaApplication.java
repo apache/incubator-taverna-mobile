@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile;
 
-
 import com.facebook.stetho.Stetho;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
@@ -52,7 +51,6 @@ public class TavernaApplication extends Application {
             return;
         }
         LeakCanary.install(this);
-
     }
 
     public ApplicationComponent getComponent() {
@@ -63,7 +61,6 @@ public class TavernaApplication extends Application {
         }
         return mApplicationComponent;
     }
-
 
     public void setComponent(ApplicationComponent applicationComponent) {
         mApplicationComponent = applicationComponent;
