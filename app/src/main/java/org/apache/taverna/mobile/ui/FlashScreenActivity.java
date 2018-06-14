@@ -20,14 +20,13 @@ package org.apache.taverna.mobile.ui;
 
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
 import org.apache.taverna.mobile.ui.tutorial.TutorialActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
+import android.support.annotation.Nullable;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -37,7 +36,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class FlashScreenActivity extends AppCompatActivity {
+public class FlashScreenActivity extends BaseActivity {
 
     @Inject
     DataManager dataManager;
@@ -46,6 +45,7 @@ public class FlashScreenActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flash_screen);
+        getActivityComponent().inject(this);
 
         Observable.timer(2, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
@@ -72,6 +72,5 @@ public class FlashScreenActivity extends AppCompatActivity {
                         }
                     }
                 });
-
     }
 }

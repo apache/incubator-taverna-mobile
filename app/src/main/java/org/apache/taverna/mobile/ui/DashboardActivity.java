@@ -27,6 +27,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
 import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
@@ -45,7 +46,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,7 +63,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends BaseActivity {
 
     @Inject DataManager dataManager;
 
@@ -83,13 +83,10 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_dashboard_main);
-
         ButterKnife.bind(this);
-
+        getActivityComponent().inject(this);
         setupDrawerContent(navigationView);
-
         dialog = new Dialog(this);
 
         setSupportActionBar(toolbar);
@@ -98,7 +95,6 @@ public class DashboardActivity extends AppCompatActivity {
             ab.setHomeAsUpIndicator(R.drawable.ic_menu);
             ab.setDisplayHomeAsUpEnabled(true);
         }
-
 
         /**
          * Setting the Fragment in FrameLayout
@@ -114,7 +110,6 @@ public class DashboardActivity extends AppCompatActivity {
 
         setNavHeader();
     }
-
 
     /**
      * @param navigationView Design Support NavigationView  OnClick Listener Event
@@ -253,7 +248,6 @@ public class DashboardActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
