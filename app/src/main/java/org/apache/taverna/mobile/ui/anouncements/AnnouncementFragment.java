@@ -61,6 +61,7 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
 
     @Inject
     DataManager dataManager;
+
     @Inject
     AnnouncementPresenter mAnnouncementPresenter;
 
