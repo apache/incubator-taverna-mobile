@@ -83,6 +83,8 @@ public class Announcement implements Parcelable {
         dest.writeString(this.content);
     }
 
+    public Announcement() {
+    }
 
     public Announcement(Parcel in) {
         this.resource = in.readString();

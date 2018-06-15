@@ -62,7 +62,6 @@ public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
 
     public void loadAllAnnouncement(int pageNumber) {
         checkViewAttached();
-        getMvpView().showProgressbar(true);
         compositeDisposable.add(mDataManager.getAllAnnouncement(
                 getAnnouncementQueryOptions(pageNumber))
                 .observeOn(AndroidSchedulers.mainThread())
