@@ -63,7 +63,7 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
         compositeDisposable.clear();
     }
 
-    public void loadAllWorkflow(int pageNumber) {
+    public void loadAllWorkflow(final int pageNumber) {
         checkViewAttached();
         getMvpView().showProgressbar(true);
         compositeDisposable.add(mDataManager.getAllWorkflow(getQueryOptions(pageNumber))
@@ -72,9 +72,18 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
                 .subscribeWith(new DisposableObserver<Workflows>() {
                     @Override
                     public void onNext(Workflows workflows) {
-                        getMvpView().showProgressbar(false);
-                        getMvpView().removeLoadMoreProgressbar();
-                        getMvpView().showWorkflows(workflows);
+                        if (workflows.getWorkflowList() != null) {
+                            getMvpView().showProgressbar(false);
+                            getMvpView().removeLoadMoreProgressbar();
+                            getMvpView().showWorkflows(workflows);
+                        } else {
+                            if (pageNumber == 1) {
+                                getMvpView().showSnackBar(R.string.no_workflows_found);
+                            } else {
+                                getMvpView().showSnackBar(R.string.no_more_workflows_avialable);
+                            }
+                            getMvpView().removeLoadMoreProgressbar();
+                        }
                     }
 
                     @Override
@@ -89,7 +98,6 @@ public class WorkflowPresenter extends BasePresenter<WorkflowMvpView> {
 
                     }
                 }));
-
     }
 
     public void attachSearchHandler(final SearchView searchView) {

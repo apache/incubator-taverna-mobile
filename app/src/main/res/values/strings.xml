@@ -166,6 +166,8 @@ limitations under the License.
     <string name="err_login_email">Enter valid email</string>
     <string name="err_login_password">Enter valid password</string>
     <string name="error_failed_to_fetch_workflow">Failed to fetch Workflow</string>
+    <string name="no_more_workflows_avialable">No more workflows avialable</string>
+    <string name="no_workflows_found">No Workflows Found</string>
 
     <string name="no_my_workflow">You have not created any workflow yet !</string>
     <string name="error_vaild_credential">Please enter valid credential</string>
@@ -197,6 +199,7 @@ limitations under the License.
     <string name="pref_key_logged_in">pref_logged_in</string>
     <string name="pref_remainLogged_in">Remain Logged-in</string>
     <string name="pref_login_description">Decide whether or not to be automatically logged-in when the app starts</string>
+
     <!-- Player Portal url info -->
     <string name="pref_player_default"> http://heater.cs.man.ac.uk:3000/</string>   <!-- default value -->
     <string name="pref_player_title">Configure Taverna player portal</string>
