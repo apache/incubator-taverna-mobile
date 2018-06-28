@@ -40,7 +40,7 @@ ext {
     buildToolsVersion = '27.0.3'
 
     // App dependencies
-    rxJava2Version = '2.0.1'
+    rxJava2Version = '2.0.2'
     supportLibraryVersion = '27.0.2'
     raizLabsDBFlow = '3.1.1'
     retrofitVersionLatest = '2.3.0'
@@ -49,4 +49,7 @@ ext {
     stetho='1.5.0'
     leakcanary ='1.5.4'
     dagger='2.8'
+
+    espresso = '2.2.1'
+    runner = '0.4'
 }

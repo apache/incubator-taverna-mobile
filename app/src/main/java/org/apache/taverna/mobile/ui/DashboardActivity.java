@@ -37,6 +37,7 @@ import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
 import org.apache.taverna.mobile.utils.ActivityUtils;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -65,6 +66,9 @@ import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
 public class DashboardActivity extends BaseActivity {
 
+    private static final String EXTRA_TRIGGER_SYNC_FLAG =
+            "org.apache.taverna.mobile.ui.DashboardActivity.EXTRA_TRIGGER_SYNC_FLAG";
+
     @Inject DataManager dataManager;
 
     @BindView(R.id.nav_view)
@@ -79,6 +83,17 @@ public class DashboardActivity extends BaseActivity {
     private Dialog dialog;
     private Fragment fragment;
     private MenuItem item;
+
+    /**
+     * Return an Intent to start this Activity.
+     * triggerDataSyncOnCreate allows disabling the background sync service onCreate. Should
+     * only be set to false during testing.
+     */
+    public static Intent getStartIntent(Context context, boolean triggerDataSyncOnCreate) {
+        Intent intent = new Intent(context, DashboardActivity.class);
+        intent.putExtra(EXTRA_TRIGGER_SYNC_FLAG, triggerDataSyncOnCreate);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

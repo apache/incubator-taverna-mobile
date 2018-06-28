@@ -16,22 +16,8 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-    }
+        testInstrumentationRunner 'org.apache.taverna.mobile.runner.RxAndroidJUnitRunner'
 
-    sourceSets {
-        def commonTestDir = 'src/commonTest/java'
-
-        main {
-            java.srcDirs = ['src/main/java']
-        }
-        androidTest {
-            java.srcDirs = ['src/androidTest/java/']
-            java.srcDir commonTestDir
-        }
-        test {
-            java.srcDirs = ['src/test/java/']
-            java.srcDir commonTestDir
-        }
     }
 
     buildTypes {
@@ -125,11 +111,30 @@ dependencies {
 
     //Dependencies for JUNit and unit tests.
     testImplementation "junit:junit:4.12"
-    testImplementation "org.mockito:mockito-all:1.10.19"
+    testImplementation "org.mockito:mockito-core:2.8.47"
+
+    androidTestImplementation "junit:junit:4.12"
+    androidTestImplementation "org.mockito:mockito-core:2.8.47"
+
+    androidTestImplementation "org.mockito:mockito-android:2.8.47"
+    androidTestImplementation "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$rootProject.espresso") {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espresso"
+    androidTestImplementation ("com.android.support.test.espresso:espresso-intents:$rootProject.espresso")
+
+    androidTestImplementation "com.android.support.test:runner:$rootProject.runner"
+    androidTestImplementation "com.android.support.test:rules:$rootProject.runner"
 
     //Dependencies for Dagger 2
     implementation  "com.google.dagger:dagger:$rootProject.dagger"
+    testImplementation  "com.google.dagger:dagger:$rootProject.dagger"
+    androidTestImplementation  "com.google.dagger:dagger:$rootProject.dagger"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger"
-
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger"
+    testAnnotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger"
 
 }

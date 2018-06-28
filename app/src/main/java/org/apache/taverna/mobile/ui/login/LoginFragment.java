@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.login;
 
-
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.ui.DashboardActivity;
@@ -102,9 +101,7 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
         mEditTextEmail.addTextChangedListener(new CustomTextWatcher(mEditTextEmail));
-
 
         mEditTextPassword.addTextChangedListener(new CustomTextWatcher(mEditTextPassword));
 
@@ -128,7 +125,6 @@ public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocu
 
             mTextInputEmail.setError(null);
         }
-
 
     }
 
