@@ -41,7 +41,7 @@
             android:orientation="vertical"
             android:visibility="gone">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -56,7 +56,8 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_height"
-                    android:background="@color/grey_background"/>
+                    android:background="@color/grey_background"
+                    android:layout_below="@id/ivWorkflowImage"/>
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/ivFav"
@@ -67,7 +68,10 @@
                     android:layout_marginTop="@dimen/iv_fav_margin_top"
                     android:backgroundTint="@color/colorPrimaryDark"
                     app:borderWidth="@dimen/iv_fav_border_width"
-                    android:src="@drawable/ic_star_border_black_24dp"/>
+                    android:src="@drawable/ic_star_border_black_24dp"
+                    android:layout_below="@+id/ivWorkflowImage"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
 
                 <TextView
                     android:id="@+id/tvTitle"
@@ -75,15 +79,20 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/tv_title_padding"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/tv_title_text_size"/>
+                    android:textSize="@dimen/tv_title_text_size"
+                    android:textStyle="bold"
+                    android:layout_below="@id/ivWorkflowImage"
+                    android:layout_toLeftOf="@+id/ivFav"/>
 
                 <LinearLayout
+                    android:id="@+id/ll_uploader_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/linear_layout_margin_top"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_below="@id/tvTitle">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/ivUploader"
                         android:layout_width="@dimen/iv_uploader_width"
                         android:layout_height="@dimen/iv_uploader_height"
@@ -102,7 +111,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/tv_uploader_name_text_size"/>
+                            android:textSize="@dimen/tv_uploader_name_text_size"
+                            android:layout_marginTop="@dimen/tv_uploader_name_margin_top"/>
 
                         <TextView
                             android:id="@+id/tvDate"
@@ -121,16 +131,23 @@
                             android:paddingLeft="@dimen/tv_type_padding_left"
                             android:paddingRight="@dimen/tv_type_padding_right"
                             android:paddingStart="@dimen/tv_type_padding_start"/>
+
                     </RelativeLayout>
 
                 </LinearLayout>
 
-                <LinearLayout
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/grey_background"
                     android:orientation="vertical"
-                    android:padding="@dimen/linLay2_padding">
+                    android:padding="@dimen/cv_description_padding"
+                    android:layout_marginTop="@dimen/cv_description_margin_top"
+                    android:layout_marginLeft="@dimen/cv_description_margin_left"
+                    android:layout_marginRight="@dimen/cv_description_margin_right"
+                    android:layout_marginBottom="@dimen/cv_description_margin_bottom"
+                    android:elevation="@dimen/cv_description_elevation"
+                    app:cardCornerRadius="@dimen/cv_description_corner_radius"
+                    android:layout_below="@id/ll_uploader_info">
 
                     <WebView
                         android:id="@+id/tvDescription"
@@ -138,9 +155,10 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/tv_description_padding"
                         />
-                </LinearLayout>
 
-            </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </RelativeLayout>
 
         </ScrollView>
     </RelativeLayout>
