@@ -20,76 +20,82 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_margin="5dp"
-        android:layout_height="250dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="1dp">
+        android:layout_margin="@dimen/workflow_card_margin"
+        android:layout_height="@dimen/workflow_card_height"
+        app:cardCornerRadius="@dimen/workflow_card_corner_radius"
+        app:cardElevation="@dimen/workflow_card_elevation">
+
     <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <ImageView
-                android:id="@+id/ivWorkflowImage"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:scaleType="center"
-                android:src="@drawable/placeholder"/>
-        <TextView
-                android:background="@color/black_background"
-                android:id="@+id/tvUploader"
+            android:id="@+id/ivWorkflowImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/workflow_image_height"
+            android:scaleType="center"
+            android:src="@drawable/placeholder"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+
+            <TextView
+                android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/ivWorkflowImage"
-                android:text="Uploader"
-                android:paddingLeft="10dp"
-                android:paddingStart="10dp"
-                android:paddingRight="0dp"
-                android:paddingEnd="0dp"
-                android:paddingBottom="5dp"
-                android:textSize="14sp"
-                android:textColor="@android:color/white"/>
-        <TextView
+                android:text="type"
+                android:textSize="@dimen/workflow_title_text_size"
+                android:textColor="@android:color/white"
+                android:background="@color/black_background"
+                android:padding="@dimen/workflow_title_text_padding"
+                android:textStyle="bold"
+                />
+
+            <TextView
                 android:background="@color/black_background"
                 android:id="@+id/tvDate"
-                android:layout_above="@id/tvUploader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="date"
-                android:paddingLeft="10dp"
-                android:paddingStart="10dp"
-                android:paddingRight="0dp"
-                android:paddingEnd="0dp"
-                android:paddingBottom="5dp"
-                android:textSize="14sp"
-                android:textColor="@android:color/white"/>
-        <TextView
-                android:background="@color/black_background"
-                android:id="@+id/tvType"
-                android:layout_above="@id/tvDate"
+                android:textSize="@dimen/workflow_date_text_size"
+                android:textColor="@android:color/white"
+                android:paddingLeft="@dimen/workflow_date_padding_left"
+                />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="type"
-                android:paddingLeft="10dp"
-                android:paddingStart="10dp"
-                android:paddingRight="0dp"
-                android:paddingEnd="0dp"
-                android:paddingBottom="5dp"
-                android:textSize="16sp"
-                android:textColor="@android:color/white"/>
-        <TextView
-                android:background="@color/black_background"
-                android:id="@+id/tvTitle"
-                android:layout_above="@id/tvType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="type"
-                android:paddingLeft="10dp"
-                android:paddingStart="10dp"
-                android:paddingRight="0dp"
-                android:paddingEnd="0dp"
-                android:paddingBottom="5dp"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:textSize="18sp"
-                android:textColor="@android:color/white"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvUploader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Uploader"
+                    android:textSize="@dimen/workflow_uploader_name_text_size"
+                    android:textColor="@android:color/white"
+                    android:background="@color/black_background"
+                    android:layout_weight="1"
+                    android:padding="@dimen/workflow_uploader_name_padding"/>
+
+                <TextView
+                    android:id="@+id/tvType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/black_background"
+                    android:text="type"
+                    android:textSize="@dimen/workflow_type_name_text_size"
+                    android:textColor="@android:color/white"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:padding="@dimen/workflow_type_padding"/>
+
+            </LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
+
 </android.support.v7.widget.CardView>

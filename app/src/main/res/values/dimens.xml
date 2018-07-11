@@ -19,6 +19,21 @@ limitations under the License.
     <dimen name="app_bar_top_padding">0dp</dimen>
     <dimen name="card_margin_horizontal">10dp</dimen>
     <dimen name="card_margin_vertical">8dp</dimen>
+    
+    <!--Workflow Card Dimens-->
+    <dimen name="workflow_card_margin">5dp</dimen>
+    <dimen name="workflow_card_height">200dp</dimen>
+    <dimen name="workflow_card_corner_radius">5dp</dimen>
+    <dimen name="workflow_card_elevation">1dp</dimen>
+    <dimen name="workflow_image_height">250dp</dimen>
+    <dimen name="workflow_title_text_size">16sp</dimen>
+    <dimen name="workflow_title_text_padding">3dp</dimen>
+    <dimen name="workflow_date_text_size">16sp</dimen>
+    <dimen name="workflow_date_padding_left">3dp</dimen>
+    <dimen name="workflow_uploader_name_text_size">14sp</dimen>
+    <dimen name="workflow_uploader_name_padding">3dp</dimen>
+    <dimen name="workflow_type_name_text_size">14sp</dimen>
+    <dimen name="workflow_type_padding">3dp</dimen>
 
     <!--Announcement Card margin-->
     <dimen name="announcement_card_margin_horizontal">5dp</dimen>
