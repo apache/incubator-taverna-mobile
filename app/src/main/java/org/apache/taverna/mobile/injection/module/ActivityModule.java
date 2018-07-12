@@ -22,7 +22,6 @@ import android.app.Activity;
 import android.content.Context;
 
 import org.apache.taverna.mobile.injection.ActivityContext;
-
 import dagger.Module;
 import dagger.Provides;
 

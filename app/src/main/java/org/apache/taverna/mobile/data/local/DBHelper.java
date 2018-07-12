@@ -35,7 +35,6 @@ import javax.inject.Singleton;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 
-
 @Singleton
 public class DBHelper {
 

@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile;
 
-
 import com.facebook.stetho.Stetho;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;

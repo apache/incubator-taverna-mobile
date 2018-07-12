@@ -131,5 +131,6 @@ dependencies {
     implementation  "com.google.dagger:dagger:$rootProject.dagger"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger"
 
+    implementation 'com.android.support:multidex:1.0.1'
 
 }

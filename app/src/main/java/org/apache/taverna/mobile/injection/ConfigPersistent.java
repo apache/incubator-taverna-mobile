@@ -16,28 +16,20 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.data.remote;
+package org.apache.taverna.mobile.injection;
 
-import com.facebook.stetho.okhttp3.StethoInterceptor;
+import org.apache.taverna.mobile.injection.component.ConfigPersistentComponent;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-public class TavernaOkHttpClient {
+import javax.inject.Scope;
 
-    public OkHttpClient getTavernaOkHttpClient() {
-
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-
-        //Enable Full Body Logging
-        HttpLoggingInterceptor logger = new HttpLoggingInterceptor();
-        logger.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        //Interceptor :> Full Body Logger
-        builder.addInterceptor(logger);
-
-        builder.addNetworkInterceptor(new StethoInterceptor());
-        return builder.build();
-
-    }
+/**
+ * A scoping annotation to permit dependencies conform to the life of the
+ * {@link ConfigPersistentComponent}
+ */
+@Scope
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ConfigPersistent {
 }

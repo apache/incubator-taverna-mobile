@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.data.remote;
 
-
 import org.apache.taverna.mobile.data.model.PlayerWorkflow;
 import org.apache.taverna.mobile.data.model.PlayerWorkflowDetail;
 
@@ -31,7 +30,6 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-
 
 public interface TavernaPlayerService {
 

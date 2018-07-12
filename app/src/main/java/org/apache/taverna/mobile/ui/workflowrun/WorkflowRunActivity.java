@@ -47,10 +47,8 @@ import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 public class WorkflowRunActivity extends BaseActivity implements WorkflowRunMvpView,
         PlayerLoginFragment.OnSuccessful {
 
-    @Inject
-    DataManager dataManager;
-    @Inject
-    WorkflowRunPresenter mWorkflowRunPresenter;
+    @Inject DataManager dataManager;
+    @Inject WorkflowRunPresenter mWorkflowRunPresenter;
     PagerAdapter mPagerAdapter;
 
     @BindView(R.id.stepsView)

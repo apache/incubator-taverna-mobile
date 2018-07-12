@@ -47,9 +47,7 @@ import okhttp3.ResponseBody;
 public class DataManager {
 
     private BaseApiManager mBaseApiManager;
-
     private DBHelper mDBHelper;
-
     private PreferencesHelper mPreferencesHelper;
 
     @Inject

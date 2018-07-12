@@ -16,28 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.taverna.mobile.data.remote;
+package org.apache.taverna.mobile.injection.component;
 
-import com.facebook.stetho.okhttp3.StethoInterceptor;
+import org.apache.taverna.mobile.injection.ConfigPersistent;
+import org.apache.taverna.mobile.injection.module.ActivityModule;
+import dagger.Component;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
+@ConfigPersistent
+@Component(dependencies = ApplicationComponent.class)
+public interface ConfigPersistentComponent {
 
-public class TavernaOkHttpClient {
+    ActivityComponent activityComponent(ActivityModule activityModule);
 
-    public OkHttpClient getTavernaOkHttpClient() {
-
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-
-        //Enable Full Body Logging
-        HttpLoggingInterceptor logger = new HttpLoggingInterceptor();
-        logger.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        //Interceptor :> Full Body Logger
-        builder.addInterceptor(logger);
-
-        builder.addNetworkInterceptor(new StethoInterceptor());
-        return builder.build();
-
-    }
 }

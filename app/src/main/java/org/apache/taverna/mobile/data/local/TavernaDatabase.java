@@ -20,14 +20,15 @@ package org.apache.taverna.mobile.data.local;
 
 import com.raizlabs.android.dbflow.annotation.Database;
 
+import javax.inject.Singleton;
+
 @Database(name = TavernaDatabase.NAME,
         version = TavernaDatabase.VERSION,
         foreignKeysSupported = true)
+@Singleton
 public class TavernaDatabase {
 
-
     public static final String NAME = "Taverna";
-
 
     public static final int VERSION = 1;
 }

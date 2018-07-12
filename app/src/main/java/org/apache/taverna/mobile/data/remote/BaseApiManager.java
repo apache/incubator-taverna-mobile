@@ -28,13 +28,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
-
 @Singleton
 public class BaseApiManager {
 
-
     public static final String MY_EXPERIMENT_END_POINT = "http://www.myexperiment.org/";
-
 
     PreferencesHelper mPreferencesHelper;
 

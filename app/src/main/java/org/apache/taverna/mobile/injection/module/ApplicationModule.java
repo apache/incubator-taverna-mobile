@@ -18,10 +18,13 @@
  */
 package org.apache.taverna.mobile.injection.module;
 
+import org.apache.taverna.mobile.data.remote.TavernaService;
 import org.apache.taverna.mobile.injection.ApplicationContext;
 
 import android.app.Application;
 import android.content.Context;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
