@@ -61,6 +61,7 @@ limitations under the License.
     <dimen name="iv_fav_border_width">0sp</dimen>
     <dimen name="tv_title_padding">10sp</dimen>
     <dimen name="tv_title_text_size">20sp</dimen>
+    <dimen name="tv_title_margin_right">75dp</dimen>
     <dimen name="linear_layout_margin_top">5sp</dimen>
     <dimen name="iv_uploader_width">50sp</dimen>
     <dimen name="iv_uploader_height">50sp</dimen>
@@ -70,12 +71,19 @@ limitations under the License.
     <dimen name="rel_lay2_margin_left">10sp</dimen>
     <dimen name="rel_lay2_margin_start">10sp</dimen>
     <dimen name="tv_uploader_name_text_size">18sp</dimen>
+    <dimen name="tv_uploader_name_margin_top">4dp</dimen>
     <dimen name="tv_type_padding_end">10sp</dimen>
     <dimen name="tv_type_padding_left">0sp</dimen>
     <dimen name="tv_type_padding_right">10sp</dimen>
     <dimen name="tv_type_padding_start">0sp</dimen>
-    <dimen name="linLay2_padding">15sp</dimen>
-    <dimen name="tv_description_padding">5sp</dimen>
+    <dimen name="cv_description_padding">15sp</dimen>
+    <dimen name="cv_description_margin_top">5sp</dimen>
+    <dimen name="cv_description_margin_left">10sp</dimen>
+    <dimen name="cv_description_margin_right">10sp</dimen>
+    <dimen name="cv_description_margin_bottom">10sp</dimen>
+    <dimen name="cv_description_elevation">5sp</dimen>
+    <dimen name="cv_description_corner_radius">2sp</dimen>
+    <dimen name="tv_description_padding">15sp</dimen>
 
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="item_offset">3dp</dimen>

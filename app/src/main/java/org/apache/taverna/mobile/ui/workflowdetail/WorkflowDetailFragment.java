@@ -18,7 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.workflowdetail;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -64,6 +63,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMvpView {
 
@@ -81,7 +81,7 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
     TextView title;
 
     @BindView(R.id.ivUploader)
-    ImageView uploaderImage;
+    CircleImageView uploaderImage;
 
     @BindView(R.id.tvUploaderName)
     TextView uploaderName;
