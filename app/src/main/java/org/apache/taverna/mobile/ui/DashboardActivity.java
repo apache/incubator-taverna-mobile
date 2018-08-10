@@ -281,29 +281,57 @@ public class DashboardActivity extends BaseActivity {
     private void setNavHeader() {
 
         View headerView =  navigationView.getHeaderView(0);
-        String avatarUrl = dataManager.getPreferencesHelper().getUserAvatarUrl();
         final CircleImageView navUserAvatar = headerView.findViewById(R.id.nav_user_avatar);
 
-        Glide.with(getContext())
-                .load(avatarUrl)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.drawable.ic_account_circle_black_24dp)
-                .error(R.drawable.ic_account_circle_black_24dp)
-                .into(new SimpleTarget<GlideDrawable>() {
-                    @Override
-                    public void onResourceReady(GlideDrawable resource, GlideAnimation<?
-                            super GlideDrawable> glideAnimation) {
-                        navUserAvatar.setImageDrawable(resource);
-                    }
-                });
+        if (dataManager.getPreferencesHelper().getUserAvatarUrl() != null) {
 
-        navUserAvatar.setOnClickListener(new View.OnClickListener() {
-            @OnClick
-            public void onClick(View v) {
-                Intent intent = new Intent(DashboardActivity.this, UserProfileActivity.class);
-                startActivity(intent);
-            }
-        });
+            String avatarUrl = dataManager.getPreferencesHelper().getUserAvatarUrl();
+
+            Glide.with(getContext())
+                    .load(avatarUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .placeholder(R.drawable.ic_account_circle_black_24dp)
+                    .error(R.drawable.ic_account_circle_black_24dp)
+                    .into(new SimpleTarget<GlideDrawable>() {
+                        @Override
+                        public void onResourceReady(GlideDrawable resource, GlideAnimation<?
+                                super GlideDrawable> glideAnimation) {
+                            navUserAvatar.setImageDrawable(resource);
+                        }
+                    });
+
+            navUserAvatar.setOnClickListener(new View.OnClickListener() {
+                @OnClick
+                public void onClick(View v) {
+                    Intent intent = new Intent(DashboardActivity.this, UserProfileActivity.class);
+                    startActivity(intent);
+                }
+            });
+        } else {
+
+            String avatarUrl = "http://www.myexperiment.org/images/avatar.png";
+
+            Glide.with(getContext())
+                    .load(avatarUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .placeholder(R.drawable.ic_account_circle_black_24dp)
+                    .error(R.drawable.ic_account_circle_black_24dp)
+                    .into(new SimpleTarget<GlideDrawable>() {
+                        @Override
+                        public void onResourceReady(GlideDrawable resource, GlideAnimation<?
+                                super GlideDrawable> glideAnimation) {
+                            navUserAvatar.setImageDrawable(resource);
+                        }
+                    });
+
+            navUserAvatar.setOnClickListener(new View.OnClickListener() {
+                @OnClick
+                public void onClick(View v) {
+                    Intent intent = new Intent(DashboardActivity.this, UserProfileActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
         String userName = dataManager.getPreferencesHelper().getUserName();
         TextView navUserName = headerView.findViewById(R.id.nav_user_name);
@@ -314,7 +342,6 @@ public class DashboardActivity extends BaseActivity {
         navUserEmail.setText(userEmail);
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user uri="http://www.myexperiment.org/user.xml?id=65265" resource="http://www.myexperiment.org/users/65265" id="65265">
+    <id>65265</id>
+    <created-at>2016-04-27 04:48:05 UTC</created-at>
+    <name>Sagar Sagar</name>
+    <description/>
+    <email/>
+    <avatar resource="http://www.myexperiment.org/images/avatar.png"/>
+    <city/>
+    <country/>
+    <website/>
+</user>
