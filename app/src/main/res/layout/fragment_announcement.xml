@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -15,8 +14,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,8 +23,7 @@
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        >
+        android:layout_below="@id/toolbar">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_movies"
@@ -34,7 +31,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:padding="@dimen/item_offset"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout>
 
@@ -44,5 +41,5 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:visibility="visible"/>
+        android:visibility="visible" />
 </RelativeLayout>

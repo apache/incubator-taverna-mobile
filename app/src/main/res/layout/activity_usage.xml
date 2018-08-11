@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -22,9 +21,9 @@
 
     <include
         android:id="@+id/toolbar"
-        android:layout_height="wrap_content"
+        layout="@layout/appbar"
         android:layout_width="fill_parent"
-        layout="@layout/appbar"/>
+        android:layout_height="wrap_content" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -38,11 +37,10 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/usage_card_view_padding_bottom"
-                android:layout_marginRight="@dimen/usage_card_view_padding_bottom"
                 android:layout_marginLeft="@dimen/usage_card_view_padding_bottom"
+                android:layout_marginRight="@dimen/usage_card_view_padding_bottom"
                 android:layout_marginTop="@dimen/usage_card_view_padding_bottom"
-                >
+                android:paddingBottom="@dimen/usage_card_view_padding_bottom">
 
                 <TextView
                     android:id="@+id/text_login_title"
@@ -77,8 +75,8 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/usage_card_view_padding_bottom"
                 android:layout_marginLeft="@dimen/usage_card_view_padding_bottom"
+                android:layout_marginRight="@dimen/usage_card_view_padding_bottom"
                 android:paddingBottom="@dimen/usage_card_view_padding_bottom">
 
                 <TextView
@@ -114,8 +112,8 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/usage_card_view_padding_bottom"
                 android:layout_marginLeft="@dimen/usage_card_view_padding_bottom"
+                android:layout_marginRight="@dimen/usage_card_view_padding_bottom"
                 android:paddingBottom="@dimen/usage_card_view_padding_bottom">
 
                 <TextView
@@ -151,9 +149,9 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/usage_card_view_padding_bottom"
+                android:layout_marginLeft="@dimen/usage_card_view_padding_bottom"
                 android:layout_marginRight="@dimen/usage_card_view_padding_bottom"
-                android:layout_marginLeft="@dimen/usage_card_view_padding_bottom">
+                android:paddingBottom="@dimen/usage_card_view_padding_bottom">
 
                 <TextView
                     android:id="@+id/text_workflow_title"

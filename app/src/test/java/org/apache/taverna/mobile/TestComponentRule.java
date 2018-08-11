@@ -19,17 +19,15 @@
 package org.apache.taverna.mobile;
 
 
-import org.apache.taverna.mobile.data.DataManager;
+import android.content.Context;
 
+import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.injection.component.DaggerTestComponent;
 import org.apache.taverna.mobile.injection.component.TestComponent;
 import org.apache.taverna.mobile.injection.module.ApplicationTestModule;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
-
-
-import android.content.Context;
 
 public class TestComponentRule implements TestRule {
 

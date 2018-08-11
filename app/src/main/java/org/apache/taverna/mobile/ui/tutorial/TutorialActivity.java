@@ -18,13 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.tutorial;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
-import org.apache.taverna.mobile.data.model.TutorialSliderEnum;
-import org.apache.taverna.mobile.ui.adapter.TutorialSliderAdapter;
-import org.apache.taverna.mobile.ui.base.BaseActivity;
-import org.apache.taverna.mobile.ui.login.LoginActivity;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,6 +27,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.local.PreferencesHelper;
+import org.apache.taverna.mobile.data.model.TutorialSliderEnum;
+import org.apache.taverna.mobile.ui.adapter.TutorialSliderAdapter;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
+import org.apache.taverna.mobile.ui.login.LoginActivity;
 
 import javax.inject.Inject;
 

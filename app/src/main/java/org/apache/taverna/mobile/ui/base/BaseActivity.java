@@ -1,11 +1,11 @@
 package org.apache.taverna.mobile.ui.base;
 
+import android.support.v7.app.AppCompatActivity;
+
 import org.apache.taverna.mobile.TavernaApplication;
 import org.apache.taverna.mobile.injection.component.ActivityComponent;
 import org.apache.taverna.mobile.injection.component.DaggerActivityComponent;
 import org.apache.taverna.mobile.injection.module.ActivityModule;
-
-import android.support.v7.app.AppCompatActivity;
 
 /**
  * @author lusifer

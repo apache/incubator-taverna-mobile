@@ -18,15 +18,15 @@
  */
 package org.apache.taverna.mobile.ui.workflow;
 
+import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
+
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.data.model.Search;
 import org.apache.taverna.mobile.data.model.Workflows;
 import org.apache.taverna.mobile.ui.base.BasePresenter;
 import org.apache.taverna.mobile.utils.RxSearch;
-
-import android.support.v7.widget.SearchView;
-import android.text.TextUtils;
 
 import java.util.HashMap;
 import java.util.Map;

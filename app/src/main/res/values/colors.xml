@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -16,81 +15,81 @@
    limitations under the License.
 -->
 <resources>
-	<color name="colorBlack">#000000</color>
-	<color name="colorPrimary">#2196F3</color>
-	<color name="colorPrimaryDark">#2196F3</color>
-	<color name="colorAccent">#FF4081</color>
-	<color name="window_background">#FFF5F5F5</color>
-	<color name="button_click_background">#e0e0e0</color>
-	<color name="black_background">#EE2196F3</color>
-	<color name="grey_background">#e0e0e0</color>
-	<color name="white">#ffff</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#2196F3</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="window_background">#FFF5F5F5</color>
+    <color name="button_click_background">#e0e0e0</color>
+    <color name="black_background">#EE2196F3</color>
+    <color name="grey_background">#e0e0e0</color>
+    <color name="white">#ffff</color>
 
-	<!-- A light Holo shade of blue -->
-	<color name="blue_light">#ff33b5e5</color>
-	<!-- A light Holo shade of gray -->
-	<color name="gray_light">#33999999</color>
-	<!-- A dark Holo shade of gray -->
-	<color name="gray_dark">#BB666666</color>
-	<!-- A light Holo shade of green -->
-	<color name="green_light">#ff99cc00</color>
-	<!-- A light Holo shade of red -->
-	<color name="red_light">#ffff4444</color>
-	<!-- A dark Holo shade of blue -->
-	<color name="blue_dark">#ff0099cc</color>
-	<!-- A dark Holo shade of green -->
-	<color name="green_dark">#ff669900</color>
-	<!-- A dark Holo shade of red -->
-	<color name="red_dark">#ffcc0000</color>
-	<!-- A Holo shade of purple -->
-	<color name="purple">#ffaa66cc</color>
-	<!-- A light Holo shade of orange -->
-	<color name="orange_light">#ffffbb33</color>
-	<!-- A dark Holo shade of orange -->
-	<color name="orange_dark">#ffff8800</color>
-	<!-- A really bright Holo shade of blue -->
-	<color name="blue_bright">#ff00ddff</color>
-	<!-- A really bright Holo shade of gray -->
-	<color name="gray_bright">#33CCCCCC</color>
+    <!-- A light Holo shade of blue -->
+    <color name="blue_light">#ff33b5e5</color>
+    <!-- A light Holo shade of gray -->
+    <color name="gray_light">#33999999</color>
+    <!-- A dark Holo shade of gray -->
+    <color name="gray_dark">#BB666666</color>
+    <!-- A light Holo shade of green -->
+    <color name="green_light">#ff99cc00</color>
+    <!-- A light Holo shade of red -->
+    <color name="red_light">#ffff4444</color>
+    <!-- A dark Holo shade of blue -->
+    <color name="blue_dark">#ff0099cc</color>
+    <!-- A dark Holo shade of green -->
+    <color name="green_dark">#ff669900</color>
+    <!-- A dark Holo shade of red -->
+    <color name="red_dark">#ffcc0000</color>
+    <!-- A Holo shade of purple -->
+    <color name="purple">#ffaa66cc</color>
+    <!-- A light Holo shade of orange -->
+    <color name="orange_light">#ffffbb33</color>
+    <!-- A dark Holo shade of orange -->
+    <color name="orange_dark">#ffff8800</color>
+    <!-- A really bright Holo shade of blue -->
+    <color name="blue_bright">#ff00ddff</color>
+    <!-- A really bright Holo shade of gray -->
+    <color name="gray_bright">#33CCCCCC</color>
 
-	<!--Swipe Refresh Colors-->
-	<array name="swipeRefreshColors">
-		<item>@color/blue_light</item>
-		<item>@color/green_light</item>
-		<item>@color/red_light</item>
-		<item>@color/orange_light</item>
-	</array>
+    <!--Swipe Refresh Colors-->
+    <array name="swipeRefreshColors">
+        <item>@color/blue_light</item>
+        <item>@color/green_light</item>
+        <item>@color/red_light</item>
+        <item>@color/orange_light</item>
+    </array>
 
-	<!-- Screens background color-->
-	<color name="bg_screen1">#f64c73</color>
-	<color name="bg_screen2">#20d2bb</color>
-	<color name="bg_screen3">#3395ff</color>
-	<color name="bg_screen4">#3395ff</color>
+    <!-- Screens background color-->
+    <color name="bg_screen1">#f64c73</color>
+    <color name="bg_screen2">#20d2bb</color>
+    <color name="bg_screen3">#3395ff</color>
+    <color name="bg_screen4">#3395ff</color>
 
-	<!-- dots inactive colors -->
-	<color name="dot_dark_screen1">#d1395c</color>
-	<color name="dot_dark_screen2">#14a895</color>
-	<color name="dot_dark_screen3">#2278d4</color>
-	<color name="dot_dark_screen4">#2278d4</color>
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#d1395c</color>
+    <color name="dot_dark_screen2">#14a895</color>
+    <color name="dot_dark_screen3">#2278d4</color>
+    <color name="dot_dark_screen4">#2278d4</color>
 
-	<!-- dots active colors -->
-	<color name="dot_light_screen1">#f98da5</color>
-	<color name="dot_light_screen2">#8cf9eb</color>
-	<color name="dot_light_screen3">#93c6fd</color>
-	<color name="dot_light_screen4">#93c6fd</color>
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#f98da5</color>
+    <color name="dot_light_screen2">#8cf9eb</color>
+    <color name="dot_light_screen3">#93c6fd</color>
+    <color name="dot_light_screen4">#93c6fd</color>
 
-	<array name="array_dot_active">
-		<item>@color/dot_light_screen1</item>
-		<item>@color/dot_light_screen2</item>
-		<item>@color/dot_light_screen3</item>
-		<item>@color/dot_light_screen4</item>
-	</array>
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+    </array>
 
-	<array name="array_dot_inactive">
-		<item>@color/dot_dark_screen1</item>
-		<item>@color/dot_dark_screen2</item>
-		<item>@color/dot_dark_screen3</item>
-		<item>@color/dot_dark_screen4</item>
-	</array>
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+    </array>
 
 </resources>

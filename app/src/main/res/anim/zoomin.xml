@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Apache Taverna Mobile
     Copyright 2016 The Apache Software Foundation
 
@@ -31,10 +30,9 @@
         android:fromYScale="1"
         android:pivotX="50%"
         android:pivotY="50%"
-        android:toXScale="3.0"
-        android:toYScale="3.0"
         android:repeatCount="1"
-        android:repeatMode="reverse">
-    </scale>
+        android:repeatMode="reverse"
+        android:toXScale="3.0"
+        android:toYScale="3.0"></scale>
 
 </set>

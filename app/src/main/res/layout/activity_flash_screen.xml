@@ -13,49 +13,51 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".ui.FlashScreenActivity">
 
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:id="@+id/tvTitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:text="@string/app_name"
         android:textSize="@dimen/title_text_size" />
 
     <ImageView
+        android:id="@+id/ivLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ivLogo"
-        android:src="@mipmap/ic_launcher"
-        android:layout_below="@+id/tvTitle"
-        android:layout_marginTop="@dimen/logo_margin_top"
+        android:layout_above="@+id/tvFooter"
         android:layout_alignEnd="@+id/tvTitle"
         android:layout_alignStart="@+id/tvTitle"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginTop="@dimen/logo_margin_top"
         android:scaleType="fitStart"
-        android:layout_above="@+id/tvFooter" />
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
+        android:id="@+id/tvFooter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/completebrand"
-        android:id="@+id/tvFooter"
-        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:gravity="center" />
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:text="@string/completebrand"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ProgressBar
+        android:id="@+id/pbLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pbLoading"
         android:layout_alignBottom="@+id/ivLogo"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

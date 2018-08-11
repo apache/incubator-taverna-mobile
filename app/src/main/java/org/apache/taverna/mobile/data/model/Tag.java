@@ -19,26 +19,45 @@
 package org.apache.taverna.mobile.data.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Text;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 @Root(name = "tag")
 public class Tag implements Parcelable {
 
+    public static final Parcelable.Creator<Tag> CREATOR = new Parcelable.Creator<Tag>() {
+        @Override
+        public Tag createFromParcel(Parcel source) {
+            return new Tag(source);
+        }
+
+        @Override
+        public Tag[] newArray(int size) {
+            return new Tag[size];
+        }
+    };
     @Attribute(name = "resource", required = false)
     String resource;
-
     @Attribute(name = "uri", required = false)
     String uri;
-
     @Attribute(name = "id", required = false)
     String id;
-
     @Text
     String content;
+
+    public Tag() {
+    }
+
+    protected Tag(Parcel in) {
+        this.resource = in.readString();
+        this.uri = in.readString();
+        this.id = in.readString();
+        this.content = in.readString();
+    }
 
     public String getContent() {
         return content;
@@ -84,26 +103,4 @@ public class Tag implements Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.content);
     }
-
-    public Tag() {
-    }
-
-    protected Tag(Parcel in) {
-        this.resource = in.readString();
-        this.uri = in.readString();
-        this.id = in.readString();
-        this.content = in.readString();
-    }
-
-    public static final Parcelable.Creator<Tag> CREATOR = new Parcelable.Creator<Tag>() {
-        @Override
-        public Tag createFromParcel(Parcel source) {
-            return new Tag(source);
-        }
-
-        @Override
-        public Tag[] newArray(int size) {
-            return new Tag[size];
-        }
-    };
 }

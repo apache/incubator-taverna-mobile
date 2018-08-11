@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -16,50 +15,50 @@
    limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
-	android:layout_height="@dimen/nav_image_height"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:background="@drawable/nav_header"
-	android:orientation="vertical"
-	android:weightSum="1">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_image_height"
+    android:background="@drawable/nav_header"
+    android:orientation="vertical"
+    android:weightSum="1">
 
-<LinearLayout
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:orientation="vertical"
-	android:layout_alignParentBottom="true"
-	android:layout_alignParentLeft="true"
-	android:layout_alignParentStart="true"
-	android:layout_marginBottom="@dimen/layout_marginBottom">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="@dimen/layout_marginBottom"
+        android:orientation="vertical">
 
-	<TextView
-		android:id="@+id/nav_user_name"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginLeft="@dimen/tv_layout_marginLeft"
-		android:textColor="@color/white"
-		android:text="@string/username"
-		android:textSize="@dimen/tv_textSize"
-		android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/nav_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/tv_layout_marginLeft"
+            android:text="@string/username"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tv_textSize"
+            android:textStyle="bold" />
 
-	<TextView
-		android:id="@+id/nav_user_email"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:textColor="@color/white"
-		android:layout_marginLeft="@dimen/tv_layout_marginLeft"
-		android:text="@string/email"
-		android:textSize="@dimen/tv_textSize"
-		android:textStyle="normal"/>
+        <TextView
+            android:id="@+id/nav_user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/tv_layout_marginLeft"
+            android:text="@string/email"
+            android:textColor="@color/white"
+            android:textSize="@dimen/tv_textSize"
+            android:textStyle="normal" />
 
-</LinearLayout>
+    </LinearLayout>
 
-	<de.hdodenhof.circleimageview.CircleImageView
-		android:id="@+id/nav_user_avatar"
-		android:layout_width="@dimen/user_image_length"
-		android:layout_height="@dimen/user_image_length"
-		android:layout_marginLeft="@dimen/user_image_margin_left"
-		android:layout_marginTop="@dimen/user_image_margin_top"
-		app:civ_border_color="@color/white"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/nav_user_avatar"
+        android:layout_width="@dimen/user_image_length"
+        android:layout_height="@dimen/user_image_length"
+        android:layout_marginLeft="@dimen/user_image_margin_left"
+        android:layout_marginTop="@dimen/user_image_margin_top"
+        app:civ_border_color="@color/white" />
 
 </RelativeLayout>

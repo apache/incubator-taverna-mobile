@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 Licensed to the Apache Software Foundation (ASF) under one or more
 contributor license agreements. See the NOTICE file distributed with
 this work for additional information regarding copyright ownership.
@@ -14,7 +13,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -33,14 +31,13 @@ limitations under the License.
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/dots_margin_bottom"
         android:gravity="center"
-        android:orientation="horizontal">
-    </LinearLayout>
+        android:orientation="horizontal"></LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/tutorial_view_height"
-        android:alpha=".5"
         android:layout_above="@id/layoutDots"
+        android:alpha=".5"
         android:background="@android:color/white" />
 
     <Button

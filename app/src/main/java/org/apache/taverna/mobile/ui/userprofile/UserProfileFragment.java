@@ -1,5 +1,13 @@
 package org.apache.taverna.mobile.ui.userprofile;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -12,14 +20,6 @@ import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsActivity;
 import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -29,7 +29,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserProfileFragment extends Fragment {
 
-    @Inject DataManager dataManager;
+    @Inject
+    DataManager dataManager;
 
     @BindView(R.id.user_name)
     TextView mUserName;

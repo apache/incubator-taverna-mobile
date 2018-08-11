@@ -18,17 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.anouncements;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Announcements;
-import org.apache.taverna.mobile.data.model.DetailAnnouncement;
-import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
-import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.ui.base.BaseActivity;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -48,6 +37,17 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Announcements;
+import org.apache.taverna.mobile.data.model.DetailAnnouncement;
+import org.apache.taverna.mobile.ui.adapter.AnnouncementAdapter;
+import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 
 import javax.inject.Inject;
 

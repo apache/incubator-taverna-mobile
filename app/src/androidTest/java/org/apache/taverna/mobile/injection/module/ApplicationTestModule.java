@@ -18,12 +18,12 @@
  */
 package org.apache.taverna.mobile.injection.module;
 
+import android.app.Application;
+import android.content.Context;
+
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.injection.ApplicationContext;
 import org.mockito.Mockito;
-
-import android.app.Application;
-import android.content.Context;
 
 import javax.inject.Singleton;
 

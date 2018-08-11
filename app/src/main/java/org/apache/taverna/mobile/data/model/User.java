@@ -28,44 +28,62 @@ import org.simpleframework.xml.Root;
 @Root(name = "user")
 public class User implements Parcelable {
 
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
     @Attribute(name = "resource", required = false)
     private String resource;
-
     @Attribute(name = "uri", required = false)
     private String uri;
-
     @Attribute(name = "id", required = false)
     private String id;
-
     @Element(name = "id", required = false)
     private String elementId;
-
     @Element(name = "created-at", required = false)
     private String createdAt;
-
     @Element(name = "name", required = false)
     private String name;
-
     @Element(name = "description", required = false)
     private String description;
-
     @Element(name = "email", required = false)
     private String email;
-
     @Element(name = "city", required = false)
     private String city;
-
     @Element(name = "country", required = false)
     private String country;
-
     @Element(name = "website", required = false)
     private String website;
-
     @Element(name = "avatar", required = false)
     private Avatar avatar;
-
     @Element(name = "workflows", required = false)
     private Workflows workflows;
+
+    public User() {
+    }
+
+    protected User(Parcel in) {
+        this.resource = in.readString();
+        this.uri = in.readString();
+        this.id = in.readString();
+        this.elementId = in.readString();
+        this.createdAt = in.readString();
+        this.name = in.readString();
+        this.description = in.readString();
+        this.email = in.readString();
+        this.city = in.readString();
+        this.country = in.readString();
+        this.website = in.readString();
+        this.avatar = in.readParcelable(Avatar.class.getClassLoader());
+        this.workflows = in.readParcelable(Workflows.class.getClassLoader());
+    }
 
     public String getResource() {
         return resource;
@@ -163,9 +181,6 @@ public class User implements Parcelable {
         this.avatar = avatar;
     }
 
-    public User() {
-    }
-
     public Workflows getWorkflows() {
         return workflows;
     }
@@ -195,32 +210,4 @@ public class User implements Parcelable {
         dest.writeParcelable(this.avatar, flags);
         dest.writeParcelable(this.workflows, flags);
     }
-
-    protected User(Parcel in) {
-        this.resource = in.readString();
-        this.uri = in.readString();
-        this.id = in.readString();
-        this.elementId = in.readString();
-        this.createdAt = in.readString();
-        this.name = in.readString();
-        this.description = in.readString();
-        this.email = in.readString();
-        this.city = in.readString();
-        this.country = in.readString();
-        this.website = in.readString();
-        this.avatar = in.readParcelable(Avatar.class.getClassLoader());
-        this.workflows = in.readParcelable(Workflows.class.getClassLoader());
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel source) {
-            return new User(source);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
 }

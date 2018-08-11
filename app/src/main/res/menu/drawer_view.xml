@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -21,47 +20,47 @@
         <item
             android:id="@+id/nav_workflows"
             android:icon="@drawable/ic_dashboard_home_web"
-            android:title="@string/title_nav_all_workflows"/>
+            android:title="@string/title_nav_all_workflows" />
         <item
             android:id="@+id/nav_my_workflows"
             android:icon="@drawable/ic_dashboard_home_web"
-            android:title="@string/title_nav_my_workflows"/>
+            android:title="@string/title_nav_my_workflows" />
         <item
             android:id="@+id/nav_favourite_workflow"
             android:icon="@drawable/ic_star_black_24dp"
-            android:title="@string/title_nav_favourite_workflows"/>
+            android:title="@string/title_nav_favourite_workflows" />
 
         <item
             android:id="@+id/nav_announcement"
             android:icon="@drawable/ic_announcement_black_24dp"
-            android:title="@string/title_nav_announcement"/>
+            android:title="@string/title_nav_announcement" />
     </group>
-        <item
-            android:id="@+id/nav_usage"
-            android:icon="@drawable/ic_usage_web"
-            android:title="@string/title_nav_usage"/>
-        <item
-            android:id="@+id/nav_about"
-            android:icon="@drawable/ic_about_web"
-            android:title="@string/title_nav_about"/>
-        <item
-            android:id="@+id/os_licences"
-            android:icon="@drawable/ic_about_web"
-            android:title="@string/title_nav_os_licences"/>
+    <item
+        android:id="@+id/nav_usage"
+        android:icon="@drawable/ic_usage_web"
+        android:title="@string/title_nav_usage" />
+    <item
+        android:id="@+id/nav_about"
+        android:icon="@drawable/ic_about_web"
+        android:title="@string/title_nav_about" />
+    <item
+        android:id="@+id/os_licences"
+        android:icon="@drawable/ic_about_web"
+        android:title="@string/title_nav_os_licences" />
     <item
         android:id="@+id/apache_licences"
         android:icon="@drawable/ic_about_web"
-        android:title="@string/title_nav_apache_licences"/>
+        android:title="@string/title_nav_apache_licences" />
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_setting_workflows_web"
-            android:title="@string/title_nav_settings"/>
+            android:title="@string/title_nav_settings" />
     </group>
-        <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_logout_web"
-            android:title="@string/tiitle_nav_logout"/>
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_logout_web"
+        android:title="@string/tiitle_nav_logout" />
 
 
 </menu>

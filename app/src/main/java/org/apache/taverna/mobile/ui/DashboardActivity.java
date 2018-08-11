@@ -18,24 +18,6 @@
  */
 package org.apache.taverna.mobile.ui;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
-import org.apache.taverna.mobile.ui.base.BaseActivity;
-import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
-import org.apache.taverna.mobile.ui.login.LoginActivity;
-import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
-import org.apache.taverna.mobile.ui.usage.UsageActivity;
-import org.apache.taverna.mobile.ui.userprofile.UserProfileActivity;
-import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
-import org.apache.taverna.mobile.utils.ActivityUtils;
-
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -54,6 +36,24 @@ import android.webkit.WebView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.ui.anouncements.AnnouncementFragment;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
+import org.apache.taverna.mobile.ui.favouriteworkflow.FavouriteWorkflowsFragment;
+import org.apache.taverna.mobile.ui.login.LoginActivity;
+import org.apache.taverna.mobile.ui.myworkflows.MyWorkflowFragment;
+import org.apache.taverna.mobile.ui.usage.UsageActivity;
+import org.apache.taverna.mobile.ui.userprofile.UserProfileActivity;
+import org.apache.taverna.mobile.ui.workflow.WorkflowFragment;
+import org.apache.taverna.mobile.utils.ActivityUtils;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -65,7 +65,8 @@ import static com.raizlabs.android.dbflow.config.FlowManager.getContext;
 
 public class DashboardActivity extends BaseActivity {
 
-    @Inject DataManager dataManager;
+    @Inject
+    DataManager dataManager;
 
     @BindView(R.id.nav_view)
     NavigationView navigationView;
@@ -280,7 +281,7 @@ public class DashboardActivity extends BaseActivity {
 
     private void setNavHeader() {
 
-        View headerView =  navigationView.getHeaderView(0);
+        View headerView = navigationView.getHeaderView(0);
         final CircleImageView navUserAvatar = headerView.findViewById(R.id.nav_user_avatar);
 
         if (dataManager.getPreferencesHelper().getUserAvatarUrl() != null) {

@@ -31,6 +31,7 @@ import java.lang.reflect.Field;
 public class NonSwipeableViewPager extends ViewPager {
 
     private static final String TAG = NonSwipeableViewPager.class.getSimpleName();
+
     public NonSwipeableViewPager(Context context) {
         super(context);
         setMyScroller();

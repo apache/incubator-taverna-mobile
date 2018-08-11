@@ -18,14 +18,14 @@
  */
 package org.apache.taverna.mobile.utils;
 
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.ImageViewTarget;
-import com.bumptech.glide.request.target.Target;
-
 import android.annotation.TargetApi;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Build;
 import android.widget.ImageView;
+
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.ImageViewTarget;
+import com.bumptech.glide.request.target.Target;
 
 /**
  * Listener which updates the {@link ImageView} to be software rendered,

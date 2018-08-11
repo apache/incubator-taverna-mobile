@@ -32,9 +32,9 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import io.reactivex.disposables.CompositeDisposable;
 
 public class AnnouncementPresenter extends BasePresenter<AnnouncementMvpView> {
 

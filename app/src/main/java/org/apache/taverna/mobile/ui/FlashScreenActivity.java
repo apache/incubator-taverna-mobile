@@ -18,15 +18,16 @@
  */
 package org.apache.taverna.mobile.ui;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.data.DataManager;
 import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.login.LoginActivity;
 import org.apache.taverna.mobile.ui.tutorial.TutorialActivity;
-import android.content.Intent;
-import android.os.Bundle;
 
-import android.support.annotation.Nullable;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;

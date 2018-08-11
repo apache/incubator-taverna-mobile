@@ -19,12 +19,12 @@
 package org.apache.taverna.mobile.ui.imagezoom;
 
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.utils.ActivityUtils;
-
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import butterknife.ButterKnife;
 

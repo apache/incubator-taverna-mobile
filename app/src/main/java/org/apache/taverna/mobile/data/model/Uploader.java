@@ -18,6 +18,9 @@
  */
 package org.apache.taverna.mobile.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
@@ -29,29 +32,44 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Text;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 @Table(database = TavernaDatabase.class)
 @ModelContainer
 @Root(name = "uploader")
 public class Uploader extends TavernaBaseModel implements Parcelable {
 
+    public static final Parcelable.Creator<Uploader> CREATOR = new Parcelable.Creator<Uploader>() {
+        @Override
+        public Uploader createFromParcel(Parcel source) {
+            return new Uploader(source);
+        }
+
+        @Override
+        public Uploader[] newArray(int size) {
+            return new Uploader[size];
+        }
+    };
     @Column
     @Attribute(name = "resource", required = false)
     String resource;
-
     @Column
     @Attribute(name = "uri", required = false)
     String uri;
-
     @PrimaryKey
     @Attribute(name = "id", required = false)
     String id;
-
     @Column
     @Text
     String content;
+
+    public Uploader() {
+    }
+
+    protected Uploader(Parcel in) {
+        this.resource = in.readString();
+        this.uri = in.readString();
+        this.id = in.readString();
+        this.content = in.readString();
+    }
 
     public String getContent() {
         return content;
@@ -97,26 +115,4 @@ public class Uploader extends TavernaBaseModel implements Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.content);
     }
-
-    public Uploader() {
-    }
-
-    protected Uploader(Parcel in) {
-        this.resource = in.readString();
-        this.uri = in.readString();
-        this.id = in.readString();
-        this.content = in.readString();
-    }
-
-    public static final Parcelable.Creator<Uploader> CREATOR = new Parcelable.Creator<Uploader>() {
-        @Override
-        public Uploader createFromParcel(Parcel source) {
-            return new Uploader(source);
-        }
-
-        @Override
-        public Uploader[] newArray(int size) {
-            return new Uploader[size];
-        }
-    };
 }
