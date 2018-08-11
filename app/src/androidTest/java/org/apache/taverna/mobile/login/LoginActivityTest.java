@@ -57,23 +57,16 @@ import static org.hamcrest.core.AllOf.allOf;
 @RunWith(AndroidJUnit4.class)
 public class LoginActivityTest {
 
-    User testUser;
+    private User testUser;
 
-    @Rule
-    public ActivityTestRule<LoginActivity> mActivityTestRule
-            = new ActivityTestRule<>(LoginActivity.class);
 
-    public final TestComponentRule component =
+    private final TestComponentRule component =
             new TestComponentRule(InstrumentationRegistry.getTargetContext());
-    public final ActivityTestRule<LoginActivity> mLoginActivityActivityTestRule =
+    private final ActivityTestRule<LoginActivity> mLoginActivityActivityTestRule =
             new ActivityTestRule<LoginActivity>(LoginActivity.class, false, false) {
                 @Override
                 protected Intent getActivityIntent() {
-                    /**
-                     * Override the default intent so we pass a false flag for syncing so it doesn't
-                     * start a sync service in the background that would affect  the behaviour of
-                     * this test.
-                     */
+
                     return new Intent(InstrumentationRegistry.getTargetContext(), LoginActivity
                             .class);
                 }
