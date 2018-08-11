@@ -257,7 +257,7 @@ public class DashboardActivity extends BaseActivity {
 
     private void signOutConfirmation() {
         new AlertDialog.Builder(this)
-                .setTitle(R.string.sign_out)
+                .setTitle(R.string.sign_out_conformation)
                 .setMessage(R.string.sign_out_message)
                 .setPositiveButton(R.string.sign_out, new DialogInterface.OnClickListener() {
 
