@@ -40,11 +40,13 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import io.reactivex.Observable;
+import retrofit2.HttpException;
 
 import static android.os.SystemClock.sleep;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -118,8 +120,7 @@ public class LoginActivityTest {
         testUser = new User();
         Mockito.when(component.getMockDataManager()
                 .getLoginUserDetail("Basic cG9zdG1hbjpwYXNzd29yZA==", true))
-                .thenReturn(Observable.just(testUser))
-                .thenThrow(new RuntimeException("runtime exception"));
+                .thenReturn(Observable.<User>error(new Throwable()));
         mLoginActivityActivityTestRule.launchActivity(null);
 
         onView(withId(R.id.etEmail))
