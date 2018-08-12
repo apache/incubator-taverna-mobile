@@ -26,13 +26,30 @@ import com.google.gson.annotations.SerializedName;
 
 public class InputsAttribute implements Parcelable {
 
+    public static final Creator<InputsAttribute> CREATOR = new Creator<InputsAttribute>() {
+        @Override
+        public InputsAttribute createFromParcel(Parcel source) {
+            return new InputsAttribute(source);
+        }
+
+        @Override
+        public InputsAttribute[] newArray(int size) {
+            return new InputsAttribute[size];
+        }
+    };
     @SerializedName("name")
     @Expose
     private String name;
-
     @SerializedName("value")
     @Expose
     private Object value;
+
+    public InputsAttribute() {
+    }
+
+    protected InputsAttribute(Parcel in) {
+        this.name = in.readString();
+    }
 
     public String getName() {
         return name;
@@ -59,23 +76,4 @@ public class InputsAttribute implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.name);
     }
-
-    public InputsAttribute() {
-    }
-
-    protected InputsAttribute(Parcel in) {
-        this.name = in.readString();
-    }
-
-    public static final Creator<InputsAttribute> CREATOR = new Creator<InputsAttribute>() {
-        @Override
-        public InputsAttribute createFromParcel(Parcel source) {
-            return new InputsAttribute(source);
-        }
-
-        @Override
-        public InputsAttribute[] newArray(int size) {
-            return new InputsAttribute[size];
-        }
-    };
 }

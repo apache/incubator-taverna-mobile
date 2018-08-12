@@ -19,12 +19,6 @@
 package org.apache.taverna.mobile.ui.login;
 
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.ui.DashboardActivity;
-import org.apache.taverna.mobile.ui.base.BaseActivity;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -44,6 +38,12 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.ui.DashboardActivity;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -52,27 +52,22 @@ import butterknife.OnClick;
 
 public class LoginFragment extends Fragment implements LoginMvpView, View.OnFocusChangeListener {
 
-    @Inject DataManager dataManager;
-    @Inject LoginPresenter mLoginPresenter;
-
+    private final String myExperimentURL = "https://www.myexperiment.org/users/new";
+    @Inject
+    DataManager dataManager;
+    @Inject
+    LoginPresenter mLoginPresenter;
     @BindView(R.id.etEmail)
     EditText mEditTextEmail;
-
     @BindView(R.id.etPassword)
     EditText mEditTextPassword;
-
     @BindView(R.id.input_layout_email)
     TextInputLayout mTextInputEmail;
-
     @BindView(R.id.input_layout_password)
     TextInputLayout mTextInputPassword;
-
     @BindView(R.id.cbRemember)
     CheckBox mCheckBoxRemember;
-
     private ProgressDialog progressDialog;
-
-    private final String myExperimentURL = "https://www.myexperiment.org/users/new";
 
     public static LoginFragment newInstance() {
 

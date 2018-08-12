@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -17,8 +16,8 @@
 -->
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle"
-    android:padding="10dp">
-    <solid android:color="@color/colorPrimaryDark"/>
-    <corners android:radius="@dimen/login_button_radius"/>
+    android:padding="10dp"
+    android:shape="rectangle">
+    <solid android:color="@color/colorPrimaryDark" />
+    <corners android:radius="@dimen/login_button_radius" />
 </shape>

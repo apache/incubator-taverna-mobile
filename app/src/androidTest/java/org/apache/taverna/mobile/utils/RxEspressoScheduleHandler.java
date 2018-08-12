@@ -22,8 +22,8 @@ import android.support.annotation.NonNull;
 import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.contrib.CountingIdlingResource;
 
-
 import io.reactivex.functions.Function;
+
 public class RxEspressoScheduleHandler implements Function<Runnable, Runnable> {
 
     private final CountingIdlingResource mCountingIdlingResource =

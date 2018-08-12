@@ -75,7 +75,7 @@ public class DataManager {
      * @return List of all Announcement
      */
     public Observable<Announcements> getAllAnnouncement(Map<String, String> options) {
-        return mBaseApiManager.getTavernaApi().getAllAnnouncements( options);
+        return mBaseApiManager.getTavernaApi().getAllAnnouncements(options);
     }
 
     /**

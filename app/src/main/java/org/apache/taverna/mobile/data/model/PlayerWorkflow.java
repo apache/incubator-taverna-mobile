@@ -26,9 +26,28 @@ import com.google.gson.annotations.SerializedName;
 
 public class PlayerWorkflow implements Parcelable {
 
+    public static final Parcelable.Creator<PlayerWorkflow> CREATOR = new Parcelable
+            .Creator<PlayerWorkflow>() {
+        @Override
+        public PlayerWorkflow createFromParcel(Parcel source) {
+            return new PlayerWorkflow(source);
+        }
+
+        @Override
+        public PlayerWorkflow[] newArray(int size) {
+            return new PlayerWorkflow[size];
+        }
+    };
     @SerializedName("id")
     @Expose
     private Integer id;
+
+    public PlayerWorkflow() {
+    }
+
+    protected PlayerWorkflow(Parcel in) {
+        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+    }
 
     public Integer getId() {
         return id;
@@ -47,24 +66,4 @@ public class PlayerWorkflow implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(this.id);
     }
-
-    public PlayerWorkflow() {
-    }
-
-    protected PlayerWorkflow(Parcel in) {
-        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
-    }
-
-    public static final Parcelable.Creator<PlayerWorkflow> CREATOR = new Parcelable
-            .Creator<PlayerWorkflow>() {
-        @Override
-        public PlayerWorkflow createFromParcel(Parcel source) {
-            return new PlayerWorkflow(source);
-        }
-
-        @Override
-        public PlayerWorkflow[] newArray(int size) {
-            return new PlayerWorkflow[size];
-        }
-    };
 }

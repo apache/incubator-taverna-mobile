@@ -19,23 +19,41 @@
 package org.apache.taverna.mobile.data.model;
 
 
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.Root;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Root;
 
 @Root(name = "avatar")
 public class Avatar implements Parcelable {
 
+    public static final Parcelable.Creator<Avatar> CREATOR = new Parcelable.Creator<Avatar>() {
+        @Override
+        public Avatar createFromParcel(Parcel source) {
+            return new Avatar(source);
+        }
+
+        @Override
+        public Avatar[] newArray(int size) {
+            return new Avatar[size];
+        }
+    };
     @Attribute(name = "resource", required = false)
     private String resource;
-
     @Attribute(name = "uri", required = false)
     private String uri;
-
     @Attribute(name = "id", required = false)
     private String id;
+
+    public Avatar() {
+    }
+
+    protected Avatar(Parcel in) {
+        this.resource = in.readString();
+        this.uri = in.readString();
+        this.id = in.readString();
+    }
 
     public String getResource() {
         return resource;
@@ -72,25 +90,4 @@ public class Avatar implements Parcelable {
         dest.writeString(this.uri);
         dest.writeString(this.id);
     }
-
-    public Avatar() {
-    }
-
-    protected Avatar(Parcel in) {
-        this.resource = in.readString();
-        this.uri = in.readString();
-        this.id = in.readString();
-    }
-
-    public static final Parcelable.Creator<Avatar> CREATOR = new Parcelable.Creator<Avatar>() {
-        @Override
-        public Avatar createFromParcel(Parcel source) {
-            return new Avatar(source);
-        }
-
-        @Override
-        public Avatar[] newArray(int size) {
-            return new Avatar[size];
-        }
-    };
 }

@@ -58,7 +58,8 @@ public class ImageZoomFragment extends Fragment implements ImageZoomMvpView {
 
     private static final String SERVER_ERROR = "Sever Error. Please try after sometime";
 
-    @Inject ImageZoomPresenter mImageZoomPresenter;
+    @Inject
+    ImageZoomPresenter mImageZoomPresenter;
 
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;

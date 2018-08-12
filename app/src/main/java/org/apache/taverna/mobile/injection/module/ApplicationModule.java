@@ -18,10 +18,10 @@
  */
 package org.apache.taverna.mobile.injection.module;
 
-import org.apache.taverna.mobile.injection.ApplicationContext;
-
 import android.app.Application;
 import android.content.Context;
+
+import org.apache.taverna.mobile.injection.ApplicationContext;
 
 import dagger.Module;
 import dagger.Provides;

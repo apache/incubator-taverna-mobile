@@ -19,6 +19,9 @@
 package org.apache.taverna.mobile;
 
 
+import android.app.Application;
+import android.content.Context;
+
 import com.facebook.stetho.Stetho;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
@@ -27,9 +30,6 @@ import com.squareup.leakcanary.LeakCanary;
 import org.apache.taverna.mobile.injection.component.ApplicationComponent;
 import org.apache.taverna.mobile.injection.component.DaggerApplicationComponent;
 import org.apache.taverna.mobile.injection.module.ApplicationModule;
-
-import android.app.Application;
-import android.content.Context;
 
 public class TavernaApplication extends Application {
 

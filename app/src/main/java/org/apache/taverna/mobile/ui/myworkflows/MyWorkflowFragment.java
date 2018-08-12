@@ -18,16 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.myworkflows;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
-import org.apache.taverna.mobile.ui.base.BaseActivity;
-import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -44,6 +34,16 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
+import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,8 +57,10 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
 
     public final String LOG_TAG = getClass().getSimpleName();
 
-    @Inject DataManager dataManager;
-    @Inject MyWorkflowPresenter mWorkflowPresenter;
+    @Inject
+    DataManager dataManager;
+    @Inject
+    MyWorkflowPresenter mWorkflowPresenter;
     WorkflowAdapter mWorkflowAdapter;
 
     @BindView(R.id.rv_workflows)

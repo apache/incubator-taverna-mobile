@@ -19,6 +19,9 @@
 package org.apache.taverna.mobile.data.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
@@ -29,28 +32,44 @@ import org.apache.taverna.mobile.data.local.TavernaDatabase;
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Text;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 @Table(database = TavernaDatabase.class)
 @ModelContainer
 public class LicenseType extends TavernaBaseModel implements Parcelable {
 
+    public static final Parcelable.Creator<LicenseType> CREATOR =
+            new Parcelable.Creator<LicenseType>() {
+                @Override
+                public LicenseType createFromParcel(Parcel source) {
+                    return new LicenseType(source);
+                }
+
+                @Override
+                public LicenseType[] newArray(int size) {
+                    return new LicenseType[size];
+                }
+            };
     @Column
     @Attribute(name = "resource", required = false)
     String resource;
-
     @Column
     @Attribute(name = "uri", required = false)
     String uri;
-
     @PrimaryKey
     @Attribute(name = "id", required = false)
     String id;
-
     @Column
     @Text(required = false)
     String content;
+
+    public LicenseType() {
+    }
+
+    protected LicenseType(Parcel in) {
+        this.resource = in.readString();
+        this.uri = in.readString();
+        this.id = in.readString();
+        this.content = in.readString();
+    }
 
     public String getContent() {
         return content;
@@ -96,27 +115,4 @@ public class LicenseType extends TavernaBaseModel implements Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.content);
     }
-
-    public LicenseType() {
-    }
-
-    protected LicenseType(Parcel in) {
-        this.resource = in.readString();
-        this.uri = in.readString();
-        this.id = in.readString();
-        this.content = in.readString();
-    }
-
-    public static final Parcelable.Creator<LicenseType> CREATOR =
-            new Parcelable.Creator<LicenseType>() {
-                @Override
-                public LicenseType createFromParcel(Parcel source) {
-                    return new LicenseType(source);
-                }
-
-                @Override
-                public LicenseType[] newArray(int size) {
-                    return new LicenseType[size];
-                }
-            };
 }

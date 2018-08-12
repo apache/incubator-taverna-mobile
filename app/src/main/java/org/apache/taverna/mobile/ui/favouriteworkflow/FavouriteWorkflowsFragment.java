@@ -18,15 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.favouriteworkflow;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.ui.adapter.FavouriteWorkflowsAdapter;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.ui.base.BaseActivity;
-import org.apache.taverna.mobile.ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity;
-import org.apache.taverna.mobile.utils.Constants;
-
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -47,6 +38,15 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.ui.adapter.FavouriteWorkflowsAdapter;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
+import org.apache.taverna.mobile.ui.favouriteworkflowdetail.FavouriteWorkflowDetailActivity;
+import org.apache.taverna.mobile.utils.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,8 +60,10 @@ public class FavouriteWorkflowsFragment extends Fragment
 
     public final String LOG_TAG = getClass().getSimpleName();
 
-    @Inject DataManager dataManager;
-    @Inject FavouriteWorkflowsPresenter mFavouriteWorkflowsPresenter;
+    @Inject
+    DataManager dataManager;
+    @Inject
+    FavouriteWorkflowsPresenter mFavouriteWorkflowsPresenter;
     FavouriteWorkflowsAdapter mFavouriteWorkflowsAdapter;
     FavouriteWorkflowsAdapter mSearchFavouriteWorkflowAdapter;
 

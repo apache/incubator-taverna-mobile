@@ -1,13 +1,13 @@
 package org.apache.taverna.mobile.ui;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.local.PreferencesHelper;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.local.PreferencesHelper;
 
 
 public class SettingFragment extends PreferenceFragmentCompat implements SharedPreferences

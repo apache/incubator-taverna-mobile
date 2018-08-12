@@ -1,97 +1,159 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <workflows>
-    <workflow resource="http://www.myexperiment.org/workflows/4766" uri="http://www.myexperiment.org/workflow.xml?id=4766" id="4766" version="2">
+    <workflow id="4766"
+        resource="http://www.myexperiment.org/workflows/4766" uri="http://www.myexperiment.org/workflow.xml?id=4766" version="2">
         <title>Get ontology parents</title>
-        <type resource="http://www.myexperiment.org/content_types/2" uri="http://www.myexperiment.org/type.xml?id=2" id="2">Taverna 2</type>
-        <uploader resource="http://www.myexperiment.org/users/2642" uri="http://www.myexperiment.org/user.xml?id=2642" id="2642">Kristina Hettne</uploader>
+        <type id="2"
+            resource="http://www.myexperiment.org/content_types/2" uri="http://www.myexperiment.org/type.xml?id=2">Taverna 2
+        </type>
+        <uploader id="2642"
+            resource="http://www.myexperiment.org/users/2642" uri="http://www.myexperiment.org/user.xml?id=2642">Kristina Hettne
+        </uploader>
         <created-at>2015-11-16 09:56:17 UTC</created-at>
         <preview>http://www.myexperiment.org/workflows/4766/versions/2/previews/full</preview>
-        <content-uri>http://www.myexperiment.org/workflows/4766/download/Get_ontology_parents-v.t2flow</content-uri>
+        <content-uri>
+            http://www.myexperiment.org/workflows/4766/download/Get_ontology_parents-v.t2flow
+        </content-uri>
     </workflow>
-    <workflow resource="http://www.myexperiment.org/workflows/4764" uri="http://www.myexperiment.org/workflow.xml?id=4764" id="4764" version="1">
+    <workflow id="4764"
+        resource="http://www.myexperiment.org/workflows/4764" uri="http://www.myexperiment.org/workflow.xml?id=4764" version="1">
         <title>Texture classification: Knime Image Analytics</title>
-        <type resource="http://www.myexperiment.org/content_types/76" uri="http://www.myexperiment.org/type.xml?id=76" id="76">KNIME</type>
-        <uploader resource="http://www.myexperiment.org/users/61228" uri="http://www.myexperiment.org/user.xml?id=61228" id="61228">Insilicoconsulting</uploader>
+        <type id="76"
+            resource="http://www.myexperiment.org/content_types/76" uri="http://www.myexperiment.org/type.xml?id=76">KNIME
+        </type>
+        <uploader id="61228"
+            resource="http://www.myexperiment.org/users/61228" uri="http://www.myexperiment.org/user.xml?id=61228">Insilicoconsulting
+        </uploader>
         <created-at>2015-11-10 08:28:37 UTC</created-at>
         <preview>http://www.myexperiment.org/workflows/4764/versions/1/previews/full</preview>
         <content-uri>
             http://www.myexperiment.org/workflows/4764/download/Texture_classification__Knime_Image_Analytics-v.zip
         </content-uri>
     </workflow>
-    <workflow resource="http://www.myexperiment.org/workflows/4763" uri="http://www.myexperiment.org/workflow.xml?id=4763" id="4763" version="1">
+    <workflow id="4763"
+        resource="http://www.myexperiment.org/workflows/4763" uri="http://www.myexperiment.org/workflow.xml?id=4763" version="1">
         <title>
-            Define one query and retrieve Molecular Interactions from PSICQUIC Services (filtered by tag) registered in the PSICQUIC registry.
+            Define one query and retrieve Molecular Interactions from PSICQUIC Services (filtered by
+            tag) registered in the PSICQUIC registry.
         </title>
-        <type resource="http://www.myexperiment.org/content_types/2" uri="http://www.myexperiment.org/type.xml?id=2" id="2">Taverna 2</type>
-        <uploader resource="http://www.myexperiment.org/users/64350" uri="http://www.myexperiment.org/user.xml?id=64350" id="64350">Maximilian Koch</uploader>
+        <type id="2"
+            resource="http://www.myexperiment.org/content_types/2" uri="http://www.myexperiment.org/type.xml?id=2">Taverna 2
+        </type>
+        <uploader id="64350"
+            resource="http://www.myexperiment.org/users/64350" uri="http://www.myexperiment.org/user.xml?id=64350">Maximilian Koch
+        </uploader>
         <created-at>2015-11-05 23:35:13 UTC</created-at>
         <preview>http://www.myexperiment.org/workflows/4763/versions/1/previews/full</preview>
         <content-uri>
             http://www.myexperiment.org/workflows/4763/download/Define_one_query_and_retrieve_Molecular_Interactions_from_PSICQUIC_Services__filtered_by_tag__registered_in_the_PSICQUIC_registry.-v.t2flow
         </content-uri>
     </workflow>
-    <workflow resource="http://www.myexperiment.org/workflows/4761" uri="http://www.myexperiment.org/workflow.xml?id=4761" id="4761" version="1">
+    <workflow id="4761"
+        resource="http://www.myexperiment.org/workflows/4761" uri="http://www.myexperiment.org/workflow.xml?id=4761" version="1">
         <title>Query for all PISCQUIC services (Name+URL)</title>
-        <type resource="http://www.myexperiment.org/content_types/2" uri="http://www.myexperiment.org/type.xml?id=2" id="2">Taverna 2</type>
-        <uploader resource="http://www.myexperiment.org/users/64350" uri="http://www.myexperiment.org/user.xml?id=64350" id="64350">Maximilian Koch</uploader>
+        <type id="2"
+            resource="http://www.myexperiment.org/content_types/2" uri="http://www.myexperiment.org/type.xml?id=2">Taverna 2
+        </type>
+        <uploader id="64350"
+            resource="http://www.myexperiment.org/users/64350" uri="http://www.myexperiment.org/user.xml?id=64350">Maximilian Koch
+        </uploader>
         <created-at>2015-11-05 23:01:06 UTC</created-at>
         <preview>http://www.myexperiment.org/workflows/4761/versions/1/previews/full</preview>
         <content-uri>
             http://www.myexperiment.org/workflows/4761/download/Query_for_all_PISCQUIC_services__Name_URL_-v.t2flow
         </content-uri>
     </workflow>
-    <workflow resource="http://www.myexperiment.org/workflows/4760" uri="http://www.myexperiment.org/workflow.xml?id=4760" id="4760" version="1">
+    <workflow id="4760"
+        resource="http://www.myexperiment.org/workflows/4760" uri="http://www.myexperiment.org/workflow.xml?id=4760" version="1">
         <title>Query PSICQUIC and filter by idA and idB (REST)</title>
-        <type resource="http://www.myexperiment.org/content_types/2" uri="http://www.myexperiment.org/type.xml?id=2" id="2">Taverna 2</type>
-        <uploader resource="http://www.myexperiment.org/users/64350" uri="http://www.myexperiment.org/user.xml?id=64350" id="64350">Maximilian Koch</uploader>
+        <type id="2"
+            resource="http://www.myexperiment.org/content_types/2" uri="http://www.myexperiment.org/type.xml?id=2">Taverna 2
+        </type>
+        <uploader id="64350"
+            resource="http://www.myexperiment.org/users/64350" uri="http://www.myexperiment.org/user.xml?id=64350">Maximilian Koch
+        </uploader>
         <created-at>2015-11-05 22:53:27 UTC</created-at>
         <preview>http://www.myexperiment.org/workflows/4760/versions/1/previews/full</preview>
         <content-uri>
             http://www.myexperiment.org/workflows/4760/download/Query_PSICQUIC_and_filter_by_idA_and_idB__REST_-v.t2flow
         </content-uri>
     </workflow>
-    <workflow resource="http://www.myexperiment.org/workflows/4759" uri="http://www.myexperiment.org/workflow.xml?id=4759" id="4759" version="1">
+    <workflow id="4759"
+        resource="http://www.myexperiment.org/workflows/4759" uri="http://www.myexperiment.org/workflow.xml?id=4759" version="1">
         <title>FInd/filter idA and idB from MITAB</title>
-        <type resource="http://www.myexperiment.org/content_types/2" uri="http://www.myexperiment.org/type.xml?id=2" id="2">Taverna 2</type>
-        <uploader resource="http://www.myexperiment.org/users/64350" uri="http://www.myexperiment.org/user.xml?id=64350" id="64350">Maximilian Koch</uploader>
+        <type id="2"
+            resource="http://www.myexperiment.org/content_types/2" uri="http://www.myexperiment.org/type.xml?id=2">Taverna 2
+        </type>
+        <uploader id="64350"
+            resource="http://www.myexperiment.org/users/64350" uri="http://www.myexperiment.org/user.xml?id=64350">Maximilian Koch
+        </uploader>
         <created-at>2015-11-05 22:27:17 UTC</created-at>
         <preview>http://www.myexperiment.org/workflows/4759/versions/1/previews/full</preview>
-        <content-uri>http://www.myexperiment.org/workflows/4759/download/FInd_filter_idA_and_idB_from_MITAB-v.t2flow</content-uri>
+        <content-uri>
+            http://www.myexperiment.org/workflows/4759/download/FInd_filter_idA_and_idB_from_MITAB-v.t2flow
+        </content-uri>
     </workflow>
-    <workflow resource="http://www.myexperiment.org/workflows/4755" uri="http://www.myexperiment.org/workflow.xml?id=4755" id="4755" version="1">
+    <workflow id="4755"
+        resource="http://www.myexperiment.org/workflows/4755" uri="http://www.myexperiment.org/workflow.xml?id=4755" version="1">
         <title>Get all PSICQUIC</title>
-        <type resource="http://www.myexperiment.org/content_types/116" uri="http://www.myexperiment.org/type.xml?id=116" id="116">Bioinformatics</type>
-        <uploader resource="http://www.myexperiment.org/users/64350" uri="http://www.myexperiment.org/user.xml?id=64350" id="64350">Maximilian Koch</uploader>
+        <type id="116"
+            resource="http://www.myexperiment.org/content_types/116" uri="http://www.myexperiment.org/type.xml?id=116">Bioinformatics
+        </type>
+        <uploader id="64350"
+            resource="http://www.myexperiment.org/users/64350" uri="http://www.myexperiment.org/user.xml?id=64350">Maximilian Koch
+        </uploader>
         <created-at>2015-11-04 18:10:28 UTC</created-at>
         <preview>http://www.myexperiment.org/workflows/4755/versions/1/previews/full</preview>
-        <content-uri>http://www.myexperiment.org/workflows/4755/download/Get_all_PSICQUIC-v.t2flow</content-uri>
+        <content-uri>http://www.myexperiment.org/workflows/4755/download/Get_all_PSICQUIC-v.t2flow
+        </content-uri>
     </workflow>
-    <workflow resource="http://www.myexperiment.org/workflows/4754" uri="http://www.myexperiment.org/workflow.xml?id=4754" id="4754" version="1">
+    <workflow id="4754"
+        resource="http://www.myexperiment.org/workflows/4754" uri="http://www.myexperiment.org/workflow.xml?id=4754" version="1">
         <title>
-            KNIME workflow used to collate data for the paper 'Selectivity profiling of BCRP versus P-gp inhibition: from automated collection of polypharmacology data to multi-label learning' by F. Montanari, B. Zdrazil et al., J. Cheminform., 2016, PMID: 26855674
+            KNIME workflow used to collate data for the paper 'Selectivity profiling of BCRP versus
+            P-gp inhibition: from automated collection of polypharmacology data to multi-label
+            learning' by F. Montanari, B. Zdrazil et al., J. Cheminform., 2016, PMID: 26855674
         </title>
-        <type resource="http://www.myexperiment.org/content_types/76" uri="http://www.myexperiment.org/type.xml?id=76" id="76">KNIME</type>
-        <uploader resource="http://www.myexperiment.org/users/63352" uri="http://www.myexperiment.org/user.xml?id=63352" id="63352">Barbara Zdrazil</uploader>
+        <type id="76"
+            resource="http://www.myexperiment.org/content_types/76" uri="http://www.myexperiment.org/type.xml?id=76">KNIME
+        </type>
+        <uploader id="63352"
+            resource="http://www.myexperiment.org/users/63352" uri="http://www.myexperiment.org/user.xml?id=63352">Barbara Zdrazil
+        </uploader>
         <created-at>2015-11-02 19:13:35 UTC</created-at>
         <preview>http://www.myexperiment.org/workflows/4754/versions/1/previews/full</preview>
         <content-uri>
             http://www.myexperiment.org/workflows/4754/download/KNIME_workflow_used_to_collate_data_for_the_paper__Selectivity_profiling_of_BCRP_versus_P-gp_inhibition__from_automated_collection_of_polypharmacology_data_to_multi-label_learning__by_F._Montanari__B._Zdrazil_et_al.__J._Cheminform.__2016__PMID__26855674_-v.zip
         </content-uri>
     </workflow>
-    <workflow resource="http://www.myexperiment.org/workflows/4753" uri="http://www.myexperiment.org/workflow.xml?id=4753" id="4753" version="1">
+    <workflow id="4753"
+        resource="http://www.myexperiment.org/workflows/4753" uri="http://www.myexperiment.org/workflow.xml?id=4753" version="1">
         <title>Pubmed -Google Tag Cloud</title>
-        <type resource="http://www.myexperiment.org/content_types/76" uri="http://www.myexperiment.org/type.xml?id=76" id="76">KNIME</type>
-        <uploader resource="http://www.myexperiment.org/users/61228" uri="http://www.myexperiment.org/user.xml?id=61228" id="61228">Insilicoconsulting</uploader>
+        <type id="76"
+            resource="http://www.myexperiment.org/content_types/76" uri="http://www.myexperiment.org/type.xml?id=76">KNIME
+        </type>
+        <uploader id="61228"
+            resource="http://www.myexperiment.org/users/61228" uri="http://www.myexperiment.org/user.xml?id=61228">Insilicoconsulting
+        </uploader>
         <created-at>2015-11-01 17:38:29 UTC</created-at>
         <preview>http://www.myexperiment.org/workflows/4753/versions/1/previews/full</preview>
-        <content-uri>http://www.myexperiment.org/workflows/4753/download/Pubmed_-Google_Tag_Cloud_-v.zip</content-uri>
+        <content-uri>
+            http://www.myexperiment.org/workflows/4753/download/Pubmed_-Google_Tag_Cloud_-v.zip
+        </content-uri>
     </workflow>
-    <workflow resource="http://www.myexperiment.org/workflows/4750" uri="http://www.myexperiment.org/workflow.xml?id=4750" id="4750" version="1">
+    <workflow id="4750"
+        resource="http://www.myexperiment.org/workflows/4750" uri="http://www.myexperiment.org/workflow.xml?id=4750" version="1">
         <title>Author Citation Network</title>
-        <type resource="http://www.myexperiment.org/content_types/2" uri="http://www.myexperiment.org/type.xml?id=2" id="2">Taverna 2</type>
-        <uploader resource="http://www.myexperiment.org/users/23068" uri="http://www.myexperiment.org/user.xml?id=23068" id="23068">Magnus Palmblad</uploader>
+        <type id="2"
+            resource="http://www.myexperiment.org/content_types/2" uri="http://www.myexperiment.org/type.xml?id=2">Taverna 2
+        </type>
+        <uploader id="23068"
+            resource="http://www.myexperiment.org/users/23068" uri="http://www.myexperiment.org/user.xml?id=23068">Magnus Palmblad
+        </uploader>
         <created-at>2015-10-20 10:10:33 UTC</created-at>
         <preview>http://www.myexperiment.org/workflows/4750/versions/1/previews/full</preview>
-        <content-uri>http://www.myexperiment.org/workflows/4750/download/Author_Citation_Network-v.t2flow</content-uri>
+        <content-uri>
+            http://www.myexperiment.org/workflows/4750/download/Author_Citation_Network-v.t2flow
+        </content-uri>
     </workflow>
 </workflows>

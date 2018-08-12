@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -15,56 +14,55 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/grey_background">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_background">
 
     <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_fav_workflows"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:padding="@dimen/item_offset"
-            android:visibility="gone"/>
+        android:id="@+id/rv_fav_workflows"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="@dimen/item_offset"
+        android:visibility="gone" />
 
     <ProgressBar
-            android:id="@+id/progress_circular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:visibility="visible"/>
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="visible" />
 
 
     <RelativeLayout
+        android:id="@+id/layout_empty_fav_workflow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        android:id="@+id/layout_empty_fav_workflow"
-        android:layout_marginBottom="@dimen/relative_layout_margin_bottom" >
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="@dimen/relative_layout_margin_bottom"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/image_fav_workflow"
             android:layout_width="@dimen/center_icon_height_width"
             android:layout_height="@dimen/center_icon_height_width"
-            android:src="@drawable/ic_stars_grey_24dp"
+            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:src="@drawable/ic_stars_grey_24dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/no_favourite_workflow_found"
-            android:textStyle="bold"
-            android:textSize="@dimen/message_text_size"
             android:layout_below="@id/image_fav_workflow"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/no_favourite_workflow_found"
+            android:textSize="@dimen/message_text_size"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 </RelativeLayout>

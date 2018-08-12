@@ -29,17 +29,36 @@ import java.util.List;
 
 public class Run implements Parcelable {
 
+    public static final Parcelable.Creator<Run> CREATOR = new Parcelable.Creator<Run>() {
+        @Override
+        public Run createFromParcel(Parcel source) {
+            return new Run(source);
+        }
+
+        @Override
+        public Run[] newArray(int size) {
+            return new Run[size];
+        }
+    };
     @SerializedName("workflow_id")
     @Expose
     private Integer workflowId;
-
     @SerializedName("name")
     @Expose
     private String name;
-
     @SerializedName("inputs_attributes")
     @Expose
     private List<InputsAttribute> inputsAttributes = new ArrayList<InputsAttribute>();
+
+    public Run() {
+    }
+
+    protected Run(Parcel in) {
+        this.workflowId = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.name = in.readString();
+        this.inputsAttributes = new ArrayList<InputsAttribute>();
+        in.readList(this.inputsAttributes, InputsAttribute.class.getClassLoader());
+    }
 
     public Integer getWorkflowId() {
         return workflowId;
@@ -65,7 +84,6 @@ public class Run implements Parcelable {
         this.inputsAttributes = inputsAttributes;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -77,26 +95,4 @@ public class Run implements Parcelable {
         dest.writeString(this.name);
         dest.writeList(this.inputsAttributes);
     }
-
-    public Run() {
-    }
-
-    protected Run(Parcel in) {
-        this.workflowId = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.name = in.readString();
-        this.inputsAttributes = new ArrayList<InputsAttribute>();
-        in.readList(this.inputsAttributes, InputsAttribute.class.getClassLoader());
-    }
-
-    public static final Parcelable.Creator<Run> CREATOR = new Parcelable.Creator<Run>() {
-        @Override
-        public Run createFromParcel(Parcel source) {
-            return new Run(source);
-        }
-
-        @Override
-        public Run[] newArray(int size) {
-            return new Run[size];
-        }
-    };
 }

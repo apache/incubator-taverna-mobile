@@ -18,18 +18,6 @@
  */
 package org.apache.taverna.mobile.ui.workflow;
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.model.Workflow;
-import org.apache.taverna.mobile.data.model.Workflows;
-import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
-import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
-import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
-import org.apache.taverna.mobile.ui.base.BaseActivity;
-import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-import org.apache.taverna.mobile.utils.Constants;
-import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
-
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -48,6 +36,18 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.model.Workflow;
+import org.apache.taverna.mobile.data.model.Workflows;
+import org.apache.taverna.mobile.ui.adapter.EndlessRecyclerOnScrollListener;
+import org.apache.taverna.mobile.ui.adapter.RecyclerItemClickListner;
+import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
+import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.Constants;
+import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;

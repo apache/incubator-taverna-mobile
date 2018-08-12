@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -32,17 +31,19 @@
         android:text="Title"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
+
     <TextView
         android:id="@+id/tvDialogAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Author"
         android:textSize="15sp" />
+
     <WebView
         android:id="@+id/wvDialogText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <RelativeLayout
 

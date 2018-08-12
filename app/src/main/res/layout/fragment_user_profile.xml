@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -16,9 +15,9 @@
    limitations under the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <android.support.v4.widget.NestedScrollView
@@ -33,40 +32,40 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/top_background_height"
-                android:orientation="vertical"
                 android:background="@color/colorPrimary"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="vertical">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/user_avatar"
                     android:layout_width="@dimen/user_image_height"
                     android:layout_height="@dimen/user_image_height"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_centerInParent="true"
                     android:layout_alignParentTop="true"
-                    app:civ_border_color="@color/white"/>
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    app:civ_border_color="@color/white" />
 
                 <TextView
                     android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/user_name"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/user_name_text_size"
                     android:layout_below="@+id/user_avatar"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/user_name_margin_top"/>
+                    android:layout_marginTop="@dimen/user_name_margin_top"
+                    android:text="@string/user_name"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/user_name_text_size" />
 
                 <TextView
                     android:id="@+id/user_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:gravity="center"
                     android:layout_below="@id/user_name"
                     android:layout_marginTop="@dimen/user_description_margin_top"
-                    android:textColor="@color/white"/>
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textColor="@color/white" />
 
             </RelativeLayout>
 
@@ -85,22 +84,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="@dimen/coloumn_linear_layout_padding"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="@dimen/coloumn_linear_layout_padding">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_email_black_24dp"/>
+                            android:src="@drawable/ic_email_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/row_title_margin_left"
                             android:text="@string/user_email"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/row_title_text_size"
-                            android:layout_marginLeft="@dimen/row_title_margin_left"
-                            android:layout_gravity="center"/>
+                            android:textSize="@dimen/row_title_text_size" />
 
                     </LinearLayout>
 
@@ -108,9 +107,9 @@
                         android:id="@+id/user_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/row_entry_text_size"
                         android:layout_gravity="center_vertical"
-                        android:paddingRight="@dimen/row_entry_padding_right"/>
+                        android:paddingRight="@dimen/row_entry_padding_right"
+                        android:textSize="@dimen/row_entry_text_size" />
 
                 </LinearLayout>
 
@@ -124,22 +123,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="@dimen/coloumn_linear_layout_padding"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="@dimen/coloumn_linear_layout_padding">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_language_black_24dp"/>
+                            android:src="@drawable/ic_language_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/row_title_margin_left"
                             android:text="@string/user_website"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/row_title_text_size"
-                            android:layout_marginLeft="@dimen/row_title_margin_left"
-                            android:layout_gravity="center"/>
+                            android:textSize="@dimen/row_title_text_size" />
 
                     </LinearLayout>
 
@@ -147,9 +146,9 @@
                         android:id="@+id/user_website"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/row_entry_text_size"
                         android:layout_gravity="center_vertical"
-                        android:paddingRight="@dimen/row_entry_padding_right"/>
+                        android:paddingRight="@dimen/row_entry_padding_right"
+                        android:textSize="@dimen/row_entry_text_size" />
 
                 </LinearLayout>
 
@@ -163,22 +162,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="@dimen/coloumn_linear_layout_padding"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="@dimen/coloumn_linear_layout_padding">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_location_city_black_24dp"/>
+                            android:src="@drawable/ic_location_city_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/row_title_margin_left"
                             android:text="@string/user_city"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/row_title_text_size"
-                            android:layout_marginLeft="@dimen/row_title_margin_left"
-                            android:layout_gravity="center"/>
+                            android:textSize="@dimen/row_title_text_size" />
 
                     </LinearLayout>
 
@@ -186,9 +185,9 @@
                         android:id="@+id/user_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/row_entry_text_size"
                         android:layout_gravity="center_vertical"
-                        android:paddingRight="@dimen/row_entry_padding_right"/>
+                        android:paddingRight="@dimen/row_entry_padding_right"
+                        android:textSize="@dimen/row_entry_text_size" />
 
                 </LinearLayout>
 
@@ -202,22 +201,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="@dimen/coloumn_linear_layout_padding"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="@dimen/coloumn_linear_layout_padding">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_location_on_black_24dp"/>
+                            android:src="@drawable/ic_location_on_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/row_title_margin_left"
                             android:text="@string/user_country"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/row_title_text_size"
-                            android:layout_marginLeft="@dimen/row_title_margin_left"
-                            android:layout_gravity="center"/>
+                            android:textSize="@dimen/row_title_text_size" />
 
                     </LinearLayout>
 
@@ -225,9 +224,9 @@
                         android:id="@+id/user_country"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/row_entry_text_size"
                         android:layout_gravity="center_vertical"
-                        android:paddingRight="@dimen/row_entry_padding_right"/>
+                        android:paddingRight="@dimen/row_entry_padding_right"
+                        android:textSize="@dimen/row_entry_text_size" />
 
                 </LinearLayout>
 
@@ -241,22 +240,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="@dimen/coloumn_linear_layout_padding"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="@dimen/coloumn_linear_layout_padding">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_storage_black_24dp"/>
+                            android:src="@drawable/ic_storage_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/row_title_margin_left"
                             android:text="@string/user_my_workflow"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/row_title_text_size"
-                            android:layout_marginLeft="@dimen/row_title_margin_left"
-                            android:layout_gravity="center" />
+                            android:textSize="@dimen/row_title_text_size" />
 
                     </LinearLayout>
 
@@ -265,7 +264,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:paddingRight="@dimen/row_entry_padding_right"
-                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
 
                 </LinearLayout>
 
@@ -279,22 +278,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="@dimen/coloumn_linear_layout_padding"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:padding="@dimen/coloumn_linear_layout_padding">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_star_black_24dp"/>
+                            android:src="@drawable/ic_star_black_24dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/row_title_margin_left"
                             android:text="@string/user_my_favorite_workflow"
                             android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/row_title_text_size"
-                            android:layout_marginLeft="@dimen/row_title_margin_left"
-                            android:layout_gravity="center"/>
+                            android:textSize="@dimen/row_title_text_size" />
 
                     </LinearLayout>
 
@@ -303,7 +302,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:paddingRight="@dimen/row_entry_padding_right"
-                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
 
                 </LinearLayout>
 

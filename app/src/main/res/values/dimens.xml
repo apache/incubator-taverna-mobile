@@ -19,7 +19,7 @@ limitations under the License.
     <dimen name="app_bar_top_padding">0dp</dimen>
     <dimen name="card_margin_horizontal">10dp</dimen>
     <dimen name="card_margin_vertical">8dp</dimen>
-    
+
     <!--Workflow Card Dimens-->
     <dimen name="workflow_card_margin">5dp</dimen>
     <dimen name="workflow_card_height">200dp</dimen>
@@ -129,7 +129,7 @@ limitations under the License.
     <dimen name="tutorial_view_height">1dp</dimen>
 
     <!-- User Profile Dimens -->
-   <dimen name="top_background_height">170dp</dimen>
+    <dimen name="top_background_height">170dp</dimen>
     <dimen name="user_image_height">90dp</dimen>
     <dimen name="user_name_text_size">20dp</dimen>
     <dimen name="user_name_margin_top">5dp</dimen>

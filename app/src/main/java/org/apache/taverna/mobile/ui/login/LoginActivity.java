@@ -18,11 +18,11 @@
  */
 package org.apache.taverna.mobile.ui.login;
 
+import android.os.Bundle;
+
 import org.apache.taverna.mobile.R;
 import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.utils.ActivityUtils;
-
-import android.os.Bundle;
 
 
 public class LoginActivity extends BaseActivity {

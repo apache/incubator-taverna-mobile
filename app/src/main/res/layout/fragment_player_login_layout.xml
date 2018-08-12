@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 Apache Taverna Mobile
 Copyright 2015 The Apache Software Foundation
 This product includes software developed at
@@ -18,26 +17,24 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="40dp"
-    >
+    android:padding="40dp">
 
     <TextView
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="24sp"
-        android:text="@string/headline_taverna_player_portal_login"/>
+        android:text="@string/headline_taverna_player_portal_login"
+        android:textSize="24sp" />
 
     <android.support.design.widget.TextInputLayout
-        android:layout_below="@id/header"
         android:id="@+id/input_layout_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/header"
         android:layout_marginTop="20dp">
 
         <EditText
@@ -46,7 +43,7 @@ limitations under the License.
             android:layout_height="wrap_content"
             android:hint="@string/hint_email_player"
             android:inputType="textEmailAddress"
-            android:singleLine="true"/>
+            android:singleLine="true" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -63,7 +60,7 @@ limitations under the License.
             android:layout_height="wrap_content"
             android:hint="@string/hint_password"
             android:inputType="textPassword"
-            android:singleLine="true"/>
+            android:singleLine="true" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -73,14 +70,14 @@ limitations under the License.
         android:layout_height="wrap_content"
         android:layout_below="@id/input_layout_password"
         android:checked="true"
-        android:text="@string/keeplogin"/>
+        android:text="@string/keeplogin" />
 
     <Button
         android:id="@+id/bLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_text_login"
+        android:layout_below="@id/cbRemember"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/cbRemember"/>
+        android:text="@string/button_text_login" />
 
 </RelativeLayout>

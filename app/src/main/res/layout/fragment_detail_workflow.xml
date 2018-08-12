@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -15,10 +14,9 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<android.support.design.widget.CoordinatorLayout
-    android:id="@+id/coords_wrapper"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coords_wrapper"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -32,7 +30,7 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true" />
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -51,53 +49,53 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/iv_workflow_image_height"
                     android:scaleType="fitCenter"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@mipmap/ic_launcher" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/view_height"
-                    android:background="@color/grey_background"
-                    android:layout_below="@id/ivWorkflowImage"/>
+                    android:layout_below="@id/ivWorkflowImage"
+                    android:background="@color/grey_background" />
 
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/ivFav"
                     android:layout_width="@dimen/iv_fav_width"
                     android:layout_height="@dimen/iv_fav_height"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/ivWorkflowImage"
                     android:layout_gravity="right"
                     android:layout_marginRight="@dimen/iv_fav_margin_right"
                     android:layout_marginTop="@dimen/iv_fav_margin_top"
                     android:backgroundTint="@color/colorPrimaryDark"
-                    app:borderWidth="@dimen/iv_fav_border_width"
                     android:src="@drawable/ic_star_border_black_24dp"
-                    android:layout_below="@+id/ivWorkflowImage"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+                    app:borderWidth="@dimen/iv_fav_border_width" />
 
                 <TextView
                     android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/ivWorkflowImage"
+                    android:layout_toLeftOf="@+id/ivFav"
                     android:padding="@dimen/tv_title_padding"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/tv_title_text_size"
-                    android:textStyle="bold"
-                    android:layout_below="@id/ivWorkflowImage"
-                    android:layout_toLeftOf="@+id/ivFav"/>
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:id="@+id/ll_uploader_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTitle"
                     android:layout_marginTop="@dimen/linear_layout_margin_top"
-                    android:orientation="horizontal"
-                    android:layout_below="@id/tvTitle">
+                    android:orientation="horizontal">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/ivUploader"
                         android:layout_width="@dimen/iv_uploader_width"
                         android:layout_height="@dimen/iv_uploader_height"
                         android:paddingLeft="@dimen/iv_uploader_padding_left"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:src="@mipmap/ic_launcher" />
 
                     <RelativeLayout
                         android:layout_width="@dimen/rel_lay2_width"
@@ -110,15 +108,15 @@
                             android:id="@+id/tvUploaderName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/tv_uploader_name_margin_top"
                             android:textColor="@android:color/black"
-                            android:textSize="@dimen/tv_uploader_name_text_size"
-                            android:layout_marginTop="@dimen/tv_uploader_name_margin_top"/>
+                            android:textSize="@dimen/tv_uploader_name_text_size" />
 
                         <TextView
                             android:id="@+id/tvDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"/>
+                            android:layout_alignParentBottom="true" />
 
                         <TextView
                             android:id="@+id/tvType"
@@ -130,7 +128,7 @@
                             android:paddingEnd="@dimen/tv_type_padding_end"
                             android:paddingLeft="@dimen/tv_type_padding_left"
                             android:paddingRight="@dimen/tv_type_padding_right"
-                            android:paddingStart="@dimen/tv_type_padding_start"/>
+                            android:paddingStart="@dimen/tv_type_padding_start" />
 
                     </RelativeLayout>
 
@@ -139,22 +137,21 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="@dimen/cv_description_padding"
-                    android:layout_marginTop="@dimen/cv_description_margin_top"
+                    android:layout_below="@id/ll_uploader_info"
+                    android:layout_marginBottom="@dimen/cv_description_margin_bottom"
                     android:layout_marginLeft="@dimen/cv_description_margin_left"
                     android:layout_marginRight="@dimen/cv_description_margin_right"
-                    android:layout_marginBottom="@dimen/cv_description_margin_bottom"
+                    android:layout_marginTop="@dimen/cv_description_margin_top"
                     android:elevation="@dimen/cv_description_elevation"
-                    app:cardCornerRadius="@dimen/cv_description_corner_radius"
-                    android:layout_below="@id/ll_uploader_info">
+                    android:orientation="vertical"
+                    android:padding="@dimen/cv_description_padding"
+                    app:cardCornerRadius="@dimen/cv_description_corner_radius">
 
                     <WebView
                         android:id="@+id/tvDescription"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/tv_description_padding"
-                        />
+                        android:padding="@dimen/tv_description_padding" />
 
                 </android.support.v7.widget.CardView>
 
@@ -168,10 +165,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:visibility="gone"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_play_arrow_black_24dp"
-        />
+        android:visibility="gone" />
 
 
 </android.support.design.widget.CoordinatorLayout>

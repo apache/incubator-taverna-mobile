@@ -71,8 +71,10 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
 
     public final String LOG_TAG = getClass().getSimpleName();
 
-    @Inject DataManager dataManager;
-    @Inject WorkflowDetailPresenter mWorkflowDetailPresenter;
+    @Inject
+    DataManager dataManager;
+    @Inject
+    WorkflowDetailPresenter mWorkflowDetailPresenter;
 
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;
@@ -245,8 +247,8 @@ public class WorkflowDetailFragment extends Fragment implements WorkflowDetailMv
                 .error(R.drawable.placeholder)
                 .into(new SimpleTarget<GlideDrawable>() {
                     @Override
-                    public void onResourceReady(GlideDrawable resource,
-                            GlideAnimation<? super GlideDrawable> glideAnimation) {
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<?
+                            super GlideDrawable> glideAnimation) {
                         workflowImage.setImageDrawable(resource);
                     }
                 });

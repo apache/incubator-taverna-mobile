@@ -70,8 +70,10 @@ public class FavouriteWorkflowDetailFragment extends Fragment
 
     public final String LOG_TAG = getClass().getSimpleName();
 
-    @Inject DataManager dataManager;
-    @Inject FavouriteWorkflowDetailPresenter mWorkflowDetailPresenter;
+    @Inject
+    DataManager dataManager;
+    @Inject
+    FavouriteWorkflowDetailPresenter mWorkflowDetailPresenter;
 
     @BindView(R.id.ivWorkflowImage)
     ImageView workflowImage;

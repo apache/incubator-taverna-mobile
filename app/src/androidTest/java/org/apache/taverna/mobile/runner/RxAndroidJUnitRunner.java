@@ -18,10 +18,10 @@
  */
 package org.apache.taverna.mobile.runner;
 
-import org.apache.taverna.mobile.utils.RxEspressoScheduleHandler;
-
 import android.os.Bundle;
 import android.support.test.espresso.Espresso;
+
+import org.apache.taverna.mobile.utils.RxEspressoScheduleHandler;
 
 import io.reactivex.plugins.RxJavaPlugins;
 

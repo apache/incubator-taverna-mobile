@@ -1,8 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <announcements>
-  <announcement uri='http://www.myexperiment.org/announcement.xml?id=1' resource='http://www.myexperiment.org/announcements/1'>New announcements feature!</announcement>
-  <announcement uri='http://www.myexperiment.org/announcement.xml?id=2' resource='http://www.myexperiment.org/announcements/2'>New reviews feature!</announcement>
-  <announcement uri='http://www.myexperiment.org/announcement.xml?id=3' resource='http://www.myexperiment.org/announcements/3'>New updates and additions</announcement>
-  <announcement uri='http://www.myexperiment.org/announcement.xml?id=4' resource='http://www.myexperiment.org/announcements/4'>Updated Group sharing!</announcement>
-  <announcement uri='http://www.myexperiment.org/announcement.xml?id=5' resource='http://www.myexperiment.org/announcements/5'>myExperiment mentioned in Nature magazine!</announcement>
+    <announcement resource='http://www.myexperiment.org/announcements/1'
+        uri='http://www.myexperiment.org/announcement.xml?id=1'>New announcements feature!
+    </announcement>
+    <announcement resource='http://www.myexperiment.org/announcements/2'
+        uri='http://www.myexperiment.org/announcement.xml?id=2'>New reviews feature!
+    </announcement>
+    <announcement resource='http://www.myexperiment.org/announcements/3'
+        uri='http://www.myexperiment.org/announcement.xml?id=3'>New updates and additions
+    </announcement>
+    <announcement resource='http://www.myexperiment.org/announcements/4'
+        uri='http://www.myexperiment.org/announcement.xml?id=4'>Updated Group sharing!
+    </announcement>
+    <announcement resource='http://www.myexperiment.org/announcements/5'
+        uri='http://www.myexperiment.org/announcement.xml?id=5'>myExperiment mentioned in Nature
+        magazine!
+    </announcement>
 </announcements>

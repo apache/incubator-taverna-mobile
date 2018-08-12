@@ -43,78 +43,96 @@ import java.util.List;
 @Root(name = "workflow")
 public class Workflow extends TavernaBaseModel implements Parcelable {
 
+    public static final Creator<Workflow> CREATOR = new Creator<Workflow>() {
+        @Override
+        public Workflow createFromParcel(Parcel source) {
+            return new Workflow(source);
+        }
+
+        @Override
+        public Workflow[] newArray(int size) {
+            return new Workflow[size];
+        }
+    };
     @Column
     @Attribute(name = "resource", required = false)
     String resource;
-
     @Column
     @Attribute(name = "uri", required = false)
     String uri;
-
     @PrimaryKey
     @Attribute(name = "id", required = false)
     String id;
-
     @Column
     @Attribute(name = "version", required = false)
     String version;
-
     @Column
     @Element(name = "id", required = false)
     String elementId;
-
     @Column
     @Element(name = "title", required = false)
     String title;
-
     @Column
     @Element(name = "description", required = false)
     String description;
-
     @Column
     @ForeignKey(saveForeignKeyModel = true)
     @Element(name = "type", required = false)
     Type type;
-
     @Column
     @ForeignKey(saveForeignKeyModel = true)
     @Element(name = "uploader", required = false)
     Uploader uploader;
-
     @Column
     @Element(name = "created-at", required = false)
     String createdAt;
-
     @Column
     @Element(name = "updated-at", required = false)
     String updatedAt;
-
     @Column
     @Element(name = "preview", required = false)
     String previewUri;
-
     @Column
     @Element(name = "svg", required = false)
     String svgUri;
-
     @Column
     @ForeignKey(saveForeignKeyModel = true)
     @Element(name = "license-type", required = false)
     LicenseType licenseType;
-
     @Column
     @Element(name = "content-uri", required = false)
     String contentUri;
-
     @Column
     @Element(name = "content-type", required = false)
     String contentType;
-
     @ElementList(name = "tags", required = false)
     List<Tag> tag;
-
     @Column(defaultValue = "0")
     Boolean favourite;
+
+    public Workflow() {
+    }
+
+    protected Workflow(Parcel in) {
+        this.resource = in.readString();
+        this.uri = in.readString();
+        this.id = in.readString();
+        this.version = in.readString();
+        this.elementId = in.readString();
+        this.title = in.readString();
+        this.description = in.readString();
+        this.type = in.readParcelable(Type.class.getClassLoader());
+        this.uploader = in.readParcelable(Uploader.class.getClassLoader());
+        this.createdAt = in.readString();
+        this.updatedAt = in.readString();
+        this.previewUri = in.readString();
+        this.svgUri = in.readString();
+        this.licenseType = in.readParcelable(LicenseType.class.getClassLoader());
+        this.contentUri = in.readString();
+        this.contentType = in.readString();
+        this.tag = in.createTypedArrayList(Tag.CREATOR);
+        this.favourite = in.readByte() != 0;
+    }
 
     public String getContentType() {
         return contentType;
@@ -260,9 +278,6 @@ public class Workflow extends TavernaBaseModel implements Parcelable {
         this.favourite = favourite;
     }
 
-    public Workflow() {
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -289,37 +304,4 @@ public class Workflow extends TavernaBaseModel implements Parcelable {
         dest.writeTypedList(this.tag);
         dest.writeByte(this.favourite ? (byte) 1 : (byte) 0);
     }
-
-    protected Workflow(Parcel in) {
-        this.resource = in.readString();
-        this.uri = in.readString();
-        this.id = in.readString();
-        this.version = in.readString();
-        this.elementId = in.readString();
-        this.title = in.readString();
-        this.description = in.readString();
-        this.type = in.readParcelable(Type.class.getClassLoader());
-        this.uploader = in.readParcelable(Uploader.class.getClassLoader());
-        this.createdAt = in.readString();
-        this.updatedAt = in.readString();
-        this.previewUri = in.readString();
-        this.svgUri = in.readString();
-        this.licenseType = in.readParcelable(LicenseType.class.getClassLoader());
-        this.contentUri = in.readString();
-        this.contentType = in.readString();
-        this.tag = in.createTypedArrayList(Tag.CREATOR);
-        this.favourite = in.readByte() != 0;
-    }
-
-    public static final Creator<Workflow> CREATOR = new Creator<Workflow>() {
-        @Override
-        public Workflow createFromParcel(Parcel source) {
-            return new Workflow(source);
-        }
-
-        @Override
-        public Workflow[] newArray(int size) {
-            return new Workflow[size];
-        }
-    };
 }

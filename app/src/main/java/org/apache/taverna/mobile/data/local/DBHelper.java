@@ -194,13 +194,12 @@ public class DBHelper {
             @Override
             public ObservableSource<? extends Workflow> call() throws Exception {
                 return Observable.just(SQLite.select()
-                                .from(Workflow.class)
-                                .where(Workflow_Table.id.eq(id))
-                                .querySingle());
+                        .from(Workflow.class)
+                        .where(Workflow_Table.id.eq(id))
+                        .querySingle());
             }
         });
     }
-
 
 
     public void clearFavouriteWorkflow() {

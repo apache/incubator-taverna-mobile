@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
    this work for additional information regarding copyright ownership.
@@ -15,14 +14,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<shape
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:shape="oval">
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
 
-    <solid
-            android:color="@color/colorPrimary"/>
+    <solid android:color="@color/colorPrimary" />
 
     <size
-            android:width="60dp"
-            android:height="60dp"/>
+        android:width="60dp"
+        android:height="60dp" />
 </shape>

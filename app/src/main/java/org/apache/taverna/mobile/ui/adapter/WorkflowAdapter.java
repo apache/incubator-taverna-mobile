@@ -25,12 +25,6 @@
 
 package org.apache.taverna.mobile.ui.adapter;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.model.Workflow;
-
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +35,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.model.Workflow;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -48,11 +48,9 @@ import butterknife.ButterKnife;
 
 public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static final String TAG = WorkflowAdapter.class.getName();
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
-
-    private static final String TAG = WorkflowAdapter.class.getName();
-
     private final List<Workflow> mWorkflowList;
     private final Context context;
 
@@ -130,6 +128,16 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return mWorkflowList != null ? mWorkflowList.get(position) : null;
     }
 
+    public static class ProgressViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.progressBar1)
+        public ProgressBar progressBar;
+
+        public ProgressViewHolder(View v) {
+            super(v);
+            ButterKnife.bind(this, v);
+        }
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -152,17 +160,6 @@ public class WorkflowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
             ButterKnife.bind(this, itemView);
 
-        }
-    }
-
-    public static class ProgressViewHolder extends RecyclerView.ViewHolder {
-
-        @BindView(R.id.progressBar1)
-        public ProgressBar progressBar;
-
-        public ProgressViewHolder(View v) {
-            super(v);
-            ButterKnife.bind(this, v);
         }
     }
 }

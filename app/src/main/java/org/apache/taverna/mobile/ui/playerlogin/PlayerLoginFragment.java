@@ -19,11 +19,6 @@
 package org.apache.taverna.mobile.ui.playerlogin;
 
 
-import org.apache.taverna.mobile.R;
-import org.apache.taverna.mobile.data.DataManager;
-import org.apache.taverna.mobile.ui.base.BaseActivity;
-import org.apache.taverna.mobile.utils.ConnectionInfo;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -39,6 +34,11 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import org.apache.taverna.mobile.R;
+import org.apache.taverna.mobile.data.DataManager;
+import org.apache.taverna.mobile.ui.base.BaseActivity;
+import org.apache.taverna.mobile.utils.ConnectionInfo;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -49,8 +49,10 @@ import butterknife.OnClick;
 public class PlayerLoginFragment extends Fragment implements PlayerLoginMvpView, View
         .OnFocusChangeListener {
 
-    @Inject DataManager dataManager;
-    @Inject PlayerLoginPresenter mPlayerLoginPresenter;
+    @Inject
+    DataManager dataManager;
+    @Inject
+    PlayerLoginPresenter mPlayerLoginPresenter;
 
     @BindView(R.id.etEmail)
     EditText mEditTextEmail;

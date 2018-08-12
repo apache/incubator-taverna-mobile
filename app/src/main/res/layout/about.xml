@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 Licensed to the Apache Software Foundation (ASF) under one or more
 contributor license agreements. See the NOTICE file distributed with
 this work for additional information regarding copyright ownership.
@@ -18,60 +17,68 @@ limitations under the License.
     android:id="@+id/about_dialouge_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:stretchColumns="*"
-    android:padding="15sp">
+    android:padding="15sp"
+    android:stretchColumns="*">
+
     <TableRow>
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/tavernalogo"
-            android:layout_gravity="left|center"/>
+            android:layout_gravity="left|center"
+            android:src="@drawable/tavernalogo" />
+
         <TextView
             android:id="@+id/name_info"
-            android:gravity="center"
-            android:layout_gravity="center"
+            style="@android:style/TextAppearance.DeviceDefault.Large"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="@string/app_name"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:singleLine="true"
-            style="@android:style/TextAppearance.DeviceDefault.Large"
+            android:text="@string/app_name"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/version_info"
-            android:gravity="center"
-            android:layout_gravity="center"
+            style="@android:style/TextAppearance.DeviceDefault.Medium"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="@string/version_number"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:singleLine="true"
-            style="@android:style/TextAppearance.DeviceDefault.Medium"
+            android:text="@string/version_number"
             android:textStyle="bold" />
     </TableRow>
+
     <TableRow>
+
         <TextView
             android:id="@+id/legal_text"
+            style="@android:style/TextAppearance.DeviceDefault.Large"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:layout_span="3"
             android:layout_margin="8dip"
-            android:textColor="@android:color/black"
-            style="@android:style/TextAppearance.DeviceDefault.Large"
+            android:layout_span="3"
             android:text="@string/about"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
             android:textStyle="normal" />
     </TableRow>
+
     <TableRow>
+
         <TextView
             android:id="@+id/gsoc_text"
+            style="@android:style/TextAppearance.DeviceDefault.Large"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:layout_span="3"
             android:layout_margin="8dip"
-            android:textColor="@android:color/black"
-            style="@android:style/TextAppearance.DeviceDefault.Large"
-            android:text="@string/about3"
+            android:layout_span="3"
             android:autoLink="web"
+            android:text="@string/about3"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
             android:textStyle="normal" />
     </TableRow>
 </TableLayout>
