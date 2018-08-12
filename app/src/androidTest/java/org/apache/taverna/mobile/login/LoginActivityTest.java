@@ -83,6 +83,7 @@ public class LoginActivityTest {
      */
     @Test
     public void checkAllViewAreVisible() throws Exception {
+        mLoginActivityActivityTestRule.launchActivity(null);
         onView(withId(R.id.logo)).check(matches(isDisplayed()));
         onView(withId(R.id.tvAppName)).check(matches(withText(R.string.app_name)));
         onView(withId(R.id.loginlayout)).check(matches(isDisplayed()));

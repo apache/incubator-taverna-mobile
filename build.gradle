@@ -50,6 +50,6 @@ ext {
     leakcanary ='1.5.4'
     dagger='2.8'
 
-    espresso = '2.2.1'
+    espresso = '2.2.2'
     runner = '0.4'
 }
