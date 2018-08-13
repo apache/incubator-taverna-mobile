@@ -9,7 +9,6 @@ import android.widget.FrameLayout;
 
 import org.apache.taverna.mobile.ui.base.BaseActivity;
 
-@RestrictTo(RestrictTo.Scope.TESTS)
 public class SingleFragmentActivity extends BaseActivity {
     FrameLayout content;
 
