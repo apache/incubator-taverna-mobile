@@ -2,7 +2,6 @@ package org.apache.taverna.mobile;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RestrictTo;
 import android.support.v4.app.Fragment;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
