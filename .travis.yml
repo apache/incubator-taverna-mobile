@@ -24,7 +24,7 @@ android:
     - extra-google-google_play_services
     - extra-android-m2repository
     - extra-google-m2repository
-    - build-tools-28.0.0
+    - build-tools-28.0.3
     - android-28
 
 before_install:
