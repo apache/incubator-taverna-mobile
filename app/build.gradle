@@ -32,10 +32,13 @@ android {
         androidTest {
             java.srcDirs = ['src/androidTest/java/']
             java.srcDir commonTestDir
+            resources.srcDirs += 'src/commonTest/resources'
+
         }
         test {
             java.srcDirs = ['src/test/java/']
             java.srcDir commonTestDir
+            resources.srcDirs += 'src/commonTest/resources'
         }
     }
 
@@ -55,6 +58,10 @@ android {
 
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildToolsVersion rootProject.ext.buildToolsVersion

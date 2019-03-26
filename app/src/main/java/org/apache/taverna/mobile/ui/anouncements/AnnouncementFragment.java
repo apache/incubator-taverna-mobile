@@ -54,6 +54,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.support.design.widget.Snackbar.make;
+
 public class AnnouncementFragment extends Fragment implements RecyclerItemClickListner
         .OnItemClickListener, AnnouncementMvpView {
 
@@ -245,7 +247,8 @@ public class AnnouncementFragment extends Fragment implements RecyclerItemClickL
 
     @Override
     public void showSnackBar(int message) {
-        final Snackbar snackbar = Snackbar.make(mRecyclerView, message, Snackbar.LENGTH_LONG);
+        final Snackbar snackbar = make(getActivity().findViewById(android.R.id.content),
+                message, Snackbar.LENGTH_LONG);
         snackbar.setAction(getResources().getString(R.string.ok), new View.OnClickListener() {
             @Override
             public void onClick(View view) {

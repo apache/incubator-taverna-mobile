@@ -107,6 +107,7 @@ limitations under the License.
         <activity android:name=".ui.userprofile.UserProfileActivity"/>
         <activity android:name=".ui.favouriteworkflow.FavouriteWorkflowsActivity"/>
         <activity android:name=".ui.myworkflows.MyWorkflowActivity"/>
+        <activity android:name=".SingleFragmentActivity"/>
     </application>
 
 </manifest>
