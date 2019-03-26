@@ -26,6 +26,7 @@ import org.apache.taverna.mobile.ui.adapter.WorkflowAdapter;
 import org.apache.taverna.mobile.ui.base.BaseActivity;
 import org.apache.taverna.mobile.ui.workflowdetail.WorkflowDetailActivity;
 import org.apache.taverna.mobile.utils.ConnectionInfo;
+import org.apache.taverna.mobile.utils.Constants;
 import org.apache.taverna.mobile.utils.ScrollChildSwipeRefreshLayout;
 
 import android.content.Intent;
@@ -190,8 +191,8 @@ public class MyWorkflowFragment extends Fragment implements MyWorkflowMvpView,
     @Override
     public void onItemClick(View childView, int position) {
         Intent intent = new Intent(getActivity(), WorkflowDetailActivity.class);
-        intent.putExtra("id", mWorkflowList.get(position).getId());
-        intent.putExtra("title", mWorkflowList.get(position).getTitle());
+        intent.putExtra(Constants.WORKFLOW_ID, mWorkflowList.get(position).getId());
+        intent.putExtra(Constants.WORKFLOW_TITLE, mWorkflowList.get(position).getTitle());
         startActivity(intent);
     }
 
