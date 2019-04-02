@@ -104,7 +104,7 @@ limitations under the License.
     <string name="emailerr">Username must not be empty</string>
     <string name="passworderr">Password must not be empty</string>
     <string name="version_number">v1.0</string>
-    <string name="about">Mobile Application for managing Taverna workflows.\n\nCopyright © 2015&#8211;2018
+    <string name="about">Mobile Application for managing Taverna workflows.\n\nCopyright © 2015&#8211;2019
         The Apache Software Foundation, Licensed under the Apache License, Version 2.0.
     </string>
     <string name="about2">View, run and download workflows on your Android mobile device.</string>
