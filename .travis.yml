@@ -29,5 +29,6 @@ android:
 
 before_install:
   - yes | sdkmanager "platforms;android-28"
+  - gradle -b wrapper.gradle wrapper
 
 script: "./gradlew build --stacktrace"
