@@ -14,16 +14,45 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-# Status 
- [![Join the chat at https://gitter.im/apache/taverna](https://badges.gitter.im/apache/taverna.svg)](https://gitter.im/apache/taverna?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
- [![Build Status](https://travis-ci.org/apache/incubator-taverna-mobile.svg?branch=master)](https://travis-ci.org/apache/incubator-taverna-mobile)
-# Apache Taverna Mobile
 
-<img align="right" src="https://user-images.githubusercontent.com/31414276/39404787-9f656d00-4bb7-11e8-847b-25f56b9e9ea6.png" width ="112px" height ="auto">
 
-Apache Taverna Mobile is an Android app for controlling an [Apache Taverna Server](http://taverna.incubator.apache.org/documentation/server/)
+
+
+## Taverna Project Retired
+
+> tl;dr: The Taverna code base is **no longer maintained** 
+> and is provided here for archival purposes.
+
+From 2014 till 2020 this code base was maintained by the 
+[Apache Incubator](https://incubator.apache.org/) project _Apache Taverna (incubating)_
+(see [web archive](https://web.archive.org/web/20200312133332/https://taverna.incubator.apache.org/)
+and [podling status](https://incubator.apache.org/projects/taverna.html)).
+
+In 2020 the Taverna community 
+[voted](https://lists.apache.org/thread.html/r559e0dd047103414fbf48a6ce1bac2e17e67504c546300f2751c067c%40%3Cdev.taverna.apache.org%3E)
+to **retire** Taverna as a project and withdraw the code base from the Apache Software Foundation. 
+
+This code base remains available under the Apache License 2.0 
+(see _License_ below), but is now simply called 
+_Taverna_ rather than ~~Apache Taverna (incubating)~~.
+
+While the code base is no longer actively maintained, 
+Pull Requests are welcome to the 
+[GitHub organization taverna](http://github.com/taverna/), 
+which may infrequently be considered by remaining 
+volunteer caretakers.
+
+
+### Previous releases
+
+This code has not yet been formally released.
+
+
+# Taverna Mobile
+
+Taverna Mobile is an Android app for controlling an [Taverna Server](https://web.archive.org/web/*/https://taverna.incubator.apache.org/documentation/server/)
 for remotely running
-[Apache Taverna](http://taverna.incubator.apache.org/) workflows.
+[Taverna](https://web.archive.org/web/*/https://taverna.incubator.apache.org/) workflows.
 
 It can also talk to a [Taverna Player](https://github.com/myGrid/taverna-player-portal).
 
@@ -33,7 +62,7 @@ This module was created during Google Summer of Code 2015.
 
 ## License
 
-(c) 2015-2019 Apache Software Foundation
+(c) 2015-2020 Apache Software Foundation
 
 This product includes software developed at The [Apache Software
 Foundation](http://www.apache.org/).
@@ -48,22 +77,9 @@ details about embedded third-party libraries and source code.
 
 # Contribute
 
-Please subscribe to and contact the
-[dev@taverna](http://taverna.incubator.apache.org/community/lists#dev) mailing list
-for any questions, suggestions and discussions about
-Apache Taverna Mobile.
-
-Bugs and feature plannings are tracked in the Jira
-[Issue tracker](https://issues.apache.org/jira/browse/TAVERNA/component/12326901)
-under the `TAVERNA` component _GSOC Taverna Mobile._ Feel free
-to add an issue!
-
-To suggest changes to this source code, feel free to raise a
-[GitHub pull request](https://github.com/apache/incubator-taverna-mobile/pulls).
 Any contributions received are assumed to be covered by the [Apache License
-2.0](https://www.apache.org/licenses/LICENSE-2.0). We might ask you
-to sign a [Contributor License Agreement](https://www.apache.org/licenses/#clas)
-before accepting a larger contribution.
+2.0](https://www.apache.org/licenses/LICENSE-2.0). 
+
 
 
 # Building and install requirements
@@ -106,7 +122,7 @@ The navigation drawer can be pulled out from the home page by swiping the extrem
  - All Workflows: Enters the workflow screen from any other screen where all the workflows are avialable.
  - My Workflows: Presents all the workflows created by you.
  - Favourite Workflows: Presents all the workflows which you marked as favorite.
- - Announcement: List all the announcements about apache taverna.
+ - Announcement: List all the announcements about Taverna.
  - Usage: Presents users usage information using usage activity.
  - About: Presents an about dialog box for the application.
  - Licence info: Presents a dialogue box with licence file of everything.
@@ -153,7 +169,7 @@ testing from a mobile/tablet, you may have to use WiFi to get access to the
 Taverna Server on the local network.
 
 You can alternatively install the [Taverna
-Server](http://taverna.incubator.apache.org/download/server/) WAR file in your
+Server](https://web.archive.org/web/*/https://taverna.incubator.apache.org/download/server/) WAR file in your
 favourite servlet container, e.g. [Apache Tomcat](http://tomcat.apache.org/) - see
 the [Taverna Server installation guide](https://launchpad.net/taverna-server/2.5.x/2.5.4/+download/install.pdf)
 for details.
